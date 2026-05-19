@@ -1,0 +1,107 @@
+% !TEX root = ../main.tex
+\chapter{Extrapolation to very-extreme expectile levels}
+\label{ch:pool-ext}
+
+\section*{Overview}
+
+This chapter extrapolates the pooled intermediate-level expectile
+estimator of \Cref{ch:pool-int} to very-extreme levels $\tau_n^\prime
+\uparrow 1$ with $n(1-\tau_n^\prime) \to c \in [0, \infty)$. The
+extrapolation is the analogue of the Weissman extrapolation for extreme
+quantiles \parencite{Weissman1978} and follows the same multiplicative-power
+structure that motivates the weighted-geometric pooling of
+\textcite[\S2.3]{DaouiaPadoanStupfler2021}. As in the single-sample case
+\parencite[Theorem~3.5]{DavisonPadoanStupfler2023}, the asymptotic
+distribution at the extreme level is dominated by the tail-index
+estimator: the contribution of the intermediate-level expectile estimator
+washes out through the log-rate.
+
+\section{Motivation}
+\label{sec:pool-ext:motivation}
+
+\todo{Risk-management applications routinely require expectiles at
+levels $\tau_n^\prime$ so close to one that there are essentially no
+observations in the corresponding tail region (typical regime:
+$n(1-\tau_n^\prime) \to c \in [0,\infty)$, equivalently $1-\tau_n^\prime
+\le 1/n$). Direct estimation by either LAWS or QB at $\tau_n^\prime$ is
+not feasible; one must extrapolate from an intermediate-level estimator
+using a model for the tail.}
+
+\section{The pooled extrapolated expectile estimator}
+\label{sec:pool-ext:estimator}
+
+\todo{Define the pooled extrapolated estimator by Weissman-style lifting
+of the pooled intermediate-level estimator of \Cref{ch:pool-int}:
+\[
+  \hatexpectile{\tau_n^\prime}^{\mathrm{pool},\star}
+  \;\coloneqq\;
+  \left(\frac{1-\tau_n^\prime}{1-\tau_n}\right)^{-\hat\gamma_n(\bm\omega_\gamma)}
+  \hatexpectile{\tau_n}^{\mathrm{pool}}(\bm\omega_\gamma,\bm\omega_q).
+\]
+Discuss two natural alternatives that turn out to be asymptotically
+equivalent: (i) plug the pooled \emph{extrapolated} quantile
+$\hatWei_n(1-(1-\tau_n^\prime)/(\gamma^{-1}-1)\mid\bm\omega_q)$
+into $\psifn(\hat\gamma_n)$; (ii) the geometric pooling of marginal
+extrapolated expectiles. Show via the multiplicative-power identity that
+all three constructions agree at the asymptotic level.}
+
+\section{Asymptotic distribution}
+\label{sec:pool-ext:CLT}
+
+\todo{State and prove the central limit theorem
+\[
+  \frac{\sqrt{k}}{\log\!\big((1-\tau_n)/(1-\tau_n^\prime)\big)}
+  \!\left(\frac{\hatexpectile{\tau_n^\prime}^{\mathrm{pool},\star}}
+                {\expectile{\tau_n^\prime}}-1\right)
+  \;\todist\;
+  \mathcal N\!\left(\mu^{\xi,\star}(\bm\omega_\gamma),\;
+                   \sigma^{\xi,\star}(\bm\omega_\gamma)^{2}\right),
+\]
+where the limit law depends \emph{only} on the pooled tail-index
+estimator (the contribution of $\hatexpectile{\tau_n}^{\mathrm{pool}}$
+enters through a $\log$-multiplicative term that vanishes at the
+displayed rate). Explicitly, $\sigma^{\xi,\star}(\bm\omega_\gamma)^2
+= \bm\omega_\gamma^\top\Vc\bm\omega_\gamma$. Cite
+\textcite[Proposition~C.6]{DavisonPadoanStupfler2023} as the plug-in
+lemma and follow the proof template of
+\textcite[Theorem~3.5]{DavisonPadoanStupfler2023}.}
+
+\section{Optimal weights for extrapolation}
+\label{sec:pool-ext:weights}
+
+\todo{Because the asymptotic variance is governed solely by
+$\hat\gamma_n(\bm\omega_\gamma)$, the variance-optimal weights for
+extrapolation coincide with $\bm\omega^{\mathrm{Var}}$ of
+\textcite{DaouiaPadoanStupfler2021}:
+$\bm\omega^{\mathrm{Var},\star} = \Vc^{-1}\bm 1/(\bm 1^\top\Vc^{-1}\bm 1)$.
+In the distributed-inference case ($R_{j,\ell}\equiv 0$), these reduce
+to $\omega_j \propto k_j$ (effective-sample-size weighting), which is
+the same conclusion as for extreme-quantile extrapolation.
+Independently, $\bm\omega_q$ becomes irrelevant at the extreme level.}
+
+\section{Bias-reduction}
+\label{sec:pool-ext:bias-reduction}
+
+\todo{Bias-reduced versions of the pooled tail index lift to
+bias-reduced versions of the pooled extrapolated expectile. Following
+the bias-reduction scheme of
+\textcite[\S2.2]{DaouiaPadoanStupfler2021}, define
+$\overline\gamma_n(\bm\omega) = \hat\gamma_n(\bm\omega) - k^{-1/2}
+\bm\omega^\top \hatBc$, and propagate this into
+$\hatexpectile{\tau_n^\prime}^{\mathrm{pool},\star}$. State the resulting
+unbiased CLT.}
+
+\section{Asymptotic confidence intervals}
+\label{sec:pool-ext:CI}
+
+\todo{Log-scale confidence intervals for $\expectile{\tau_n^\prime}$ in
+the spirit of \textcite[Corollary~4]{DaouiaPadoanStupfler2021}:
+\[
+  \Prob\!\left(\expectile{\tau_n^\prime}\in
+    \hatexpectile{\tau_n^\prime}^{\mathrm{pool},\star}\exp\!
+    \left[\pm z_{1-\alpha/2}\log\!\Big(\frac{1-\tau_n}{1-\tau_n^\prime}\Big)
+    \sqrt{\frac{\bm\omega_\gamma^\top\hatVc\bm\omega_\gamma}{k}}
+    \right]\right)
+  \to 1-\alpha.
+\]
+Discuss finite-sample performance heuristically.}

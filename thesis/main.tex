@@ -1,0 +1,40 @@
+% Master's thesis: Improved Statistical Inference for Expectile-Based Risk Measures
+% Author: Filippo Gombac
+% Compile with: latexmk -pdf -bibtex-cond main.tex   (uses biber for biblatex)
+
+\input{preamble}
+
+\title{Improved Statistical Inference for Expectile-Based Risk Measures\\[0.5em]
+       \large An Optimal Pooling Approach in the Heavy-Tailed Regime}
+\author{Filippo Gombac\\
+        \todo{add supervisor / co-supervisor}\\
+        \todo{add institution / department}}
+\date{\today}
+
+\begin{document}
+
+\frontmatter
+\maketitle
+
+\chapter*{Abstract}
+\todo{Write a $\sim$200-word abstract once \Cref{ch:pool-int} is in shape. Outline of the abstract: (i) expectiles as the only coherent and elicitable law-invariant risk measure; (ii) the problem of combining tail-index and extreme-quantile information from several samples (distributed inference, multi-study evidence synthesis); (iii) our pooled extreme-expectile estimator, its joint CLT via plug-in into the expectile--quantile asymptotic equivalence, and the variance-/AMSE-optimal weights tailored to the expectile target; (iv) Weissman-style extrapolation to very-extreme expectile levels; (v) outlook on relaxing the iid assumption.}
+
+\tableofcontents
+
+\mainmatter
+
+\include{chapters/01_introduction}
+\include{chapters/02_background}
+\include{chapters/03_pooled_intermediate}
+\include{chapters/04_pooled_extreme}
+\include{chapters/05_discussion}
+
+\appendix
+\chapter{Proofs}
+\label{app:proofs}
+\todo{Detailed proofs of the main theorems of \Cref{ch:pool-int,ch:pool-ext} go here. Recommended organisation: (A.1) joint CLT for the pooled $(\hat\gamma_n, \hat q_n^\star)$ vector, (A.2) delta-method computation for the QB pooled expectile, (A.3) Weissman extrapolation lemma, (A.4) bias-component estimation.}
+
+\backmatter
+\printbibliography[heading=bibintoc]
+
+\end{document}

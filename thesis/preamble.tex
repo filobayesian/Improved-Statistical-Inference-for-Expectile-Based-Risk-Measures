@@ -1,0 +1,104 @@
+% !TEX root = main.tex
+% Preamble for the Master's thesis.
+% Notation aligned with Daouia-Padoan-Stupfler (2021, "Optimal Pooling").
+
+\documentclass[11pt, a4paper, oneside]{book}
+
+% --- Encoding & fonts ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[english]{babel}
+\usepackage{microtype}
+\usepackage{csquotes}
+
+% --- Layout ---
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{parskip}
+
+% --- Math ---
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+\usepackage{bm}
+\usepackage{bbm}
+
+% --- Lists, refs, links ---
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!50!black,
+  citecolor=blue!50!black,
+  urlcolor=blue!50!black
+}
+\usepackage[capitalize, nameinlink]{cleveref}
+
+% --- Bibliography ---
+\usepackage[backend=biber,
+            style=authoryear,
+            sorting=nyt,
+            maxcitenames=2,
+            maxbibnames=99,
+            giveninits=true,
+            uniquename=init]{biblatex}
+\addbibresource{references.bib}
+
+% --- Theorem environments ---
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% --- Math operators ---
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\Prob}{\mathbb{P}}
+
+% --- Sets ---
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\one}{\mathbbm{1}}
+
+% --- Convergence arrows ---
+\newcommand{\todist}{\xrightarrow{\,d\,}}
+\newcommand{\toprob}{\xrightarrow{\,\Prob\,}}
+\newcommand{\toas}{\xrightarrow{\,\mathrm{a.s.}\,}}
+
+% --- Notation aligned with Daouia-Padoan-Stupfler (2021) ---
+\newcommand{\Vc}{\bm{V}_{\bm{c}}}
+\newcommand{\Bc}{\bm{B}_{\bm{c}}}
+\newcommand{\Rjl}{R_{j,\ell}}
+\newcommand{\hatVc}{\widehat{\bm{V}}_{\bm{c}}}
+\newcommand{\hatBc}{\widehat{\bm{B}}_{\bm{c}}}
+
+% --- Expectile and quantile notation ---
+\newcommand{\expectile}[1]{\xi_{#1}}
+\newcommand{\hatexpectile}[1]{\widehat{\xi}_{#1}}
+\newcommand{\tildexpectile}[1]{\widetilde{\xi}_{#1}}
+\newcommand{\psifn}{\psi}
+\newcommand{\Quant}{Q}
+\newcommand{\hatQuant}{\widehat{Q}}
+\newcommand{\Wei}{q^{\star}}
+\newcommand{\hatWei}{\widehat{q}^{\star}}
+
+% --- Convenience ---
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+
+% --- TODO marker (visible until thesis is final) ---
+\newcommand{\todo}[1]{\textcolor{red}{\textbf{[TODO:} #1\textbf{]}}}

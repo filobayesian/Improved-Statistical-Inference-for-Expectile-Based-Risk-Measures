@@ -1,0 +1,38 @@
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Motivation}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Extreme expectile inference}{2}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Pooled inference across samples}{2}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Research question and scope}{2}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Contributions}{3}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Outline of the thesis}{4}{section.1.6}%
+\contentsline {chapter}{\numberline {2}Background}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Regular variation and the second-order condition}{5}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Tail-index and extreme-quantile estimation}{6}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}The Hill estimator}{6}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Weissman extrapolation to extreme quantiles}{7}{subsection.2.2.2}%
+\contentsline {section}{\numberline {2.3}Expectiles}{7}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Extreme expectile inference: the iid heavy-tailed baseline}{8}{section.2.4}%
+\contentsline {section}{\numberline {2.5}The optimal pooling framework}{8}{section.2.5}%
+\contentsline {chapter}{\numberline {3}Pooled inference for extreme expectiles at intermediate levels}{9}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Setup and notation}{9}{section.3.1}%
+\contentsline {section}{\numberline {3.2}The pooled QB expectile estimator}{9}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Joint asymptotic distribution of the pooled inputs}{10}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Asymptotic normality of the pooled expectile estimator}{10}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Variance- and AMSE-optimal weights}{10}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Estimated weights and confidence intervals}{10}{section.3.6}%
+\contentsline {section}{\numberline {3.7}A test of expectile-tail-homogeneity}{11}{section.3.7}%
+\contentsline {chapter}{\numberline {4}Extrapolation to very-extreme expectile levels}{12}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Motivation}{12}{section.4.1}%
+\contentsline {section}{\numberline {4.2}The pooled extrapolated expectile estimator}{12}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Asymptotic distribution}{13}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Optimal weights for extrapolation}{13}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Bias-reduction}{13}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Asymptotic confidence intervals}{13}{section.4.6}%
+\contentsline {chapter}{\numberline {5}Discussion and future work}{14}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Summary of contributions}{14}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Connections to Expected Shortfall}{14}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Limitations}{14}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Future work}{15}{section.5.4}%
+\contentsline {chapter}{\numberline {A}Proofs}{16}{appendix.A}%
+\contentsline {chapter}{Bibliography}{17}{appendix*.6}%

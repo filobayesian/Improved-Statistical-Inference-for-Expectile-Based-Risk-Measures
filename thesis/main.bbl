@@ -1,0 +1,511 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nyt/global//global/global}
+    \entry{ArtznerDelbaenEberHeath1999}{article}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=3f2ec6a82c23c0c7062a2c8dad7a86e1}{%
+           family={Artzner},
+           familyi={A\bibinitperiod},
+           given={Philippe},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1af76fc6ac243ee12ea3e2cb593750ee}{%
+           family={Delbaen},
+           familyi={D\bibinitperiod},
+           given={Freddy},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1d79028403b8f170c257ba3e5531a3e8}{%
+           family={Eber},
+           familyi={E\bibinitperiod},
+           given={Jean-Marc},
+           giveni={J\bibinithyphendelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=efe5624ffa1b674383a27edcc7c48d62}{%
+           family={Heath},
+           familyi={H\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{401eceac13445f29090201341d46d9fa}
+      \strng{fullhash}{70f38e73ef1cfca300fa942b4a702234}
+      \strng{bibnamehash}{70f38e73ef1cfca300fa942b4a702234}
+      \strng{authorbibnamehash}{70f38e73ef1cfca300fa942b4a702234}
+      \strng{authornamehash}{401eceac13445f29090201341d46d9fa}
+      \strng{authorfullhash}{70f38e73ef1cfca300fa942b4a702234}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Mathematical Finance}
+      \field{number}{3}
+      \field{title}{Coherent measures of risk}
+      \field{volume}{9}
+      \field{year}{1999}
+      \field{pages}{203\bibrangedash 228}
+      \range{pages}{26}
+    \endentry
+    \entry{BelliniKlarMullerRosazzaGianin2014}{article}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=e456d4173faeb5b59527fe1a7cb9e985}{%
+           family={Bellini},
+           familyi={B\bibinitperiod},
+           given={Fabio},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3dbc75230357b984ff4c37ab1336ca5a}{%
+           family={Klar},
+           familyi={K\bibinitperiod},
+           given={Bernhard},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6d43d8076b2a08aac78aa8b75dcaed4b}{%
+           family={Müller},
+           familyi={M\bibinitperiod},
+           given={Alfred},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e2d46ccb26e9362f7a762bec975ab00b}{%
+           family={Rosazza\bibnamedelima Gianin},
+           familyi={R\bibinitperiod\bibinitdelim G\bibinitperiod},
+           given={Emanuela},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{b4a6d4aed7f8c1442430942e7a8a6e72}
+      \strng{fullhash}{99aeb9f124933c57d5f87d12da9c2546}
+      \strng{bibnamehash}{99aeb9f124933c57d5f87d12da9c2546}
+      \strng{authorbibnamehash}{99aeb9f124933c57d5f87d12da9c2546}
+      \strng{authornamehash}{b4a6d4aed7f8c1442430942e7a8a6e72}
+      \strng{authorfullhash}{99aeb9f124933c57d5f87d12da9c2546}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Insurance: Mathematics and Economics}
+      \field{title}{Generalized quantiles as risk measures}
+      \field{volume}{54}
+      \field{year}{2014}
+      \field{pages}{41\bibrangedash 48}
+      \range{pages}{8}
+    \endentry
+    \entry{DaouiaGirardStupfler2018}{article}{}
+      \name{author}{3}{ul=2}{%
+        {{un=0,uniquepart=base,hash=9bd5145f5ade5b755a2fd71b455eb620}{%
+           family={Daouia},
+           familyi={D\bibinitperiod},
+           given={Abdelaati},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3087d4cc70fb7b23058ecbe7cdbb507d}{%
+           family={Girard},
+           familyi={G\bibinitperiod},
+           given={Stéphane},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c1e0be9e5ef95568a2e36070aadcdeb8}{%
+           family={Stupfler},
+           familyi={S\bibinitperiod},
+           given={Gilles},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{adaf470abad719d8fe224e60e5ba0574}
+      \strng{fullhash}{b4a31c70385e545e38da3cc883a70b2a}
+      \strng{bibnamehash}{b4a31c70385e545e38da3cc883a70b2a}
+      \strng{authorbibnamehash}{b4a31c70385e545e38da3cc883a70b2a}
+      \strng{authornamehash}{adaf470abad719d8fe224e60e5ba0574}
+      \strng{authorfullhash}{b4a31c70385e545e38da3cc883a70b2a}
+      \field{extraname}{1}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of the Royal Statistical Society. Series B}
+      \field{number}{2}
+      \field{title}{Estimation of tail risk based on extreme expectiles}
+      \field{volume}{80}
+      \field{year}{2018}
+      \field{pages}{263\bibrangedash 292}
+      \range{pages}{30}
+    \endentry
+    \entry{DaouiaGirardStupfler2019}{article}{}
+      \name{author}{3}{ul=2}{%
+        {{un=0,uniquepart=base,hash=9bd5145f5ade5b755a2fd71b455eb620}{%
+           family={Daouia},
+           familyi={D\bibinitperiod},
+           given={Abdelaati},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3087d4cc70fb7b23058ecbe7cdbb507d}{%
+           family={Girard},
+           familyi={G\bibinitperiod},
+           given={Stéphane},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c1e0be9e5ef95568a2e36070aadcdeb8}{%
+           family={Stupfler},
+           familyi={S\bibinitperiod},
+           given={Gilles},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{adaf470abad719d8fe224e60e5ba0574}
+      \strng{fullhash}{b4a31c70385e545e38da3cc883a70b2a}
+      \strng{bibnamehash}{b4a31c70385e545e38da3cc883a70b2a}
+      \strng{authorbibnamehash}{b4a31c70385e545e38da3cc883a70b2a}
+      \strng{authornamehash}{adaf470abad719d8fe224e60e5ba0574}
+      \strng{authorfullhash}{b4a31c70385e545e38da3cc883a70b2a}
+      \field{extraname}{2}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Bernoulli}
+      \field{number}{1}
+      \field{title}{Extreme {M}-quantiles as risk measures: {F}rom $L^{1}$ to $L^{p}$ optimization}
+      \field{volume}{25}
+      \field{year}{2019}
+      \field{pages}{264\bibrangedash 309}
+      \range{pages}{46}
+    \endentry
+    \entry{DaouiaPadoanStupfler2021}{article}{}
+      \name{author}{3}{ul=2}{%
+        {{un=0,uniquepart=base,hash=9bd5145f5ade5b755a2fd71b455eb620}{%
+           family={Daouia},
+           familyi={D\bibinitperiod},
+           given={Abdelaati},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=0c11d850708ce6fef1d53c0b8af5f7eb}{%
+           family={Padoan},
+           familyi={P\bibinitperiod},
+           given={Simone\bibnamedelima A.},
+           giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c1e0be9e5ef95568a2e36070aadcdeb8}{%
+           family={Stupfler},
+           familyi={S\bibinitperiod},
+           given={Gilles},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{0379089272b5ffb8941b2b65fe508592}
+      \strng{fullhash}{2d21c94ef0f3d79e23be6d13306b3d85}
+      \strng{bibnamehash}{2d21c94ef0f3d79e23be6d13306b3d85}
+      \strng{authorbibnamehash}{2d21c94ef0f3d79e23be6d13306b3d85}
+      \strng{authornamehash}{0379089272b5ffb8941b2b65fe508592}
+      \strng{authorfullhash}{2d21c94ef0f3d79e23be6d13306b3d85}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprinttype}{arXiv}
+      \field{note}{arXiv:2111.03173 [math.ST]. \todo{update if accepted at journal}}
+      \field{title}{Optimal pooling and distributed inference for the tail index and extreme quantiles}
+      \field{year}{2021}
+      \verb{eprint}
+      \verb 2111.03173
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2111.03173
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2111.03173
+      \endverb
+    \endentry
+    \entry{DavisonPadoanStupfler2023}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=cea13b3418593a52bdfe130f4fe106e8}{%
+           family={Davison},
+           familyi={D\bibinitperiod},
+           given={Anthony\bibnamedelima C.},
+           giveni={A\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=0c11d850708ce6fef1d53c0b8af5f7eb}{%
+           family={Padoan},
+           familyi={P\bibinitperiod},
+           given={Simone\bibnamedelima A.},
+           giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c1e0be9e5ef95568a2e36070aadcdeb8}{%
+           family={Stupfler},
+           familyi={S\bibinitperiod},
+           given={Gilles},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{b42a92786f4a33d0e0f32dd42068a4aa}
+      \strng{fullhash}{8f62a5760a96380616dabf24c5470764}
+      \strng{bibnamehash}{8f62a5760a96380616dabf24c5470764}
+      \strng{authorbibnamehash}{8f62a5760a96380616dabf24c5470764}
+      \strng{authornamehash}{b42a92786f4a33d0e0f32dd42068a4aa}
+      \strng{authorfullhash}{8f62a5760a96380616dabf24c5470764}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Business \& Economic Statistics}
+      \field{number}{3}
+      \field{title}{Tail risk inference via expectiles in heavy-tailed time series}
+      \field{volume}{41}
+      \field{year}{2023}
+      \field{pages}{876\bibrangedash 889}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1080/07350015.2022.2078332
+      \endverb
+    \endentry
+    \entry{EhmGneitingJordanKrueger2016}{article}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=ce53396dc73de4d699fedd992cf4897d}{%
+           family={Ehm},
+           familyi={E\bibinitperiod},
+           given={Werner},
+           giveni={W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=cf94799d213c0ab2fd2012473da7440b}{%
+           family={Gneiting},
+           familyi={G\bibinitperiod},
+           given={Tilmann},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c5fe64e740a9f03e59bbdfb557e99c51}{%
+           family={Jordan},
+           familyi={J\bibinitperiod},
+           given={Alexander},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ddd6c8baf4e586351125b9e8ca40430e}{%
+           family={Krüger},
+           familyi={K\bibinitperiod},
+           given={Fabian},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{6f6995f2fcd85b70ad0ae6e99f568ed6}
+      \strng{fullhash}{f9595749edfd28032acc8f597b77b38d}
+      \strng{bibnamehash}{f9595749edfd28032acc8f597b77b38d}
+      \strng{authorbibnamehash}{f9595749edfd28032acc8f597b77b38d}
+      \strng{authornamehash}{6f6995f2fcd85b70ad0ae6e99f568ed6}
+      \strng{authorfullhash}{f9595749edfd28032acc8f597b77b38d}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of the Royal Statistical Society. Series B}
+      \field{number}{3}
+      \field{title}{Of quantiles and expectiles: {C}onsistent scoring functions, {C}hoquet representations and forecast rankings}
+      \field{volume}{78}
+      \field{year}{2016}
+      \field{pages}{505\bibrangedash 562}
+      \range{pages}{58}
+    \endentry
+    \entry{Gneiting2011}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=cf94799d213c0ab2fd2012473da7440b}{%
+           family={Gneiting},
+           familyi={G\bibinitperiod},
+           given={Tilmann},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{cf94799d213c0ab2fd2012473da7440b}
+      \strng{fullhash}{cf94799d213c0ab2fd2012473da7440b}
+      \strng{bibnamehash}{cf94799d213c0ab2fd2012473da7440b}
+      \strng{authorbibnamehash}{cf94799d213c0ab2fd2012473da7440b}
+      \strng{authornamehash}{cf94799d213c0ab2fd2012473da7440b}
+      \strng{authorfullhash}{cf94799d213c0ab2fd2012473da7440b}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of the American Statistical Association}
+      \field{number}{494}
+      \field{title}{Making and evaluating point forecasts}
+      \field{volume}{106}
+      \field{year}{2011}
+      \field{pages}{746\bibrangedash 762}
+      \range{pages}{17}
+    \endentry
+    \entry{deHaanFerreira2006}{book}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=bbda4744adb5a56012642f11d8aca3eb}{%
+           family={Haan},
+           familyi={H\bibinitperiod},
+           given={Laurens},
+           giveni={L\bibinitperiod},
+           givenun=0,
+           prefix={de},
+           prefixi={d\bibinitperiod},
+           prefixun=0}}%
+        {{un=0,uniquepart=base,hash=8c23b1d2fc7f638d2fa4dae66e258e3a}{%
+           family={Ferreira},
+           familyi={F\bibinitperiod},
+           given={Ana},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {New York}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{7a74dadaccbe4d41a79d78180da0f0b6}
+      \strng{fullhash}{7a74dadaccbe4d41a79d78180da0f0b6}
+      \strng{bibnamehash}{7a74dadaccbe4d41a79d78180da0f0b6}
+      \strng{authorbibnamehash}{7a74dadaccbe4d41a79d78180da0f0b6}
+      \strng{authornamehash}{7a74dadaccbe4d41a79d78180da0f0b6}
+      \strng{authorfullhash}{7a74dadaccbe4d41a79d78180da0f0b6}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{series}{Springer Series in Operations Research and Financial Engineering}
+      \field{title}{Extreme Value Theory: An Introduction}
+      \field{year}{2006}
+    \endentry
+    \entry{NeweyPowell1987}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=058d74ae5e89fbd5a49ebdbe97b4c922}{%
+           family={Newey},
+           familyi={N\bibinitperiod},
+           given={Whitney\bibnamedelima K.},
+           giveni={W\bibinitperiod\bibinitdelim K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=52ad8eec8014fdb8f72da420d06eb7e9}{%
+           family={Powell},
+           familyi={P\bibinitperiod},
+           given={James\bibnamedelima L.},
+           giveni={J\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{c2700fc3c834f10ec3860a41e2bf97a7}
+      \strng{fullhash}{c2700fc3c834f10ec3860a41e2bf97a7}
+      \strng{bibnamehash}{c2700fc3c834f10ec3860a41e2bf97a7}
+      \strng{authorbibnamehash}{c2700fc3c834f10ec3860a41e2bf97a7}
+      \strng{authornamehash}{c2700fc3c834f10ec3860a41e2bf97a7}
+      \strng{authorfullhash}{c2700fc3c834f10ec3860a41e2bf97a7}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Econometrica}
+      \field{number}{4}
+      \field{title}{Asymmetric least squares estimation and testing}
+      \field{volume}{55}
+      \field{year}{1987}
+      \field{pages}{819\bibrangedash 847}
+      \range{pages}{29}
+    \endentry
+    \entry{PadoanStupfler2022}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=0c11d850708ce6fef1d53c0b8af5f7eb}{%
+           family={Padoan},
+           familyi={P\bibinitperiod},
+           given={Simone\bibnamedelima A.},
+           giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c1e0be9e5ef95568a2e36070aadcdeb8}{%
+           family={Stupfler},
+           familyi={S\bibinitperiod},
+           given={Gilles},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{5648aaf64525589c1512861e13ff33f8}
+      \strng{fullhash}{5648aaf64525589c1512861e13ff33f8}
+      \strng{bibnamehash}{5648aaf64525589c1512861e13ff33f8}
+      \strng{authorbibnamehash}{5648aaf64525589c1512861e13ff33f8}
+      \strng{authornamehash}{5648aaf64525589c1512861e13ff33f8}
+      \strng{authorfullhash}{5648aaf64525589c1512861e13ff33f8}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Bernoulli}
+      \field{number}{2}
+      \field{title}{Joint inference on extreme expectiles for multivariate heavy-tailed distributions}
+      \field{volume}{28}
+      \field{year}{2022}
+      \field{pages}{1021\bibrangedash 1048}
+      \range{pages}{28}
+      \verb{doi}
+      \verb 10.3150/21-BEJ1375
+      \endverb
+    \endentry
+    \entry{Weissman1978}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=96396faee478b5f31a8d7af6c12930be}{%
+           family={Weissman},
+           familyi={W\bibinitperiod},
+           given={Ishay},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{96396faee478b5f31a8d7af6c12930be}
+      \strng{fullhash}{96396faee478b5f31a8d7af6c12930be}
+      \strng{bibnamehash}{96396faee478b5f31a8d7af6c12930be}
+      \strng{authorbibnamehash}{96396faee478b5f31a8d7af6c12930be}
+      \strng{authornamehash}{96396faee478b5f31a8d7af6c12930be}
+      \strng{authorfullhash}{96396faee478b5f31a8d7af6c12930be}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of the American Statistical Association}
+      \field{number}{364}
+      \field{title}{Estimation of parameters and large quantiles based on the $k$ largest observations}
+      \field{volume}{73}
+      \field{year}{1978}
+      \field{pages}{812\bibrangedash 815}
+      \range{pages}{4}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

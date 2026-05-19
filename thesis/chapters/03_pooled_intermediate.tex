@@ -1,0 +1,131 @@
+% !TEX root = ../main.tex
+\chapter{Pooled inference for extreme expectiles at intermediate levels}
+\label{ch:pool-int}
+
+\section*{Overview}
+
+This chapter introduces the pooled extreme-expectile estimator at
+intermediate levels and develops its asymptotic theory. The construction
+plugs the pooled tail-index estimator $\hat\gamma_n(\bm\omega_\gamma)$
+and the pooled weighted-geometric Weissman extreme-quantile estimator
+$\hatWei_n(\,\cdot\,;\bm\omega_q)$ of
+\textcite{DaouiaPadoanStupfler2021} into the expectile--quantile
+asymptotic equivalence $\xi_\tau \approx \psifn(\gamma)\,Q_X(\tau)$. The
+delta method applied through $\psifn$ yields a joint Gaussian limit,
+from which we read off the variance- and AMSE-optimal pooling weights
+tailored to the pooled expectile target.
+
+\section{Setup and notation}
+\label{sec:pool-int:setup}
+
+\todo{We have $m$ independent samples of iid heavy-tailed observations
+with a common extreme-value index $\gamma \in (0,1/2)$. Each sample $j$
+contributes a Hill estimator $\hat\gamma_j(k_j)$ and a Weissman
+extreme-quantile estimator $\hat q^\star_j(1-p\mid k_j)$, together with
+their joint asymptotic covariance in the sense of Theorems~1 and~2 of
+\textcite{DaouiaPadoanStupfler2021}. Because the samples are
+\emph{independent}, the tail-copula functions $R_{j,\ell}$ are
+identically zero across sources, and the cross-source blocks of the
+joint asymptotic covariance vanish. We target the extreme expectile
+$\expectile{\tau_n}$ at intermediate level $\tau_n \to 1$ with
+$n(1-\tau_n) \to \infty$.}
+
+\section{The pooled QB expectile estimator}
+\label{sec:pool-int:estimator}
+
+\todo{Define the pooled QB extreme-expectile estimator
+\[
+  \hatexpectile{\tau_n}^{\mathrm{pool}}(\bm\omega_\gamma,\bm\omega_q)
+  \;\coloneqq\;
+  \psifn\!\big(\hat\gamma_n(\bm\omega_\gamma)\big)\,
+  \hatWei_n(1-\tau_n \mid \bm\omega_q),
+\qquad
+  \psifn(g) = \big(g^{-1}-1\big)^{-g}.
+\]
+Discuss the choice of weight vectors $\bm\omega_\gamma$ and $\bm\omega_q$
+--- they need not coincide --- and motivate the use of the
+\emph{intermediate-level} pooled Weissman (rather than the empirical
+intermediate quantile) by appealing to the asymptotic equivalence between
+the two at intermediate levels.}
+
+\section{Joint asymptotic distribution of the pooled inputs}
+\label{sec:pool-int:joint-clt}
+
+\todo{State and prove the joint CLT for the $2m$-vector
+$\big(\hat\gamma_j(k_j),\,\hat q^\star_j(1-\tau_n\mid k_j)\big)_{j=1,\ldots,m}$
+under the iid baseline. The within-sample $2\times 2$ blocks coincide
+with the joint $(\hat\gamma_j,\hat q_j)$ limit of
+\textcite[Theorem~2.2 and Corollary~2.3]{PadoanStupfler2022}; the
+between-sample blocks vanish because the samples are independent.
+Conclude that the pooled $(\hat\gamma_n(\bm\omega_\gamma),
+\hatWei_n(1-\tau_n\mid \bm\omega_q))$ is jointly Gaussian with covariance
+\[
+  \bm\Sigma(\bm\omega_\gamma,\bm\omega_q)
+  \;=\;
+  \begin{pmatrix}
+    \bm\omega_\gamma^\top \Vc\,\bm\omega_\gamma
+      & \text{cross-covariance} \\
+    \cdot
+      & \bm\omega_q^\top \Vc\,\bm\omega_q
+  \end{pmatrix},
+\]
+with the cross-covariance evaluated explicitly from the joint
+within-sample distribution of $(\hat\gamma_j,\hat q_j)$.}
+
+\section{Asymptotic normality of the pooled expectile estimator}
+\label{sec:pool-int:expectile-clt}
+
+\todo{Apply the delta method to the joint Gaussian limit of the previous
+section through the map $(g, q) \mapsto \psifn(g)\,q$. The Jacobian is
+$(\psifn'(g)\,q,\,\psifn(g))$ with $\psifn'(g) = \psifn(g)\cdot
+\big[(1-g)^{-1} - \log(g^{-1}-1)\big]/g$, which factor we denote
+$m(\gamma)$. The resulting limit is
+\[
+  \sqrt{k}\!\left(\frac{\hatexpectile{\tau_n}^{\mathrm{pool}}}
+                        {\expectile{\tau_n}} - 1\right)
+  \;\todist\;
+  \mathcal N\!\Big(\mu^{\xi}(\bm\omega_\gamma,\bm\omega_q),\;
+                    \sigma^{\xi}(\bm\omega_\gamma,\bm\omega_q)^{2}\Big),
+\]
+with explicit forms of the asymptotic bias $\mu^{\xi}$ and variance
+$\sigma^{\xi,2}$ in terms of $\Bc$ and $\Vc$. \emph{Cite the plug-in
+CLT of \textcite[Proposition~C.6]{DavisonPadoanStupfler2023} as the
+abstract technical lemma justifying this manipulation.}}
+
+\section{Variance- and AMSE-optimal weights}
+\label{sec:pool-int:weights}
+
+\todo{Derive closed-form expressions for the weights minimising
+$\sigma^{\xi,2}$ and the AMSE
+$(\mu^{\xi})^2+\sigma^{\xi,2}$, respectively. The minimisation is over
+$(\bm\omega_\gamma,\bm\omega_q)$ subject to
+$\bm\omega_\gamma^\top\bm 1 = \bm\omega_q^\top\bm 1 = 1$. Show that the
+optimal weights differ from $\bm\omega^{\mathrm{Var}}$ of
+\textcite{DaouiaPadoanStupfler2021} whenever the
+within-sample cross-covariance between $\hat\gamma_j$ and $\hat q_j$
+is non-zero, and identify the explicit difference. Provide a sufficient
+condition for the optimal expectile weights to coincide with the
+optimal quantile weights, namely $m(\gamma)\to 0$ (i.e.\ $\gamma$ near
+the value at which the LAWS and QB intermediate variances coincide).}
+
+\section{Estimated weights and confidence intervals}
+\label{sec:pool-int:CI}
+
+\todo{Plug-in estimation of $\Bc$ and $\Vc$ from the per-sample
+$(\hat\gamma_j,\hat q_j)$ pairs, following Section~2.2 of
+\textcite{DaouiaPadoanStupfler2021}. Asymptotic
+$(1-\alpha)$-confidence interval for $\expectile{\tau_n}$ built on the
+Gaussian limit of the previous section.}
+
+\section{A test of expectile-tail-homogeneity}
+\label{sec:pool-int:test}
+
+\todo{Consider the null hypothesis that the $m$ samples share a common
+expectile-tail behaviour, i.e.\ $\xi_{\tau,j}/\xi_{\tau,\ell}\to 1$ for
+all pairs $(j,\ell)$, which under tail homogeneity is equivalent to
+$\gamma_j=\gamma$ for all $j$ and $q_{\tau,j}/q_{\tau,\ell}\to 1$
+\parencite[Remark~5]{DaouiaPadoanStupfler2021}. Following the GLS
+construction of \textcite[\S3.3]{PadoanStupfler2022}, the
+$\chi^2_{m-1}$ deviance statistic on the log-scale yields a test of
+size $\alpha$ for expectile-tail-homogeneity. Reject for large values
+and accept otherwise.}
