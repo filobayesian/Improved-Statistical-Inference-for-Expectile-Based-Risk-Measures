@@ -6,11 +6,13 @@
 
 This chapter collects the technical ingredients on which the thesis
 builds: regular variation and the second-order condition; the Hill and
-Weissman estimators for the tail index and extreme quantiles; expectiles
-and their characterisation as a coherent and elicitable risk measure;
-single-sample iid extreme-expectile inference; and the optimal pooling
-framework of \textcite{DaouiaPadoanStupfler2021}. Nothing in this
-chapter is original; the contributions begin in \Cref{ch:pool-int}.
+Weissman estimators for the tail index and extreme quantiles;
+expectiles and their characterisation as a coherent and elicitable
+risk measure; single-sample iid extreme-expectile inference, with the
+plug-in central limit theorem that the contribution chapters take as
+their workhorse; and the optimal pooling framework of
+\textcite{DaouiaPadoanStupfler2021}. Nothing in this chapter is
+original; the contributions begin in \Cref{ch:pool-int}.
 
 \section{Regular variation and the second-order condition}
 \label{sec:bg:rv}
@@ -61,9 +63,8 @@ Fr\'echet, and $F$-distribution families
 
 For the asymptotic-normality statements that drive the inferential
 theory we need a quantitative refinement of \Cref{cond:bg:first-order}
-controlling the rate of convergence in
-\Cref{def:bg:rv}. The standard refinement is the second-order
-condition.
+controlling the rate of convergence in \Cref{def:bg:rv}. The standard
+refinement is the second-order condition.
 
 \begin{condition}[Second-order condition $\mathcal C_{2}(\gamma, \rho, A)$]
 \label{cond:bg:second-order}
@@ -97,8 +98,8 @@ quantile $\Quant_{X}(\tau)$.
 
 Under the first-order condition, the extreme-value index $\gamma > 0$
 is the primary parameter determining the behaviour of $F$ in the tail.
-We collect here the two classical estimators that the thesis builds on:
-the Hill estimator of $\gamma$ and the Weissman extrapolation for
+We collect here the two classical estimators that the thesis builds
+on: the Hill estimator of $\gamma$ and the Weissman extrapolation for
 extreme quantiles. Both are standard; the textbook reference is
 \textcite[Ch.~3--4]{deHaanFerreira2006}.
 
@@ -106,8 +107,8 @@ extreme quantiles. Both are standard; the textbook reference is
 \label{sec:bg:hill}
 
 Given an iid sample $X_{1}, \ldots, X_{n}$ from $F$ and an integer
-$k = k_{n} \in \{1, \ldots, n-1\}$, the \emph{Hill estimator} of $\gamma$
-based on the $k+1$ top order statistics is
+$k = k_{n} \in \{1, \ldots, n-1\}$, the \emph{Hill estimator} of
+$\gamma$ based on the $k + 1$ top order statistics is
 \begin{equation}
 \label{eq:bg:hill}
   \hat\gamma_{n}(k) \;=\; \frac{1}{k} \sum_{i=1}^{k} \log\!\left(
@@ -134,21 +135,22 @@ $\sqrt{k}\, A(n/k) \to \lambda \in \R$, then
 \]
 \end{theorem}
 
-The choice of $k$ controls the well-known bias--variance trade-off: too
-small a $k$ inflates the variance, while too large a $k$ injects
-second-order bias through the term $\lambda / (1-\rho)$. Adaptive choice
-of $k$ is a research topic in its own right; we do not pursue it in
-this thesis and treat $k$ as fixed by the data analyst.
+The choice of $k$ controls the well-known bias--variance trade-off:
+too small a $k$ inflates the variance, while too large a $k$ injects
+second-order bias through the term $\lambda / (1 - \rho)$. Adaptive
+choice of $k$ is a research topic in its own right; we do not pursue
+it in this thesis and treat $k$ as fixed by the data analyst.
 
 \subsection{Weissman extrapolation to extreme quantiles}
 \label{sec:bg:weissman}
 
 The \emph{Weissman extrapolation} \parencite{Weissman1978} extrapolates
-from the intermediate-order statistic $X_{n-k:n}$ --- which estimates
-the quantile $\Quant_{X}(1 - k/n)$ at the intermediate level $1 - k/n$
---- to a quantile at a very-extreme level $1 - p$ with $p = p_{n} \to 0$
-as $n \to \infty$. Plugging the Hill estimator into the first-order
-identity $U(t y) / U(t) \to y^{\gamma}$ gives the Weissman estimator
+from the intermediate-order statistic $X_{n - k:n}$ --- which
+estimates the quantile $\Quant_{X}(1 - k/n)$ at the intermediate level
+$1 - k/n$ --- to a quantile at a very-extreme level $1 - p$ with
+$p = p_{n} \to 0$ as $n \to \infty$. Plugging the Hill estimator into
+the first-order identity $U(t y) / U(t) \to y^{\gamma}$ gives the
+Weissman estimator
 \begin{equation}
 \label{eq:bg:weissman}
   \hatWei_{n}(1 - p \mid k)
@@ -161,8 +163,8 @@ beyond the largest observation in the sample.
 \begin{theorem}
 \label{thm:bg:weissman}
 Assume $\mathcal C_{2}(\gamma, \rho, A)$ with $\gamma > 0$ and
-$\rho < 0$. Let $k = k_{n} \to \infty$, $k/n \to 0$, $p = p_{n} \to 0$
-with $k/(np) \to \infty$ and $\sqrt{k}/\log(k/(np)) \to \infty$.
+$\rho < 0$. Let $k = k_{n} \to \infty$, $k / n \to 0$, $p = p_{n} \to 0$
+with $k / (np) \to \infty$ and $\sqrt{k} / \log(k / (np)) \to \infty$.
 Suppose $\sqrt{k}\, A(n/k) \to \lambda \in \R$. Then
 \[
   \frac{\sqrt{k}}{\log\!\big(k/(np)\big)}
@@ -172,100 +174,793 @@ Suppose $\sqrt{k}\, A(n/k) \to \lambda \in \R$. Then
 \]
 \end{theorem}
 
-The rate $\sqrt{k}/\log(k/(np))$ reflects the cost of extrapolation:
-the further into the tail one extrapolates, the larger the
-log-denominator and the slower the rate. The asymptotic variance is
-identical to that of the Hill estimator (\Cref{thm:bg:hill}); the
+The rate $\sqrt{k} / \log(k / (np))$ reflects the cost of
+extrapolation: the further into the tail one extrapolates, the larger
+the log-denominator and the slower the rate. The asymptotic variance
+is identical to that of the Hill estimator (\Cref{thm:bg:hill}); the
 extrapolation contributes only through the multiplicative log-scale
 factor. This is the structural fact that
 \textcite[\S2.3]{DaouiaPadoanStupfler2021} exploits to motivate the
-weighted-\emph{geometric} pooling of Weissman estimators --- rather than
-the arithmetic pooling natural for centred quantities --- and that we
-shall in turn exploit in \Cref{ch:pool-ext} for the extrapolation of
-pooled expectiles.
+weighted-\emph{geometric} pooling of Weissman estimators --- rather
+than the arithmetic pooling natural for centred quantities --- and
+that we shall in turn exploit in \Cref{ch:pool-ext} for the
+extrapolation of pooled expectiles.
 
 \section{Expectiles}
 \label{sec:bg:expectiles}
 
-\todo{Definition via the asymmetric-LS minimisation of
-\textcite{NeweyPowell1987}; first-order conditions for the population
-expectile; basic properties (existence for $\E|X|<\infty$, uniqueness,
-location/scale equivariance, monotonicity in $\tau$, $\xi_{1/2}=\E X$).
-Coherence (for $\tau \ge 1/2$) and elicitability via the asymmetric
-squared scoring function; cite
-\textcite{BelliniKlarMullerRosazzaGianin2014}. Choquet representation
-of \textcite{EhmGneitingJordanKrueger2016}. Risk-management
-interpretation as a VaR-distortion.}
+This section collects the definition and the basic properties of
+expectiles that we shall use in the rest of the thesis. Expectiles
+were introduced by \textcite{NeweyPowell1987} as an
+asymmetric-least-squares analogue of quantiles. The properties relevant
+for risk management --- in particular coherence and elicitability ---
+have been worked out subsequently, most notably by
+\textcite{BelliniKlarMullerRosazzaGianin2014} and
+\textcite{EhmGneitingJordanKrueger2016}.
+
+\subsection{Definition}
+
+Let $X$ be a real-valued random variable with $\E |X| < \infty$, and
+fix a level $\tau \in (0, 1)$. The $\tau$-\emph{expectile} of $X$ is
+defined as
+\begin{equation}
+\label{eq:bg:expectile-def}
+  \expectile{\tau}(X)
+  \;\coloneqq\;
+  \argmin_{\theta \in \R}\;
+  \E\!\left[\, \eta_{\tau}(X - \theta) - \eta_{\tau}(X) \,\right],
+  \qquad
+  \eta_{\tau}(u) \coloneqq \abs{\tau - \one\{u \le 0\}}\, u^{2}.
+\end{equation}
+The asymmetric squared check function $\eta_{\tau}$ penalises positive
+and negative deviations from $\theta$ with the asymmetric weights
+$\tau$ and $1 - \tau$, respectively. Recovering the mean in the
+symmetric case is immediate: $\eta_{1/2}(u) = u^{2} / 2$, so
+$\expectile{1/2}(X) = \E X$.
+
+The objective \eqref{eq:bg:expectile-def} is strictly convex in
+$\theta$ whenever $\Var X > 0$, and its first-order condition reduces
+to the implicit equation
+\begin{equation}
+\label{eq:bg:expectile-foc}
+  \tau\, \E\!\big[(X - \expectile{\tau}(X))_{+}\big]
+  \;=\;
+  (1 - \tau)\, \E\!\big[(\expectile{\tau}(X) - X)_{+}\big],
+\end{equation}
+where $u_{+} = \max(u, 0)$. The expectile is therefore the unique value
+of $\theta$ at which the asymmetrically-weighted upper and lower
+partial first moments coincide. This is the analogue of the implicit
+equation
+$\tau\, \Prob(X > \expectile{\tau}) = (1 - \tau)\, \Prob(X < \expectile{\tau})$
+that characterises quantiles, with first partial moments replacing
+exceedance probabilities.
+
+\subsection{Basic properties}
+
+The following properties are immediate from
+\eqref{eq:bg:expectile-def} or \eqref{eq:bg:expectile-foc}; we collect
+them without proof and refer to \textcite[\S3]{NeweyPowell1987} and
+\textcite[\S2]{BelliniKlarMullerRosazzaGianin2014} for details.
+
+\begin{proposition}
+\label{prop:bg:expectile-properties}
+Let $X$ and $Y$ be real-valued random variables with $\E |X|, \E |Y|
+< \infty$. For each $\tau \in (0, 1)$:
+\begin{enumerate}[label=(\roman*)]
+\item \textbf{Existence and uniqueness.} $\expectile{\tau}(X)$ exists
+      and is uniquely defined.
+\item \textbf{Mean recovery.} $\expectile{1/2}(X) = \E X$.
+\item \textbf{Location equivariance.}
+      $\expectile{\tau}(X + c) = \expectile{\tau}(X) + c$ for
+      $c \in \R$.
+\item \textbf{Positive homogeneity.}
+      $\expectile{\tau}(\lambda X) = \lambda\, \expectile{\tau}(X)$
+      for $\lambda \ge 0$.
+\item \textbf{Sign reflection.}
+      $\expectile{\tau}(-X) = -\expectile{1 - \tau}(X)$.
+\item \textbf{Monotonicity in $\tau$.} The map
+      $\tau \mapsto \expectile{\tau}(X)$ is strictly increasing on
+      $(0, 1)$, with the boundary limits
+      $\expectile{\tau}(X) \to \mathrm{ess}\inf(X)$ as $\tau \to 0$
+      and $\expectile{\tau}(X) \to \mathrm{ess}\sup(X)$ as
+      $\tau \to 1$ (provided the relevant essential infimum or
+      supremum is finite).
+\item \textbf{Monotonicity in the argument.} If $X \le Y$ almost
+      surely, then $\expectile{\tau}(X) \le \expectile{\tau}(Y)$.
+\end{enumerate}
+\end{proposition}
+
+Properties (iii)--(v) and (vii) qualify the expectile as a
+translation-equivariant, positively homogeneous, monotone functional
+--- three of the four axioms in \textcite{ArtznerDelbaenEberHeath1999}
+that define a coherent risk measure. The fourth axiom is
+subadditivity, to which we turn next.
+
+\subsection{Coherence and elicitability}
+
+Let $\rho_{\tau}$ denote the functional $\rho_{\tau}(X) =
+\expectile{\tau}(-X)$, interpreted as the expectile of the loss $-X$
+under the actuarial convention that gains are positive. Subadditivity
+of $\rho_{\tau}$ requires
+$\rho_{\tau}(X + Y) \le \rho_{\tau}(X) + \rho_{\tau}(Y)$ for all
+$X, Y$.
+
+\begin{theorem}[\textcite{BelliniKlarMullerRosazzaGianin2014}]
+\label{thm:bg:expectile-coherence}
+The functional $\rho_{\tau}(X) = \expectile{\tau}(-X)$ is a coherent
+risk measure if and only if $\tau \ge 1/2$.
+\end{theorem}
+
+Recall that a real-valued functional $T$ on a class of distributions
+is \emph{elicitable} \parencite{Gneiting2011} if there exists a scoring
+function $S : \R \times \R \to [0, \infty)$ such that
+$T(P) = \argmin_{\theta \in \R} \E_{P}\!S(\theta, X)$ for every $P$
+in the class. The asymmetric squared scoring function
+$S_{\tau}(\theta, x) = \eta_{\tau}(x - \theta)$ elicits the
+$\tau$-expectile by construction \eqref{eq:bg:expectile-def}, which
+also means that expectile forecasts can be backtested directly by
+ranking competing forecasts via the empirical $S_{\tau}$ loss. Taken
+together with \Cref{thm:bg:expectile-coherence}, this places expectiles
+in a privileged position among law-invariant risk measures: for
+$\tau \in [1/2, 1)$ the $\tau$-expectile is the only law-invariant
+risk measure that is both coherent and elicitable
+\parencite[Theorem~14]{BelliniKlarMullerRosazzaGianin2014}.
+
+\subsection{Choquet representation}
+
+\textcite{EhmGneitingJordanKrueger2016} place expectiles within a
+broader theory of consistent scoring functions and obtain a useful
+mixture representation in which $\expectile{\tau}$ appears as a
+weighted integral of elementary ``Bernoulli'' scoring functions over
+the support of $X$. We do not use the mixture representation
+explicitly in the asymptotic arguments of
+\Cref{ch:pool-int,ch:pool-ext}, and refer the reader to the original
+paper for the formal statement.
 
 \section{Extreme expectile inference: the iid heavy-tailed baseline}
 \label{sec:bg:extreme-expectile}
 
-\todo{State and reference the expectile--quantile asymptotic
-equivalence: $\xi_\tau/Q_X(\tau) \to (\gamma^{-1}-1)^{-\gamma}$ as
-$\tau\uparrow 1$ for $\gamma\in(0,1)$
-\parencite[Proposition~1]{DaouiaGirardStupfler2019}.}
+We now restrict to a heavy-tailed loss $X$ satisfying
+\Cref{cond:bg:first-order} with extreme-value index $\gamma \in (0,1)$,
+and consider inference for $\expectile{\tau}$ at levels $\tau$
+approaching one. We distinguish, throughout, between two asymptotic
+regimes:
+\begin{itemize}
+\item \emph{intermediate-level}: $\tau_{n} \to 1$ with
+      $n(1 - \tau_{n}) \to \infty$. There are still many observations
+      above $\Quant_{X}(\tau_{n})$, and central limit theorems hold at
+      the rate $\sqrt{n(1 - \tau_{n})}$.
+\item \emph{extreme-level}: $\tau_{n}^{\prime} \to 1$ with
+      $n(1 - \tau_{n}^{\prime}) \to c \in [0, \infty)$. There are at
+      most finitely many observations above
+      $\Quant_{X}(\tau_{n}^{\prime})$, and direct estimation is
+      infeasible; extrapolation is required.
+\end{itemize}
+The results in this section are due, in the iid setting, to
+\textcite{DaouiaGirardStupfler2018,DaouiaGirardStupfler2019,DaouiaGirardStupfler2020};
+the time-series extension that we have used to organise the
+exposition is \textcite{DavisonPadoanStupfler2023}, and we shall
+borrow Proposition~C.6 of that paper's supplement to formulate the
+abstract plug-in lemma that the contribution chapters use.
 
-\todo{The two estimator families in the iid setting
-\parencite{DaouiaGirardStupfler2018}: (a) LAWS direct,
-$\tildexpectile{\tau_n} = \argmin_{\theta}\sum_i \eta_{\tau_n}(X_i-\theta)$,
-with asymptotic variance $2\gamma^3/(1-2\gamma)$ at intermediate levels;
-(b) QB plug-in, $\hatexpectile{\tau_n} = (\hat\gamma^{-1}-1)^{-\hat\gamma}
-\hatQuant(\tau_n)$, with asymptotic variance involving
-$m(\gamma)=(1-\gamma)^{-1}-\log(\gamma^{-1}-1)$.}
+\subsection{The expectile--quantile asymptotic equivalence}
 
-\todo{Weissman-style extrapolation to very-extreme levels $\tau_n^\prime$
-with $n(1-\tau_n^\prime) \to c$: $\overline{\xi}^\star_{\tau_n^\prime} =
-((1-\tau_n^\prime)/(1-\tau_n))^{-\hat\gamma}\,\overline{\xi}_{\tau_n}$,
-with asymptotic variance $\gamma^2$ in the iid case. The LAWS-anchored
-and QB-anchored extrapolations have the same asymptotic distribution at
-the extreme level (the tail-index estimator dominates).}
+The single most important fact for extreme expectile inference is
+that, in the heavy-tailed regime, the expectile is asymptotically
+proportional to the quantile of the same level.
 
-\todo{State the plug-in CLT of
-\textcite[Proposition~C.6]{DavisonPadoanStupfler2023}, which is the
-abstract technical lemma that lifts joint $\sqrt{n(1-\tau_n)}$-Gaussian
-limits of $(\hat\gamma, \overline\xi)$ to limits of the extrapolated
-$\overline\xi^\star$. This is the workhorse for \Cref{ch:pool-int} and
-\Cref{ch:pool-ext}.}
+\begin{proposition}[Asymptotic equivalence;
+                    \textcite{BelliniKlarMullerRosazzaGianin2014},
+                    \textcite{DaouiaGirardStupfler2019}]
+\label{prop:bg:expectile-quantile}
+Suppose $X$ satisfies \Cref{cond:bg:first-order} with index
+$\gamma \in (0, 1)$. Then
+\begin{equation}
+\label{eq:bg:expectile-quantile-equivalence}
+  \frac{\expectile{\tau}(X)}{\Quant_{X}(\tau)}
+  \;\xrightarrow{\tau \uparrow 1}\;
+  \psifn(\gamma) \;\coloneqq\; \big(\gamma^{-1} - 1\big)^{-\gamma}.
+\end{equation}
+\end{proposition}
+
+The factor $\psifn(\gamma)$ is the linchpin of all extreme-expectile
+inference: it converts asymptotic statements about extreme quantiles
+into asymptotic statements about extreme expectiles, and vice versa.
+The function $\psifn$ is continuous and strictly increasing on
+$(0, 1)$, with $\psifn(\gamma) \to 1$ as $\gamma \downarrow 0$ and
+$\psifn(\gamma) \to \infty$ as $\gamma \uparrow 1$. In particular, for
+heavier tails the expectile lies further above the same-level
+quantile.
+
+\subsection{Two families of estimators at intermediate levels}
+
+Two natural estimators of $\expectile{\tau_{n}}$ at an intermediate
+level $\tau_{n}$ arise from the asymmetric-LS definition
+\eqref{eq:bg:expectile-def} on the one hand, and from the asymptotic
+equivalence \eqref{eq:bg:expectile-quantile-equivalence} on the other.
+
+\paragraph{LAWS direct estimator.}
+The \emph{asymmetric-least-squares} (LAWS) estimator replaces the
+population minimisation \eqref{eq:bg:expectile-def} with its empirical
+analogue:
+\begin{equation}
+\label{eq:bg:laws}
+  \tildexpectile{\tau_{n}}
+  \;=\;
+  \argmin_{\theta \in \R}\,
+  \sum_{i=1}^{n} \eta_{\tau_{n}}(X_{i} - \theta).
+\end{equation}
+The estimator $\tildexpectile{\tau_{n}}$ is computed by an
+iteratively-reweighted least-squares scheme that converges in a finite
+number of iterations; see \textcite[\S3]{DaouiaGirardStupfler2018} for
+implementation details.
+
+\begin{theorem}[Intermediate LAWS CLT;
+                \textcite{DaouiaGirardStupfler2018}]
+\label{thm:bg:laws-iid}
+Assume $\mathcal C_{2}(\gamma, \rho, A)$ with $\gamma \in (0, 1/2)$
+and $\E |X_{-}|^{2 + \delta} < \infty$ for some $\delta > 0$. Let
+$\tau_{n} \to 1$ with $n(1 - \tau_{n}) \to \infty$ and suppose
+$\sqrt{n(1 - \tau_{n})}\, A\!\big((1 - \tau_{n})^{-1}\big) \to
+\lambda \in \R$ and
+$\sqrt{n(1 - \tau_{n})}\, / \Quant_{X}(\tau_{n}) \to 0$. Then
+\[
+  \sqrt{n(1 - \tau_{n})}\!
+  \left( \frac{\tildexpectile{\tau_{n}}}{\expectile{\tau_{n}}} - 1
+  \right)
+  \;\todist\;
+  \mathcal N\!\left(0,\; \frac{2 \gamma^{3}}{1 - 2\gamma}\right).
+\]
+\end{theorem}
+
+\paragraph{Quantile-based plug-in estimator.}
+A second family substitutes estimators of $\gamma$ and of the
+intermediate quantile $\Quant_{X}(\tau_{n})$ into the
+asymptotic-equivalence formula
+\eqref{eq:bg:expectile-quantile-equivalence}:
+\begin{equation}
+\label{eq:bg:qb}
+  \hatexpectile{\tau_{n}}
+  \;=\;
+  \psifn\!\big(\hat\gamma_{n}\big)\, \hatQuant(\tau_{n}),
+\end{equation}
+where $\hatQuant(\tau_{n}) = X_{n - \lfloor n(1 - \tau_{n}) \rfloor : n}$
+is the empirical quantile (an intermediate-order statistic) and
+$\hat\gamma_{n}$ is any $\sqrt{n(1 - \tau_{n})}$-consistent tail-index
+estimator. The natural choice is the Hill estimator of
+\eqref{eq:bg:hill} with effective sample size $k = \lfloor
+n(1 - \tau_{n})\rfloor$.
+
+\begin{theorem}[Intermediate QB CLT;
+                \textcite{DaouiaGirardStupfler2018}]
+\label{thm:bg:qb-iid}
+Under the conditions of \Cref{thm:bg:laws-iid}, with $\hat\gamma_{n}$
+the Hill estimator at effective sample size
+$k = \lfloor n(1 - \tau_{n}) \rfloor$,
+\[
+  \sqrt{n(1 - \tau_{n})}\!
+  \left(\frac{\hatexpectile{\tau_{n}}}{\expectile{\tau_{n}}} - 1
+  \right)
+  \;\todist\;
+  \mathcal N\!\left(\frac{m(\gamma)}{1 - \rho}\,\lambda,\;
+                    \gamma^{2}\big(1 + m(\gamma)^{2}\big)\right),
+\]
+where $m(\gamma) = (1 - \gamma)^{-1} - \log(\gamma^{-1} - 1)$.
+\end{theorem}
+
+\paragraph{Comparison.}
+The LAWS estimator has asymptotic variance
+$2 \gamma^{3} / (1 - 2 \gamma)$, which is independent of the choice
+of tail-index estimator. The QB estimator's variance
+$\gamma^{2}(1 + m(\gamma)^{2})$ depends on the tail-index estimator
+used and reflects the contribution of $\hat\gamma_{n}$ via the term
+$m(\gamma)^{2}$. Numerical comparison over $\gamma \in (0, 1/2)$
+reveals that no single estimator dominates the other across the whole
+range: the QB estimator has smaller variance for moderately
+heavy-tailed distributions ($\gamma$ small), while the LAWS estimator
+overtakes it as $\gamma$ approaches $1/2$. The thesis works with the
+QB construction throughout, because it composes more directly with the
+pooled $(\hat\gamma, \hat Q)$ inputs of the pooling framework.
+
+\subsection{Weissman extrapolation to very-extreme expectile levels}
+\label{sec:bg:weissman-expectile}
+
+For levels $\tau_{n}^{\prime}$ so close to one that
+$n(1 - \tau_{n}^{\prime}) \to c \in [0, \infty)$, neither
+$\tildexpectile{\tau_{n}^{\prime}}$ nor
+$\hatexpectile{\tau_{n}^{\prime}}$ is defined consistently.
+Extrapolation from an intermediate level $\tau_{n}$ to the extreme
+level $\tau_{n}^{\prime}$ is required.
+
+The asymptotic equivalence
+\eqref{eq:bg:expectile-quantile-equivalence} and the first-order
+identity $U(t y) / U(t) \to y^{\gamma}$ together yield the heuristic
+\[
+  \frac{\expectile{\tau_{n}^{\prime}}}{\expectile{\tau_{n}}}
+  \;\sim\;
+  \frac{\Quant_{X}(\tau_{n}^{\prime})}{\Quant_{X}(\tau_{n})}
+  \;\sim\;
+  \left(\frac{1 - \tau_{n}^{\prime}}{1 - \tau_{n}}\right)^{\!-\gamma},
+\]
+which suggests the \emph{Weissman-type} extrapolated estimator
+\begin{equation}
+\label{eq:bg:weissman-expectile}
+  \overline{\xi}^{\,\star}_{\tau_{n}^{\prime}}
+  \;=\;
+  \left(\frac{1 - \tau_{n}^{\prime}}{1 - \tau_{n}}\right)^{\!-\hat\gamma_{n}}\!
+  \overline{\xi}_{\tau_{n}},
+\end{equation}
+where $\overline{\xi}_{\tau_{n}}$ is any consistent intermediate-level
+estimator (either $\tildexpectile{\tau_{n}}$ or
+$\hatexpectile{\tau_{n}}$) and $\hat\gamma_{n}$ is a $\sqrt{n(1 -
+\tau_{n})}$-consistent tail-index estimator. We write
+$\tilde{\xi}^{\,\star}$ and $\hat{\xi}^{\,\star}$ for the
+LAWS-anchored and QB-anchored extrapolations, respectively.
+
+\begin{theorem}[Extreme-level CLT;
+                \textcite{DaouiaGirardStupfler2018}]
+\label{thm:bg:weissman-expectile-iid}
+Under the conditions of \Cref{thm:bg:laws-iid} and with
+$\tau_{n}^{\prime} \to 1$ such that
+$(1 - \tau_{n}^{\prime})/(1 - \tau_{n}) \to 0$ and
+$\sqrt{n(1 - \tau_{n})}\,/\log((1 - \tau_{n})/(1 - \tau_{n}^{\prime}))
+\to \infty$,
+\[
+  \frac{\sqrt{n(1 - \tau_{n})}}
+       {\log\!\big((1 - \tau_{n})/(1 - \tau_{n}^{\prime})\big)}
+  \!\left(\frac{\overline{\xi}^{\,\star}_{\tau_{n}^{\prime}}}
+                {\expectile{\tau_{n}^{\prime}}} - 1\right)
+  \;\todist\;
+  \mathcal N\!\left(\frac{\lambda}{1 - \rho},\; \gamma^{2}\right).
+\]
+\end{theorem}
+
+Two remarks are in order. First, the rate
+$\sqrt{n(1 - \tau_{n})}\, / \log((1 - \tau_{n})/(1 - \tau_{n}^{\prime}))$
+is the classical Weissman rate of \Cref{thm:bg:weissman}: the further
+into the tail one extrapolates, the larger the log-denominator and the
+slower the rate of convergence. Second, the asymptotic variance is
+$\gamma^{2}$ \emph{regardless of whether the anchor estimator is LAWS
+or QB}: the contribution of $\overline{\xi}_{\tau_{n}}$ is dominated,
+at the extreme level, by that of $\hat\gamma_{n}$ entering the
+multiplicative power. This is the central structural feature that
+makes extreme-expectile inference tractable; at the extreme level,
+asymptotic inference for $\expectile{\tau_{n}^{\prime}}$ reduces to
+asymptotic inference for the tail index.
+
+\subsection{The plug-in central limit theorem}
+\label{sec:bg:plug-in}
+
+\Cref{thm:bg:laws-iid,thm:bg:qb-iid,thm:bg:weissman-expectile-iid}
+together specify a complete asymptotic theory for extreme expectiles
+in the iid heavy-tailed setting. For the pooled inference developed
+in \Cref{ch:pool-int,ch:pool-ext}, however, we require a more abstract
+formulation that decouples the asymptotic distribution of the inputs
+$(\hat\gamma_{n}, \overline{\xi}_{\tau_{n}})$ from the way in which
+they are obtained. The required abstraction is essentially
+\emph{Proposition~C.6} in the supplement to
+\textcite{DavisonPadoanStupfler2023}, restated here in a form adapted
+to the iid setting.
+
+\begin{proposition}[Plug-in CLT for extrapolated expectiles;
+                    cf.\ \textcite{DavisonPadoanStupfler2023}, Prop.~C.6]
+\label{prop:bg:plug-in-clt}
+Let $\hat\gamma_{n}$ be an estimator of $\gamma > 0$ and
+$\overline{\xi}_{\tau_{n}}$ an estimator of
+$\expectile{\tau_{n}}$, with the joint asymptotic representation
+\begin{equation}
+\label{eq:bg:joint-input}
+  \sqrt{n(1 - \tau_{n})}
+    \begin{pmatrix}
+      \hat\gamma_{n} - \gamma \\
+      \overline{\xi}_{\tau_{n}} / \expectile{\tau_{n}} - 1
+    \end{pmatrix}
+  \;\todist\;
+  \begin{pmatrix} \Gamma \\ \Delta \end{pmatrix},
+\end{equation}
+for some random vector $(\Gamma, \Delta)^{\top}$. Assume
+$\mathcal C_{2}(\gamma, \rho, A)$ with $\gamma \in (0, 1/2)$ and
+$\rho < 0$, and that
+$\sqrt{n(1 - \tau_{n})}\,A\!\big((1 - \tau_{n})^{-1}\big) \to \lambda \in
+\R$. Let $\tau_{n}^{\prime} \to 1$ satisfy
+$(1 - \tau_{n}^{\prime})/(1 - \tau_{n}) \to 0$ and
+$\sqrt{n(1 - \tau_{n})}\,/\log((1 - \tau_{n})/(1 - \tau_{n}^{\prime}))
+\to \infty$. Then the Weissman-extrapolated expectile
+$\overline{\xi}^{\,\star}_{\tau_{n}^{\prime}}$ defined by
+\eqref{eq:bg:weissman-expectile} satisfies
+\[
+  \frac{\sqrt{n(1 - \tau_{n})}}
+       {\log\!\big((1 - \tau_{n})/(1 - \tau_{n}^{\prime})\big)}
+  \!\left(\frac{\overline{\xi}^{\,\star}_{\tau_{n}^{\prime}}}
+                {\expectile{\tau_{n}^{\prime}}} - 1\right)
+  \;\todist\;
+  \Gamma.
+\]
+\end{proposition}
+
+\Cref{prop:bg:plug-in-clt} is the technical workhorse of the thesis.
+It says that the asymptotic distribution of the extrapolated expectile
+at very-extreme levels is governed \emph{only} by the asymptotic
+distribution of the tail-index estimator: the contribution of the
+intermediate-level expectile estimator $\overline{\xi}_{\tau_{n}}$
+washes out through the log-rate. In \Cref{ch:pool-ext} we shall feed
+the pooled inputs
+$(\hat\gamma_{n}(\bm\omega), \overline{\xi}^{\mathrm{pool}}_{\tau_{n}})$
+of \Cref{ch:pool-int} through this proposition to obtain the CLT for
+the pooled extrapolated expectile in essentially one step.
 
 \section{The optimal pooling framework}
 \label{sec:bg:pooling}
 
-\todo{Setup: $m$ samples $\bm{X}_1,\ldots,\bm{X}_m$, sample sizes $n_j$,
-total $n = \sum n_j$; effective sample sizes $k_j$ for tail estimation;
-ratios $n_j/n \to b_j$, $k_j/n_j \to 0$, $k_j/k \to c_j$. Marginal
-second-order condition $\mathcal C_2(\gamma_j,\rho_j,A_j)$. Tail-copula
-assumption $\mathcal J(\bm R)$ encoding cross-sample asymptotic
-dependence via $R_{j,\ell}$. The common-tail case
-$\bm\gamma = \gamma\bm 1$ that the thesis adopts.}
+We now turn to the pooling framework of
+\textcite{DaouiaPadoanStupfler2021}, which the rest of the thesis
+extends from quantiles to expectiles. The framework concerns inference
+for the common tail index and the common extreme quantile of $m$
+samples that may have heterogeneous sizes, heterogeneous second-order
+properties, and non-trivial cross-sample tail dependence.
 
-\todo{Pooled Hill estimator $\hat\gamma_n(\bm\omega) =
-\bm\omega^\top\hat{\bm\gamma}_n$ with $\bm\omega^\top\bm 1 = 1$. State
-Theorem~1 of \textcite{DaouiaPadoanStupfler2021}: joint
-$\sqrt{k_j}(\hat\gamma_j(k_j)-\gamma_j) \todist \mathcal N(\bm B,\bm V)$,
-with bias vector $\bm B$ involving $\lambda_j/(1-\rho_j)$ and covariance
-matrix $\bm V$ whose diagonal entries are $\gamma_j^2$ and off-diagonal
-entries are
-$\gamma_j\gamma_\ell\sqrt{c_\ell/c_j}\,R_{j,\ell}(c_\ell/c_j,b_\ell/b_j)$.}
+\subsection{Setup}
 
-\todo{Variance-optimal and AMSE-optimal weights:
-$\bm\omega^{\mathrm{Var}} = \Vc^{-1}\bm 1/(\bm 1^\top\Vc^{-1}\bm 1)$, and
-the AMSE-optimal counterpart involving $\Bc$ and $\Vc$.}
+We have $m$ samples, each obtained by iid sampling of one component of
+an $m$-dimensional random vector
+$\bm X = (X_{1}, \ldots, X_{m})^{\top}$. The $j$th sample comprises
+$n_{j}$ observations $X_{1, j}, X_{2, j}, \ldots, X_{n_{j}, j}$ with
+common marginal distribution function $F_{j}$, tail quantile function
+$U_{j} = (1 / \overline F_{j})^{\leftarrow}$, and extreme-value index
+$\gamma_{j} > 0$. The order statistics of the $j$th sample are denoted
+$X_{1 : n_{j}, j} \le \cdots \le X_{n_{j} : n_{j}, j}$. The total
+sample size is $n = \sum_{j=1}^{m} n_{j}$.
 
-\todo{Weighted geometric pooled Weissman estimator
-$\hatWei_n(1-p\mid \bm\omega) = \prod_j [\hat q^\star_j(1-p\mid k_j)]^{\omega_j}$
-and Theorem~2 of \textcite{DaouiaPadoanStupfler2021} giving its
-asymptotic distribution.}
+Tail inference in sample $j$ uses its top $k_{j} + 1$ order statistics,
+where the effective sample size $k_{j} = k_{j}(n)$ satisfies
+$k_{j} \to \infty$ and $k_{j} / n_{j} \to 0$ as $n \to \infty$. The
+total effective sample size is $k = \sum_{j=1}^{m} k_{j}$. Order the
+samples so that $n_{1} \le \cdots \le n_{m}$, and assume the
+asymptotic-proportionality conditions
+\begin{equation}
+\label{eq:bg:pool-rates}
+  \frac{n_{1}}{n_{j}} \;\to\; b_{j} \in (0, 1],
+  \qquad
+  \frac{k_{1}}{k_{j}} \;\to\; c_{j} \in (0, \infty),
+\end{equation}
+with $b_{1} = c_{1} = 1$. The marginal $F_{j}$ satisfies
+$\mathcal C_{2}(\gamma_{j}, \rho_{j}, A_{j})$
+(\Cref{cond:bg:second-order}). The thesis works under the
+\emph{common-tail-index} assumption
+\begin{equation}
+\label{eq:bg:common-gamma}
+  \gamma_{1} \;=\; \cdots \;=\; \gamma_{m} \;=\; \gamma,
+\end{equation}
+which is the natural setup when the $m$ samples are believed to come
+from the same underlying tail behaviour.
 
-\todo{Distributed-inference specialisation: iid data within and across
-machines forces $R_{j,\ell}\equiv 0$, so $\bm V$ becomes diagonal with
-entries $\gamma^2/c_j$; the variance-optimal weights reduce to
-$\omega^{\mathrm{Var}}_j \propto k_j$ (effective-sample-size weighting);
-and the pooled Hill and Weissman estimators are asymptotically
-equivalent to the unfeasible benchmark Hill and Weissman estimators
-built from the combined sample.}
+The cross-sample asymptotic dependence is captured by a pairwise
+\emph{tail-copula} structure
+\parencite[\S2.1]{DaouiaPadoanStupfler2021}.
 
-\todo{Tail-homogeneity test $H_0:\bm\gamma=\gamma\bm 1$ via the
-chi-square statistic $\Lambda_n =
-k(\hat{\bm\gamma}_n-\bar\mu_n\bm 1)^\top\hatVc^{-1}
-(\hat{\bm\gamma}_n-\bar\mu_n\bm 1)$. Asymptotic confidence interval for
-$\gamma$ under tail homogeneity.}
+\begin{condition}[Tail-copula condition $\mathcal J(\bm R)$]
+\label{cond:bg:tail-copula}
+For each pair $(j, \ell)$ with $j \ne \ell$, there exists a function
+$\Rjl : [0, \infty]^{2} \setminus \{(\infty, \infty)\} \to [0, \infty)$
+such that, for every $(x_{j}, x_{\ell}) \in [0, \infty)^{2}$,
+\[
+  \lim_{s \to \infty}
+    s\, \Prob\!\big(\,
+      \overline F_{j}(X_{j}) \le x_{j}/s,\;
+      \overline F_{\ell}(X_{\ell}) \le x_{\ell}/s\,\big)
+  \;=\; \Rjl(x_{j}, x_{\ell}).
+\]
+\end{condition}
+
+The function $\Rjl$ is the bivariate tail copula of
+$(X_{j}, X_{\ell})$ \parencite[\S8.2]{deHaanFerreira2006}; it measures
+the rate at which the joint upper-tail probability of
+$(X_{j}, X_{\ell})$ decays in comparison with the marginals. The
+case $\Rjl \equiv 0$ corresponds to \emph{asymptotic tail
+independence} of $X_{j}$ and $X_{\ell}$, which is in particular
+implied by independence of the samples themselves --- the setting of
+this thesis.
+
+\subsection{The pooled Hill estimator}
+
+Each sample contributes a Hill estimator $\hat\gamma_{j}(k_{j})$ as
+in \eqref{eq:bg:hill}; we collect these into the random vector
+\[
+  \hat{\bm\gamma}_{n}
+  \;=\;
+  \big(\hat\gamma_{1}(k_{1}), \ldots, \hat\gamma_{m}(k_{m})\big)^{\top}.
+\]
+Given a weight vector $\bm\omega \in \R^{m}$ with $\bm\omega^{\top}
+\bm 1 = 1$, the \emph{pooled Hill estimator} is the weighted arithmetic
+combination
+\begin{equation}
+\label{eq:bg:pooled-hill}
+  \hat\gamma_{n}(\bm\omega)
+  \;\coloneqq\;
+  \bm\omega^{\top}\hat{\bm\gamma}_{n}
+  \;=\;
+  \sum_{j=1}^{m} \omega_{j}\,\hat\gamma_{j}(k_{j}).
+\end{equation}
+The constraint $\bm\omega^{\top}\bm 1 = 1$ ensures consistency of
+$\hat\gamma_{n}(\bm\omega)$ for the common $\gamma$ under
+\eqref{eq:bg:common-gamma}. The naive choice $\bm\omega = m^{-1}\bm 1$
+recovers a simple arithmetic average; the choice $\bm\omega \propto
+(k_{1}, \ldots, k_{m})$ recovers effective-sample-size weighting. The
+goal of the optimal-pooling literature is to identify weight choices
+that improve on these heuristics in terms of asymptotic variance or
+AMSE.
+
+The fundamental asymptotic result is the joint CLT for the marginal
+Hill estimators.
+
+\begin{theorem}[\textcite{DaouiaPadoanStupfler2021}, Theorem~1]
+\label{thm:bg:pool-hill}
+Assume $\mathcal C_{2}(\gamma_{j}, \rho_{j}, A_{j})$ for every $j$,
+the tail-copula condition $\mathcal J(\bm R)$, the
+proportionality conditions \eqref{eq:bg:pool-rates}, and
+$\sqrt{k_{j}}\, A_{j}(n_{j}/k_{j}) \to \lambda_{j} \in \R$ for every
+$j$. Then
+\[
+  \big(\sqrt{k_{1}}(\hat\gamma_{1}(k_{1}) - \gamma_{1}),
+       \ldots,
+       \sqrt{k_{m}}(\hat\gamma_{m}(k_{m}) - \gamma_{m})\big)^{\top}
+  \;\todist\;
+  \mathcal N(\bm B, \bm V),
+\]
+with $\bm B = \big(\lambda_{j}/(1 - \rho_{j})\big)_{j=1}^{m}$ and
+$\bm V$ the symmetric matrix whose entries are
+\[
+  V_{j, \ell}
+  \;=\;
+  \begin{cases}
+    \gamma_{j}^{2}, & j = \ell, \\[2pt]
+    \gamma_{j}\,\gamma_{\ell}\,\sqrt{c_{\ell}/c_{j}}\,
+      \Rjl(c_{\ell}/c_{j},\, b_{\ell}/b_{j}),
+        & j < \ell.
+  \end{cases}
+\]
+Suppose, in addition, the common-$\gamma$ condition
+\eqref{eq:bg:common-gamma}. Then for any $\bm\omega$ with
+$\bm\omega^{\top}\bm 1 = 1$,
+\[
+  \sqrt{k}\,\big(\hat\gamma_{n}(\bm\omega) - \gamma\big)
+  \;\todist\;
+  \mathcal N\!\big(\bm\omega^{\top}\Bc,\;
+                    \bm\omega^{\top}\Vc\bm\omega\big),
+\]
+where $\Bc$ and $\Vc$ denote the bias vector and the covariance matrix
+on the common $\sqrt{k}$ scale; in particular,
+\[
+  (\Vc)_{j, j}
+  \;=\; \gamma^{2}\, c_{j}\,\Bigg(\sum_{i = 1}^{m} c_{i}^{-1}\Bigg),
+  \qquad j = 1, \ldots, m,
+\]
+and the off-diagonal entries of $\Vc$ are proportional to the
+corresponding tail-copula evaluations
+$\Rjl(c_{\ell}/c_{j}, b_{\ell}/b_{j})$ --- explicit formulas are
+given in \textcite[Theorem~1]{DaouiaPadoanStupfler2021}.
+\end{theorem}
+
+In the case of \emph{independent} samples ($\Rjl \equiv 0$ for every
+$j \ne \ell$), the off-diagonal entries of $\Vc$ vanish identically
+and $\Vc$ becomes the diagonal matrix
+\begin{equation}
+\label{eq:bg:V_c-diagonal}
+  \Vc
+  \;=\;
+  \gamma^{2}\!\left(\sum_{i = 1}^{m} c_{i}^{-1}\right)
+    \mathrm{diag}(c_{1}, \ldots, c_{m}).
+\end{equation}
+\Cref{eq:bg:V_c-diagonal} is the form of $\Vc$ that the thesis will
+exploit in \Cref{ch:pool-int,ch:pool-ext}.
+
+\subsection{Variance- and AMSE-optimal weights}
+
+Given \Cref{thm:bg:pool-hill}, two natural choices of $\bm\omega$
+emerge as solutions to convex quadratic programmes.
+
+\begin{proposition}[Optimal weights;
+                    \textcite{DaouiaPadoanStupfler2021}, \S2.2]
+\label{prop:bg:optimal-weights}
+Suppose $\Vc$ is positive definite. Under the common-$\gamma$
+condition \eqref{eq:bg:common-gamma}:
+\begin{enumerate}[label=(\roman*)]
+\item The variance-optimal weights, minimising
+      $\bm\omega^{\top}\Vc\bm\omega$ subject to
+      $\bm\omega^{\top}\bm 1 = 1$, are
+      \[
+        \bm\omega^{\mathrm{Var}}
+        \;=\;
+        \frac{\Vc^{-1}\bm 1}{\bm 1^{\top}\Vc^{-1}\bm 1},
+      \]
+      with corresponding asymptotic variance
+      $\bm\omega^{\mathrm{Var},\top}\Vc\bm\omega^{\mathrm{Var}}
+        = (\bm 1^{\top}\Vc^{-1}\bm 1)^{-1}$.
+\item The AMSE-optimal weights, minimising
+      $(\bm\omega^{\top}\Bc)^{2} + \bm\omega^{\top}\Vc\bm\omega$
+      subject to $\bm\omega^{\top}\bm 1 = 1$, are
+      \[
+        \bm\omega^{\mathrm{AMSE}}
+        \;=\;
+        \frac{(1 + \Bc^{\top}\Vc^{-1}\Bc)\,\Vc^{-1}\bm 1
+              - (\bm 1^{\top}\Vc^{-1}\Bc)\,\Vc^{-1}\Bc}
+             {(1 + \Bc^{\top}\Vc^{-1}\Bc)(\bm 1^{\top}\Vc^{-1}\bm 1)
+              - (\bm 1^{\top}\Vc^{-1}\Bc)^{2}}.
+      \]
+\end{enumerate}
+\end{proposition}
+
+In the independent-samples case, $\Vc$ is diagonal
+(\Cref{eq:bg:V_c-diagonal}) and the variance-optimal weights reduce
+to
+\begin{equation}
+\label{eq:bg:V-opt-distrib}
+  \omega_{j}^{\mathrm{Var}}
+  \;=\;
+  \Bigg(\sum_{i = 1}^{m} c_{i}^{-1}\Bigg)^{\!\!-1}\!
+  c_{j}^{-1}
+  \;\sim\;
+  \frac{k_{j}}{k},
+\end{equation}
+where the equivalence uses $c_{i}^{-1} = \lim k_{i}/k_{1}$. Thus the
+samples contribute to the pooled tail index in proportion to their
+effective sample size, the same rule that one would expect from the
+unfeasible Hill estimator built from the entire combined sample.
+
+In practice $\Vc$ and $\Bc$ must be replaced by consistent estimators
+$\hatVc$ and $\hatBc$ to render the optimal weights data-driven. The
+estimators are built from the marginal $\hat\gamma_{j}$, estimators of
+the second-order parameters $\hat\beta_{j}$ and $\hat\rho_{j}$, and a
+plug-in estimator $\widehat{\Rjl}$ of the bivariate tail copula
+\parencite[\S2.2]{DaouiaPadoanStupfler2021}. The composite estimator
+$\hat\gamma_{n}(\hat{\bm\omega})$ is then $\sqrt{k}$-asymptotically
+equivalent to $\hat\gamma_{n}(\bm\omega)$ provided
+$\hat{\bm\omega} \toprob \bm\omega$.
+
+\subsection{Weighted geometric pooling of extreme quantiles}
+
+For estimation of an extreme quantile $q(1 - p)$ with $p = p(n) \to
+0$, each sample contributes a Weissman estimator
+\[
+  \hat q_{j}^{\star}(1 - p \mid k_{j})
+  \;=\;
+  \left(\frac{k_{j}}{n_{j}\, p}\right)^{\!\hat\gamma_{j}(k_{j})}\!
+  X_{n_{j} - k_{j} : n_{j},\,j}.
+\]
+The aggregation of these per-sample Weissman estimators must be
+adapted to their multiplicative-power structure
+(\Cref{eq:bg:weissman}), and is done by \emph{weighted geometric}
+--- rather than arithmetic --- averaging. Under the additional
+assumption that the samples share the same extreme quantile, formalised
+as the asymptotic-proportionality condition
+\begin{condition}[Tail homoskedasticity $(\mathcal H)$]
+\label{cond:bg:tail-homoskedasticity}
+For every $j \ne \ell$, $U_{j}(t) / U_{\ell}(t) \to 1$ as $t \to
+\infty$,
+\end{condition}
+the pooled extreme-quantile estimator of
+\textcite[\S2.3]{DaouiaPadoanStupfler2021} is
+\begin{equation}
+\label{eq:bg:pooled-weissman}
+  \hatWei_{n}(1 - p \mid \bm\omega)
+  \;\coloneqq\;
+  \prod_{j = 1}^{m}
+    \big[\hat q_{j}^{\star}(1 - p \mid k_{j})\big]^{\omega_{j}}.
+\end{equation}
+The reason for the geometric form is visible from the log-scale
+identity
+$\log \hat q_{j}^{\star}(1 - p \mid k_{j})
+  = \log(k_{j}/(n_{j} p))\,\hat\gamma_{j}(k_{j})
+    + \log X_{n_{j} - k_{j} : n_{j},\,j}$:
+a weighted sum on the log scale puts the per-sample
+$\hat\gamma_{j}(k_{j})$ on the standard linear scale, which is what
+the joint CLT of \Cref{thm:bg:pool-hill} addresses.
+
+\begin{theorem}[\textcite{DaouiaPadoanStupfler2021}, Theorem~2]
+\label{thm:bg:pool-weissman}
+Assume the hypotheses of \Cref{thm:bg:pool-hill}, the common-$\gamma$
+condition \eqref{eq:bg:common-gamma}, the tail-homoskedasticity
+condition $(\mathcal H)$, and let $p = p(n) \to 0$ with
+$k/(np) \to \infty$ and $\sqrt{k}/\log(k/(np)) \to \infty$. Then for
+any $\bm\omega$ with $\bm\omega^{\top}\bm 1 = 1$ and any
+$j \in \{1, \ldots, m\}$,
+\[
+  \frac{\sqrt{k}}{\log\!\big(k_{j}/(n_{j} p)\big)}
+  \!\left(\frac{\hatWei_{n}(1 - p \mid \bm\omega)}{q_{j}(1 - p)}
+            - 1\right)
+  \;\todist\;
+  \mathcal N\!\big(\bm\omega^{\top}\Bc,\;
+                    \bm\omega^{\top}\Vc\bm\omega\big).
+\]
+\end{theorem}
+
+The asymptotic distribution of the pooled Weissman estimator is
+\emph{identical}, up to the log-rate factor, to that of the pooled
+Hill estimator. Two structural consequences follow. First, the
+variance- and AMSE-optimal weights of \Cref{prop:bg:optimal-weights}
+are also optimal for the pooled extreme-quantile estimator. Second,
+the entire information needed for inference at very-extreme quantile
+levels is contained in the joint distribution of the per-sample Hill
+estimators; the extreme-quantile inputs contribute only through the
+deterministic log-scale factor. This structural fact is the analogue,
+in the multi-sample setting, of the dominance of the tail-index
+estimator at the extreme level that we have already encountered in
+\Cref{thm:bg:weissman-expectile-iid,prop:bg:plug-in-clt}.
+
+\subsection{Tail-homogeneity testing and confidence intervals}
+
+The covariance structure $\Vc$ also yields a Wald-type chi-square
+test for the common-$\gamma$ hypothesis \eqref{eq:bg:common-gamma},
+sometimes called \emph{tail homogeneity} across samples.
+
+\begin{theorem}[Tail-homogeneity test;
+                \textcite{DaouiaPadoanStupfler2021}, Corollary~3]
+\label{thm:bg:tail-homogeneity-test}
+Assume the hypotheses of \Cref{thm:bg:pool-hill} and the null
+$H_{0}: \gamma_{1} = \cdots = \gamma_{m}$. The statistic
+\[
+  \Lambda_{n}
+  \;=\;
+  k\,(\hat{\bm\gamma}_{n} - \bar\mu_{n}\bm 1)^{\top}\hatVc^{-1}
+       (\hat{\bm\gamma}_{n} - \bar\mu_{n}\bm 1),
+  \qquad
+  \bar\mu_{n}
+  \;=\;
+  \frac{\bm 1^{\top}\hatVc^{-1}\hat{\bm\gamma}_{n}}
+       {\bm 1^{\top}\hatVc^{-1}\bm 1},
+\]
+satisfies $\Lambda_{n} \todist \chi^{2}_{m - 1}$ under $H_{0}$ and
+$\Lambda_{n} \toprob \infty$ under any alternative. A test of
+asymptotic size $\alpha$ rejects $H_{0}$ when
+$\Lambda_{n} > \chi^{2}_{m - 1,\, 1 - \alpha}$.
+\end{theorem}
+
+Under tail homogeneity, \Cref{prop:bg:optimal-weights} furnishes
+asymptotic confidence intervals for the common $\gamma$ on the
+$\sqrt{k}$ scale; log-scale confidence intervals for the extrapolated
+extreme quantile follow from \Cref{thm:bg:pool-weissman}.
+
+\subsection{Distributed inference as a special case}
+\label{sec:bg:pool-distrib}
+
+The distributed-inference setting is the special case in which the
+$m$ samples are obtained as iid subdivisions of one common underlying
+iid sample: data points are iid both within and across samples, with
+a common marginal distribution. The framework simplifies considerably
+and matches the assumptions of this thesis.
+
+Under distributed-inference assumptions:
+\begin{itemize}
+\item the common-$\gamma$ condition \eqref{eq:bg:common-gamma} and the
+      tail-homoskedasticity condition $(\mathcal H)$ are trivially
+      satisfied;
+\item the tail copula $\Rjl$ between any pair of distinct samples
+      vanishes identically (independence implies tail independence);
+\item $\Vc$ in \Cref{thm:bg:pool-hill} becomes the diagonal matrix
+      \eqref{eq:bg:V_c-diagonal};
+\item the variance-optimal weights of \Cref{prop:bg:optimal-weights}
+      reduce to $\omega_{j}^{\mathrm{Var}} \propto k_{j}$ as in
+      \eqref{eq:bg:V-opt-distrib}.
+\end{itemize}
+
+\begin{corollary}[\textcite{DaouiaPadoanStupfler2021},
+                  Corollary~6 and Theorem~3]
+\label{cor:bg:pool-distrib-oracle}
+Under the distributed-inference assumptions, and provided that the
+sample fractions are asymptotically equal,
+$k_{j} / n_{j} = (k/n)(1 + o(1))$ for every $j$, the
+variance-optimally-pooled Hill estimator
+$\hat\gamma_{n}(\bm\omega^{\mathrm{Var}})$ is $\sqrt{k}$-asymptotically
+equivalent to the unfeasible benchmark Hill estimator
+$\hat\gamma_{n}^{(\mathrm{Hill})}(k)$ built from the entire combined
+sample. Analogously, the variance-optimally-pooled Weissman estimator
+$\hatWei_{n}(1 - p \mid \bm\omega^{\mathrm{Var}})$ is asymptotically
+equivalent to the unfeasible benchmark Weissman estimator built from
+the combined sample.
+\end{corollary}
+
+\Cref{cor:bg:pool-distrib-oracle} is the central efficiency result of
+the optimal pooling framework: the pooled estimators pay no asymptotic
+price for the distributed structure of the data. It is this property
+that we shall seek to preserve in the pooled-expectile estimators of
+\Cref{ch:pool-int,ch:pool-ext}.

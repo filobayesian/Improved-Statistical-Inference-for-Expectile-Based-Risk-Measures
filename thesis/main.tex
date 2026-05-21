@@ -32,7 +32,555 @@
 \appendix
 \chapter{Proofs}
 \label{app:proofs}
-\todo{Detailed proofs of the main theorems of \Cref{ch:pool-int,ch:pool-ext} go here. Recommended organisation: (A.1) joint CLT for the pooled $(\hat\gamma_n, \hat q_n^\star)$ vector, (A.2) delta-method computation for the QB pooled expectile, (A.3) Weissman extrapolation lemma, (A.4) bias-component estimation.}
+
+This appendix collects the detailed proofs of the named results of
+\Cref{ch:pool-int,ch:pool-ext} whose proof sketches in the main
+text omit routine bookkeeping. Each section is self-contained and
+re-uses only the notation and named results of the body of the
+thesis.
+
+\section{Proof of \texorpdfstring{\Cref{prop:pool-int:A-B-equiv}}{Proposition 3.1}}
+\label{app:proofs:A-B-equiv}
+
+We prove the $\sqrt{k}$-asymptotic equivalence of the two pooled
+QB intermediate-expectile estimators
+$\hatexpectile{\tau_{n}}^{(A)}$ and $\hatexpectile{\tau_{n}}^{(B)}$
+introduced in \Cref{sec:pool-int:estimator}, applied to a common,
+\emph{deterministic} weight vector $\bm\omega \in \R^{m}$ with
+$\bm\omega^{\top}\bm 1 = 1$, the number of samples $m$ being fixed
+as $n \to \infty$.
+
+\paragraph{Reduction to a $\psifn$-difference.}
+From the definitions \eqref{eq:pool-int:expectile-A} and
+\eqref{eq:pool-int:expectile-B},
+\begin{align*}
+  \hatexpectile{\tau_{n}}^{(A)}(\bm\omega, \bm\omega)
+    &\;=\;
+    \psifn(\hat\gamma_{n}(\bm\omega))\,
+    \hatWei_{n}(1 - \tau_{n} \mid \bm\omega), \\
+  \hatexpectile{\tau_{n}}^{(B)}(\bm\omega)
+    &\;=\;
+    \Big(\prod_{j = 1}^{m}\psifn(\hat\gamma_{j}(k_{j}))^{\omega_{j}}\Big)
+    \,\hatWei_{n}(1 - \tau_{n} \mid \bm\omega).
+\end{align*}
+The Weissman factor is identical in the two estimators, so the
+ratio reduces to a function of the Hill estimators only:
+\begin{equation}
+\label{eq:app:A-B-ratio}
+  \log\!\frac{\hatexpectile{\tau_{n}}^{(A)}(\bm\omega, \bm\omega)}
+              {\hatexpectile{\tau_{n}}^{(B)}(\bm\omega)}
+  \;=\;
+  \log\psifn\!\big(\hat\gamma_{n}(\bm\omega)\big)
+  \;-\;
+  \sum_{j = 1}^{m}\omega_{j}\,
+    \log\psifn\!\big(\hat\gamma_{j}(k_{j})\big).
+\end{equation}
+The proposition therefore reduces to
+\begin{equation}
+\label{eq:app:reduction-target}
+  \sqrt{k}\,\Big[
+    \log\psifn(\hat\gamma_{n}(\bm\omega))
+    - \sum_{j}\omega_{j}\log\psifn(\hat\gamma_{j}(k_{j}))
+  \Big] \;\toprob\; 0.
+\end{equation}
+
+\paragraph{Good event supporting the Taylor expansion.}
+The map $g \mapsto \log\psifn(g) = -g\log(g^{-1} - 1)$ is defined
+on the open interval $(0, 1)$ and singular at its endpoints, so the
+Taylor expansion below requires $\hat\gamma_{j}(k_{j})$ and
+$\hat\gamma_{n}(\bm\omega)$ to lie in $(0, 1)$. By
+\Cref{thm:bg:hill}, $\hat\gamma_{j}(k_{j}) \toprob \gamma$ for every
+$j$, and $\gamma \in (0, 1/2)$ by \eqref{eq:pool-int:moment}; hence
+\[
+  \mathbb{P}\!\big(\,\hat\gamma_{j}(k_{j}) \in (0, 1)
+    \text{ for every } j = 1, \ldots, m\,\big) \;\to\; 1.
+\]
+The pooled estimator inherits the same property:
+$\hat\gamma_{n}(\bm\omega)
+= \sum_{j} \omega_{j}\,\hat\gamma_{j}(k_{j}) \toprob \gamma$ (a
+finite weighted sum of consistent terms with deterministic weights
+summing to one), so
+$\mathbb{P}(\hat\gamma_{n}(\bm\omega) \in (0, 1)) \to 1$. Define
+the event
+\[
+  E_{n} \;\coloneqq\; \big\{\hat\gamma_{1}(k_{1}), \ldots,
+    \hat\gamma_{m}(k_{m}),\, \hat\gamma_{n}(\bm\omega) \in (0, 1)\big\},
+  \qquad \mathbb{P}(E_{n}) \to 1.
+\]
+It suffices to establish the claimed $O_{p}(k^{-1})$ bound on
+$E_{n}$: for any $\epsilon > 0$ and $M > 0$,
+$\mathbb{P}(|X_{n}| > M a_{n}) \le \mathbb{P}(|X_{n}|\mathbf{1}_{E_{n}}
+> M a_{n}) + \mathbb{P}(E_{n}^{c})$, and the second term tends to
+zero, so modifying a sequence on an event of vanishing probability
+does not affect convergence in probability or $O_{p}(\cdot)$ bounds.
+Throughout the remainder of the proof we therefore work on $E_{n}$
+without further comment.
+
+\paragraph{Taylor expansion with Lagrange remainder.}
+The map $g \mapsto \log\psifn(g) = -g\log(g^{-1} - 1)$ is
+$C^{\infty}$ on the open interval $(0, 1)$, with first derivative
+$m(g) = (1 - g)^{-1} - \log(g^{-1} - 1)$ (the function introduced
+in \eqref{eq:pool-int:m-function}) and second derivative
+\[
+  m'(g)
+  \;=\;
+  \frac{1}{(1 - g)^{2}}
+  + \frac{1}{1 - g}
+  + \frac{1}{g}
+  \;>\; 0,
+  \qquad g \in (0, 1).
+\]
+By Taylor's theorem with Lagrange remainder, for each $j \in
+\{1, \ldots, m\}$ there exists a random $\tilde\gamma_{j}$ lying
+between $\hat\gamma_{j}(k_{j})$ and $\gamma$ such that
+\begin{equation}
+\label{eq:app:taylor-j}
+  \log\psifn(\hat\gamma_{j}(k_{j}))
+  - \log\psifn(\gamma)
+  \;=\;
+  m(\gamma)\,\big(\hat\gamma_{j}(k_{j}) - \gamma\big)
+  + \tfrac{1}{2}\,m'(\tilde\gamma_{j})\,
+    \big(\hat\gamma_{j}(k_{j}) - \gamma\big)^{2},
+\end{equation}
+and similarly there exists $\tilde\gamma_{\star}$ between
+$\hat\gamma_{n}(\bm\omega)$ and $\gamma$ with
+\begin{equation}
+\label{eq:app:taylor-pool}
+  \log\psifn(\hat\gamma_{n}(\bm\omega))
+  - \log\psifn(\gamma)
+  \;=\;
+  m(\gamma)\,\big(\hat\gamma_{n}(\bm\omega) - \gamma\big)
+  + \tfrac{1}{2}\,m'(\tilde\gamma_{\star})\,
+    \big(\hat\gamma_{n}(\bm\omega) - \gamma\big)^{2}.
+\end{equation}
+Subtract the $\bm\omega$-weighted sum of \eqref{eq:app:taylor-j}
+across $j$ from \eqref{eq:app:taylor-pool}. The constant terms
+$\log\psifn(\gamma)$ cancel because $\sum_{j}\omega_{j} = 1$, and
+the linear terms cancel because the pooled Hill estimator is the
+weighted linear combination
+$\hat\gamma_{n}(\bm\omega) = \sum_{j}\omega_{j}\hat\gamma_{j}(k_{j})$,
+which implies $\sum_{j}\omega_{j}(\hat\gamma_{j} - \gamma) =
+\hat\gamma_{n}(\bm\omega) - \gamma$. We obtain
+\begin{equation}
+\label{eq:app:A-B-master}
+  \log\psifn(\hat\gamma_{n}(\bm\omega))
+  - \sum_{j}\omega_{j}\log\psifn(\hat\gamma_{j}(k_{j}))
+  \;=\;
+  \tfrac{1}{2}\,m'(\tilde\gamma_{\star})\,
+    \big(\hat\gamma_{n}(\bm\omega) - \gamma\big)^{2}
+  - \tfrac{1}{2}\sum_{j}\omega_{j}\,m'(\tilde\gamma_{j})\,
+    \big(\hat\gamma_{j}(k_{j}) - \gamma\big)^{2}.
+\end{equation}
+
+\paragraph{Order of the remainder terms.}
+By \Cref{thm:bg:hill},
+$\sqrt{k_{j}}(\hat\gamma_{j}(k_{j}) - \gamma) \todist
+\mathcal N(\lambda_{j}/(1 - \rho), \gamma^{2})$ for every $j$,
+hence $\hat\gamma_{j}(k_{j}) - \gamma = O_{p}(k_{j}^{-1/2})$. The
+proportionality condition \eqref{eq:bg:pool-rates}, $k_{1}/k_{j}
+\to c_{j} \in (0, \infty)$, gives $k_{j} \asymp k$ uniformly in
+$j$, so
+\begin{equation}
+\label{eq:app:Op-bound-per-sample}
+  \hat\gamma_{j}(k_{j}) - \gamma \;=\; O_{p}(k^{-1/2}),
+  \qquad
+  \big(\hat\gamma_{j}(k_{j}) - \gamma\big)^{2} \;=\; O_{p}(k^{-1}),
+  \qquad j = 1, \ldots, m.
+\end{equation}
+The pooled Hill estimator inherits the rate as a finite weighted
+combination of $\sqrt{k}$-consistent terms:
+\begin{equation}
+\label{eq:app:Op-bound-pool}
+  \hat\gamma_{n}(\bm\omega) - \gamma \;=\; O_{p}(k^{-1/2}),
+  \qquad
+  \big(\hat\gamma_{n}(\bm\omega) - \gamma\big)^{2}
+    \;=\; O_{p}(k^{-1}).
+\end{equation}
+For the Lagrange-remainder pre-factors, the consistency
+$\hat\gamma_{j}(k_{j}) \toprob \gamma$ and the squeeze
+$\tilde\gamma_{j}$ between $\hat\gamma_{j}$ and $\gamma$ give
+$\tilde\gamma_{j} \toprob \gamma$; continuity of $m'$ on
+$(0, 1)$ then yields, by the continuous mapping theorem,
+$m'(\tilde\gamma_{j}) \toprob m'(\gamma) = O_{p}(1)$. The same
+argument gives $m'(\tilde\gamma_{\star}) \toprob m'(\gamma)$.
+
+Inserting these orders into \eqref{eq:app:A-B-master}: each summand
+on the right-hand side is the product of an $O_{p}(1)$ factor
+($m'(\tilde\gamma_{\cdot})$) and an $O_{p}(k^{-1})$ factor (a
+squared deviation), so each is $O_{p}(k^{-1})$. Since the sum on
+the right has $m + 1$ terms and $m$ is fixed, the right-hand side
+of \eqref{eq:app:A-B-master} is itself $O_{p}(k^{-1})$.
+
+\paragraph{Conclusion.}
+The right-hand side of \eqref{eq:app:A-B-master} is a finite sum of
+$m + 1$ terms, each a product of an $O_{p}(1)$ Lagrange factor and
+an $O_{p}(k^{-1})$ squared deviation. With $m$ fixed,
+\[
+  \log\psifn(\hat\gamma_{n}(\bm\omega))
+  - \sum_{j}\omega_{j}\log\psifn(\hat\gamma_{j}(k_{j}))
+  \;=\; O_{p}(k^{-1}).
+\]
+Combining this with the reduction \eqref{eq:app:A-B-ratio} gives
+\[
+  \log\!\frac{\hatexpectile{\tau_{n}}^{(A)}(\bm\omega, \bm\omega)}
+              {\hatexpectile{\tau_{n}}^{(B)}(\bm\omega)}
+  \;=\; O_{p}(k^{-1}),
+\]
+hence
+\[
+  \sqrt{k}\,
+  \log\!\frac{\hatexpectile{\tau_{n}}^{(A)}(\bm\omega, \bm\omega)}
+              {\hatexpectile{\tau_{n}}^{(B)}(\bm\omega)}
+  \;=\; O_{p}(k^{-1/2}) \;=\; o_{p}(1),
+\]
+which proves the convergence in probability claimed by
+\Cref{prop:pool-int:A-B-equiv}. Since $e^{x} - 1 \sim x$ as
+$x \to 0$ and our log-ratio is $O_{p}(k^{-1})$, the continuous
+mapping theorem applied to $\exp$ further yields
+\[
+  \frac{\hatexpectile{\tau_{n}}^{(A)}(\bm\omega, \bm\omega)}
+       {\hatexpectile{\tau_{n}}^{(B)}(\bm\omega)} - 1
+  \;=\; O_{p}(k^{-1}).
+\]
+The $k^{-1}$ rate is one full order \emph{stronger} than the
+$o_{p}(k^{-1/2})$ statement that the $\sqrt{k}$-CLT
+\Cref{thm:pool-int:main} requires: the two constructions agree
+asymptotically not only at the CLT scale but at a strictly finer
+scale, so the two estimators are interchangeable to leading order
+in every quantity downstream of the joint Gaussian limit. \qed
+
+\section{Proof of \texorpdfstring{\Cref{prop:pool-int:joint-clt}}{Proposition 3.2}}
+\label{app:proofs:joint-clt}
+
+We establish the joint $\sqrt{k}$-Gaussian limit
+\eqref{eq:pool-int:joint-pooled-clt} of the pair
+$\big(\hat\gamma_{n}(\bm\omega_{\gamma}),\,
+\log\hatWei_{n}(1 - \tau_{n} \mid \bm\omega_{q})\big)$ under the
+standing assumptions of \Cref{sec:pool-int:setup}: $m$ independent
+samples sharing the common marginal $F$ and the common tail index
+$\gamma \in (0, 1/2)$, the proportionality conditions
+\eqref{eq:bg:pool-rates}, the second-order condition
+$\mathcal C_{2}(\gamma, \rho, A)$ with the per-sample bias rate
+$\sqrt{k_{j}}\,A(n_{j}/k_{j}) \to \lambda_{j} \in \R$, an intermediate
+target level $\tau_{n} \to 1$ with $n(1 - \tau_{n}) \to \infty$, and
+the chapter's log-rate convergence $L_{j}(\tau_{n}) \to L_{j}^{\star}
+\in \R$ for every $j$. The number of samples $m$ is fixed.
+
+The proof composes four steps:
+(i) the within-sample joint CLT for the Hill estimator and the
+intermediate log-order statistic;
+(ii) the linear lift of (i) to the (Hill, log-Weissman) pair via the
+exact decomposition \eqref{eq:pool-int:weissman-decomp};
+(iii) cross-sample independence, which renders the $2m$-vector of all
+per-sample inputs jointly Gaussian with block-diagonal covariance on
+the common $\sqrt{k}$ scale;
+(iv) the linear pooling map, which collapses the $2m$-vector onto the
+$2$-vector \eqref{eq:pool-int:joint-pooled-clt} and yields the
+covariance \eqref{eq:pool-int:Sigma}.
+
+\paragraph{Step (i): within-sample joint CLT for Hill and intermediate log-order statistic.}
+Fix $j \in \{1, \ldots, m\}$ and write $\tau_{n_{j}} \coloneqq
+1 - k_{j}/n_{j}$ for the sample-$j$ intermediate level. The joint
+$\sqrt{k_{j}}$-asymptotics of the Hill estimator and its companion
+intermediate log-order statistic is a standard
+tail-empirical-process result
+\parencite[Theorem~2.4.8 and \S5.1]{deHaanFerreira2006}; in the form
+we use it is the input to the iid QB plug-in CLT of
+\textcite{DaouiaGirardStupfler2018} reproduced as
+\Cref{thm:bg:qb-iid}. Under $\mathcal C_{2}(\gamma, \rho, A)$ with
+$k_{j} \to \infty$, $k_{j}/n_{j} \to 0$, and
+$\sqrt{k_{j}}\,A(n_{j}/k_{j}) \to \lambda_{j} \in \R$,
+\begin{equation}
+\label{eq:app:within-input}
+  \sqrt{k_{j}}\!
+    \begin{pmatrix}
+      \hat\gamma_{j}(k_{j}) - \gamma \\[2pt]
+      \log X_{n_{j} - k_{j} : n_{j},\,j}
+        - \log \Quant_{X}(\tau_{n_{j}})
+    \end{pmatrix}
+  \;\todist\;
+  \mathcal N\!\left(
+    \begin{pmatrix} b_{j}^{H} \\[2pt] b_{j}^{Q} \end{pmatrix},\;
+    \gamma^{2}\, \bm I_{2}\right),
+\end{equation}
+where the bias parameters
+$b_{j}^{H} = \lambda_{j}/(1 - \rho)$ and
+$b_{j}^{Q} = b_{j}^{Q}(\lambda_{j}, \rho)$ are determined by the
+second-order condition, and $\bm I_{2}$ is the $2 \times 2$ identity
+matrix. The load-bearing structural fact in
+\eqref{eq:app:within-input} is the \emph{zero off-diagonal entry}:
+the Hill estimator is a smooth functional of the centred log-spacings
+above $X_{n_{j} - k_{j} : n_{j},\,j}$, while the
+intermediate-threshold fluctuation is the centred $(k_{j} + 1)$-th
+upper log-order statistic, and the two decouple in the
+tail-empirical-process limit with common variance $\gamma^{2}$. The
+diagonal form $\gamma^{2}\bm I_{2}$ is therefore essential for the
+simple $\Vc$-and-$\mathrm{diag}(\bm L^{\star})$ covariance structure
+of \eqref{eq:pool-int:Sigma} used in the rest of the chapter.
+
+\paragraph{Step (ii): linear lift to (Hill, log-Weissman).}
+The Weissman decomposition \eqref{eq:pool-int:weissman-decomp},
+exact for every $n$, reads
+\begin{equation}
+\label{eq:app:wei-decomp}
+  \log\hat q^{\star}_{j}(1 - \tau_{n} \mid k_{j})
+    \;-\; \log\Quant_{X}(\tau_{n})
+  \;=\;
+  L_{j}(\tau_{n})\,\big(\hat\gamma_{j}(k_{j}) - \gamma\big)
+  \;+\;
+  \big(\log X_{n_{j} - k_{j} : n_{j},\,j}
+       - \log\Quant_{X}(\tau_{n_{j}})\big)
+  \;+\; r_{j}(\tau_{n}),
+\end{equation}
+where
+$r_{j}(\tau_{n}) \coloneqq
+\gamma\,L_{j}(\tau_{n}) + \log\Quant_{X}(\tau_{n_{j}})
+- \log\Quant_{X}(\tau_{n})$
+is a deterministic remainder. Identity \eqref{eq:app:wei-decomp}
+follows by inserting the definition
+$\hat q^{\star}_{j}(1 - \tau_{n} \mid k_{j})
+= (k_{j}/(n_{j}(1 - \tau_{n})))^{\hat\gamma_{j}(k_{j})}
+X_{n_{j} - k_{j} : n_{j},\,j}$ and adding and subtracting
+$\gamma\,L_{j}(\tau_{n})$ and $\log\Quant_{X}(\tau_{n_{j}})$.
+
+The remainder $r_{j}(\tau_{n})$ measures the deterministic gap
+between the population log-quantile at the chapter level $\tau_{n}$
+and its first-order regular-variation approximation pivoted at
+$\tau_{n_{j}}$. By the second-order condition $\mathcal C_{2}(\gamma,
+\rho, A)$ applied to $U = (1/\overline F)^{\leftarrow}$ at base point
+$t = n_{j}/k_{j}$ and ratio $y = k_{j}/(n_{j}(1 - \tau_{n}))$, one has
+$\log U(t\,y) - \log U(t) - \gamma\log y = A(t)\,\Psi_{\rho}(y) +
+o(A(t))$ uniformly on compact $y$-sets, with
+$\Psi_{\rho}(y) = (y^{\rho} - 1)/\rho$. Therefore
+\begin{equation}
+\label{eq:app:rj-bias}
+  r_{j}(\tau_{n})
+  \;=\;
+  -A(n_{j}/k_{j})\,
+   \Psi_{\rho}\!\big(k_{j}/(n_{j}(1 - \tau_{n}))\big)
+  \;+\; o\big(A(n_{j}/k_{j})\big),
+\end{equation}
+and the per-sample bias rate $\sqrt{k_{j}}\,A(n_{j}/k_{j}) \to
+\lambda_{j}$ together with $L_{j}(\tau_{n}) \to L_{j}^{\star} \in \R$
+yields $\sqrt{k_{j}}\,r_{j}(\tau_{n}) \to -\lambda_{j}\,
+\Psi_{\rho}(e^{L_{j}^{\star}}) =: b_{j}^{R}$, a finite deterministic
+shift. Since $r_{j}(\tau_{n})$ is deterministic, it shifts only the
+limiting mean and does not enter the covariance: the asymptotic
+covariance below is determined entirely by the two random inputs
+$\hat\gamma_{j}(k_{j}) - \gamma$ and
+$\log X_{n_{j} - k_{j} : n_{j},\,j} - \log\Quant_{X}(\tau_{n_{j}})$
+of \eqref{eq:app:within-input}.
+
+Write \eqref{eq:app:wei-decomp} in matrix form,
+\[
+  \sqrt{k_{j}}\!
+    \begin{pmatrix}
+      \hat\gamma_{j}(k_{j}) - \gamma \\[2pt]
+      \log\hat q^{\star}_{j}(1 - \tau_{n} \mid k_{j})
+        - \log\Quant_{X}(\tau_{n})
+    \end{pmatrix}
+  \;=\;
+  \underbrace{\!\begin{pmatrix} 1 & 0 \\ L_{j}(\tau_{n}) & 1
+              \end{pmatrix}\!}_{=:\,\bm M_{j}(\tau_{n})}\,
+  \sqrt{k_{j}}\!
+    \begin{pmatrix}
+      \hat\gamma_{j}(k_{j}) - \gamma \\[2pt]
+      \log X_{n_{j} - k_{j} : n_{j},\,j}
+        - \log\Quant_{X}(\tau_{n_{j}})
+    \end{pmatrix}
+  \;+\;
+  \begin{pmatrix} 0 \\ \sqrt{k_{j}}\,r_{j}(\tau_{n}) \end{pmatrix}.
+\]
+The deterministic matrix $\bm M_{j}(\tau_{n}) \to \bm M_{j}^{\star}
+\coloneqq \big(1, 0;\, L_{j}^{\star}, 1\big)$ entrywise, and the
+deterministic shift converges to $(0, b_{j}^{R})^{\top}$. The
+continuous mapping theorem and Slutsky combine \eqref{eq:app:within-input}
+with these deterministic convergences to deliver
+\begin{equation}
+\label{eq:app:within-output}
+  \sqrt{k_{j}}\!
+    \begin{pmatrix}
+      \hat\gamma_{j}(k_{j}) - \gamma \\[2pt]
+      \log\hat q^{\star}_{j}(1 - \tau_{n} \mid k_{j})
+        - \log\Quant_{X}(\tau_{n})
+    \end{pmatrix}
+  \;\todist\;
+  \mathcal N\!\left(\bm\mu_{j}^{\star},\;
+                   \gamma^{2}\!\begin{pmatrix}
+                     1 & L_{j}^{\star} \\
+                     L_{j}^{\star} & 1 + (L_{j}^{\star})^{2}
+                   \end{pmatrix}\right),
+\end{equation}
+with mean
+$\bm\mu_{j}^{\star} = \bm M_{j}^{\star}(b_{j}^{H}, b_{j}^{Q})^{\top}
++ (0, b_{j}^{R})^{\top}
+= \big(b_{j}^{H},\, L_{j}^{\star}\, b_{j}^{H} + b_{j}^{Q}
+       + b_{j}^{R}\big)^{\top}$.
+The covariance is
+$\bm M_{j}^{\star}\,(\gamma^{2}\bm I_{2})\,(\bm M_{j}^{\star})^{\top}
+= \gamma^{2}\big(1, L_{j}^{\star};\, L_{j}^{\star}, 1+(L_{j}^{\star})^{2}\big)$,
+which is precisely \eqref{eq:pool-int:per-sample-clt}.
+
+\paragraph{Step (iii): cross-sample independence and rescaling to $\sqrt{k}$.}
+The $m$ samples are independent, so the $2m$ random variables
+$\big(\hat\gamma_{j}(k_{j}) - \gamma,\,
+\log\hat q^{\star}_{j}(1 - \tau_{n} \mid k_{j}) -
+\log\Quant_{X}(\tau_{n})\big)_{j = 1}^{m}$ are organised as $m$
+independent $2$-blocks. Stacking them into the column vector
+\[
+  \bm Z_{n}
+  \;\coloneqq\;
+  \big(\hat\gamma_{1} - \gamma,\, \ldots,\,
+       \hat\gamma_{m} - \gamma,\;
+       \log\hat q^{\star}_{1} - \log\Quant_{X}(\tau_{n}),\, \ldots,\,
+       \log\hat q^{\star}_{m} - \log\Quant_{X}(\tau_{n})\big)^{\!\top}
+  \in \R^{2m}
+\]
+(Hill components stacked first, log-Weissman components second), the
+joint CLT of $\sqrt{k_{j}}\bm Z_{n}^{(j)}$ from
+\eqref{eq:app:within-output} aggregates across $j$ under independence
+to a joint $2m$-dimensional Gaussian limit. To express the limit on
+the common $\sqrt{k}$ scale, multiply each per-sample $\sqrt{k_{j}}$
+input by the deterministic factor $\sqrt{k/k_{j}}$, which converges
+to a finite limit:
+\[
+  \frac{k}{k_{j}}
+  \;=\;
+  \frac{\sum_{i = 1}^{m} k_{i}}{k_{j}}
+  \;=\;
+  \sum_{i = 1}^{m} \frac{k_{1}/k_{j}}{k_{1}/k_{i}}
+  \;\longrightarrow\;
+  c_{j}\sum_{i = 1}^{m} c_{i}^{-1},
+\]
+using \eqref{eq:bg:pool-rates}. The per-sample within-block
+covariance \eqref{eq:app:within-output} scales by the factor
+$k/k_{j}$, so its diagonal entry
+$(\sqrt{k}/\sqrt{k_{j}})^{2}\cdot \gamma^{2}
+\to \gamma^{2}\,c_{j}\,\sum_{i}c_{i}^{-1}
+= (\Vc)_{j,j}$, the diagonal entry of the diagonal pooled-Hill
+covariance \eqref{eq:bg:V_c-diagonal} for the
+independent-samples specialisation. We therefore obtain
+\begin{equation}
+\label{eq:app:Z-joint-CLT}
+  \sqrt{k}\,\bm Z_{n}
+  \;\todist\;
+  \mathcal N\!\big(\bm\mu_{Z},\, \bm\Sigma_{Z}\big),
+\end{equation}
+where the $2m \times 2m$ covariance $\bm\Sigma_{Z}$ has the
+block-structured form
+\begin{equation}
+\label{eq:app:Sigma-Z}
+  \bm\Sigma_{Z}
+  \;=\;
+  \begin{pmatrix}
+    \Vc & \mathrm{diag}(\bm L^{\star})\,\Vc \\[2pt]
+    \mathrm{diag}(\bm L^{\star})\,\Vc
+      & \Vc + \mathrm{diag}(\bm L^{\star})^{2}\,\Vc
+  \end{pmatrix},
+\end{equation}
+expressed in $m \times m$ blocks. Each block is diagonal: the
+upper-left block is $\Vc$ itself (with diagonal entries
+$(\Vc)_{j,j} = \gamma^{2}\,c_{j}\sum_{i}c_{i}^{-1}$); the
+off-diagonal blocks have $j$th diagonal entry
+$L_{j}^{\star}(\Vc)_{j,j}$; the lower-right block has $j$th diagonal
+entry $(1 + (L_{j}^{\star})^{2})(\Vc)_{j,j}$. All non-diagonal
+entries within each block vanish because of cross-sample
+independence. The mean $\bm\mu_{Z}$ is the corresponding linear
+functional of the per-sample bias parameters $b_{j}^{H}, b_{j}^{Q},
+b_{j}^{R}$, rescaled to the $\sqrt{k}$ scale: explicitly,
+$(\bm\mu_{Z})_{j} = \sqrt{c_{j}\sum_{i}c_{i}^{-1}}\, b_{j}^{H}
+= (\Bc)_{j}$ for $j = 1, \ldots, m$, and
+$(\bm\mu_{Z})_{m + j} = \sqrt{c_{j}\sum_{i}c_{i}^{-1}}\,
+\big(L_{j}^{\star}\, b_{j}^{H} + b_{j}^{Q} + b_{j}^{R}\big)
+=: (\Bc^{\star}(\tau_{n}))_{j}$. The first half of $\bm\mu_{Z}$ is
+exactly the pooled-Hill bias vector $\Bc$ of
+\Cref{thm:bg:pool-hill}; the second half is the
+pooled-Weissman bias vector $\Bc^{\star}(\tau_{n})$ specialised to
+the intermediate-level target.
+
+\paragraph{Step (iv): linear pooling map.}
+By definitions \eqref{eq:pool-int:hill-pool} and
+\eqref{eq:pool-int:weissman-pool},
+\[
+  \hat\gamma_{n}(\bm\omega_{\gamma}) - \gamma
+  \;=\;
+  \sum_{j = 1}^{m}\omega_{\gamma, j}\,(\hat\gamma_{j}(k_{j}) - \gamma),
+  \qquad
+  \log\hatWei_{n}(1 - \tau_{n} \mid \bm\omega_{q})
+    - \log\Quant_{X}(\tau_{n})
+  \;=\;
+  \sum_{j = 1}^{m}\omega_{q, j}\,
+    \big(\log\hat q^{\star}_{j} - \log\Quant_{X}(\tau_{n})\big),
+\]
+where the second identity uses $\bm\omega_{q}^{\top}\bm 1 = 1$ so
+that subtracting the common term $\log\Quant_{X}(\tau_{n})$ commutes
+with the weighted sum. Both pooled coordinates are linear in $\bm
+Z_{n}$, and the relation is exactly
+\[
+  \begin{pmatrix}
+    \hat\gamma_{n}(\bm\omega_{\gamma}) - \gamma \\[2pt]
+    \log\hatWei_{n}(1 - \tau_{n} \mid \bm\omega_{q})
+      - \log\Quant_{X}(\tau_{n})
+  \end{pmatrix}
+  \;=\;
+  \bm A\,\bm Z_{n},
+  \qquad
+  \bm A
+  \;\coloneqq\;
+  \begin{pmatrix}
+    \bm\omega_{\gamma}^{\top} & \bm 0_{m}^{\top} \\
+    \bm 0_{m}^{\top} & \bm\omega_{q}^{\top}
+  \end{pmatrix}
+  \;\in \R^{2 \times 2m}.
+\]
+Applying $\bm A$ to \eqref{eq:app:Z-joint-CLT},
+\[
+  \sqrt{k}\,\bm A\,\bm Z_{n}
+  \;\todist\;
+  \mathcal N\!\big(\bm A\,\bm\mu_{Z},\,
+                    \bm A\,\bm\Sigma_{Z}\,\bm A^{\top}\big).
+\]
+The mean follows from the block structure of $\bm\mu_{Z}$ identified
+in Step (iii):
+$\bm A\,\bm\mu_{Z}
+= \big(\bm\omega_{\gamma}^{\top}\Bc,\;
+       \bm\omega_{q}^{\top}\Bc^{\star}(\tau_{n})\big)^{\top}$,
+which is the chapter's $\bm\mu(\bm\omega_{\gamma}, \bm\omega_{q})$.
+
+For the covariance, partition $\bm A$ along the same Hill /
+log-Weissman split as $\bm\Sigma_{Z}$ and compute block-by-block,
+using \eqref{eq:app:Sigma-Z}:
+\begin{align*}
+  \bm A\,\bm\Sigma_{Z}\,\bm A^{\top}\big|_{1,1}
+  &\;=\;
+  \bm\omega_{\gamma}^{\top}\,\Vc\,\bm\omega_{\gamma},
+  \\
+  \bm A\,\bm\Sigma_{Z}\,\bm A^{\top}\big|_{1,2}
+  &\;=\;
+  \bm\omega_{\gamma}^{\top}\,
+    \mathrm{diag}(\bm L^{\star})\,\Vc\,\bm\omega_{q},
+  \\
+  \bm A\,\bm\Sigma_{Z}\,\bm A^{\top}\big|_{2,2}
+  &\;=\;
+  \bm\omega_{q}^{\top}\,
+    \big(\Vc + \mathrm{diag}(\bm L^{\star})^{2}\,\Vc\big)\,\bm\omega_{q},
+\end{align*}
+with the $(2, 1)$ block equal to the $(1, 2)$ block by symmetry of
+$\bm\Sigma_{Z}$. The diagonality of $\Vc$ (under independent
+sampling, \eqref{eq:bg:V_c-diagonal}) ensures that $\Vc$ and
+$\mathrm{diag}(\bm L^{\star})$ commute, so the off-diagonal block can
+equivalently be written
+$\bm\omega_{\gamma}^{\top}\Vc\,\mathrm{diag}(\bm L^{\star})\,\bm\omega_{q}$
+and is the entrywise sum
+$\sum_{j} \omega_{\gamma, j}\,\omega_{q, j}\,L_{j}^{\star}\,
+(\Vc)_{j, j}$. This recovers the covariance
+\eqref{eq:pool-int:Sigma} of the proposition.
+
+Combining the two displays, the pooled $2$-vector converges in
+distribution to a Gaussian with mean
+$\bm\mu(\bm\omega_{\gamma}, \bm\omega_{q})$ and covariance
+$\bm\Sigma(\bm\omega_{\gamma}, \bm\omega_{q})$, which is precisely
+\eqref{eq:pool-int:joint-pooled-clt}. \qed
 
 \backmatter
 \printbibliography[heading=bibintoc]

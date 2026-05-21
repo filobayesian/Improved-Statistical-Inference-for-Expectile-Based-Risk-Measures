@@ -12,27 +12,71 @@
 \contentsline {subsection}{\numberline {2.2.1}The Hill estimator}{6}{subsection.2.2.1}%
 \contentsline {subsection}{\numberline {2.2.2}Weissman extrapolation to extreme quantiles}{7}{subsection.2.2.2}%
 \contentsline {section}{\numberline {2.3}Expectiles}{7}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Extreme expectile inference: the iid heavy-tailed baseline}{8}{section.2.4}%
-\contentsline {section}{\numberline {2.5}The optimal pooling framework}{8}{section.2.5}%
-\contentsline {chapter}{\numberline {3}Pooled inference for extreme expectiles at intermediate levels}{9}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Setup and notation}{9}{section.3.1}%
-\contentsline {section}{\numberline {3.2}The pooled QB expectile estimator}{9}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Joint asymptotic distribution of the pooled inputs}{10}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Asymptotic normality of the pooled expectile estimator}{10}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Variance- and AMSE-optimal weights}{10}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Estimated weights and confidence intervals}{10}{section.3.6}%
-\contentsline {section}{\numberline {3.7}A test of expectile-tail-homogeneity}{11}{section.3.7}%
-\contentsline {chapter}{\numberline {4}Extrapolation to very-extreme expectile levels}{12}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Motivation}{12}{section.4.1}%
-\contentsline {section}{\numberline {4.2}The pooled extrapolated expectile estimator}{12}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Asymptotic distribution}{13}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Optimal weights for extrapolation}{13}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Bias-reduction}{13}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Asymptotic confidence intervals}{13}{section.4.6}%
-\contentsline {chapter}{\numberline {5}Discussion and future work}{14}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Summary of contributions}{14}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Connections to Expected Shortfall}{14}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Limitations}{14}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Future work}{15}{section.5.4}%
-\contentsline {chapter}{\numberline {A}Proofs}{16}{appendix.A}%
-\contentsline {chapter}{Bibliography}{17}{appendix*.6}%
+\contentsline {subsection}{\numberline {2.3.1}Definition}{8}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Basic properties}{8}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Coherence and elicitability}{9}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Choquet representation}{9}{subsection.2.3.4}%
+\contentsline {section}{\numberline {2.4}Extreme expectile inference: the iid heavy-tailed baseline}{9}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}The expectile--quantile asymptotic equivalence}{10}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Two families of estimators at intermediate levels}{10}{subsection.2.4.2}%
+\contentsline {paragraph}{LAWS direct estimator.}{10}{section*.4}%
+\contentsline {paragraph}{Quantile-based plug-in estimator.}{10}{section*.5}%
+\contentsline {paragraph}{Comparison.}{11}{section*.6}%
+\contentsline {subsection}{\numberline {2.4.3}Weissman extrapolation to very-extreme expectile levels}{11}{subsection.2.4.3}%
+\contentsline {subsection}{\numberline {2.4.4}The plug-in central limit theorem}{12}{subsection.2.4.4}%
+\contentsline {section}{\numberline {2.5}The optimal pooling framework}{12}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Setup}{12}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}The pooled Hill estimator}{13}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}Variance- and AMSE-optimal weights}{14}{subsection.2.5.3}%
+\contentsline {subsection}{\numberline {2.5.4}Weighted geometric pooling of extreme quantiles}{15}{subsection.2.5.4}%
+\contentsline {subsection}{\numberline {2.5.5}Tail-homogeneity testing and confidence intervals}{16}{subsection.2.5.5}%
+\contentsline {subsection}{\numberline {2.5.6}Distributed inference as a special case}{16}{subsection.2.5.6}%
+\contentsline {chapter}{\numberline {3}Pooled inference for extreme expectiles at intermediate levels}{18}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Setup and notation}{18}{section.3.1}%
+\contentsline {paragraph}{The $m$ samples and the pooling primitives.}{18}{section*.8}%
+\contentsline {paragraph}{Heavy-tail regime.}{19}{section*.9}%
+\contentsline {paragraph}{The target.}{19}{section*.10}%
+\contentsline {paragraph}{Per-sample QB plug-in: a forced consequence of the pooling protocol.}{19}{section*.11}%
+\contentsline {paragraph}{Roadmap.}{20}{section*.12}%
+\contentsline {section}{\numberline {3.2}The pooled QB expectile estimator}{20}{section.3.2}%
+\contentsline {paragraph}{Pooled Hill and pooled Weissman primitives.}{20}{section*.13}%
+\contentsline {paragraph}{The two candidate estimators.}{21}{section*.14}%
+\contentsline {paragraph}{Canonical choice.}{21}{section*.15}%
+\contentsline {paragraph}{Two weight vectors, not one.}{22}{section*.16}%
+\contentsline {paragraph}{Why the pooled Weissman at the intermediate level.}{22}{section*.17}%
+\contentsline {section}{\numberline {3.3}Joint asymptotic distribution of the pooled inputs}{22}{section.3.3}%
+\contentsline {paragraph}{Within-sample decomposition.}{22}{section*.18}%
+\contentsline {paragraph}{Pooling under independence.}{23}{section*.19}%
+\contentsline {section}{\numberline {3.4}Asymptotic normality of the pooled expectile estimator}{24}{section.3.4}%
+\contentsline {paragraph}{Derivative of $\log \psi $.}{24}{section*.20}%
+\contentsline {paragraph}{Reduction to the iid baseline.}{25}{section*.21}%
+\contentsline {paragraph}{Distributed-inference simplification.}{25}{section*.22}%
+\contentsline {section}{\numberline {3.5}Variance- and AMSE-optimal weights}{25}{section.3.5}%
+\contentsline {paragraph}{Beyond the distributed-inference setting.}{26}{section*.24}%
+\contentsline {section}{\numberline {3.6}Estimated weights and confidence intervals}{27}{section.3.6}%
+\contentsline {section}{\numberline {3.7}A test of expectile-tail-homogeneity}{28}{section.3.7}%
+\contentsline {chapter}{\numberline {4}Extrapolation to very-extreme expectile levels}{30}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Motivation}{30}{section.4.1}%
+\contentsline {section}{\numberline {4.2}The pooled extrapolated expectile estimator}{30}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Asymptotic distribution}{31}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Optimal weights for extrapolation}{31}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Bias-reduction}{31}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Asymptotic confidence intervals}{31}{section.4.6}%
+\contentsline {chapter}{\numberline {5}Discussion and future work}{32}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Summary of contributions}{32}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Connections to Expected Shortfall}{32}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Limitations}{32}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Future work}{33}{section.5.4}%
+\contentsline {chapter}{\numberline {A}Proofs}{34}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Proof of \Cref {prop:pool-int:A-B-equiv}}{34}{section.A.1}%
+\contentsline {paragraph}{Reduction to a $\psi $-difference.}{34}{section*.27}%
+\contentsline {paragraph}{Good event supporting the Taylor expansion.}{34}{section*.28}%
+\contentsline {paragraph}{Taylor expansion with Lagrange remainder.}{35}{section*.29}%
+\contentsline {paragraph}{Order of the remainder terms.}{35}{section*.30}%
+\contentsline {paragraph}{Conclusion.}{36}{section*.31}%
+\contentsline {section}{\numberline {A.2}Proof of \Cref {prop:pool-int:joint-clt}}{36}{section.A.2}%
+\contentsline {paragraph}{Step (i): within-sample joint CLT for Hill and intermediate log-order statistic.}{37}{section*.32}%
+\contentsline {paragraph}{Step (ii): linear lift to (Hill, log-Weissman).}{37}{section*.33}%
+\contentsline {paragraph}{Step (iii): cross-sample independence and rescaling to $\sqrt {k}$.}{38}{section*.34}%
+\contentsline {paragraph}{Step (iv): linear pooling map.}{39}{section*.35}%
+\contentsline {chapter}{Bibliography}{40}{appendix*.36}%

@@ -196,6 +196,48 @@
       \field{pages}{264\bibrangedash 309}
       \range{pages}{46}
     \endentry
+    \entry{DaouiaGirardStupfler2020}{article}{}
+      \name{author}{3}{ul=2}{%
+        {{un=0,uniquepart=base,hash=9bd5145f5ade5b755a2fd71b455eb620}{%
+           family={Daouia},
+           familyi={D\bibinitperiod},
+           given={Abdelaati},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3087d4cc70fb7b23058ecbe7cdbb507d}{%
+           family={Girard},
+           familyi={G\bibinitperiod},
+           given={Stéphane},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c1e0be9e5ef95568a2e36070aadcdeb8}{%
+           family={Stupfler},
+           familyi={S\bibinitperiod},
+           given={Gilles},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{adaf470abad719d8fe224e60e5ba0574}
+      \strng{fullhash}{b4a31c70385e545e38da3cc883a70b2a}
+      \strng{bibnamehash}{b4a31c70385e545e38da3cc883a70b2a}
+      \strng{authorbibnamehash}{b4a31c70385e545e38da3cc883a70b2a}
+      \strng{authornamehash}{adaf470abad719d8fe224e60e5ba0574}
+      \strng{authorfullhash}{b4a31c70385e545e38da3cc883a70b2a}
+      \field{extraname}{3}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Bernoulli}
+      \field{number}{1}
+      \field{title}{Tail expectile process and risk assessment}
+      \field{volume}{26}
+      \field{year}{2020}
+      \field{pages}{531\bibrangedash 556}
+      \range{pages}{26}
+    \endentry
     \entry{DaouiaPadoanStupfler2021}{article}{}
       \name{author}{3}{ul=2}{%
         {{un=0,uniquepart=base,hash=9bd5145f5ade5b755a2fd71b455eb620}{%
