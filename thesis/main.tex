@@ -907,6 +907,371 @@ and applying Slutsky's theorem,
 \]
 which is \eqref{eq:pool-int:main-clt}. \qed
 
+\section{Proof of \texorpdfstring{\Cref{prop:pool-int:var-opt-distrib,prop:pool-int:var-opt-general}}{Propositions 3.4 and 3.5}}
+\label{app:proofs:var-opt-general}
+
+We prove \Cref{prop:pool-int:var-opt-general} (the general case). The
+equal-fraction \Cref{prop:pool-int:var-opt-distrib} is recovered as
+the specialisation $\bm L^{\star} = L^{\star}\bm 1$ at the end of the
+section.
+
+
+
+We minimise the asymptotic variance
+$\sigma^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})^{2}$ of
+\eqref{eq:pool-int:sigma-xi} over deterministic weight vectors
+$\bm\omega_{\gamma}, \bm\omega_{q} \in \R^{m}$ satisfying
+$\bm\omega_{\gamma}^{\top}\bm 1 = \bm\omega_{q}^{\top}\bm 1 = 1$,
+under the standing assumptions of \Cref{sec:pool-int:setup}. Recall
+$\bm D \coloneqq \mathrm{diag}(\bm L^{\star})$ and the scalars
+$a, b, c, \Delta$ defined in \eqref{eq:pool-int:var-opt-abcDelta}.
+
+\paragraph{Step (i): the change of variables.}
+The factorisation \eqref{eq:pool-int:variance-factorisation},
+\[
+  \sigma^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})^{2}
+  \;=\;
+  \bm u^{\top}\Vc\bm u + \bm\omega_{q}^{\top}\Vc\bm\omega_{q},
+  \qquad
+  \bm u \coloneqq m(\gamma)\,\bm\omega_{\gamma} + \bm D\,\bm\omega_{q},
+\]
+relies only on the diagonality of $\Vc$ and is verified by direct
+expansion. For $m(\gamma) \ne 0$, the linear map
+$(\bm\omega_{\gamma}, \bm\omega_{q}) \mapsto (\bm u, \bm\omega_{q})$
+is a bijection of $\R^{m} \times \R^{m}$ onto itself, with inverse
+$\bm\omega_{\gamma} = m(\gamma)^{-1}(\bm u - \bm D\,\bm\omega_{q})$.
+The simplex constraints translate accordingly: from
+$\bm\omega_{\gamma}^{\top}\bm 1 = 1$ and $\bm D\bm 1 = \bm L^{\star}$,
+\begin{equation}
+\label{eq:app:varopt:constraint-u}
+  \bm u^{\top}\bm 1 - \bm\omega_{q}^{\top}\bm L^{\star}
+  \;=\; m(\gamma),
+  \qquad
+  \bm\omega_{q}^{\top}\bm 1 \;=\; 1.
+\end{equation}
+The optimisation \eqref{eq:pool-int:variance-factorisation} reduces
+to a strictly convex quadratic programme on $\R^{2m}$, with the
+block-diagonal positive-definite Hessian
+$\mathrm{diag}(\Vc, \Vc)$ and the two linear constraints
+\eqref{eq:app:varopt:constraint-u}.
+
+\paragraph{Step (ii): the dual variables.}
+Introduce Lagrange multipliers $\mu, \nu \in \R$ and form
+\[
+  \mathcal L(\bm u, \bm\omega_{q}; \mu, \nu)
+  \;=\;
+  \bm u^{\top}\Vc\bm u + \bm\omega_{q}^{\top}\Vc\bm\omega_{q}
+  - \mu\,(\bm u^{\top}\bm 1 - \bm\omega_{q}^{\top}\bm L^{\star}
+           - m(\gamma))
+  - \nu\,(\bm\omega_{q}^{\top}\bm 1 - 1).
+\]
+The first-order conditions read
+\begin{equation}
+\label{eq:app:varopt:foc}
+  2\Vc\,\bm u \;=\; \mu\,\bm 1,
+  \qquad
+  2\Vc\,\bm\omega_{q} \;=\; \nu\,\bm 1 - \mu\,\bm L^{\star}.
+\end{equation}
+Both equations admit the unique solutions
+\begin{equation}
+\label{eq:app:varopt:primal-from-dual}
+  \bm u \;=\; (\mu/2)\,\Vc^{-1}\bm 1,
+  \qquad
+  \bm\omega_{q}
+  \;=\; (\nu/2)\,\Vc^{-1}\bm 1 - (\mu/2)\,\Vc^{-1}\bm L^{\star},
+\end{equation}
+displaying $\bm u$ in $\mathrm{span}\{\Vc^{-1}\bm 1\}$ and
+$\bm\omega_{q}$ in $\mathrm{span}\{\Vc^{-1}\bm 1, \Vc^{-1}\bm
+L^{\star}\}$ at the optimum.
+
+\paragraph{Step (iii): solving for the multipliers.}
+Substitute \eqref{eq:app:varopt:primal-from-dual} into the constraints
+\eqref{eq:app:varopt:constraint-u}. Recall $a = \bm 1^{\top}\Vc^{-1}
+\bm 1$, $b = \bm 1^{\top}\Vc^{-1}\bm L^{\star} = (\bm L^{\star})^{\top}
+\Vc^{-1}\bm 1$ (using symmetry of $\Vc^{-1}$), and $c =
+(\bm L^{\star})^{\top}\Vc^{-1}\bm L^{\star}$:
+\[
+  \bm u^{\top}\bm 1 = (\mu/2)\,a,
+  \qquad
+  \bm\omega_{q}^{\top}\bm L^{\star}
+    = (\nu/2)\,b - (\mu/2)\,c,
+  \qquad
+  \bm\omega_{q}^{\top}\bm 1
+    = (\nu/2)\,a - (\mu/2)\,b.
+\]
+The constraints \eqref{eq:app:varopt:constraint-u} become the linear
+system
+\begin{equation}
+\label{eq:app:varopt:dual-system}
+  \begin{pmatrix} a + c & -\,b \\[2pt] -\,b & a \end{pmatrix}\!
+  \begin{pmatrix} \mu/2 \\ \nu/2 \end{pmatrix}
+  \;=\;
+  \begin{pmatrix} m(\gamma) \\ 1 \end{pmatrix}.
+\end{equation}
+The coefficient matrix has determinant $a(a+c) - b^{2} = \Delta$.
+Cauchy--Schwarz in the $\Vc^{-1}$-inner product gives $b^{2}
+\le ac$, with equality iff $\bm L^{\star} \in \mathrm{span}\{\bm 1\}$
+(which, since all components of $\Vc^{-1}\bm 1$ are strictly positive,
+forces $\bm L^{\star} = L^{\star}\bm 1$). Therefore $ac - b^{2} \ge
+0$ and, since $a > 0$ (diagonal positive entries of $\Vc^{-1}$),
+\begin{equation}
+\label{eq:app:varopt:Delta-positive}
+  \Delta \;=\; a^{2} + (ac - b^{2}) \;>\; 0,
+\end{equation}
+strictly, with $\Delta = a^{2}$ exactly under the distributed-inference
+setting $\bm L^{\star} = L^{\star}\bm 1$. Cramer's rule applied to
+\eqref{eq:app:varopt:dual-system} yields
+\begin{equation}
+\label{eq:app:varopt:mu-nu}
+  \mu/2 \;=\; \frac{m(\gamma)\,a + b}{\Delta},
+  \qquad
+  \nu/2 \;=\; \frac{a + c + m(\gamma)\,b}{\Delta}.
+\end{equation}
+
+\paragraph{Step (iv): the primal solution.}
+Inserting \eqref{eq:app:varopt:mu-nu} into
+\eqref{eq:app:varopt:primal-from-dual} gives the optimal $\bm
+\omega_{q}$ of \eqref{eq:pool-int:var-opt-general-q}. For
+$\bm\omega_{\gamma}$, invert the change of variables: $\bm
+\omega_{\gamma}^{\star} = m(\gamma)^{-1}(\bm u^{\star} - \bm D\,
+\bm\omega_{q}^{\star})$. Using the diagonality identities $\bm D\Vc^{-1}
+\bm 1 = \Vc^{-1}\bm L^{\star}$ and $\bm D\Vc^{-1}\bm L^{\star} = \Vc^{-1}
+\bm D^{2}\bm 1$ (both consequences of $\Vc, \bm D$ being diagonal and
+hence commuting), one obtains
+\[
+  \bm u^{\star} - \bm D\,\bm\omega_{q}^{\star}
+  \;=\;
+  \frac{m(\gamma)\,a + b}{\Delta}\,\Vc^{-1}\bm 1
+  \;-\;
+  \frac{a + c + m(\gamma)\,b}{\Delta}\,\Vc^{-1}\bm L^{\star}
+  \;+\;
+  \frac{m(\gamma)\,a + b}{\Delta}\,\Vc^{-1}\bm D^{2}\bm 1,
+\]
+which is \eqref{eq:pool-int:var-opt-general-g} after the factor
+$m(\gamma)^{-1}$. The minimum variance follows from Lagrangian
+duality: at the optimum of a strictly convex quadratic minimised
+under linear constraints, the optimal value equals
+$\tfrac{1}{2}(\mu^{\star}\, d_{1} + \nu^{\star}\, d_{2})$ where
+$d_{1} = m(\gamma)$, $d_{2} = 1$ are the constraint right-hand sides.
+Substituting \eqref{eq:app:varopt:mu-nu}:
+\[
+  \sigma^{\xi}\!\big(\bm\omega^{\xi,\mathrm{Var}}_{\gamma},
+                     \bm\omega^{\xi,\mathrm{Var}}_{q}\big)^{\!2}
+  \;=\;
+  \frac{m(\gamma)\,[m(\gamma)\,a + b] + [a + c + m(\gamma)\,b]}
+       {\Delta}
+  \;=\;
+  \frac{(m(\gamma)^{2} + 1)\,a + 2\,m(\gamma)\,b + c}{\Delta},
+\]
+which is \eqref{eq:pool-int:var-opt-general-value}.
+
+\paragraph{Step (v): the departure formula.}
+A direct computation gives
+\[
+  \bm\omega^{\xi,\mathrm{Var}}_{q} - \bm\omega^{\mathrm{Var}}
+  \;=\;
+  \frac{(a + c + m(\gamma)\,b)\,\Vc^{-1}\bm 1
+        - (m(\gamma)\,a + b)\,\Vc^{-1}\bm L^{\star}}{\Delta}
+  \;-\;
+  \frac{\Vc^{-1}\bm 1}{a}.
+\]
+Bring to a common denominator $a\Delta$ and collect the
+$\Vc^{-1}\bm 1$ coefficient: $a(a + c + m(\gamma)\,b) - \Delta
+= a^{2} + ac + m(\gamma)\,ab - a^{2} - ac + b^{2}
+= b\,(m(\gamma)\,a + b)$. Hence
+\[
+  \bm\omega^{\xi,\mathrm{Var}}_{q} - \bm\omega^{\mathrm{Var}}
+  \;=\;
+  \frac{m(\gamma)\,a + b}{a\,\Delta}\,
+  \big[b\,\Vc^{-1}\bm 1 - a\,\Vc^{-1}\bm L^{\star}\big]
+  \;=\;
+  -\,\frac{m(\gamma)\,a + b}{\Delta}\,
+   \Vc^{-1}\big(\bm L^{\star} - \bar L^{\star}\bm 1\big),
+\]
+with $\bar L^{\star} = b/a$, which is
+\eqref{eq:pool-int:var-opt-general-departure}.
+
+\paragraph{Specialisation to the distributed-inference setting.}
+Substituting $\bm L^{\star} = L^{\star}\bm 1$ gives $b = L^{\star}a$,
+$c = (L^{\star})^{2}a$, $\Delta = a^{2}$. From
+\eqref{eq:app:varopt:mu-nu}:
+\[
+  \mu/2 \;=\; \frac{(m(\gamma) + L^{\star})\,a}{a^{2}}
+        \;=\; \frac{m(\gamma) + L^{\star}}{a},
+  \qquad
+  \nu/2 \;=\; \frac{(1 + L^{\star 2} + m(\gamma)\,L^{\star})\,a}{a^{2}}
+        \;=\; \frac{1 + L^{\star 2} + m(\gamma)\,L^{\star}}{a},
+\]
+and
+$\bm\omega^{\star}_{q} = (\nu/2 - (\mu/2)L^{\star})\,\Vc^{-1}\bm 1
+= ((1 + L^{\star 2} + m(\gamma)L^{\star}) - L^{\star}(m(\gamma)
++ L^{\star}))\Vc^{-1}\bm 1/a = \Vc^{-1}\bm 1/a =
+\bm\omega^{\mathrm{Var}}$. A symmetric calculation gives
+$\bm\omega^{\star}_{\gamma} = \bm\omega^{\mathrm{Var}}$, and the
+minimum-variance value reduces to $[(m(\gamma) + L^{\star})^{2} +
+1]/a$, recovering
+\Cref{prop:pool-int:var-opt-distrib}.
+
+\paragraph{The degenerate case $m(\gamma) = 0$.}
+When $m(\gamma) = 0$, the change-of-variables map is no longer a
+bijection: $\bm u = \bm D\bm\omega_{q}$ depends only on $\bm\omega_{q}$
+and $\bm\omega_{\gamma}$ disappears from the variance. The factorisation
+collapses to
+$\sigma^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})^{2}
+= \bm\omega_{q}^{\top}\Vc(\bm I + \bm D^{2})\bm\omega_{q}$,
+a strictly convex quadratic in $\bm\omega_{q}$ alone (since $\Vc(\bm I
++ \bm D^{2})$ is the product of two positive-definite diagonal matrices,
+hence positive definite). Minimisation under $\bm\omega_{q}^{\top}\bm 1
+= 1$ gives, by the standard Lagrangian calculation for a single linear
+constraint,
+\begin{equation}
+\label{eq:app:varopt:m-zero}
+  \bm\omega^{\xi,\mathrm{Var}}_{q}\big|_{m(\gamma) = 0}
+  \;=\;
+  \frac{(\bm I + \bm D^{2})^{-1}\Vc^{-1}\bm 1}
+       {\bm 1^{\top}(\bm I + \bm D^{2})^{-1}\Vc^{-1}\bm 1},
+\end{equation}
+with $\bm\omega_{\gamma}$ indeterminate. In the distributed-inference
+setting $\bm D = L^{\star}\bm I$, $(\bm I + \bm D^{2})^{-1}$ is a
+scalar multiple of $\bm I$ and \eqref{eq:app:varopt:m-zero} reduces to
+$\bm\omega^{\mathrm{Var}}$; in general it differs from
+$\bm\omega^{\mathrm{Var}}$ along directions in
+$\mathrm{span}\{\bm 1, \bm L^{\star},\ldots\}$. \qed
+
+\section{Proof of \texorpdfstring{\Cref{prop:pool-int:amse-opt}}{Proposition 3.6}}
+\label{app:proofs:amse-opt}
+
+We prove existence, uniqueness, and the closed form
+\eqref{eq:pool-int:amse-opt-formula} of the AMSE minimiser under the
+standing assumptions of \Cref{sec:pool-int:setup} and $m(\gamma) \ne 0$.
+Recall the stacked notation
+$\bm w = (\bm\omega_{\gamma}^{\top}, \bm\omega_{q}^{\top})^{\top}$,
+the bias gradient and variance Hessian $\bm h, \bm Q$ of
+\eqref{eq:pool-int:amse-stacked}, the constraint matrix $\bm A \in
+\R^{2m \times 2}$ with columns $\bm 1_{g} = (\bm 1^{\top}, \bm
+0^{\top})^{\top}$ and $\bm 1_{q} = (\bm 0^{\top}, \bm 1^{\top})^{\top}$,
+and the matrix $\bm M \coloneqq \bm Q + \bm h\bm h^{\top}$.
+
+\paragraph{Step (i): rewriting the AMSE as a quadratic form.}
+By construction $\mu^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q}) =
+\bm h^{\top}\bm w + b^{\xi/\Quant}$ and
+$\sigma^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})^{2} = \bm w^{\top}\bm
+Q\bm w$, so
+\begin{align*}
+  \mathrm{AMSE}^{\xi}(\bm w)
+  &\;=\;
+  (\bm h^{\top}\bm w + b^{\xi/\Quant})^{2}
+  + \bm w^{\top}\bm Q\bm w
+  \\
+  &\;=\;
+  \bm w^{\top}\bm M\,\bm w
+  \;+\; 2\,b^{\xi/\Quant}\,\bm h^{\top}\bm w
+  \;+\; (b^{\xi/\Quant})^{2},
+\end{align*}
+recognising $(\bm h^{\top}\bm w)^{2} = \bm w^{\top}(\bm h\bm h^{\top})
+\bm w$ and $\bm M = \bm Q + \bm h\bm h^{\top}$. The additive constant
+$(b^{\xi/\Quant})^{2}$ does not influence the argmin and is dropped
+below.
+
+\paragraph{Step (ii): positive-definiteness of $\bm M$.}
+$\bm Q$ is positive definite. Indeed, the variance factorisation
+$\bm w^{\top}\bm Q\bm w = \bm u^{\top}\Vc\bm u + \bm\omega_{q}^{\top}
+\Vc\bm\omega_{q}$ with $\bm u = m(\gamma)\bm\omega_{\gamma} + \bm
+D\bm\omega_{q}$ exhibits $\bm Q$ as the pull-back of the
+block-diagonal positive-definite matrix $\mathrm{diag}(\Vc, \Vc)$
+under the linear bijection $\bm w \mapsto (\bm u, \bm\omega_{q})$
+(valid for $m(\gamma) \ne 0$, see \Cref{app:proofs:var-opt-general}).
+Hence $\bm w^{\top}\bm Q\bm w \ge 0$ with equality iff $\bm u = 0$
+and $\bm\omega_{q} = 0$, which forces $\bm w = 0$. The rank-one
+positive semi-definite update $\bm h\bm h^{\top}$ preserves positive
+definiteness, so $\bm M = \bm Q + \bm h\bm h^{\top}$ is positive
+definite. Strict convexity of $\mathrm{AMSE}^{\xi}(\bm w) -
+(b^{\xi/\Quant})^{2}$ on $\R^{2m}$, and a fortiori on the closed
+affine constraint set $\{\bm A^{\top}\bm w = \bm 1_{2}\}$, follows.
+
+\paragraph{Step (iii): existence and uniqueness via the Lagrangian.}
+Form
+\[
+  \mathcal L(\bm w; \bm\nu)
+  \;=\;
+  \bm w^{\top}\bm M\,\bm w
+  + 2\,b^{\xi/\Quant}\,\bm h^{\top}\bm w
+  - \bm\nu^{\top}(\bm A^{\top}\bm w - \bm 1_{2}),
+\]
+with $\bm\nu \in \R^{2}$. The first-order conditions read
+\begin{equation}
+\label{eq:app:amse:foc-stacked}
+  2\,\bm M\,\bm w + 2\,b^{\xi/\Quant}\,\bm h - \bm A\,\bm\nu
+  \;=\; \bm 0,
+\end{equation}
+together with $\bm A^{\top}\bm w = \bm 1_{2}$. From
+\eqref{eq:app:amse:foc-stacked},
+\begin{equation}
+\label{eq:app:amse:primal-from-dual}
+  \bm w
+  \;=\;
+  \bm M^{-1}\!\left[\tfrac{1}{2}\bm A\,\bm\nu
+                    - b^{\xi/\Quant}\,\bm h\right].
+\end{equation}
+Imposing the constraint $\bm A^{\top}\bm w = \bm 1_{2}$:
+\[
+  \tfrac{1}{2}\,\bm A^{\top}\bm M^{-1}\bm A\,\bm\nu
+  - b^{\xi/\Quant}\,\bm A^{\top}\bm M^{-1}\bm h
+  \;=\; \bm 1_{2}.
+\]
+The matrix $\bm A^{\top}\bm M^{-1}\bm A \in \R^{2 \times 2}$ is
+positive definite: $\bm M^{-1}$ is PD, and $\bm A$ has full column
+rank since its two columns $\bm 1_{g}, \bm 1_{q}$ have disjoint
+nonzero supports. Hence
+\begin{equation}
+\label{eq:app:amse:nu-formula}
+  \bm\nu \;=\; 2\,(\bm A^{\top}\bm M^{-1}\bm A)^{-1}\!
+              \big(\bm 1_{2} \;+\; b^{\xi/\Quant}\,
+                   \bm A^{\top}\bm M^{-1}\bm h\big).
+\end{equation}
+Substituting \eqref{eq:app:amse:nu-formula} back into
+\eqref{eq:app:amse:primal-from-dual} delivers the closed form
+\eqref{eq:pool-int:amse-opt-formula}. Strict convexity of the
+objective on the affine constraint set together with the linear FOC
+\eqref{eq:app:amse:foc-stacked} forces this $\bm w$ to be the unique
+constrained minimiser.
+
+\paragraph{Step (iv): equivalence with the block FOC system.}
+Expand \eqref{eq:app:amse:foc-stacked} block-by-block. The product
+$\bm M\bm w = \bm Q\bm w + (\bm h^{\top}\bm w)\,\bm h = \bm Q\bm w +
+(\mu^{\xi} - b^{\xi/\Quant})\bm h$, using $\mu^{\xi} = \bm h^{\top}
+\bm w + b^{\xi/\Quant}$. Substituting,
+\eqref{eq:app:amse:foc-stacked} becomes
+\[
+  2\,\bm Q\bm w \;+\; 2\,(\mu^{\xi} - b^{\xi/\Quant})\,\bm h
+  \;+\; 2\,b^{\xi/\Quant}\,\bm h
+  \;=\; \bm A\,\bm\nu
+  \quad\Longleftrightarrow\quad
+  \bm Q\bm w \;+\; \mu^{\xi}\,\bm h \;=\; \tfrac{1}{2}\,\bm A\,\bm\nu.
+\]
+Writing $\bm\nu = (\lambda_{\gamma}, \lambda_{q})^{\top}$ and reading
+off the upper and lower blocks of size $m$:
+\begin{align*}
+  \big[\bm Q\bm w\big]_{1, \ldots, m}
+  &\;=\;
+  m(\gamma)^{2}\,\Vc\,\bm\omega_{\gamma}
+  + m(\gamma)\,\bm D\,\Vc\,\bm\omega_{q},
+  \\
+  \big[\bm Q\bm w\big]_{m+1, \ldots, 2m}
+  &\;=\;
+  m(\gamma)\,\bm D\,\Vc\,\bm\omega_{\gamma}
+  + (\Vc + \bm D^{2}\Vc)\,\bm\omega_{q},
+\end{align*}
+$[\bm h]_{1,\ldots,m} = m(\gamma)\Bc$,
+$[\bm h]_{m+1,\ldots,2m} = \Bc^{\star}$,
+$[\bm A\bm\nu]_{1,\ldots,m} = \lambda_{\gamma}\bm 1$,
+$[\bm A\bm\nu]_{m+1,\ldots,2m} = \lambda_{q}\bm 1$.
+The block decomposition reproduces \eqref{eq:pool-int:amse-foc}.
+Uniqueness from strict convexity, combined with the consistency
+identity $\mu^{\xi} = m(\gamma)\,\bm\omega_{\gamma}^{\top}\Bc +
+\bm\omega_{q}^{\top}\Bc^{\star} + b^{\xi/\Quant}$ at the minimiser,
+completes the equivalence. \qed
+
 \backmatter
 \printbibliography[heading=bibintoc]
 

@@ -712,9 +712,9 @@ expectile estimator: the cross term in \eqref{eq:pool-int:sigma-xi}
 couples the two pooled inputs through $\mathrm{diag}(\bm L^{\star})$
 and is a genuine structural feature of the expectile target. As
 \Cref{sec:pool-int:weights} shows, however, the additional freedom is
-not exploited by the variance optimum in the canonical
+not exploited by the variance optimum in the equal-fraction
 distributed-inference case: under
-\Cref{cor:bg:pool-distrib-oracle} the expectile-optimal pair
+\Cref{cor:bg:pool-distrib-oracle} the variance-optimal pair
 collapses to a single Paper~3 quantile-style weight vector
 $\bm\omega^{\xi,\mathrm{Var}}_{\gamma} =
  \bm\omega^{\xi,\mathrm{Var}}_{q} = \bm\omega^{\mathrm{Var}}$
@@ -755,165 +755,372 @@ are individually minimised by aligning their argument with
 $\Vc^{-1}\bm 1$; whether this can be done by a single choice of
 $(\bm\omega_{\gamma}, \bm\omega_{q})$ depends on whether the linear
 constraint induced on $\bm u$ by the simplex constraints is
-sample-free. It is, precisely under the distributed-inference
-assumption.
+sample-free. It is, precisely under the equal-fraction
+distributed-inference assumption $k_{j}/n_{j} = (k/n)(1 + o(1))$ of
+\Cref{cor:bg:pool-distrib-oracle}, which renders $L_{j}(\tau_{n})$
+sample-free and collapses
+$\mathrm{diag}(\bm L^{\star})$ to a scalar multiple of the identity.
 
-\begin{proposition}[Variance-optimal weights, distributed-inference setting]
+\begin{proposition}[Variance-optimal weights, equal-fraction distributed inference]
 \label{prop:pool-int:var-opt-distrib}
 Under the assumptions of \Cref{thm:pool-int:main} and the
 equal-sample-fraction condition
 $k_{j}/n_{j} = (k/n)(1 + o(1))$ of
 \Cref{cor:bg:pool-distrib-oracle}, the variance-optimal weights for
-the pooled QB expectile estimator coincide with the variance-optimal
-weights for the quantile target of \Cref{prop:bg:optimal-weights}:
+the pooled QB expectile estimator satisfy
 \begin{equation}
 \label{eq:pool-int:var-opt-distrib-coincide}
-  \bm\omega^{\xi,\mathrm{Var}}_{\gamma}
-  \;=\;
   \bm\omega^{\xi,\mathrm{Var}}_{q}
   \;=\;
   \bm\omega^{\mathrm{Var}}
   \;=\;
-  \frac{\Vc^{-1}\bm 1}{\bm 1^{\top}\Vc^{-1}\bm 1}.
+  \frac{\Vc^{-1}\bm 1}{\bm 1^{\top}\Vc^{-1}\bm 1},
 \end{equation}
-The corresponding asymptotic variance is
+with corresponding asymptotic variance
 \begin{equation}
 \label{eq:pool-int:var-opt-distrib-value}
-  \sigma^{\xi}\big(\bm\omega^{\mathrm{Var}},
-                    \bm\omega^{\mathrm{Var}}\big)^{2}
+  \sigma^{\xi}\big(\bm\omega^{\xi,\mathrm{Var}}_{\gamma},
+                    \bm\omega^{\xi,\mathrm{Var}}_{q}\big)^{2}
   \;=\;
   \big[(m(\gamma) + L^{\star})^{2} + 1\big]\,
   \big(\bm 1^{\top}\Vc^{-1}\bm 1\big)^{-1}.
 \end{equation}
+If $m(\gamma) \ne 0$, the variance-optimal pair is unique and
+$\bm\omega^{\xi,\mathrm{Var}}_{\gamma} = \bm\omega^{\mathrm{Var}}$
+as well, so both pooled inputs receive the Paper~3 quantile-pooling
+weights. If $m(\gamma) = 0$, the asymptotic variance does not depend
+on $\bm\omega_{\gamma}$: any admissible vector is then
+variance-optimal, and the matched representative
+$\bm\omega^{\xi,\mathrm{Var}}_{\gamma} = \bm\omega^{\mathrm{Var}}$ is
+one canonical choice.
 \end{proposition}
 
-\begin{proof}[Sketch.]
-Equal sample fractions render $L_{j}(\tau_{n}) \to L^{\star}$
-sample-free, so $\mathrm{diag}(\bm L^{\star}) = L^{\star}\mathbf I$
-and $\bm u = m(\gamma)\bm\omega_{\gamma} + L^{\star}\bm\omega_{q}$.
-The simplex constraints then imply
-$\bm u^{\top}\bm 1 = m(\gamma) + L^{\star}$, a sample-free constant.
-The minimisation \eqref{eq:pool-int:variance-factorisation}
-decouples into two independent quadratic programmes,
-\[
-  \min_{\bm u : \bm u^{\top}\bm 1 = m(\gamma) + L^{\star}}
-    \bm u^{\top}\Vc\bm u
-  \quad\text{and}\quad
-  \min_{\bm\omega_{q}^{\top}\bm 1 = 1}
-    \bm\omega_{q}^{\top}\Vc\bm\omega_{q},
-\]
-both solved by directions proportional to $\Vc^{-1}\bm 1$. Their
-solutions are $\bm u^{\star} = (m(\gamma) + L^{\star})\,
-\bm\omega^{\mathrm{Var}}$ and $\bm\omega_{q}^{\star} =
-\bm\omega^{\mathrm{Var}}$. Inversion of the definition of $\bm u$
-yields $\bm\omega_{\gamma}^{\star} = m(\gamma)^{-1}(\bm u^{\star}
-- L^{\star}\bm\omega_{q}^{\star}) = \bm\omega^{\mathrm{Var}}$. The
-case $m(\gamma) = 0$ degenerates: the variance no longer depends on
-$\bm\omega_{\gamma}$, and \eqref{eq:pool-int:var-opt-distrib-coincide}
-holds modulo this indeterminacy of $\bm\omega_{\gamma}$. Substituting
-into \eqref{eq:pool-int:variance-factorisation} gives
-\eqref{eq:pool-int:var-opt-distrib-value}.
+\begin{proof}
+The proposition is the specialisation $\bm L^{\star} = L^{\star}\bm
+1$ of \Cref{prop:pool-int:var-opt-general}; see
+\Cref{app:proofs:var-opt-general}, which discharges both the
+$m(\gamma) \ne 0$ closed form and the $m(\gamma) = 0$ degenerate
+case.
 \end{proof}
 
-\Cref{prop:pool-int:var-opt-distrib} is the central efficiency
-statement of this chapter: in the distributed-inference setting,
-\emph{the optimal pooling weights are invariant under the change of
-target from extreme quantile to extreme expectile.} The two targets
-share the same data-fusion recipe; the only change in the asymptotic
-variance is the multiplicative factor $(m(\gamma) + L^{\star})^{2} +
-1$ replacing the quantile-target factor of $1$. The
-distributed-inference oracle equivalence
-(\Cref{cor:bg:pool-distrib-oracle}) thus extends to the expectile
-target without modification of the pooling rule.
+\Cref{prop:pool-int:var-opt-distrib} is the central
+variance-efficiency statement of this chapter: under equal-fraction
+distributed inference, \emph{the variance-optimal pooling weights are
+invariant under the change of target from extreme quantile to
+extreme expectile.} The two targets share the same data-fusion
+recipe; the only change in the asymptotic variance is the
+multiplicative factor $(m(\gamma) + L^{\star})^{2} + 1$ replacing the
+quantile-target factor of $1$. The distributed-inference oracle
+equivalence (\Cref{cor:bg:pool-distrib-oracle}) thus extends to the
+expectile target at the variance criterion without modification of
+the pooling rule. The AMSE-optimum, by contrast, is genuinely
+target-dependent even under equal-fraction distributed inference, as
+the second subsection below makes precise.
 
-\paragraph{Beyond the distributed-inference setting.}
+\paragraph{Beyond the equal-fraction setting.}
 When the sample fractions $k_{j}/n_{j}$ vary across $j$,
 $\mathrm{diag}(\bm L^{\star})$ ceases to be a scalar multiple of the
-identity, and the constraint $\bm u^{\top}\bm 1
+identity, the constraint
+$\bm u^{\top}\bm 1
 = m(\gamma) + \bm\omega_{q}^{\top}\bm L^{\star}$ acquires explicit
-dependence on $\bm\omega_{q}$; the decoupling argument breaks. The
-first-order conditions of the joint minimisation form the linear
-system
+dependence on $\bm\omega_{q}$, and the decoupling argument used in
+\Cref{prop:pool-int:var-opt-distrib} breaks. The variance-optimal
+pair then lifts off the matched-weight diagonal and admits the
+explicit closed form recorded below. Set
+$\bm D \coloneqq \mathrm{diag}(\bm L^{\star})$ and abbreviate the
+three scalar invariants of $(\Vc, \bm L^{\star})$:
 \begin{equation}
-\label{eq:pool-int:var-foc}
-\begin{aligned}
-  m(\gamma)^{2}\,\Vc\,\bm\omega_{\gamma}
-  + m(\gamma)\,\mathrm{diag}(\bm L^{\star})\,\Vc\,\bm\omega_{q}
-  &\;=\; \tfrac{1}{2}\lambda_{\gamma}\bm 1, \\
-  m(\gamma)\,\mathrm{diag}(\bm L^{\star})\,\Vc\,\bm\omega_{\gamma}
-  + \big(\Vc + \mathrm{diag}(\bm L^{\star})^{2}\Vc\big)\,
-    \bm\omega_{q}
-  &\;=\; \tfrac{1}{2}\lambda_{q}\bm 1,
-\end{aligned}
+\label{eq:pool-int:var-opt-abcDelta}
+  a \;\coloneqq\; \bm 1^{\top}\Vc^{-1}\bm 1,
+  \qquad
+  b \;\coloneqq\; \bm 1^{\top}\Vc^{-1}\bm L^{\star},
+  \qquad
+  c \;\coloneqq\; (\bm L^{\star})^{\top}\Vc^{-1}\bm L^{\star},
+  \qquad
+  \Delta \;\coloneqq\; a(a + c) - b^{2}.
 \end{equation}
-whose unique solution, recorded in closed form in the proof
-appendix, differs from $(\bm\omega^{\mathrm{Var}},
-\bm\omega^{\mathrm{Var}})$ by a correction of magnitude
-$|m(\gamma)| \cdot \max_{j, \ell} |L_{j}^{\star} - L_{\ell}^{\star}|$
-along the direction $\Vc^{-1}(\bm L^{\star} - \bar L^{\star}\bm 1)$,
-where $\bar L^{\star}$ is the $\Vc^{-1}\bm 1$-weighted mean of
-$\bm L^{\star}$. The correction vanishes identically when
-$\bm L^{\star}$ is constant across $j$ (recovering
-\Cref{prop:pool-int:var-opt-distrib}), and vanishes to leading order
-when $\gamma$ is close to the zero $\gamma^{\star}$ of $m(\,\cdot\,)$.
-In practice the Paper~3 weights $\bm\omega^{\mathrm{Var}}$ remain
-near-optimal whenever either condition holds approximately.
+
+\begin{proposition}[Variance-optimal weights, general case]
+\label{prop:pool-int:var-opt-general}
+Under the assumptions of \Cref{thm:pool-int:main} and $m(\gamma) \ne
+0$, the Cauchy--Schwarz inequality in the $\Vc^{-1}$-inner product
+gives $ac - b^{2} \ge 0$, with equality iff $\bm L^{\star}$ is a
+scalar multiple of $\bm 1$ --- precisely the equal-fraction case in
+which $L_{j}^{\star}$ is sample-free across $j$. Consequently
+\[
+  \Delta \;=\; a^{2} + (ac - b^{2}) \;\ge\; a^{2} \;>\; 0,
+\]
+with $\Delta = a^{2}$ exactly under the equal-fraction
+distributed-inference setting of
+\Cref{prop:pool-int:var-opt-distrib}. The variance-optimal pooling
+weights for the pooled QB intermediate expectile estimator are unique
+and given by
+\begin{align}
+\label{eq:pool-int:var-opt-general-q}
+  \bm\omega^{\xi,\mathrm{Var}}_{q}
+    &\;=\;
+    \frac{(a + c + m(\gamma)\,b)\,\Vc^{-1}\bm 1
+          \;-\;(m(\gamma)\,a + b)\,\Vc^{-1}\bm L^{\star}}
+         {\Delta},
+  \\[2pt]
+\label{eq:pool-int:var-opt-general-g}
+  \bm\omega^{\xi,\mathrm{Var}}_{\gamma}
+    &\;=\;
+    \frac{(m(\gamma)\,a + b)\,\Vc^{-1}(\bm 1 + \bm D^{2}\bm 1)
+          \;-\;(a + c + m(\gamma)\,b)\,\Vc^{-1}\bm L^{\star}}
+         {m(\gamma)\,\Delta},
+\end{align}
+and the associated minimum asymptotic variance is
+\begin{equation}
+\label{eq:pool-int:var-opt-general-value}
+  \sigma^{\xi}\!\big(\bm\omega^{\xi,\mathrm{Var}}_{\gamma},
+                      \bm\omega^{\xi,\mathrm{Var}}_{q}\big)^{\!2}
+  \;=\;
+  \frac{(m(\gamma)^{2} + 1)\,a \;+\; 2\,m(\gamma)\,b \;+\; c}{\Delta}.
+\end{equation}
+In the distributed-inference setting $\bm L^{\star} = L^{\star}\bm 1$
+one has $b = L^{\star}a$, $c = (L^{\star})^{2}a$, $\Delta = a^{2}$;
+formulas
+\eqref{eq:pool-int:var-opt-general-q}--\eqref{eq:pool-int:var-opt-general-value}
+then collapse to
+\eqref{eq:pool-int:var-opt-distrib-coincide} and
+\eqref{eq:pool-int:var-opt-distrib-value}, recovering
+\Cref{prop:pool-int:var-opt-distrib}.
+\end{proposition}
+
+\begin{proof}
+See \Cref{app:proofs:var-opt-general}, where the change of variables
+$(\bm\omega_{\gamma}, \bm\omega_{q}) \mapsto (\bm u, \bm\omega_{q})$
+with $\bm u = m(\gamma)\bm\omega_{\gamma} + \bm D\bm\omega_{q}$,
+positivity of $\Delta$ from Cauchy--Schwarz, and the explicit
+Lagrangian dual system are spelled out step-by-step.
+\end{proof}
+
+The assumption $m(\gamma) \ne 0$ is essential for the two-vector
+closed form: it is the condition that makes the change of variables
+$(\bm\omega_{\gamma}, \bm\omega_{q}) \mapsto (\bm u, \bm\omega_{q})$ a
+bijection, and it appears in the denominator of
+\eqref{eq:pool-int:var-opt-general-g}. When $m(\gamma) = 0$ the
+asymptotic variance does not identify $\bm\omega_{\gamma}$, and the
+optimisation collapses to the single-vector problem in
+$\bm\omega_{q}$ recorded in \Cref{app:proofs:var-opt-general}.
+
+\paragraph{Departure from the matched-weight diagonal.}
+The discrepancy between $(\bm\omega^{\xi,\mathrm{Var}}_{\gamma},
+\bm\omega^{\xi,\mathrm{Var}}_{q})$ and the Paper~3 matched-weight
+pair $(\bm\omega^{\mathrm{Var}}, \bm\omega^{\mathrm{Var}})$ is
+controlled by the $\Vc^{-1}$-Cauchy--Schwarz defect $ac - b^{2} \ge
+0$, which vanishes exactly when $\bm L^{\star}$ is a scalar multiple
+of $\bm 1$. Writing $\bar L^{\star} \coloneqq b/a$ for the
+$\Vc^{-1}\bm 1$-weighted mean of $\bm L^{\star}$, a direct expansion
+of \eqref{eq:pool-int:var-opt-general-q} delivers the closed-form
+discrepancy
+\begin{equation}
+\label{eq:pool-int:var-opt-general-departure}
+  \bm\omega^{\xi,\mathrm{Var}}_{q} - \bm\omega^{\mathrm{Var}}
+  \;=\;
+  -\,\frac{m(\gamma)\,a + b}{\Delta}\,
+   \Vc^{-1}\big(\bm L^{\star} - \bar L^{\star}\bm 1\big),
+\end{equation}
+verified in \Cref{app:proofs:var-opt-general} (Step (v)), with an
+analogous identity for $\bm\omega^{\xi,\mathrm{Var}}_{\gamma}$
+obtained by inversion of the $\bm u$-definition. The correction lies
+entirely along the $\Vc^{-1}$-centred direction
+$\Vc^{-1}(\bm L^{\star} - \bar L^{\star}\bm 1)$. Writing $\Delta =
+a^{2} + (ac - b^{2})$ exhibits its scalar prefactor as
+\[
+  \frac{m(\gamma)\,a + b}{\Delta}
+  \;=\;
+  \frac{m(\gamma) + \bar L^{\star}}{a}
+  \cdot
+  \left[1 \;+\; O\!\left(\frac{ac - b^{2}}{a^{2}}\right)\right]
+\]
+in the small Cauchy--Schwarz defect regime $ac - b^{2} \ll a^{2}$.
+The Paper~3 weights therefore remain near-optimal whenever (i) the
+log-rate vector is nearly sample-free ($ac - b^{2} \approx 0$, i.e.\
+$\bm L^{\star}$ nearly constant in the $\Vc^{-1}\bm 1$-weighted
+sense), or (ii) $m(\gamma) + \bar L^{\star} \approx 0$, which combines
+the expectile-specific zero $\gamma^{\star} \approx 0.218$ of
+$m(\,\cdot\,)$ with the log-rate weighted mean. The degenerate case $m(\gamma) = 0$
+leaves $\bm\omega_{\gamma}$ indeterminate and reduces the
+optimisation to the single-vector problem $\min \bm\omega_{q}^{\top}
+\Vc(\bm I + \bm D^{2})\bm\omega_{q}$ subject to
+$\bm\omega_{q}^{\top}\bm 1 = 1$, whose solution is recorded in
+\Cref{app:proofs:var-opt-general}; it coincides with
+$\bm\omega^{\mathrm{Var}}$ in the equal-fraction setting and
+deviates from it otherwise.
 
 \subsection*{AMSE-optimal weights}
 
 The AMSE-optimal pair
 $(\bm\omega^{\xi,\mathrm{AMSE}}_{\gamma},
-\bm\omega^{\xi,\mathrm{AMSE}}_{q})$ minimises
-$\big(\mu^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})\big)^{2} +
-\sigma^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})^{2}$ subject to the
-simplex constraints. The structure parallels
-\Cref{prop:bg:optimal-weights}(ii), with the variance term producing
-the same machinery as above and the bias term carrying the
-expectile-specific composite bias rate
+\bm\omega^{\xi,\mathrm{AMSE}}_{q})$ minimises the asymptotic mean
+squared error
 \begin{equation}
-\label{eq:pool-int:amse-bias-functional}
-  \mu^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})
-  \;=\;
-  m(\gamma)\,\bm\omega_{\gamma}^{\top}\Bc
-  \;+\;
-  \bm\omega_{q}^{\top}\Bc^{\star}
-  \;+\;
-  b^{\xi/\Quant}.
+\label{eq:pool-int:amse-def}
+  \mathrm{AMSE}^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})
+  \;\coloneqq\;
+  \big(\mu^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})\big)^{2}
+  + \sigma^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})^{2}
 \end{equation}
-The AMSE landscape thus differs from the Paper~3 quantile-target
-AMSE landscape on two structural counts, both visible already in the
-distributed-inference setting with matched weights
-$\bm\omega_{\gamma} = \bm\omega_{q} = \bm\omega$: the bias-rate
-vector $m(\gamma)\Bc + \Bc^{\star}$ replaces the
-Paper~3 vector $\Bc^{\star}$, and the deterministic offset
-$b^{\xi/\Quant}$ shifts the location of the AMSE minimum along the
-simplex. The AMSE-optimal weights for the expectile target are
-therefore in general \emph{not} equal to the Paper~3 quantile-target
-AMSE-optimum, even when the variance-optima do coincide
-(\Cref{prop:pool-int:var-opt-distrib}). The closed-form solution of
-the joint quadratic programme, together with the positive-definiteness
-condition required for it to be well-defined, is recorded in the proof
-appendix; it reduces to the Paper~3 expression only in the trivial
-case $b^{\xi/\Quant} = 0$ and $m(\gamma)\,\Bc \propto \Bc^{\star}$,
-which is not generic.
+subject to the simplex constraints
+$\bm\omega_{\gamma}^{\top}\bm 1 = \bm\omega_{q}^{\top}\bm 1 = 1$, with
+$\mu^{\xi}$ and $\sigma^{\xi}$ as in \eqref{eq:pool-int:mu-xi} and
+\eqref{eq:pool-int:sigma-xi}. The objective parallels
+\Cref{prop:bg:optimal-weights}(ii), but the expectile target reshapes
+the bias landscape on two structural counts. First, in the two-weight
+problem the bias is a linear functional of the stacked vector
+$(\bm\omega_{\gamma}^{\top}, \bm\omega_{q}^{\top})^{\top}$ with
+\emph{stacked gradient} $(m(\gamma)\Bc, \Bc^{\star})^{\top}$, in
+which the pooled-Hill bias enters rescaled by the QB Jacobian
+$m(\gamma)$ and the pooled-Weissman bias enters unrescaled; the
+composite direction $m(\gamma)\Bc + \Bc^{\star}$ that replaces the
+Paper~3 vector $\Bc^{\star}$ arises only when restricted to the
+matched-weight diagonal $\bm\omega_{\gamma} = \bm\omega_{q}$. Second,
+$\mu^{\xi}$ carries the additive offset $b^{\xi/\Quant}$ of
+\eqref{eq:pool-int:b-xi-Q-def}, which translates the AMSE minimum
+away from the Paper~3 variance-optimal direction.
+
+\paragraph{Stacked notation.}
+To state the optimum compactly, stack the two pooling weight vectors
+into $\bm w \coloneqq (\bm\omega_{\gamma}^{\top},
+\bm\omega_{q}^{\top})^{\top} \in \R^{2m}$ and assemble the bias
+gradient and variance Hessian implied by
+\eqref{eq:pool-int:mu-xi}--\eqref{eq:pool-int:sigma-xi}:
+\begin{equation}
+\label{eq:pool-int:amse-stacked}
+  \bm h \;\coloneqq\;
+  \begin{pmatrix} m(\gamma)\,\Bc \\[2pt] \Bc^{\star} \end{pmatrix}
+  \in \R^{2m},
+  \qquad
+  \bm Q \;\coloneqq\;
+  \begin{pmatrix}
+    m(\gamma)^{2}\,\Vc & m(\gamma)\,\bm D\,\Vc \\[2pt]
+    m(\gamma)\,\bm D\,\Vc & \Vc + \bm D^{2}\Vc
+  \end{pmatrix}
+  \in \R^{2m \times 2m},
+\end{equation}
+so that
+$\mu^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q}) = \bm h^{\top}\bm w +
+b^{\xi/\Quant}$ and
+$\sigma^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})^{2} = \bm w^{\top}
+\bm Q\bm w$. Write $\bm A \in \R^{2m \times 2}$ for the matrix with
+columns $\bm 1_{g} \coloneqq (\bm 1^{\top}, \bm 0^{\top})^{\top}$ and
+$\bm 1_{q} \coloneqq (\bm 0^{\top}, \bm 1^{\top})^{\top}$, so that the
+simplex constraints read $\bm A^{\top}\bm w = \bm 1_{2}$.
+
+\begin{proposition}[AMSE-optimal weights]
+\label{prop:pool-int:amse-opt}
+Under the assumptions of \Cref{thm:pool-int:main} and $m(\gamma) \ne
+0$, the matrix $\bm M \coloneqq \bm Q + \bm h\bm h^{\top}$ is
+positive definite, and the AMSE objective \eqref{eq:pool-int:amse-def}
+is strictly convex on the affine constraint set
+$\{\bm w \in \R^{2m} : \bm A^{\top}\bm w = \bm 1_{2}\}$. The unique
+minimiser admits the closed form
+\begin{equation}
+\label{eq:pool-int:amse-opt-formula}
+  \bm w^{\xi,\mathrm{AMSE}}
+  \;=\;
+  \bm M^{-1}\!\left[\bm A\,(\bm A^{\top}\bm M^{-1}\bm A)^{-1}\!
+                     \big(\bm 1_{2} \;+\; b^{\xi/\Quant}\,
+                          \bm A^{\top}\bm M^{-1}\bm h\big)
+                    \;-\; b^{\xi/\Quant}\,\bm h\right],
+\end{equation}
+and is equivalently characterised by the first-order conditions
+\begin{equation}
+\label{eq:pool-int:amse-foc}
+\begin{aligned}
+  m(\gamma)^{2}\,\Vc\,\bm\omega_{\gamma}
+  + m(\gamma)\,\bm D\,\Vc\,\bm\omega_{q}
+  &\;=\; \tfrac{1}{2}\lambda_{\gamma}\bm 1
+       \;-\; m(\gamma)\,\mu^{\xi}\,\Bc, \\
+  m(\gamma)\,\bm D\,\Vc\,\bm\omega_{\gamma}
+  + \big(\Vc + \bm D^{2}\Vc\big)\,\bm\omega_{q}
+  &\;=\; \tfrac{1}{2}\lambda_{q}\bm 1
+       \;-\; \mu^{\xi}\,\Bc^{\star},
+\end{aligned}
+\end{equation}
+together with the simplex constraints
+$\bm\omega_{\gamma}^{\top}\bm 1 = \bm\omega_{q}^{\top}\bm 1 = 1$ and
+the self-referential identity
+$\mu^{\xi} = m(\gamma)\,\bm\omega_{\gamma}^{\top}\Bc +
+\bm\omega_{q}^{\top}\Bc^{\star} + b^{\xi/\Quant}$. The Lagrange
+multipliers $\lambda_{\gamma}, \lambda_{q} \in \R$ are uniquely
+determined by these constraints.
+\end{proposition}
+
+\begin{proof}
+See \Cref{app:proofs:amse-opt}, where positive-definiteness of $\bm
+Q$ (and hence of $\bm M = \bm Q + \bm h\bm h^{\top}$) is verified in
+Step (ii) via the variance factorisation, the Lagrangian and
+explicit FOC normalisation are recorded in Step (iii), and the block
+decomposition matching \eqref{eq:pool-int:amse-foc} is in Step (iv).
+\end{proof}
+
+\paragraph{Comparison with the Paper~3 AMSE optimum.}
+The expectile AMSE-optimum does \emph{not} reduce to the Paper~3
+quantile AMSE-optimum of \Cref{prop:bg:optimal-weights}(ii), even
+under the equal-fraction distributed-inference simplification
+$\bm D = L^{\star}\bm I$ that aligned the two variance-optima in
+\Cref{prop:pool-int:var-opt-distrib}. Three structural differences
+persist:
+\begin{enumerate}[label=(\roman*)]
+  \item the bias gradient is the stacked vector
+        $\bm h = (m(\gamma)\Bc, \Bc^{\star})^{\top}$ rather than the
+        single-block $\Bc^{\star}$ of \Cref{prop:bg:optimal-weights};
+  \item $\mu^{\xi}$ carries the additive offset
+        $b^{\xi/\Quant}$, which shifts the AMSE minimum away from
+        the variance-optimal direction $\Vc^{-1}\bm 1$;
+  \item the expectile minimiser is genuinely a pair
+        $(\bm\omega_{\gamma}, \bm\omega_{q})$, and the diagonal
+        $\bm\omega_{\gamma} = \bm\omega_{q}$ is generically not a
+        solution to the FOC \eqref{eq:pool-int:amse-foc} because the
+        Hill and Weissman blocks of $\bm h$ enter asymmetrically
+        through $m(\gamma)\Bc$ and $\Bc^{\star}$.
+\end{enumerate}
+The two AMSE-optima coincide only under restrictive alignment
+conditions; a transparent sufficient case is $b^{\xi/\Quant} = 0$
+together with the structural alignment
+$\Bc^{\star} \propto m(\gamma)\,\Bc$ --- the deterministic
+expectile--quantile gap must vanish at the chapter rate, and the
+pooled-Hill and pooled-Weissman biases must reinforce each other in
+proportion to the QB Jacobian. We do not characterise the exact
+necessary condition: it would require inverting the closed-form
+\eqref{eq:pool-int:amse-opt-formula} against the Paper~3 expression
+and isolating the locus of coincidence in
+$(\Vc, \bm D, \Bc, \Bc^{\star}, b^{\xi/\Quant})$-space, a calculation
+that is not generically a single algebraic constraint. Generically,
+however, the AMSE-optimum is target-dependent. This asymmetry
+between the variance-optimum, which is target-invariant under
+equal-fraction distributed inference
+(\Cref{prop:pool-int:var-opt-distrib}), and the AMSE-optimum, which
+is target-dependent even there, is the qualitative signature of
+carrying the expectile target through the QB plug-in.
 
 \section{Estimated weights and confidence intervals}
 \label{sec:pool-int:CI}
 
-The variance- and AMSE-optimal weights of
-\Cref{prop:pool-int:var-opt-distrib} depend on the population
-quantities $\Vc$ and $\Bc$, which are unknown in practice. Following
-the plug-in scheme of \textcite[\S2.2]{DaouiaPadoanStupfler2021}
-recalled in \Cref{sec:bg:pooling}, we estimate them by consistent
+The variance-optimal weights of
+\Cref{prop:pool-int:var-opt-distrib,prop:pool-int:var-opt-general}
+depend on the population covariance $\Vc$ alone, while the
+AMSE-optimal weights of \Cref{prop:pool-int:amse-opt} additionally
+depend on the bias quantities $\Bc, \Bc^{\star}$ and on the
+deterministic expectile--quantile offset $b^{\xi/\Quant}$. All of
+these are unknown in practice. Following the plug-in scheme of
+\textcite[\S2.2]{DaouiaPadoanStupfler2021} recalled in
+\Cref{sec:bg:pooling}, we estimate $\Vc$ and $\Bc$ by consistent
 empirical analogues $\hatVc, \hatBc$ built from the per-sample
 $\hat\gamma_{j}(k_{j})$ and from estimators
 $\hat\beta_{j}, \hat\rho_{j}$ of the second-order parameters of
-$\mathcal C_{2}(\gamma, \rho, A)$. We additionally plug in
-$\hat m \coloneqq m(\hat\gamma_{n}(\hat{\bm\omega}_{\gamma}))$ for
-$m(\gamma)$ in \eqref{eq:pool-int:sigma-xi}. Continuity of
+$\mathcal C_{2}(\gamma, \rho, A)$; $\Bc^{\star}$ admits the analogous
+plug-in $\hatBc^{\star}$ via \eqref{eq:pool-int:Bcstar-def}, and
+$b^{\xi/\Quant}$ via \eqref{eq:pool-int:b-xi-Q-def}. We additionally
+plug in $\hat m \coloneqq m(\hat\gamma_{n}(\hat{\bm\omega}_{\gamma}))$
+for $m(\gamma)$ in \eqref{eq:pool-int:sigma-xi}. Continuity of
 $m(\,\cdot\,)$, of the optimal-weight maps in
-\Cref{prop:bg:optimal-weights}, and of the variance form
-\eqref{eq:pool-int:sigma-xi} ensures that the plug-in estimators
+\Cref{prop:bg:optimal-weights,prop:pool-int:var-opt-general,prop:pool-int:amse-opt},
+and of the variance form \eqref{eq:pool-int:sigma-xi} ensures that
+the plug-in estimators
 $\hat{\bm\omega}_{\gamma}, \hat{\bm\omega}_{q}, \hat m,
 \hat\sigma^{\xi}$ are consistent for their population analogues, and
 that the composite estimator
@@ -921,6 +1128,22 @@ $\hatexpectile{\tau_{n}}^{\mathrm{pool}}(\hat{\bm\omega}_{\gamma},
 \hat{\bm\omega}_{q})$ is $\sqrt{k}$-asymptotically equivalent to
 $\hatexpectile{\tau_{n}}^{\mathrm{pool}}(\bm\omega_{\gamma},
 \bm\omega_{q})$ \parencite[Theorem~3]{DaouiaPadoanStupfler2021}.
+
+\paragraph{Variance versus AMSE feasibility.}
+The variance-optimal plug-in requires only $\hatVc$ --- a consistent
+estimator of a first-order quantity --- whereas the AMSE-optimal
+plug-in additionally requires consistent estimation of $\Bc$,
+$\Bc^{\star}$, and the expectile--quantile offset $b^{\xi/\Quant}$,
+all of which are second-order quantities driven by the unknown rate
+function $A(\,\cdot\,)$ and the second-order parameter $\rho$.
+Estimating second-order quantities in the heavy-tailed regime is
+notoriously delicate
+\parencite[\S5.2]{deHaanFerreira2006}, and the AMSE-optimal weights
+are consequently substantially less stable in finite samples than
+the variance-optimal weights. For this reason the variance-optimal
+plug-in is the more robust default in practice; the AMSE-optimal
+plug-in is best reserved for settings where reliable estimators of
+$\rho$ and $A$ are available.
 
 \begin{corollary}[Asymptotic confidence interval for $\expectile{\tau_{n}}$]
 \label{cor:pool-int:CI}
@@ -954,13 +1177,14 @@ theorem applied to $\exp$ transports the interval to the original
 scale.
 \end{proof}
 
-Two practical remarks. First, the log-scale interval
+Three practical remarks. First, the log-scale interval
 \eqref{eq:pool-int:CI-log} is symmetric in $\log \expectile{\tau_{n}}$
 while its exponential is not; the latter is the natural form for
 applications in which $\expectile{\tau_{n}}$ is interpreted as a
-monetary risk measure. Second, under the distributed-inference
-setting of \Cref{prop:pool-int:var-opt-distrib} the optimal weights
-are identical across the two pooled inputs, so a single estimated
+monetary risk measure. Second, under the equal-fraction
+distributed-inference setting of
+\Cref{prop:pool-int:var-opt-distrib} the variance-optimal weights are
+identical across the two pooled inputs, so a single estimated
 $\hat{\bm\omega}^{\mathrm{Var}} = \hatVc^{-1}\bm 1 /
 (\bm 1^{\top}\hatVc^{-1}\bm 1)$ suffices and the plug-in variance
 simplifies to
@@ -968,6 +1192,28 @@ $\hat\sigma^{\xi, 2}
 = \big[(\hat m + \hat L^{\star})^{2} + 1\big]
 / (\bm 1^{\top}\hatVc^{-1}\bm 1)$,
 where $\hat L^{\star} = \log(k/(n(1 - \tau_{n})))$.
+
+Third, the interval \eqref{eq:pool-int:CI-log} is a
+\emph{first-order variance-based} interval, valid only when the
+$\sqrt{k}$-bias of the pooled estimator is asymptotically negligible
+--- the explicit assumption
+$\sqrt{k}\,\hat\mu^{\xi}(\hat{\bm\omega}_{\gamma},
+\hat{\bm\omega}_{q}) \toprob 0$ in
+\Cref{cor:pool-int:CI}. \Cref{thm:pool-int:main} shows that this is
+typically not the case: $\mu^{\xi}$ involves the second-order
+quantities $\Bc, \Bc^{\star}$ and the offset $b^{\xi/\Quant}$, all of
+which generically contribute non-zero asymptotic bias under
+$\mathcal C_{2}(\gamma, \rho, A)$. When this bias is not negligible,
+\eqref{eq:pool-int:CI-log} should either be re-centred on a
+bias-corrected point estimator
+$\hatexpectile{\tau_{n}}^{\mathrm{pool}} \exp\!\big(-
+\hat\mu^{\xi}/\sqrt{k}\big)$, or its width should incorporate a
+plug-in estimate of $\mu^{\xi}/\sqrt{k}$ as a deterministic shift.
+Standard practice in the extreme-value literature selects $k$ small
+enough that the bias contribution sits below the CLT noise, which
+amounts to operating away from the AMSE-optimal $k$ of
+\Cref{prop:pool-int:amse-opt} --- another reason the variance-optimal
+plug-in is the more natural default for inference.
 
 \section{A test of expectile-tail-homogeneity}
 \label{sec:pool-int:test}
