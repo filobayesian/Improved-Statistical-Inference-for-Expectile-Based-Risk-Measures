@@ -330,8 +330,12 @@ multiplicative power factor collapses to one and
 $\hat q^{\star}_{j}$ reduces to the bare $(k_{j} + 1)$-th upper order
 statistic of sample $j$ --- the empirical intermediate quantile.
 Otherwise, $\hat q^{\star}_{j}$ interpolates or mildly extrapolates
-across intermediate levels, and remains $\sqrt{k_{j}}$-consistent
-under \Cref{thm:bg:weissman}. Adopting the Weissman primitive
+across intermediate levels, and remains $\sqrt{k_{j}}$-consistent by
+the within-sample joint CLT for the Hill estimator and the
+intermediate log-order statistic invoked in
+\Cref{prop:pool-int:joint-clt} below --- this is the finite-log-rate
+analogue of the diverging-log-rate Weissman CLT
+\Cref{thm:bg:weissman}, not a direct consequence of it. Adopting the Weissman primitive
 uniformly --- in lieu of switching to bare order statistics at
 intermediate levels --- has two virtues: (i) it is the primitive that
 the pooling protocol of \Cref{sec:bg:pooling} already shares between
@@ -471,15 +475,15 @@ mean
   \;=\;
   \begin{pmatrix}
     \bm\omega_{\gamma}^{\top}\Bc \\[2pt]
-    \bm\omega_{q}^{\top}\Bc^{\star}(\tau_{n})
+    \bm\omega_{q}^{\top}\Bc^{\star}
   \end{pmatrix},
 \end{equation}
 where $\Bc$ is the pooled-Hill bias vector of \Cref{thm:bg:pool-hill}
-and the pooled-Weissman bias vector at the intermediate level has
-entries
+and the limiting pooled-Weissman bias vector at the intermediate
+level has entries
 \begin{equation}
 \label{eq:pool-int:Bcstar-def}
-  \big(\Bc^{\star}(\tau_{n})\big)_{j}
+  \big(\Bc^{\star}\big)_{j}
   \;=\;
   \sqrt{c_{j}\textstyle\sum_{i = 1}^{m} c_{i}^{-1}}\,
   \Big[L_{j}^{\star}\,b_{j}^{H}
@@ -521,10 +525,13 @@ estimator need not coincide, an observation that
 
 The main result of this chapter is the central limit theorem for the
 pooled QB intermediate expectile estimator
-\eqref{eq:pool-int:expectile-pool}. The proof is a single application
-of the standard multivariate delta method to
-\Cref{prop:pool-int:joint-clt}, through the smooth map
-$(g, x) \mapsto \log \psifn(g) + x$ on the log scale.
+\eqref{eq:pool-int:expectile-pool}. The result is obtained by feeding
+the joint pooled CLT of \Cref{prop:pool-int:joint-clt} through the
+smooth log-linear map $(g, x) \mapsto \log\psifn(g) + x$ via a
+first-order Taylor expansion, combined with the second-order
+expectile--quantile expansion that controls the deterministic gap
+between $\log\expectile{\tau_{n}}$ and $\log\psifn(\gamma) +
+\log\Quant_{X}(\tau_{n})$.
 
 \paragraph{Derivative of $\log \psifn$.}
 A short calculation gives
@@ -539,15 +546,73 @@ A short calculation gives
 which is the same $m(\gamma)$ that governs the variance of the QB
 intermediate-level estimator in the iid baseline
 \Cref{thm:bg:qb-iid}. The function $m(\,\cdot\,)$ is continuous on
-$(0, 1)$, vanishes at the value $\gamma^{\star} \approx 0.27$ solving
-$(1 - \gamma)^{-1} = \log(\gamma^{-1} - 1)$, and is positive
+$(0, 1)$, vanishes at the value $\gamma^{\star} \approx 0.2178$
+solving $(1 - \gamma)^{-1} = \log(\gamma^{-1} - 1)$, and is positive
 (resp.\ negative) for $\gamma$ above (resp.\ below) $\gamma^{\star}$.
+
+\paragraph{The deterministic expectile--quantile gap.}
+The first-order asymptotic equivalence
+$\expectile{\tau} / \Quant_{X}(\tau) \to \psifn(\gamma)$ of
+\Cref{prop:bg:expectile-quantile} sharpens, under
+\Cref{cond:bg:second-order}, to a second-order expansion
+\parencite[Lemma~1 and Theorem~2]{DaouiaGirardStupfler2018}
+\begin{equation}
+\label{eq:pool-int:xi-Q-gap}
+  \log\expectile{\tau} \;-\; \log\psifn(\gamma) \;-\; \log\Quant_{X}(\tau)
+  \;=\;
+  c(\gamma, \rho)\, A\!\big((1 - \tau)^{-1}\big)
+  \;+\; o\!\big(A((1 - \tau)^{-1})\big),
+  \qquad \tau \uparrow 1,
+\end{equation}
+for an explicit constant $c(\gamma, \rho)$ whose form is recorded in
+the proof appendix and is not used below. The chapter setup of
+\Cref{sec:pool-int:setup} already \emph{implies} a finite limit
+\begin{equation}
+\label{eq:pool-int:Lambda-bullet}
+  \Lambda^{\bullet}
+  \;\coloneqq\;
+  \lim_{n \to \infty}\sqrt{k}\,A\!\big((1 - \tau_{n})^{-1}\big)
+  \;\in\; \R,
+\end{equation}
+without any additional hypothesis: starting from the per-sample bias
+rate $\sqrt{k_{j}}\,A(n_{j}/k_{j}) \to \lambda_{j}$, the log-rate
+convergence $L_{j}(\tau_{n}) \to L_{j}^{\star}$, and the regular
+variation $|A| \in \mathrm{RV}_{\rho}$ at infinity
+\parencite[Theorem~2.3.9]{deHaanFerreira2006}, one obtains
+$\sqrt{k_{j}}\,A((1 - \tau_{n})^{-1}) \to \lambda_{j}\,
+(e^{L_{j}^{\star}})^{\rho}$, and a further rescaling by
+$\sqrt{k/k_{j}} \to \sqrt{c_{j}\sum_{i} c_{i}^{-1}}$ delivers
+\eqref{eq:pool-int:Lambda-bullet} (the per-$j$ expressions for
+$\Lambda^{\bullet}$ agree by joint compatibility of
+$\{\lambda_{j}\}, \{L_{j}^{\star}\}, \{c_{j}\}$ under a single global
+$A$; see \Cref{app:proofs:main-clt} for the explicit verification).
+The finite asymptotic constant
+\begin{equation}
+\label{eq:pool-int:b-xi-Q-def}
+  b^{\xi/\Quant}
+  \;\coloneqq\;
+  \lim_{n \to \infty}\sqrt{k}\,
+  \big[\log\psifn(\gamma) + \log\Quant_{X}(\tau_{n})
+       - \log\expectile{\tau_{n}}\big]
+  \;=\;
+  -\,c(\gamma, \rho)\,\Lambda^{\bullet}
+\end{equation}
+follows. The sign convention in \eqref{eq:pool-int:b-xi-Q-def} is
+chosen so that $b^{\xi/\Quant}$ enters the asymptotic mean of the
+pooled estimator with a $+$ sign in \eqref{eq:pool-int:mu-xi} below;
+that is, $b^{\xi/\Quant}$ is the deterministic \emph{bias
+contribution} of the gap, not the gap itself. The contribution
+$b^{\xi/\Quant}$ is \emph{absent} from the analogue quantile-target
+theorem \Cref{thm:bg:pool-weissman} of
+\textcite{DaouiaPadoanStupfler2021}: it is the deterministic
+correction that arises when the quantile target is replaced by the
+expectile target through the QB plug-in.
 
 \begin{theorem}[Pooled QB intermediate expectile CLT]
 \label{thm:pool-int:main}
-Under the assumptions of \Cref{prop:pool-int:joint-clt}, for any
-weight vectors $\bm\omega_{\gamma}, \bm\omega_{q} \in \R^{m}$
-satisfying
+Under the assumptions of \Cref{prop:pool-int:joint-clt} (in
+particular \Cref{cond:bg:second-order}), for any weight vectors
+$\bm\omega_{\gamma}, \bm\omega_{q} \in \R^{m}$ satisfying
 $\bm\omega_{\gamma}^{\top}\bm 1 = \bm\omega_{q}^{\top}\bm 1 = 1$,
 \begin{equation}
 \label{eq:pool-int:main-clt}
@@ -574,68 +639,45 @@ with asymptotic variance
     \Vc\big)\bm\omega_{q},
 \end{equation}
 and asymptotic bias
-$\mu^{\xi}(\bm\omega_{\gamma},\bm\omega_{q})
-= m(\gamma)\,\bm\omega_{\gamma}^{\top}\Bc
-+ \bm\omega_{q}^{\top}\Bc^{\star}(\tau_{n})$, where $\Bc^{\star}
-(\tau_{n})$ is the pooled-Weissman bias vector whose explicit form is
-recorded in the proof appendix.
+\begin{equation}
+\label{eq:pool-int:mu-xi}
+  \mu^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})
+  \;=\;
+  m(\gamma)\,\bm\omega_{\gamma}^{\top}\Bc
+  \;+\;
+  \bm\omega_{q}^{\top}\Bc^{\star}
+  \;+\;
+  b^{\xi/\Quant},
+\end{equation}
+where $\Bc$ and $\Bc^{\star}$ are as in
+\Cref{prop:pool-int:joint-clt} (the pooled-Hill and limiting
+intermediate-level pooled-Weissman bias vectors) and $b^{\xi/\Quant}$
+is the asymptotic expectile--quantile bias contribution of
+\eqref{eq:pool-int:b-xi-Q-def}.
 \end{theorem}
 
-\begin{proof}[Sketch.]
-By the QB factorisation \eqref{eq:pool-int:expectile-pool} and the
-expectile--quantile asymptotic equivalence
-\eqref{eq:bg:expectile-quantile-equivalence},
-\[
-  \log \hatexpectile{\tau_{n}}^{\mathrm{pool}}
-    - \log\expectile{\tau_{n}}
-  \;=\;
-  \big[\log \psifn(\hat\gamma_{n}(\bm\omega_{\gamma}))
-       - \log \psifn(\gamma)\big]
-  \;+\;
-  \big[\log \hatWei_{n}(1 - \tau_{n} \mid \bm\omega_{q})
-       - \log \Quant_{X}(\tau_{n})\big]
-  + o(1),
-\]
-where the $o(1)$ collects the deterministic remainder
-$\log(\expectile{\tau_{n}}/\Quant_{X}(\tau_{n})) - \log \psifn(\gamma)
-= O(A((1 - \tau_{n})^{-1}))$ from
-\Cref{prop:bg:expectile-quantile}; the standard second-order bias
-condition $\sqrt{k}\,A((1 - \tau_{n})^{-1}) = O(1)$ renders this
-remainder $o_p(1/\sqrt{k})$. By \eqref{eq:pool-int:m-function} and a
-first-order Taylor expansion,
-$\log\psifn(\hat\gamma_{n}) - \log\psifn(\gamma)
-= m(\gamma)(\hat\gamma_{n} - \gamma)
-+ o_{p}(\hat\gamma_{n} - \gamma)$. Hence
-\[
-  \sqrt{k}\big(\log\hatexpectile{\tau_{n}}^{\mathrm{pool}}
-       - \log\expectile{\tau_{n}}\big)
-  \;=\;
-  \big(m(\gamma),\, 1\big)\!\cdot\!\sqrt{k}\!
-    \begin{pmatrix}
-      \hat\gamma_{n}(\bm\omega_{\gamma}) - \gamma \\
-      \log\hatWei_{n}(1 - \tau_{n} \mid \bm\omega_{q})
-        - \log \Quant_{X}(\tau_{n})
-    \end{pmatrix}
-  + o_{p}(1),
-\]
-to which \Cref{prop:pool-int:joint-clt} applies directly: the
-asymptotic variance \eqref{eq:pool-int:sigma-xi} is the quadratic
-form $(m(\gamma), 1)\,\bm\Sigma(\bm\omega_{\gamma},
-\bm\omega_{q})\,(m(\gamma), 1)^{\top}$ read off from
-\eqref{eq:pool-int:Sigma}, and the bias follows analogously from
-$\bm\mu(\bm\omega_{\gamma}, \bm\omega_{q})$. The continuous-mapping
-theorem applied to $\exp$ then converts the log-ratio statement to
-the ratio statement \eqref{eq:pool-int:main-clt}.
+\begin{proof}
+See \Cref{app:proofs:main-clt}.
 \end{proof}
 
 \paragraph{Reduction to the iid baseline.}
 \Cref{thm:pool-int:main} contains \Cref{thm:bg:qb-iid} as the
-special case $m = 1$: a single sample renders the weight vectors
-scalar, set $L_{1}^{\star} = 0$ by aligning $\tau_{n}$ with the
-sample's intermediate level, and $\Vc$ collapses to $\gamma^{2}$.
-The asymptotic variance \eqref{eq:pool-int:sigma-xi} reduces to
-$\gamma^{2}(1 + m(\gamma)^{2})$, in exact agreement with
-\Cref{thm:bg:qb-iid}.
+special case $m = 1$ with the chapter target aligned to the single
+sample's intermediate level. The weight vectors collapse to scalars
+$\omega_{\gamma} = \omega_{q} = 1$; the alignment forces
+$L_{1}^{\star} = 0$, $\Psi_{\rho}(e^{L_{1}^{\star}}) = 0$, and
+$\Vc \to \gamma^{2}$. The asymptotic variance \eqref{eq:pool-int:sigma-xi}
+collapses to $\gamma^{2}(1 + m(\gamma)^{2})$, in exact agreement with
+\Cref{thm:bg:qb-iid}. The bias \eqref{eq:pool-int:mu-xi} collapses to
+$m(\gamma)\,b_{1}^{H} + b_{1}^{Q} + b^{\xi/\Quant}
+= m(\gamma)\,\lambda / (1 - \rho) + [b_{1}^{Q} + b^{\xi/\Quant}]$,
+and the structural cancellation
+$b_{1}^{Q} + b^{\xi/\Quant} = 0$ in the iid baseline --- a
+known consequence of the joint asymptotic theory of the bare
+intermediate-order statistic and the expectile--quantile equivalence
+under $\mathcal C_{2}(\gamma, \rho, A)$, see
+\textcite[Theorem~2]{DaouiaGirardStupfler2018} --- recovers the bias
+$m(\gamma)\,\lambda / (1 - \rho)$ of \Cref{thm:bg:qb-iid}.
 
 \paragraph{Distributed-inference simplification.}
 Under the distributed-inference assumption that the sample fractions
@@ -662,6 +704,21 @@ level ($L^{\star} = 0$), \eqref{eq:pool-int:sigma-xi-distrib}
 collapses to $(1 + m(\gamma)^{2})\,\bm\omega^{\top}\Vc\bm\omega$ ---
 the natural pooled analogue of the iid intermediate QB variance
 $\gamma^{2}(1 + m(\gamma)^{2})$ of \Cref{thm:bg:qb-iid}.
+
+\paragraph{Why two weight vectors.}
+The separate weight pair $(\bm\omega_{\gamma}, \bm\omega_{q})$ is
+needed to expose the full variance structure of the pooled QB
+expectile estimator: the cross term in \eqref{eq:pool-int:sigma-xi}
+couples the two pooled inputs through $\mathrm{diag}(\bm L^{\star})$
+and is a genuine structural feature of the expectile target. As
+\Cref{sec:pool-int:weights} shows, however, the additional freedom is
+not exploited by the variance optimum in the canonical
+distributed-inference case: under
+\Cref{cor:bg:pool-distrib-oracle} the expectile-optimal pair
+collapses to a single Paper~3 quantile-style weight vector
+$\bm\omega^{\xi,\mathrm{Var}}_{\gamma} =
+ \bm\omega^{\xi,\mathrm{Var}}_{q} = \bm\omega^{\mathrm{Var}}$
+(\Cref{prop:pool-int:var-opt-distrib}).
 
 \section{Variance- and AMSE-optimal weights}
 \label{sec:pool-int:weights}
@@ -810,15 +867,35 @@ $(\bm\omega^{\xi,\mathrm{AMSE}}_{\gamma},
 $\big(\mu^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})\big)^{2} +
 \sigma^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})^{2}$ subject to the
 simplex constraints. The structure parallels
-\Cref{prop:bg:optimal-weights}(ii), with $\Bc$ and $\Bc^{\star}
-(\tau_{n})$ entering through the bias and the same variance
-machinery as above producing the second-moment term. The same
-dichotomy holds: under the distributed-inference assumption, the
-AMSE-optimum coincides with the Paper~3 quantile-target AMSE-optimum,
-while in the general case it acquires the controlled correction
-described above. The closed-form expressions and the
-positive-definiteness condition required for the AMSE-optimum to be
-well-defined are recorded in the proof appendix.
+\Cref{prop:bg:optimal-weights}(ii), with the variance term producing
+the same machinery as above and the bias term carrying the
+expectile-specific composite bias rate
+\begin{equation}
+\label{eq:pool-int:amse-bias-functional}
+  \mu^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})
+  \;=\;
+  m(\gamma)\,\bm\omega_{\gamma}^{\top}\Bc
+  \;+\;
+  \bm\omega_{q}^{\top}\Bc^{\star}
+  \;+\;
+  b^{\xi/\Quant}.
+\end{equation}
+The AMSE landscape thus differs from the Paper~3 quantile-target
+AMSE landscape on two structural counts, both visible already in the
+distributed-inference setting with matched weights
+$\bm\omega_{\gamma} = \bm\omega_{q} = \bm\omega$: the bias-rate
+vector $m(\gamma)\Bc + \Bc^{\star}$ replaces the
+Paper~3 vector $\Bc^{\star}$, and the deterministic offset
+$b^{\xi/\Quant}$ shifts the location of the AMSE minimum along the
+simplex. The AMSE-optimal weights for the expectile target are
+therefore in general \emph{not} equal to the Paper~3 quantile-target
+AMSE-optimum, even when the variance-optima do coincide
+(\Cref{prop:pool-int:var-opt-distrib}). The closed-form solution of
+the joint quadratic programme, together with the positive-definiteness
+condition required for it to be well-defined, is recorded in the proof
+appendix; it reduces to the Paper~3 expression only in the trivial
+case $b^{\xi/\Quant} = 0$ and $m(\gamma)\,\Bc \propto \Bc^{\star}$,
+which is not generic.
 
 \section{Estimated weights and confidence intervals}
 \label{sec:pool-int:CI}

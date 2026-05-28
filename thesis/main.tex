@@ -492,10 +492,10 @@ $(\bm\mu_{Z})_{j} = \sqrt{c_{j}\sum_{i}c_{i}^{-1}}\, b_{j}^{H}
 = (\Bc)_{j}$ for $j = 1, \ldots, m$, and
 $(\bm\mu_{Z})_{m + j} = \sqrt{c_{j}\sum_{i}c_{i}^{-1}}\,
 \big(L_{j}^{\star}\, b_{j}^{H} + b_{j}^{Q} + b_{j}^{R}\big)
-=: (\Bc^{\star}(\tau_{n}))_{j}$. The first half of $\bm\mu_{Z}$ is
+=: (\Bc^{\star})_{j}$. The first half of $\bm\mu_{Z}$ is
 exactly the pooled-Hill bias vector $\Bc$ of
 \Cref{thm:bg:pool-hill}; the second half is the
-pooled-Weissman bias vector $\Bc^{\star}(\tau_{n})$ specialised to
+pooled-Weissman bias vector $\Bc^{\star}$ specialised to
 the intermediate-level target.
 
 \paragraph{Step (iv): linear pooling map.}
@@ -544,7 +544,7 @@ The mean follows from the block structure of $\bm\mu_{Z}$ identified
 in Step (iii):
 $\bm A\,\bm\mu_{Z}
 = \big(\bm\omega_{\gamma}^{\top}\Bc,\;
-       \bm\omega_{q}^{\top}\Bc^{\star}(\tau_{n})\big)^{\top}$,
+       \bm\omega_{q}^{\top}\Bc^{\star}\big)^{\top}$,
 which is the chapter's $\bm\mu(\bm\omega_{\gamma}, \bm\omega_{q})$.
 
 For the covariance, partition $\bm A$ along the same Hill /
@@ -581,6 +581,331 @@ distribution to a Gaussian with mean
 $\bm\mu(\bm\omega_{\gamma}, \bm\omega_{q})$ and covariance
 $\bm\Sigma(\bm\omega_{\gamma}, \bm\omega_{q})$, which is precisely
 \eqref{eq:pool-int:joint-pooled-clt}. \qed
+
+\section{Proof of \texorpdfstring{\Cref{thm:pool-int:main}}{Theorem 3.3}}
+\label{app:proofs:main-clt}
+
+We prove the pooled QB intermediate-expectile CLT
+\eqref{eq:pool-int:main-clt} under the standing assumptions of
+\Cref{sec:pool-int:setup}: $m$ independent samples with common
+marginal $F$, common tail index $\gamma \in (0, 1/2)$, the
+proportionality conditions \eqref{eq:bg:pool-rates}, the second-order
+condition $\mathcal C_{2}(\gamma, \rho, A)$ with per-sample bias rate
+$\sqrt{k_{j}}\,A(n_{j}/k_{j}) \to \lambda_{j} \in \R$, an intermediate
+target $\tau_{n} \to 1$ with $n(1 - \tau_{n}) \to \infty$, and the
+log-rate convergence $L_{j}(\tau_{n}) \to L_{j}^{\star} \in \R$ for
+every $j$. The number of samples $m$ is fixed. We work for arbitrary
+deterministic weight vectors $\bm\omega_{\gamma}, \bm\omega_{q} \in
+\R^{m}$ satisfying $\bm\omega_{\gamma}^{\top}\bm 1 =
+\bm\omega_{q}^{\top}\bm 1 = 1$; the extension to estimated weights is
+collected in \Cref{cor:pool-int:CI}.
+
+The proof composes four steps:
+(i) a deterministic identity on the log scale that decomposes the
+expectile log-ratio into a random Hill increment, a random log-Weissman
+increment, and a deterministic expectile--quantile gap;
+(ii) a Taylor linearisation of $\log\psifn$ at $\gamma$ that converts
+the Hill increment into a linear functional of $\hat\gamma_{n} -
+\gamma$ up to a $\sqrt{k}$-negligible remainder;
+(iii) the second-order expectile--quantile expansion that controls the
+deterministic gap;
+(iv) the multivariate delta method applied to
+\Cref{prop:pool-int:joint-clt} to read off the asymptotic mean and
+covariance, followed by the continuous-mapping theorem applied to
+$\exp$.
+
+\paragraph{Step (i): the deterministic log-ratio decomposition.}
+By the QB factorisation \eqref{eq:pool-int:expectile-pool},
+\[
+  \log\hatexpectile{\tau_{n}}^{\mathrm{pool}}\!
+       (\bm\omega_{\gamma}, \bm\omega_{q})
+  \;=\;
+  \log\psifn\!\big(\hat\gamma_{n}(\bm\omega_{\gamma})\big)
+  \;+\;
+  \log\hatWei_{n}(1 - \tau_{n} \mid \bm\omega_{q}).
+\]
+Subtract $\log\expectile{\tau_{n}}$ from both sides and insert
+$\pm\,\log\psifn(\gamma)\,\pm\,\log\Quant_{X}(\tau_{n})$:
+\begin{equation}
+\label{eq:app:main:log-decomp}
+\begin{aligned}
+  \log\hatexpectile{\tau_{n}}^{\mathrm{pool}}
+  - \log\expectile{\tau_{n}}
+  \;=\;
+  &\underbrace{\big[\log\psifn(\hat\gamma_{n}(\bm\omega_{\gamma}))
+              - \log\psifn(\gamma)\big]}_{(\mathrm{H})}
+  \\[-2pt]
+  + \;&\underbrace{\big[\log\hatWei_{n}(1 - \tau_{n} \mid
+                                       \bm\omega_{q})
+              - \log\Quant_{X}(\tau_{n})\big]}_{(\mathrm{W})}
+  \\[-2pt]
+  + \;&\underbrace{\big[\log\psifn(\gamma)
+              + \log\Quant_{X}(\tau_{n})
+              - \log\expectile{\tau_{n}}\big]}_{(\mathrm{G})}.
+\end{aligned}
+\end{equation}
+The identity \eqref{eq:app:main:log-decomp} is exact for every $n$.
+Terms $(\mathrm{H})$ and $(\mathrm{W})$ are random and centred at zero
+by \Cref{prop:pool-int:joint-clt}; term $(\mathrm{G})$ is deterministic
+and depends on the target level $\tau_{n}$ only through population
+quantities. The sign in $(\mathrm{G})$ is chosen so that the rescaled
+$\sqrt{k}\,(\mathrm{G})$ converges directly to $b^{\xi/\Quant}$ in
+\eqref{eq:pool-int:b-xi-Q-def}, eliminating the bookkeeping of an
+intermediate minus sign in Step (iii).
+
+\paragraph{Step (ii): Taylor linearisation of $\log\psifn$.}
+The argument is identical in spirit to that of
+\Cref{app:proofs:A-B-equiv}. The map $g \mapsto \log\psifn(g) =
+-g\log(g^{-1} - 1)$ is $C^{\infty}$ on $(0, 1)$ with first derivative
+$m(g)$ defined in \eqref{eq:pool-int:m-function} and second derivative
+\[
+  m'(g)
+  \;=\;
+  \frac{1}{(1 - g)^{2}}
+  + \frac{1}{1 - g}
+  + \frac{1}{g}
+  \;>\; 0,
+  \qquad g \in (0, 1).
+\]
+By \Cref{thm:bg:hill} and \eqref{eq:pool-int:moment},
+$\hat\gamma_{n}(\bm\omega_{\gamma}) \toprob \gamma \in (0, 1/2)
+\subset (0, 1)$, so the event
+$E_{n} \coloneqq \{\hat\gamma_{n}(\bm\omega_{\gamma}) \in (0, 1)\}$
+satisfies $\mathbb{P}(E_{n}) \to 1$ and we may work on it without
+affecting convergence in distribution. On $E_{n}$, Taylor's theorem
+with Lagrange remainder yields a random $\tilde\gamma_{\star}$ between
+$\hat\gamma_{n}(\bm\omega_{\gamma})$ and $\gamma$ such that
+\begin{equation}
+\label{eq:app:main:psi-taylor}
+  \log\psifn(\hat\gamma_{n}(\bm\omega_{\gamma}))
+  - \log\psifn(\gamma)
+  \;=\;
+  m(\gamma)\,
+    \big(\hat\gamma_{n}(\bm\omega_{\gamma}) - \gamma\big)
+  + \tfrac{1}{2}\,m'(\tilde\gamma_{\star})\,
+    \big(\hat\gamma_{n}(\bm\omega_{\gamma}) - \gamma\big)^{2}.
+\end{equation}
+\Cref{prop:pool-int:joint-clt} gives $\hat\gamma_{n}(\bm\omega_{\gamma})
+- \gamma = O_{p}(k^{-1/2})$, hence $(\hat\gamma_{n}
+- \gamma)^{2} = O_{p}(k^{-1})$. The squeeze $\tilde\gamma_{\star}
+\toprob \gamma$ together with continuity of $m'$ on $(0, 1)$ gives
+$m'(\tilde\gamma_{\star}) \toprob m'(\gamma) = O_{p}(1)$. The
+Lagrange remainder in \eqref{eq:app:main:psi-taylor} is therefore
+$O_{p}(k^{-1}) = o_{p}(k^{-1/2})$, so
+\begin{equation}
+\label{eq:app:main:H-linearised}
+  \sqrt{k}\,(\mathrm{H})
+  \;=\;
+  m(\gamma)\,\sqrt{k}\,\big(\hat\gamma_{n}(\bm\omega_{\gamma})
+                                 - \gamma\big)
+  \;+\; o_{p}(1).
+\end{equation}
+
+\paragraph{Step (iii): the deterministic expectile--quantile gap.}
+The first-order equivalence
+$\expectile{\tau}/\Quant_{X}(\tau) \to \psifn(\gamma)$ of
+\Cref{prop:bg:expectile-quantile} sharpens, under the second-order
+condition $\mathcal C_{2}(\gamma, \rho, A)$ with the moment bound
+$\E |X_{-}|^{2 + \delta} < \infty$ of \eqref{eq:pool-int:moment}, to
+the second-order expansion
+\begin{equation}
+\label{eq:app:main:xi-Q-expansion}
+  \log\expectile{\tau}
+  - \log\psifn(\gamma)
+  - \log\Quant_{X}(\tau)
+  \;=\;
+  c(\gamma, \rho)\, A\!\big((1 - \tau)^{-1}\big)
+  \;+\; o\!\big(A((1 - \tau)^{-1})\big),
+  \qquad \tau \uparrow 1,
+\end{equation}
+established in
+\textcite[Theorem~2, eq.~(8)]{DaouiaGirardStupfler2018} for the
+expectile--quantile ratio (the additive log form
+\eqref{eq:app:main:xi-Q-expansion} follows by a Taylor expansion of
+$\log(1 + x)$ around zero, since the ratio differs from $\psifn(\gamma)$
+by a vanishing quantity of order $A$). The constant
+\begin{equation}
+\label{eq:app:main:c-gamma-rho}
+  c(\gamma, \rho)
+  \;=\;
+  \frac{(1 - \gamma)^{-\rho}}{1 - \gamma - \rho}
+  \;-\;
+  \frac{\psifn(\gamma)^{\rho}}{1 - \gamma - \rho},
+\end{equation}
+recorded in \textcite[Lemma~1]{DaouiaGirardStupfler2018}, depends on
+$(\gamma, \rho)$ only; its explicit form is not used below, only its
+finiteness for $\gamma \in (0, 1/2)$ and $\rho \le 0$.
+
+To convert \eqref{eq:app:main:xi-Q-expansion} into a $\sqrt{k}$-rescaled
+shift, we show that
+\begin{equation}
+\label{eq:app:main:Lambda-bullet}
+  \sqrt{k}\,A\!\big((1 - \tau_{n})^{-1}\big)
+  \;\longrightarrow\;
+  \Lambda^{\bullet}
+  \;\in\; \R,
+\end{equation}
+a finite limit determined by the chapter setup. Indeed, for any fixed
+$j$, the log-rate convergence $L_{j}(\tau_{n}) \to L_{j}^{\star}$
+gives the ratio
+\[
+  \frac{(1 - \tau_{n})^{-1}}{n_{j}/k_{j}}
+  \;=\;
+  \frac{k_{j}}{n_{j}(1 - \tau_{n})}
+  \;=\;
+  e^{L_{j}(\tau_{n})}
+  \;\longrightarrow\;
+  e^{L_{j}^{\star}}
+  \;\in\; (0, \infty),
+\]
+so by the regular variation $|A| \in \mathrm{RV}_{\rho}$ at infinity
+\parencite[Theorem~2.3.9]{deHaanFerreira2006},
+\[
+  \frac{A((1 - \tau_{n})^{-1})}{A(n_{j}/k_{j})}
+  \;\longrightarrow\;
+  \big(e^{L_{j}^{\star}}\big)^{\rho}.
+\]
+Multiplying by $\sqrt{k_{j}}\,A(n_{j}/k_{j}) \to \lambda_{j}$ and then
+by $\sqrt{k/k_{j}} \to \sqrt{c_{j}\sum_{i} c_{i}^{-1}}$, the limit
+\eqref{eq:app:main:Lambda-bullet} exists and equals
+\begin{equation}
+\label{eq:app:main:Lambda-bullet-formula}
+  \Lambda^{\bullet}
+  \;=\;
+  \sqrt{c_{j}\,\textstyle\sum_{i = 1}^{m} c_{i}^{-1}}\;
+  \lambda_{j}\,\big(e^{L_{j}^{\star}}\big)^{\rho}
+  \qquad \text{for every } j = 1, \ldots, m.
+\end{equation}
+The right-hand side of \eqref{eq:app:main:Lambda-bullet-formula}
+appears to depend on $j$, but the left-hand side
+$\sqrt{k}\,A((1-\tau_{n})^{-1})$ does not: hence the per-$j$ limits
+must coincide whenever they exist. This is a consistency identity
+implicit in the chapter setup --- not an additional hypothesis ---
+expressing the compatibility of the per-sample bias rates
+$\sqrt{k_{j}}\,A(n_{j}/k_{j}) \to \lambda_{j}$ and log-rate limits
+$L_{j}(\tau_{n}) \to L_{j}^{\star}$ across $j$ under a single global
+$A \in \mathrm{RV}_{\rho}$. Inserting
+\eqref{eq:app:main:Lambda-bullet} into
+\eqref{eq:app:main:xi-Q-expansion} at $\tau = \tau_{n}$ and using the
+sign convention of $(\mathrm{G})$ chosen in
+\eqref{eq:app:main:log-decomp},
+\begin{equation}
+\label{eq:app:main:G-limit}
+  \sqrt{k}\,(\mathrm{G})
+  \;=\;
+  \sqrt{k}\,\big[\log\psifn(\gamma) + \log\Quant_{X}(\tau_{n})
+                 - \log\expectile{\tau_{n}}\big]
+  \;\longrightarrow\;
+  -c(\gamma, \rho)\,\Lambda^{\bullet}
+  \;=\; b^{\xi/\Quant},
+\end{equation}
+which is the finite deterministic shift announced in
+\eqref{eq:pool-int:b-xi-Q-def}.
+
+\paragraph{Step (iv): the delta method and the limit.}
+Insert \eqref{eq:app:main:H-linearised} and the trivial identity
+$\sqrt{k}\,(\mathrm{W}) = \sqrt{k}\,(\mathrm{W})$ into the
+$\sqrt{k}$-rescaled version of \eqref{eq:app:main:log-decomp}, and
+recall \eqref{eq:app:main:G-limit}:
+\begin{equation}
+\label{eq:app:main:assembled}
+  \sqrt{k}\,\big[\log\hatexpectile{\tau_{n}}^{\mathrm{pool}}
+              - \log\expectile{\tau_{n}}\big]
+  \;=\;
+  \big(m(\gamma),\, 1\big)\,
+  \sqrt{k}\!
+    \begin{pmatrix}
+      \hat\gamma_{n}(\bm\omega_{\gamma}) - \gamma \\[2pt]
+      \log\hatWei_{n}(1 - \tau_{n} \mid \bm\omega_{q})
+        - \log\Quant_{X}(\tau_{n})
+    \end{pmatrix}
+  \;+\; \sqrt{k}\,(\mathrm{G})
+  \;+\; o_{p}(1).
+\end{equation}
+By \Cref{prop:pool-int:joint-clt} and the continuous-mapping theorem
+applied to the deterministic linear functional $(g, x) \mapsto
+m(\gamma)\,g + x$, the leading term on the right of
+\eqref{eq:app:main:assembled} converges in distribution to a
+univariate Gaussian with mean
+$(m(\gamma), 1)\,\bm\mu(\bm\omega_{\gamma}, \bm\omega_{q})$ and
+variance
+$(m(\gamma), 1)\,\bm\Sigma(\bm\omega_{\gamma}, \bm\omega_{q})\,
+ (m(\gamma), 1)^{\top}$. Reading off from \eqref{eq:pool-int:mu-pool}
+and \eqref{eq:pool-int:Sigma},
+\[
+  (m(\gamma), 1)\,\bm\mu(\bm\omega_{\gamma}, \bm\omega_{q})
+  \;=\;
+  m(\gamma)\,\bm\omega_{\gamma}^{\top}\Bc
+  \;+\;
+  \bm\omega_{q}^{\top}\Bc^{\star},
+\]
+and the quadratic form expands to
+\begin{align*}
+  (m(\gamma), 1)\,\bm\Sigma(\bm\omega_{\gamma}, \bm\omega_{q})\,
+                   (m(\gamma), 1)^{\top}
+  &\;=\;
+  m(\gamma)^{2}\,\bm\omega_{\gamma}^{\top}\Vc\,\bm\omega_{\gamma}
+  \;+\;
+  2\,m(\gamma)\,
+    \bm\omega_{\gamma}^{\top}\,\mathrm{diag}(\bm L^{\star})\,\Vc\,
+    \bm\omega_{q} \\
+  &\quad{}+\;
+  \bm\omega_{q}^{\top}\!\big(\Vc + \mathrm{diag}(\bm L^{\star})^{2}\,
+                              \Vc\big)\bm\omega_{q}
+  \;=\; \sigma^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})^{2}.
+\end{align*}
+The deterministic shift $\sqrt{k}\,(\mathrm{G})$ in
+\eqref{eq:app:main:assembled} converges to $b^{\xi/\Quant}$ by
+\eqref{eq:app:main:G-limit}. Combining via Slutsky's theorem,
+\begin{equation}
+\label{eq:app:main:log-CLT}
+  \sqrt{k}\,\big[\log\hatexpectile{\tau_{n}}^{\mathrm{pool}}
+              - \log\expectile{\tau_{n}}\big]
+  \;\todist\;
+  \mathcal N\!\big(\mu^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q}),\,
+                    \sigma^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})^{2}
+              \big),
+\end{equation}
+with $\mu^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q}) = m(\gamma)\,
+\bm\omega_{\gamma}^{\top}\Bc + \bm\omega_{q}^{\top}\Bc^{\star}
++ b^{\xi/\Quant}$ as in \eqref{eq:pool-int:mu-xi}: the random part
+contributes $m(\gamma)\,\bm\omega_{\gamma}^{\top}\Bc +
+\bm\omega_{q}^{\top}\Bc^{\star}$ to the mean and the
+deterministic shift contributes $+b^{\xi/\Quant}$, both with the same
+sign as in \eqref{eq:app:main:assembled}.
+
+To convert the log-ratio statement \eqref{eq:app:main:log-CLT} into
+the ratio statement \eqref{eq:pool-int:main-clt}, observe that
+\eqref{eq:app:main:log-CLT} forces
+$\sqrt{k}\,\log(\hatexpectile{\tau_{n}}^{\mathrm{pool}}/
+\expectile{\tau_{n}}) = O_{p}(1)$, equivalently
+$\log(\hatexpectile{\tau_{n}}^{\mathrm{pool}}/\expectile{\tau_{n}}) =
+o_{p}(1)$. A first-order Taylor expansion of $u \mapsto e^{u} - 1$
+around $u = 0$ then gives the exact identity
+\begin{equation}
+\label{eq:app:main:exp-taylor}
+  \frac{\hatexpectile{\tau_{n}}^{\mathrm{pool}}}
+       {\expectile{\tau_{n}}} - 1
+  \;=\;
+  \log\!\frac{\hatexpectile{\tau_{n}}^{\mathrm{pool}}}
+              {\expectile{\tau_{n}}}
+  \cdot\big(1 + o_{p}(1)\big),
+\end{equation}
+since the next term in the expansion is squared and thus
+$O_{p}(1/k) = o_{p}(1/\sqrt{k})$. Multiplying through by $\sqrt{k}$
+and applying Slutsky's theorem,
+\[
+  \sqrt{k}\!\left(\frac{\hatexpectile{\tau_{n}}^{\mathrm{pool}}}
+                          {\expectile{\tau_{n}}} - 1\right)
+  \;=\;
+  \sqrt{k}\,
+    \log\!\frac{\hatexpectile{\tau_{n}}^{\mathrm{pool}}}
+                {\expectile{\tau_{n}}}
+  \;+\; o_{p}(1)
+  \;\todist\;
+  \mathcal N\!\big(\mu^{\xi},\, \sigma^{\xi,\,2}\big),
+\]
+which is \eqref{eq:pool-int:main-clt}. \qed
 
 \backmatter
 \printbibliography[heading=bibintoc]
