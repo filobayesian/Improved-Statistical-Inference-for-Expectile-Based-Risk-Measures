@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1779966372.47676 "main.bcf" "main.bbl" "main" 1779980195.54326 0
-  "main.bcf" 1779980195.41082 114633 0cefccc615eb046539d8cbf5a87f8b02 "pdflatex"
+["biber main"] 1779987501.69441 "main.bcf" "main.bbl" "main" 1780043564.23409 0
+  "main.bcf" 1780043564.0755 114627 0bb89f435037503fec9130ff1ebb1763 "pdflatex"
   "references.bib" 1779132843.78814 6708 4efde8dc8f3963372793e426e27565eb ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1779980193.83997 "main.tex" "main.pdf" "main" 1779980195.54362 0
+["pdflatex"] 1780043562.41018 "main.tex" "main.pdf" "main" 1780043564.23445 0
   "/Users/filippogombac/Library/texlive/2024/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.657pk" 1779132859.78267 7808 b778b35f869b37ca1d137622207fc6be ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1254269338 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc" 1202520719 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
@@ -207,22 +207,22 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1735212710.83392 5467645 128b85b7cde5f5edc5cb7f1dd7ff8736 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1735212675 8221434 0c0422bde2dc7f9c7511840f033622fe ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "chapters/01_introduction.aux" 1779980194.73116 6022 bcf4a6075d0fd6a58ab8fb4cdbb5faaf "pdflatex"
+  "chapters/01_introduction.aux" 1780043563.31435 6022 bcf4a6075d0fd6a58ab8fb4cdbb5faaf "pdflatex"
   "chapters/01_introduction.tex" 1779954909.73716 9942 f01d6ae09531552119b701fd71732b9a ""
-  "chapters/02_background.aux" 1779980194.95792 15197 bad04843dcdf57c3790cb9c7120c7f33 "pdflatex"
+  "chapters/02_background.aux" 1780043563.57688 15197 bad04843dcdf57c3790cb9c7120c7f33 "pdflatex"
   "chapters/02_background.tex" 1779271571.70037 40969 59a58135163e53e6fa1677bfb450d4ef ""
-  "chapters/03_pooled_intermediate.aux" 1779980195.18516 16949 a8b696b38950f4b570ab0241a59fcc5f "pdflatex"
-  "chapters/03_pooled_intermediate.tex" 1779978982.21857 59918 71d4be22334ce9b01e8c65b51913a884 ""
-  "chapters/04_pooled_extreme.aux" 1779980195.22783 5997 b33c253d5c04001a1f806ce4c81b8bb8 "pdflatex"
+  "chapters/03_pooled_intermediate.aux" 1780043563.82241 18263 867b9209f17cf4b6970cbe85887bb4ef "pdflatex"
+  "chapters/03_pooled_intermediate.tex" 1780043554.73725 68205 8932bad614ef13ba5fd92882d36332d2 ""
+  "chapters/04_pooled_extreme.aux" 1780043563.87025 5997 d5004eca098769b9a8205c7934973bdc "pdflatex"
   "chapters/04_pooled_extreme.tex" 1779132899.45316 4773 e0f63621c2d4f9d6c2311472df5f36c6 ""
-  "chapters/05_discussion.aux" 1779980195.26114 5355 f14aa9248e382a4777014cc92407d430 "pdflatex"
+  "chapters/05_discussion.aux" 1780043563.90269 5355 28eb667a86ee76bbe1add8e146ae3eef "pdflatex"
   "chapters/05_discussion.tex" 1779132902.13302 3278 8376b869c51d1bc83250e1b836c6b3ed ""
-  "main.aux" 1779980195.40276 23504 c6b6c04ad77dfd16acae622bf898a18c "pdflatex"
-  "main.bbl" 1779966374.75395 22029 dccee6c3c8190d0e1d603c02c88712dc "biber main"
-  "main.out" 1779980195.40969 11731 684b027a3b0efcd4d2218b32c20d2147 "pdflatex"
-  "main.run.xml" 1779980195.41154 2311 e66a0e3ff336a5af941c7fe634558519 "pdflatex"
-  "main.tex" 1779980187.01267 51914 a4a040e0abb19dffb5f02bce80aae3f4 ""
-  "main.toc" 1779980195.41161 9332 007047b64f97bafd8750d64605690f41 "pdflatex"
+  "main.aux" 1780043564.06576 25418 6700dead57c256c1506df86f0665f9ce "pdflatex"
+  "main.bbl" 1779987503.91664 22029 dccee6c3c8190d0e1d603c02c88712dc "biber main"
+  "main.out" 1780043564.0745 11906 e52ff9327a2264b106a9c91ed681c969 "pdflatex"
+  "main.run.xml" 1780043564.07622 2311 e66a0e3ff336a5af941c7fe634558519 "pdflatex"
+  "main.tex" 1780042558.4192 62135 36268266b2ca020d7631f6911bbfab45 ""
+  "main.toc" 1780043564.07627 9880 a257c6b314b915e79c528f06ec1d6ded "pdflatex"
   "preamble.tex" 1779132892.28944 2934 86972072cbe00a1c236ead3c1a65ba09 ""
   (generated)
   "chapters/01_introduction.aux"

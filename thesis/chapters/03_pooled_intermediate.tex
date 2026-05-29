@@ -1100,120 +1100,306 @@ carrying the expectile target through the QB plug-in.
 \section{Estimated weights and confidence intervals}
 \label{sec:pool-int:CI}
 
-The variance-optimal weights of
-\Cref{prop:pool-int:var-opt-distrib,prop:pool-int:var-opt-general}
-depend on the population covariance $\Vc$ alone, while the
-AMSE-optimal weights of \Cref{prop:pool-int:amse-opt} additionally
-depend on the bias quantities $\Bc, \Bc^{\star}$ and on the
-deterministic expectile--quantile offset $b^{\xi/\Quant}$. All of
-these are unknown in practice. Following the plug-in scheme of
-\textcite[\S2.2]{DaouiaPadoanStupfler2021} recalled in
-\Cref{sec:bg:pooling}, we estimate $\Vc$ and $\Bc$ by consistent
-empirical analogues $\hatVc, \hatBc$ built from the per-sample
-$\hat\gamma_{j}(k_{j})$ and from estimators
-$\hat\beta_{j}, \hat\rho_{j}$ of the second-order parameters of
-$\mathcal C_{2}(\gamma, \rho, A)$; $\Bc^{\star}$ admits the analogous
-plug-in $\hatBc^{\star}$ via \eqref{eq:pool-int:Bcstar-def}, and
-$b^{\xi/\Quant}$ via \eqref{eq:pool-int:b-xi-Q-def}. We additionally
-plug in $\hat m \coloneqq m(\hat\gamma_{n}(\hat{\bm\omega}_{\gamma}))$
-for $m(\gamma)$ in \eqref{eq:pool-int:sigma-xi}. Continuity of
-$m(\,\cdot\,)$, of the optimal-weight maps in
-\Cref{prop:bg:optimal-weights,prop:pool-int:var-opt-general,prop:pool-int:amse-opt},
-and of the variance form \eqref{eq:pool-int:sigma-xi} ensures that
-the plug-in estimators
-$\hat{\bm\omega}_{\gamma}, \hat{\bm\omega}_{q}, \hat m,
-\hat\sigma^{\xi}$ are consistent for their population analogues, and
-that the composite estimator
-$\hatexpectile{\tau_{n}}^{\mathrm{pool}}(\hat{\bm\omega}_{\gamma},
-\hat{\bm\omega}_{q})$ is $\sqrt{k}$-asymptotically equivalent to
-$\hatexpectile{\tau_{n}}^{\mathrm{pool}}(\bm\omega_{\gamma},
-\bm\omega_{q})$ \parencite[Theorem~3]{DaouiaPadoanStupfler2021}.
+The optimal weights of
+\Cref{prop:pool-int:var-opt-distrib,prop:pool-int:var-opt-general,prop:pool-int:amse-opt}
+are unknown in practice: they depend on the population covariance
+$\Vc$, on the log-rate vector $\bm L^{\star}$, on $m(\gamma)$, and ---
+for the AMSE optimum --- on the bias quantities $\Bc, \Bc^{\star}$
+and the expectile--quantile offset $b^{\xi/\Quant}$. We follow the
+plug-in scheme of \textcite[\S2.2]{DaouiaPadoanStupfler2021} recalled
+in \Cref{sec:bg:pooling}: each population quantity is replaced by a
+consistent empirical analogue, and the resulting plug-in weights are
+substituted into the pooled estimator
+\eqref{eq:pool-int:expectile-pool}. This section organises the
+plug-in inputs by what each optimum needs, states the resulting
+confidence interval under undersmoothing (\Cref{cor:pool-int:CI})
+with the variance-optimal plug-in as the default implementation, and
+contrasts it with the bias-corrected variant required in the
+AMSE-optimal regime (\Cref{rem:pool-int:CI-bias-correction}).
 
-\paragraph{Variance versus AMSE feasibility.}
-The variance-optimal plug-in requires only $\hatVc$ --- a consistent
-estimator of a first-order quantity --- whereas the AMSE-optimal
-plug-in additionally requires consistent estimation of $\Bc$,
-$\Bc^{\star}$, and the expectile--quantile offset $b^{\xi/\Quant}$,
-all of which are second-order quantities driven by the unknown rate
-function $A(\,\cdot\,)$ and the second-order parameter $\rho$.
-Estimating second-order quantities in the heavy-tailed regime is
-notoriously delicate
-\parencite[\S5.2]{deHaanFerreira2006}, and the AMSE-optimal weights
-are consequently substantially less stable in finite samples than
-the variance-optimal weights. For this reason the variance-optimal
-plug-in is the more robust default in practice; the AMSE-optimal
-plug-in is best reserved for settings where reliable estimators of
-$\rho$ and $A$ are available.
+\subsection*{Feasible plug-in weights}
+
+The three optima of \Cref{sec:pool-int:weights} have different
+plug-in demands. Listing them in order of increasing complexity:
+
+\begin{enumerate}[label=(\alph*), leftmargin=*, itemsep=2pt]
+\item \emph{Equal-fraction variance-optimal weights}
+(\Cref{prop:pool-int:var-opt-distrib}).
+Under $k_{j}/n_{j} = (k/n)(1 + o(1))$ the optimum collapses to
+$\bm\omega^{\mathrm{Var}} = \Vc^{-1}\bm 1 /
+(\bm 1^{\top}\Vc^{-1}\bm 1)$, which depends on $\Vc$ alone. The
+plug-in
+\begin{equation}
+\label{eq:pool-int:plugin-eqfrac}
+  \hat{\bm\omega}^{\mathrm{Var}}
+  \;=\;
+  \hatVc^{-1}\bm 1 \,\big/\, \big(\bm 1^{\top}\hatVc^{-1}\bm 1\big)
+\end{equation}
+therefore requires only a consistent estimator of $\Vc$, a
+first-order quantity built from the per-sample
+$\hat\gamma_{j}(k_{j})$ via the diagonal formula
+\eqref{eq:bg:V_c-diagonal}.
+
+\item \emph{General variance-optimal weights}
+(\Cref{prop:pool-int:var-opt-general}).
+When $k_{j}/n_{j}$ varies across $j$, the closed forms
+\eqref{eq:pool-int:var-opt-general-q}--\eqref{eq:pool-int:var-opt-general-g}
+also depend on $m(\gamma)$ and on the log-rate vector $\bm L^{\star}$.
+The plug-in therefore additionally requires
+$\hat m \toprob m(\gamma)$ and $\hat L_{j}^{\star} \to L_{j}^{\star}$;
+the latter is deterministic ($\hat L_{j}^{\star} \coloneqq
+L_{j}(\tau_{n}) = \log(k_{j}/(n_{j}(1 - \tau_{n})))$ converges by the
+chapter setup of \Cref{sec:pool-int:setup}), so the only random
+plug-in beyond $\hatVc$ is $\hat m$. To avoid circularity --- the
+general formula for $\hat{\bm\omega}_{\gamma}$ would otherwise
+depend on $\hat m$, which would itself depend on
+$\hat{\bm\omega}_{\gamma}$ --- we seed $\hat m$ from a preliminary
+consistent pooled Hill estimator that needs no weight optimisation,
+for instance the effective-sample-size pool
+\begin{equation}
+\label{eq:pool-int:plugin-m}
+  \hat m^{(0)}
+  \;\coloneqq\;
+  m\!\Big(\sum_{j=1}^{m}\!(k_{j}/k)\,\hat\gamma_{j}(k_{j})\Big),
+  \qquad
+  \hat m^{(0)} \toprob m(\gamma),
+\end{equation}
+which is consistent under \Cref{thm:bg:hill} and avoids the
+self-reference. One may optionally iterate after computing the
+weights --- updating $\hat m \leftarrow m(\hat\gamma_{n}
+(\hat{\bm\omega}_{\gamma}))$ once the weights have been formed --- but
+this is asymptotically immaterial.
+
+\item \emph{AMSE-optimal weights} (\Cref{prop:pool-int:amse-opt}).
+The closed form \eqref{eq:pool-int:amse-opt-formula} depends on all
+of $\Vc, \bm L^{\star}, m(\gamma), \Bc, \Bc^{\star}, b^{\xi/\Quant}$
+through the stacked vector $\bm h$ and Hessian $\bm Q$ of
+\eqref{eq:pool-int:amse-stacked}. The plug-in therefore requires,
+on top of $\hatVc$ and $\hat m$, consistent estimators of the
+second-order quantities
+\begin{equation}
+\label{eq:pool-int:plugin-amse}
+  \hatBc \toprob \Bc,
+  \qquad
+  \hatBc^{\star} \toprob \Bc^{\star},
+  \qquad
+  \hat b^{\xi/\Quant} \toprob b^{\xi/\Quant}.
+\end{equation}
+These are built from estimators $\hat\beta_{j}, \hat\rho_{j}$ of the
+second-order parameters of $\mathcal C_{2}(\gamma, \rho, A)$ via
+\eqref{eq:pool-int:Bcstar-def}--\eqref{eq:pool-int:b-xi-Q-def} and
+$\Bc$ from \Cref{thm:bg:pool-hill}.
+\end{enumerate}
+
+In each case the population optimum map is a continuous function of
+its arguments on the parameter region where the denominators
+$\bm 1^{\top}\Vc^{-1}\bm 1, \Delta, \det\!\big(\bm A^{\top}\bm
+M^{-1}\bm A\big)$ are bounded away from zero (which holds whenever
+$\Vc$ and $\bm M$ are positive definite, and, for the general
+variance-optimal and AMSE-optimal closed forms, $m(\gamma) \ne 0$).
+The continuous-mapping theorem then transfers the plug-in convergences
+above into consistency
+$\hat{\bm\omega}_{\gamma} \toprob \bm\omega_{\gamma},
+\hat{\bm\omega}_{q} \toprob \bm\omega_{q}$ of the optimal-weight
+plug-ins, and from there into consistency of the plug-in variance
+$\hat\sigma^{\xi}(\hat{\bm\omega}_{\gamma}, \hat{\bm\omega}_{q})
+\toprob \sigma^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})$ via
+\eqref{eq:pool-int:sigma-xi}. By construction the closed forms
+\eqref{eq:pool-int:plugin-eqfrac},
+\eqref{eq:pool-int:var-opt-general-q}--\eqref{eq:pool-int:var-opt-general-g}
+and \eqref{eq:pool-int:amse-opt-formula} are normalised against the
+simplex constraint, so $\hat{\bm\omega}_{\gamma}^{\top}\bm 1
+= \hat{\bm\omega}_{q}^{\top}\bm 1 = 1$ holds \emph{exactly}, not just
+in probability --- a property that the estimated-weight lift in
+\Cref{cor:pool-int:CI} below relies on.
+
+\paragraph{Practical recommendation.}
+The complexity gradient (a) $\to$ (b) $\to$ (c) above is also a
+finite-sample stability gradient. Estimators of the second-order
+parameter $\rho$ and the rate function $A(\,\cdot\,)$ that
+\eqref{eq:pool-int:plugin-amse} relies on are notoriously delicate in
+the heavy-tailed regime \parencite[\S5.2]{deHaanFerreira2006}, and
+the resulting $\hatBc, \hatBc^{\star}, \hat b^{\xi/\Quant}$ converge
+slowly enough that the AMSE-optimal plug-in (c) is substantially less
+stable in finite samples than the variance-optimal plug-ins
+(a)--(b). The variance-optimal plug-in is therefore the robust
+default in practice; the AMSE-optimal plug-in is best reserved for
+settings where reliable estimators of $\rho$ and $A$ are available.
+
+\subsection*{Confidence interval under undersmoothing}
+
+The asymptotic bias \eqref{eq:pool-int:mu-xi} is the linear
+combination
+\[
+  \mu^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})
+  \;=\;
+  m(\gamma)\,\bm\omega_{\gamma}^{\top}\Bc
+  \;+\; \bm\omega_{q}^{\top}\Bc^{\star}
+  \;+\; b^{\xi/\Quant}.
+\]
+Inspection of the bias formulas
+\eqref{eq:pool-int:Bcstar-def}--\eqref{eq:pool-int:b-xi-Q-def}
+together with $\bm B_{\bm c}$ from \Cref{thm:bg:pool-hill} shows
+that every term is a continuous linear combination of the per-sample
+bias rates $\lambda_{j} \coloneqq \lim \sqrt{k_{j}}\,A(n_{j}/k_{j})$.
+The \emph{undersmoothing calibration}
+\begin{equation}
+\label{eq:pool-int:undersmoothing}
+  \sqrt{k_{j}}\,A(n_{j}/k_{j}) \;\to\; 0
+  \qquad\text{for every } j = 1, \ldots, m,
+\end{equation}
+therefore forces $\Bc = \bm 0$, $\Bc^{\star} = \bm 0$,
+$\Lambda^{\bullet} = 0$, $b^{\xi/\Quant} = 0$, and consequently
+$\mu^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q}) = 0$ for every
+admissible pair $(\bm\omega_{\gamma}, \bm\omega_{q})$. This is the
+hypothesis under which the variance-only confidence interval below
+is asymptotically valid. Without \eqref{eq:pool-int:undersmoothing}
+the limit-bias is generically non-zero and the interval must be
+re-centred on a bias-corrected point estimator
+(\Cref{rem:pool-int:CI-bias-correction}).
 
 \begin{corollary}[Asymptotic confidence interval for $\expectile{\tau_{n}}$]
 \label{cor:pool-int:CI}
-Assume \Cref{thm:pool-int:main}, the consistency conditions
-$\hat{\bm\omega}_{\gamma} \toprob \bm\omega_{\gamma}$,
-$\hat{\bm\omega}_{q} \toprob \bm\omega_{q}$, $\hat m \toprob m(\gamma)$,
-$\hatVc \toprob \Vc$ in the operator norm, and
-$\sqrt{k}\,\hat\mu^{\xi}(\hat{\bm\omega}_{\gamma},
-\hat{\bm\omega}_{q}) \toprob 0$ (asymptotically negligible bias).
-Then an asymptotic $(1 - \alpha)$ confidence interval for
-$\expectile{\tau_{n}}$ on the log scale is
+Assume the setting of \Cref{thm:pool-int:main} together with the
+undersmoothing condition \eqref{eq:pool-int:undersmoothing}, and let
+$(\hat{\bm\omega}_{\gamma}, \hat{\bm\omega}_{q})$ be estimated weight
+pairs satisfying the simplex constraints
+$\hat{\bm\omega}_{\gamma}^{\top}\bm 1
+= \hat{\bm\omega}_{q}^{\top}\bm 1 = 1$ exactly and the consistency
+conditions
+\begin{equation}
+\label{eq:pool-int:CI-consistency}
+  \hat{\bm\omega}_{\gamma} \toprob \bm\omega_{\gamma},
+  \qquad
+  \hat{\bm\omega}_{q} \toprob \bm\omega_{q},
+  \qquad
+  \hatVc \toprob \Vc,
+  \qquad
+  \hat m \toprob m(\gamma),
+\end{equation}
+for some deterministic limit pair $(\bm\omega_{\gamma},
+\bm\omega_{q})$ on the simplex. Then, for every $\alpha \in (0, 1)$,
+the random log-scale interval
 \begin{equation}
 \label{eq:pool-int:CI-log}
+  I_{n}^{\log}
+  \;\coloneqq\;
   \log \hatexpectile{\tau_{n}}^{\mathrm{pool}}\!
        (\hat{\bm\omega}_{\gamma}, \hat{\bm\omega}_{q})
   \;\pm\;
   z_{1 - \alpha/2}\,
   \frac{\hat\sigma^{\xi}(\hat{\bm\omega}_{\gamma},
-                         \hat{\bm\omega}_{q})}{\sqrt{k}},
+                         \hat{\bm\omega}_{q})}{\sqrt{k}}
 \end{equation}
-where $z_{1 - \alpha/2}$ is the standard-normal quantile of order
-$1 - \alpha/2$ and $\hat\sigma^{\xi}$ is the plug-in version of
-\eqref{eq:pool-int:sigma-xi}. The corresponding interval on the
-original scale is the exponential of \eqref{eq:pool-int:CI-log}.
+and the associated original-scale interval $I_{n} \coloneqq
+\exp(I_{n}^{\log})$ are asymptotic $(1 - \alpha)$ confidence intervals
+for $\log \expectile{\tau_{n}}$ and $\expectile{\tau_{n}}$
+respectively:
+\[
+  \Prob\!\big(\log \expectile{\tau_{n}} \in I_{n}^{\log}\big)
+  \;\to\; 1 - \alpha,
+  \qquad
+  \Prob\!\big(\expectile{\tau_{n}} \in I_{n}\big)
+  \;\to\; 1 - \alpha,
+\]
+as $n \to \infty$, where $z_{1 - \alpha/2}$ is the standard-normal
+quantile of order $1 - \alpha/2$ and $\hat\sigma^{\xi}$ is the
+plug-in version of \eqref{eq:pool-int:sigma-xi}.
 \end{corollary}
 
-\begin{proof}[Sketch.]
-Slutsky's theorem applied to \eqref{eq:pool-int:main-clt} delivers
-the asymptotic pivot on the log scale; the continuous-mapping
-theorem applied to $\exp$ transports the interval to the original
-scale.
+\begin{proof}
+See \Cref{app:proofs:CI}, where the four-step argument is spelled
+out: (i) the log-scale recasting of \Cref{thm:pool-int:main}; (ii)
+the lift to estimated weights via the exact simplex constraint and
+Slutsky; (iii) self-normalisation through the plug-in variance under
+undersmoothing; (iv) transport of coverage to the original scale by
+strict monotonicity of $\exp$.
 \end{proof}
 
-Three practical remarks. First, the log-scale interval
-\eqref{eq:pool-int:CI-log} is symmetric in $\log \expectile{\tau_{n}}$
-while its exponential is not; the latter is the natural form for
-applications in which $\expectile{\tau_{n}}$ is interpreted as a
-monetary risk measure. Second, under the equal-fraction
-distributed-inference setting of
+\paragraph{Practical remarks.}
+First, the log-scale interval \eqref{eq:pool-int:CI-log} is symmetric
+in $\log \expectile{\tau_{n}}$ while its exponential is not; the
+latter is the natural form for applications in which
+$\expectile{\tau_{n}}$ is interpreted as a monetary risk measure.
+Second, under the equal-fraction distributed-inference setting of
 \Cref{prop:pool-int:var-opt-distrib} the variance-optimal weights are
-identical across the two pooled inputs, so a single estimated
-$\hat{\bm\omega}^{\mathrm{Var}} = \hatVc^{-1}\bm 1 /
-(\bm 1^{\top}\hatVc^{-1}\bm 1)$ suffices and the plug-in variance
-simplifies to
-$\hat\sigma^{\xi, 2}
-= \big[(\hat m + \hat L^{\star})^{2} + 1\big]
-/ (\bm 1^{\top}\hatVc^{-1}\bm 1)$,
-where $\hat L^{\star} = \log(k/(n(1 - \tau_{n})))$.
+identical across the two pooled inputs, so the single estimated
+$\hat{\bm\omega}^{\mathrm{Var}}$ of \eqref{eq:pool-int:plugin-eqfrac}
+suffices and the plug-in variance simplifies to
+\[
+  \hat\sigma^{\xi}(\hat{\bm\omega}^{\mathrm{Var}},
+                    \hat{\bm\omega}^{\mathrm{Var}})^{2}
+  \;=\;
+  \big[(\hat m + \hat L^{\star})^{2} + 1\big]
+  \big/ \big(\bm 1^{\top}\hatVc^{-1}\bm 1\big),
+  \qquad
+  \hat L^{\star} \;=\; \log\!\big(k/(n(1 - \tau_{n}))\big),
+\]
+which is the natural plug-in image of the limit
+\eqref{eq:pool-int:var-opt-distrib-value}.
 
-Third, the interval \eqref{eq:pool-int:CI-log} is a
-\emph{first-order variance-based} interval, valid only when the
-$\sqrt{k}$-bias of the pooled estimator is asymptotically negligible
---- the explicit assumption
-$\sqrt{k}\,\hat\mu^{\xi}(\hat{\bm\omega}_{\gamma},
-\hat{\bm\omega}_{q}) \toprob 0$ in
-\Cref{cor:pool-int:CI}. \Cref{thm:pool-int:main} shows that this is
-typically not the case: $\mu^{\xi}$ involves the second-order
-quantities $\Bc, \Bc^{\star}$ and the offset $b^{\xi/\Quant}$, all of
-which generically contribute non-zero asymptotic bias under
-$\mathcal C_{2}(\gamma, \rho, A)$. When this bias is not negligible,
-\eqref{eq:pool-int:CI-log} should either be re-centred on a
-bias-corrected point estimator
-$\hatexpectile{\tau_{n}}^{\mathrm{pool}} \exp\!\big(-
-\hat\mu^{\xi}/\sqrt{k}\big)$, or its width should incorporate a
-plug-in estimate of $\mu^{\xi}/\sqrt{k}$ as a deterministic shift.
-Standard practice in the extreme-value literature selects $k$ small
-enough that the bias contribution sits below the CLT noise, which
-amounts to operating away from the AMSE-optimal $k$ of
-\Cref{prop:pool-int:amse-opt} --- another reason the variance-optimal
-plug-in is the more natural default for inference.
+\paragraph{CI validity at $m(\gamma) = 0$.}
+The hypotheses of \Cref{cor:pool-int:CI} do \emph{not} require
+$m(\gamma) \ne 0$: the proof of \Cref{app:proofs:CI} uses only
+(i) consistency of the estimated weights toward a deterministic
+simplex pair, (ii) consistency of the plug-in variance, and (iii)
+positivity of the limit variance $\sigma^{\xi}(\bm\omega_{\gamma},
+\bm\omega_{q})^{2}$. The restriction $m(\gamma) \ne 0$ enters
+elsewhere: it is needed for the variance-optimal closed form of
+\Cref{prop:pool-int:var-opt-general} (because the change of
+variables $(\bm\omega_{\gamma}, \bm\omega_{q}) \mapsto
+(\bm u, \bm\omega_{q})$ ceases to be a bijection at $m(\gamma) = 0$)
+and for the AMSE positive-definiteness of
+\Cref{prop:pool-int:amse-opt}. At the boundary $\gamma = \gamma^{\star}
+\approx 0.2178$, the equal-fraction variance-optimal
+$\hat{\bm\omega}^{\mathrm{Var}}$ of \eqref{eq:pool-int:plugin-eqfrac}
+remains well defined and consistent, and the CI
+\eqref{eq:pool-int:CI-log} retains its $(1 - \alpha)$ asymptotic
+coverage; the variance simply degenerates to
+$\hat\sigma^{\xi,\,2} = [(\hat L^{\star})^{2} + 1]/
+(\bm 1^{\top}\hatVc^{-1}\bm 1)$.
+
+\begin{remark}[Bias-corrected confidence interval]
+\label{rem:pool-int:CI-bias-correction}
+The undersmoothing condition \eqref{eq:pool-int:undersmoothing} is
+the natural companion of the variance-only interval
+\eqref{eq:pool-int:CI-log} but is incompatible with the
+AMSE-optimal calibration of \Cref{prop:pool-int:amse-opt}: the
+AMSE-optimal choice of $k$ is intended for the regime in which at
+least one $\lambda_{j}$ may be non-zero, so that the limit-bias
+$\mu^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})$ need not vanish (if
+all $\lambda_{j} = 0$ then $\Bc = \Bc^{\star} = b^{\xi/\Quant} = 0$
+and the AMSE-optimum collapses to the variance-optimum, so the
+distinction between the two criteria has no content). When
+$\mu^{\xi} \ne 0$, \eqref{eq:pool-int:CI-log} does not have nominal
+asymptotic coverage. The standard remedy is to centre the interval
+on the bias-corrected point estimator
+$\hatexpectile{\tau_{n}}^{\mathrm{pool}}\!\exp\!\big(-\hat\mu^{\xi}
+(\hat{\bm\omega}_{\gamma}, \hat{\bm\omega}_{q})/\sqrt{k}\big)$, where
+$\hat\mu^{\xi}$ substitutes $\hatBc, \hatBc^{\star}, \hat
+b^{\xi/\Quant}, \hat m$ into \eqref{eq:pool-int:mu-xi}. The
+corresponding bias-corrected log-scale interval inherits the
+$(1 - \alpha)$ asymptotic coverage of \Cref{cor:pool-int:CI} provided
+$\hat\mu^{\xi}(\hat{\bm\omega}_{\gamma}, \hat{\bm\omega}_{q})
+\toprob \mu^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})$ ---
+\emph{i.e.\ }the second-order consistency conditions
+\eqref{eq:pool-int:plugin-amse} hold --- a hypothesis substantially
+more demanding than \eqref{eq:pool-int:CI-consistency} because it
+requires consistent estimation of the second-order parameter $\rho$
+and the rate function $A$ \parencite[\S5.2]{deHaanFerreira2006}.
+\end{remark}
+
+Standard practice in the extreme-value literature accordingly favours
+the variance-only interval \eqref{eq:pool-int:CI-log} under
+\eqref{eq:pool-int:undersmoothing} over the bias-corrected variant of
+\Cref{rem:pool-int:CI-bias-correction}: undersmoothing trades a
+small amount of asymptotic efficiency for the absence of a
+hard-to-estimate correction, and operates the pooled estimator away
+from the AMSE-optimal $k$ of \Cref{prop:pool-int:amse-opt}. This
+trade-off is the operational reason why
+\Cref{prop:pool-int:var-opt-distrib} --- not
+\Cref{prop:pool-int:amse-opt} --- is the natural default companion to
+\Cref{cor:pool-int:CI} in applications.
 
 \section{A test of expectile-tail-homogeneity}
 \label{sec:pool-int:test}

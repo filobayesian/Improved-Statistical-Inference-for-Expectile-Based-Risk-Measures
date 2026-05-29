@@ -1272,6 +1272,253 @@ identity $\mu^{\xi} = m(\gamma)\,\bm\omega_{\gamma}^{\top}\Bc +
 \bm\omega_{q}^{\top}\Bc^{\star} + b^{\xi/\Quant}$ at the minimiser,
 completes the equivalence. \qed
 
+\section{Proof of \texorpdfstring{\Cref{cor:pool-int:CI}}{Corollary 3.7}}
+\label{app:proofs:CI}
+
+We prove the asymptotic-coverage statement of
+\Cref{cor:pool-int:CI} under the standing assumptions of
+\Cref{sec:pool-int:setup}, the undersmoothing condition
+\eqref{eq:pool-int:undersmoothing}, and the consistency assumptions
+\eqref{eq:pool-int:CI-consistency} on the estimated weight pair
+$(\hat{\bm\omega}_{\gamma}, \hat{\bm\omega}_{q})$, the plug-in
+covariance $\hatVc$, and the plug-in QB Jacobian $\hat m$. We retain
+the simplex constraints
+$\hat{\bm\omega}_{\gamma}^{\top}\bm 1 =
+\hat{\bm\omega}_{q}^{\top}\bm 1 = 1$ \emph{exactly}, which holds for
+the variance- and AMSE-optimal plug-ins of
+\Cref{prop:bg:optimal-weights,prop:pool-int:var-opt-general,prop:pool-int:amse-opt}
+by construction.
+
+The proof composes four steps:
+(i) recast the conclusion of \Cref{thm:pool-int:main} on the log
+scale;
+(ii) lift the deterministic-weight CLT to the estimated weights via
+the exact simplex constraint and Slutsky;
+(iii) substitute the plug-in variance to obtain the asymptotic pivot
+under undersmoothing;
+(iv) transport coverage to the original scale by strict monotonicity
+of $\exp$.
+
+\paragraph{Step (i): log-scale recasting.}
+By the QB factorisation \eqref{eq:pool-int:expectile-pool},
+\begin{equation}
+\label{eq:app:CI:log-decomposition}
+  \log\hatexpectile{\tau_{n}}^{\mathrm{pool}}\!
+       (\bm\omega_{\gamma}, \bm\omega_{q})
+  \;=\;
+  \log\psifn\!\big(\hat\gamma_{n}(\bm\omega_{\gamma})\big)
+  \;+\;
+  \log\hatWei_{n}(1 - \tau_{n} \mid \bm\omega_{q}).
+\end{equation}
+\Cref{thm:pool-int:main} delivers $\sqrt{k}\,
+(\hatexpectile{\tau_{n}}^{\mathrm{pool}}(\bm\omega_{\gamma},
+\bm\omega_{q})/\expectile{\tau_{n}} - 1) \todist
+\mathcal N(\mu^{\xi}, \sigma^{\xi,\,2})$. The displayed log-CLT
+\eqref{eq:app:main:log-CLT} in the proof of
+\Cref{thm:pool-int:main} (\Cref{app:proofs:main-clt}) is the same
+statement on the log scale,
+\begin{equation}
+\label{eq:app:CI:log-clt-det}
+  \sqrt{k}\,
+  \big(\log\hatexpectile{\tau_{n}}^{\mathrm{pool}}\!
+            (\bm\omega_{\gamma}, \bm\omega_{q})
+       - \log\expectile{\tau_{n}}\big)
+  \;\todist\;
+  \mathcal N\!\big(\mu^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q}),\,
+                    \sigma^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})^{2}\big).
+\end{equation}
+Under undersmoothing \eqref{eq:pool-int:undersmoothing}, every entry
+of $\Bc, \Bc^{\star}$ and the offset $b^{\xi/\Quant}$ vanishes
+(inspection of \eqref{eq:pool-int:Bcstar-def},
+\eqref{eq:pool-int:b-xi-Q-def}, and the formula for $\Bc$ in
+\Cref{thm:bg:pool-hill}, each of which is a continuous linear
+combination of the per-sample bias rates
+$\lambda_{j} = \lim \sqrt{k_{j}}\,A(n_{j}/k_{j})$). Hence
+$\mu^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q}) = 0$ and the limit in
+\eqref{eq:app:CI:log-clt-det} reduces to
+$\mathcal N(0, \sigma^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})^{2})$.
+
+\paragraph{Step (ii): estimated-weight lift.}
+We show that replacing $(\bm\omega_{\gamma}, \bm\omega_{q})$ by
+$(\hat{\bm\omega}_{\gamma}, \hat{\bm\omega}_{q})$ in
+\eqref{eq:app:CI:log-decomposition} changes the left-hand side of
+\eqref{eq:app:CI:log-clt-det} by $o_{p}(1)$. Decompose this change
+into a Hill and a Weissman contribution,
+\begin{align*}
+  \Delta_{n}^{\gamma}
+  &\;\coloneqq\;
+    \log\psifn\!\big(\hat\gamma_{n}(\hat{\bm\omega}_{\gamma})\big)
+    - \log\psifn\!\big(\hat\gamma_{n}(\bm\omega_{\gamma})\big),
+  \\[2pt]
+  \Delta_{n}^{q}
+  &\;\coloneqq\;
+    \log\hatWei_{n}(1 - \tau_{n} \mid \hat{\bm\omega}_{q})
+    - \log\hatWei_{n}(1 - \tau_{n} \mid \bm\omega_{q}).
+\end{align*}
+
+\emph{Hill contribution.}
+Linearity of the pooled Hill in its weights
+(\eqref{eq:pool-int:hill-pool}) gives
+\[
+  \hat\gamma_{n}(\hat{\bm\omega}_{\gamma})
+    - \hat\gamma_{n}(\bm\omega_{\gamma})
+  \;=\;
+  (\hat{\bm\omega}_{\gamma} - \bm\omega_{\gamma})^{\top}
+    \hat{\bm\gamma}_{n}
+  \;=\;
+  (\hat{\bm\omega}_{\gamma} - \bm\omega_{\gamma})^{\top}
+    \big(\hat{\bm\gamma}_{n} - \gamma\bm 1\big),
+\]
+the deterministic offset $\gamma\bm 1$ vanishing by the exact simplex
+identity
+$(\hat{\bm\omega}_{\gamma} - \bm\omega_{\gamma})^{\top}\bm 1
+= 1 - 1 = 0$ on both the plug-in and the limit weight vectors. The
+per-sample Hill CLT (within-sample component of
+\eqref{eq:pool-int:per-sample-clt}) gives
+$\sqrt{k_{j}}(\hat\gamma_{j} - \gamma) = O_{p}(1)$, hence
+$\sqrt{k}(\hat\gamma_{j} - \gamma) = \sqrt{k/k_{j}}\,O_{p}(1) =
+O_{p}(1)$ via $k_{j}/k \to c_{j} \in (0, 1)$ from
+\eqref{eq:bg:pool-rates}. Therefore $\sqrt{k}(\hat{\bm\gamma}_{n}
+- \gamma\bm 1) = O_{p}(1)$, and the Cauchy--Schwarz inequality
+combined with $\hat{\bm\omega}_{\gamma} - \bm\omega_{\gamma} =
+o_{p}(1)$ yields
+\begin{equation}
+\label{eq:app:CI:hill-lift}
+  \sqrt{k}\,\big(\hat\gamma_{n}(\hat{\bm\omega}_{\gamma})
+                  - \hat\gamma_{n}(\bm\omega_{\gamma})\big)
+  \;=\;
+  (\hat{\bm\omega}_{\gamma} - \bm\omega_{\gamma})^{\top}\,
+  \sqrt{k}\big(\hat{\bm\gamma}_{n} - \gamma\bm 1\big)
+  \;=\; o_{p}(1) \cdot O_{p}(1) \;=\; o_{p}(1).
+\end{equation}
+The map $\log\psifn$ is continuously differentiable on $(0, 1/2)$
+with derivative $m(\,\cdot\,)$ defined in
+\eqref{eq:pool-int:m-function}; on the good event
+$\{\hat\gamma_{n}(\bm\omega_{\gamma}),
+\hat\gamma_{n}(\hat{\bm\omega}_{\gamma}) \in (0, 1)\}$ --- of
+probability $\to 1$ by the consistency
+$\hat\gamma_{n}(\hat{\bm\omega}_{\gamma}),
+\hat\gamma_{n}(\bm\omega_{\gamma}) \toprob \gamma$ --- the mean
+value theorem yields a random $\tilde\gamma_{n}$ between the two
+pooled values such that
+\[
+  \Delta_{n}^{\gamma}
+  \;=\;
+  m(\tilde\gamma_{n})\,
+  \big[\hat\gamma_{n}(\hat{\bm\omega}_{\gamma})
+       - \hat\gamma_{n}(\bm\omega_{\gamma})\big].
+\]
+Squeeze gives $\tilde\gamma_{n} \toprob \gamma$ and, by continuity of
+$m(\,\cdot\,)$, $m(\tilde\gamma_{n}) \toprob m(\gamma)$. Combining
+with \eqref{eq:app:CI:hill-lift}, $\sqrt{k}\,\Delta_{n}^{\gamma}
+= O_{p}(1) \cdot o_{p}(1) = o_{p}(1)$.
+
+\emph{Weissman contribution.}
+Weighted-geometric linearity of $\log\hatWei_{n}$ in $\bm\omega_{q}$
+(\eqref{eq:pool-int:weissman-pool}) gives
+\[
+  \Delta_{n}^{q}
+  \;=\;
+  (\hat{\bm\omega}_{q} - \bm\omega_{q})^{\top}
+    \big(\log\hat{\bm q}^{\star}_{n}
+         - \log\Quant_{X}(\tau_{n})\bm 1\big),
+\]
+where the deterministic offset $\log\Quant_{X}(\tau_{n})\bm 1$
+cancels via the simplex identity
+$(\hat{\bm\omega}_{q} - \bm\omega_{q})^{\top}\bm 1 = 0$. The
+within-sample Weissman component of
+\eqref{eq:pool-int:per-sample-clt} delivers
+$\sqrt{k_{j}}(\log\hat q^{\star}_{j} - \log\Quant_{X}(\tau_{n}))
+= O_{p}(1)$ under $L_{j}(\tau_{n}) \to L_{j}^{\star} \in \R$, and the
+same $\sqrt{k/k_{j}} = O(1)$ rescaling promotes this to
+$\sqrt{k}(\log\hat{\bm q}^{\star}_{n}
+- \log\Quant_{X}(\tau_{n})\bm 1) = O_{p}(1)$. Hence
+\begin{equation}
+\label{eq:app:CI:weissman-lift}
+  \sqrt{k}\,\Delta_{n}^{q}
+  \;=\;
+  (\hat{\bm\omega}_{q} - \bm\omega_{q})^{\top}\,
+  \sqrt{k}\big(\log\hat{\bm q}^{\star}_{n}
+               - \log\Quant_{X}(\tau_{n})\bm 1\big)
+  \;=\; o_{p}(1) \cdot O_{p}(1) \;=\; o_{p}(1).
+\end{equation}
+
+\emph{Assembly.}
+Combining \eqref{eq:app:CI:log-clt-det} (under undersmoothing,
+limit-mean zero) with $\sqrt{k}\,\Delta_{n}^{\gamma}
++ \sqrt{k}\,\Delta_{n}^{q} = o_{p}(1)$ and Slutsky's theorem,
+\begin{equation}
+\label{eq:app:CI:log-clt-plugin}
+  \sqrt{k}\,
+  \big(\log\hatexpectile{\tau_{n}}^{\mathrm{pool}}\!
+            (\hat{\bm\omega}_{\gamma}, \hat{\bm\omega}_{q})
+       - \log\expectile{\tau_{n}}\big)
+  \;\todist\;
+  \mathcal N\!\big(0,\,
+                    \sigma^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})^{2}\big).
+\end{equation}
+
+\paragraph{Step (iii): self-normalisation.}
+The variance \eqref{eq:pool-int:sigma-xi} is a polynomial in
+$(\Vc, \bm L^{\star}, m, \bm\omega_{\gamma}, \bm\omega_{q})$, and
+$\sigma^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})^{2} > 0$ because
+$\Vc$ is positive definite, $\bm\omega_{q}^{\top}\bm 1 = 1$ forces
+$\bm\omega_{q} \ne \bm 0$, and the structurally non-negative
+contribution $\bm\omega_{q}^{\top}\Vc\bm\omega_{q}$ to
+\eqref{eq:pool-int:sigma-xi} is strictly positive. The plug-in
+substitutes $\hatVc, \hat L_{j}^{\star} \coloneqq L_{j}(\tau_{n}),
+\hat m, \hat{\bm\omega}_{\gamma}, \hat{\bm\omega}_{q}$ for their
+population analogues. The log-rate plug-in
+$\hat L_{j}^{\star} = L_{j}(\tau_{n}) =
+\log(k_{j}/(n_{j}(1 - \tau_{n})))$ is deterministic and converges to
+$L_{j}^{\star}$ by the chapter setup of \Cref{sec:pool-int:setup}; the
+remaining four convergences are the assumptions
+\eqref{eq:pool-int:CI-consistency}. The continuous-mapping theorem
+applied first to the polynomial \eqref{eq:pool-int:sigma-xi} and then
+to $\sqrt{\,\cdot\,}$ on $(0, \infty)$ yields
+\[
+  \hat\sigma^{\xi}(\hat{\bm\omega}_{\gamma}, \hat{\bm\omega}_{q})
+  \;\toprob\;
+  \sigma^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q}) \;>\; 0.
+\]
+Slutsky's theorem applied to the ratio of
+\eqref{eq:app:CI:log-clt-plugin} and this consistent variance
+estimator produces the asymptotic pivot
+\begin{equation}
+\label{eq:app:CI:pivot}
+  Z_{n}
+  \;\coloneqq\;
+  \frac{\sqrt{k}\,
+        \big(\log\hatexpectile{\tau_{n}}^{\mathrm{pool}}\!
+              (\hat{\bm\omega}_{\gamma}, \hat{\bm\omega}_{q})
+             - \log\expectile{\tau_{n}}\big)}
+       {\hat\sigma^{\xi}(\hat{\bm\omega}_{\gamma}, \hat{\bm\omega}_{q})}
+  \;\todist\; \mathcal N(0, 1).
+\end{equation}
+For every $\alpha \in (0, 1)$,
+$\Prob(|Z_{n}| \le z_{1 - \alpha/2}) \to 1 - \alpha$. Inverting the
+inequality $|Z_{n}| \le z_{1 - \alpha/2}$ for
+$\log\expectile{\tau_{n}}$ recovers exactly the event
+$\log\expectile{\tau_{n}} \in I_{n}^{\log}$ with $I_{n}^{\log}$
+defined in \eqref{eq:pool-int:CI-log}, so
+$\Prob(\log\expectile{\tau_{n}} \in I_{n}^{\log}) \to 1 - \alpha$.
+
+\paragraph{Step (iv): transport to the original scale.}
+The map $x \mapsto e^{x}$ is strictly increasing and continuous on
+$\R$, so for the random closed interval
+$I_{n}^{\log} = [a_{n}, b_{n}]$,
+\[
+  \log\expectile{\tau_{n}} \in [a_{n}, b_{n}]
+  \quad \Longleftrightarrow \quad
+  \expectile{\tau_{n}} \in [e^{a_{n}}, e^{b_{n}}]
+  \;=\; \exp(I_{n}^{\log})
+  \;=\; I_{n}.
+\]
+The two events coincide pointwise on the underlying probability space,
+hence
+$\Prob(\expectile{\tau_{n}} \in I_{n})
+= \Prob(\log\expectile{\tau_{n}} \in I_{n}^{\log}) \to 1 - \alpha$. \qed
+
 \backmatter
 \printbibliography[heading=bibintoc]
 
