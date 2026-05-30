@@ -300,14 +300,24 @@ $\sqrt{k_{j}}\,A(n_{j}/k_{j}) \to \lambda_{j} \in \R$,
     \end{pmatrix}
   \;\todist\;
   \mathcal N\!\left(
-    \begin{pmatrix} b_{j}^{H} \\[2pt] b_{j}^{Q} \end{pmatrix},\;
+    \begin{pmatrix} b_{j}^{H} \\[2pt] 0 \end{pmatrix},\;
     \gamma^{2}\, \bm I_{2}\right),
 \end{equation}
-where the bias parameters
-$b_{j}^{H} = \lambda_{j}/(1 - \rho)$ and
-$b_{j}^{Q} = b_{j}^{Q}(\lambda_{j}, \rho)$ are determined by the
-second-order condition, and $\bm I_{2}$ is the $2 \times 2$ identity
-matrix. The load-bearing structural fact in
+where $b_{j}^{H} = \lambda_{j}/(1 - \rho)$ is the Hill bias and
+$\bm I_{2}$ is the $2 \times 2$ identity matrix. The \emph{zero} second
+component is the asymptotic unbiasedness of the intermediate
+log-order statistic, centred at its own population quantile
+$\log\Quant_{X}(\tau_{n_{j}}) = \log U(n_{j}/k_{j})$: in the
+representation $\log X_{n_{j} - k_{j} : n_{j},\,j} - \log U(n_{j}/k_{j})
+= \gamma\log V_{j} + A(n_{j}/k_{j})\,\Psi_{\rho}(V_{j}) + o(A(n_{j}/k_{j}))$
+with $V_{j} = (k_{j}/n_{j})\,U^{\leftarrow}(\,\cdot\,)$ satisfying
+$\sqrt{k_{j}}(V_{j} - 1) \todist \mathcal N(0, 1)$, the second-order term
+is $\sqrt{k_{j}}\,A(n_{j}/k_{j})\,\Psi_{\rho}(V_{j}) = A(n_{j}/k_{j})\,
+O_{p}(1) = o_{p}(1)$ because $\Psi_{\rho}(1) = 0$, so it leaves no bias
+at the $\sqrt{k_{j}}$ scale \parencite{DaouiaGirardStupfler2018}. This
+is in contrast to the Hill estimator, whose bias $b_{j}^{H}$ arises
+precisely from \emph{averaging} that second-order term across the top
+$k_{j}$ order statistics, where it does not vanish. The load-bearing structural fact in
 \eqref{eq:app:within-input} is the \emph{zero off-diagonal entry}:
 the Hill estimator is a smooth functional of the centred log-spacings
 above $X_{n_{j} - k_{j} : n_{j},\,j}$, while the
@@ -412,10 +422,11 @@ with these deterministic convergences to deliver
                    \end{pmatrix}\right),
 \end{equation}
 with mean
-$\bm\mu_{j}^{\star} = \bm M_{j}^{\star}(b_{j}^{H}, b_{j}^{Q})^{\top}
+$\bm\mu_{j}^{\star} = \bm M_{j}^{\star}(b_{j}^{H}, 0)^{\top}
 + (0, b_{j}^{R})^{\top}
-= \big(b_{j}^{H},\, L_{j}^{\star}\, b_{j}^{H} + b_{j}^{Q}
-       + b_{j}^{R}\big)^{\top}$.
+= \big(b_{j}^{H},\, L_{j}^{\star}\, b_{j}^{H}
+       + b_{j}^{R}\big)^{\top}$, the vanishing order-statistic bias of
+\eqref{eq:app:within-input} carrying through.
 The covariance is
 $\bm M_{j}^{\star}\,(\gamma^{2}\bm I_{2})\,(\bm M_{j}^{\star})^{\top}
 = \gamma^{2}\big(1, L_{j}^{\star};\, L_{j}^{\star}, 1+(L_{j}^{\star})^{2}\big)$,
@@ -486,16 +497,17 @@ $L_{j}^{\star}(\Vc)_{j,j}$; the lower-right block has $j$th diagonal
 entry $(1 + (L_{j}^{\star})^{2})(\Vc)_{j,j}$. All non-diagonal
 entries within each block vanish because of cross-sample
 independence. The mean $\bm\mu_{Z}$ is the corresponding linear
-functional of the per-sample bias parameters $b_{j}^{H}, b_{j}^{Q},
-b_{j}^{R}$, rescaled to the $\sqrt{k}$ scale: explicitly,
+functional of the per-sample bias parameters $b_{j}^{H}$ and
+$b_{j}^{R}$, rescaled to the $\sqrt{k}$ scale: explicitly,
 $(\bm\mu_{Z})_{j} = \sqrt{c_{j}\sum_{i}c_{i}^{-1}}\, b_{j}^{H}
 = (\Bc)_{j}$ for $j = 1, \ldots, m$, and
 $(\bm\mu_{Z})_{m + j} = \sqrt{c_{j}\sum_{i}c_{i}^{-1}}\,
-\big(L_{j}^{\star}\, b_{j}^{H} + b_{j}^{Q} + b_{j}^{R}\big)
-=: (\Bc^{\star})_{j}$. The first half of $\bm\mu_{Z}$ is
+\big(L_{j}^{\star}\, b_{j}^{H} + b_{j}^{R}\big)
+=: (\Bc^{\star})_{j}$, the order-statistic bias being absent by
+\eqref{eq:app:within-input}. The first half of $\bm\mu_{Z}$ is
 exactly the pooled-Hill bias vector $\Bc$ of
-\Cref{thm:bg:pool-hill}; the second half is the
-pooled-Weissman bias vector $\Bc^{\star}$ specialised to
+\Cref{thm:bg:pool-hill}; the second half is the pooled-Weissman bias
+vector $\Bc^{\star}$ of \eqref{eq:pool-int:Bcstar-def}, specialised to
 the intermediate-level target.
 
 \paragraph{Step (iv): linear pooling map.}
@@ -718,23 +730,17 @@ the second-order expansion
   \;+\; o\!\big(A((1 - \tau)^{-1})\big),
   \qquad \tau \uparrow 1,
 \end{equation}
-established in
-\textcite[Theorem~2, eq.~(8)]{DaouiaGirardStupfler2018} for the
-expectile--quantile ratio (the additive log form
+the logarithm of the second-order expansion \eqref{eq:bg:c-gamma-rho}
+of \textcite{DaouiaGirardStupfler2018}, with the explicit constant
+$c(\gamma, \rho)$ recorded there. The additive log form
 \eqref{eq:app:main:xi-Q-expansion} follows by a Taylor expansion of
-$\log(1 + x)$ around zero, since the ratio differs from $\psifn(\gamma)$
-by a vanishing quantity of order $A$). The constant
-\begin{equation}
-\label{eq:app:main:c-gamma-rho}
-  c(\gamma, \rho)
-  \;=\;
-  \frac{(1 - \gamma)^{-\rho}}{1 - \gamma - \rho}
-  \;-\;
-  \frac{\psifn(\gamma)^{\rho}}{1 - \gamma - \rho},
-\end{equation}
-recorded in \textcite[Lemma~1]{DaouiaGirardStupfler2018}, depends on
-$(\gamma, \rho)$ only; its explicit form is not used below, only its
-finiteness for $\gamma \in (0, 1/2)$ and $\rho \le 0$.
+$\log(1 + x)$ around zero, the ratio differing from $\psifn(\gamma)$ by
+a vanishing quantity of order $A$; the moment-rate term
+$O(\Quant_{X}(\tau)^{-1})$ of \eqref{eq:bg:c-gamma-rho} is
+$\sqrt{k}$-negligible under the standing condition
+\eqref{eq:pool-int:moment-rate} and is absorbed into the remainder.
+Only the finiteness of $c(\gamma, \rho)$ for $\gamma \in (0, 1/2)$ and
+$\rho \le 0$ is used below.
 
 To convert \eqref{eq:app:main:xi-Q-expansion} into a $\sqrt{k}$-rescaled
 shift, we show that
@@ -1518,6 +1524,372 @@ The two events coincide pointwise on the underlying probability space,
 hence
 $\Prob(\expectile{\tau_{n}} \in I_{n})
 = \Prob(\log\expectile{\tau_{n}} \in I_{n}^{\log}) \to 1 - \alpha$. \qed
+
+\section{Proof of \texorpdfstring{\Cref{thm:pool-int:hom-test}}{Theorem 3.9}}
+\label{app:proofs:hom-test}
+
+We prove the expectile-tail-homogeneity test of
+\Cref{thm:pool-int:hom-test} under the standing assumptions of
+\Cref{sec:pool-int:setup}, with $\hat{\bm\Sigma}_{n} \toprob
+\bm\Sigma$ and $\bm\Sigma$ positive definite. The argument composes
+six steps:
+(i) the per-sample QB log-expectile CLT, obtained by the single-sample
+specialisation of \Cref{app:proofs:main-clt};
+(ii) aggregation across the independent samples and rescaling to the
+common $\sqrt{k}$ scale, which yields the joint limit
+\eqref{eq:pool-int:test-clt} with covariance
+\eqref{eq:pool-int:test-Sigma} and mean
+\eqref{eq:pool-int:test-beta};
+(iii) the GLS algebra reducing the statistic to a quadratic form in a
+single asymptotically Gaussian vector;
+(iv) the resulting noncentral $\chi^{2}_{m - 1}(\delta)$ limit;
+(v) the two regimes in which $\delta = 0$;
+(vi) consistency under the alternative.
+Throughout, $S \coloneqq \sum_{i = 1}^{m} c_{i}^{-1}$, so that
+$(\Vc)_{j, j} = \gamma^{2}\,c_{j}\,S$ by
+\eqref{eq:bg:V_c-diagonal} and $k/k_{j} \to c_{j}\,S$ by
+\eqref{eq:bg:pool-rates}, as established in
+\Cref{app:proofs:joint-clt}.
+
+\paragraph{Step (i): per-sample QB log-expectile CLT.}
+Fix $j \in \{1, \ldots, m\}$. The per-sample QB log-expectile
+\eqref{eq:pool-int:test-per-sample} decomposes exactly, as in
+\eqref{eq:app:main:log-decomp} with $m = 1$ and unit weight, into
+\[
+  \log\hatexpectile{\tau_{n},\,j} - \log\expectile{\tau_{n}}
+  \;=\;
+  \underbrace{\big[\log\psifn(\hat\gamma_{j}(k_{j}))
+                   - \log\psifn(\gamma)\big]}_{(\mathrm H)_{j}}
+  \;+\;
+  \underbrace{\big[\log\hat q^{\star}_{j}(1 - \tau_{n} \mid k_{j})
+                   - \log\Quant_{X}(\tau_{n})\big]}_{(\mathrm W)_{j}}
+  \;+\;
+  (\mathrm G),
+\]
+with $(\mathrm G) = \log\psifn(\gamma) + \log\Quant_{X}(\tau_{n})
+- \log\expectile{\tau_{n}}$ the deterministic expectile--quantile gap,
+which is common to all samples. The Taylor linearisation of Step (ii)
+of \Cref{app:proofs:main-clt} gives $(\mathrm H)_{j} = m(\gamma)
+(\hat\gamma_{j}(k_{j}) - \gamma) + O_{p}(k_{j}^{-1})$, so on the
+$\sqrt{k_{j}}$ scale
+\[
+  \sqrt{k_{j}}\,\big(\log\hatexpectile{\tau_{n},\,j}
+                     - \log\expectile{\tau_{n}}\big)
+  \;=\;
+  (m(\gamma),\, 1)\,
+  \sqrt{k_{j}}\!
+    \begin{pmatrix}
+      \hat\gamma_{j}(k_{j}) - \gamma \\[2pt]
+      \log\hat q^{\star}_{j}(1 - \tau_{n} \mid k_{j})
+        - \log\Quant_{X}(\tau_{n})
+    \end{pmatrix}
+  \;+\; \sqrt{k_{j}}\,(\mathrm G)
+  \;+\; o_{p}(1).
+\]
+The within-sample $2$-vector obeys the joint CLT
+\eqref{eq:pool-int:per-sample-clt} (proved as
+\eqref{eq:app:within-output}), with mean
+$\bm\mu_{j}^{\star} = \big(b_{j}^{H},\,
+L_{j}^{\star}\,b_{j}^{H} + b_{j}^{R}\big)^{\top}$,
+$b_{j}^{R} = -\lambda_{j}\,\Psi_{\rho}(e^{L_{j}^{\star}})$ (the
+order-statistic bias being zero by \eqref{eq:app:within-input}), and
+covariance $\gamma^{2}\big(1, L_{j}^{\star};\, L_{j}^{\star},
+1 + (L_{j}^{\star})^{2}\big)$. The deterministic gap satisfies, by the
+second-order expansion \eqref{eq:app:main:xi-Q-expansion} and the
+regular variation of $A$ used in \eqref{eq:app:main:Lambda-bullet},
+\[
+  \sqrt{k_{j}}\,(\mathrm G)
+  \;=\;
+  -c(\gamma, \rho)\,\sqrt{k_{j}}\,A\!\big((1 - \tau_{n})^{-1}\big)
+  + o(1)
+  \;\longrightarrow\;
+  -c(\gamma, \rho)\,\lambda_{j}\,(e^{L_{j}^{\star}})^{\rho}
+  \;=:\; g_{j}.
+\]
+Reading the row $(m(\gamma), 1)$ through the within-sample covariance
+gives the scalar variance
+$\gamma^{2}\big[(m(\gamma) + L_{j}^{\star})^{2} + 1\big]$ (the
+computation of \eqref{eq:pool-int:sigma-xi} at $m = 1$, unit weight),
+so Slutsky's theorem yields
+\begin{equation}
+\label{eq:app:hom:per-sample}
+  \sqrt{k_{j}}\,\big(\log\hatexpectile{\tau_{n},\,j}
+                     - \log\expectile{\tau_{n}}\big)
+  \;\todist\;
+  \mathcal N\!\Big(\beta_{j}^{\circ},\;
+    \gamma^{2}\big[(m(\gamma) + L_{j}^{\star})^{2} + 1\big]\Big),
+  \qquad
+  \beta_{j}^{\circ}
+  \;=\;
+  (m(\gamma) + L_{j}^{\star})\,b_{j}^{H} + b_{j}^{R}
+  + g_{j}.
+\end{equation}
+
+\paragraph{Step (ii): aggregation and rescaling to $\sqrt{k}$.}
+The $m$ samples are independent \eqref{eq:pool-int:R-zero}, so the
+scalars in \eqref{eq:app:hom:per-sample} are independent across $j$,
+and the vector $\sqrt{k}(\hat{\bm\Xi}_{n} -
+\log\expectile{\tau_{n}}\bm 1)$ has independent (hence jointly
+Gaussian, in the limit) coordinates obtained by multiplying
+\eqref{eq:app:hom:per-sample} by $\sqrt{k/k_{j}} \to \sqrt{c_{j} S}$.
+The $j$th limiting variance is
+\[
+  c_{j} S\,\gamma^{2}\big[(m(\gamma) + L_{j}^{\star})^{2} + 1\big]
+  \;=\;
+  \big[(m(\gamma) + L_{j}^{\star})^{2} + 1\big]\,(\Vc)_{j, j},
+\]
+which is the $j$th diagonal entry of $\bm\Sigma$ in
+\eqref{eq:pool-int:test-Sigma}; the off-diagonal entries vanish by
+independence, so the limiting covariance is exactly $\bm\Sigma$. The
+$j$th limiting mean is $\sqrt{c_{j} S}\,\beta_{j}^{\circ}$. Splitting
+$\beta_{j}^{\circ}$ as in \eqref{eq:app:hom:per-sample} and using the
+$\sqrt{k}$-rescaled bias identities of \Cref{app:proofs:joint-clt},
+\[
+  \sqrt{c_{j} S}\,b_{j}^{H} = (\Bc)_{j},
+  \qquad
+  \sqrt{c_{j} S}\,\big(L_{j}^{\star}\,b_{j}^{H}
+                       + b_{j}^{R}\big) = (\Bc^{\star})_{j},
+\]
+the first from \Cref{thm:bg:pool-hill} and the second from
+\eqref{eq:pool-int:Bcstar-def}, we obtain
+\[
+  \sqrt{c_{j} S}\,\beta_{j}^{\circ}
+  \;=\;
+  \sqrt{c_{j} S}\,\big[m(\gamma)\,b_{j}^{H}
+       + (L_{j}^{\star}\,b_{j}^{H} + b_{j}^{R})\big]
+  \;+\; \sqrt{c_{j} S}\,g_{j}
+  \;=\;
+  m(\gamma)\,(\Bc)_{j} + (\Bc^{\star})_{j}
+  \;+\; \sqrt{c_{j} S}\,g_{j}.
+\]
+For the last term, the per-$j$ identity
+\eqref{eq:app:main:Lambda-bullet-formula} reads
+$\sqrt{c_{j} S}\,\lambda_{j}\,(e^{L_{j}^{\star}})^{\rho} =
+\Lambda^{\bullet}$, so
+\[
+  \sqrt{c_{j} S}\,g_{j}
+  \;=\;
+  -c(\gamma, \rho)\,\sqrt{c_{j} S}\,\lambda_{j}\,
+   (e^{L_{j}^{\star}})^{\rho}
+  \;=\;
+  -c(\gamma, \rho)\,\Lambda^{\bullet}
+  \;=\; b^{\xi/\Quant}
+\]
+by \eqref{eq:pool-int:b-xi-Q-def}, \emph{independently of $j$}. Hence
+$\sqrt{c_{j} S}\,\beta_{j}^{\circ} = m(\gamma)\,(\Bc)_{j}
++ (\Bc^{\star})_{j} + b^{\xi/\Quant}$, i.e.\ the limiting mean vector
+is $\bm\beta = m(\gamma)\Bc + \Bc^{\star} + b^{\xi/\Quant}\bm 1$ of
+\eqref{eq:pool-int:test-beta}. This proves \eqref{eq:pool-int:test-clt}.
+
+\paragraph{Step (iii): GLS reduction to a quadratic form.}
+Write $\bm Y_{n} \coloneqq \sqrt{k}(\hat{\bm\Xi}_{n} -
+\log\expectile{\tau_{n}}\bm 1)$, so $\bm Y_{n} \todist
+\bm Y \sim \mathcal N(\bm\beta, \bm\Sigma)$ by Step (ii). Introduce
+the random oblique projection
+\[
+  \bm P_{n}
+  \;\coloneqq\;
+  \bm I - \frac{\bm 1\,\bm 1^{\top}\hat{\bm\Sigma}_{n}^{-1}}
+               {\bm 1^{\top}\hat{\bm\Sigma}_{n}^{-1}\bm 1},
+\]
+which satisfies $\bm P_{n}\bm 1 = \bm 0$ and, from the definition of
+$\hat\nu_{n}$ in \eqref{eq:pool-int:test-stat},
+$\hat{\bm\Xi}_{n} - \hat\nu_{n}\bm 1 = \bm P_{n}\hat{\bm\Xi}_{n}
+= \bm P_{n}(\hat{\bm\Xi}_{n} - \log\expectile{\tau_{n}}\bm 1)
+= k^{-1/2}\,\bm P_{n}\bm Y_{n}$, the second equality because
+$\bm P_{n}\bm 1 = \bm 0$ removes the common centring. Substituting
+into \eqref{eq:pool-int:test-stat},
+\begin{equation}
+\label{eq:app:hom:quadratic}
+  \Lambda^{\xi}_{n}
+  \;=\;
+  k\,\big(k^{-1/2}\bm P_{n}\bm Y_{n}\big)^{\top}
+     \hat{\bm\Sigma}_{n}^{-1}
+     \big(k^{-1/2}\bm P_{n}\bm Y_{n}\big)
+  \;=\;
+  \bm Y_{n}^{\top}\,
+    \bm P_{n}^{\top}\hat{\bm\Sigma}_{n}^{-1}\bm P_{n}\,
+  \bm Y_{n}.
+\end{equation}
+By hypothesis $\hat{\bm\Sigma}_{n} \toprob \bm\Sigma$, so
+$\bm P_{n} \toprob \bm P \coloneqq \bm I -
+\bm 1\bm 1^{\top}\bm\Sigma^{-1}/(\bm 1^{\top}\bm\Sigma^{-1}\bm 1)$ and
+$\bm P_{n}^{\top}\hat{\bm\Sigma}_{n}^{-1}\bm P_{n} \toprob
+\bm M \coloneqq \bm P^{\top}\bm\Sigma^{-1}\bm P$, both by the
+continuous-mapping theorem. A direct computation, writing
+$\bm w \coloneqq \bm\Sigma^{-1}\bm 1$ and $s \coloneqq
+\bm 1^{\top}\bm\Sigma^{-1}\bm 1 = \bm 1^{\top}\bm w$, gives the
+standard GLS identity
+\begin{equation}
+\label{eq:app:hom:M-identity}
+  \bm M
+  \;=\;
+  \bm P^{\top}\bm\Sigma^{-1}\bm P
+  \;=\;
+  \bm\Sigma^{-1}
+  \;-\;
+  \frac{\bm\Sigma^{-1}\bm 1\,\bm 1^{\top}\bm\Sigma^{-1}}
+       {\bm 1^{\top}\bm\Sigma^{-1}\bm 1},
+\end{equation}
+since the three cross terms in the expansion of
+$(\bm I - \bm w\bm 1^{\top}/s)\bm\Sigma^{-1}
+(\bm I - \bm 1\bm w^{\top}/s)$ each reduce to
+$\bm w\bm w^{\top}/s$ (using $\bm 1^{\top}\bm w = s$ and symmetry of
+$\bm\Sigma^{-1}$), leaving $\bm\Sigma^{-1} - \bm w\bm w^{\top}/s$. The
+matrix $\bm M$ is symmetric positive semi-definite and satisfies
+$\bm M\bm 1 = \bm w - \bm w(s/s) = \bm 0$. By
+\eqref{eq:app:hom:quadratic}, Slutsky's theorem, and the
+continuous-mapping theorem applied to the (jointly continuous)
+quadratic-form map $(\bm A, \bm y) \mapsto \bm y^{\top}\bm A\bm y$,
+\begin{equation}
+\label{eq:app:hom:quadratic-limit}
+  \Lambda^{\xi}_{n} \;\todist\; \bm Y^{\top}\bm M\,\bm Y,
+  \qquad \bm Y \sim \mathcal N(\bm\beta, \bm\Sigma).
+\end{equation}
+
+\paragraph{Step (iv): the noncentral chi-square limit.}
+Standardise $\bm Z \coloneqq \bm\Sigma^{-1/2}\bm Y \sim
+\mathcal N(\bm\Sigma^{-1/2}\bm\beta, \bm I_{m})$, where
+$\bm\Sigma^{-1/2}$ is the symmetric positive-definite square root of
+$\bm\Sigma^{-1}$. Then
+$\bm Y^{\top}\bm M\bm Y = \bm Z^{\top}\widetilde{\bm M}\bm Z$ with
+\[
+  \widetilde{\bm M}
+  \;\coloneqq\;
+  \bm\Sigma^{1/2}\bm M\,\bm\Sigma^{1/2}
+  \;=\;
+  \bm I_{m} - \frac{\bm v\bm v^{\top}}{\bm v^{\top}\bm v},
+  \qquad
+  \bm v \coloneqq \bm\Sigma^{-1/2}\bm 1,
+\]
+using \eqref{eq:app:hom:M-identity} and
+$\bm\Sigma^{1/2}\bm w = \bm\Sigma^{-1/2}\bm 1 = \bm v$,
+$s = \bm v^{\top}\bm v$. The matrix $\widetilde{\bm M}$ is the
+orthogonal projection onto $\bm v^{\perp}$: it is symmetric,
+idempotent, and of rank $m - 1$. A quadratic form
+$\bm Z^{\top}\widetilde{\bm M}\bm Z$ in a unit-covariance Gaussian
+$\bm Z \sim \mathcal N(\bm\mu_{Z}, \bm I_{m})$ with $\widetilde{\bm M}$
+a rank-$r$ orthogonal projection is noncentral $\chi^{2}_{r}$ with
+noncentrality $\bm\mu_{Z}^{\top}\widetilde{\bm M}\bm\mu_{Z}$. Here
+$r = m - 1$ and $\bm\mu_{Z} = \bm\Sigma^{-1/2}\bm\beta$, so
+\[
+  \Lambda^{\xi}_{n}
+  \;\todist\;
+  \chi^{2}_{m - 1}(\delta),
+  \qquad
+  \delta
+  \;=\;
+  \bm\beta^{\top}\bm\Sigma^{-1/2}\widetilde{\bm M}\bm\Sigma^{-1/2}\bm\beta
+  \;=\;
+  \bm\beta^{\top}\bm M\bm\beta
+  \;=\;
+  \bm\beta^{\top}\bm\Sigma^{-1}\bm\beta
+  - \frac{(\bm 1^{\top}\bm\Sigma^{-1}\bm\beta)^{2}}
+         {\bm 1^{\top}\bm\Sigma^{-1}\bm 1},
+\]
+the last equality by \eqref{eq:app:hom:M-identity}. This is
+\eqref{eq:pool-int:test-noncentral}. Since $\widetilde{\bm M}$ is
+positive semi-definite, $\delta \ge 0$, with $\delta = 0$ iff
+$\widetilde{\bm M}\bm\Sigma^{-1/2}\bm\beta = \bm 0$, i.e.\
+$\bm\Sigma^{-1/2}\bm\beta \in \mathrm{span}\{\bm v\}
+= \mathrm{span}\{\bm\Sigma^{-1/2}\bm 1\}$, equivalently
+$\bm\beta \in \mathrm{span}\{\bm 1\}$.
+
+\paragraph{Step (v): the two regimes with $\delta = 0$.}
+\emph{(i) Undersmoothing.} Under \eqref{eq:pool-int:undersmoothing},
+$\lambda_{j} = 0$ for every $j$, so the per-sample $\sqrt{k_{j}}$-biases
+$b_{j}^{H} = \lambda_{j}/(1-\rho)$ and $b_{j}^{R}
+= -\lambda_{j}\Psi_{\rho}(e^{L_{j}^{\star}})$ both vanish (the
+order-statistic bias being identically zero), and
+$\Lambda^{\bullet} = 0$, whence $\Bc = \Bc^{\star} = \bm 0$ and
+$b^{\xi/\Quant} = 0$. Therefore
+$\bm\beta = \bm 0 \in \mathrm{span}\{\bm 1\}$ and $\delta = 0$.
+
+\emph{(ii) Equal-fraction distributed inference.} Here
+$L_{j}^{\star} = L^{\star}$ is sample-free. The two per-sample
+$\sqrt{k_{j}}$-biases are proportional to $\lambda_{j}$ with
+coefficients depending only on the common parameters
+$(\gamma, \rho, L^{\star})$:
+$b_{j}^{H} = \lambda_{j}/(1 - \rho)$ and
+$b_{j}^{R} = -\lambda_{j}\,\Psi_{\rho}(e^{L^{\star}})$, the
+order-statistic bias being identically zero. The $\sqrt{k}$-rescaling
+factor satisfies, by \eqref{eq:app:main:Lambda-bullet-formula} at
+$L_{j}^{\star} = L^{\star}$,
+\[
+  \sqrt{c_{j} S}\,\lambda_{j}
+  \;=\;
+  \Lambda^{\bullet}\,(e^{L^{\star}})^{-\rho},
+  \qquad \text{sample-free.}
+\]
+Consequently
+$(\Bc)_{j} = \sqrt{c_{j} S}\,b_{j}^{H}
+= \Lambda^{\bullet}(e^{L^{\star}})^{-\rho}/(1 - \rho)$ and
+$(\Bc^{\star})_{j} = \sqrt{c_{j} S}\,(L^{\star}b_{j}^{H}
++ b_{j}^{R}) = \Lambda^{\bullet}(e^{L^{\star}})^{-\rho}
+\big[L^{\star}/(1 - \rho) - \Psi_{\rho}(e^{L^{\star}})\big]$ are both
+sample-free, and $b^{\xi/\Quant}\bm 1$ is collinear with $\bm 1$ by
+construction. Hence every coordinate of
+$\bm\beta = m(\gamma)\Bc + \Bc^{\star} + b^{\xi/\Quant}\bm 1$ equals
+the common constant
+\[
+  \beta_{0}
+  \;=\;
+  \Lambda^{\bullet}(e^{L^{\star}})^{-\rho}\!
+   \left[\frac{m(\gamma) + L^{\star}}{1 - \rho}
+         - \Psi_{\rho}(e^{L^{\star}})\right]
+   + b^{\xi/\Quant},
+\]
+so $\bm\beta = \beta_{0}\bm 1 \in \mathrm{span}\{\bm 1\}$ and
+$\delta = 0$. This is the expectile-level counterpart of the
+bias-collinearity that renders the tail-index test
+\Cref{thm:bg:tail-homogeneity-test} asymptotically central under the
+same distributed-inference regime.
+
+\paragraph{Step (vi): consistency under the alternative.}
+Write $\bm\Xi_{n}^{\star} \coloneqq (\log\expectile{\tau_{n},\,1},
+\ldots, \log\expectile{\tau_{n},\,m})^{\top}$ for the vector of
+\emph{population} per-sample log-expectiles, and abbreviate
+$\bm D_{n} \coloneqq \hat{\bm\Sigma}_{n}^{-1} \toprob \bm\Sigma^{-1}
+\succ \bm 0$ with the induced seminorm
+$\|\bm x\|_{\bm D_{n}}^{2} \coloneqq \bm x^{\top}\bm D_{n}\bm x$. Each
+$\hatexpectile{\tau_{n},\,j}$ is consistent for its own
+$\expectile{\tau_{n},\,j}$, so the per-sample CLT
+\eqref{eq:app:hom:per-sample} recentred at $\bm\Xi_{n}^{\star}$ gives
+$\hat{\bm\Xi}_{n} - \bm\Xi_{n}^{\star} = O_{p}(k^{-1/2})$. Because the
+GLS residual $\hat{\bm\Xi}_{n} - \hat\nu_{n}\bm 1 = \bm P_{n}
+\hat{\bm\Xi}_{n}$ is, by definition of $\hat\nu_{n}$, the minimiser
+of $c \mapsto \|\hat{\bm\Xi}_{n} - c\bm 1\|_{\bm D_{n}}^{2}$, the
+statistic is the squared GLS distance of $\hat{\bm\Xi}_{n}$ from
+$\mathrm{span}\{\bm 1\}$:
+\[
+  \Lambda^{\xi}_{n}
+  \;=\;
+  k\,\min_{c \in \R}\big\|\hat{\bm\Xi}_{n} - c\bm 1\big\|_{\bm D_{n}}^{2}.
+\]
+By the triangle inequality for $\|\cdot\|_{\bm D_{n}}$ and the bound
+$\min_{c}\|\bm x - c\bm 1\|_{\bm D_{n}} \ge
+\lambda_{\min}(\bm D_{n})^{1/2}\,\min_{c}\|\bm x - c\bm 1\|$ (valid
+because, at the $\|\cdot\|_{\bm D_{n}}$-optimal $c$, the entrywise
+inequality $\bm x^{\top}\bm D_{n}\bm x \ge \lambda_{\min}(\bm D_{n})
+\|\bm x\|^{2}$ applies),
+\[
+  \sqrt{\Lambda^{\xi}_{n}}
+  \;=\;
+  \sqrt{k}\,\min_{c}\big\|\hat{\bm\Xi}_{n} - c\bm 1\big\|_{\bm D_{n}}
+  \;\ge\;
+  \lambda_{\min}(\bm D_{n})^{1/2}\,
+  \sqrt{k}\,\min_{c}\big\|\bm\Xi_{n}^{\star} - c\bm 1\big\|
+  \;-\;
+  \sqrt{k}\,\big\|\hat{\bm\Xi}_{n} - \bm\Xi_{n}^{\star}\big\|_{\bm D_{n}}.
+\]
+The subtracted term is $O_{p}(1)$ since $\sqrt{k}(\hat{\bm\Xi}_{n}
+- \bm\Xi_{n}^{\star}) = O_{p}(1)$ and $\bm D_{n} = O_{p}(1)$. Under
+the stated alternative $\sqrt{k}\,\min_{c}\|\bm\Xi_{n}^{\star}
+- c\bm 1\| \to \infty$, while $\lambda_{\min}(\bm D_{n}) \toprob
+\lambda_{\min}(\bm\Sigma^{-1}) > 0$ by positive definiteness of
+$\bm\Sigma$. The first term on the right therefore diverges in
+probability and dominates the $O_{p}(1)$ correction, so
+$\Lambda^{\xi}_{n} \toprob \infty$. \qed
 
 \backmatter
 \printbibliography[heading=bibintoc]

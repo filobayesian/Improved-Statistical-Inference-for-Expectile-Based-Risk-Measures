@@ -366,11 +366,50 @@ $\gamma \in (0, 1)$. Then
 The factor $\psifn(\gamma)$ is the linchpin of all extreme-expectile
 inference: it converts asymptotic statements about extreme quantiles
 into asymptotic statements about extreme expectiles, and vice versa.
-The function $\psifn$ is continuous and strictly increasing on
-$(0, 1)$, with $\psifn(\gamma) \to 1$ as $\gamma \downarrow 0$ and
-$\psifn(\gamma) \to \infty$ as $\gamma \uparrow 1$. In particular, for
-heavier tails the expectile lies further above the same-level
-quantile.
+The function $\psifn$ is continuous on $(0, 1)$, with
+$\psifn(\gamma) \to 1$ as $\gamma \downarrow 0$ and
+$\psifn(\gamma) \to \infty$ as $\gamma \uparrow 1$. It is \emph{not}
+monotone: its logarithmic derivative
+\begin{equation}
+\label{eq:bg:m-function}
+  m(\gamma)
+  \;\coloneqq\;
+  \frac{d}{d\gamma}\log\psifn(\gamma)
+  \;=\;
+  \frac{1}{1 - \gamma} - \log\big(\gamma^{-1} - 1\big)
+\end{equation}
+changes sign at the value $\gamma^{\star} \approx 0.2178$ solving
+$m(\gamma^{\star}) = 0$, so $\psifn$ decreases on $(0, \gamma^{\star})$
+to a minimum $\psifn(\gamma^{\star}) \approx 0.757$ and increases on
+$(\gamma^{\star}, 1)$; in particular it returns to $\psifn = 1$ at
+$\gamma = 1/2$. Only for tail indices beyond $\gamma^{\star}$ does a
+heavier tail place the expectile further above the same-level quantile.
+
+Under the second-order condition $\mathcal C_{2}(\gamma, \rho, A)$ with
+$\gamma \in (0, 1/2)$ and $\E|X_{-}|^{2 + \delta} < \infty$, the
+first-order equivalence \eqref{eq:bg:expectile-quantile-equivalence}
+sharpens to the second-order expansion
+\parencite{DaouiaGirardStupfler2018}
+\begin{equation}
+\label{eq:bg:c-gamma-rho}
+  \frac{\expectile{\tau}(X)}{\Quant_{X}(\tau)}
+  \;=\;
+  \psifn(\gamma)\Big[1 + c(\gamma, \rho)\,A\big((1 - \tau)^{-1}\big)
+                      + O\big(\Quant_{X}(\tau)^{-1}\big)\Big],
+  \quad
+  c(\gamma, \rho)
+  \;\coloneqq\;
+  \frac{(\gamma^{-1} - 1)^{-\rho}}{1 - \gamma - \rho}
+  + \frac{(\gamma^{-1} - 1)^{-\rho} - 1}{\rho},
+\end{equation}
+as $\tau \uparrow 1$. The constant $c(\gamma, \rho)$ measures the
+deterministic gap between the extreme expectile and the same-level
+quantile beyond the leading factor $\psifn(\gamma)$. The remaining
+second-order term $O(\Quant_{X}(\tau)^{-1})$ is governed by the lower
+moments of $X$; under the moment condition
+$\sqrt{n(1 - \tau_{n})}\,/\Quant_{X}(\tau_{n}) \to 0$ adopted below it
+is $\sqrt{n(1 - \tau_{n})}$-negligible, so the $A$-driven term alone
+governs the asymptotic bias of the quantile-based estimator.
 
 \subsection{Two families of estimators at intermediate levels}
 
@@ -442,10 +481,22 @@ $k = \lfloor n(1 - \tau_{n}) \rfloor$,
   \left(\frac{\hatexpectile{\tau_{n}}}{\expectile{\tau_{n}}} - 1
   \right)
   \;\todist\;
-  \mathcal N\!\left(\frac{m(\gamma)}{1 - \rho}\,\lambda,\;
+  \mathcal N\!\left(\Big(\frac{m(\gamma)}{1 - \rho}
+                          - c(\gamma, \rho)\Big)\lambda,\;
                     \gamma^{2}\big(1 + m(\gamma)^{2}\big)\right),
 \]
-where $m(\gamma) = (1 - \gamma)^{-1} - \log(\gamma^{-1} - 1)$.
+with $m(\gamma)$ as in \eqref{eq:bg:m-function} and $c(\gamma, \rho)$
+the second-order expectile--quantile constant of
+\eqref{eq:bg:c-gamma-rho}. The asymptotic bias has two pieces: the
+Hill bias $\lambda / (1 - \rho)$ propagated through the logarithmic
+derivative $m(\gamma)$ of $\psifn$, and the deterministic
+expectile--quantile gap $-c(\gamma, \rho)\,\lambda$. The empirical
+quantile $\hatQuant(\tau_{n})$ adds no bias of its own: being an
+intermediate order statistic, it is $\sqrt{n(1 - \tau_{n})}$-unbiased
+for $\Quant_{X}(\tau_{n})$, the condition
+$\sqrt{n(1 - \tau_{n})}\,/\Quant_{X}(\tau_{n}) \to 0$ inherited from
+\Cref{thm:bg:laws-iid} ensuring the moment-term contribution to the
+gap is negligible.
 \end{theorem}
 
 \paragraph{Comparison.}

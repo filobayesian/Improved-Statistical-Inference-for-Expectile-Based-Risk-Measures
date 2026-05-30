@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.26)  29 MAY 2026 10:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.26)  30 MAY 2026 12:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -999,11 +999,22 @@ Overfull \hbox (3.4753pt too wide) in paragraph at lines 229--237
  \T1/lmr/m/n/10.95 (-20) at which the asymmetrically-
  []
 
-[8] [9] [10] [11] [12] [13] [14] [15] [16]) [17]
+[8] [9]
+Overfull \hbox (22.40997pt too wide) detected at line 404
+[][][][]  \OT1/lmr/m/n/10.95 =  \OML/lmm/m/it/10.95  \OT1/lmr/m/n/10.95 (\OML/l
+mm/m/it/10.95 ^^M\OT1/lmr/m/n/10.95 )[]1 + \OML/lmm/m/it/10.95 c\OT1/lmr/m/n/10
+.95 (\OML/lmm/m/it/10.95 ^^M; ^^Z\OT1/lmr/m/n/10.95 ) \OML/lmm/m/it/10.95 A[]\O
+T1/lmr/m/n/10.95 (1 \OMS/lmsy/m/n/10.95 ^^@ \OML/lmm/m/it/10.95 ^^\\OT1/lmr/m/n
+/10.95 )[][] + \OML/lmm/m/it/10.95 O[]Q[]\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.9
+5 ^^\\OT1/lmr/m/n/10.95 )[][][]\OML/lmm/m/it/10.95 ;  c\OT1/lmr/m/n/10.95 (\OML
+/lmm/m/it/10.95 ^^M; ^^Z\OT1/lmr/m/n/10.95 )  [][]=  [] + []\OML/lmm/m/it/10.95
+ ;
+ []
+
+[10] [11] [12] [13] [14] [15] [16]) [17]
 \openout2 = `chapters/03_pooled_intermediate.aux'.
 
-
-(./chapters/03_pooled_intermediate.tex
+ (./chapters/03_pooled_intermediate.tex
 Chapter 3.
 [18
 
@@ -1023,17 +1034,17 @@ MEDIATE LEVELS \T1/lmr/m/n/10.95 20
  []
 
 [20]
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 301.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 301.
-
 Overfull \hbox (57.91907pt too wide) has occurred while \output is active
 \T1/lmr/m/sl/10.95 CHAPTER 3.  POOLED INFERENCE FOR EXTREME EXPECTILES AT INTER
 MEDIATE LEVELS \T1/lmr/m/n/10.95 21
  []
 
 [21]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <9> on input line 315.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 315.
+
 Overfull \hbox (57.91907pt too wide) has occurred while \output is active
 \T1/lmr/m/sl/10.95 CHAPTER 3.  POOLED INFERENCE FOR EXTREME EXPECTILES AT INTER
 MEDIATE LEVELS \T1/lmr/m/n/10.95 22
@@ -1046,7 +1057,13 @@ MEDIATE LEVELS \T1/lmr/m/n/10.95 23
  []
 
 [23]
-Overfull \hbox (17.87221pt too wide) in paragraph at lines 554--559
+Overfull \hbox (57.91907pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10.95 CHAPTER 3.  POOLED INFERENCE FOR EXTREME EXPECTILES AT INTER
+MEDIATE LEVELS \T1/lmr/m/n/10.95 24
+ []
+
+[24]
+Overfull \hbox (17.87221pt too wide) in paragraph at lines 571--577
  []\T1/lmr/bx/n/10.95 (-20) The de-ter-min-is-tic expectile--quantile gap.[] \T
 1/lmr/m/n/10.95 (-20) The first-order asymp-totic equiv-a-lence $\OML/lmm/m/it/
 10.95 ^^X[]=Q[]\OT1/lmr/m/n/10.95 (-20) (\OML/lmm/m/it/10.95 ^^\\OT1/lmr/m/n/10
@@ -1054,12 +1071,6 @@ Overfull \hbox (17.87221pt too wide) in paragraph at lines 554--559
  []
 
 
-Overfull \hbox (57.91907pt too wide) has occurred while \output is active
-\T1/lmr/m/sl/10.95 CHAPTER 3.  POOLED INFERENCE FOR EXTREME EXPECTILES AT INTER
-MEDIATE LEVELS \T1/lmr/m/n/10.95 24
- []
-
-[24]
 Overfull \hbox (57.91907pt too wide) has occurred while \output is active
 \T1/lmr/m/sl/10.95 CHAPTER 3.  POOLED INFERENCE FOR EXTREME EXPECTILES AT INTER
 MEDIATE LEVELS \T1/lmr/m/n/10.95 25
@@ -1113,40 +1124,52 @@ Overfull \hbox (57.91907pt too wide) has occurred while \output is active
 MEDIATE LEVELS \T1/lmr/m/n/10.95 33
  []
 
-[33])
+[33]
 Overfull \hbox (57.91907pt too wide) has occurred while \output is active
 \T1/lmr/m/sl/10.95 CHAPTER 3.  POOLED INFERENCE FOR EXTREME EXPECTILES AT INTER
 MEDIATE LEVELS \T1/lmr/m/n/10.95 34
  []
 
 [34]
+Overfull \hbox (57.91907pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10.95 CHAPTER 3.  POOLED INFERENCE FOR EXTREME EXPECTILES AT INTER
+MEDIATE LEVELS \T1/lmr/m/n/10.95 35
+ []
+
+[35])
+Overfull \hbox (57.91907pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10.95 CHAPTER 3.  POOLED INFERENCE FOR EXTREME EXPECTILES AT INTER
+MEDIATE LEVELS \T1/lmr/m/n/10.95 36
+ []
+
+[36]
 \openout2 = `chapters/04_pooled_extreme.aux'.
 
  (./chapters/04_pooled_extreme.tex
 Chapter 4.
-[35
+[37
 
 
 
 
-]) [36]
+]) [38]
 \openout2 = `chapters/05_discussion.aux'.
 
  (./chapters/05_discussion.tex
 Chapter 5.
-) [37
+) [39
 
 
 
 
-] [38]
+] [40]
 Appendix A.
-[39
+[41
 
 
 
-] [40] [41]
-Overfull \hbox (1.77873pt too wide) detected at line 334
+] [42] [43]
+Overfull \hbox (1.77873pt too wide) detected at line 344
 [][][][] []\OT1/lmr/m/n/10.95 (1 \OMS/lmsy/m/n/10.95 ^^@ \OML/lmm/m/it/10.95 ^^
 \[] \OMS/lmsy/m/n/10.95 j \OML/lmm/m/it/10.95 k[]\OT1/lmr/m/n/10.95 )  \OMS/lms
 y/m/n/10.95 ^^@  [] \OML/lmm/m/it/10.95 Q[]\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10
@@ -1159,13 +1182,13 @@ r/m/n/10.95 ) \OMS/lmsy/m/n/10.95 ^^@ \OML/lmm/m/it/10.95 ^^M[]  \OT1/lmr/m/n/1
 m/n/10.95 )\OML/lmm/m/it/10.95 ;
  []
 
-[42]
-Overfull \hbox (76.32314pt too wide) detected at line 393
+[44]
+Overfull \hbox (76.32314pt too wide) detected at line 403
 []  []  \OT1/lmr/m/n/10.95 =  []  []  []  +  [] \OML/lmm/m/it/10.95 :
  []
 
-[43]
-Overfull \hbox (29.36664pt too wide) detected at line 514
+[45]
+Overfull \hbox (29.36664pt too wide) detected at line 526
 []\OT1/lmr/m/n/10.95 (\OML/lmm/b/it/10.95 ![]\OT1/lmr/m/n/10.95 ) \OMS/lmsy/m/n
 /10.95 ^^@ \OML/lmm/m/it/10.95 ^^M  \OT1/lmr/m/n/10.95 =  [] \OML/lmm/m/it/10.9
 5 ![] \OT1/lmr/m/n/10.95 ([](\OML/lmm/m/it/10.95 k[]\OT1/lmr/m/n/10.95 ) \OMS/l
@@ -1179,29 +1202,29 @@ n/10.95 ^^@ [] \OML/lmm/m/it/10.95 Q[]\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 ^
  []
 
 
-Overfull \hbox (1.27345pt too wide) in paragraph at lines 542--549
+Overfull \hbox (1.27345pt too wide) in paragraph at lines 554--561
 \T1/lmr/m/n/10.95 (-20) The mean fol-lows from the block struc-ture of $\OML/lm
 m/b/it/10.95 ^^V[]$ \T1/lmr/m/n/10.95 (-20) iden-ti-fied in Step (iii): $\OML/l
 mm/b/it/10.95 A ^^V[] \OT1/lmr/m/n/10.95 (-20) = []\OML/lmm/b/it/10.95 ![]B[]\O
 ML/lmm/m/it/10.95 ;  \OML/lmm/b/it/10.95 ![]B[][][]$\T1/lmr/m/n/10.95 (-20) ,
  []
 
-[44] [45]
-Overfull \hbox (15.1974pt too wide) in paragraph at lines 705--711
+[46] [47]
+Overfull \hbox (15.1974pt too wide) in paragraph at lines 717--723
  []\T1/lmr/bx/n/10.95 (-20) Step (iii): the de-ter-min-is-tic expectile--quanti
 le gap.[] \T1/lmr/m/n/10.95 (-20) The first-order equiv-a-lence $\OML/lmm/m/it/
 10.95 ^^X[]=Q[]\OT1/lmr/m/n/10.95 (-20) (\OML/lmm/m/it/10.95 ^^\\OT1/lmr/m/n/10
 .95 (-20) ) \OMS/lmsy/m/n/10.95 !
  []
 
-[46] [47] [48] [49]
-Overfull \hbox (10.28572pt too wide) detected at line 1104
+[48] [49] [50] [51]
+Overfull \hbox (10.28572pt too wide) detected at line 1110
 \OML/lmm/m/it/10.95 ^^V=\OT1/lmr/m/n/10.95 2  =  []  =  []\OML/lmm/m/it/10.95 ;
   ^^W=\OT1/lmr/m/n/10.95 2  =  []  =  []\OML/lmm/m/it/10.95 ;
  []
 
-[50] [51] [52]
-Overfull \hbox (12.15097pt too wide) in paragraph at lines 1393--1404
+[52] [53] [54]
+Overfull \hbox (12.15097pt too wide) in paragraph at lines 1399--1410
 \T1/lmr/m/n/10.95 (-20) the good event $\OMS/lmsy/m/n/10.95 f[]\OT1/lmr/m/n/10.
 95 (-20) (\OML/lmm/b/it/10.95 ![]\OT1/lmr/m/n/10.95 (-20) )\OML/lmm/m/it/10.95 
 ; []\OT1/lmr/m/n/10.95 (-20) ([]) \OMS/lmsy/m/n/10.95 2 \OT1/lmr/m/n/10.95 (-20
@@ -1212,9 +1235,17 @@ Overfull \hbox (12.15097pt too wide) in paragraph at lines 1393--1404
 .95 ![]\OT1/lmr/m/n/10.95 (-20) ) []
  []
 
-[53] [54]
+[55]
+Overfull \hbox (5.07356pt too wide) detected at line 1588
+[] [] [] [] \OMS/lmsy/m/n/10.95 ^^@ [] \OML/lmm/m/it/10.95 ^^X[][]  \OT1/lmr/m/
+n/10.95 =  (\OML/lmm/m/it/10.95 m\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 ^^M\OT
+1/lmr/m/n/10.95 )\OML/lmm/m/it/10.95 ;  \OT1/lmr/m/n/10.95 1) []  []  +  [] (G)
+  +  \OML/lmm/m/it/10.95 o[]\OT1/lmr/m/n/10.95 (1)\OML/lmm/m/it/10.95 :
+ []
+
+[56] [57] [58] [59]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-523.
+895.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -1225,29 +1256,28 @@ Package microtype Info: Loading generic protrusion settings for font family
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
- [55
+[60
 
 
-]
-(./main.aux (./chapters/01_introduction.aux) (./chapters/02_background.aux)
-(./chapters/03_pooled_intermediate.aux) (./chapters/04_pooled_extreme.aux)
+] (./main.aux (./chapters/01_introduction.aux) (./chapters/02_background.aux) (
+./chapters/03_pooled_intermediate.aux) (./chapters/04_pooled_extreme.aux)
 (./chapters/05_discussion.aux))
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: E52FF9327A2264B106A9C91ED681C969;11906.
+(rerunfilecheck)             Checksum: 62CEE20005D98ACC5653836F3BA07E03;12071.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 26209 strings out of 474116
- 465822 string characters out of 5743681
- 1952187 words of memory out of 5000000
- 47455 multiletter control sequences out of 15000+600000
- 690193 words of font info for 313 fonts, out of 8000000 for 9000
+ 26302 strings out of 474116
+ 467319 string characters out of 5743681
+ 1950187 words of memory out of 5000000
+ 47486 multiletter control sequences out of 15000+600000
+ 691785 words of font info for 329 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  74i,18n,84p,1001b,2270s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/filippogombac/Library/texlive/2024/texmf-var/fonts/pk/ljfour/public/
@@ -1273,10 +1303,10 @@ fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1
 /public/lm/lmsy9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/
 lmtt10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symb
 ols/msbm10.pfb>
-Output written on main.pdf (59 pages, 724798 bytes).
+Output written on main.pdf (64 pages, 767951 bytes).
 PDF statistics:
- 1573 PDF objects out of 1728 (max. 8388607)
- 1442 compressed objects within 15 object streams
- 341 named destinations out of 1000 (max. 500000)
- 68553 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 1721 PDF objects out of 1728 (max. 8388607)
+ 1584 compressed objects within 16 object streams
+ 371 named destinations out of 1000 (max. 500000)
+ 68561 words of extra memory for PDF output out of 74296 (max. 10000000)
 
