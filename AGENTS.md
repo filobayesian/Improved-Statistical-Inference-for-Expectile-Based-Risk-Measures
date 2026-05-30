@@ -91,7 +91,7 @@ The thesis is a composition of three pre-existing pieces, applied in the order *
 
 3. **Expectile-specific delta-method calculus (used in Chapter 3).** The only expectile-specific computation is the delta method applied through $\psifn(\gamma) = (\gamma^{-1}-1)^{-\gamma}$, with derivative factor $m(\gamma) = (1-\gamma)^{-1} - \log(\gamma^{-1}-1)$. Applied to the pooled $(\hat\gamma^{\text{pool}},\hat Q^{\text{pool}})$ from piece (1), it produces a joint Gaussian limit for $(\hat\gamma^{\text{pool}},\widehat\xi^{\text{pool}}_{\tau_n})$ — exactly the input piece (2) consumes. The asymptotic equivalence $\xi_\tau / Q_X(\tau) \to \psifn(\gamma)$ as $\tau \uparrow 1$ is from Proposition 1 of DGS (2019).
 
-The iid substrate for extreme-expectile inference itself is Daouia-Girard-Stupfler (2018, *JRSS B* 80, 263–292); cited in the bib but the PDF is **not** in `/papers`.
+The iid substrate for extreme-expectile inference itself is Daouia-Girard-Stupfler (2018, *JRSS B* 80, 263–292); the PDF is available in `/papers` as `Daouia-Estimationtailrisk-2018.pdf`.
 
 ## Notation conventions
 

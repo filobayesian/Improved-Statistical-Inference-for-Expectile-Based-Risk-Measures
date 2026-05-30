@@ -24,12 +24,12 @@ $F$, the corresponding order statistics are denoted by
 $X_{1:n} \le X_{2:n} \le \cdots \le X_{n:n}$.
 
 Heavy-tailed asymptotics are governed by the language of regular
-variation; the reference is \textcite[Ch.~1]{deHaanFerreira2006}.
+variation; the reference is \textcite[Appendix~B.1]{deHaanFerreira2006}.
 
 \begin{definition}[Regular variation]
 \label{def:bg:rv}
-A measurable function $f : \R_{+} \to \R_{+}$ is \emph{regularly varying
-at infinity with index} $\alpha \in \R$, written
+A Lebesgue measurable function $f : (0,\infty) \to \R$ that is eventually
+positive is \emph{regularly varying at infinity with index} $\alpha \in \R$, written
 $f \in \mathrm{RV}_{\alpha}$, if for every $y > 0$,
 \[
   \lim_{t \to \infty} \frac{f(t y)}{f(t)} \;=\; y^{\alpha}.
@@ -47,6 +47,7 @@ $\overline F \in \mathrm{RV}_{-1/\gamma}$, or equivalently the
 \emph{tail quantile function}
 \[
   U(t) \;\coloneqq\; \inf\!\Big\{ x \in \R \,:\, \tfrac{1}{\overline F(x)} \ge t \Big\}
+  \,,\qquad t>1,
 \]
 satisfies $U \in \mathrm{RV}_{\gamma}$.
 \end{condition}
@@ -60,7 +61,7 @@ Throughout, for a continuous distribution function $F$, we write
   \inf\{x\in\R:F(x)\ge \tau\},
   \qquad 0<\tau<1.
 \]
-With the tail quantile $U(t)=F^{\leftarrow}(1-1/t)$, this gives
+With the tail quantile $U(t)=F^{\leftarrow}(1-1/t)$, $t>1$, this gives
 \[
   \Quant_X(\tau)=U((1-\tau)^{-1}),
   \qquad
@@ -68,7 +69,7 @@ With the tail quantile $U(t)=F^{\leftarrow}(1-1/t)$, this gives
 \]
 
 \Cref{cond:bg:first-order} is equivalent to saying that $X$ lies in the
-max-domain of attraction of the Fr\'echet distribution with shape
+Fr\'echet max-domain of attraction with extreme-value index
 $\gamma$ \parencite[Theorem~1.2.1]{deHaanFerreira2006}. The parameter
 $\gamma > 0$ is the \emph{extreme-value index} of $F$; it controls how
 slowly $\overline F$ decays at infinity. Standard heavy-tailed
@@ -111,6 +112,10 @@ $X^{-}=\max(-X,0)$ satisfies
 \]
 \end{condition}
 
+\textcite{DaouiaGirardStupfler2018} write the same assumption as
+$\E|Y_-|^{2+\delta}<\infty$ with $Y_-=\min(Y,0)$; here $X^-$ denotes
+the nonnegative negative part.
+
 For the expectile CLTs used below we shall work in the range
 $\gamma \in (0, 1/2)$ together with an explicit lower-tail moment
 condition. The restriction $\gamma < 1/2$ controls the positive tail
@@ -133,7 +138,8 @@ extreme quantiles. Both are standard; the textbook reference is
 \label{sec:bg:hill}
 
 Given an iid sample $X_{1}, \ldots, X_{n}$ from $F$ and an integer
-$k = k_{n} \in \{1, \ldots, n-1\}$, the \emph{Hill estimator} of
+$k = k_{n} \in \{1, \ldots, n-1\}$, the \emph{Hill estimator}
+\parencite{Hill1975} of
 $\gamma$ based on the $k + 1$ top order statistics is
 \begin{equation}
 \label{eq:bg:hill}
@@ -147,12 +153,19 @@ that event; equivalently one may assume that the upper tail is
 eventually supported on $(0,\infty)$, or apply a deterministic shift,
 which leaves the extreme-value index unchanged.
 The interpretation is direct: if the upper tail of $F$ were exactly
-Pareto with index $1/\gamma$, the log-spacings
-$\log(X_{n-i+1:n}) - \log(X_{n-k:n})$ would be iid exponential with
-mean $\gamma$, and $\hat\gamma_{n}(k)$ would be their sample mean.
+Pareto with index $1/\gamma$, the logarithms of excess ratios above a
+fixed tail threshold would be exponential with mean $\gamma$; in
+Hill's order-statistic derivation, this appears through the scaled
+consecutive log-spacings
+$i\{\log X_{n-i+1:n}-\log X_{n-i:n}\}$, which are independent
+exponential variables with mean $\gamma$ in the exact Pareto case and
+whose average is \eqref{eq:bg:hill}.
 \Cref{cond:bg:first-order} asserts that the upper tail is
-\emph{approximately} Pareto, which translates into the following
-asymptotic theory \parencite[Theorem~3.2.5]{deHaanFerreira2006}.
+\emph{approximately} Pareto. The consistency statement below is
+\textcite[Theorem~3.2.2]{deHaanFerreira2006}; the normal limit is
+\textcite[Theorem~3.2.5]{deHaanFerreira2006} when $\rho<0$, with the
+$\rho=0$ endpoint in the same $\mathcal C_{2}$ convention covered by
+the $m=1$ specialisation of \textcite[Theorem~1]{DaouiaPadoanStupfler2021}.
 
 \begin{theorem}
 \label{thm:bg:hill}
@@ -189,10 +202,19 @@ Weissman estimator
   \;=\; \left( \frac{k}{n p} \right)^{\hat\gamma_{n}(k)}
         X_{n - k\,:\,n}.
 \end{equation}
+For $p=c/n$ and fixed $k$, \eqref{eq:bg:weissman} reduces to the
+large-quantile estimator proposed by \textcite[\S4]{Weissman1978}
+in the Fr\'echet case, written there with tail parameter
+$\alpha=1/\gamma$ and descending order statistics.
 The theorem below covers the far-tail regime $np=o(k)$. The especially
 severe very-extreme case has $np=O(1)$, where the expected number of
 observations beyond $\Quant_X(1-p)$ remains bounded; when $p<1/n$, the
 target is beyond the usual sample-maximum scale.
+It is the Hill-estimator specialisation of
+\textcite[Theorem~4.3.8]{deHaanFerreira2006}; since
+$\log k=o(\sqrt{k})$, the source condition
+$\log(np_n)=o(\sqrt{k})$ is equivalently written here as
+$\log(k/(np_n))=o(\sqrt{k})$.
 
 \begin{theorem}
 \label{thm:bg:weissman}
@@ -226,10 +248,11 @@ extrapolation of pooled expectiles.
 This section collects the definition and the basic properties of
 expectiles that we shall use in the rest of the thesis. Expectiles
 were introduced by \textcite{NeweyPowell1987} as an
-asymmetric-least-squares analogue of quantiles. The properties relevant
-for risk management --- in particular coherence and elicitability ---
-have been worked out subsequently, most notably by
+asymmetric-least-squares analogue of quantiles. Their role as risk
+measures, in particular their coherence properties, was clarified by
 \textcite{BelliniKlarMullerRosazzaGianin2014} and
+\textcite{Ziegel2016}; their elicitability and scoring-function
+representations are treated in \textcite{Gneiting2011} and
 \textcite{EhmGneitingJordanKrueger2016}.
 
 \subsection{Definition}
@@ -256,19 +279,19 @@ The subtraction of $\eta_\tau(X)$ in
 criterion finite under the first-moment condition $\E|X|<\infty$; it
 does not affect the minimiser in $\theta$.
 
-The objective \eqref{eq:bg:expectile-def} is strictly convex in
-$\theta$ whenever $X$ is not almost surely constant, and its
-first-order condition reduces to the implicit equation
+The convex objective \eqref{eq:bg:expectile-def} has a unique
+minimiser, and its first-order condition reduces to the implicit
+equation
 \begin{equation}
 \label{eq:bg:expectile-foc}
   \tau\, \E\!\big[(X - \expectile{\tau}(X))_{+}\big]
   \;=\;
   (1 - \tau)\, \E\!\big[(\expectile{\tau}(X) - X)_{+}\big],
 \end{equation}
-where $u_{+} = \max(u, 0)$. The expectile is therefore the unique value
-of $\theta$ at which the asymmetrically-weighted upper and lower
-partial first moments coincide. This mirrors the implicit quantile
-equation
+where $u_{+} = \max(u, 0)$. Thus $\expectile{\tau}(X)$ is the unique
+point where the upper and lower first partial moments, with asymmetric
+weights, balance. In the continuous case, this mirrors the implicit
+quantile equation
 \[
   \tau\, \Prob(X > \Quant_X(\tau))
   =
@@ -280,8 +303,9 @@ with first partial moments replacing exceedance probabilities.
 
 The following properties are immediate from
 \eqref{eq:bg:expectile-def} or \eqref{eq:bg:expectile-foc}; we collect
-them without proof and refer to \textcite[\S3]{NeweyPowell1987} and
-\textcite[\S2]{BelliniKlarMullerRosazzaGianin2014} for details.
+them without proof and refer to \textcite[\S2]{NeweyPowell1987} and
+\textcite[Sections~2--3]{BelliniKlarMullerRosazzaGianin2014} for
+details.
 
 \begin{proposition}
 \label{prop:bg:expectile-properties}
@@ -290,6 +314,8 @@ Let $X$ and $Y$ be real-valued random variables with $\E |X|, \E |Y|
 \begin{enumerate}[label=(\roman*)]
 \item \textbf{Existence and uniqueness.} $\expectile{\tau}(X)$ exists
       and is uniquely defined.
+\item \textbf{Law invariance.} If $X$ and $Y$ have the same
+      distribution, then $\expectile{\tau}(X)=\expectile{\tau}(Y)$.
 \item \textbf{Mean recovery.} $\expectile{1/2}(X) = \E X$.
 \item \textbf{Location equivariance.}
       $\expectile{\tau}(X + c) = \expectile{\tau}(X) + c$ for
@@ -311,10 +337,10 @@ Let $X$ and $Y$ be real-valued random variables with $\E |X|, \E |Y|
 \end{enumerate}
 \end{proposition}
 
-Properties (iii), (iv), and (vii) give translation equivariance,
-positive homogeneity, and monotonicity --- three of the four axioms in
+Location equivariance, positive homogeneity, and monotonicity in the
+argument give three of the four axioms in
 \textcite{ArtznerDelbaenEberHeath1999} that define a coherent risk
-measure. Property (v) is useful for switching between loss and
+measure. Sign reflection is useful for switching between loss and
 position conventions. The fourth axiom is subadditivity, to which we
 turn next.
 
@@ -341,30 +367,36 @@ risk measure if and only if $\tau \ge 1/2$.
 \end{theorem}
 
 Recall that a real-valued functional $T$ on a class of distributions
-is \emph{elicitable} \parencite{Gneiting2011} if there exists a scoring
-function $S : \R \times \R \to [0, \infty)$ such that
-$T(P) = \argmin_{\theta \in \R} \E_{P}\!S(\theta, X)$ for every $P$
-in the class. The asymmetric squared scoring function
-$S_{\tau}(\theta, x) = \eta_{\tau}(x - \theta)$ elicits the
-$\tau$-expectile by construction \eqref{eq:bg:expectile-def}, which
-means that competing expectile forecasts can be compared by empirical
-averages of a strictly consistent scoring function. Taken together
-with \Cref{thm:bg:expectile-coherence}, this places expectiles in a
+is \emph{elicitable} \parencite{Gneiting2011} if there exists a
+strictly consistent scoring function $S : \R \times \R \to [0,\infty)$
+whose expected score is uniquely minimised by reporting $T(P)$ for
+every $P$ in the class. \textcite[\S3.3]{Gneiting2011} shows
+that the $\tau$-expectile is elicitable on classes with finite first
+moment; the familiar asymmetric squared score
+$S_{\tau}(\theta, x)=\eta_{\tau}(x-\theta)$ is strictly consistent on
+classes with finite second moment, while the general characterisation
+uses Bregman-type scores with the corresponding integrability
+conditions. Thus competing expectile forecasts can be compared by
+empirical averages of strictly consistent scores. Taken together with
+\Cref{thm:bg:expectile-coherence}, this places expectiles in a
 privileged position among risk measures. On suitable convex classes of
 distributions and under the usual monetary-risk-measure convention,
 Bellini et al.\ show that, within the class of M-quantiles, the
 coherent risk measures are exactly the expectiles, while
-\textcite{Ziegel2016} characterises finite-valued elicitable,
-law-invariant coherent risk measures as expectile-type functionals,
-with the expectation appearing as the boundary or special case.
+\textcite{Ziegel2016} characterises elicitable law-invariant coherent
+risk measures as certain expectiles, with the expectation appearing as
+the special case.
 
 \subsection{Choquet representation}
 
 \textcite{EhmGneitingJordanKrueger2016} place expectiles within a
-broader theory of consistent scoring functions and show that the class
-of scoring functions consistent for expectiles admits a Choquet-type
-mixture representation, analogous in spirit to representations for
-quantile scores. This is relevant for forecast comparison and
+broader theory of consistent scoring functions. They show that regular
+scoring functions consistent for expectiles admit a mixture
+representation over elementary scores, analogous in spirit to the
+corresponding representation for quantile scores. After a normalisation
+that removes trivial dilations of the scoring class, these elementary
+scores are extreme points, yielding the advertised Choquet-type
+representation. This is relevant for forecast comparison and
 backtesting, but it is not used in the asymptotic theory below; all
 subsequent arguments rely only on the expectile first-order condition
 and the extreme expectile--quantile equivalence.

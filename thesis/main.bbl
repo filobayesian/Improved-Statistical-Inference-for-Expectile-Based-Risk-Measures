@@ -449,6 +449,35 @@
       \field{title}{Extreme Value Theory: An Introduction}
       \field{year}{2006}
     \endentry
+    \entry{Hill1975}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=98e26dab19f4808f69fa832666acc261}{%
+           family={Hill},
+           familyi={H\bibinitperiod},
+           given={Bruce\bibnamedelima M.},
+           giveni={B\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{98e26dab19f4808f69fa832666acc261}
+      \strng{fullhash}{98e26dab19f4808f69fa832666acc261}
+      \strng{bibnamehash}{98e26dab19f4808f69fa832666acc261}
+      \strng{authorbibnamehash}{98e26dab19f4808f69fa832666acc261}
+      \strng{authornamehash}{98e26dab19f4808f69fa832666acc261}
+      \strng{authorfullhash}{98e26dab19f4808f69fa832666acc261}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The Annals of Statistics}
+      \field{number}{5}
+      \field{title}{A simple general approach to inference about the tail of a distribution}
+      \field{volume}{3}
+      \field{year}{1975}
+      \field{pages}{1163\bibrangedash 1174}
+      \range{pages}{12}
+    \endentry
     \entry{NeweyPowell1987}{article}{}
       \name{author}{2}{}{%
         {{un=0,uniquepart=base,hash=058d74ae5e89fbd5a49ebdbe97b4c922}{%
