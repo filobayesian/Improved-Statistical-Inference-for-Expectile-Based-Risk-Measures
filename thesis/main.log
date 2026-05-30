@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.26)  30 MAY 2026 18:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.26)  30 MAY 2026 19:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -991,8 +991,19 @@ Chapter 2.
 
 
 
-] [6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19] [20])
-[21]
+] [6] [7] [8] [9] [10] [11]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 5
+29.
+
+(/usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmtt' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+ [12] [13] [14]
+[15] [16] [17] [18] [19] [20]) [21]
 \openout2 = `chapters/03_pooled_intermediate.aux'.
 
  (./chapters/03_pooled_intermediate.tex
@@ -1228,21 +1239,12 @@ n/10.95 =  (\OML/lmm/m/it/10.95 m\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 ^^M\OT
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-895.
- (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `lmtt' (encoding: T1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
-[64
+ [64
 
 
-] (./main.aux (./chapters/01_introduction.aux) (./chapters/02_background.aux) (
-./chapters/03_pooled_intermediate.aux) (./chapters/04_pooled_extreme.aux)
-(./chapters/05_discussion.aux))
+] (./main.aux (./chapters/01_introduction.aux)
+(./chapters/02_background.aux) (./chapters/03_pooled_intermediate.aux)
+(./chapters/04_pooled_extreme.aux) (./chapters/05_discussion.aux))
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -1254,11 +1256,11 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 26326 strings out of 474116
- 467790 string characters out of 5743681
+ 26333 strings out of 474116
+ 467872 string characters out of 5743681
  1950187 words of memory out of 5000000
- 47506 multiletter control sequences out of 15000+600000
- 691496 words of font info for 327 fonts, out of 8000000 for 9000
+ 47507 multiletter control sequences out of 15000+600000
+ 691814 words of font info for 330 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  74i,18n,84p,1001b,2270s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/filippogombac/Library/texlive/2024/texmf-var/fonts/pk/ljfour/public/
@@ -1284,10 +1286,10 @@ fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1
 /public/lm/lmsy9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/
 lmtt10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symb
 ols/msbm10.pfb>
-Output written on main.pdf (68 pages, 781564 bytes).
+Output written on main.pdf (68 pages, 783804 bytes).
 PDF statistics:
- 1769 PDF objects out of 2073 (max. 8388607)
- 1627 compressed objects within 17 object streams
+ 1770 PDF objects out of 2073 (max. 8388607)
+ 1628 compressed objects within 17 object streams
  379 named destinations out of 1000 (max. 500000)
  68561 words of extra memory for PDF output out of 74296 (max. 10000000)
 

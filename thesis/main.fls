@@ -359,6 +359,10 @@ INPUT ./chapters/02_background.tex
 INPUT ./chapters/02_background.tex
 INPUT chapters/02_background.tex
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmbxi10.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmtt10.tfm
 INPUT ./chapters/03_pooled_intermediate.tex
 INPUT ./chapters/03_pooled_intermediate.tex
 OUTPUT chapters/03_pooled_intermediate.aux
@@ -401,10 +405,6 @@ INPUT ./chapters/05_discussion.tex
 INPUT ./chapters/05_discussion.tex
 INPUT chapters/05_discussion.tex
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmcsc10.tfm
-INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
-INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
-INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
-INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmtt10.tfm
 INPUT main.aux
 INPUT ./chapters/01_introduction.aux
 INPUT ./chapters/01_introduction.aux

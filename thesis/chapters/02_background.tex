@@ -435,7 +435,7 @@ proportional to the quantile of the same level.
 
 \begin{proposition}[Asymptotic equivalence;
                     \textcite{BelliniKlarMullerRosazzaGianin2014},
-                    \textcite{DaouiaGirardStupfler2019}]
+                    \textcite{DaouiaGirardStupfler2019}, Corollary~1 with $p=2$]
 \label{prop:bg:expectile-quantile}
 Suppose $X$ satisfies \Cref{cond:bg:first-order} with index
 $\gamma \in (0, 1)$ and $\E X^{-} < \infty$. Then
@@ -477,7 +477,7 @@ Under the second-order condition $\mathcal C_{2}(\gamma, \rho, A)$ with
 $\gamma \in (0, 1/2)$ and \Cref{cond:bg:lower-tail-moment}, the
 first-order equivalence \eqref{eq:bg:expectile-quantile-equivalence}
 sharpens to the second-order expansion
-\parencite{DaouiaGirardStupfler2018}
+\parencite[Corollary~1]{DaouiaGirardStupfler2018}
 \begin{equation}
 \label{eq:bg:c-gamma-rho}
   \begin{aligned}
@@ -524,17 +524,16 @@ analogue:
   \argmin_{\theta \in \R}\,
   \sum_{i=1}^{n} \eta_{\tau_{n}}(X_{i} - \theta).
 \end{equation}
-The estimator $\tildexpectile{\tau_{n}}$ is computed by an
-iteratively-reweighted least-squares scheme that converges in a finite
-number of iterations; see \textcite[\S3]{DaouiaGirardStupfler2018} for
-implementation details.
+The estimator $\tildexpectile{\tau_{n}}$ can be computed with standard
+expectile routines; \textcite[\S3.1.2]{DaouiaGirardStupfler2018} use
+the \texttt{expectile} function of the \texttt{expectreg} package.
 
 \begin{theorem}[Intermediate LAWS CLT;
-                \textcite{DaouiaGirardStupfler2018}]
+                \textcite{DaouiaGirardStupfler2018}, Theorem~2]
 \label{thm:bg:laws-iid}
 Assume \Cref{cond:bg:first-order} with
-$\gamma \in (0,1/(2+\delta))$, and assume
-\Cref{cond:bg:lower-tail-moment} for the same $\delta>0$. Let
+$\gamma \in (0,1/2)$, and assume
+\Cref{cond:bg:lower-tail-moment}. Let
 $\tau_{n} \to 1$ with $n(1 - \tau_{n}) \to \infty$. Then
 \[
   \sqrt{n(1 - \tau_{n})}\!
@@ -558,13 +557,13 @@ asymptotic-equivalence formula
 \end{equation}
 where $\hatQuant(\tau_{n}) = X_{n - \lfloor n(1 - \tau_{n}) \rfloor : n}$
 is the empirical quantile (an intermediate-order statistic) and
-$\hat\gamma_{n}$ is any $\sqrt{n(1 - \tau_{n})}$-consistent tail-index
-estimator. The natural choice is the Hill estimator of
-\eqref{eq:bg:hill} with effective sample size $k = \lfloor
-n(1 - \tau_{n})\rfloor$.
+$\hat\gamma_{n}$ is a tail-index estimator admitting the required
+$\sqrt{n(1 - \tau_{n})}$ limit theory. The natural choice is the Hill
+estimator of \eqref{eq:bg:hill} with effective sample size
+$k = \lfloor n(1 - \tau_{n})\rfloor$.
 
 \begin{theorem}[Intermediate QB CLT;
-                \textcite{DaouiaGirardStupfler2018}]
+                \textcite{DaouiaGirardStupfler2018}, Corollary~2]
 \label{thm:bg:qb-iid}
 Assume $\mathcal C_{2}(\gamma, \rho, A)$ with
 $\gamma \in (0,1/2)$ and \Cref{cond:bg:lower-tail-moment}. Let
@@ -667,7 +666,7 @@ $\tilde{\xi}^{\,\star}$ and $\hat{\xi}^{\,\star}$ for the
 LAWS-anchored and QB-anchored extrapolations, respectively.
 
 \begin{theorem}[Extreme-level CLT;
-                \textcite{DaouiaGirardStupfler2018}]
+                \textcite{DaouiaGirardStupfler2018}, Corollaries~3--4]
 \label{thm:bg:weissman-expectile-iid}
 Assume $\mathcal C_{2}(\gamma,\rho,A)$ with
 $\gamma\in(0,1/2)$, $\rho<0$, and
@@ -721,7 +720,8 @@ $(\hat\gamma_{n}, \overline{\xi}_{\tau_{n}})$ from the way in which
 they are obtained. The required abstraction is essentially
 \emph{Proposition~C.6} in the supplement to
 \textcite{DavisonPadoanStupfler2023}, restated here in a form adapted
-to the iid setting.
+to the iid setting and with the normalising rate written as a generic
+sequence $a_n$.
 
 \begin{proposition}[Plug-in CLT for extrapolated expectiles;
                     cf.\ \textcite{DavisonPadoanStupfler2023}, Prop.~C.6]
@@ -821,9 +821,11 @@ the pooled extrapolated expectile in essentially one step.
 We now turn to the pooling framework of
 \textcite{DaouiaPadoanStupfler2021}, which the rest of the thesis
 extends from quantiles to expectiles. The framework concerns inference
-for the common tail index and the common extreme quantile of $m$
-samples that may have heterogeneous sizes, heterogeneous second-order
-properties, and non-trivial cross-sample tail dependence.
+from $m$ samples for the tail index and, under an additional
+tail-homoskedasticity condition, for the extreme quantile. The samples
+may have
+heterogeneous sizes, heterogeneous second-order properties, and
+non-trivial cross-sample tail dependence.
 
 \subsection{Setup}
 
@@ -834,21 +836,21 @@ We have $m$ samples, each obtained by iid sampling of one component of
 an $m$-dimensional random vector
 $\bm X = (X_{1}, \ldots, X_{m})^{\top}$. The $j$th sample comprises
 $n_{j}$ observations $X_{1, j}, X_{2, j}, \ldots, X_{n_{j}, j}$ with
-marginal distribution function $F_{j}$, tail quantile function
-$U_{j} = (1 / \overline F_{j})^{\leftarrow}$, and extreme-value index
-$\gamma_{j} > 0$. The order statistics of the $j$th sample are denoted
+continuous, right-heavy-tailed marginal distribution function $F_{j}$,
+tail quantile function $U_{j} = (1 / \overline F_{j})^{\leftarrow}$,
+and extreme-value index $\gamma_{j} > 0$. The order statistics of the
+$j$th sample are denoted
 $X_{1 : n_{j}, j} \le \cdots \le X_{n_{j} : n_{j}, j}$. The total
 sample size is $n = \sum_{j=1}^{m} n_{j}$.
 
 Tail inference in sample $j$ uses its top $k_{j} + 1$ order statistics,
 where the effective sample size $k_{j} = k_{j}(n)$ satisfies
 $k_{j} \to \infty$ and $k_{j} / n_{j} \to 0$ as $n \to \infty$. The
-total effective sample size is $k = \sum_{j=1}^{m} k_{j}$. Order the
-samples so that $n_{1} \le \cdots \le n_{m}$, and assume the
+total effective sample size is $k = \sum_{j=1}^{m} k_{j}$. Assume the
 asymptotic-proportionality conditions
 \begin{equation}
 \label{eq:bg:pool-rates}
-  \frac{n_{1}}{n_{j}} \;\to\; b_{j} \in (0, 1],
+  \frac{n_{1}}{n_{j}} \;\to\; b_{j} \in (0, \infty),
   \qquad
   \frac{k_{1}}{k_{j}} \;\to\; c_{j} \in (0, \infty),
 \end{equation}
@@ -870,7 +872,8 @@ The cross-sample asymptotic dependence is captured by a pairwise
 \paragraph{Condition $\mathcal J(\bm R)$ (tail-copula condition).}
 For each pair $(j, \ell)$ with $j \ne \ell$, there exists a function
 $\Rjl : [0, \infty]^{2} \setminus \{(\infty, \infty)\} \to [0, \infty)$
-such that, for every $(x_{j}, x_{\ell}) \in [0, \infty)^{2}$,
+such that, for every
+$(x_{j}, x_{\ell}) \in [0, \infty]^{2} \setminus \{(\infty,\infty)\}$,
 \[
   \lim_{s \to \infty}
     s\, \Prob\!\big(\,
@@ -946,8 +949,10 @@ $\bm V$ the symmetric matrix whose entries are
   \;=\;
   \begin{cases}
     \gamma_{j}^{2}, & j = \ell, \\[2pt]
-    \gamma_{j}\,\gamma_{\ell}\,\sqrt{c_{j}/c_{\ell}}\,
-      \Rjl(c_{\ell}/c_{j},\, b_{\ell}/b_{j}),
+    \displaystyle
+    \frac{\gamma_{j}\gamma_{\ell}}
+         {\max(b_j,b_\ell)\sqrt{c_jc_\ell}}\,
+      \Rjl(b_jc_\ell,\, b_\ell c_j),
         & j < \ell.
   \end{cases}
 \]
@@ -975,7 +980,9 @@ The covariance matrix $\Vc$ is given by
   \left(\sum_{i = 1}^{m} c_i^{-1}\right)
   \begin{cases}
     \gamma^{2}c_j, & j=\ell, \\[2pt]
-    \gamma^{2}c_j\,\Rjl(c_{\ell}/c_j,b_{\ell}/b_j),
+    \displaystyle
+    \frac{\gamma^{2}}{\max(b_j,b_\ell)}\,
+      \Rjl(b_jc_\ell,b_\ell c_j),
       & j<\ell,
   \end{cases}
 \]
@@ -1011,7 +1018,7 @@ are constrained only by $\bm\omega^\top\bm 1=1$; the optimal weights
 therefore need not be convex weights.
 
 \begin{proposition}[Optimal weights;
-                    \textcite{DaouiaPadoanStupfler2021}, \S2.2]
+                    \textcite{DaouiaPadoanStupfler2021}, Theorem~1 and \S2.2]
 \label{prop:bg:optimal-weights}
 Suppose $\Vc$ is positive definite. Under the common-$\gamma$
 condition $(H_{\gamma})$:
@@ -1086,7 +1093,7 @@ adapted to their multiplicative-power structure
 (\Cref{eq:bg:weissman}), and is done by \emph{weighted geometric}
 --- rather than arithmetic --- averaging. Under the additional
 assumption that the samples have asymptotically equivalent extreme
-quantiles, formalised as the asymptotic-proportionality condition
+quantiles, formalised as the asymptotic-equivalence condition
 \begin{condition}[Tail homoskedasticity $(\mathcal H)$]
 \label{cond:bg:tail-homoskedasticity}
 For every $j \ne \ell$, $U_{j}(t) / U_{\ell}(t) \to 1$ as $t \to
@@ -1208,8 +1215,9 @@ asymptotic size $\alpha$ rejects $H_{0}$ when
 $\Lambda_{n} > \chi^{2}_{m - 1,\, 1 - \alpha}$.
 \end{theorem}
 
-If the asymptotic bias is retained rather than removed by
-undersmoothing or bias correction, the same GLS deviance has the
+Paper~3 states the bias-free version above. The same Gaussian GLS
+calculation also shows that, if the asymptotic bias is retained rather
+than removed by undersmoothing or bias correction, the deviance has the
 noncentral limit
 \[
   \Lambda_n \todist \chi^2_{m-1}(\delta_\gamma),
@@ -1256,17 +1264,22 @@ Under distributed-inference assumptions:
       \eqref{eq:bg:V-opt-distrib}.
 \end{itemize}
 
-\begin{corollary}[\textcite{DaouiaPadoanStupfler2021},
-                  Corollary~6 and Theorem~3]
+\begin{corollary}[Distributed oracle equivalence;
+                  \textcite{DaouiaPadoanStupfler2021},
+                  Corollary~6, Theorem~3 and Corollary~8]
 \label{cor:bg:pool-distrib-oracle}
-Under the distributed-inference assumptions, and provided that the
-sample fractions are asymptotically equal,
-$k_{j} / n_{j} = (k/n)(1 + O(k^{-1/2}))$ for every $j$, the
-variance-optimally-pooled Hill estimator
+Under the distributed-inference assumptions of Corollary~5 in
+\textcite{DaouiaPadoanStupfler2021}, suppose the sample fractions are
+asymptotically equal in the stronger sense
+$k_{j} / n_{j} = (k/n)(1 + O(k^{-1/2}))$ for every $j$. Then, under the
+conditions of their Theorem~3, the variance-optimally-pooled Hill
+estimator
 $\hat\gamma_{n}(\bm\omega^{\mathrm{Var}})$ is $\sqrt{k}$-asymptotically
 equivalent to the unfeasible benchmark Hill estimator
 $\hat\gamma_{n}^{(\mathrm{Hill})}(k)$ built from the entire combined
-sample. Analogously, the variance-optimally-pooled Weissman estimator
+sample. If, in addition, $\rho<0$ and $p=p(n)$ satisfies
+$k/(np)\to\infty$ and $\sqrt{k}/\log(k/(np))\to\infty$, then the
+variance-optimally-pooled Weissman estimator
 $\hatWei_{n}(1 - p \mid \bm\omega^{\mathrm{Var}})$ is asymptotically
 equivalent to the unfeasible benchmark Weissman estimator built from
 the combined sample.
@@ -1274,7 +1287,7 @@ the combined sample.
 
 \Cref{cor:bg:pool-distrib-oracle} is the central efficiency result of
 the optimal pooling framework: under the distributed-inference
-assumptions, equal effective sample fractions, and variance-optimal
+assumptions, equal sample fractions, and variance-optimal
 weighting, the pooled estimators pay no first-order asymptotic
 efficiency price relative to the infeasible pooled-sample benchmark.
 It is this property that we shall seek to preserve in the
