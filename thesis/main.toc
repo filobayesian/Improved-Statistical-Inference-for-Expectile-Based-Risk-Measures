@@ -9,115 +9,116 @@
 \contentsline {chapter}{\numberline {2}Background}{5}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Regular variation and the second-order condition}{5}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Tail-index and extreme-quantile estimation}{6}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}The Hill estimator}{6}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.1}The Hill estimator}{7}{subsection.2.2.1}%
 \contentsline {subsection}{\numberline {2.2.2}Weissman extrapolation to extreme quantiles}{7}{subsection.2.2.2}%
-\contentsline {section}{\numberline {2.3}Expectiles}{7}{section.2.3}%
+\contentsline {section}{\numberline {2.3}Expectiles}{8}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}Definition}{8}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Basic properties}{8}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.2}Basic properties}{9}{subsection.2.3.2}%
 \contentsline {subsection}{\numberline {2.3.3}Coherence and elicitability}{9}{subsection.2.3.3}%
-\contentsline {subsection}{\numberline {2.3.4}Choquet representation}{9}{subsection.2.3.4}%
-\contentsline {section}{\numberline {2.4}Extreme expectile inference: the iid heavy-tailed baseline}{9}{section.2.4}%
+\contentsline {subsection}{\numberline {2.3.4}Choquet representation}{10}{subsection.2.3.4}%
+\contentsline {section}{\numberline {2.4}Extreme expectile inference: the iid heavy-tailed baseline}{10}{section.2.4}%
 \contentsline {subsection}{\numberline {2.4.1}The expectile--quantile asymptotic equivalence}{10}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}Two families of estimators at intermediate levels}{10}{subsection.2.4.2}%
-\contentsline {paragraph}{LAWS direct estimator.}{10}{section*.4}%
-\contentsline {paragraph}{Quantile-based plug-in estimator.}{11}{section*.5}%
-\contentsline {paragraph}{Comparison.}{11}{section*.6}%
-\contentsline {subsection}{\numberline {2.4.3}Weissman extrapolation to very-extreme expectile levels}{11}{subsection.2.4.3}%
-\contentsline {subsection}{\numberline {2.4.4}The plug-in central limit theorem}{12}{subsection.2.4.4}%
-\contentsline {section}{\numberline {2.5}The optimal pooling framework}{13}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Setup}{13}{subsection.2.5.1}%
-\contentsline {subsection}{\numberline {2.5.2}The pooled Hill estimator}{14}{subsection.2.5.2}%
-\contentsline {subsection}{\numberline {2.5.3}Variance- and AMSE-optimal weights}{15}{subsection.2.5.3}%
-\contentsline {subsection}{\numberline {2.5.4}Weighted geometric pooling of extreme quantiles}{16}{subsection.2.5.4}%
-\contentsline {subsection}{\numberline {2.5.5}Tail-homogeneity testing and confidence intervals}{16}{subsection.2.5.5}%
-\contentsline {subsection}{\numberline {2.5.6}Distributed inference as a special case}{17}{subsection.2.5.6}%
-\contentsline {chapter}{\numberline {3}Pooled inference for extreme expectiles at intermediate levels}{18}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Setup and notation}{18}{section.3.1}%
-\contentsline {paragraph}{The $m$ samples and the pooling primitives.}{18}{section*.8}%
-\contentsline {paragraph}{Heavy-tail regime.}{19}{section*.9}%
-\contentsline {paragraph}{The target.}{19}{section*.10}%
-\contentsline {paragraph}{Per-sample QB plug-in: a forced consequence of the pooling protocol.}{19}{section*.11}%
-\contentsline {paragraph}{Roadmap.}{20}{section*.12}%
-\contentsline {section}{\numberline {3.2}The pooled QB expectile estimator}{20}{section.3.2}%
-\contentsline {paragraph}{Pooled Hill and pooled Weissman primitives.}{20}{section*.13}%
-\contentsline {paragraph}{The two candidate estimators.}{21}{section*.14}%
-\contentsline {paragraph}{Canonical choice.}{22}{section*.15}%
-\contentsline {paragraph}{Two weight vectors, not one.}{22}{section*.16}%
-\contentsline {paragraph}{Why the pooled Weissman at the intermediate level.}{22}{section*.17}%
-\contentsline {section}{\numberline {3.3}Joint asymptotic distribution of the pooled inputs}{22}{section.3.3}%
-\contentsline {paragraph}{Within-sample decomposition.}{23}{section*.18}%
-\contentsline {paragraph}{Pooling under independence.}{23}{section*.19}%
-\contentsline {section}{\numberline {3.4}Asymptotic normality of the pooled expectile estimator}{24}{section.3.4}%
-\contentsline {paragraph}{Derivative of $\log \psi $.}{24}{section*.20}%
-\contentsline {paragraph}{The deterministic expectile--quantile gap.}{25}{section*.21}%
-\contentsline {paragraph}{Reduction to the iid baseline.}{26}{section*.22}%
-\contentsline {paragraph}{Distributed-inference simplification.}{26}{section*.23}%
-\contentsline {paragraph}{Why two weight vectors.}{26}{section*.24}%
-\contentsline {section}{\numberline {3.5}Variance- and AMSE-optimal weights}{26}{section.3.5}%
-\contentsline {paragraph}{Beyond the equal-fraction setting.}{27}{section*.26}%
-\contentsline {paragraph}{Departure from the matched-weight diagonal.}{28}{section*.27}%
-\contentsline {paragraph}{Stacked notation.}{29}{section*.29}%
-\contentsline {paragraph}{Comparison with the Paper~3 AMSE optimum.}{30}{section*.30}%
-\contentsline {section}{\numberline {3.6}Estimated weights and confidence intervals}{31}{section.3.6}%
-\contentsline {paragraph}{Practical recommendation.}{32}{section*.32}%
-\contentsline {paragraph}{Practical remarks.}{33}{section*.34}%
-\contentsline {paragraph}{CI validity at $m(\gamma ) = 0$.}{33}{section*.35}%
-\contentsline {section}{\numberline {3.7}A test of expectile-tail-homogeneity}{34}{section.3.7}%
-\contentsline {paragraph}{Joint limit of the per-sample log-expectiles.}{34}{section*.36}%
-\contentsline {paragraph}{The GLS deviance statistic.}{35}{section*.37}%
-\contentsline {paragraph}{Discussion.}{36}{section*.38}%
-\contentsline {chapter}{\numberline {4}Extrapolation to very-extreme expectile levels}{37}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Motivation}{37}{section.4.1}%
-\contentsline {section}{\numberline {4.2}The pooled extrapolated expectile estimator}{37}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Asymptotic distribution}{38}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Optimal weights for extrapolation}{38}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Bias-reduction}{38}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Asymptotic confidence intervals}{38}{section.4.6}%
-\contentsline {chapter}{\numberline {5}Discussion and future work}{39}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Summary of contributions}{39}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Connections to Expected Shortfall}{39}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Limitations}{39}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Future work}{40}{section.5.4}%
-\contentsline {chapter}{\numberline {A}Proofs}{41}{appendix.A}%
-\contentsline {section}{\numberline {A.1}Proof of \Cref {prop:pool-int:A-B-equiv}}{41}{section.A.1}%
-\contentsline {paragraph}{Reduction to a $\psi $-difference.}{41}{section*.40}%
-\contentsline {paragraph}{Good event supporting the Taylor expansion.}{41}{section*.41}%
-\contentsline {paragraph}{Taylor expansion with Lagrange remainder.}{42}{section*.42}%
-\contentsline {paragraph}{Order of the remainder terms.}{42}{section*.43}%
-\contentsline {paragraph}{Conclusion.}{43}{section*.44}%
-\contentsline {section}{\numberline {A.2}Proof of \Cref {prop:pool-int:joint-clt}}{43}{section.A.2}%
-\contentsline {paragraph}{Step (i): within-sample joint CLT for Hill and intermediate log-order statistic.}{44}{section*.45}%
-\contentsline {paragraph}{Step (ii): linear lift to (Hill, log-Weissman).}{44}{section*.46}%
-\contentsline {paragraph}{Step (iii): cross-sample independence and rescaling to $\sqrt {k}$.}{45}{section*.47}%
-\contentsline {paragraph}{Step (iv): linear pooling map.}{46}{section*.48}%
-\contentsline {section}{\numberline {A.3}Proof of \Cref {thm:pool-int:main}}{47}{section.A.3}%
-\contentsline {paragraph}{Step (i): the deterministic log-ratio decomposition.}{47}{section*.49}%
-\contentsline {paragraph}{Step (ii): Taylor linearisation of $\log \psi $.}{48}{section*.50}%
-\contentsline {paragraph}{Step (iii): the deterministic expectile--quantile gap.}{48}{section*.51}%
-\contentsline {paragraph}{Step (iv): the delta method and the limit.}{49}{section*.52}%
-\contentsline {section}{\numberline {A.4}Proof of \Cref {prop:pool-int:var-opt-distrib,prop:pool-int:var-opt-general}}{50}{section.A.4}%
-\contentsline {paragraph}{Step (i): the change of variables.}{50}{section*.53}%
-\contentsline {paragraph}{Step (ii): the dual variables.}{50}{section*.54}%
-\contentsline {paragraph}{Step (iii): solving for the multipliers.}{51}{section*.55}%
-\contentsline {paragraph}{Step (iv): the primal solution.}{51}{section*.56}%
-\contentsline {paragraph}{Step (v): the departure formula.}{51}{section*.57}%
-\contentsline {paragraph}{Specialisation to the distributed-inference setting.}{52}{section*.58}%
-\contentsline {paragraph}{The degenerate case $m(\gamma ) = 0$.}{52}{section*.59}%
-\contentsline {section}{\numberline {A.5}Proof of \Cref {prop:pool-int:amse-opt}}{52}{section.A.5}%
-\contentsline {paragraph}{Step (i): rewriting the AMSE as a quadratic form.}{52}{section*.60}%
-\contentsline {paragraph}{Step (ii): positive-definiteness of $\bm {M}$.}{53}{section*.61}%
-\contentsline {paragraph}{Step (iii): existence and uniqueness via the Lagrangian.}{53}{section*.62}%
-\contentsline {paragraph}{Step (iv): equivalence with the block FOC system.}{53}{section*.63}%
-\contentsline {section}{\numberline {A.6}Proof of \Cref {cor:pool-int:CI}}{54}{section.A.6}%
-\contentsline {paragraph}{Step (i): log-scale recasting.}{54}{section*.64}%
-\contentsline {paragraph}{Step (ii): estimated-weight lift.}{54}{section*.65}%
-\contentsline {paragraph}{Step (iii): self-normalisation.}{55}{section*.66}%
-\contentsline {paragraph}{Step (iv): transport to the original scale.}{56}{section*.67}%
-\contentsline {section}{\numberline {A.7}Proof of \Cref {thm:pool-int:hom-test}}{56}{section.A.7}%
-\contentsline {paragraph}{Step (i): per-sample QB log-expectile CLT.}{56}{section*.68}%
-\contentsline {paragraph}{Step (ii): aggregation and rescaling to $\sqrt {k}$.}{57}{section*.69}%
-\contentsline {paragraph}{Step (iii): GLS reduction to a quadratic form.}{57}{section*.70}%
-\contentsline {paragraph}{Step (iv): the noncentral chi-square limit.}{58}{section*.71}%
-\contentsline {paragraph}{Step (v): the two regimes with $\delta = 0$.}{58}{section*.72}%
-\contentsline {paragraph}{Step (vi): consistency under the alternative.}{59}{section*.73}%
-\contentsline {chapter}{Bibliography}{60}{appendix*.74}%
+\contentsline {subsection}{\numberline {2.4.2}Two families of estimators at intermediate levels}{11}{subsection.2.4.2}%
+\contentsline {paragraph}{LAWS direct estimator.}{11}{section*.4}%
+\contentsline {paragraph}{Quantile-based plug-in estimator.}{12}{section*.5}%
+\contentsline {paragraph}{Comparison.}{12}{section*.6}%
+\contentsline {subsection}{\numberline {2.4.3}Weissman extrapolation to very-extreme expectile levels}{13}{subsection.2.4.3}%
+\contentsline {subsection}{\numberline {2.4.4}The plug-in central limit theorem}{13}{subsection.2.4.4}%
+\contentsline {section}{\numberline {2.5}The optimal pooling framework}{15}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Setup}{15}{subsection.2.5.1}%
+\contentsline {paragraph}{Condition $\mathcal J(\bm {R})$ (tail-copula condition).}{15}{section*.7}%
+\contentsline {subsection}{\numberline {2.5.2}The pooled Hill estimator}{16}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}Variance- and AMSE-optimal weights}{17}{subsection.2.5.3}%
+\contentsline {subsection}{\numberline {2.5.4}Weighted geometric pooling of extreme quantiles}{18}{subsection.2.5.4}%
+\contentsline {subsection}{\numberline {2.5.5}Tail-homogeneity testing and confidence intervals}{19}{subsection.2.5.5}%
+\contentsline {subsection}{\numberline {2.5.6}Distributed inference as a special case}{20}{subsection.2.5.6}%
+\contentsline {chapter}{\numberline {3}Pooled inference for extreme expectiles at intermediate levels}{21}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Setup and notation}{21}{section.3.1}%
+\contentsline {paragraph}{The $m$ samples and the pooling primitives.}{21}{section*.9}%
+\contentsline {paragraph}{Heavy-tail regime.}{22}{section*.10}%
+\contentsline {paragraph}{The target.}{22}{section*.11}%
+\contentsline {paragraph}{Per-sample QB plug-in: a forced consequence of the pooling protocol.}{22}{section*.12}%
+\contentsline {paragraph}{Roadmap.}{23}{section*.13}%
+\contentsline {section}{\numberline {3.2}The pooled QB expectile estimator}{23}{section.3.2}%
+\contentsline {paragraph}{Pooled Hill and pooled Weissman primitives.}{23}{section*.14}%
+\contentsline {paragraph}{The two candidate estimators.}{24}{section*.15}%
+\contentsline {paragraph}{Canonical choice.}{25}{section*.16}%
+\contentsline {paragraph}{Two weight vectors, not one.}{25}{section*.17}%
+\contentsline {paragraph}{Why the pooled Weissman at the intermediate level.}{25}{section*.18}%
+\contentsline {section}{\numberline {3.3}Joint asymptotic distribution of the pooled inputs}{25}{section.3.3}%
+\contentsline {paragraph}{Within-sample decomposition.}{26}{section*.19}%
+\contentsline {paragraph}{Pooling under independence.}{26}{section*.20}%
+\contentsline {section}{\numberline {3.4}Asymptotic normality of the pooled expectile estimator}{27}{section.3.4}%
+\contentsline {paragraph}{Derivative of $\log \psi $.}{27}{section*.21}%
+\contentsline {paragraph}{The deterministic expectile--quantile gap.}{28}{section*.22}%
+\contentsline {paragraph}{Reduction to the iid baseline.}{29}{section*.23}%
+\contentsline {paragraph}{Distributed-inference simplification.}{29}{section*.24}%
+\contentsline {paragraph}{Why two weight vectors.}{29}{section*.25}%
+\contentsline {section}{\numberline {3.5}Variance- and AMSE-optimal weights}{29}{section.3.5}%
+\contentsline {paragraph}{Beyond the equal-fraction setting.}{30}{section*.27}%
+\contentsline {paragraph}{Departure from the matched-weight diagonal.}{31}{section*.28}%
+\contentsline {paragraph}{Stacked notation.}{32}{section*.30}%
+\contentsline {paragraph}{Comparison with the Paper~3 AMSE optimum.}{33}{section*.31}%
+\contentsline {section}{\numberline {3.6}Estimated weights and confidence intervals}{34}{section.3.6}%
+\contentsline {paragraph}{Practical recommendation.}{35}{section*.33}%
+\contentsline {paragraph}{Practical remarks.}{36}{section*.35}%
+\contentsline {paragraph}{CI validity at $m(\gamma ) = 0$.}{36}{section*.36}%
+\contentsline {section}{\numberline {3.7}A test of expectile-tail-homogeneity}{37}{section.3.7}%
+\contentsline {paragraph}{Joint limit of the per-sample log-expectiles.}{37}{section*.37}%
+\contentsline {paragraph}{The GLS deviance statistic.}{38}{section*.38}%
+\contentsline {paragraph}{Discussion.}{39}{section*.39}%
+\contentsline {chapter}{\numberline {4}Extrapolation to very-extreme expectile levels}{40}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Motivation}{40}{section.4.1}%
+\contentsline {section}{\numberline {4.2}The pooled extrapolated expectile estimator}{40}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Asymptotic distribution}{41}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Optimal weights for extrapolation}{41}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Bias-reduction}{41}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Asymptotic confidence intervals}{41}{section.4.6}%
+\contentsline {chapter}{\numberline {5}Discussion and future work}{42}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Summary of contributions}{42}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Connections to Expected Shortfall}{42}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Limitations}{42}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Future work}{43}{section.5.4}%
+\contentsline {chapter}{\numberline {A}Proofs}{44}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Proof of \Cref {prop:pool-int:A-B-equiv}}{44}{section.A.1}%
+\contentsline {paragraph}{Reduction to a $\psi $-difference.}{44}{section*.41}%
+\contentsline {paragraph}{Good event supporting the Taylor expansion.}{44}{section*.42}%
+\contentsline {paragraph}{Taylor expansion with Lagrange remainder.}{45}{section*.43}%
+\contentsline {paragraph}{Order of the remainder terms.}{45}{section*.44}%
+\contentsline {paragraph}{Conclusion.}{46}{section*.45}%
+\contentsline {section}{\numberline {A.2}Proof of \Cref {prop:pool-int:joint-clt}}{46}{section.A.2}%
+\contentsline {paragraph}{Step (i): within-sample joint CLT for Hill and intermediate log-order statistic.}{47}{section*.46}%
+\contentsline {paragraph}{Step (ii): linear lift to (Hill, log-Weissman).}{47}{section*.47}%
+\contentsline {paragraph}{Step (iii): cross-sample independence and rescaling to $\sqrt {k}$.}{48}{section*.48}%
+\contentsline {paragraph}{Step (iv): linear pooling map.}{49}{section*.49}%
+\contentsline {section}{\numberline {A.3}Proof of \Cref {thm:pool-int:main}}{50}{section.A.3}%
+\contentsline {paragraph}{Step (i): the deterministic log-ratio decomposition.}{50}{section*.50}%
+\contentsline {paragraph}{Step (ii): Taylor linearisation of $\log \psi $.}{51}{section*.51}%
+\contentsline {paragraph}{Step (iii): the deterministic expectile--quantile gap.}{51}{section*.52}%
+\contentsline {paragraph}{Step (iv): the delta method and the limit.}{52}{section*.53}%
+\contentsline {section}{\numberline {A.4}Proof of \Cref {prop:pool-int:var-opt-distrib,prop:pool-int:var-opt-general}}{53}{section.A.4}%
+\contentsline {paragraph}{Step (i): the change of variables.}{53}{section*.54}%
+\contentsline {paragraph}{Step (ii): the dual variables.}{53}{section*.55}%
+\contentsline {paragraph}{Step (iii): solving for the multipliers.}{54}{section*.56}%
+\contentsline {paragraph}{Step (iv): the primal solution.}{54}{section*.57}%
+\contentsline {paragraph}{Step (v): the departure formula.}{54}{section*.58}%
+\contentsline {paragraph}{Specialisation to the distributed-inference setting.}{55}{section*.59}%
+\contentsline {paragraph}{The degenerate case $m(\gamma ) = 0$.}{55}{section*.60}%
+\contentsline {section}{\numberline {A.5}Proof of \Cref {prop:pool-int:amse-opt}}{55}{section.A.5}%
+\contentsline {paragraph}{Step (i): rewriting the AMSE as a quadratic form.}{55}{section*.61}%
+\contentsline {paragraph}{Step (ii): positive-definiteness of $\bm {M}$.}{56}{section*.62}%
+\contentsline {paragraph}{Step (iii): existence and uniqueness via the Lagrangian.}{56}{section*.63}%
+\contentsline {paragraph}{Step (iv): equivalence with the block FOC system.}{56}{section*.64}%
+\contentsline {section}{\numberline {A.6}Proof of \Cref {cor:pool-int:CI}}{57}{section.A.6}%
+\contentsline {paragraph}{Step (i): log-scale recasting.}{57}{section*.65}%
+\contentsline {paragraph}{Step (ii): estimated-weight lift.}{57}{section*.66}%
+\contentsline {paragraph}{Step (iii): self-normalisation.}{58}{section*.67}%
+\contentsline {paragraph}{Step (iv): transport to the original scale.}{59}{section*.68}%
+\contentsline {section}{\numberline {A.7}Proof of \Cref {thm:pool-int:hom-test}}{59}{section.A.7}%
+\contentsline {paragraph}{Step (i): per-sample QB log-expectile CLT.}{59}{section*.69}%
+\contentsline {paragraph}{Step (ii): aggregation and rescaling to $\sqrt {k}$.}{60}{section*.70}%
+\contentsline {paragraph}{Step (iii): GLS reduction to a quadratic form.}{60}{section*.71}%
+\contentsline {paragraph}{Step (iv): the noncentral chi-square limit.}{61}{section*.72}%
+\contentsline {paragraph}{Step (v): the two regimes with $\delta = 0$.}{61}{section*.73}%
+\contentsline {paragraph}{Step (vi): consistency under the alternative.}{62}{section*.74}%
+\contentsline {chapter}{Bibliography}{63}{appendix*.75}%

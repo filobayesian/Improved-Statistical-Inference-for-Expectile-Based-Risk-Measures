@@ -153,6 +153,9 @@
       \field{year}{2018}
       \field{pages}{263\bibrangedash 292}
       \range{pages}{30}
+      \verb{doi}
+      \verb 10.1111/rssb.12254
+      \endverb
     \endentry
     \entry{DaouiaGirardStupfler2019}{article}{}
       \name{author}{3}{ul=2}{%
@@ -272,17 +275,18 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprinttype}{arXiv}
-      \field{note}{arXiv:2111.03173 [math.ST]. \todo{update if accepted at journal}}
-      \field{title}{Optimal pooling and distributed inference for the tail index and extreme quantiles}
-      \field{year}{2021}
+      \field{journaltitle}{Bernoulli}
+      \field{number}{2}
+      \field{title}{Optimal weighted pooling for inference about the tail index and extreme quantiles}
+      \field{volume}{30}
+      \field{year}{2024}
+      \field{pages}{1287\bibrangedash 1312}
+      \range{pages}{26}
+      \verb{doi}
+      \verb 10.3150/23-BEJ1632
+      \endverb
       \verb{eprint}
       \verb 2111.03173
-      \endverb
-      \verb{urlraw}
-      \verb https://arxiv.org/abs/2111.03173
-      \endverb
-      \verb{url}
-      \verb https://arxiv.org/abs/2111.03173
       \endverb
     \endentry
     \entry{DavisonPadoanStupfler2023}{article}{}
@@ -546,6 +550,38 @@
       \field{year}{1978}
       \field{pages}{812\bibrangedash 815}
       \range{pages}{4}
+    \endentry
+    \entry{Ziegel2016}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=bec2958bb4fa4c04a85db76f0313970e}{%
+           family={Ziegel},
+           familyi={Z\bibinitperiod},
+           given={Johanna\bibnamedelima F.},
+           giveni={J\bibinitperiod\bibinitdelim F\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{bec2958bb4fa4c04a85db76f0313970e}
+      \strng{fullhash}{bec2958bb4fa4c04a85db76f0313970e}
+      \strng{bibnamehash}{bec2958bb4fa4c04a85db76f0313970e}
+      \strng{authorbibnamehash}{bec2958bb4fa4c04a85db76f0313970e}
+      \strng{authornamehash}{bec2958bb4fa4c04a85db76f0313970e}
+      \strng{authorfullhash}{bec2958bb4fa4c04a85db76f0313970e}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Mathematical Finance}
+      \field{number}{4}
+      \field{title}{Coherence and elicitability}
+      \field{volume}{26}
+      \field{year}{2016}
+      \field{pages}{901\bibrangedash 918}
+      \range{pages}{18}
+      \verb{doi}
+      \verb 10.1111/mafi.12080
+      \endverb
     \endentry
   \enddatalist
 \endrefsection
