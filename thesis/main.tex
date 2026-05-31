@@ -996,8 +996,6 @@ equal-fraction \Cref{prop:pool-int:var-opt-distrib} is recovered as
 the specialisation $\bm L^{\star} = L^{\star}\bm 1$ at the end of the
 section.
 
-
-
 We minimise the asymptotic variance
 $\sigma^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})^{2}$ of
 \eqref{eq:pool-int:sigma-xi} over deterministic weight vectors
@@ -1091,10 +1089,9 @@ system
 \end{equation}
 The coefficient matrix has determinant $a(a+c) - b^{2} = \Delta$.
 Cauchy--Schwarz in the $\Vc^{-1}$-inner product gives $b^{2}
-\le ac$, with equality iff $\bm L^{\star} \in \mathrm{span}\{\bm 1\}$
-(which, since all components of $\Vc^{-1}\bm 1$ are strictly positive,
-forces $\bm L^{\star} = L^{\star}\bm 1$). Therefore $ac - b^{2} \ge
-0$ and, since $a > 0$ (diagonal positive entries of $\Vc^{-1}$),
+\le ac$, with equality iff $\bm L^{\star} \in \mathrm{span}\{\bm 1\}$,
+that is, iff $\bm L^{\star}=L^\star\bm 1$ for some scalar $L^\star$.
+Therefore $ac - b^{2} \ge 0$ and, since $a > 0$,
 \begin{equation}
 \label{eq:app:varopt:Delta-positive}
   \Delta \;=\; a^{2} + (ac - b^{2}) \;>\; 0,
@@ -1187,17 +1184,27 @@ and
 $\bm\omega^{\star}_{q} = (\nu/2 - (\mu/2)L^{\star})\,\Vc^{-1}\bm 1
 = ((1 + L^{\star 2} + m(\gamma)L^{\star}) - L^{\star}(m(\gamma)
 + L^{\star}))\Vc^{-1}\bm 1/a = \Vc^{-1}\bm 1/a =
-\bm\omega^{\mathrm{Var}}$. A symmetric calculation gives
-$\bm\omega^{\star}_{\gamma} = \bm\omega^{\mathrm{Var}}$, and the
-minimum-variance value reduces to $[(m(\gamma) + L^{\star})^{2} +
+\bm\omega^{\mathrm{Var}}$. For the Hill-weight component,
+$\bm u^\star=(m(\gamma)+L^\star)\Vc^{-1}\bm 1/a$ and
+$\bm D\bm\omega_q^\star=L^\star\Vc^{-1}\bm 1/a$, so
+\[
+  \bm\omega_\gamma^\star
+  =
+  m(\gamma)^{-1}(\bm u^\star-\bm D\bm\omega_q^\star)
+  =
+  \Vc^{-1}\bm 1/a
+  =
+  \bm\omega^{\mathrm{Var}}.
+\]
+The minimum-variance value reduces to $[(m(\gamma) + L^{\star})^{2} +
 1]/a$, recovering
 \Cref{prop:pool-int:var-opt-distrib}.
 
-\paragraph{The degenerate case $m(\gamma) = 0$.}
+\paragraph{The case $m(\gamma) = 0$.}
 When $m(\gamma) = 0$, the change-of-variables map is no longer a
 bijection: $\bm u = \bm D\bm\omega_{q}$ depends only on $\bm\omega_{q}$
 and $\bm\omega_{\gamma}$ disappears from the variance. The factorisation
-collapses to
+reduces to
 $\sigma^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})^{2}
 = \bm\omega_{q}^{\top}\Vc(\bm I + \bm D^{2})\bm\omega_{q}$,
 a strictly convex quadratic in $\bm\omega_{q}$ alone (since $\Vc(\bm I
@@ -1216,8 +1223,7 @@ with $\bm\omega_{\gamma}$ indeterminate. In the distributed-inference
 setting $\bm D = L^{\star}\bm I$, $(\bm I + \bm D^{2})^{-1}$ is a
 scalar multiple of $\bm I$ and \eqref{eq:app:varopt:m-zero} reduces to
 $\bm\omega^{\mathrm{Var}}$; in general it differs from
-$\bm\omega^{\mathrm{Var}}$ along directions in
-$\mathrm{span}\{\bm 1, \bm L^{\star},\ldots\}$. \qed
+$\bm\omega^{\mathrm{Var}}$. \qed
 
 \section{Proof of \texorpdfstring{\Cref{prop:pool-int:amse-opt}}{Proposition 3.6}}
 \label{app:proofs:amse-opt}
@@ -1269,6 +1275,8 @@ definiteness, so $\bm M = \bm Q + \bm h\bm h^{\top}$ is positive
 definite. Strict convexity of $\mathrm{AMSE}^{\xi}(\bm w) -
 (b^{\xi/\Quant})^{2}$ on $\R^{2m}$, and a fortiori on the closed
 affine constraint set $\{\bm A^{\top}\bm w = \bm 1_{2}\}$, follows.
+Positive definiteness also makes the quadratic objective coercive, so a
+minimiser exists on this non-empty closed affine set.
 
 \paragraph{Step (iii): existence and uniqueness via the Lagrangian.}
 Form
@@ -1331,7 +1339,9 @@ $\bm M\bm w = \bm Q\bm w + (\bm h^{\top}\bm w)\,\bm h = \bm Q\bm w +
   \bm Q\bm w \;+\; \mu^{\xi}\,\bm h \;=\; \tfrac{1}{2}\,\bm A\,\bm\nu.
 \]
 Writing $\bm\nu = (\lambda_{\gamma}, \lambda_{q})^{\top}$ and reading
-off the upper and lower blocks of size $m$:
+off the upper and lower blocks of size $m$ (these $\lambda$'s are
+Lagrange multipliers, not the second-order bias-rate constants
+$\lambda_j$):
 \begin{align*}
   \big[\bm Q\bm w\big]_{1, \ldots, m}
   &\;=\;
@@ -1368,7 +1378,11 @@ $\hat{\bm\omega}_{\gamma}^{\top}\bm 1 =
 \hat{\bm\omega}_{q}^{\top}\bm 1 = 1$ \emph{exactly}, which holds for
 the variance- and AMSE-optimal plug-ins of
 \Cref{prop:bg:optimal-weights,prop:pool-int:var-opt-general,prop:pool-int:amse-opt}
-by construction.
+by construction. All logarithms and square roots below are understood
+on high-probability events on which they are well defined; the
+right-tail setup, the expectile--quantile equivalence, and the
+consistency of the variance plug-in make the complements of these
+events negligible.
 
 The proof composes four steps:
 (i) recast the conclusion of \Cref{thm:pool-int:main} on the log
@@ -1391,6 +1405,11 @@ By the QB factorisation \eqref{eq:pool-int:expectile-pool},
   \;+\;
   \log\hatWei_{n}(\tau_{n} \mid \bm\omega_{q}).
 \end{equation}
+The population expectile is positive eventually by the right-heavy-tailed
+setup and \Cref{prop:bg:expectile-quantile}. The local Weissman factors,
+and hence their weighted-geometric pool, are positive with probability
+tending one, so \eqref{eq:app:CI:log-decomposition} is legitimate on an
+event whose probability tends to one.
 \Cref{thm:pool-int:main} delivers $\sqrt{k}\,
 (\hatexpectile{\tau_{n}}^{\mathrm{pool}}(\bm\omega_{\gamma},
 \bm\omega_{q})/\expectile{\tau_{n}} - 1) \todist
@@ -1408,13 +1427,20 @@ statement on the log scale,
   \mathcal N\!\big(\mu^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q}),\,
                     \sigma^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})^{2}\big).
 \end{equation}
-Under undersmoothing \eqref{eq:pool-int:undersmoothing}, every entry
-of $\Bc, \Bc^{\star}$ and the offset $b^{\xi/\Quant}$ vanishes
-(inspection of \eqref{eq:pool-int:Bcstar-def},
-\eqref{eq:pool-int:b-xi-Q-def}, and the formula for $\Bc$ in
-\Cref{thm:bg:pool-hill}, each of which is a continuous linear
-combination of the per-sample bias rates
-$\lambda_{j} = \lim \sqrt{k_{j}}\,A(n_{j}/k_{j})$). Hence
+Under undersmoothing \eqref{eq:pool-int:undersmoothing}, every
+per-sample bias rate
+$\lambda_j=\lim\sqrt{k_j}A(n_j/k_j)$ is zero. The formulas
+\eqref{eq:pool-int:Bcstar-def} and \Cref{thm:bg:pool-hill} then give
+$\Bc=\bm0$ and $\Bc^\star=\bm0$. Moreover, the compatibility identity
+\[
+  \Lambda^\bullet
+  =
+  \sqrt{c_jS}\,\lambda_j e^{\rho L_j^\star},
+  \qquad j=1,\ldots,m,
+\]
+forces $\Lambda^\bullet=0$, and therefore
+$b^{\xi/\Quant}=-c(\gamma,\rho)\Lambda^\bullet=0$ by
+\eqref{eq:pool-int:b-xi-Q-def}. Hence
 $\mu^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q}) = 0$ and the limit in
 \eqref{eq:app:CI:log-clt-det} reduces to
 $\mathcal N(0, \sigma^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})^{2})$.
@@ -1472,16 +1498,20 @@ o_{p}(1)$ yields
   \sqrt{k}\big(\hat{\bm\gamma}_{n} - \gamma\bm 1\big)
   \;=\; o_{p}(1) \cdot O_{p}(1) \;=\; o_{p}(1).
 \end{equation}
-The map $\log\psifn$ is continuously differentiable on $(0, 1/2)$
-with derivative $m(\,\cdot\,)$ defined in
-\eqref{eq:pool-int:m-function}; on the good event
-$\{\hat\gamma_{n}(\bm\omega_{\gamma}),
-\hat\gamma_{n}(\hat{\bm\omega}_{\gamma}) \in (0, 1)\}$ --- of
-probability $\to 1$ by the consistency
+The map $\log\psifn$ is continuously differentiable on $(0, 1)$ with
+derivative $m(\,\cdot\,)$ defined in \eqref{eq:pool-int:m-function}.
+Let
+\[
+  E_n^\gamma
+  =
+  \{\hat\gamma_{n}(\bm\omega_{\gamma})\in(0,1),\,
+    \hat\gamma_{n}(\hat{\bm\omega}_{\gamma})\in(0,1)\}.
+\]
+By consistency,
 $\hat\gamma_{n}(\hat{\bm\omega}_{\gamma}),
-\hat\gamma_{n}(\bm\omega_{\gamma}) \toprob \gamma$ --- the mean
-value theorem yields a random $\tilde\gamma_{n}$ between the two
-pooled values such that
+\hat\gamma_{n}(\bm\omega_{\gamma}) \toprob \gamma$, so
+\(\Prob(E_n^\gamma)\to1\). On this event, the mean value theorem yields
+a random $\tilde\gamma_{n}$ between the two pooled values such that
 \[
   \Delta_{n}^{\gamma}
   \;=\;
@@ -1562,6 +1592,10 @@ to $\sqrt{\,\cdot\,}$ on $(0, \infty)$ yields
   \;\toprob\;
   \sigma^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q}) \;>\; 0.
 \]
+In particular,
+$\Prob\{\hat\sigma^{\xi}(\hat{\bm\omega}_{\gamma},
+\hat{\bm\omega}_{q})>0\}\to1$, so the division below is well defined
+with probability tending one.
 Slutsky's theorem applied to the ratio of
 \eqref{eq:app:CI:log-clt-plugin} and this consistent variance
 estimator produces the asymptotic pivot
