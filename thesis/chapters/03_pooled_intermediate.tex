@@ -976,13 +976,16 @@ invariant under the change of target from extreme quantile to
 extreme expectile.} The two targets share the same data-fusion
 recipe; the only change in the asymptotic variance is the
 multiplicative factor $(m(\gamma) + L^{\star})^{2} + 1$ replacing the
-quantile-target factor of $1$. Under the stronger oracle-rate
-equal-fraction condition of \Cref{cor:bg:pool-distrib-oracle}, the
-distributed-inference oracle equivalence thus extends to the expectile
-target at the variance criterion without modification of the pooling
-rule. The AMSE-optimum, by contrast, is genuinely
-target-dependent even under equal-fraction distributed inference, as
-the second subsection below makes precise.
+Paper~3 Hill/extreme-quantile factor of $1$ under the corresponding
+normalisation. Under the stronger oracle-rate equal-fraction condition
+of \Cref{cor:bg:pool-distrib-oracle}, the distributed-inference oracle
+equivalence thus extends to the expectile target at the variance
+criterion without modification of the pooling rule. The AMSE criterion
+requires separate bookkeeping because the bias term is target-specific;
+as the second subsection below explains, however, the equal-fraction
+distributed setting is also a collapse regime for AMSE, while genuinely
+target-dependent AMSE weights can appear once the effective sample
+fractions are unequal.
 
 \paragraph{Beyond the equal-fraction setting.}
 When the effective sample fractions $k_{j}/n_{j}$ vary across $j$,
@@ -1103,12 +1106,17 @@ a^{2} + (ac - b^{2})$ exhibits its scalar prefactor as
   \left[1 \;+\; O\!\left(\frac{ac - b^{2}}{a^{2}}\right)\right]
 \]
 in the small Cauchy--Schwarz defect regime $ac - b^{2} \ll a^{2}$.
-The Paper~3 weights therefore remain near-optimal whenever (i) the
+The Paper~3 weights therefore remain near-optimal whenever the
 log-rate vector is nearly sample-free ($ac - b^{2} \approx 0$, i.e.\
 $\bm L^{\star}$ nearly constant in the $\Vc^{-1}\bm 1$-weighted
-sense), or (ii) $m(\gamma) + \bar L^{\star} \approx 0$, which combines
-the expectile-specific zero $\gamma^{\star} \approx 0.218$ of
-$m(\,\cdot\,)$ with the log-rate weighted mean. The degenerate case $m(\gamma) = 0$
+sense). The quantile-weight component
+$\bm\omega^{\xi,\mathrm{Var}}_{q}$ also remains close to
+$\bm\omega^{\mathrm{Var}}$ when
+$m(\gamma) + \bar L^{\star} \approx 0$, which combines the
+expectile-specific zero $\gamma^{\star} \approx 0.218$ of
+$m(\,\cdot\,)$ with the log-rate weighted mean; this second condition
+by itself controls the displayed $\bm\omega_q$ correction, not the full
+two-vector pair. The degenerate case $m(\gamma) = 0$
 leaves $\bm\omega_{\gamma}$ indeterminate and reduces the
 optimisation to the single-vector problem $\min \bm\omega_{q}^{\top}
 \Vc(\bm I + \bm D^{2})\bm\omega_{q}$ subject to
@@ -1135,18 +1143,19 @@ $\bm\omega_{\gamma}^{\top}\bm 1 = \bm\omega_{q}^{\top}\bm 1 = 1$, with
 $\mu^{\xi}$ and $\sigma^{\xi}$ as in \eqref{eq:pool-int:mu-xi} and
 \eqref{eq:pool-int:sigma-xi}. The objective parallels
 \Cref{prop:bg:optimal-weights}(ii), but the expectile target reshapes
-the bias landscape on two structural counts. First, in the two-weight
-problem the bias is a linear functional of the stacked vector
+the bias landscape away from the equal-fraction collapse regime. In the
+two-weight problem the bias is a linear functional of the stacked vector
 $(\bm\omega_{\gamma}^{\top}, \bm\omega_{q}^{\top})^{\top}$ with
-\emph{stacked gradient} $(m(\gamma)\Bc, \Bc^{\star})^{\top}$, in
-which the pooled-Hill bias enters rescaled by the QB Jacobian
-$m(\gamma)$ and the pooled-Weissman bias enters unrescaled; the
-composite direction $m(\gamma)\Bc + \Bc^{\star}$ that replaces the
-Paper~3 vector $\Bc^{\star}$ arises only when restricted to the
-matched-weight diagonal $\bm\omega_{\gamma} = \bm\omega_{q}$. Second,
-$\mu^{\xi}$ carries the additive offset $b^{\xi/\Quant}$ of
-\eqref{eq:pool-int:b-xi-Q-def}, which translates the AMSE minimum
-away from the Paper~3 variance-optimal direction.
+\emph{stacked gradient} $(m(\gamma)\Bc, \Bc^{\star})^{\top}$: the
+pooled-Hill bias enters rescaled by the QB Jacobian $m(\gamma)$, while
+the pooled-Weissman bias enters unrescaled. Only after restricting to
+the matched-weight diagonal $\bm\omega_{\gamma} = \bm\omega_{q}$ does
+one see the composite direction $m(\gamma)\Bc + \Bc^{\star}$, which is
+the expectile analogue of the single Paper~3 bias vector $\Bc$. In
+addition, $\mu^{\xi}$ carries the additive offset $b^{\xi/\Quant}$ of
+\eqref{eq:pool-int:b-xi-Q-def}. This offset has no effect on the
+variance problem, but it enters the AMSE first-order conditions whenever
+the remaining bias part depends on the weights.
 
 \paragraph{Stacked notation.}
 To state the optimum compactly, stack the two pooling weight vectors
@@ -1224,20 +1233,63 @@ explicit FOC normalisation are recorded in Step (iii), and the block
 decomposition matching \eqref{eq:pool-int:amse-foc} is in Step (iv).
 \end{proof}
 
-\paragraph{Comparison with the Paper~3 AMSE optimum.}
-The expectile AMSE-optimum does \emph{not} reduce to the Paper~3
-quantile AMSE-optimum of \Cref{prop:bg:optimal-weights}(ii), even
-under the equal-fraction distributed-inference simplification
-$\bm D = L^{\star}\bm I$ that aligned the two variance-optima in
-\Cref{prop:pool-int:var-opt-distrib}. Three structural differences
-persist:
+\paragraph{Equal-fraction AMSE collapse.}
+Under the equal-effective-sample-fraction condition
+$k_j/n_j=(k/n)(1+o(1))$, the log-rate vector is
+$\bm L^{\star}=L^{\star}\bm 1$. The compatibility identity following
+\eqref{eq:pool-int:Lambda-bullet} then gives
+\[
+  \sqrt{c_jS}\,\lambda_j
+  =
+  \Lambda^{\bullet}(e^{L^{\star}})^{-\rho},
+  \qquad S=\sum_{i=1}^{m}c_i^{-1},
+\]
+which is sample-free. Combining this with
+\eqref{eq:pool-int:Bcstar-def} yields
+\[
+  \Bc=\beta_H\bm 1,
+  \qquad
+  \Bc^{\star}=\beta_W\bm 1
+\]
+for constants $\beta_H,\beta_W$ depending on
+$(\gamma,\rho,L^\star,\Lambda^\bullet)$ but not on $j$. Hence, for all
+admissible weight pairs,
+\[
+  \mu^\xi(\bm\omega_\gamma,\bm\omega_q)
+  =
+  m(\gamma)\beta_H+\beta_W+b^{\xi/\Quant},
+\]
+which is constant on the constraint set. In this regime the AMSE
+criterion is therefore the variance criterion plus a constant. If
+$m(\gamma)\ne0$, the unique AMSE-optimal pair is the same matched pair
+as in \Cref{prop:pool-int:var-opt-distrib},
+\[
+  \bm\omega_\gamma^{\xi,\mathrm{AMSE}}
+  =
+  \bm\omega_q^{\xi,\mathrm{AMSE}}
+  =
+  \bm\omega^{\mathrm{Var}},
+\]
+and when $m(\gamma)=0$ the same indeterminacy of
+$\bm\omega_\gamma$ described in
+\Cref{prop:pool-int:var-opt-distrib} remains. This is exactly parallel
+to Paper~3 in the equal-fraction distributed setting: there too the
+Paper~3 bias vector $\Bc$ is collinear with $\bm 1$, so the AMSE
+criterion collapses to the variance criterion under the affine
+constraint.
+
+\paragraph{Comparison with the Paper~3 AMSE optimum away from equal fractions.}
+Outside the equal-fraction collapse regime, the expectile
+AMSE-optimum generally does \emph{not} reduce to the Paper~3
+AMSE-optimum of \Cref{prop:bg:optimal-weights}(ii). Three structural
+differences are responsible:
 \begin{enumerate}[label=(\roman*)]
   \item the bias gradient is the stacked vector
         $\bm h = (m(\gamma)\Bc, \Bc^{\star})^{\top}$ rather than the
-        single-block $\Bc^{\star}$ of \Cref{prop:bg:optimal-weights};
+        single-block $\Bc$ of \Cref{prop:bg:optimal-weights};
   \item $\mu^{\xi}$ carries the additive offset
-        $b^{\xi/\Quant}$, which shifts the AMSE minimum away from
-        the variance-optimal direction $\Vc^{-1}\bm 1$;
+        $b^{\xi/\Quant}$, which enters the AMSE first-order conditions
+        through the self-consistent mean $\mu^\xi$;
   \item the expectile minimiser is genuinely a pair
         $(\bm\omega_{\gamma}, \bm\omega_{q})$, and the diagonal
         $\bm\omega_{\gamma} = \bm\omega_{q}$ is generically not a
@@ -1245,24 +1297,17 @@ persist:
         Hill and Weissman blocks of $\bm h$ enter asymmetrically
         through $m(\gamma)\Bc$ and $\Bc^{\star}$.
 \end{enumerate}
-The two AMSE-optima coincide only under restrictive alignment
-conditions; a transparent sufficient case is $b^{\xi/\Quant} = 0$
-together with the structural alignment
-$\Bc^{\star} \propto m(\gamma)\,\Bc$ --- the deterministic
-expectile--quantile gap must vanish at the chapter rate, and the
-pooled-Hill and pooled-Weissman biases must reinforce each other in
-proportion to the QB Jacobian. We do not characterise the exact
-necessary condition: it would require inverting the closed-form
-\eqref{eq:pool-int:amse-opt-formula} against the Paper~3 expression
-and isolating the locus of coincidence in
-$(\Vc, \bm D, \Bc, \Bc^{\star}, b^{\xi/\Quant})$-space, a calculation
-that is not generically a single algebraic constraint. Generically,
-however, the AMSE-optimum is target-dependent. This asymmetry
-between the variance-optimum, which is target-invariant under
-equal-fraction distributed inference
-(\Cref{prop:pool-int:var-opt-distrib}), and the AMSE-optimum, which
-is target-dependent even there, is the qualitative signature of
-carrying the expectile target through the QB plug-in.
+Exact coincidence with the Paper~3 AMSE weights can occur, but it is a
+compatibility condition on the full FOC system rather than a simple
+proportionality of $\Bc$ and $\Bc^\star$. One would have to insert the
+Paper~3 candidate weight into \eqref{eq:pool-int:amse-foc}, impose the
+two affine constraints, and solve the resulting block equations in the
+quantities $(\Vc,\bm D,\Bc,\Bc^{\star},b^{\xi/\Quant})$. We do not
+characterise that exceptional locus here. The robust qualitative point
+is narrower and sharper: equal-fraction distributed inference preserves
+the Paper~3 weights for both variance and AMSE, whereas unequal
+effective sample fractions generically make the expectile AMSE
+calibration target-dependent.
 
 \section{Estimated weights and confidence intervals}
 \label{sec:pool-int:CI}

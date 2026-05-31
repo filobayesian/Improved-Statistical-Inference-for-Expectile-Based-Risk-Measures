@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.26)  31 MAY 2026 16:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.26)  31 MAY 2026 17:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1139,37 +1139,43 @@ MEDIATE LEVELS \T1/lmr/m/n/10.95 42
  []
 
 [42]
+Overfull \hbox (57.91907pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10.95 CHAPTER 3.  POOLED INFERENCE FOR EXTREME EXPECTILES AT INTER
+MEDIATE LEVELS \T1/lmr/m/n/10.95 43
+ []
+
+[43]
 \openout2 = `chapters/04_pooled_extreme.aux'.
 
  (./chapters/04_pooled_extreme.tex
 Chapter 4.
-[43
+[44
 
 
 
 
-]) [44]
+]) [45]
 \openout2 = `chapters/05_discussion.aux'.
 
  (./chapters/05_discussion.tex
 Chapter 5.
-) [45
+) [46
 
 
 
 
-] [46]
+] [47]
 Appendix A.
-[47
+[48
 
 
 
-] [48] [49] [50]
+] [49] [50] [51]
 Overfull \hbox (57.46487pt too wide) detected at line 459
 []  []  \OT1/lmr/m/n/10.95 =  []  []  []  +  [] \OML/lmm/m/it/10.95 :
  []
 
-[51] [52]
+[52] [53]
 Overfull \hbox (15.37495pt too wide) detected at line 582
 []\OT1/lmr/m/n/10.95 (\OML/lmm/b/it/10.95 ![]\OT1/lmr/m/n/10.95 ) \OMS/lmsy/m/n
 /10.95 ^^@ \OML/lmm/m/it/10.95 ^^M  \OT1/lmr/m/n/10.95 =  [] \OML/lmm/m/it/10.9
@@ -1191,13 +1197,13 @@ mm/b/it/10.95 A ^^V[] \OT1/lmr/m/n/10.95 (-20) = []\OML/lmm/b/it/10.95 ![]B[]\O
 ML/lmm/m/it/10.95 ;  \OML/lmm/b/it/10.95 ![]B[][][]$\T1/lmr/m/n/10.95 (-20) ,
  []
 
-[53] [54] [55] [56] [57] [58]
+[54] [55] [56] [57] [58] [59]
 Overfull \hbox (10.28572pt too wide) detected at line 1185
 \OML/lmm/m/it/10.95 ^^V=\OT1/lmr/m/n/10.95 2  =  []  =  []\OML/lmm/m/it/10.95 ;
   ^^W=\OT1/lmr/m/n/10.95 2  =  []  =  []\OML/lmm/m/it/10.95 ;
  []
 
-[59] [60] [61]
+[60] [61] [62]
 Overfull \hbox (12.15097pt too wide) in paragraph at lines 1474--1485
 \T1/lmr/m/n/10.95 (-20) the good event $\OMS/lmsy/m/n/10.95 f[]\OT1/lmr/m/n/10.
 95 (-20) (\OML/lmm/b/it/10.95 ![]\OT1/lmr/m/n/10.95 (-20) )\OML/lmm/m/it/10.95 
@@ -1209,11 +1215,11 @@ Overfull \hbox (12.15097pt too wide) in paragraph at lines 1474--1485
 .95 ![]\OT1/lmr/m/n/10.95 (-20) ) []
  []
 
-[62] [63] [64] [65] [66]
+[63] [64] [65] [66] [67]
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
- [67
+ [68
 
 
 ] (./main.aux (./chapters/01_introduction.aux)
@@ -1224,17 +1230,17 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: B457A5E791CF650C96D27DEE19AA5A0F;12071.
+(rerunfilecheck)             Checksum: EB368B9F275602C2F04E7F8892EBE2E6;12071.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 26350 strings out of 474116
- 468172 string characters out of 5743681
+ 26356 strings out of 474116
+ 468236 string characters out of 5743681
  1952187 words of memory out of 5000000
  47512 multiletter control sequences out of 15000+600000
- 692043 words of font info for 333 fonts, out of 8000000 for 9000
+ 692265 words of font info for 335 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  74i,18n,84p,1001b,2270s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/filippogombac/Library/texlive/2024/texmf-var/fonts/pk/ljfour/public/
@@ -1260,10 +1266,10 @@ fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1
 /public/lm/lmsy9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/
 lmtt10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symb
 ols/msbm10.pfb>
-Output written on main.pdf (71 pages, 797886 bytes).
+Output written on main.pdf (72 pages, 801058 bytes).
 PDF statistics:
- 1789 PDF objects out of 2073 (max. 8388607)
- 1644 compressed objects within 17 object streams
- 385 named destinations out of 1000 (max. 500000)
+ 1796 PDF objects out of 2073 (max. 8388607)
+ 1650 compressed objects within 17 object streams
+ 387 named destinations out of 1000 (max. 500000)
  68561 words of extra memory for PDF output out of 74296 (max. 10000000)
 
