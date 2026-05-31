@@ -1954,21 +1954,27 @@ bias-collinearity that renders the tail-index test
 \Cref{thm:bg:tail-homogeneity-test} asymptotically central under the
 same distributed-inference regime.
 
-\paragraph{Step (vi): consistency under the alternative.}
+\paragraph{Step (vi): consistency under diagnostic alternatives.}
+This final step proves the consistency assertion when
+\eqref{eq:pool-int:test-stat} is read as a diagnostic outside the
+chapter's common-marginal null model. It therefore uses the additional
+alternative-side hypotheses stated in \Cref{thm:pool-int:hom-test},
+rather than the common-target CLT of Steps (i)--(v).
 Write $\bm\Xi_{n}^{\star} \coloneqq (\log\expectile{\tau_{n},\,1},
 \ldots, \log\expectile{\tau_{n},\,m})^{\top}$ for the vector of
 \emph{population} per-sample log-expectiles, and abbreviate
-$\bm D_{n} \coloneqq \hat{\bm\Sigma}_{n}^{-1} \toprob \bm\Sigma^{-1}
-\succ \bm 0$ with the induced seminorm
-$\|\bm x\|_{\bm D_{n}}^{2} \coloneqq \bm x^{\top}\bm D_{n}\bm x$. Each
-$\hatexpectile{\tau_{n},\,j}$ is consistent for its own
-$\expectile{\tau_{n},\,j}$, so the per-sample CLT
-\eqref{eq:app:hom:per-sample} recentred at $\bm\Xi_{n}^{\star}$ gives
-$\hat{\bm\Xi}_{n} - \bm\Xi_{n}^{\star} = O_{p}(k^{-1/2})$. Because the
-GLS residual $\hat{\bm\Xi}_{n} - \hat\nu_{n}\bm 1 = \bm P_{n}
-\hat{\bm\Xi}_{n}$ is, by definition of $\hat\nu_{n}$, the minimiser
-of $c \mapsto \|\hat{\bm\Xi}_{n} - c\bm 1\|_{\bm D_{n}}^{2}$, the
-statistic is the squared GLS distance of $\hat{\bm\Xi}_{n}$ from
+$\bm D_{n} \coloneqq \hat{\bm\Sigma}_{n}^{-1}$, with induced norm
+$\|\bm x\|_{\bm D_{n}}^{2} \coloneqq \bm x^{\top}\bm D_{n}\bm x$.
+Assume $\hat{\bm\Xi}_{n} - \bm\Xi_{n}^{\star}=O_{p}(k^{-1/2})$,
+$\|\bm D_n\|=O_p(1)$, and
+$\Prob\{\lambda_{\min}(\bm D_n)>\eta\}\to1$ for some $\eta>0$. These
+conditions say, respectively, that the local log-expectile estimators
+remain root-$k$ consistent for their own targets and that the plug-in
+precision matrix does not degenerate. Because the GLS residual
+$\hat{\bm\Xi}_{n} - \hat\nu_{n}\bm 1 = \bm P_{n}\hat{\bm\Xi}_{n}$ is,
+by definition of $\hat\nu_{n}$, the minimiser of
+$c \mapsto \|\hat{\bm\Xi}_{n} - c\bm 1\|_{\bm D_{n}}^{2}$, the statistic
+is the squared GLS distance of $\hat{\bm\Xi}_{n}$ from
 $\mathrm{span}\{\bm 1\}$:
 \[
   \Lambda^{\xi}_{n}
@@ -1978,9 +1984,10 @@ $\mathrm{span}\{\bm 1\}$:
 By the triangle inequality for $\|\cdot\|_{\bm D_{n}}$ and the bound
 $\min_{c}\|\bm x - c\bm 1\|_{\bm D_{n}} \ge
 \lambda_{\min}(\bm D_{n})^{1/2}\,\min_{c}\|\bm x - c\bm 1\|$ (valid
-because, at the $\|\cdot\|_{\bm D_{n}}$-optimal $c$, the entrywise
-inequality $\bm x^{\top}\bm D_{n}\bm x \ge \lambda_{\min}(\bm D_{n})
-\|\bm x\|^{2}$ applies),
+because, at the $\|\cdot\|_{\bm D_{n}}$-optimal $c$, the Rayleigh
+quotient inequality
+$\bm x^{\top}\bm D_{n}\bm x \ge \lambda_{\min}(\bm D_{n})\|\bm x\|^{2}$
+applies),
 \[
   \sqrt{\Lambda^{\xi}_{n}}
   \;=\;
@@ -1992,12 +1999,11 @@ inequality $\bm x^{\top}\bm D_{n}\bm x \ge \lambda_{\min}(\bm D_{n})
   \sqrt{k}\,\big\|\hat{\bm\Xi}_{n} - \bm\Xi_{n}^{\star}\big\|_{\bm D_{n}}.
 \]
 The subtracted term is $O_{p}(1)$ since $\sqrt{k}(\hat{\bm\Xi}_{n}
-- \bm\Xi_{n}^{\star}) = O_{p}(1)$ and $\bm D_{n} = O_{p}(1)$. Under
+- \bm\Xi_{n}^{\star}) = O_{p}(1)$ and $\|\bm D_{n}\|=O_{p}(1)$. Under
 the stated alternative $\sqrt{k}\,\min_{c}\|\bm\Xi_{n}^{\star}
-- c\bm 1\| \to \infty$, while $\lambda_{\min}(\bm D_{n}) \toprob
-\lambda_{\min}(\bm\Sigma^{-1}) > 0$ by positive definiteness of
-$\bm\Sigma$. The first term on the right therefore diverges in
-probability and dominates the $O_{p}(1)$ correction, so
+- c\bm 1\| \to \infty$, while $\lambda_{\min}(\bm D_{n})$ is bounded
+away from zero in probability. The first term on the right therefore
+diverges in probability and dominates the $O_{p}(1)$ correction, so
 $\Lambda^{\xi}_{n} \toprob \infty$. \qed
 
 \backmatter

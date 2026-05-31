@@ -390,8 +390,6 @@ INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/lmbsy10.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/lmbsy5.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/bbm/bbm9.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/bbm/bbm5.tfm
-INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmri8.tfm
-INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmri7.tfm
 INPUT ./chapters/04_pooled_extreme.tex
 INPUT ./chapters/04_pooled_extreme.tex
 OUTPUT chapters/04_pooled_extreme.aux

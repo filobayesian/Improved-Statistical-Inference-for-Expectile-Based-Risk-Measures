@@ -122,5 +122,5 @@
 \contentsline {paragraph}{Step (iii): GLS reduction to a quadratic form.}{67}{section*.73}%
 \contentsline {paragraph}{Step (iv): the noncentral chi-square limit.}{67}{section*.74}%
 \contentsline {paragraph}{Step (v): the two regimes with $\delta = 0$.}{68}{section*.75}%
-\contentsline {paragraph}{Step (vi): consistency under the alternative.}{68}{section*.76}%
-\contentsline {chapter}{Bibliography}{69}{appendix*.77}%
+\contentsline {paragraph}{Step (vi): consistency under diagnostic alternatives.}{68}{section*.76}%
+\contentsline {chapter}{Bibliography}{70}{appendix*.77}%

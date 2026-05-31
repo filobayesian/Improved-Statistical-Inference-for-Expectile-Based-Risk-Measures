@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.26)  31 MAY 2026 18:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.26)  31 MAY 2026 18:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1138,13 +1138,13 @@ Overfull \hbox (57.91907pt too wide) has occurred while \output is active
 MEDIATE LEVELS \T1/lmr/m/n/10.95 42
  []
 
-[42])
+[42]
 Overfull \hbox (57.91907pt too wide) has occurred while \output is active
 \T1/lmr/m/sl/10.95 CHAPTER 3.  POOLED INFERENCE FOR EXTREME EXPECTILES AT INTER
 MEDIATE LEVELS \T1/lmr/m/n/10.95 43
  []
 
-[43]
+[43])
 Overfull \hbox (57.91907pt too wide) has occurred while \output is active
 \T1/lmr/m/sl/10.95 CHAPTER 3.  POOLED INFERENCE FOR EXTREME EXPECTILES AT INTER
 MEDIATE LEVELS \T1/lmr/m/n/10.95 44
@@ -1209,11 +1209,11 @@ Overfull \hbox (10.28572pt too wide) detected at line 1182
   ^^W=\OT1/lmr/m/n/10.95 2  =  []  =  []\OML/lmm/m/it/10.95 ;
  []
 
-[61] [62] [63] [64] [65] [66] [67] [68]
+[61] [62] [63] [64] [65] [66] [67] [68] [69]
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
- [69
+ [70
 
 
 ] (./main.aux
@@ -1231,11 +1231,11 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 26366 strings out of 474116
- 468347 string characters out of 5743681
+ 26355 strings out of 474116
+ 468204 string characters out of 5743681
  1952187 words of memory out of 5000000
- 47515 multiletter control sequences out of 15000+600000
- 692579 words of font info for 338 fonts, out of 8000000 for 9000
+ 47511 multiletter control sequences out of 15000+600000
+ 683654 words of font info for 333 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  74i,18n,84p,1001b,2270s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/filippogombac/Library/texlive/2024/texmf-var/fonts/pk/ljfour/public/
@@ -1261,10 +1261,10 @@ fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1
 /public/lm/lmsy9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/
 lmtt10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symb
 ols/msbm10.pfb>
-Output written on main.pdf (73 pages, 809130 bytes).
+Output written on main.pdf (74 pages, 811819 bytes).
 PDF statistics:
- 1817 PDF objects out of 2073 (max. 8388607)
- 1670 compressed objects within 17 object streams
- 388 named destinations out of 1000 (max. 500000)
- 68561 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 1822 PDF objects out of 2073 (max. 8388607)
+ 1674 compressed objects within 17 object streams
+ 389 named destinations out of 1000 (max. 500000)
+ 64465 words of extra memory for PDF output out of 74296 (max. 10000000)
 

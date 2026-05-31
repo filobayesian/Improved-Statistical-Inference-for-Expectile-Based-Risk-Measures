@@ -1833,17 +1833,37 @@ both to the common centring $\log\expectile{\tau_{n}}$ and --- as the
 theorem makes precise --- to any asymptotic bias collinear with
 $\bm 1$.
 
+Because \eqref{eq:pool-int:test-stat} is scaled by $k$, the formal
+no-separation null behind the chi-square calibration is a
+\emph{root-$k$} log-expectile homogeneity condition. If
+\[
+  \bm\Xi_{n}^{\star}
+  \;\coloneqq\;
+  \big(\log\expectile{\tau_{n},\,1}, \ldots,
+       \log\expectile{\tau_{n},\,m}\big)^{\top}
+\]
+denotes the vector of population per-sample log-expectiles in a
+diagnostic reading beyond the common-marginal model, this condition is
+\[
+  H_{0,k}^{\xi}\colon\quad
+  \sqrt{k}\,\min_{c \in \R}
+  \big\|\bm\Xi_{n}^{\star} - c\,\bm 1\big\| \;\to\; 0.
+\]
+It is automatic under the chapter's standing common-marginal
+assumption, for which
+$\bm\Xi_{n}^{\star}=\log\expectile{\tau_{n}}\bm 1$. The weaker
+first-order condition
+$\expectile{\tau_n,j}/\expectile{\tau_n,\ell}\to1$ is useful for
+interpreting the target of the diagnostic, but by itself it is not
+strong enough to justify a root-$k$ chi-square calibration.
+
 \begin{theorem}[Expectile-tail-homogeneity test]
 \label{thm:pool-int:hom-test}
 Adopt the assumptions of \Cref{thm:pool-int:main} and suppose
 $\hat{\bm\Sigma}_{n} \toprob \bm\Sigma$ with $\bm\Sigma$ positive
-definite. Under the null hypothesis
-\[
-  H_{0}^{\xi}\colon\quad
-  \frac{\expectile{\tau_{n},\,j}}{\expectile{\tau_{n},\,\ell}}
-  \;\to\; 1
-  \qquad \text{for every } j \ne \ell,
-\]
+definite. Under the chapter's common-marginal null model, equivalently
+under the common-target centring
+$\bm\Xi_{n}^{\star}=\log\expectile{\tau_n}\bm 1$,
 the statistic \eqref{eq:pool-int:test-stat} converges to a
 noncentral chi-square,
 \begin{equation}
@@ -1875,15 +1895,24 @@ regimes of the chapter guarantee $\delta = 0$:
       of $\bm\beta$ collapses to one common value, so that
       $\bm\beta \in \mathrm{span}\{\bm 1\}$.
 \end{enumerate}
-Under any alternative for which the population log-expectiles are
-separated faster than $k^{-1/2}$ --- formally,
+Moreover, if the statistic is used diagnostically outside the
+common-marginal model in a setting where
+$\hat{\bm\Xi}_{n}-\bm\Xi_{n}^{\star}=O_{p}(k^{-1/2})$ and the plug-in
+precision matrices $\hat{\bm\Sigma}_{n}^{-1}$ remain bounded and
+uniformly positive definite in probability, then under any alternative
+for which the population log-expectiles are separated faster than
+$k^{-1/2}$ --- formally,
 $\sqrt{k}\,\min_{c \in \R}\big\|(\log\expectile{\tau_{n},\,j})_{j=1}^{m}
 - c\,\bm 1\big\| \to \infty$ --- the statistic diverges,
-$\Lambda^{\xi}_{n} \toprob \infty$. A test of asymptotic size
-$\alpha$ rejects $H_{0}^{\xi}$ when
+$\Lambda^{\xi}_{n} \toprob \infty$. Consequently, the central
+chi-square rejection rule
 $\Lambda^{\xi}_{n} > \chi^{2}_{m - 1,\, 1 - \alpha}$, the
 $(1 - \alpha)$-quantile of the \emph{central} $\chi^{2}_{m - 1}$
-law.
+law, has asymptotic size $\alpha$ in the regimes where $\delta=0$
+above. If $\delta>0$, its null rejection probability converges instead
+to
+$\Prob\{\chi^{2}_{m-1}(\delta)>\chi^{2}_{m - 1,\,1-\alpha}\}$, which is
+larger than $\alpha$.
 \end{theorem}
 
 \begin{proof}
@@ -1892,8 +1921,9 @@ See \Cref{app:proofs:hom-test}.
 
 \paragraph{Discussion.}
 Three comments situate the test. First, under the chapter's standing
-assumption of a common marginal $F$ the null $H_{0}^{\xi}$ holds
-automatically, so the test is a specification check on the pooling
+assumption of a common marginal $F$ the root-$k$ null
+$H_{0,k}^{\xi}$ holds automatically, so the test is a specification
+check on the pooling
 hypothesis rather than a test of a substantive scientific null: a
 non-rejection licenses the variance-optimal pooling recipes of
 \Cref{sec:pool-int:weights,sec:pool-int:CI}, while a rejection warns
@@ -1910,35 +1940,35 @@ that delivers the central $\chi^{2}_{m - 1}$ is in force. Outside
 both regimes the asymptotic bias $\bm\beta$ is generically not
 collinear with $\bm 1$, the limit is the noncentral
 $\chi^{2}_{m - 1}(\delta)$ of \eqref{eq:pool-int:test-noncentral},
-and the nominal-size test is over- or under-sized according to the
-magnitude of $\delta$; this is the expectile-level counterpart of the
-identical bias caveat carried, but left implicit, by the tail-index
-test of \Cref{thm:bg:tail-homogeneity-test}.
+and the central critical value over-rejects by an amount governed by
+$\delta$; this is the expectile-level counterpart of the identical
+bias caveat carried, but left implicit, by the tail-index test of
+\Cref{thm:bg:tail-homogeneity-test}.
 
-Third, the expectile null $H_{0}^{\xi}$ and the tail-index null
-$H_{0}\colon \gamma_{1} = \cdots = \gamma_{m}$ of
+Third, the first-order expectile null
+$H_{0,0}^{\xi}\colon
+\expectile{\tau_n,j}/\expectile{\tau_n,\ell}\to1$ and the tail-index
+null $H_{0}\colon \gamma_{1} = \cdots = \gamma_{m}$ of
 \Cref{thm:bg:tail-homogeneity-test} are related but not identical.
 Per-sample expectile--quantile equivalence
 (\Cref{prop:bg:expectile-quantile}) gives
 $\expectile{\tau_{n},\,j} \sim \psifn(\gamma_{j})\,
-\Quant_{X_{j}}(\tau_{n})$, so $H_{0}^{\xi}$ requires the products
+\Quant_{X_{j}}(\tau_{n})$, so $H_{0,0}^{\xi}$ requires the products
 $\psifn(\gamma_{j})\,\Quant_{X_{j}}(\tau_{n})$ to agree across
-samples in the limit. Under the tail-homoskedasticity condition
-$(\mathcal H)$ of \Cref{cond:bg:tail-homoskedasticity} the quantile
-factors $\Quant_{X_{j}}(\tau_{n})$ already coincide, and
-$H_{0}^{\xi}$ collapses to homogeneity of the scalars
-$\psifn(\gamma_{j})$ --- a consequence of, but strictly weaker than,
-$H_{0}$, because $\psifn$ is not injective on $(0, 1/2)$: it tends to
-$1$ at \emph{both} endpoints $\gamma \downarrow 0$ and
-$\gamma \uparrow 1/2$, so distinct tail indices can share a common
-$\psifn$ value. Against such $\psifn$-preserving tail-index alternatives the expectile
-test is asymptotically blind, whereas the tail-index test of
-\Cref{thm:bg:tail-homogeneity-test} detects them. The complementary
-strength of $\Lambda^{\xi}_{n}$ surfaces when $(\mathcal H)$
-\emph{fails}: scale (extreme-quantile) heterogeneity across samples can
-leave $H_{0}$ intact while violating $H_{0}^{\xi}$, so the expectile
+samples in the limit. The non-injectivity of $\psifn$ on $(0,1/2)$
+should not be read in isolation: under regular variation, different
+tail indices force the quantile ratio
+$\Quant_{X_j}(\tau)/\Quant_{X_\ell}(\tau)$ to tend to $0$ or
+$\infty$, regardless of possible coincidences among the scalar values
+$\psifn(\gamma_j)$. Thus fixed alternatives with unequal tail indices
+are not hidden by equal $\psifn$ values once the quantile factor is
+included. The complementary strength of $\Lambda^{\xi}_{n}$ is instead
+scale sensitivity: when the tail indices are equal but the
+tail-homoskedasticity condition $(\mathcal H)$ of
+\Cref{cond:bg:tail-homoskedasticity} fails, the tail-index test can
+accept $H_{0}$ while $H_{0,0}^{\xi}$ fails. In that case the expectile
 test registers departures in the actual inferential target --- the
 expectile --- to which a test of the tail index alone is by
-construction blind. The two diagnostics are therefore complementary,
-carrying \emph{different} blind spots rather than one uniformly
-dominating the other.
+construction blind. The two diagnostics are therefore complementary:
+one targets tail-index equality, the other targets equality of the
+high-expectile levels being pooled.
