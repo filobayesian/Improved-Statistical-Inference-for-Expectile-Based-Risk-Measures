@@ -475,17 +475,28 @@ central limit theorem
         - \log \Quant_{X}(\tau_{n})
     \end{pmatrix}
   \;\todist\;
-  \mathcal N\!\left(\bm\mu_{j}(\tau_{n}),\,
+  \mathcal N\!\left(\bm\mu_{j}^{\star},\,
                     \gamma^{2}\!\begin{pmatrix}
                       1 & L_{j}^{\star} \\
                       L_{j}^{\star} & 1 + (L_{j}^{\star})^{2}
                     \end{pmatrix}\right),
 \end{equation}
 under the common-marginal assumption of \Cref{sec:pool-int:setup}
-and the condition $L_{j}(\tau_{n}) \to L_{j}^{\star} \in \R$. The
-bias vector $\bm\mu_{j}(\tau_{n})$ is determined by the second-order
-condition $\mathcal C_{2}(\gamma, \rho, A)$; its explicit form is
-deferred to the proof appendix. The $2 \times 2$ covariance reveals
+and the condition $L_{j}(\tau_{n}) \to L_{j}^{\star} \in \R$. With
+$\Psi_\rho$ the second-order kernel defined in
+\eqref{eq:pool-int:Bcstar-def}, the limiting mean is
+\[
+  \bm\mu_j^\star
+  =
+  \begin{pmatrix}
+    \lambda_j/(1-\rho) \\[2pt]
+    \lambda_j\!\left\{L_j^\star/(1-\rho)
+      - \Psi_\rho(e^{L_j^\star})\right\}
+  \end{pmatrix}.
+\]
+The first component is the usual Hill bias, while the second combines
+that Hill bias, transported through the log-rate $L_j^\star$, with the
+deterministic second-order Weissman remainder. The $2 \times 2$ covariance reveals
 the within-sample Hill--Weissman correlation induced by the log-rate
 factor: cross-covariance $\gamma^{2} L_{j}^{\star}$, and a Weissman
 variance $\gamma^{2}(1 + (L_{j}^{\star})^{2})$ obtained from the
@@ -564,7 +575,11 @@ level has entries
   \lambda_{j}\Big[\frac{L_{j}^{\star}}{1 - \rho}
        \;-\; \Psi_{\rho}\big(e^{L_{j}^{\star}}\big)\Big],
   \qquad
-  \Psi_{\rho}(y) \;=\; \frac{y^{\rho} - 1}{\rho},
+  \Psi_{\rho}(y) \;=\;
+  \begin{cases}
+    (y^{\rho} - 1)/\rho, & \rho < 0, \\[2pt]
+    \log y, & \rho = 0,
+  \end{cases}
 \end{equation}
 combining the Hill bias $b_{j}^{H} = \lambda_{j}/(1-\rho)$, weighted by
 the log-rate $L_{j}^{\star}$, with the limiting second-order Weissman

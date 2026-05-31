@@ -341,26 +341,38 @@ where $b_{j}^{H} = \lambda_{j}/(1 - \rho)$ is the Hill bias and
 $\bm I_{2}$ is the $2 \times 2$ identity matrix. The \emph{zero} second
 component is the asymptotic unbiasedness of the intermediate
 log-order statistic, centred at its own population quantile
-$\log\Quant_{X}(\tau_{n_{j}}) = \log U(n_{j}/k_{j})$: in the
-representation $\log X_{n_{j} - k_{j} : n_{j},\,j} - \log U(n_{j}/k_{j})
-= \gamma\log V_{j} + A(n_{j}/k_{j})\,\Psi_{\rho}(V_{j}) + o(A(n_{j}/k_{j}))$
-with $V_{j} = (k_{j}/n_{j})\,U^{\leftarrow}(\,\cdot\,)$ satisfying
-$\sqrt{k_{j}}(V_{j} - 1) \todist \mathcal N(0, 1)$, the second-order term
-is $\sqrt{k_{j}}\,A(n_{j}/k_{j})\,\Psi_{\rho}(V_{j}) = A(n_{j}/k_{j})\,
-O_{p}(1) = o_{p}(1)$ because $\Psi_{\rho}(1) = 0$, so it leaves no bias
-at the $\sqrt{k_{j}}$ scale \parencite{DaouiaGirardStupfler2018}. This
-is in contrast to the Hill estimator, whose bias $b_{j}^{H}$ arises
-precisely from \emph{averaging} that second-order term across the top
-$k_{j}$ order statistics, where it does not vanish. The load-bearing structural fact in
-\eqref{eq:app:within-input} is the \emph{zero off-diagonal entry}:
-the Hill estimator is a smooth functional of the centred log-spacings
-above $X_{n_{j} - k_{j} : n_{j},\,j}$, while the
-intermediate-threshold fluctuation is the centred $(k_{j} + 1)$-th
-upper log-order statistic, and the two decouple in the
-tail-empirical-process limit with common variance $\gamma^{2}$. The
-diagonal form $\gamma^{2}\bm I_{2}$ is therefore essential for the
-simple $\Vc$-and-$\mathrm{diag}(\bm L^{\star})$ covariance structure
-of \eqref{eq:pool-int:Sigma} used in the rest of the chapter.
+$\log\Quant_{X}(\tau_{n_{j}}) = \log U(n_{j}/k_{j})$. In the
+tail-quantile-process representation, evaluating the threshold process
+at $s=1$ removes the deterministic second-order term because
+$\Psi_{\rho}(1)=0$ for the second-order kernel
+\eqref{eq:pool-int:Bcstar-def}; hence no $A(n_j/k_j)$-bias remains in
+the second coordinate \parencite[Theorem~2.4.8]{deHaanFerreira2006}. This is in
+contrast to the Hill estimator, whose bias $b_{j}^{H}$ arises precisely
+from averaging the second-order tail-quantile term across the top
+$k_{j}$ order statistics, where it does not vanish.
+
+The load-bearing structural fact in \eqref{eq:app:within-input} is the
+\emph{zero off-diagonal entry}. The same Brownian representation writes
+the centred threshold fluctuation as $\gamma W_j(1)$ and the centred
+Hill fluctuation as
+\[
+  \gamma\int_{0}^{1}\{s^{-1}W_j(s)-W_j(1)\}\,ds
+\]
+plus the deterministic Hill bias. Therefore
+\[
+  \Cov\!\left(
+    W_j(1),
+    \int_{0}^{1}\{s^{-1}W_j(s)-W_j(1)\}\,ds
+  \right)
+  =
+  \int_{0}^{1}\{s^{-1}\Cov(W_j(1),W_j(s))-1\}\,ds
+  = 0,
+\]
+which gives the asymptotic independence of the two random components
+and their common variance $\gamma^{2}$. The diagonal form
+$\gamma^{2}\bm I_{2}$ is therefore essential for the simple
+$\Vc$-and-$\mathrm{diag}(\bm L^{\star})$ covariance structure of
+\eqref{eq:pool-int:Sigma} used in the rest of the chapter.
 
 \paragraph{Step (ii): linear lift to (Hill, log-Weissman).}
 The Weissman decomposition \eqref{eq:pool-int:weissman-decomp},
@@ -395,7 +407,15 @@ $\tau_{n_{j}}$. By the second-order condition $\mathcal C_{2}(\gamma,
 $t = n_{j}/k_{j}$ and ratio $y = k_{j}/(n_{j}(1 - \tau_{n}))$, one has
 $\log U(t\,y) - \log U(t) - \gamma\log y = A(t)\,\Psi_{\rho}(y) +
 o(A(t))$ uniformly on compact $y$-sets, with
-$\Psi_{\rho}(y) = (y^{\rho} - 1)/\rho$. Therefore
+\[
+  \Psi_{\rho}(y)
+  =
+  \begin{cases}
+    (y^{\rho} - 1)/\rho, & \rho < 0, \\[2pt]
+    \log y, & \rho = 0,
+  \end{cases}
+\]
+the endpoint being read in the usual second-order convention. Therefore
 \begin{equation}
 \label{eq:app:rj-bias}
   r_{j}(\tau_{n})

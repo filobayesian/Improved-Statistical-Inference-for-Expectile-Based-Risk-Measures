@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.26)  31 MAY 2026 15:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.26)  31 MAY 2026 15:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1061,7 +1061,7 @@ MEDIATE LEVELS \T1/lmr/m/n/10.95 29
  []
 
 [29]
-Overfull \hbox (17.87221pt too wide) in paragraph at lines 631--637
+Overfull \hbox (17.87221pt too wide) in paragraph at lines 646--652
  []\T1/lmr/bx/n/10.95 (-20) The de-ter-min-is-tic expectile--quantile gap.[] \T
 1/lmr/m/n/10.95 (-20) The first-order asymp-totic equiv-a-lence $\OML/lmm/m/it/
 10.95 ^^X[]=Q[]\OT1/lmr/m/n/10.95 (-20) (\OML/lmm/m/it/10.95 ^^\\OT1/lmr/m/n/10
@@ -1167,12 +1167,12 @@ Appendix A.
 
 
 ] [47] [48] [49]
-Overfull \hbox (57.46487pt too wide) detected at line 437
+Overfull \hbox (57.46487pt too wide) detected at line 457
 []  []  \OT1/lmr/m/n/10.95 =  []  []  []  +  [] \OML/lmm/m/it/10.95 :
  []
 
-[50]
-Overfull \hbox (15.37495pt too wide) detected at line 560
+[50] [51]
+Overfull \hbox (15.37495pt too wide) detected at line 580
 []\OT1/lmr/m/n/10.95 (\OML/lmm/b/it/10.95 ![]\OT1/lmr/m/n/10.95 ) \OMS/lmsy/m/n
 /10.95 ^^@ \OML/lmm/m/it/10.95 ^^M  \OT1/lmr/m/n/10.95 =  [] \OML/lmm/m/it/10.9
 5 ![] \OT1/lmr/m/n/10.95 ([](\OML/lmm/m/it/10.95 k[]\OT1/lmr/m/n/10.95 ) \OMS/l
@@ -1185,8 +1185,8 @@ it/10.95 Q[]\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 ^^\[]\OT1/lmr/m/n/10.95 )[]
 \OML/lmm/m/it/10.95 ;
  []
 
-[51]
-Overfull \hbox (1.27345pt too wide) in paragraph at lines 588--595
+
+Overfull \hbox (1.27345pt too wide) in paragraph at lines 608--615
 \T1/lmr/m/n/10.95 (-20) The mean fol-lows from the block struc-ture of $\OML/lm
 m/b/it/10.95 ^^V[]$ \T1/lmr/m/n/10.95 (-20) iden-ti-fied in Step (iii): $\OML/l
 mm/b/it/10.95 A ^^V[] \OT1/lmr/m/n/10.95 (-20) = []\OML/lmm/b/it/10.95 ![]B[]\O
@@ -1194,7 +1194,7 @@ ML/lmm/m/it/10.95 ;  \OML/lmm/b/it/10.95 ![]B[][][]$\T1/lmr/m/n/10.95 (-20) ,
  []
 
 [52]
-Overfull \hbox (15.1974pt too wide) in paragraph at lines 751--757
+Overfull \hbox (15.1974pt too wide) in paragraph at lines 771--777
  []\T1/lmr/bx/n/10.95 (-20) Step (iii): the de-ter-min-is-tic expectile--quanti
 le gap.[] \T1/lmr/m/n/10.95 (-20) The first-order equiv-a-lence $\OML/lmm/m/it/
 10.95 ^^X[]=Q[]\OT1/lmr/m/n/10.95 (-20) (\OML/lmm/m/it/10.95 ^^\\OT1/lmr/m/n/10
@@ -1202,13 +1202,13 @@ le gap.[] \T1/lmr/m/n/10.95 (-20) The first-order equiv-a-lence $\OML/lmm/m/it/
  []
 
 [53] [54] [55] [56]
-Overfull \hbox (10.28572pt too wide) detected at line 1144
+Overfull \hbox (10.28572pt too wide) detected at line 1164
 \OML/lmm/m/it/10.95 ^^V=\OT1/lmr/m/n/10.95 2  =  []  =  []\OML/lmm/m/it/10.95 ;
   ^^W=\OT1/lmr/m/n/10.95 2  =  []  =  []\OML/lmm/m/it/10.95 ;
  []
 
 [57] [58] [59]
-Overfull \hbox (12.15097pt too wide) in paragraph at lines 1433--1444
+Overfull \hbox (12.15097pt too wide) in paragraph at lines 1453--1464
 \T1/lmr/m/n/10.95 (-20) the good event $\OMS/lmsy/m/n/10.95 f[]\OT1/lmr/m/n/10.
 95 (-20) (\OML/lmm/b/it/10.95 ![]\OT1/lmr/m/n/10.95 (-20) )\OML/lmm/m/it/10.95 
 ; []\OT1/lmr/m/n/10.95 (-20) ([]) \OMS/lmsy/m/n/10.95 2 \OT1/lmr/m/n/10.95 (-20
@@ -1219,15 +1219,15 @@ Overfull \hbox (12.15097pt too wide) in paragraph at lines 1433--1444
 .95 ![]\OT1/lmr/m/n/10.95 (-20) ) []
  []
 
-[60] [61] [62] [63] [64]
+[60] [61] [62] [63] [64] [65]
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
- [65
+ [66
 
 
-] (./main.aux (./chapters/01_introduction.aux)
-(./chapters/02_background.aux) (./chapters/03_pooled_intermediate.aux)
+] (./main.aux (./chapters/01_introduction.aux) (./chapters/02_background.aux) (
+./chapters/03_pooled_intermediate.aux)
 (./chapters/04_pooled_extreme.aux) (./chapters/05_discussion.aux))
  ***********
 LaTeX2e <2023-11-01> patch level 1
@@ -1240,9 +1240,9 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 26338 strings out of 474116
- 467918 string characters out of 5743681
- 1950187 words of memory out of 5000000
+ 26339 strings out of 474116
+ 467925 string characters out of 5743681
+ 1952187 words of memory out of 5000000
  47508 multiletter control sequences out of 15000+600000
  691821 words of font info for 331 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1270,10 +1270,10 @@ fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1
 /public/lm/lmsy9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/
 lmtt10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symb
 ols/msbm10.pfb>
-Output written on main.pdf (69 pages, 792553 bytes).
+Output written on main.pdf (70 pages, 793737 bytes).
 PDF statistics:
- 1776 PDF objects out of 2073 (max. 8388607)
- 1633 compressed objects within 17 object streams
- 381 named destinations out of 1000 (max. 500000)
+ 1782 PDF objects out of 2073 (max. 8388607)
+ 1638 compressed objects within 17 object streams
+ 382 named destinations out of 1000 (max. 500000)
  68561 words of extra memory for PDF output out of 74296 (max. 10000000)
 
