@@ -23,14 +23,19 @@ The contribution of this chapter rests on the pooling framework of
 common marginal distribution --- the tail-homogeneous
 distributed-inference case of \Cref{sec:bg:pool-distrib}. The equal
 effective sample fraction condition $k_{j}/n_{j} = (k/n)(1 + o(1))$
-of \Cref{cor:bg:pool-distrib-oracle} is \emph{not} part of the
-standing setup; it is invoked only in
-\Cref{sec:pool-int:weights,sec:pool-int:CI} where it simplifies the
-variance-optimal weights. We restate below only those assumptions
-used throughout; the general pooling machinery and its supporting
-joint central limit theorems
-(\Cref{thm:bg:pool-hill,thm:bg:pool-weissman}) are imported without
-modification.
+is \emph{not} part of the standing setup; it is invoked only in
+\Cref{sec:pool-int:weights,sec:pool-int:CI,sec:pool-int:test} where it
+simplifies the variance-optimal weights and the limiting bias
+structure. When oracle equivalence to the unfeasible pooled-sample
+benchmark is cited, we use the stronger
+$k_{j}/n_{j} = (k/n)(1 + O(k^{-1/2}))$ condition of
+\Cref{cor:bg:pool-distrib-oracle}. We restate below only those
+assumptions used throughout. The pooled-Hill CLT of
+\Cref{thm:bg:pool-hill} is imported directly; the weighted-geometric
+Weissman construction of \Cref{sec:bg:pooling} is kept as the
+quantile primitive, while its finite-log intermediate limit is derived
+inside this chapter rather than read off from the diverging-log
+Weissman CLT \Cref{thm:bg:pool-weissman}.
 
 \paragraph{The $m$ samples and the pooling primitives.}
 We have $m$ \emph{independent} samples
@@ -52,10 +57,14 @@ $j$ supplies the two pooling primitives of \Cref{sec:bg:pooling}: a
 local Hill estimator $\hat\gamma_{j}(k_{j})$ as in
 \eqref{eq:bg:hill}, and a local Weissman extreme-quantile estimator
 $\hat q^{\star}_{j}(\,\cdot\,\mid k_{j})$ as in
-\eqref{eq:bg:weissman}. These $2m$ scalars, together with their
-joint asymptotic covariance, constitute the entire information
-shared between samples; no raw observation and no expectile-specific
-summary statistic crosses between machines.
+\eqref{eq:bg:weissman}. The dot does not represent an additional
+communicated function; it denotes the algebraic Weissman rule
+recoverable from the communicated Weissman value together with
+$(\hat\gamma_{j}(k_{j}), k_j, n_j)$. At any fixed target level this
+rule contributes one quantile scalar per sample. These values, together
+with their joint asymptotic covariance, constitute the entire
+information shared between samples; no raw observation and no
+expectile-specific summary statistic crosses between machines.
 
 \paragraph{Heavy-tail regime.}
 The common marginal $F$ satisfies the second-order condition
@@ -69,20 +78,21 @@ $\mathcal C_{2}(\gamma, \rho, A)$ of \Cref{cond:bg:second-order} with
 \end{equation}
 the per-sample bias-rate condition
 $\sqrt{k_{j}}\, A(n_{j}/k_{j}) \to \lambda_{j} \in \R$ holds for every
-$j$, and the moment-negligibility condition
+$j$, $F$ is strictly increasing in a neighbourhood of its upper
+endpoint, and the moment-negligibility condition
 \begin{equation}
 \label{eq:pool-int:moment-rate}
   \frac{\sqrt{k}}{\Quant_{X}(\tau_{n})} \;\to\; 0
 \end{equation}
-is in force. The restriction $\gamma < 1/2$ is the moment regime in
-which expectile inference is statistically meaningful and in which the
-expectile--quantile asymptotic equivalence
-\eqref{eq:bg:expectile-quantile-equivalence} composes with the iid
-intermediate central limit theorems
-\Cref{thm:bg:laws-iid,thm:bg:qb-iid}. Condition
+is in force. The restriction $\gamma < 1/2$ is the finite-variance
+regime in which the expectile central limit theorems used in the
+thesis apply. It strengthens the first-order range $\gamma < 1$
+needed for the expectile--quantile asymptotic equivalence
+\eqref{eq:bg:expectile-quantile-equivalence}. Condition
 \eqref{eq:pool-int:moment-rate} is the multi-sample counterpart of the
 $\sqrt{n(1 - \tau_{n})}\,/\Quant_{X}(\tau_{n}) \to 0$ hypothesis of
-those theorems: it ensures that the moment term in the
+the QB intermediate theorem and the second-order
+expectile--quantile expansion: it ensures that the moment term in the
 expectile--quantile expansion \eqref{eq:bg:c-gamma-rho} is
 asymptotically negligible, so that the deterministic bias of the
 pooled estimator is governed by the single second-order rate carried
@@ -124,7 +134,7 @@ expectile--quantile equivalence of \Cref{prop:bg:expectile-quantile}:
   \hatexpectile{\tau,\,j}
   \;=\;
   \psifn\!\big(\hat\gamma_{j}(k_{j})\big)\,
-  \hat q^{\star}_{j}(1 - \tau \mid k_{j}).
+  \hat q^{\star}_{j}(\tau \mid k_{j}).
 \]
 The LAWS direct estimator \eqref{eq:bg:laws} would require sharing
 $\tildexpectile{\tau_{n},\,j}$ across samples, which lies outside the
@@ -141,11 +151,10 @@ protocol, not an independent methodological preference.
 \Cref{sec:pool-int:estimator} defines the pooled QB intermediate
 expectile estimator from the pooled Hill and pooled Weissman inputs.
 \Cref{sec:pool-int:joint-clt} derives the joint $\sqrt{k}$-CLT for
-the pooled Hill and log-Weissman inputs, combining the marginal
-pooled limits of \Cref{sec:bg:pooling}
-(\Cref{thm:bg:pool-hill,thm:bg:pool-weissman}) with the local
-Hill / intermediate-threshold joint CLT, specialised to the
-independent-samples case \eqref{eq:pool-int:R-zero}. The output is
+the pooled Hill and log-Weissman inputs, combining the pooled-Hill
+limit of \Cref{thm:bg:pool-hill} and the weighted-geometric pooling map
+with the local Hill / intermediate-threshold joint CLT, specialised to
+the independent-samples case \eqref{eq:pool-int:R-zero}. The output is
 the Gaussian input to which the delta method is then applied.
 \Cref{sec:pool-int:expectile-clt} applies the delta method through
 $\psifn$ and states the main asymptotic-normality theorem of the
@@ -161,7 +170,7 @@ expectile-tail-homogeneity null hypothesis.
 \label{sec:pool-int:estimator}
 
 The shared primitives $\big(\hat\gamma_{j}(k_{j}),\,
-\hat q^{\star}_{j}(1 - \tau_{n} \mid k_{j})\big)_{j = 1, \ldots, m}$
+\hat q^{\star}_{j}(\tau_{n} \mid k_{j})\big)_{j = 1, \ldots, m}$
 admit two natural \emph{single-weight} constructions of a pooled QB
 intermediate-expectile estimator. The first, denoted (A), applies
 the QB plug-in once, at the centre, after pooling the Hill and
@@ -204,10 +213,10 @@ Weissman estimator \eqref{eq:bg:pooled-weissman} read
       \omega_{\gamma, j}\,\hat\gamma_{j}(k_{j}),
   \\[2pt]
 \label{eq:pool-int:weissman-pool}
-  \hatWei_{n}(1 - \tau_{n} \mid \bm\omega_{q})
+  \hatWei_{n}(\tau_{n} \mid \bm\omega_{q})
     &\;=\;
     \prod_{j=1}^{m}
-      \big[\hat q^{\star}_{j}(1 - \tau_{n} \mid k_{j})\big]^{\omega_{q, j}},
+      \big[\hat q^{\star}_{j}(\tau_{n} \mid k_{j})\big]^{\omega_{q, j}},
 \end{align}
 both evaluated at the chapter's intermediate level $\tau_{n}$.
 
@@ -221,7 +230,7 @@ centre,
     (\bm\omega_{\gamma}, \bm\omega_{q})
   \;\coloneqq\;
   \psifn\!\big(\hat\gamma_{n}(\bm\omega_{\gamma})\big)\,
-  \hatWei_{n}(1 - \tau_{n} \mid \bm\omega_{q}).
+  \hatWei_{n}(\tau_{n} \mid \bm\omega_{q}).
 \end{equation}
 The second computes a per-sample QB expectile on each machine and
 geometric-pools the resulting $m$ local estimates,
@@ -231,11 +240,11 @@ geometric-pools the resulting $m$ local estimates,
   \;\coloneqq\;
   \prod_{j = 1}^{m}\!\big[
     \psifn(\hat\gamma_{j}(k_{j}))\,
-    \hat q^{\star}_{j}(1 - \tau_{n} \mid k_{j})
+    \hat q^{\star}_{j}(\tau_{n} \mid k_{j})
   \big]^{\omega_{j}}
   \;=\;
   \Big(\prod_{j = 1}^{m}\psifn(\hat\gamma_{j}(k_{j}))^{\omega_{j}}\Big)
-  \cdot \hatWei_{n}(1 - \tau_{n} \mid \bm\omega).
+  \cdot \hatWei_{n}(\tau_{n} \mid \bm\omega).
 \end{equation}
 The Weissman factor is identical in the two formulae; the
 constructions differ only in whether the nonlinearity $\psifn$ acts
@@ -294,7 +303,7 @@ We adopt
     (\bm\omega_{\gamma}, \bm\omega_{q})
   \;\coloneqq\;
   \psifn\!\big(\hat\gamma_{n}(\bm\omega_{\gamma})\big)\,
-  \hatWei_{n}(1 - \tau_{n} \mid \bm\omega_{q}),
+  \hatWei_{n}(\tau_{n} \mid \bm\omega_{q}),
 \end{equation}
 identical to \eqref{eq:pool-int:expectile-A}, as the canonical
 pooled QB intermediate-expectile estimator for the remainder of
@@ -317,11 +326,12 @@ $\sqrt{k_{j}}\,A(n_{j}/k_{j}) \to \lambda_{j}$ of
 \paragraph{Two weight vectors, not one.}
 Definition \eqref{eq:pool-int:expectile-pool} carries two free weight
 vectors rather than a single one. In the quantile-only analysis of
-\Cref{thm:bg:pool-weissman} the joint asymptotic distribution of the
-pooled Hill and pooled Weissman estimators is governed by a single
-$\bm\omega$, and the variance- and AMSE-optima of
-\Cref{prop:bg:optimal-weights} apply uniformly across the two
-primitives. The expectile target combines these two primitives
+\eqref{eq:bg:pooled-weissman}, the weighted-geometric quantile pool is
+formed with a single $\bm\omega$, and the extreme-quantile limit of
+\Cref{thm:bg:pool-weissman} is governed by that same vector. The
+variance- and AMSE-optima of \Cref{prop:bg:optimal-weights} therefore
+apply to the quantile target through one set of weights. The expectile
+target combines the Hill and Weissman primitives
 through the nonlinear map $\psifn$, and the asymptotic variance of
 $\hatexpectile{\tau_{n}}^{\mathrm{pool}}$ acquires a contribution
 from the within-sample cross-covariance of $\hat\gamma_{j}$ and
@@ -336,7 +346,7 @@ imposing it by hand.
 
 \paragraph{Why the pooled Weissman at the intermediate level.}
 At the intermediate level $\tau_{n}$, the per-sample Weissman
-estimator $\hat q^{\star}_{j}(1 - \tau_{n} \mid k_{j}) = (k_{j}/(n_{j}
+estimator $\hat q^{\star}_{j}(\tau_{n} \mid k_{j}) = (k_{j}/(n_{j}
 (1 - \tau_{n})))^{\hat\gamma_{j}(k_{j})}\, X_{n_{j} - k_{j} : n_{j},\,j}$
 plays a dual role. When $\tau_{n}$ matches the sample-specific
 intermediate level $\tau_{n_{j}} \coloneqq 1 - k_{j}/n_{j}$, the
@@ -363,7 +373,7 @@ footing.
 
 This section establishes the joint $\sqrt{k}$-Gaussian limit of
 $(\hat\gamma_{n}(\bm\omega_{\gamma}),\,
-\log\hatWei_{n}(1 - \tau_{n} \mid \bm\omega_{q}))$ at intermediate
+\log\hatWei_{n}(\tau_{n} \mid \bm\omega_{q}))$ at intermediate
 level $\tau_{n}$. The result is the input that
 \Cref{sec:pool-int:expectile-clt} feeds through the delta method to
 obtain the asymptotic distribution of the pooled QB expectile
@@ -374,7 +384,7 @@ For each sample $j$, the log of the Weissman estimator decomposes
 exactly as
 \begin{equation}
 \label{eq:pool-int:weissman-decomp}
-  \log\hat q^{\star}_{j}(1 - \tau_{n} \mid k_{j})
+  \log\hat q^{\star}_{j}(\tau_{n} \mid k_{j})
   \;=\;
   \log X_{n_{j} - k_{j} : n_{j},\,j}
   \;+\;
@@ -410,7 +420,7 @@ central limit theorem
   \sqrt{k_{j}}\!
     \begin{pmatrix}
       \hat\gamma_{j}(k_{j}) - \gamma \\[2pt]
-      \log\hat q^{\star}_{j}(1 - \tau_{n} \mid k_{j})
+      \log\hat q^{\star}_{j}(\tau_{n} \mid k_{j})
         - \log \Quant_{X}(\tau_{n})
     \end{pmatrix}
   \;\todist\;
@@ -456,7 +466,7 @@ $\bm\omega_{\gamma}^{\top}\bm 1 = \bm\omega_{q}^{\top}\bm 1 = 1$,
   \sqrt{k}\!
     \begin{pmatrix}
       \hat\gamma_{n}(\bm\omega_{\gamma}) - \gamma \\[2pt]
-      \log\hatWei_{n}(1 - \tau_{n} \mid \bm\omega_{q})
+      \log\hatWei_{n}(\tau_{n} \mid \bm\omega_{q})
         - \log \Quant_{X}(\tau_{n})
     \end{pmatrix}
   \;\todist\;
@@ -525,10 +535,9 @@ See \Cref{app:proofs:joint-clt}.
 
 \Cref{prop:pool-int:joint-clt} is the joint counterpart, at the
 intermediate finite-log-rate level $L_{j}(\tau_{n}) \to L_{j}^{\star}
-\in \R$, of the marginal pooled Hill and pooled Weissman limits
-recalled in \Cref{sec:bg:pooling}
-(\Cref{thm:bg:pool-hill,thm:bg:pool-weissman}). The extreme-level,
-diverging-log-rate joint analogue is the subject of
+\in \R$, of the pooled-Hill limit and weighted-geometric Weissman
+construction recalled in \Cref{sec:bg:pooling}. The extreme-level,
+diverging-log-rate analogue is the subject of
 \Cref{ch:pool-ext}. The
 new feature for the expectile target is the cross-covariance
 $\bm\omega_{\gamma}^{\top}\mathrm{diag}(\bm L^{\star})\Vc\bm\omega_{q}$:
@@ -623,8 +632,7 @@ pooled estimator with a $+$ sign in \eqref{eq:pool-int:mu-xi} below;
 that is, $b^{\xi/\Quant}$ is the deterministic \emph{bias
 contribution} of the gap, not the gap itself. The contribution
 $b^{\xi/\Quant}$ is \emph{absent} from the analogue quantile-target
-theorem \Cref{thm:bg:pool-weissman} of
-\textcite{DaouiaPadoanStupfler2021}: it is the deterministic
+pooling theorem of \textcite{DaouiaPadoanStupfler2021}: it is the deterministic
 correction that arises when the quantile target is replaced by the
 expectile target through the QB plug-in.
 
@@ -714,7 +722,7 @@ statistic is $\sqrt{k}$-unbiased and contributes no bias term at all.
 \paragraph{Distributed-inference simplification.}
 Under the distributed-inference assumption that the sample fractions
 are asymptotically equal, $k_{j}/n_{j} = (k/n)(1 + o(1))$ for every
-$j$ (\Cref{cor:bg:pool-distrib-oracle}), the log-rate factor
+$j$, the log-rate factor
 $L_{j}(\tau_{n}) = \log(k/(n(1 - \tau_{n}))) + o(1)$ becomes a
 sample-free quantity. Writing $L^{\star}$ for its common limit,
 \eqref{eq:pool-int:sigma-xi} simplifies to
@@ -745,8 +753,8 @@ couples the two pooled inputs through $\mathrm{diag}(\bm L^{\star})$
 and is a genuine structural feature of the expectile target. As
 \Cref{sec:pool-int:weights} shows, however, the additional freedom is
 not exploited by the variance optimum in the equal-fraction
-distributed-inference case: under
-\Cref{cor:bg:pool-distrib-oracle} the variance-optimal pair
+distributed-inference case: under the equal-fraction setup described
+in \Cref{sec:pool-int:setup}, the variance-optimal pair
 collapses to a single Paper~3 quantile-style weight vector
 $\bm\omega^{\xi,\mathrm{Var}}_{\gamma} =
  \bm\omega^{\xi,\mathrm{Var}}_{q} = \bm\omega^{\mathrm{Var}}$
@@ -788,8 +796,8 @@ $\Vc^{-1}\bm 1$; whether this can be done by a single choice of
 $(\bm\omega_{\gamma}, \bm\omega_{q})$ depends on whether the linear
 constraint induced on $\bm u$ by the simplex constraints is
 sample-free. It is, precisely under the equal-fraction
-distributed-inference assumption $k_{j}/n_{j} = (k/n)(1 + o(1))$ of
-\Cref{cor:bg:pool-distrib-oracle}, which renders $L_{j}(\tau_{n})$
+distributed-inference assumption $k_{j}/n_{j} = (k/n)(1 + o(1))$
+described in \Cref{sec:pool-int:setup}, which renders $L_{j}(\tau_{n})$
 sample-free and collapses
 $\mathrm{diag}(\bm L^{\star})$ to a scalar multiple of the identity.
 
@@ -797,8 +805,8 @@ $\mathrm{diag}(\bm L^{\star})$ to a scalar multiple of the identity.
 \label{prop:pool-int:var-opt-distrib}
 Under the assumptions of \Cref{thm:pool-int:main} and the
 equal-sample-fraction condition
-$k_{j}/n_{j} = (k/n)(1 + o(1))$ of
-\Cref{cor:bg:pool-distrib-oracle}, the variance-optimal weights for
+$k_{j}/n_{j} = (k/n)(1 + o(1))$ described in
+\Cref{sec:pool-int:setup}, the variance-optimal weights for
 the pooled QB expectile estimator satisfy
 \begin{equation}
 \label{eq:pool-int:var-opt-distrib-coincide}
@@ -842,10 +850,11 @@ invariant under the change of target from extreme quantile to
 extreme expectile.} The two targets share the same data-fusion
 recipe; the only change in the asymptotic variance is the
 multiplicative factor $(m(\gamma) + L^{\star})^{2} + 1$ replacing the
-quantile-target factor of $1$. The distributed-inference oracle
-equivalence (\Cref{cor:bg:pool-distrib-oracle}) thus extends to the
-expectile target at the variance criterion without modification of
-the pooling rule. The AMSE-optimum, by contrast, is genuinely
+quantile-target factor of $1$. Under the stronger oracle-rate
+equal-fraction condition of \Cref{cor:bg:pool-distrib-oracle}, the
+distributed-inference oracle equivalence thus extends to the expectile
+target at the variance criterion without modification of the pooling
+rule. The AMSE-optimum, by contrast, is genuinely
 target-dependent even under equal-fraction distributed inference, as
 the second subsection below makes precise.
 
@@ -1452,7 +1461,7 @@ Let
   \hatexpectile{\tau_{n},\,j}
   \;\coloneqq\;
   \psifn\!\big(\hat\gamma_{j}(k_{j})\big)\,
-  \hat q^{\star}_{j}(1 - \tau_{n} \mid k_{j}),
+  \hat q^{\star}_{j}(\tau_{n} \mid k_{j}),
   \qquad j = 1, \ldots, m,
 \end{equation}
 denote the per-sample QB intermediate-expectile estimators of
@@ -1598,8 +1607,8 @@ regimes of the chapter guarantee $\delta = 0$:
       under which $\Bc = \Bc^{\star} = \bm 0$ and $b^{\xi/\Quant} = 0$,
       hence $\bm\beta = \bm 0$;
 \item the equal-fraction distributed-inference setting
-      $k_{j}/n_{j} = (k/n)(1 + o(1))$ of
-      \Cref{cor:bg:pool-distrib-oracle}, under which every coordinate
+      $k_{j}/n_{j} = (k/n)(1 + o(1))$ described in
+      \Cref{sec:pool-int:setup}, under which every coordinate
       of $\bm\beta$ collapses to one common value, so that
       $\bm\beta \in \mathrm{span}\{\bm 1\}$.
 \end{enumerate}
