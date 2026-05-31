@@ -57,11 +57,11 @@ From the definitions \eqref{eq:pool-int:expectile-A} and
   \hatexpectile{\tau_{n}}^{(A)}(\bm\omega, \bm\omega)
     &\;=\;
     \psifn(\hat\gamma_{n}(\bm\omega))\,
-    \hatWei_{n}(1 - \tau_{n} \mid \bm\omega), \\
+    \hatWei_{n}(\tau_{n} \mid \bm\omega), \\
   \hatexpectile{\tau_{n}}^{(B)}(\bm\omega)
     &\;=\;
     \Big(\prod_{j = 1}^{m}\psifn(\hat\gamma_{j}(k_{j}))^{\omega_{j}}\Big)
-    \,\hatWei_{n}(1 - \tau_{n} \mid \bm\omega).
+    \,\hatWei_{n}(\tau_{n} \mid \bm\omega).
 \end{align*}
 The Weissman factor is identical in the two estimators, so the
 ratio reduces to a function of the Hill estimators only:
@@ -83,6 +83,11 @@ The proposition therefore reduces to
     - \sum_{j}\omega_{j}\log\psifn(\hat\gamma_{j}(k_{j}))
   \Big] \;\toprob\; 0.
 \end{equation}
+The log-geometric Weissman factors are defined on the
+high-probability positivity event described after
+\eqref{eq:pool-int:weissman-pool}. They cancel exactly in
+\eqref{eq:app:A-B-ratio}, so no Weissman-specific stochastic term
+enters the remainder of this proof.
 
 \paragraph{Good event supporting the Taylor expansion.}
 The map $g \mapsto \log\psifn(g) = -g\log(g^{-1} - 1)$ is defined
@@ -255,7 +260,7 @@ in every quantity downstream of the joint Gaussian limit. \qed
 We establish the joint $\sqrt{k}$-Gaussian limit
 \eqref{eq:pool-int:joint-pooled-clt} of the pair
 $\big(\hat\gamma_{n}(\bm\omega_{\gamma}),\,
-\log\hatWei_{n}(1 - \tau_{n} \mid \bm\omega_{q})\big)$ under the
+\log\hatWei_{n}(\tau_{n} \mid \bm\omega_{q})\big)$ under the
 standing assumptions of \Cref{sec:pool-int:setup}: $m$ independent
 samples sharing the common marginal $F$ and the common tail index
 $\gamma \in (0, 1/2)$, the proportionality conditions
@@ -333,7 +338,7 @@ The Weissman decomposition \eqref{eq:pool-int:weissman-decomp},
 exact for every $n$, reads
 \begin{equation}
 \label{eq:app:wei-decomp}
-  \log\hat q^{\star}_{j}(1 - \tau_{n} \mid k_{j})
+  \log\hat q^{\star}_{j}(\tau_{n} \mid k_{j})
     \;-\; \log\Quant_{X}(\tau_{n})
   \;=\;
   L_{j}(\tau_{n})\,\big(\hat\gamma_{j}(k_{j}) - \gamma\big)
@@ -348,7 +353,7 @@ $r_{j}(\tau_{n}) \coloneqq
 - \log\Quant_{X}(\tau_{n})$
 is a deterministic remainder. Identity \eqref{eq:app:wei-decomp}
 follows by inserting the definition
-$\hat q^{\star}_{j}(1 - \tau_{n} \mid k_{j})
+$\hat q^{\star}_{j}(\tau_{n} \mid k_{j})
 = (k_{j}/(n_{j}(1 - \tau_{n})))^{\hat\gamma_{j}(k_{j})}
 X_{n_{j} - k_{j} : n_{j},\,j}$ and adding and subtracting
 $\gamma\,L_{j}(\tau_{n})$ and $\log\Quant_{X}(\tau_{n_{j}})$.
@@ -386,7 +391,7 @@ Write \eqref{eq:app:wei-decomp} in matrix form,
   \sqrt{k_{j}}\!
     \begin{pmatrix}
       \hat\gamma_{j}(k_{j}) - \gamma \\[2pt]
-      \log\hat q^{\star}_{j}(1 - \tau_{n} \mid k_{j})
+      \log\hat q^{\star}_{j}(\tau_{n} \mid k_{j})
         - \log\Quant_{X}(\tau_{n})
     \end{pmatrix}
   \;=\;
@@ -411,7 +416,7 @@ with these deterministic convergences to deliver
   \sqrt{k_{j}}\!
     \begin{pmatrix}
       \hat\gamma_{j}(k_{j}) - \gamma \\[2pt]
-      \log\hat q^{\star}_{j}(1 - \tau_{n} \mid k_{j})
+      \log\hat q^{\star}_{j}(\tau_{n} \mid k_{j})
         - \log\Quant_{X}(\tau_{n})
     \end{pmatrix}
   \;\todist\;
@@ -435,7 +440,7 @@ which is precisely \eqref{eq:pool-int:per-sample-clt}.
 \paragraph{Step (iii): cross-sample independence and rescaling to $\sqrt{k}$.}
 The $m$ samples are independent, so the $2m$ random variables
 $\big(\hat\gamma_{j}(k_{j}) - \gamma,\,
-\log\hat q^{\star}_{j}(1 - \tau_{n} \mid k_{j}) -
+\log\hat q^{\star}_{j}(\tau_{n} \mid k_{j}) -
 \log\Quant_{X}(\tau_{n})\big)_{j = 1}^{m}$ are organised as $m$
 independent $2$-blocks. Stacking them into the column vector
 \[
@@ -518,7 +523,7 @@ By definitions \eqref{eq:pool-int:hill-pool} and
   \;=\;
   \sum_{j = 1}^{m}\omega_{\gamma, j}\,(\hat\gamma_{j}(k_{j}) - \gamma),
   \qquad
-  \log\hatWei_{n}(1 - \tau_{n} \mid \bm\omega_{q})
+  \log\hatWei_{n}(\tau_{n} \mid \bm\omega_{q})
     - \log\Quant_{X}(\tau_{n})
   \;=\;
   \sum_{j = 1}^{m}\omega_{q, j}\,
@@ -531,7 +536,7 @@ Z_{n}$, and the relation is exactly
 \[
   \begin{pmatrix}
     \hat\gamma_{n}(\bm\omega_{\gamma}) - \gamma \\[2pt]
-    \log\hatWei_{n}(1 - \tau_{n} \mid \bm\omega_{q})
+    \log\hatWei_{n}(\tau_{n} \mid \bm\omega_{q})
       - \log\Quant_{X}(\tau_{n})
   \end{pmatrix}
   \;=\;
@@ -634,7 +639,7 @@ By the QB factorisation \eqref{eq:pool-int:expectile-pool},
   \;=\;
   \log\psifn\!\big(\hat\gamma_{n}(\bm\omega_{\gamma})\big)
   \;+\;
-  \log\hatWei_{n}(1 - \tau_{n} \mid \bm\omega_{q}).
+  \log\hatWei_{n}(\tau_{n} \mid \bm\omega_{q}).
 \]
 Subtract $\log\expectile{\tau_{n}}$ from both sides and insert
 $\pm\,\log\psifn(\gamma)\,\pm\,\log\Quant_{X}(\tau_{n})$:
@@ -647,7 +652,7 @@ $\pm\,\log\psifn(\gamma)\,\pm\,\log\Quant_{X}(\tau_{n})$:
   &\underbrace{\big[\log\psifn(\hat\gamma_{n}(\bm\omega_{\gamma}))
               - \log\psifn(\gamma)\big]}_{(\mathrm{H})}
   \\[-2pt]
-  + \;&\underbrace{\big[\log\hatWei_{n}(1 - \tau_{n} \mid
+  + \;&\underbrace{\big[\log\hatWei_{n}(\tau_{n} \mid
                                        \bm\omega_{q})
               - \log\Quant_{X}(\tau_{n})\big]}_{(\mathrm{W})}
   \\[-2pt]
@@ -822,7 +827,7 @@ recall \eqref{eq:app:main:G-limit}:
   \sqrt{k}\!
     \begin{pmatrix}
       \hat\gamma_{n}(\bm\omega_{\gamma}) - \gamma \\[2pt]
-      \log\hatWei_{n}(1 - \tau_{n} \mid \bm\omega_{q})
+      \log\hatWei_{n}(\tau_{n} \mid \bm\omega_{q})
         - \log\Quant_{X}(\tau_{n})
     \end{pmatrix}
   \;+\; \sqrt{k}\,(\mathrm{G})
@@ -1314,7 +1319,7 @@ By the QB factorisation \eqref{eq:pool-int:expectile-pool},
   \;=\;
   \log\psifn\!\big(\hat\gamma_{n}(\bm\omega_{\gamma})\big)
   \;+\;
-  \log\hatWei_{n}(1 - \tau_{n} \mid \bm\omega_{q}).
+  \log\hatWei_{n}(\tau_{n} \mid \bm\omega_{q}).
 \end{equation}
 \Cref{thm:pool-int:main} delivers $\sqrt{k}\,
 (\hatexpectile{\tau_{n}}^{\mathrm{pool}}(\bm\omega_{\gamma},
@@ -1358,8 +1363,8 @@ into a Hill and a Weissman contribution,
   \\[2pt]
   \Delta_{n}^{q}
   &\;\coloneqq\;
-    \log\hatWei_{n}(1 - \tau_{n} \mid \hat{\bm\omega}_{q})
-    - \log\hatWei_{n}(1 - \tau_{n} \mid \bm\omega_{q}).
+    \log\hatWei_{n}(\tau_{n} \mid \hat{\bm\omega}_{q})
+    - \log\hatWei_{n}(\tau_{n} \mid \bm\omega_{q}).
 \end{align*}
 
 \emph{Hill contribution.}
@@ -1561,7 +1566,7 @@ Fix $j \in \{1, \ldots, m\}$. The per-sample QB log-expectile
   \underbrace{\big[\log\psifn(\hat\gamma_{j}(k_{j}))
                    - \log\psifn(\gamma)\big]}_{(\mathrm H)_{j}}
   \;+\;
-  \underbrace{\big[\log\hat q^{\star}_{j}(1 - \tau_{n} \mid k_{j})
+  \underbrace{\big[\log\hat q^{\star}_{j}(\tau_{n} \mid k_{j})
                    - \log\Quant_{X}(\tau_{n})\big]}_{(\mathrm W)_{j}}
   \;+\;
   (\mathrm G),
@@ -1580,7 +1585,7 @@ $\sqrt{k_{j}}$ scale
   \sqrt{k_{j}}\!
     \begin{pmatrix}
       \hat\gamma_{j}(k_{j}) - \gamma \\[2pt]
-      \log\hat q^{\star}_{j}(1 - \tau_{n} \mid k_{j})
+      \log\hat q^{\star}_{j}(\tau_{n} \mid k_{j})
         - \log\Quant_{X}(\tau_{n})
     \end{pmatrix}
   \;+\; \sqrt{k_{j}}\,(\mathrm G)

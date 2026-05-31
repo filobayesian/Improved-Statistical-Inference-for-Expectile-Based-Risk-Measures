@@ -186,12 +186,13 @@ parsimony, since it is the direct lift of the iid QB pipeline of
 one application of $\psifn$ --- to the pooled setting.
 
 Crucially, (A) admits an intrinsic \emph{two-weight} extension that
-(B) does not: the pooled Hill and pooled Weissman primitives can in
-principle receive distinct weight vectors $(\bm\omega_{\gamma},
-\bm\omega_{q})$. Once we relax to two weights, construction (B) has
-no analogue --- it is built on a single per-sample QB and a single
-geometric pool --- so the two-weight machinery developed in the
-remainder of the chapter is necessarily (A)-only.
+the single-local-QB version of (B) does not: the pooled Hill and pooled
+Weissman primitives can in principle receive distinct weight vectors
+$(\bm\omega_{\gamma}, \bm\omega_{q})$. Once we relax to two weights,
+construction (B), understood as first compressing each sample to one
+local QB scalar and then pooling those scalars, has no direct analogue;
+the two-weight machinery developed in the remainder of the chapter is
+therefore necessarily (A)-only.
 \Cref{sec:pool-int:weights} will return to the question of whether
 this two-weight freedom is ever genuinely exploited, and show that
 under the distributed-inference setting of \Cref{sec:pool-int:setup}
@@ -219,6 +220,15 @@ Weissman estimator \eqref{eq:bg:pooled-weissman} read
       \big[\hat q^{\star}_{j}(\tau_{n} \mid k_{j})\big]^{\omega_{q, j}},
 \end{align}
 both evaluated at the chapter's intermediate level $\tau_{n}$.
+Since the weights are allowed to be real, the geometric products in
+\eqref{eq:pool-int:weissman-pool} and below are interpreted on the log
+scale and require positive local Weissman factors. Under the
+right-heavy-tailed setting with $\gamma > 0$ and $k_j/n_j \to 0$, the
+intermediate order statistic $X_{n_j-k_j:n_j,\,j}$ diverges to the
+right in probability by regular variation of the tail quantile; hence
+$\Prob(\hat q^{\star}_{j}(\tau_{n}\mid k_{j})>0,\ j=1,\ldots,m)\to1$.
+All asymptotic log-scale statements below are understood on this
+high-probability event.
 
 \paragraph{The two candidate estimators.}
 The first construction, which we adopt as canonical, pools the
@@ -276,9 +286,10 @@ $(\bm\omega_{\gamma}, \bm\omega_{q}) = (\bm\omega, \bm\omega)$, the
 two estimators share the same $\sqrt{k}$-asymptotic distribution and
 \Cref{thm:pool-int:main} applies to either without modification. The
 same conclusion extends to estimated weights $\hat{\bm\omega}$
-satisfying $\hat{\bm\omega} \toprob \bm\omega$: since $\bm\omega$ is
-a fixed finite vector, the components of $\hat{\bm\omega}$ are
-automatically $O_{p}(1)$ (cf.\ \Cref{cor:pool-int:CI}).
+satisfying $\hat{\bm\omega}^{\top}\bm 1 = 1$ exactly and
+$\hat{\bm\omega} \toprob \bm\omega$; more generally, exact
+normalisation may be replaced by
+$\sqrt{k}\abs{\hat{\bm\omega}^{\top}\bm 1 - 1}\toprob 0$.
 \end{proposition}
 
 \begin{proof}[Sketch.]

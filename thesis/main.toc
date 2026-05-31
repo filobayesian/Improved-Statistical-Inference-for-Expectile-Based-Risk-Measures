@@ -47,17 +47,17 @@
 \contentsline {paragraph}{Why the pooled Weissman at the intermediate level.}{26}{section*.18}%
 \contentsline {section}{\numberline {3.3}Joint asymptotic distribution of the pooled inputs}{27}{section.3.3}%
 \contentsline {paragraph}{Within-sample decomposition.}{27}{section*.19}%
-\contentsline {paragraph}{Pooling under independence.}{27}{section*.20}%
-\contentsline {section}{\numberline {3.4}Asymptotic normality of the pooled expectile estimator}{28}{section.3.4}%
+\contentsline {paragraph}{Pooling under independence.}{28}{section*.20}%
+\contentsline {section}{\numberline {3.4}Asymptotic normality of the pooled expectile estimator}{29}{section.3.4}%
 \contentsline {paragraph}{Derivative of $\log \psi $.}{29}{section*.21}%
 \contentsline {paragraph}{The deterministic expectile--quantile gap.}{29}{section*.22}%
 \contentsline {paragraph}{Reduction to the iid baseline.}{30}{section*.23}%
 \contentsline {paragraph}{Distributed-inference simplification.}{30}{section*.24}%
-\contentsline {paragraph}{Why two weight vectors.}{30}{section*.25}%
+\contentsline {paragraph}{Why two weight vectors.}{31}{section*.25}%
 \contentsline {section}{\numberline {3.5}Variance- and AMSE-optimal weights}{31}{section.3.5}%
 \contentsline {paragraph}{Beyond the equal-fraction setting.}{32}{section*.27}%
 \contentsline {paragraph}{Departure from the matched-weight diagonal.}{33}{section*.28}%
-\contentsline {paragraph}{Stacked notation.}{33}{section*.30}%
+\contentsline {paragraph}{Stacked notation.}{34}{section*.30}%
 \contentsline {paragraph}{Comparison with the Paper~3 AMSE optimum.}{34}{section*.31}%
 \contentsline {section}{\numberline {3.6}Estimated weights and confidence intervals}{35}{section.3.6}%
 \contentsline {paragraph}{Practical recommendation.}{36}{section*.33}%
@@ -82,7 +82,7 @@
 \contentsline {chapter}{\numberline {A}Proofs}{46}{appendix.A}%
 \contentsline {section}{\numberline {A.1}Proof of \Cref {prop:pool-int:A-B-equiv}}{46}{section.A.1}%
 \contentsline {paragraph}{Reduction to a $\psi $-difference.}{46}{section*.41}%
-\contentsline {paragraph}{Good event supporting the Taylor expansion.}{46}{section*.42}%
+\contentsline {paragraph}{Good event supporting the Taylor expansion.}{47}{section*.42}%
 \contentsline {paragraph}{Taylor expansion with Lagrange remainder.}{47}{section*.43}%
 \contentsline {paragraph}{Order of the remainder terms.}{47}{section*.44}%
 \contentsline {paragraph}{Conclusion.}{48}{section*.45}%
@@ -101,11 +101,11 @@
 \contentsline {paragraph}{Step (ii): the dual variables.}{55}{section*.55}%
 \contentsline {paragraph}{Step (iii): solving for the multipliers.}{56}{section*.56}%
 \contentsline {paragraph}{Step (iv): the primal solution.}{56}{section*.57}%
-\contentsline {paragraph}{Step (v): the departure formula.}{56}{section*.58}%
+\contentsline {paragraph}{Step (v): the departure formula.}{57}{section*.58}%
 \contentsline {paragraph}{Specialisation to the distributed-inference setting.}{57}{section*.59}%
 \contentsline {paragraph}{The degenerate case $m(\gamma ) = 0$.}{57}{section*.60}%
 \contentsline {section}{\numberline {A.5}Proof of \Cref {prop:pool-int:amse-opt}}{57}{section.A.5}%
-\contentsline {paragraph}{Step (i): rewriting the AMSE as a quadratic form.}{57}{section*.61}%
+\contentsline {paragraph}{Step (i): rewriting the AMSE as a quadratic form.}{58}{section*.61}%
 \contentsline {paragraph}{Step (ii): positive-definiteness of $\bm {M}$.}{58}{section*.62}%
 \contentsline {paragraph}{Step (iii): existence and uniqueness via the Lagrangian.}{58}{section*.63}%
 \contentsline {paragraph}{Step (iv): equivalence with the block FOC system.}{58}{section*.64}%
@@ -117,7 +117,7 @@
 \contentsline {section}{\numberline {A.7}Proof of \Cref {thm:pool-int:hom-test}}{61}{section.A.7}%
 \contentsline {paragraph}{Step (i): per-sample QB log-expectile CLT.}{61}{section*.69}%
 \contentsline {paragraph}{Step (ii): aggregation and rescaling to $\sqrt {k}$.}{62}{section*.70}%
-\contentsline {paragraph}{Step (iii): GLS reduction to a quadratic form.}{62}{section*.71}%
+\contentsline {paragraph}{Step (iii): GLS reduction to a quadratic form.}{63}{section*.71}%
 \contentsline {paragraph}{Step (iv): the noncentral chi-square limit.}{63}{section*.72}%
 \contentsline {paragraph}{Step (v): the two regimes with $\delta = 0$.}{63}{section*.73}%
 \contentsline {paragraph}{Step (vi): consistency under the alternative.}{64}{section*.74}%
