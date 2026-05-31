@@ -643,25 +643,50 @@ solving $(1 - \gamma)^{-1} = \log(\gamma^{-1} - 1)$, and is positive
 (resp.\ negative) for $\gamma$ above (resp.\ below) $\gamma^{\star}$.
 
 \paragraph{The deterministic expectile--quantile gap.}
-The first-order asymptotic equivalence
-$\expectile{\tau} / \Quant_{X}(\tau) \to \psifn(\gamma)$ of
-\Cref{prop:bg:expectile-quantile} sharpens, under
-\Cref{cond:bg:second-order}, to the logarithm of the second-order
+The first-order asymptotic equivalence of
+\Cref{prop:bg:expectile-quantile},
+\[
+  \expectile{\tau} / \Quant_{X}(\tau) \to \psifn(\gamma),
+  \qquad \tau \uparrow 1,
+\]
+sharpens, under \Cref{cond:bg:second-order}, through the second-order
 expansion \eqref{eq:bg:c-gamma-rho}
 \parencite{DaouiaGirardStupfler2018},
 \begin{equation}
 \label{eq:pool-int:xi-Q-gap}
-  \log\expectile{\tau} \;-\; \log\psifn(\gamma) \;-\; \log\Quant_{X}(\tau)
-  \;=\;
+  \begin{aligned}
+  \log\expectile{\tau} - \log\psifn(\gamma) - \log\Quant_{X}(\tau)
+  &=
   c(\gamma, \rho)\, A\!\big((1 - \tau)^{-1}\big)
-  \;+\; o\!\big(A((1 - \tau)^{-1})\big),
-  \qquad \tau \uparrow 1,
+  + o\!\big(A((1 - \tau)^{-1})\big)
+  \\
+  &\quad
+  + O\!\big(\Quant_X(\tau)^{-1}\big),
+  \qquad \tau \uparrow 1.
+  \end{aligned}
 \end{equation}
 where the constant $c(\gamma, \rho)$ is given explicitly in
-\eqref{eq:bg:c-gamma-rho} and the moment-rate term has been absorbed
-into the remainder by \eqref{eq:pool-int:moment-rate}; only the
-finiteness of $c(\gamma, \rho)$ is used below. The chapter setup of
-\Cref{sec:pool-int:setup} already \emph{implies} a finite limit
+\eqref{eq:bg:c-gamma-rho}. The final term in
+\eqref{eq:pool-int:xi-Q-gap} is the first-moment contribution in the
+DGS expansion; it is not, in general, an $o(A)$ term. What is needed
+for the CLT is only its sequence-level disappearance after
+multiplication by $\sqrt{k}$. Along the chapter target $\tau_n$,
+\eqref{eq:pool-int:moment-rate} gives
+$\sqrt{k}/\Quant_X(\tau_n) \to 0$, while the bias-rate assumptions
+below give $\sqrt{k}\,A((1-\tau_n)^{-1}) = O(1)$. Hence
+\begin{equation}
+\label{eq:pool-int:xi-Q-gap-seq}
+  \sqrt{k}\Big[
+    \log\expectile{\tau_n}
+    - \log\psifn(\gamma)
+    - \log\Quant_X(\tau_n)
+  \Big]
+  =
+  c(\gamma,\rho)\sqrt{k}\,A\!\big((1-\tau_n)^{-1}\big)
+  + o(1).
+\end{equation}
+The chapter setup of \Cref{sec:pool-int:setup} already \emph{implies}
+a finite limit
 \begin{equation}
 \label{eq:pool-int:Lambda-bullet}
   \Lambda^{\bullet}

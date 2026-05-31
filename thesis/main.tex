@@ -711,10 +711,12 @@ $\pm\,\log\psifn(\gamma)\,\pm\,\log\Quant_{X}(\tau_{n})$:
 \end{aligned}
 \end{equation}
 The identity \eqref{eq:app:main:log-decomp} is exact for every $n$.
-Terms $(\mathrm{H})$ and $(\mathrm{W})$ are random and centred at zero
-by \Cref{prop:pool-int:joint-clt}; term $(\mathrm{G})$ is deterministic
-and depends on the target level $\tau_{n}$ only through population
-quantities. The sign in $(\mathrm{G})$ is chosen so that the rescaled
+Terms $(\mathrm{H})$ and $(\mathrm{W})$ are random fluctuations around
+their population centering quantities; their $\sqrt{k}$-means are those
+supplied by \Cref{prop:pool-int:joint-clt} after the linearisation in
+Step~(ii). Term $(\mathrm{G})$ is deterministic and depends on the
+target level $\tau_{n}$ only through population quantities. The sign in
+$(\mathrm{G})$ is chosen so that the rescaled
 $\sqrt{k}\,(\mathrm{G})$ converges directly to $b^{\xi/\Quant}$ in
 \eqref{eq:pool-int:b-xi-Q-def}, eliminating the bookkeeping of an
 intermediate minus sign in Step (iii).
@@ -768,36 +770,54 @@ $O_{p}(k^{-1}) = o_{p}(k^{-1/2})$, so
 \end{equation}
 
 \paragraph{Step (iii): the deterministic expectile--quantile gap.}
-The first-order equivalence
-$\expectile{\tau}/\Quant_{X}(\tau) \to \psifn(\gamma)$ of
-\Cref{prop:bg:expectile-quantile} sharpens, under the second-order
-condition $\mathcal C_{2}(\gamma, \rho, A)$ with the moment bound
-$\E |X_{-}|^{2 + \delta} < \infty$ of \eqref{eq:pool-int:moment}, to
+The first-order equivalence of \Cref{prop:bg:expectile-quantile},
+\[
+  \expectile{\tau}/\Quant_{X}(\tau) \to \psifn(\gamma),
+  \qquad \tau \uparrow 1,
+\]
+sharpens, under the second-order condition
+$\mathcal C_{2}(\gamma, \rho, A)$ with the moment bound
+$\E |X_{-}|^{2 + \delta} < \infty$ of \eqref{eq:pool-int:moment}, via
 the second-order expansion
 \begin{equation}
 \label{eq:app:main:xi-Q-expansion}
-  \log\expectile{\tau}
-  - \log\psifn(\gamma)
-  - \log\Quant_{X}(\tau)
-  \;=\;
+  \begin{aligned}
+  \log\expectile{\tau} - \log\psifn(\gamma) - \log\Quant_{X}(\tau)
+  &=
   c(\gamma, \rho)\, A\!\big((1 - \tau)^{-1}\big)
-  \;+\; o\!\big(A((1 - \tau)^{-1})\big),
-  \qquad \tau \uparrow 1,
+  + o\!\big(A((1 - \tau)^{-1})\big)
+  \\
+  &\quad
+  + O\!\big(\Quant_X(\tau)^{-1}\big),
+  \qquad \tau \uparrow 1.
+  \end{aligned}
 \end{equation}
-the logarithm of the second-order expansion \eqref{eq:bg:c-gamma-rho}
-of \textcite{DaouiaGirardStupfler2018}, with the explicit constant
-$c(\gamma, \rho)$ recorded there. The additive log form
-\eqref{eq:app:main:xi-Q-expansion} follows by a Taylor expansion of
-$\log(1 + x)$ around zero, the ratio differing from $\psifn(\gamma)$ by
-a vanishing quantity of order $A$; the moment-rate term
-$O(\Quant_{X}(\tau)^{-1})$ of \eqref{eq:bg:c-gamma-rho} is
-$\sqrt{k}$-negligible under the standing condition
-\eqref{eq:pool-int:moment-rate} and is absorbed into the remainder.
+the logarithmic form of \eqref{eq:bg:c-gamma-rho} of
+\textcite{DaouiaGirardStupfler2018}, with the explicit constant
+$c(\gamma, \rho)$ recorded there. The additive log form follows by a
+Taylor expansion of $\log(1 + x)$ around zero. The first-moment term
+$O(\Quant_{X}(\tau)^{-1})$ is displayed explicitly because it need not
+be $o(A((1-\tau)^{-1}))$ without an additional comparison of rates.
+Along the sequence $\tau_n$, however, it is $\sqrt{k}$-negligible under
+\eqref{eq:pool-int:moment-rate}. Since
+$\sqrt{k}\,A((1-\tau_n)^{-1}) = O(1)$ by the argument below, the
+$o(A)$ term is also $o(k^{-1/2})$. Consequently,
+\begin{equation}
+\label{eq:app:main:xi-Q-expansion-seq}
+  \sqrt{k}\Big[
+    \log\expectile{\tau_n}
+    - \log\psifn(\gamma)
+    - \log\Quant_X(\tau_n)
+  \Big]
+  =
+  c(\gamma,\rho)\sqrt{k}\,A\!\big((1-\tau_n)^{-1}\big)
+  + o(1).
+\end{equation}
 Only the finiteness of $c(\gamma, \rho)$ for $\gamma \in (0, 1/2)$ and
 $\rho \le 0$ is used below.
 
-To convert \eqref{eq:app:main:xi-Q-expansion} into a $\sqrt{k}$-rescaled
-shift, we show that
+To identify the deterministic shift in
+\eqref{eq:app:main:xi-Q-expansion-seq}, we show that
 \begin{equation}
 \label{eq:app:main:Lambda-bullet}
   \sqrt{k}\,A\!\big((1 - \tau_{n})^{-1}\big)
@@ -845,9 +865,9 @@ expressing the compatibility of the per-sample bias rates
 $\sqrt{k_{j}}\,A(n_{j}/k_{j}) \to \lambda_{j}$ and log-rate limits
 $L_{j}(\tau_{n}) \to L_{j}^{\star}$ across $j$ under a single global
 $A \in \mathrm{RV}_{\rho}$. Inserting
-\eqref{eq:app:main:Lambda-bullet} into
-\eqref{eq:app:main:xi-Q-expansion} at $\tau = \tau_{n}$ and using the
-sign convention of $(\mathrm{G})$ chosen in
+\eqref{eq:app:main:Lambda-bullet} into the sequence-level expansion
+\eqref{eq:app:main:xi-Q-expansion-seq} and using the sign convention of
+$(\mathrm{G})$ chosen in
 \eqref{eq:app:main:log-decomp},
 \begin{equation}
 \label{eq:app:main:G-limit}
