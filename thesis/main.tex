@@ -339,8 +339,8 @@ $\sqrt{k_{j}}\,A(n_{j}/k_{j}) \to \lambda_{j} \in \R$,
 \end{equation}
 where $b_{j}^{H} = \lambda_{j}/(1 - \rho)$ is the Hill bias and
 $\bm I_{2}$ is the $2 \times 2$ identity matrix. The \emph{zero} second
-component is the asymptotic unbiasedness of the intermediate
-log-order statistic, centred at its own population quantile
+component is the zero asymptotic bias of the intermediate log-order
+statistic on the $\sqrt{k_j}$ scale, centred at its own population quantile
 $\log\Quant_{X}(\tau_{n_{j}}) = \log U(n_{j}/k_{j})$. In the
 tail-quantile-process representation, evaluating the threshold process
 at $s=1$ removes the deterministic second-order term because
@@ -352,7 +352,9 @@ from averaging the second-order tail-quantile term across the top
 $k_{j}$ order statistics, where it does not vanish.
 
 The load-bearing structural fact in \eqref{eq:app:within-input} is the
-\emph{zero off-diagonal entry}. The same Brownian representation writes
+\emph{zero off-diagonal entry}. The same Brownian representation, with
+$W_j$ a standard Brownian motion arising as the tail-empirical-process
+limit for sample $j$, writes
 the centred threshold fluctuation as $\gamma W_j(1)$ and the centred
 Hill fluctuation as
 \[
@@ -479,7 +481,7 @@ with mean
 $\bm\mu_{j}^{\star} = \bm M_{j}^{\star}(b_{j}^{H}, 0)^{\top}
 + (0, b_{j}^{R})^{\top}
 = \big(b_{j}^{H},\, L_{j}^{\star}\, b_{j}^{H}
-       + b_{j}^{R}\big)^{\top}$, the vanishing order-statistic bias of
+       + b_{j}^{R}\big)^{\top}$, the zero order-statistic asymptotic bias of
 \eqref{eq:app:within-input} carrying through.
 The covariance is
 $\bm M_{j}^{\star}\,(\gamma^{2}\bm I_{2})\,(\bm M_{j}^{\star})^{\top}
@@ -531,16 +533,16 @@ independent-samples specialisation. We therefore obtain
   \;\todist\;
   \mathcal N\!\big(\bm\mu_{Z},\, \bm\Sigma_{Z}\big),
 \end{equation}
-where the $2m \times 2m$ covariance $\bm\Sigma_{Z}$ has the
-block-structured form
+where, with $\bm D^\star \coloneqq \mathrm{diag}(\bm L^\star)$, the
+$2m \times 2m$ covariance $\bm\Sigma_{Z}$ has the block-structured form
 \begin{equation}
 \label{eq:app:Sigma-Z}
   \bm\Sigma_{Z}
   \;=\;
   \begin{pmatrix}
-    \Vc & \mathrm{diag}(\bm L^{\star})\,\Vc \\[2pt]
-    \mathrm{diag}(\bm L^{\star})\,\Vc
-      & \Vc + \mathrm{diag}(\bm L^{\star})^{2}\,\Vc
+    \Vc & \bm D^\star\Vc \\[2pt]
+    \Vc\bm D^\star
+      & \Vc + \bm D^\star\Vc\bm D^\star
   \end{pmatrix},
 \end{equation}
 expressed in $m \times m$ blocks. Each block is diagonal: the
@@ -623,20 +625,19 @@ using \eqref{eq:app:Sigma-Z}:
   \\
   \bm A\,\bm\Sigma_{Z}\,\bm A^{\top}\big|_{1,2}
   &\;=\;
-  \bm\omega_{\gamma}^{\top}\,
-    \mathrm{diag}(\bm L^{\star})\,\Vc\,\bm\omega_{q},
+  \bm\omega_{\gamma}^{\top}\bm D^\star\Vc\,\bm\omega_{q},
   \\
   \bm A\,\bm\Sigma_{Z}\,\bm A^{\top}\big|_{2,2}
   &\;=\;
   \bm\omega_{q}^{\top}\,
-    \big(\Vc + \mathrm{diag}(\bm L^{\star})^{2}\,\Vc\big)\,\bm\omega_{q},
+    \big(\Vc + \bm D^\star\Vc\bm D^\star\big)\,\bm\omega_{q},
 \end{align*}
 with the $(2, 1)$ block equal to the $(1, 2)$ block by symmetry of
 $\bm\Sigma_{Z}$. The diagonality of $\Vc$ (under independent
 sampling, \eqref{eq:bg:V_c-diagonal}) ensures that $\Vc$ and
-$\mathrm{diag}(\bm L^{\star})$ commute, so the off-diagonal block can
+$\bm D^\star$ commute, so the off-diagonal block can
 equivalently be written
-$\bm\omega_{\gamma}^{\top}\Vc\,\mathrm{diag}(\bm L^{\star})\,\bm\omega_{q}$
+$\bm\omega_{\gamma}^{\top}\Vc\,\bm D^\star\,\bm\omega_{q}$
 and is the entrywise sum
 $\sum_{j} \omega_{\gamma, j}\,\omega_{q, j}\,L_{j}^{\star}\,
 (\Vc)_{j, j}$. This recovers the covariance
@@ -838,8 +839,8 @@ gives the ratio
   e^{L_{j}^{\star}}
   \;\in\; (0, \infty),
 \]
-so by the regular variation $|A| \in \mathrm{RV}_{\rho}$ at infinity
-\parencite[Theorem~2.3.9]{deHaanFerreira2006},
+so by \Cref{cond:bg:second-order}, whose auxiliary function $A$ is
+eventually of constant sign and has signed ratio limit $y^\rho$,
 \[
   \frac{A((1 - \tau_{n})^{-1})}{A(n_{j}/k_{j})}
   \;\longrightarrow\;
@@ -864,7 +865,7 @@ implicit in the chapter setup --- not an additional hypothesis ---
 expressing the compatibility of the per-sample bias rates
 $\sqrt{k_{j}}\,A(n_{j}/k_{j}) \to \lambda_{j}$ and log-rate limits
 $L_{j}(\tau_{n}) \to L_{j}^{\star}$ across $j$ under a single global
-$A \in \mathrm{RV}_{\rho}$. Inserting
+constant-sign auxiliary function $A$. Inserting
 \eqref{eq:app:main:Lambda-bullet} into the sequence-level expansion
 \eqref{eq:app:main:xi-Q-expansion-seq} and using the sign convention of
 $(\mathrm{G})$ chosen in
@@ -961,7 +962,7 @@ $\sqrt{k}\,\log(\hatexpectile{\tau_{n}}^{\mathrm{pool}}/
 \expectile{\tau_{n}}) = O_{p}(1)$, equivalently
 $\log(\hatexpectile{\tau_{n}}^{\mathrm{pool}}/\expectile{\tau_{n}}) =
 o_{p}(1)$. A first-order Taylor expansion of $u \mapsto e^{u} - 1$
-around $u = 0$ then gives the exact identity
+around $u = 0$ then gives the asymptotic relation
 \begin{equation}
 \label{eq:app:main:exp-taylor}
   \frac{\hatexpectile{\tau_{n}}^{\mathrm{pool}}}

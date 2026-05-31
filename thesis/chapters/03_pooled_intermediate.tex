@@ -263,7 +263,8 @@ right in probability by regular variation of the tail quantile; hence
 $\Prob(\hat q^{\star}_{j}(\tau_{n}\mid k_{j})>0,\ j=1,\ldots,m)\to1$.
 All asymptotic log-scale statements below are understood on this
 high-probability event, intersected with the event on which the local
-and pooled Hill estimators entering $\log\psifn$ lie in $(0,1)$.
+and pooled Hill estimators entering $\log\psifn$ lie in $(0,1)$. Arbitrary
+definitions on the complementary event do not affect the weak limits.
 
 \paragraph{The two candidate estimators.}
 The first construction, which we adopt as canonical, pools the
@@ -448,8 +449,8 @@ The log-rate factor $L_{j}(\tau_{n})$ records the extent to which
 sample $j$ extrapolates from its own intermediate level
 $\tau_{n_{j}} \coloneqq 1 - k_{j}/n_{j}$ to the chapter target
 $\tau_{n}$: $L_{j} = 0$ when the two coincide, $L_{j} > 0$ for
-extrapolation, $L_{j} < 0$ for interpolation. The only non-algebraic input
-to the entire proof of \Cref{prop:pool-int:joint-clt} is the
+extrapolation, $L_{j} < 0$ for interpolation. The only stochastic input
+to the proof of \Cref{prop:pool-int:joint-clt} is the
 within-sample joint asymptotic behaviour of the Hill estimator and
 its companion intermediate log-order statistic at effective sample
 size $k_{j}$. By the tail-empirical-process representation
@@ -464,8 +465,9 @@ itself, and the two decouple in the tail-empirical-process limit.
 This same joint behaviour underlies the iid QB plug-in CLT of
 \textcite{DaouiaGirardStupfler2018} reproduced in
 \Cref{thm:bg:qb-iid}. Combining it with
-\eqref{eq:pool-int:weissman-decomp} yields the within-sample joint
-central limit theorem
+\eqref{eq:pool-int:weissman-decomp}, while using the second-order
+tail-quantile expansion for the deterministic centering, yields the
+within-sample joint central limit theorem
 \begin{equation}
 \label{eq:pool-int:per-sample-clt}
   \sqrt{k_{j}}\!
@@ -538,22 +540,24 @@ $\bm\omega_{\gamma}^{\top}\bm 1 = \bm\omega_{q}^{\top}\bm 1 = 1$,
 with covariance
 \begin{equation}
 \label{eq:pool-int:Sigma}
+  \begin{gathered}
+  \bm D^{\star} \coloneqq \mathrm{diag}(\bm L^{\star}),\\[-2pt]
   \bm\Sigma(\bm\omega_{\gamma},\bm\omega_{q})
   \;=\;
   \begin{pmatrix}
     \bm\omega_{\gamma}^{\top}\Vc\bm\omega_{\gamma}
       &
-    \bm\omega_{\gamma}^{\top}\,\mathrm{diag}(\bm L^{\star})\,
-      \Vc\,\bm\omega_{q} \\[2pt]
-    \bm\omega_{q}^{\top}\,\mathrm{diag}(\bm L^{\star})\,
-      \Vc\,\bm\omega_{\gamma}
+    \bm\omega_{\gamma}^{\top}\bm D^{\star}\Vc\,\bm\omega_{q} \\[2pt]
+    \bm\omega_{q}^{\top}\Vc\bm D^{\star}\bm\omega_{\gamma}
       &
-    \bm\omega_{q}^{\top}\!\big(\Vc + \mathrm{diag}(\bm L^{\star})^{2}
-      \Vc\big)\,\bm\omega_{q}
-  \end{pmatrix},
+    \bm\omega_{q}^{\top}\!\big(\Vc + \bm D^{\star}\Vc\bm D^{\star}
+      \big)\,\bm\omega_{q}
+  \end{pmatrix}.
+  \end{gathered}
 \end{equation}
-where $\Vc$ is the diagonal matrix \eqref{eq:bg:V_c-diagonal},
-$\bm L^{\star} = (L_{1}^{\star}, \ldots, L_{m}^{\star})^{\top}$, and
+Here $\Vc$ is the diagonal matrix \eqref{eq:bg:V_c-diagonal}, so
+$\bm D^{\star}\Vc\bm D^{\star}=(\bm D^{\star})^{2}\Vc$, and
+$\bm L^{\star} = (L_{1}^{\star}, \ldots, L_{m}^{\star})^{\top}$. The
 mean
 \begin{equation}
 \label{eq:pool-int:mu-pool}
@@ -585,14 +589,18 @@ combining the Hill bias $b_{j}^{H} = \lambda_{j}/(1-\rho)$, weighted by
 the log-rate $L_{j}^{\star}$, with the limiting second-order Weissman
 remainder $-\lambda_{j}\Psi_{\rho}(e^{L_{j}^{\star}})$. The
 intermediate log-order statistic contributes no bias term of its own:
-centred at $\log\Quant_{X}(\tau_{n_{j}})$ it is $\sqrt{k_{j}}$-unbiased
+centred at $\log\Quant_{X}(\tau_{n_{j}})$ it has zero asymptotic bias on
+the $\sqrt{k_{j}}$ scale
 \parencite{DaouiaGirardStupfler2018,deHaanFerreira2006}, as established
 in \Cref{app:proofs:joint-clt}. The covariance
 \eqref{eq:pool-int:Sigma} does not depend on $\Bc^{\star}$.
-The proposition is stated for deterministic weights; the extension to
-estimated weights $\hat{\bm\omega}_{\gamma}, \hat{\bm\omega}_{q}
-\toprob \bm\omega_{\gamma}, \bm\omega_{q}$ is a Slutsky corollary,
-deferred to \Cref{sec:pool-int:CI}.
+The proposition is stated for deterministic affine weights. The same
+limit holds for estimated weights satisfying
+$\hat{\bm\omega}_{\gamma}^{\top}\bm 1 =
+\hat{\bm\omega}_{q}^{\top}\bm 1 = 1$ exactly and
+$\hat{\bm\omega}_{\gamma} \toprob \bm\omega_{\gamma}$,
+$\hat{\bm\omega}_{q} \toprob \bm\omega_{q}$; this estimated-weight lift
+is deferred to \Cref{sec:pool-int:CI}.
 \end{proposition}
 
 \begin{proof}
@@ -665,7 +673,7 @@ expansion \eqref{eq:bg:c-gamma-rho}
   \qquad \tau \uparrow 1.
   \end{aligned}
 \end{equation}
-where the constant $c(\gamma, \rho)$ is given explicitly in
+Here the constant $c(\gamma, \rho)$ is given explicitly in
 \eqref{eq:bg:c-gamma-rho}. The final term in
 \eqref{eq:pool-int:xi-Q-gap} is the first-moment contribution in the
 DGS expansion; it is not, in general, an $o(A)$ term. What is needed
@@ -696,16 +704,24 @@ a finite limit
 \end{equation}
 without any additional hypothesis: starting from the per-sample bias
 rate $\sqrt{k_{j}}\,A(n_{j}/k_{j}) \to \lambda_{j}$, the log-rate
-convergence $L_{j}(\tau_{n}) \to L_{j}^{\star}$, and the regular
-variation $|A| \in \mathrm{RV}_{\rho}$ at infinity
-\parencite[Theorem~2.3.9]{deHaanFerreira2006}, one obtains
+convergence $L_{j}(\tau_{n}) \to L_{j}^{\star}$, and the signed ratio
+convergence for the constant-sign auxiliary function $A$ under
+\Cref{cond:bg:second-order}, one obtains
 $\sqrt{k_{j}}\,A((1 - \tau_{n})^{-1}) \to \lambda_{j}\,
 (e^{L_{j}^{\star}})^{\rho}$, and a further rescaling by
 $\sqrt{k/k_{j}} \to \sqrt{c_{j}\sum_{i} c_{i}^{-1}}$ delivers
-\eqref{eq:pool-int:Lambda-bullet} (the per-$j$ expressions for
-$\Lambda^{\bullet}$ agree by joint compatibility of
-$\{\lambda_{j}\}, \{L_{j}^{\star}\}, \{c_{j}\}$ under a single global
-$A$; see \Cref{app:proofs:main-clt} for the explicit verification).
+\eqref{eq:pool-int:Lambda-bullet}. Equivalently, with
+$S=\sum_i c_i^{-1}$, the constants already introduced obey the
+compatibility identity
+\[
+  \sqrt{c_jS}\,\lambda_j e^{\rho L_j^\star}
+  =
+  \sqrt{c_\ell S}\,\lambda_\ell e^{\rho L_\ell^\star}
+  \qquad \text{for all } j,\ell,
+\]
+because both sides are limits of the same sequence
+$\sqrt{k}\,A((1-\tau_n)^{-1})$; see \Cref{app:proofs:main-clt} for the
+explicit verification.
 The finite asymptotic constant
 \begin{equation}
 \label{eq:pool-int:b-xi-Q-def}
@@ -779,19 +795,33 @@ is the asymptotic expectile--quantile bias contribution of
 See \Cref{app:proofs:main-clt}.
 \end{proof}
 
+Writing $\bm D^{\star}=\mathrm{diag}(\bm L^\star)$, the variance in
+\eqref{eq:pool-int:sigma-xi} factorises as
+\[
+  \sigma^{\xi}(\bm\omega_{\gamma},\bm\omega_{q})^{2}
+  =
+  \big(m(\gamma)\bm\omega_{\gamma}+\bm D^{\star}\bm\omega_q\big)^{\top}
+  \Vc\big(m(\gamma)\bm\omega_{\gamma}+\bm D^{\star}\bm\omega_q\big)
+  + \bm\omega_q^{\top}\Vc\bm\omega_q.
+\]
+This form makes the non-negativity immediate and shows how the log-rate
+vector $\bm L^\star$ couples the Hill and Weissman inputs. The
+weight-optimisation section exploits exactly this factorisation.
+
 \paragraph{Reduction to the iid baseline.}
 \Cref{thm:pool-int:main} contains \Cref{thm:bg:qb-iid} as the
 special case $m = 1$ with the chapter target aligned to the single
 sample's intermediate level. The weight vectors collapse to scalars
 $\omega_{\gamma} = \omega_{q} = 1$; the alignment forces
 $L_{1}^{\star} = 0$, $\Psi_{\rho}(e^{L_{1}^{\star}}) = 0$, and
-$\Vc \to \gamma^{2}$. The asymptotic variance \eqref{eq:pool-int:sigma-xi}
+$\Vc = \gamma^{2}$. The asymptotic variance \eqref{eq:pool-int:sigma-xi}
 collapses to $\gamma^{2}(1 + m(\gamma)^{2})$, in exact agreement with
 \Cref{thm:bg:qb-iid}. The bias \eqref{eq:pool-int:mu-xi} collapses
 likewise. The pooled-Weissman bias vanishes, $\Bc^{\star} = 0$: at
 $L_{1}^{\star} = 0$ the bracket in \eqref{eq:pool-int:Bcstar-def}
 reduces to $L_{1}^{\star}/(1 - \rho) - \Psi_{\rho}(1) = 0$, since the
-intermediate order statistic carries no bias of its own. Hence
+intermediate order statistic has zero asymptotic bias on the
+$\sqrt{k}$ scale. Hence
 \begin{equation}
 \label{eq:pool-int:iid-bias}
   \mu^{\xi}
@@ -808,10 +838,11 @@ of \eqref{eq:bg:c-gamma-rho}. This is precisely the bias of
 \Cref{thm:bg:qb-iid}: there is no cancellation between an
 order-statistic bias and the gap, because --- as
 \Cref{app:proofs:joint-clt} establishes --- the intermediate order
-statistic is $\sqrt{k}$-unbiased and contributes no bias term at all.
+statistic has zero asymptotic bias on the $\sqrt{k}$ scale and
+contributes no bias term at all.
 
 \paragraph{Distributed-inference simplification.}
-Under the distributed-inference assumption that the sample fractions
+Under the distributed-inference assumption that the effective sample fractions
 are asymptotically equal, $k_{j}/n_{j} = (k/n)(1 + o(1))$ for every
 $j$, the log-rate factor
 $L_{j}(\tau_{n}) = \log(k/(n(1 - \tau_{n}))) + o(1)$ becomes a
@@ -844,12 +875,16 @@ couples the two pooled inputs through $\mathrm{diag}(\bm L^{\star})$
 and is a genuine structural feature of the expectile target. As
 \Cref{sec:pool-int:weights} shows, however, the additional freedom is
 not exploited by the variance optimum in the equal-fraction
-distributed-inference case: under the equal-fraction setup described
-in \Cref{sec:pool-int:setup}, the variance-optimal pair
-collapses to a single Paper~3 quantile-style weight vector
-$\bm\omega^{\xi,\mathrm{Var}}_{\gamma} =
- \bm\omega^{\xi,\mathrm{Var}}_{q} = \bm\omega^{\mathrm{Var}}$
-(\Cref{prop:pool-int:var-opt-distrib}).
+distributed-inference case: under the additional equal-fraction
+specialisation of \Cref{sec:pool-int:setup}, the variance-optimal
+quantile weights remain
+$\bm\omega^{\xi,\mathrm{Var}}_{q}=\bm\omega^{\mathrm{Var}}$
+(\Cref{prop:pool-int:var-opt-distrib}). When $m(\gamma)\ne0$ the unique
+variance-optimal pair is matched,
+$\bm\omega^{\xi,\mathrm{Var}}_{\gamma}
+= \bm\omega^{\xi,\mathrm{Var}}_{q} = \bm\omega^{\mathrm{Var}}$; when
+$m(\gamma)=0$, the $\gamma$-weight is variance-unidentified and this
+matched vector is only a canonical representative.
 
 \section{Variance- and AMSE-optimal weights}
 \label{sec:pool-int:weights}
@@ -895,7 +930,7 @@ $\mathrm{diag}(\bm L^{\star})$ to a scalar multiple of the identity.
 \begin{proposition}[Variance-optimal weights, equal-fraction distributed inference]
 \label{prop:pool-int:var-opt-distrib}
 Under the assumptions of \Cref{thm:pool-int:main} and the
-equal-sample-fraction condition
+equal-effective-sample-fraction condition
 $k_{j}/n_{j} = (k/n)(1 + o(1))$ described in
 \Cref{sec:pool-int:setup}, the variance-optimal weights for
 the pooled QB expectile estimator satisfy
@@ -950,7 +985,7 @@ target-dependent even under equal-fraction distributed inference, as
 the second subsection below makes precise.
 
 \paragraph{Beyond the equal-fraction setting.}
-When the sample fractions $k_{j}/n_{j}$ vary across $j$,
+When the effective sample fractions $k_{j}/n_{j}$ vary across $j$,
 $\mathrm{diag}(\bm L^{\star})$ ceases to be a scalar multiple of the
 identity, the constraint
 $\bm u^{\top}\bm 1

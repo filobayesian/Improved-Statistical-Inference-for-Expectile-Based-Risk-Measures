@@ -52,18 +52,18 @@
 \contentsline {paragraph}{Derivative of $\log \psi $.}{30}{section*.21}%
 \contentsline {paragraph}{The deterministic expectile--quantile gap.}{30}{section*.22}%
 \contentsline {paragraph}{Reduction to the iid baseline.}{31}{section*.23}%
-\contentsline {paragraph}{Distributed-inference simplification.}{31}{section*.24}%
+\contentsline {paragraph}{Distributed-inference simplification.}{32}{section*.24}%
 \contentsline {paragraph}{Why two weight vectors.}{32}{section*.25}%
 \contentsline {section}{\numberline {3.5}Variance- and AMSE-optimal weights}{32}{section.3.5}%
 \contentsline {paragraph}{Beyond the equal-fraction setting.}{33}{section*.27}%
 \contentsline {paragraph}{Departure from the matched-weight diagonal.}{34}{section*.28}%
 \contentsline {paragraph}{Stacked notation.}{35}{section*.30}%
-\contentsline {paragraph}{Comparison with the Paper~3 AMSE optimum.}{35}{section*.31}%
+\contentsline {paragraph}{Comparison with the Paper~3 AMSE optimum.}{36}{section*.31}%
 \contentsline {section}{\numberline {3.6}Estimated weights and confidence intervals}{36}{section.3.6}%
-\contentsline {paragraph}{Practical recommendation.}{37}{section*.33}%
-\contentsline {paragraph}{Practical remarks.}{38}{section*.35}%
+\contentsline {paragraph}{Practical recommendation.}{38}{section*.33}%
+\contentsline {paragraph}{Practical remarks.}{39}{section*.35}%
 \contentsline {paragraph}{CI validity at $m(\gamma ) = 0$.}{39}{section*.36}%
-\contentsline {section}{\numberline {3.7}A test of expectile-tail-homogeneity}{39}{section.3.7}%
+\contentsline {section}{\numberline {3.7}A test of expectile-tail-homogeneity}{40}{section.3.7}%
 \contentsline {paragraph}{Joint limit of the per-sample log-expectiles.}{40}{section*.37}%
 \contentsline {paragraph}{The GLS deviance statistic.}{40}{section*.38}%
 \contentsline {paragraph}{Discussion.}{41}{section*.39}%

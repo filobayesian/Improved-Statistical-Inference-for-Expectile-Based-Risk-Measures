@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.26)  31 MAY 2026 16:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.26)  31 MAY 2026 16:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -993,7 +993,7 @@ Chapter 2.
 
 ] [6] [7] [8] [9] [10] [11]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 5
-40.
+42.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
@@ -1033,9 +1033,9 @@ MEDIATE LEVELS \T1/lmr/m/n/10.95 25
 
 [25]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 374.
+(Font)              <9> on input line 375.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 374.
+(Font)              <5> on input line 375.
 
 Overfull \hbox (57.91907pt too wide) has occurred while \output is active
 \T1/lmr/m/sl/10.95 CHAPTER 3.  POOLED INFERENCE FOR EXTREME EXPECTILES AT INTER
@@ -1126,13 +1126,13 @@ Overfull \hbox (57.91907pt too wide) has occurred while \output is active
 MEDIATE LEVELS \T1/lmr/m/n/10.95 40
  []
 
-[40])
+[40]
 Overfull \hbox (57.91907pt too wide) has occurred while \output is active
 \T1/lmr/m/sl/10.95 CHAPTER 3.  POOLED INFERENCE FOR EXTREME EXPECTILES AT INTER
 MEDIATE LEVELS \T1/lmr/m/n/10.95 41
  []
 
-[41]
+[41])
 Overfull \hbox (57.91907pt too wide) has occurred while \output is active
 \T1/lmr/m/sl/10.95 CHAPTER 3.  POOLED INFERENCE FOR EXTREME EXPECTILES AT INTER
 MEDIATE LEVELS \T1/lmr/m/n/10.95 42
@@ -1165,12 +1165,12 @@ Appendix A.
 
 
 ] [48] [49] [50]
-Overfull \hbox (57.46487pt too wide) detected at line 457
+Overfull \hbox (57.46487pt too wide) detected at line 459
 []  []  \OT1/lmr/m/n/10.95 =  []  []  []  +  [] \OML/lmm/m/it/10.95 :
  []
 
 [51] [52]
-Overfull \hbox (15.37495pt too wide) detected at line 580
+Overfull \hbox (15.37495pt too wide) detected at line 582
 []\OT1/lmr/m/n/10.95 (\OML/lmm/b/it/10.95 ![]\OT1/lmr/m/n/10.95 ) \OMS/lmsy/m/n
 /10.95 ^^@ \OML/lmm/m/it/10.95 ^^M  \OT1/lmr/m/n/10.95 =  [] \OML/lmm/m/it/10.9
 5 ![] \OT1/lmr/m/n/10.95 ([](\OML/lmm/m/it/10.95 k[]\OT1/lmr/m/n/10.95 ) \OMS/l
@@ -1184,7 +1184,7 @@ it/10.95 Q[]\OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 ^^\[]\OT1/lmr/m/n/10.95 )[]
  []
 
 
-Overfull \hbox (1.27345pt too wide) in paragraph at lines 608--615
+Overfull \hbox (1.27345pt too wide) in paragraph at lines 610--617
 \T1/lmr/m/n/10.95 (-20) The mean fol-lows from the block struc-ture of $\OML/lm
 m/b/it/10.95 ^^V[]$ \T1/lmr/m/n/10.95 (-20) iden-ti-fied in Step (iii): $\OML/l
 mm/b/it/10.95 A ^^V[] \OT1/lmr/m/n/10.95 (-20) = []\OML/lmm/b/it/10.95 ![]B[]\O
@@ -1192,13 +1192,13 @@ ML/lmm/m/it/10.95 ;  \OML/lmm/b/it/10.95 ![]B[][][]$\T1/lmr/m/n/10.95 (-20) ,
  []
 
 [53] [54] [55] [56] [57] [58]
-Overfull \hbox (10.28572pt too wide) detected at line 1184
+Overfull \hbox (10.28572pt too wide) detected at line 1185
 \OML/lmm/m/it/10.95 ^^V=\OT1/lmr/m/n/10.95 2  =  []  =  []\OML/lmm/m/it/10.95 ;
   ^^W=\OT1/lmr/m/n/10.95 2  =  []  =  []\OML/lmm/m/it/10.95 ;
  []
 
 [59] [60] [61]
-Overfull \hbox (12.15097pt too wide) in paragraph at lines 1473--1484
+Overfull \hbox (12.15097pt too wide) in paragraph at lines 1474--1485
 \T1/lmr/m/n/10.95 (-20) the good event $\OMS/lmsy/m/n/10.95 f[]\OT1/lmr/m/n/10.
 95 (-20) (\OML/lmm/b/it/10.95 ![]\OT1/lmr/m/n/10.95 (-20) )\OML/lmm/m/it/10.95 
 ; []\OT1/lmr/m/n/10.95 (-20) ([]) \OMS/lmsy/m/n/10.95 2 \OT1/lmr/m/n/10.95 (-20
@@ -1230,11 +1230,11 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 26346 strings out of 474116
- 468088 string characters out of 5743681
- 1950187 words of memory out of 5000000
+ 26350 strings out of 474116
+ 468172 string characters out of 5743681
+ 1952187 words of memory out of 5000000
  47512 multiletter control sequences out of 15000+600000
- 691821 words of font info for 331 fonts, out of 8000000 for 9000
+ 692043 words of font info for 333 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  74i,18n,84p,1001b,2270s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/filippogombac/Library/texlive/2024/texmf-var/fonts/pk/ljfour/public/
@@ -1260,10 +1260,10 @@ fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1
 /public/lm/lmsy9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/
 lmtt10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symb
 ols/msbm10.pfb>
-Output written on main.pdf (71 pages, 795757 bytes).
+Output written on main.pdf (71 pages, 797886 bytes).
 PDF statistics:
- 1788 PDF objects out of 2073 (max. 8388607)
- 1643 compressed objects within 17 object streams
+ 1789 PDF objects out of 2073 (max. 8388607)
+ 1644 compressed objects within 17 object streams
  385 named destinations out of 1000 (max. 500000)
  68561 words of extra memory for PDF output out of 74296 (max. 10000000)
 
