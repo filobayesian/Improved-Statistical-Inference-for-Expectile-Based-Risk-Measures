@@ -48,7 +48,8 @@ $\hatexpectile{\tau_{n}}^{(A)}$ and $\hatexpectile{\tau_{n}}^{(B)}$
 introduced in \Cref{sec:pool-int:estimator}, applied to a common,
 \emph{deterministic} weight vector $\bm\omega \in \R^{m}$ with
 $\bm\omega^{\top}\bm 1 = 1$, the number of samples $m$ being fixed
-as $n \to \infty$.
+as $n \to \infty$. The estimated-weight extension stated in the
+proposition is proved after the deterministic case.
 
 \paragraph{Reduction to a $\psifn$-difference.}
 From the definitions \eqref{eq:pool-int:expectile-A} and
@@ -92,34 +93,27 @@ enters the remainder of this proof.
 \paragraph{Good event supporting the Taylor expansion.}
 The map $g \mapsto \log\psifn(g) = -g\log(g^{-1} - 1)$ is defined
 on the open interval $(0, 1)$ and singular at its endpoints, so the
-Taylor expansion below requires $\hat\gamma_{j}(k_{j})$ and
-$\hat\gamma_{n}(\bm\omega)$ to lie in $(0, 1)$. By
+Taylor expansion below is carried out on a compact subinterval of
+$(0,1)$. Choose $\eta \in (0,\gamma)$; since
+$\gamma \in (0,1/2)$, this gives $\gamma \in (\eta,1-\eta)$. By
 \Cref{thm:bg:hill}, $\hat\gamma_{j}(k_{j}) \toprob \gamma$ for every
-$j$, and $\gamma \in (0, 1/2)$ by \eqref{eq:pool-int:moment}; hence
-\[
-  \mathbb{P}\!\big(\,\hat\gamma_{j}(k_{j}) \in (0, 1)
-    \text{ for every } j = 1, \ldots, m\,\big) \;\to\; 1.
-\]
-The pooled estimator inherits the same property:
+$j$. The pooled estimator also satisfies
 $\hat\gamma_{n}(\bm\omega)
-= \sum_{j} \omega_{j}\,\hat\gamma_{j}(k_{j}) \toprob \gamma$ (a
-finite weighted sum of consistent terms with deterministic weights
-summing to one), so
-$\mathbb{P}(\hat\gamma_{n}(\bm\omega) \in (0, 1)) \to 1$. Define
-the event
+= \sum_{j} \omega_{j}\,\hat\gamma_{j}(k_{j}) \toprob \gamma$, because
+it is a finite weighted sum of consistent terms with deterministic
+weights summing to one. Hence the compact good event
 \[
-  E_{n} \;\coloneqq\; \big\{\hat\gamma_{1}(k_{1}), \ldots,
-    \hat\gamma_{m}(k_{m}),\, \hat\gamma_{n}(\bm\omega) \in (0, 1)\big\},
-  \qquad \mathbb{P}(E_{n}) \to 1.
+  E_{n,\eta}
+  \;\coloneqq\;
+  \big\{\hat\gamma_{1}(k_{1}), \ldots, \hat\gamma_{m}(k_{m}),
+        \hat\gamma_{n}(\bm\omega) \in [\eta, 1-\eta]\big\}
 \]
-It suffices to establish the claimed $O_{p}(k^{-1})$ bound on
-$E_{n}$: for any $\epsilon > 0$ and $M > 0$,
-$\mathbb{P}(|X_{n}| > M a_{n}) \le \mathbb{P}(|X_{n}|\mathbf{1}_{E_{n}}
-> M a_{n}) + \mathbb{P}(E_{n}^{c})$, and the second term tends to
-zero, so modifying a sequence on an event of vanishing probability
-does not affect convergence in probability or $O_{p}(\cdot)$ bounds.
-Throughout the remainder of the proof we therefore work on $E_{n}$
-without further comment.
+satisfies $\mathbb{P}(E_{n,\eta}) \to 1$. It suffices to establish the
+claimed $O_{p}(k^{-1})$ bound on $E_{n,\eta}$: modifying a sequence on
+an event of probability tending to zero does not affect convergence in
+probability or $O_{p}(\cdot)$ bounds. Throughout the deterministic
+part of the proof we therefore work on $E_{n,\eta}$ without further
+comment.
 
 \paragraph{Taylor expansion with Lagrange remainder.}
 The map $g \mapsto \log\psifn(g) = -g\log(g^{-1} - 1)$ is
@@ -201,13 +195,18 @@ combination of $\sqrt{k}$-consistent terms:
   \big(\hat\gamma_{n}(\bm\omega) - \gamma\big)^{2}
     \;=\; O_{p}(k^{-1}).
 \end{equation}
-For the Lagrange-remainder pre-factors, the consistency
-$\hat\gamma_{j}(k_{j}) \toprob \gamma$ and the squeeze
-$\tilde\gamma_{j}$ between $\hat\gamma_{j}$ and $\gamma$ give
-$\tilde\gamma_{j} \toprob \gamma$; continuity of $m'$ on
-$(0, 1)$ then yields, by the continuous mapping theorem,
-$m'(\tilde\gamma_{j}) \toprob m'(\gamma) = O_{p}(1)$. The same
-argument gives $m'(\tilde\gamma_{\star}) \toprob m'(\gamma)$.
+For the Lagrange-remainder pre-factors, all intermediate points
+$\tilde\gamma_{j}$ and $\tilde\gamma_{\star}$ lie in
+$[\eta,1-\eta]$ on $E_{n,\eta}$. Since $m'$ is continuous on this
+compact interval,
+\[
+  C_{\eta}
+  \;\coloneqq\;
+  \sup_{g \in [\eta,1-\eta]}\abs{m'(g)}
+  \;<\; \infty .
+\]
+Thus the Lagrange factors are deterministically bounded on the good
+event.
 
 Inserting these orders into \eqref{eq:app:A-B-master}: each summand
 on the right-hand side is the product of an $O_{p}(1)$ factor
@@ -216,16 +215,9 @@ squared deviation), so each is $O_{p}(k^{-1})$. Since the sum on
 the right has $m + 1$ terms and $m$ is fixed, the right-hand side
 of \eqref{eq:app:A-B-master} is itself $O_{p}(k^{-1})$.
 
-\paragraph{Conclusion.}
-The right-hand side of \eqref{eq:app:A-B-master} is a finite sum of
-$m + 1$ terms, each a product of an $O_{p}(1)$ Lagrange factor and
-an $O_{p}(k^{-1})$ squared deviation. With $m$ fixed,
-\[
-  \log\psifn(\hat\gamma_{n}(\bm\omega))
-  - \sum_{j}\omega_{j}\log\psifn(\hat\gamma_{j}(k_{j}))
-  \;=\; O_{p}(k^{-1}).
-\]
-Combining this with the reduction \eqref{eq:app:A-B-ratio} gives
+\paragraph{Conclusion for deterministic weights.}
+Combining the bound in \eqref{eq:app:A-B-master} with the reduction
+\eqref{eq:app:A-B-ratio} gives
 \[
   \log\!\frac{\hatexpectile{\tau_{n}}^{(A)}(\bm\omega, \bm\omega)}
               {\hatexpectile{\tau_{n}}^{(B)}(\bm\omega)}
@@ -247,12 +239,49 @@ mapping theorem applied to $\exp$ further yields
        {\hatexpectile{\tau_{n}}^{(B)}(\bm\omega)} - 1
   \;=\; O_{p}(k^{-1}).
 \]
-The $k^{-1}$ rate is one full order \emph{stronger} than the
-$o_{p}(k^{-1/2})$ statement that the $\sqrt{k}$-CLT
-\Cref{thm:pool-int:main} requires: the two constructions agree
-asymptotically not only at the CLT scale but at a strictly finer
-scale, so the two estimators are interchangeable to leading order
-in every quantity downstream of the joint Gaussian limit. \qed
+The $k^{-1}$ rate is one full order below the $k^{-1/2}$ scale of
+\Cref{thm:pool-int:main}: the two constructions agree asymptotically
+not only at the CLT scale but at a strictly finer scale, so the two
+estimators are interchangeable to leading order in every quantity
+downstream of the joint Gaussian limit.
+
+\paragraph{Estimated-weight extension.}
+Let now $\hat{\bm\omega}$ be a random weight vector satisfying
+$\hat{\bm\omega}\toprob\bm\omega$ for a deterministic
+$\bm\omega$ with $\bm\omega^\top\bm 1 = 1$. Then
+$\|\hat{\bm\omega}\| = O_p(1)$. If
+$\hat{\bm\omega}^{\top}\bm 1 = 1$ exactly, the previous proof applies
+with $\bm\omega$ replaced by $\hat{\bm\omega}$ on the joint
+high-probability event where $\|\hat{\bm\omega}\|$ is bounded and all
+local and pooled Hill estimators lie in $[\eta,1-\eta]$. The weighted
+Hill deviation remains $O_p(k^{-1/2})$, because
+\[
+  \abs{\sum_{j=1}^{m}\hat\omega_j(\hat\gamma_j(k_j)-\gamma)}
+  \;\le\;
+  \|\hat{\bm\omega}\|\,
+  \big\|\hat{\bm\gamma}_{n}-\gamma\bm 1\big\|
+  \;=\; O_p(k^{-1/2}),
+\]
+and the weighted sum of squared local deviations remains
+$O_p(k^{-1})$, since $m$ is fixed, $\|\hat{\bm\omega}\|=O_p(1)$, and
+each $(\hat\gamma_j(k_j)-\gamma)^2=O_p(k^{-1})$. Hence the unscaled
+log-ratio is still $O_p(k^{-1})$.
+
+If exact normalisation is relaxed, write
+$s_n=\hat{\bm\omega}^{\top}\bm 1$ and
+$f(g)=\log\psifn(g)$. Taylor expansion around $\gamma$ gives
+\[
+  f\!\left(\sum_{j=1}^{m}\hat\omega_j\hat\gamma_j(k_j)\right)
+  - \sum_{j=1}^{m}\hat\omega_j f\big(\hat\gamma_j(k_j)\big)
+  =
+  (s_n-1)\{\gamma f'(\gamma)-f(\gamma)\}
+  + O_p(k^{-1}) + o_p(k^{-1/2}),
+\]
+where the remainders use $\|\hat{\bm\omega}\|=O_p(1)$,
+$\hat\gamma_j(k_j)-\gamma=O_p(k^{-1/2})$ uniformly over fixed $j$, and
+$\sqrt{k}\abs{s_n-1}\toprob0$. Multiplication by $\sqrt{k}$ therefore
+still yields $o_p(1)$, which proves the stated estimated-weight
+$\sqrt{k}$-equivalence. \qed
 
 \section{Proof of \texorpdfstring{\Cref{prop:pool-int:joint-clt}}{Proposition 3.2}}
 \label{app:proofs:joint-clt}
@@ -951,7 +980,7 @@ expansion. For $m(\gamma) \ne 0$, the linear map
 $(\bm\omega_{\gamma}, \bm\omega_{q}) \mapsto (\bm u, \bm\omega_{q})$
 is a bijection of $\R^{m} \times \R^{m}$ onto itself, with inverse
 $\bm\omega_{\gamma} = m(\gamma)^{-1}(\bm u - \bm D\,\bm\omega_{q})$.
-The simplex constraints translate accordingly: from
+The sum-to-one constraints translate accordingly: from
 $\bm\omega_{\gamma}^{\top}\bm 1 = 1$ and $\bm D\bm 1 = \bm L^{\star}$,
 \begin{equation}
 \label{eq:app:varopt:constraint-u}
@@ -1293,7 +1322,7 @@ We prove the asymptotic-coverage statement of
 \eqref{eq:pool-int:CI-consistency} on the estimated weight pair
 $(\hat{\bm\omega}_{\gamma}, \hat{\bm\omega}_{q})$, the plug-in
 covariance $\hatVc$, and the plug-in QB Jacobian $\hat m$. We retain
-the simplex constraints
+the affine sum-to-one constraints
 $\hat{\bm\omega}_{\gamma}^{\top}\bm 1 =
 \hat{\bm\omega}_{q}^{\top}\bm 1 = 1$ \emph{exactly}, which holds for
 the variance- and AMSE-optimal plug-ins of
@@ -1304,7 +1333,7 @@ The proof composes four steps:
 (i) recast the conclusion of \Cref{thm:pool-int:main} on the log
 scale;
 (ii) lift the deterministic-weight CLT to the estimated weights via
-the exact simplex constraint and Slutsky;
+the exact sum-to-one constraint and Slutsky;
 (iii) substitute the plug-in variance to obtain the asymptotic pivot
 under undersmoothing;
 (iv) transport coverage to the original scale by strict monotonicity
@@ -1380,7 +1409,7 @@ Linearity of the pooled Hill in its weights
   (\hat{\bm\omega}_{\gamma} - \bm\omega_{\gamma})^{\top}
     \big(\hat{\bm\gamma}_{n} - \gamma\bm 1\big),
 \]
-the deterministic offset $\gamma\bm 1$ vanishing by the exact simplex
+the deterministic offset $\gamma\bm 1$ vanishing by the exact sum-to-one
 identity
 $(\hat{\bm\omega}_{\gamma} - \bm\omega_{\gamma})^{\top}\bm 1
 = 1 - 1 = 0$ on both the plug-in and the limit weight vectors. The
@@ -1388,7 +1417,7 @@ per-sample Hill CLT (within-sample component of
 \eqref{eq:pool-int:per-sample-clt}) gives
 $\sqrt{k_{j}}(\hat\gamma_{j} - \gamma) = O_{p}(1)$, hence
 $\sqrt{k}(\hat\gamma_{j} - \gamma) = \sqrt{k/k_{j}}\,O_{p}(1) =
-O_{p}(1)$ via $k_{j}/k \to c_{j} \in (0, 1)$ from
+O_{p}(1)$ because $k/k_j \to c_j\sum_i c_i^{-1}<\infty$ by
 \eqref{eq:bg:pool-rates}. Therefore $\sqrt{k}(\hat{\bm\gamma}_{n}
 - \gamma\bm 1) = O_{p}(1)$, and the Cauchy--Schwarz inequality
 combined with $\hat{\bm\omega}_{\gamma} - \bm\omega_{\gamma} =
@@ -1435,7 +1464,7 @@ Weighted-geometric linearity of $\log\hatWei_{n}$ in $\bm\omega_{q}$
          - \log\Quant_{X}(\tau_{n})\bm 1\big),
 \]
 where the deterministic offset $\log\Quant_{X}(\tau_{n})\bm 1$
-cancels via the simplex identity
+cancels via the sum-to-one identity
 $(\hat{\bm\omega}_{q} - \bm\omega_{q})^{\top}\bm 1 = 0$. The
 within-sample Weissman component of
 \eqref{eq:pool-int:per-sample-clt} delivers
