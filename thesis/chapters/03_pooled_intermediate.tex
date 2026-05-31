@@ -1339,18 +1339,25 @@ plug-in demands. Listing them in order of increasing complexity:
 (\Cref{prop:pool-int:var-opt-distrib}).
 Under $k_{j}/n_{j} = (k/n)(1 + o(1))$ the optimum collapses to
 $\bm\omega^{\mathrm{Var}} = \Vc^{-1}\bm 1 /
-(\bm 1^{\top}\Vc^{-1}\bm 1)$, which depends on $\Vc$ alone. The
-plug-in
+(\bm 1^{\top}\Vc^{-1}\bm 1)$. Since the independent-samples covariance
+\eqref{eq:bg:V_c-diagonal} is diagonal with a common multiplicative
+factor, this population vector has coordinates
+$\omega_{j}^{\mathrm{Var}} \propto c_{j}^{-1}$. The canonical
+distributed plug-in is therefore the effective-sample-size weight used
+by \textcite[\S3.2]{DaouiaPadoanStupfler2021},
 \begin{equation}
 \label{eq:pool-int:plugin-eqfrac}
-  \hat{\bm\omega}^{\mathrm{Var}}
+  \hat\omega_{j}^{\mathrm{Var}}
   \;=\;
-  \hatVc^{-1}\bm 1 \,\big/\, \big(\bm 1^{\top}\hatVc^{-1}\bm 1\big)
+  \frac{k_{j}}{k},
+  \qquad j = 1,\ldots,m.
 \end{equation}
-therefore requires only a consistent estimator of $\Vc$, a
-first-order quantity built from the per-sample
-$\hat\gamma_{j}(k_{j})$ via the diagonal formula
-\eqref{eq:bg:V_c-diagonal}.
+Equivalently, any consistent diagonal covariance plug-in $\hatVc
+\toprob\Vc$ may be inserted into the generic Paper~3 formula
+$\hatVc^{-1}\bm 1/(\bm 1^\top\hatVc^{-1}\bm 1)$; it has the same limit.
+The variance estimator used in the confidence interval still requires a
+consistent $\hatVc$, but the default weight vector itself is the
+non-random vector \eqref{eq:pool-int:plugin-eqfrac}.
 
 \item \emph{General variance-optimal weights}
 (\Cref{prop:pool-int:var-opt-general}).
@@ -1397,10 +1404,20 @@ second-order quantities
   \qquad
   \hat b^{\xi/\Quant} \toprob b^{\xi/\Quant}.
 \end{equation}
-These are built from estimators $\hat\beta_{j}, \hat\rho_{j}$ of the
-second-order parameters of $\mathcal C_{2}(\gamma, \rho, A)$ via
-\eqref{eq:pool-int:Bcstar-def}--\eqref{eq:pool-int:b-xi-Q-def} and
-$\Bc$ from \Cref{thm:bg:pool-hill}.
+These convergences are not automatic consequences of the abstract
+second-order condition $\mathcal C_{2}(\gamma,\rho,A)$: that condition
+specifies the limiting auxiliary function $A$, not a directly
+estimable finite-dimensional parameter. Operationally one needs an
+additional second-order working model, such as the Hall-type
+parametrisation $A(t)=\gamma\beta t^{\rho}$ used by
+\textcite[\S2.2]{DaouiaPadoanStupfler2021}. Under such a parametrisation,
+machinewise estimators $\hat\beta_j,\hat\rho_j$ of the common
+second-order parameters can be inserted into
+\eqref{eq:pool-int:Bcstar-def}--\eqref{eq:pool-int:b-xi-Q-def} and into
+the formula for $\Bc$ from \Cref{thm:bg:pool-hill}. Without this extra
+model, \eqref{eq:pool-int:plugin-amse} should be read as a high-level
+assumption that consistent estimators of the limiting bias constants are
+available.
 \end{enumerate}
 
 In each case the population optimum map is a continuous function of
@@ -1430,13 +1447,15 @@ The complexity gradient (a) $\to$ (b) $\to$ (c) above is also a
 finite-sample stability gradient. Estimators of the second-order
 parameter $\rho$ and the rate function $A(\,\cdot\,)$ that
 \eqref{eq:pool-int:plugin-amse} relies on are notoriously delicate in
-the heavy-tailed regime \parencite[\S5.2]{deHaanFerreira2006}, and
-the resulting $\hatBc, \hatBc^{\star}, \hat b^{\xi/\Quant}$ converge
-slowly enough that the AMSE-optimal plug-in (c) is substantially less
-stable in finite samples than the variance-optimal plug-ins
-(a)--(b). The variance-optimal plug-in is therefore the robust
-default in practice; the AMSE-optimal plug-in is best reserved for
-settings where reliable estimators of $\rho$ and $A$ are available.
+the heavy-tailed regime; see the bias-correction discussion of
+\textcite[\S3.1.1]{DaouiaGirardStupfler2018} and
+\textcite[Remark~4]{DaouiaPadoanStupfler2021}. The resulting $\hatBc,
+\hatBc^{\star}, \hat b^{\xi/\Quant}$ converge slowly enough that the
+AMSE-optimal plug-in (c) is substantially less stable in finite samples
+than the variance-optimal plug-ins (a)--(b). The variance-optimal
+plug-in is therefore the robust default in practice; the AMSE-optimal
+plug-in is best reserved for settings where reliable estimators of
+$\rho$ and $A$ are available.
 
 \subsection*{Confidence interval under undersmoothing}
 
@@ -1575,14 +1594,12 @@ $\hat\sigma^{\xi,\,2} = [(\hat L^{\star})^{2} + 1]/
 \label{rem:pool-int:CI-bias-correction}
 The undersmoothing condition \eqref{eq:pool-int:undersmoothing} is
 the natural companion of the variance-only interval
-\eqref{eq:pool-int:CI-log} but is incompatible with the
-AMSE-optimal calibration of \Cref{prop:pool-int:amse-opt}: the
-AMSE-optimal choice of $k$ is intended for the regime in which at
-least one $\lambda_{j}$ may be non-zero, so that the limit-bias
-$\mu^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})$ need not vanish (if
-all $\lambda_{j} = 0$ then $\Bc = \Bc^{\star} = b^{\xi/\Quant} = 0$
-and the AMSE-optimum collapses to the variance-optimum, so the
-distinction between the two criteria has no content). When
+\eqref{eq:pool-int:CI-log}. It is a different asymptotic calibration
+from the second-order regime in which the bias component of
+\eqref{eq:pool-int:mu-xi} is retained and the AMSE weight criterion of
+\Cref{prop:pool-int:amse-opt} is meaningful. In that regime the
+limit-bias $\mu^{\xi}(\bm\omega_{\gamma}, \bm\omega_{q})$ need not
+vanish. When
 $\mu^{\xi} \ne 0$, \eqref{eq:pool-int:CI-log} does not have nominal
 asymptotic coverage. The standard remedy is to centre the interval
 on the bias-corrected point estimator
@@ -1606,9 +1623,8 @@ the variance-only interval \eqref{eq:pool-int:CI-log} under
 \eqref{eq:pool-int:undersmoothing} over the bias-corrected variant of
 \Cref{rem:pool-int:CI-bias-correction}: undersmoothing trades a
 small amount of asymptotic efficiency for the absence of a
-hard-to-estimate correction, and operates the pooled estimator away
-from the AMSE-optimal $k$ of \Cref{prop:pool-int:amse-opt}. This
-trade-off is the operational reason why
+hard-to-estimate correction and places inference in a
+variance-dominated regime. This trade-off is the operational reason why
 \Cref{prop:pool-int:var-opt-distrib} --- not
 \Cref{prop:pool-int:amse-opt} --- is the natural default companion to
 \Cref{cor:pool-int:CI} in applications.
@@ -1732,8 +1748,9 @@ estimators of \Cref{sec:pool-int:CI},
   \log\!\big(k_{j}/(n_{j}(1 - \tau_{n}))\big),
 \end{equation}
 with $\hat m = \hat m^{(0)}$ the preliminary effective-sample-size
-seed \eqref{eq:pool-int:plugin-m} and $\hatVc$ the diagonal
-covariance plug-in of \eqref{eq:pool-int:plugin-eqfrac}. The residual
+seed \eqref{eq:pool-int:plugin-m} and $\hatVc$ any consistent diagonal
+covariance plug-in for \eqref{eq:bg:V_c-diagonal}, as in
+\Cref{sec:pool-int:CI}. The residual
 $\hat{\bm\Xi}_{n} - \hat\nu_{n}\bm 1$ is the vector of GLS residuals
 about $\hat\nu_{n}$; by construction it annihilates the direction
 $\bm 1$, which is the structural reason the statistic is insensitive

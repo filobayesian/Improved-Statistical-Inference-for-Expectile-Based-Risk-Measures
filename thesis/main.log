@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.26)  31 MAY 2026 17:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.26)  31 MAY 2026 17:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1132,13 +1132,13 @@ Overfull \hbox (57.91907pt too wide) has occurred while \output is active
 MEDIATE LEVELS \T1/lmr/m/n/10.95 41
  []
 
-[41])
+[41]
 Overfull \hbox (57.91907pt too wide) has occurred while \output is active
 \T1/lmr/m/sl/10.95 CHAPTER 3.  POOLED INFERENCE FOR EXTREME EXPECTILES AT INTER
 MEDIATE LEVELS \T1/lmr/m/n/10.95 42
  []
 
-[42]
+[42])
 Overfull \hbox (57.91907pt too wide) has occurred while \output is active
 \T1/lmr/m/sl/10.95 CHAPTER 3.  POOLED INFERENCE FOR EXTREME EXPECTILES AT INTER
 MEDIATE LEVELS \T1/lmr/m/n/10.95 43
@@ -1236,11 +1236,11 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 26356 strings out of 474116
- 468236 string characters out of 5743681
+ 26357 strings out of 474116
+ 468252 string characters out of 5743681
  1952187 words of memory out of 5000000
- 47512 multiletter control sequences out of 15000+600000
- 692265 words of font info for 335 fonts, out of 8000000 for 9000
+ 47515 multiletter control sequences out of 15000+600000
+ 692135 words of font info for 334 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  74i,18n,84p,1001b,2270s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/filippogombac/Library/texlive/2024/texmf-var/fonts/pk/ljfour/public/
@@ -1266,10 +1266,10 @@ fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1
 /public/lm/lmsy9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/
 lmtt10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symb
 ols/msbm10.pfb>
-Output written on main.pdf (72 pages, 801058 bytes).
+Output written on main.pdf (72 pages, 802385 bytes).
 PDF statistics:
- 1796 PDF objects out of 2073 (max. 8388607)
- 1650 compressed objects within 17 object streams
+ 1802 PDF objects out of 2073 (max. 8388607)
+ 1656 compressed objects within 17 object streams
  387 named destinations out of 1000 (max. 500000)
  68561 words of extra memory for PDF output out of 74296 (max. 10000000)
 

@@ -62,8 +62,8 @@
 \contentsline {paragraph}{Comparison with the Paper~3 AMSE optimum away from equal fractions.}{36}{section*.32}%
 \contentsline {section}{\numberline {3.6}Estimated weights and confidence intervals}{37}{section.3.6}%
 \contentsline {paragraph}{Practical recommendation.}{38}{section*.34}%
-\contentsline {paragraph}{Practical remarks.}{39}{section*.36}%
-\contentsline {paragraph}{CI validity at $m(\gamma ) = 0$.}{39}{section*.37}%
+\contentsline {paragraph}{Practical remarks.}{40}{section*.36}%
+\contentsline {paragraph}{CI validity at $m(\gamma ) = 0$.}{40}{section*.37}%
 \contentsline {section}{\numberline {3.7}A test of expectile-tail-homogeneity}{40}{section.3.7}%
 \contentsline {paragraph}{Joint limit of the per-sample log-expectiles.}{41}{section*.38}%
 \contentsline {paragraph}{The GLS deviance statistic.}{41}{section*.39}%
