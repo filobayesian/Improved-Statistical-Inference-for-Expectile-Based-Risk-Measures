@@ -14,7 +14,7 @@
 \contentsline {section}{\numberline {2.3}Expectiles}{8}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}Definition}{8}{subsection.2.3.1}%
 \contentsline {subsection}{\numberline {2.3.2}Basic properties}{9}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Coherence and elicitability}{9}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.3}Coherence and elicitability}{10}{subsection.2.3.3}%
 \contentsline {subsection}{\numberline {2.3.4}Choquet representation}{10}{subsection.2.3.4}%
 \contentsline {section}{\numberline {2.4}Extreme expectile inference: the iid heavy-tailed baseline}{10}{section.2.4}%
 \contentsline {subsection}{\numberline {2.4.1}The expectile--quantile asymptotic equivalence}{11}{subsection.2.4.1}%
@@ -25,13 +25,13 @@
 \contentsline {subsection}{\numberline {2.4.3}Weissman extrapolation to very-extreme expectile levels}{13}{subsection.2.4.3}%
 \contentsline {subsection}{\numberline {2.4.4}The plug-in central limit theorem}{14}{subsection.2.4.4}%
 \contentsline {section}{\numberline {2.5}The optimal pooling framework}{15}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Setup}{15}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.1}Setup}{16}{subsection.2.5.1}%
 \contentsline {paragraph}{Condition $\mathcal J(\bm {R})$ (tail-copula condition).}{16}{section*.7}%
-\contentsline {subsection}{\numberline {2.5.2}The pooled Hill estimator}{16}{subsection.2.5.2}%
-\contentsline {subsection}{\numberline {2.5.3}Variance- and AMSE-optimal weights}{17}{subsection.2.5.3}%
-\contentsline {subsection}{\numberline {2.5.4}Weighted geometric pooling of extreme quantiles}{18}{subsection.2.5.4}%
+\contentsline {subsection}{\numberline {2.5.2}The pooled Hill estimator}{17}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}Variance- and AMSE-optimal weights}{18}{subsection.2.5.3}%
+\contentsline {subsection}{\numberline {2.5.4}Weighted geometric pooling of extreme quantiles}{19}{subsection.2.5.4}%
 \contentsline {subsection}{\numberline {2.5.5}Tail-homogeneity testing and confidence intervals}{20}{subsection.2.5.5}%
-\contentsline {subsection}{\numberline {2.5.6}Distributed inference as a special case}{20}{subsection.2.5.6}%
+\contentsline {subsection}{\numberline {2.5.6}Distributed inference as a special case}{21}{subsection.2.5.6}%
 \contentsline {chapter}{\numberline {3}Pooled inference for extreme expectiles at intermediate levels}{22}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Setup and notation}{22}{section.3.1}%
 \contentsline {paragraph}{The $m$ samples and the pooling primitives.}{22}{section*.9}%

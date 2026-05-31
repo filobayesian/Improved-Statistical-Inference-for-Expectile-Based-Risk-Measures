@@ -7,8 +7,8 @@
 This chapter collects the technical ingredients on which the thesis
 builds: regular variation and the second-order condition; the Hill and
 Weissman estimators for the tail index and extreme quantiles;
-expectiles and their characterisation as a coherent and elicitable
-risk measure; single-sample iid extreme-expectile inference, with the
+expectiles and their coherence and elicitability properties as risk
+measures; single-sample iid extreme-expectile inference, with the
 plug-in central limit theorem that the contribution chapters take as
 their workhorse; and the optimal pooling framework of
 \textcite{DaouiaPadoanStupfler2021}. Nothing in this chapter is
@@ -150,8 +150,11 @@ Since $U(t) \to \infty$ under \Cref{cond:bg:first-order}, the event
 $X_{n-k:n} > 0$ has probability tending to one for intermediate
 $k$. The log-based tail estimators in this section are understood on
 that event; equivalently one may assume that the upper tail is
-eventually supported on $(0,\infty)$, or apply a deterministic shift,
-which leaves the extreme-value index unchanged.
+eventually supported on $(0,\infty)$, or, for tail-index estimation
+only, apply a deterministic shift, which leaves the extreme-value index
+unchanged. For quantile or expectile estimation the shift must be
+undone after extrapolation; the large-quantile ratio asymptotics are
+unaffected because the upper endpoint is infinite.
 The interpretation is direct: if the upper tail of $F$ were exactly
 Pareto with index $1/\gamma$, the logarithms of excess ratios above a
 fixed tail threshold would be exponential with mean $\gamma$; in
@@ -290,14 +293,17 @@ equation
 \end{equation}
 where $u_{+} = \max(u, 0)$. Thus $\expectile{\tau}(X)$ is the unique
 point where the upper and lower first partial moments, with asymmetric
-weights, balance. In the continuous case, this mirrors the implicit
-quantile equation
+weights, balance. For a strictly increasing continuous distribution,
+$\Quant_X(\tau)$ is equivalently characterised by
+$F(\Quant_X(\tau))=\tau$. This can be written in the formally balanced
+form
 \[
   \tau\, \Prob(X > \Quant_X(\tau))
   =
   (1 - \tau)\, \Prob(X < \Quant_X(\tau)),
 \]
-with first partial moments replacing exceedance probabilities.
+but, unlike \eqref{eq:bg:expectile-foc}, this identity expresses a
+probability balance rather than a balance of tail magnitudes.
 
 \subsection{Basic properties}
 
@@ -337,11 +343,12 @@ Let $X$ and $Y$ be real-valued random variables with $\E |X|, \E |Y|
 \end{enumerate}
 \end{proposition}
 
-Location equivariance, positive homogeneity, and monotonicity in the
-argument give three of the four axioms in
-\textcite{ArtznerDelbaenEberHeath1999} that define a coherent risk
-measure. Sign reflection is useful for switching between loss and
-position conventions. The fourth axiom is subadditivity, to which we
+For losses, expectiles are translation equivariant, positively
+homogeneous, and monotone. For positions, the induced risk functional
+$\rho_\tau(Y)=\expectile{\tau}(-Y)$ is cash-additive with the usual sign
+convention $\rho_\tau(Y+c)=\rho_\tau(Y)-c$ and is monotone decreasing in
+positions. The remaining coherence axiom in
+\textcite{ArtznerDelbaenEberHeath1999} is subadditivity, to which we
 turn next.
 
 \subsection{Coherence and elicitability}
@@ -471,11 +478,13 @@ $m(\gamma^{\star}) = 0$, so $\psifn$ decreases on $(0, \gamma^{\star})$
 to a minimum $\psifn(\gamma^{\star}) \approx 0.757$ and increases on
 $(\gamma^{\star}, 1)$; in particular it returns to $\psifn = 1$ at
 $\gamma = 1/2$. Only for tail indices beyond $\gamma^{\star}$ does a
-heavier tail place the expectile further above the same-level quantile.
+heavier tail move the expectile closer to, and for $\gamma>1/2$ above,
+the same-level quantile.
 
 Under the second-order condition $\mathcal C_{2}(\gamma, \rho, A)$ with
-$\gamma \in (0, 1/2)$ and \Cref{cond:bg:lower-tail-moment}, the
-first-order equivalence \eqref{eq:bg:expectile-quantile-equivalence}
+$\gamma \in (0, 1/2)$ and \Cref{cond:bg:lower-tail-moment}, and assuming
+that $F$ is strictly increasing in a neighbourhood of its upper endpoint,
+the first-order equivalence \eqref{eq:bg:expectile-quantile-equivalence}
 sharpens to the second-order expansion
 \parencite[Corollary~1]{DaouiaGirardStupfler2018}
 \begin{equation}
@@ -500,8 +509,10 @@ by continuity when $\rho=0$, so that
 $c(\gamma,0)=m(\gamma)$. The constant $c(\gamma, \rho)$ measures the
 deterministic gap between the extreme expectile and the same-level
 quantile beyond the leading factor $\psifn(\gamma)$. The remaining
-second-order term $O(\Quant_{X}(\tau)^{-1})$ is governed by the lower
-moments of $X$; under the moment condition
+second-order term $O(\Quant_{X}(\tau)^{-1})$ contains the first-moment
+contribution in the expansion of
+\textcite{DaouiaGirardStupfler2018}; the lower-tail moment assumption
+ensures that this term is well controlled. Under the moment condition
 $\sqrt{n(1 - \tau_{n})}\,/\Quant_{X}(\tau_{n}) \to 0$ adopted below it
 is $\sqrt{n(1 - \tau_{n})}$-negligible, so the $A$-driven term alone
 governs the asymptotic bias of the quantile-based estimator.
@@ -566,7 +577,9 @@ $k = \lfloor n(1 - \tau_{n})\rfloor$.
                 \textcite{DaouiaGirardStupfler2018}, Corollary~2]
 \label{thm:bg:qb-iid}
 Assume $\mathcal C_{2}(\gamma, \rho, A)$ with
-$\gamma \in (0,1/2)$ and \Cref{cond:bg:lower-tail-moment}. Let
+$\gamma \in (0,1/2)$ and \Cref{cond:bg:lower-tail-moment}. Assume also
+that $F$ is strictly increasing in a neighbourhood of its upper endpoint.
+Let
 $\tau_n \to 1$ with $n(1-\tau_n)\to\infty$ and suppose
 \[
   \sqrt{n(1-\tau_n)}\, A\big((1-\tau_n)^{-1}\big)\to \lambda\in\R,
@@ -627,7 +640,10 @@ and especially as $\gamma \uparrow 1/2$, the QB variance is smaller
 because the LAWS variance diverges. The thesis works with the QB
 construction throughout not because it uniformly dominates LAWS, but
 because it composes directly with the pooled $(\hat\gamma,\hat Q)$
-inputs of the pooling framework.
+inputs of the pooling framework. This comparison concerns direct
+intermediate-level expectile estimation; in the very-extreme
+extrapolation regime below, the first-order limit is instead driven by
+the tail-index estimator.
 
 \subsection{Weissman extrapolation to very-extreme expectile levels}
 \label{sec:bg:weissman-expectile}
@@ -635,7 +651,8 @@ inputs of the pooling framework.
 For levels $\tau_{n}^{\prime}$ so close to one that
 $n(1 - \tau_{n}^{\prime}) \to c \in [0, \infty)$, neither
 $\tildexpectile{\tau_{n}^{\prime}}$ nor
-$\hatexpectile{\tau_{n}^{\prime}}$ is defined consistently.
+$\hatexpectile{\tau_{n}^{\prime}}$ provides a consistent direct
+estimator of $\expectile{\tau_n'}$.
 Extrapolation from an intermediate level $\tau_{n}$ to the extreme
 level $\tau_{n}^{\prime}$ is required.
 
@@ -670,7 +687,8 @@ LAWS-anchored and QB-anchored extrapolations, respectively.
 \label{thm:bg:weissman-expectile-iid}
 Assume $\mathcal C_{2}(\gamma,\rho,A)$ with
 $\gamma\in(0,1/2)$, $\rho<0$, and
-\Cref{cond:bg:lower-tail-moment}. Let
+\Cref{cond:bg:lower-tail-moment}. Assume also that $F$ is strictly
+increasing in a neighbourhood of its upper endpoint. Let
 $\tau_n\to1$ satisfy $n(1-\tau_n)\to\infty$ and let
 $\tau_{n}^{\prime} \to 1$ satisfy
 $n(1-\tau'_n)\to c\in[0,\infty)$,
@@ -758,6 +776,17 @@ and suppose
   a_n A((1-\tau_n)^{-1})\to \lambda_1\in\R,\qquad
   \frac{a_n}{\Quant_X(\tau_n)}\to \lambda_2\in\R .
 \]
+Assume moreover that $\Prob(\widehat\xi_{\tau_n}^{\,I}>0)\to1$ and
+that the deterministic extrapolation error satisfies
+\[
+  \frac{a_n}{\ell_n}
+  \left\{
+    \log\expectile{\tau'_n}
+    - \log\expectile{\tau_n}
+    - \gamma\ell_n
+  \right\}
+  \;\longrightarrow\; 0.
+\]
 Then the Weissman-extrapolated expectile
 \[
   \widehat\xi_{\tau'_n}^{\,\star}
@@ -778,8 +807,9 @@ satisfies
 
 \begin{remark}[Deterministic ratio control]
 \label{rem:bg:plugin-ratio-control}
-The proof of \Cref{prop:bg:plug-in-clt} uses the deterministic
-log-ratio negligibility
+The deterministic log-ratio condition in
+\Cref{prop:bg:plug-in-clt} is the high-level form of the extrapolation
+bias control. It is precisely the negligibility
 \[
   \frac{a_n}{\ell_n}
   \left\{
@@ -792,8 +822,9 @@ log-ratio negligibility
 In the original supplement of
 \textcite{DavisonPadoanStupfler2023}, this control is part of the
 high-level condition $C^\ast$. In the iid heavy-tailed setting of this
-thesis, it follows from the second-order expansion
-\eqref{eq:bg:c-gamma-rho}: the $A$-term contributes
+thesis, under the strict upper-tail monotonicity used for the DGS
+second-order expansion, it follows from the second-order quantile
+expansion and \eqref{eq:bg:c-gamma-rho}: the $A$-term contributes
 $O(a_n A((1-\tau_n)^{-1})/\ell_n)=o(1)$ and the lower-tail remainder
 contributes $O(a_n/\{\Quant_X(\tau_n)\ell_n\})=o(1)$.
 \end{remark}
@@ -832,9 +863,12 @@ non-trivial cross-sample tail dependence.
 Throughout \Cref{sec:bg:pooling}, unless explicitly stated otherwise,
 $m$ is fixed while $n=\sum_{j=1}^{m}n_j\to\infty$. This is the
 finite-$m$ regime imported into \Cref{ch:pool-int,ch:pool-ext}.
-We have $m$ samples, each obtained by iid sampling of one component of
-an $m$-dimensional random vector
-$\bm X = (X_{1}, \ldots, X_{m})^{\top}$. The $j$th sample comprises
+Let $\bm X_i=(X_{i,1},\ldots,X_{i,m})^\top$, $i\ge1$, be iid copies of a
+generic $m$-dimensional random vector
+$\bm X = (X_{1}, \ldots, X_{m})^{\top}$. Margin $j$ is observed for
+$i=1,\ldots,n_j$, so if $n_j\ne n_\ell$ the two margins overlap only for
+the first $\min(n_j,n_\ell)$ vector observations. The $j$th sample
+therefore comprises
 $n_{j}$ observations $X_{1, j}, X_{2, j}, \ldots, X_{n_{j}, j}$ with
 continuous, right-heavy-tailed marginal distribution function $F_{j}$,
 tail quantile function $U_{j} = (1 / \overline F_{j})^{\leftarrow}$,
@@ -864,6 +898,9 @@ $\mathcal C_{2}(\gamma_{j}, \rho_{j}, A_{j})$
 \]
 which is the natural setup when the $m$ samples are believed to come
 from the same underlying tail behaviour.
+All common-$\gamma$ vector limits below are expressed on the aggregate
+scale $\sqrt{k}$; the constants $c_j$ translate the margin-specific
+$\sqrt{k_j}$ rates onto this common scale.
 
 The cross-sample asymptotic dependence is captured by a pairwise
 \emph{tail-copula} structure
@@ -1077,6 +1114,9 @@ $\hat{\bm\omega}^{\top}\bm 1=1$ exactly and
 $\hat{\bm\omega} \toprob \bm\omega$. If exact normalisation is not
 imposed, one must instead require
 $\sqrt{k}\,\abs{\hat{\bm\omega}^{\top}\bm 1-1}\toprob0$.
+In applications, the main additional difficulty is not the quadratic
+minimisation itself but the stable estimation of $\Vc$, especially its
+off-diagonal tail-copula entries.
 
 \subsection{Weighted geometric pooling of extreme quantiles}
 
@@ -1209,7 +1249,9 @@ calibration $\lambda_j=0$ for every $j$. The statistic
   \frac{\bm 1^{\top}\hatVc^{-1}\hat{\bm\gamma}_{n}}
        {\bm 1^{\top}\hatVc^{-1}\bm 1},
 \]
-satisfies $\Lambda_{n} \todist \chi^{2}_{m - 1}$ under $H_{0}$ and
+where $\hatVc$ is a consistent estimator of the covariance matrix of
+$\sqrt{k}(\hat{\bm\gamma}_n-\gamma\bm 1)$ under $H_0$.
+Then $\Lambda_{n} \todist \chi^{2}_{m - 1}$ under $H_{0}$ and
 $\Lambda_{n} \toprob \infty$ under fixed alternatives. A test of
 asymptotic size $\alpha$ rejects $H_{0}$ when
 $\Lambda_{n} > \chi^{2}_{m - 1,\, 1 - \alpha}$.
