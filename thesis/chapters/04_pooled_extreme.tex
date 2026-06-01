@@ -20,18 +20,56 @@ order.
 \section{Motivation}
 \label{sec:pool-ext:motivation}
 
-\todo{Rewrite this as a bridge from
-\Cref{sec:bg:weissman-expectile} and \Cref{ch:pool-int}. Explain that
-very-extreme levels satisfy
-$n(1-\tau_n^\prime)\to c\in[0,\infty)$, so direct LAWS or direct QB
-estimation at $\tau_n^\prime$ is not the object of the thesis. The
-only admissible input remains the Paper-3 primitive pair
-$(\hat\gamma_j(k_j),\hat q_j^\star(\,\cdot\,\mid k_j))$ from each
-machine; no expectile-specific primitive is introduced in Chapter 4.
-The chapter therefore extrapolates the canonical pooled QB estimator of
-\Cref{eq:pool-int:expectile-pool}, exactly as
-\Cref{prop:bg:plug-in-clt} says one may extrapolate any
-intermediate-level expectile estimator with a joint root-rate limit.}
+The intermediate-level theory of \Cref{ch:pool-int} estimates
+$\expectile{\tau_n}$ at levels for which the expected number of
+upper-tail observations diverges. This chapter moves to the
+very-extreme regime
+\[
+  \tau_n^\prime \uparrow 1,
+  \qquad
+  n(1-\tau_n^\prime)\to c\in[0,\infty),
+\]
+where the target lies beyond, or at the edge of, the range supported by
+the observed upper order statistics. As recalled in
+\Cref{sec:bg:weissman-expectile}, the iid extreme-expectile theory of
+\textcite{DaouiaGirardStupfler2018} handles this regime by
+extrapolating an intermediate-level expectile estimator with a
+Weissman-type power factor. Direct LAWS or direct QB estimation at
+$\tau_n^\prime$ is therefore not the object of the chapter: the stable
+statistical anchor remains the intermediate level $\tau_n$, and the
+very-extreme target is reached by extrapolation.
+
+The pooling protocol is unchanged. Each sample still communicates only
+the two primitives inherited from \textcite{DaouiaPadoanStupfler2021}:
+the local Hill estimator $\hat\gamma_j(k_j)$ and the local Weissman
+quantile input $\hat q_j^\star(\,\cdot\,\mid k_j)$, together with the
+asymptotic covariance information needed for pooling. No raw
+observations and no expectile-specific scalar, such as a local LAWS
+estimate, are introduced at this stage. Consequently the
+intermediate-level anchor available for extrapolation is precisely the
+canonical pooled QB estimator
+\[
+  \hatexpectile{\tau_n}^{\mathrm{pool}}
+    (\bm\omega_\gamma,\bm\omega_q)
+  =
+  \psifn\!\big(\hat\gamma_n(\bm\omega_\gamma)\big)
+  \hatWei_n(\tau_n\mid\bm\omega_q)
+\]
+from \Cref{eq:pool-int:expectile-pool}.
+
+The role of \Cref{prop:bg:plug-in-clt}, the thesis-level version of
+\textcite[Proposition~C.6]{DavisonPadoanStupfler2023}, is exactly to
+make this transfer modular. Once an intermediate estimator and a
+tail-index estimator satisfy a joint root-rate limit, their
+Weissman-extrapolated expectile has an extreme-level limit governed
+only by the tail-index component. Chapter~3 supplies that joint limit
+for
+$\big(\hat\gamma_n(\bm\omega_\gamma),
+\hatexpectile{\tau_n}^{\mathrm{pool}}(\bm\omega_\gamma,\bm\omega_q)\big)$.
+The remaining sections of the present chapter therefore do not develop
+a new expectile primitive; they specify the extrapolation regime,
+define the pooled Weissman-type lift, and read the limiting
+distribution and optimal weights from the pooled Hill component.
 
 \section{Extrapolation regime and input limit}
 \label{sec:pool-ext:regime}
