@@ -14,7 +14,10 @@
 \begin{document}
 
 \frontmatter
+\hypersetup{pageanchor=false}
 \maketitle
+\cleardoublepage
+\hypersetup{pageanchor=true}
 
 \chapter*{Abstract}
 \todo{Write a $\sim$200-word abstract once \Cref{ch:pool-int} is in shape. Outline of the abstract: (i) expectiles as the only coherent and elicitable law-invariant risk measure; (ii) the problem of combining tail-index and extreme-quantile information from several samples (distributed inference, multi-study evidence synthesis); (iii) our pooled extreme-expectile estimator, its joint CLT via plug-in into the expectile--quantile asymptotic equivalence, and the variance-/AMSE-optimal weights tailored to the expectile target; (iv) Weissman-style extrapolation to very-extreme expectile levels; (v) outlook on relaxing the iid assumption.}
@@ -320,7 +323,7 @@ intermediate log-order statistic is a standard
 tail-empirical-process result
 \parencite[Theorem~2.4.8 and \S5.1]{deHaanFerreira2006}; in the form
 we use it is the input to the iid QB plug-in CLT of
-\textcite{DaouiaGirardStupfler2018} reproduced as
+\textcite{DaouiaGirardStupfler2020} reproduced as
 \Cref{thm:bg:qb-iid}. Under $\mathcal C_{2}(\gamma, \rho, A)$ with
 $k_{j} \to \infty$, $k_{j}/n_{j} \to 0$, and
 $\sqrt{k_{j}}\,A(n_{j}/k_{j}) \to \lambda_{j} \in \R$,
@@ -438,14 +441,14 @@ $\log X_{n_{j} - k_{j} : n_{j},\,j} - \log\Quant_{X}(\tau_{n_{j}})$
 of \eqref{eq:app:within-input}.
 
 Write \eqref{eq:app:wei-decomp} in matrix form,
-\[
+\begin{align*}
   \sqrt{k_{j}}\!
     \begin{pmatrix}
       \hat\gamma_{j}(k_{j}) - \gamma \\[2pt]
       \log\hat q^{\star}_{j}(\tau_{n} \mid k_{j})
         - \log\Quant_{X}(\tau_{n})
     \end{pmatrix}
-  \;=\;
+  &\;=\;
   \underbrace{\!\begin{pmatrix} 1 & 0 \\ L_{j}(\tau_{n}) & 1
               \end{pmatrix}\!}_{=:\,\bm M_{j}(\tau_{n})}\,
   \sqrt{k_{j}}\!
@@ -454,9 +457,10 @@ Write \eqref{eq:app:wei-decomp} in matrix form,
       \log X_{n_{j} - k_{j} : n_{j},\,j}
         - \log\Quant_{X}(\tau_{n_{j}})
     \end{pmatrix}
-  \;+\;
+  \\[-2pt]
+  &\quad+\;
   \begin{pmatrix} 0 \\ \sqrt{k_{j}}\,r_{j}(\tau_{n}) \end{pmatrix}.
-\]
+\end{align*}
 The deterministic matrix $\bm M_{j}(\tau_{n}) \to \bm M_{j}^{\star}
 \coloneqq \big(1, 0;\, L_{j}^{\star}, 1\big)$ entrywise, and the
 deterministic shift converges to $(0, b_{j}^{R})^{\top}$. The
@@ -569,17 +573,17 @@ the intermediate-level target.
 \paragraph{Step (iv): linear pooling map.}
 By definitions \eqref{eq:pool-int:hill-pool} and
 \eqref{eq:pool-int:weissman-pool},
-\[
+\begin{align*}
   \hat\gamma_{n}(\bm\omega_{\gamma}) - \gamma
-  \;=\;
+  &\;=\;
   \sum_{j = 1}^{m}\omega_{\gamma, j}\,(\hat\gamma_{j}(k_{j}) - \gamma),
-  \qquad
+  \\
   \log\hatWei_{n}(\tau_{n} \mid \bm\omega_{q})
     - \log\Quant_{X}(\tau_{n})
-  \;=\;
+  &\;=\;
   \sum_{j = 1}^{m}\omega_{q, j}\,
     \big(\log\hat q^{\star}_{j} - \log\Quant_{X}(\tau_{n})\big),
-\]
+\end{align*}
 where the second identity uses $\bm\omega_{q}^{\top}\bm 1 = 1$ so
 that subtracting the common term $\log\Quant_{X}(\tau_{n})$ commutes
 with the weighted sum. Both pooled coordinates are linear in $\bm
@@ -610,9 +614,12 @@ Applying $\bm A$ to \eqref{eq:app:Z-joint-CLT},
 \]
 The mean follows from the block structure of $\bm\mu_{Z}$ identified
 in Step (iii):
-$\bm A\,\bm\mu_{Z}
-= \big(\bm\omega_{\gamma}^{\top}\Bc,\;
-       \bm\omega_{q}^{\top}\Bc^{\star}\big)^{\top}$,
+\[
+  \bm A\,\bm\mu_{Z}
+  =
+  \big(\bm\omega_{\gamma}^{\top}\Bc,\;
+       \bm\omega_{q}^{\top}\Bc^{\star}\big)^{\top},
+\]
 which is the chapter's $\bm\mu(\bm\omega_{\gamma}, \bm\omega_{q})$.
 
 For the covariance, partition $\bm A$ along the same Hill /
@@ -794,7 +801,7 @@ the second-order expansion
   \end{aligned}
 \end{equation}
 the logarithmic form of \eqref{eq:bg:c-gamma-rho} of
-\textcite{DaouiaGirardStupfler2018}, with the explicit constant
+\textcite{DaouiaGirardStupfler2020}, with the explicit constant
 $c(\gamma, \rho)$ recorded there. The additive log form follows by a
 Taylor expansion of $\log(1 + x)$ around zero. The first-moment term
 $O(\Quant_{X}(\tau)^{-1})$ is displayed explicitly because it need not
@@ -1174,11 +1181,13 @@ Substituting $\bm L^{\star} = L^{\star}\bm 1$ gives $b = L^{\star}a$,
 $c = (L^{\star})^{2}a$, $\Delta = a^{2}$. From
 \eqref{eq:app:varopt:mu-nu}:
 \[
+\begin{aligned}
   \mu/2 \;=\; \frac{(m(\gamma) + L^{\star})\,a}{a^{2}}
         \;=\; \frac{m(\gamma) + L^{\star}}{a},
-  \qquad
+  \\[2pt]
   \nu/2 \;=\; \frac{(1 + L^{\star 2} + m(\gamma)\,L^{\star})\,a}{a^{2}}
         \;=\; \frac{1 + L^{\star 2} + m(\gamma)\,L^{\star}}{a},
+\end{aligned}
 \]
 and
 $\bm\omega^{\star}_{q} = (\nu/2 - (\mu/2)L^{\star})\,\Vc^{-1}\bm 1

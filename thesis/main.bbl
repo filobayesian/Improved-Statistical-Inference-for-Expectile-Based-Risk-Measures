@@ -198,6 +198,9 @@
       \field{year}{2019}
       \field{pages}{264\bibrangedash 309}
       \range{pages}{46}
+      \verb{doi}
+      \verb 10.3150/17-BEJ987
+      \endverb
     \endentry
     \entry{DaouiaGirardStupfler2020}{article}{}
       \name{author}{3}{ul=2}{%
@@ -240,6 +243,9 @@
       \field{year}{2020}
       \field{pages}{531\bibrangedash 556}
       \range{pages}{26}
+      \verb{doi}
+      \verb 10.3150/19-BEJ1137
+      \endverb
     \endentry
     \entry{DaouiaPadoanStupfler2021}{article}{}
       \name{author}{3}{ul=2}{%

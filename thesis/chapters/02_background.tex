@@ -488,14 +488,21 @@ $\gamma \in (0, 1/2)$ and \Cref{cond:bg:lower-tail-moment}, and assuming
 that $F$ is strictly increasing in a neighbourhood of its upper endpoint,
 the first-order equivalence \eqref{eq:bg:expectile-quantile-equivalence}
 sharpens to the second-order expansion
-\parencite[Corollary~1]{DaouiaGirardStupfler2018}
+\parencite[Proposition~1(i)]{DaouiaGirardStupfler2020}
 \begin{equation}
 \label{eq:bg:c-gamma-rho}
   \begin{aligned}
   \frac{\expectile{\tau}(X)}{\Quant_{X}(\tau)}
   &=
-  \psifn(\gamma)\Big[1 + c(\gamma, \rho)\,A\big((1 - \tau)^{-1}\big)
-                      + O\big(\Quant_{X}(\tau)^{-1}\big)\Big],
+  \psifn(\gamma)\Big[
+      1 + c(\gamma, \rho)\,A\big((1 - \tau)^{-1}\big)
+      + \gamma(\gamma^{-1} - 1)^{\gamma}
+        \frac{\E X}{\Quant_{X}(\tau)}
+  \\
+  &\hspace{5.6em}
+      + o\big(A((1 - \tau)^{-1})\big)
+      + o\big(\Quant_{X}(\tau)^{-1}\big)
+    \Big],
   \\
   c(\gamma, \rho)
   &\coloneqq
@@ -506,18 +513,23 @@ sharpens to the second-order expansion
 The displayed form is the version used in the thesis: it combines the
 second-order tail expansion with the lower-tail moment condition
 sufficient to control the non-tail contribution to the expectile
-equation. As $\tau \uparrow 1$, the second term in $c(\gamma,\rho)$ is read
-by continuity when $\rho=0$, so that
+equation. At the endpoint $\rho=0$, the second term in $c(\gamma,\rho)$
+is read by continuity as $\rho\to0$, so that
 $c(\gamma,0)=m(\gamma)$. The constant $c(\gamma, \rho)$ measures the
 deterministic gap between the extreme expectile and the same-level
-quantile beyond the leading factor $\psifn(\gamma)$. The remaining
-second-order term $O(\Quant_{X}(\tau)^{-1})$ contains the first-moment
-contribution in the expansion of
-\textcite{DaouiaGirardStupfler2018}; the lower-tail moment assumption
-ensures that this term is well controlled. Under the moment condition
+quantile beyond the leading factor $\psifn(\gamma)$. The term
+$\gamma(\gamma^{-1}-1)^{\gamma}\E X/\Quant_{X}(\tau)$ is the explicit
+first-moment contribution in the expansion of
+\textcite{DaouiaGirardStupfler2020}; it is often abbreviated below as an
+$O(\Quant_{X}(\tau)^{-1})$ contribution, because the lower-tail moment
+assumption ensures that it is well controlled. Under the moment condition
 $\sqrt{n(1 - \tau_{n})}\,/\Quant_{X}(\tau_{n}) \to 0$ adopted below it
 is $\sqrt{n(1 - \tau_{n})}$-negligible, so the $A$-driven term alone
-governs the asymptotic bias of the quantile-based estimator.
+governs the asymptotic bias of the quantile-based estimator. This
+source is the version used here because it is stated under the
+$\rho\le0$ convention of \Cref{cond:bg:second-order}; the earlier
+\textcite[Corollary~1]{DaouiaGirardStupfler2018} gives the same
+constant under its stricter $\rho<0$ formulation.
 
 \subsection{Two families of estimators at intermediate levels}
 
@@ -576,7 +588,7 @@ estimator of \eqref{eq:bg:hill} with effective sample size
 $k = \lfloor n(1 - \tau_{n})\rfloor$.
 
 \begin{theorem}[Intermediate QB CLT;
-                \textcite{DaouiaGirardStupfler2018}, Corollary~2]
+                \textcite{DaouiaGirardStupfler2020}, Theorem~4 with $\beta=1$]
 \label{thm:bg:qb-iid}
 Assume $\mathcal C_{2}(\gamma, \rho, A)$ with
 $\gamma \in (0,1/2)$ and \Cref{cond:bg:lower-tail-moment}. Assume also
@@ -614,7 +626,7 @@ expectile--quantile gap is negligible.
 \end{theorem}
 
 This is the $\lambda_2=0$ specialisation of the more general
-intermediate QB CLT, where
+intermediate QB CLT of \textcite{DaouiaGirardStupfler2020}, where
 \[
   \lambda_2
   =
@@ -626,6 +638,10 @@ term of order $\lambda_2$ depending on the first moment of $X$. The
 present thesis imposes
 $\sqrt{n(1-\tau_n)}/\Quant_X(\tau_n)\to0$ because this is the regime
 needed later to isolate the second-order tail bias.
+\textcite[Corollary~2]{DaouiaGirardStupfler2018} is the original iid
+QB statement under the stricter $\rho<0$ convention; the 2020 tail
+expectile process result is the version that matches
+\Cref{cond:bg:second-order} at the intermediate level.
 
 \paragraph{Comparison.}
 The LAWS estimator has asymptotic variance
@@ -737,11 +753,12 @@ in the iid heavy-tailed setting. For the pooled inference developed
 in \Cref{ch:pool-int,ch:pool-ext}, however, we require a more abstract
 formulation that decouples the asymptotic distribution of the inputs
 $(\hat\gamma_{n}, \overline{\xi}_{\tau_{n}})$ from the way in which
-they are obtained. The required abstraction is essentially
+they are obtained. We use the following high-level consequence of
 \emph{Proposition~C.6} in the supplement to
-\textcite{DavisonPadoanStupfler2023}, restated here in a form adapted
-to the iid setting and with the normalising rate written as a generic
-sequence $a_n$.
+\textcite{DavisonPadoanStupfler2023}. It packages the deterministic
+expectile-ratio control as an explicit assumption and writes the
+normalising rate as a generic sequence $a_n$, which is the form needed
+when the intermediate estimator is itself produced by pooling.
 
 \begin{proposition}[Plug-in CLT for extrapolated expectiles;
                     cf.\ \textcite{DavisonPadoanStupfler2023}, Prop.~C.6]
@@ -853,8 +870,11 @@ the pooled extrapolated expectile in essentially one step.
 
 We now turn to the pooling framework of
 \textcite{DaouiaPadoanStupfler2021}, which the rest of the thesis
-extends from quantiles to expectiles. The framework concerns inference
-from $m$ samples for the tail index and, under an additional
+extends from quantiles to expectiles. We refer throughout to the final
+Bernoulli article version listed in the bibliography; the earlier arXiv
+preprint circulated under the same arXiv identifier but differs in some
+display notation. The framework concerns inference from $m$ samples for
+the tail index and, under an additional
 tail-homoskedasticity condition, for the extreme quantile. The samples
 may have
 heterogeneous sizes, heterogeneous second-order properties, and

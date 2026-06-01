@@ -1,5 +1,5 @@
 % !TEX root = ../main.tex
-\chapter{Pooled inference for extreme expectiles at intermediate levels}
+\chapter[Pooled intermediate expectiles]{Pooled inference for extreme expectiles at intermediate levels}
 \label{ch:pool-int}
 
 \section*{Overview}
@@ -122,6 +122,13 @@ $1 - \tau_n \asymp k/n$, and suppressing slowly varying factors,
 $\Quant_X(\tau_n) \asymp (n/k)^\gamma$, so
 \eqref{eq:pool-int:moment-rate} requires
 $k^{1/2+\gamma}/n^\gamma \to 0$.
+The endpoint $\rho=0$ is retained in this intermediate-level chapter:
+the expectile--quantile expansion and QB CLT used below are the
+\textcite{DaouiaGirardStupfler2020} versions stated under the same
+$\rho\le0$ convention as \Cref{cond:bg:second-order}. The stricter
+$\rho<0$ assumption re-enters only for the very-extreme extrapolation
+step in \Cref{ch:pool-ext}, through
+\Cref{prop:bg:plug-in-clt,thm:bg:pool-weissman}.
 
 \paragraph{The target.}
 We target the common population expectile $\expectile{\tau_{n}}$ at
@@ -463,7 +470,7 @@ $X_{n_{j} - k_{j} : n_{j},\,j}$, while the intermediate-threshold
 fluctuation is the centred $(k_{j}+1)$-th upper log-order statistic
 itself, and the two decouple in the tail-empirical-process limit.
 This same joint behaviour underlies the iid QB plug-in CLT of
-\textcite{DaouiaGirardStupfler2018} reproduced in
+\textcite{DaouiaGirardStupfler2020} reproduced in
 \Cref{thm:bg:qb-iid}. Combining it with
 \eqref{eq:pool-int:weissman-decomp}, while using the second-order
 tail-quantile expansion for the deterministic centering, yields the
@@ -591,7 +598,7 @@ remainder $-\lambda_{j}\Psi_{\rho}(e^{L_{j}^{\star}})$. The
 intermediate log-order statistic contributes no bias term of its own:
 centred at $\log\Quant_{X}(\tau_{n_{j}})$ it has zero asymptotic bias on
 the $\sqrt{k_{j}}$ scale
-\parencite{DaouiaGirardStupfler2018,deHaanFerreira2006}, as established
+\parencite[Theorem~2.4.8]{deHaanFerreira2006}, as established
 in \Cref{app:proofs:joint-clt}. The covariance
 \eqref{eq:pool-int:Sigma} does not depend on $\Bc^{\star}$.
 The proposition is stated for deterministic affine weights. The same
@@ -659,7 +666,7 @@ The first-order asymptotic equivalence of
 \]
 sharpens, under \Cref{cond:bg:second-order}, through the second-order
 expansion \eqref{eq:bg:c-gamma-rho}
-\parencite{DaouiaGirardStupfler2018},
+\parencite[Proposition~1(i)]{DaouiaGirardStupfler2020},
 \begin{equation}
 \label{eq:pool-int:xi-Q-gap}
   \begin{aligned}
@@ -978,14 +985,16 @@ recipe; the only change in the asymptotic variance is the
 multiplicative factor $(m(\gamma) + L^{\star})^{2} + 1$ replacing the
 Paper~3 Hill/extreme-quantile factor of $1$ under the corresponding
 normalisation. Under the stronger oracle-rate equal-fraction condition
-of \Cref{cor:bg:pool-distrib-oracle}, the distributed-inference oracle
-equivalence thus extends to the expectile target at the variance
-criterion without modification of the pooling rule. The AMSE criterion
-requires separate bookkeeping because the bias term is target-specific;
-as the second subsection below explains, however, the equal-fraction
-distributed setting is also a collapse regime for AMSE, while genuinely
-target-dependent AMSE weights can appear once the effective sample
-fractions are unequal.
+of \Cref{cor:bg:pool-distrib-oracle}, this identifies the same pooling
+rule that would enter the corresponding unfeasible pooled-sample
+comparison for an expectile target; the present chapter uses only the
+variance-optimality statement proved above, rather than a separate
+oracle-equivalence theorem for a newly defined pooled-sample expectile
+benchmark. The AMSE criterion requires separate bookkeeping because the
+bias term is target-specific; as the second subsection below explains,
+however, the equal-fraction distributed setting is also a collapse
+regime for AMSE, while genuinely target-dependent AMSE weights can
+appear once the effective sample fractions are unequal.
 
 \paragraph{Beyond the equal-fraction setting.}
 When the effective sample fractions $k_{j}/n_{j}$ vary across $j$,
