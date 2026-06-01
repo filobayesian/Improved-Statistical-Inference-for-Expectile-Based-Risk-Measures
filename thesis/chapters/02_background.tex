@@ -951,9 +951,9 @@ implied by independence of the samples themselves --- the setting of
 this thesis.
 This formulation covers the general pooling framework in which
 cross-sample extremal dependence may be represented through a tail
-copula. In the distributed-inference case used later in the thesis,
-the samples are independent marginal subsamples and all pairwise
-tail-copula terms vanish.
+copula. In the independent common-distribution distributed case used
+later in the thesis, the samples are independent marginal subsamples
+and all pairwise tail-copula terms vanish.
 
 \subsection{The pooled Hill estimator}
 
@@ -1279,10 +1279,10 @@ asymptotic size $\alpha$ rejects $H_{0}$ when
 $\Lambda_{n} > \chi^{2}_{m - 1,\, 1 - \alpha}$.
 \end{theorem}
 
-Paper~3 states the bias-free version above. The same Gaussian GLS
-calculation also shows that, if the asymptotic bias is retained rather
-than removed by undersmoothing or bias correction, the deviance has the
-noncentral limit
+\textcite{DaouiaPadoanStupfler2021} state the bias-free version above.
+The same Gaussian GLS calculation also shows that, if the asymptotic
+bias is retained rather than removed by undersmoothing or bias
+correction, the deviance has the noncentral limit
 \[
   \Lambda_n \todist \chi^2_{m-1}(\delta_\gamma),
   \qquad
@@ -1308,13 +1308,13 @@ included in the centering.
 \subsection{Distributed inference as a special case}
 \label{sec:bg:pool-distrib}
 
-The distributed-inference setting is the special case in which the
-$m$ samples are obtained as iid subdivisions of one common underlying
-iid sample: data points are iid both within and across samples, with
-a common marginal distribution. The framework simplifies considerably
-and matches the assumptions of this thesis.
+The independent common-distribution distributed setting is the special
+case in which the $m$ samples are obtained as iid subdivisions of one
+common underlying iid sample: data points are iid both within and
+across samples, with a common marginal distribution. The framework
+simplifies considerably and matches the assumptions of this thesis.
 
-Under distributed-inference assumptions:
+Under these independent common-distribution distributed assumptions:
 \begin{itemize}
 \item the common-$\gamma$ condition $(H_{\gamma})$ and the
       tail-homoskedasticity condition $(\mathcal H)$ are trivially
@@ -1332,9 +1332,9 @@ Under distributed-inference assumptions:
                   \textcite{DaouiaPadoanStupfler2021},
                   Corollary~6, Theorem~3 and Corollary~8]
 \label{cor:bg:pool-distrib-oracle}
-Under the distributed-inference assumptions of Corollary~5 in
-\textcite{DaouiaPadoanStupfler2021}, suppose the sample fractions are
-asymptotically equal in the stronger sense
+Under the distributed-inference assumptions (iid across machines) of
+Corollary~5 in \textcite{DaouiaPadoanStupfler2021}, suppose the sample
+fractions are asymptotically equal in the stronger sense
 $k_{j} / n_{j} = (k/n)(1 + O(k^{-1/2}))$ for every $j$. Then, under the
 conditions of their Theorem~3, the variance-optimally-pooled Hill
 estimator
@@ -1350,8 +1350,8 @@ the combined sample.
 \end{corollary}
 
 \Cref{cor:bg:pool-distrib-oracle} is the central efficiency result of
-the optimal pooling framework: under the distributed-inference
-assumptions, equal sample fractions, and variance-optimal
+the optimal pooling framework: under the independent common-distribution
+distributed assumptions, equal sample fractions, and variance-optimal
 weighting, the pooled estimators pay no first-order asymptotic
 efficiency price relative to the infeasible pooled-sample benchmark.
 It is this property that we shall seek to preserve in the

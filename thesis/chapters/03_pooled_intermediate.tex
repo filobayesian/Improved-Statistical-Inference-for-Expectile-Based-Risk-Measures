@@ -10,7 +10,8 @@ plugs the pooled tail-index estimator $\hat\gamma_n(\bm\omega_\gamma)$
 and the pooled weighted-geometric Weissman extreme-quantile estimator
 $\hatWei_n(\,\cdot\,\mid\bm\omega_q)$ of
 \textcite{DaouiaPadoanStupfler2021} into the expectile--quantile
-asymptotic equivalence $\xi_\tau \approx \psifn(\gamma)\,Q_X(\tau)$. The
+asymptotic equivalence
+$\expectile{\tau} \approx \psifn(\gamma)\,\Quant_X(\tau)$. The
 delta method applied through $\psifn$ yields a joint Gaussian limit,
 from which we read off the variance- and AMSE-optimal pooling weights
 tailored to the pooled expectile target.
@@ -21,7 +22,7 @@ tailored to the pooled expectile target.
 The contribution of this chapter rests on the pooling framework of
 \Cref{sec:bg:pooling}, specialised to independent samples with a
 common marginal distribution --- the common-distribution
-distributed-inference case of \Cref{sec:bg:pool-distrib}. This is
+distributed setting of \Cref{sec:bg:pool-distrib}. This is
 deliberately stronger than assuming only a common tail index: it gives
 one common population target $\expectile{\tau_n}$ and one common
 quantile function $\Quant_X$, whereas heterogeneous margins would
@@ -234,8 +235,9 @@ therefore adopt (A) because it is algebraically simpler and keeps the
 two primitive weight vectors visible.
 \Cref{sec:pool-int:weights} will return to the question of whether
 this two-weight freedom is ever genuinely exploited, and show that
-under the distributed-inference setting of \Cref{sec:pool-int:setup}
-the variance-optimal pair lies on the matched-weight diagonal.
+under the equal-fraction distributed-inference specialisation the
+variance-optimal pair lies on the matched-weight diagonal, apart from
+the non-identifiability of the Hill weights when $m(\gamma)=0$.
 
 \paragraph{Pooled Hill and pooled Weissman primitives.}
 For weight vectors $\bm\omega_{\gamma}, \bm\omega_{q} \in \R^{m}$
@@ -752,8 +754,12 @@ expectile target through the QB plug-in.
 
 \begin{theorem}[Pooled QB intermediate expectile CLT]
 \label{thm:pool-int:main}
-Under the assumptions of \Cref{prop:pool-int:joint-clt} (in
-particular \Cref{cond:bg:second-order}), for any weight vectors
+Under the setup and heavy-tail regime of \Cref{sec:pool-int:setup}
+(including \Cref{eq:pool-int:moment,eq:pool-int:moment-rate}), the
+positivity/log-domain convention of \Cref{sec:pool-int:estimator}, the
+assumptions of \Cref{prop:pool-int:joint-clt}, and the finite
+expectile--quantile bias limit \eqref{eq:pool-int:Lambda-bullet} implied
+by these conditions, for any weight vectors
 $\bm\omega_{\gamma}, \bm\omega_{q} \in \R^{m}$ satisfying
 $\bm\omega_{\gamma}^{\top}\bm 1 = \bm\omega_{q}^{\top}\bm 1 = 1$,
 \begin{equation}
@@ -848,10 +854,9 @@ order-statistic bias and the gap, because --- as
 statistic has zero asymptotic bias on the $\sqrt{k}$ scale and
 contributes no bias term at all.
 
-\paragraph{Distributed-inference simplification.}
-Under the distributed-inference assumption that the effective sample fractions
-are asymptotically equal, $k_{j}/n_{j} = (k/n)(1 + o(1))$ for every
-$j$, the log-rate factor
+\paragraph{Equal-fraction distributed simplification.}
+Under the equal-effective-fraction distributed specialisation,
+$k_{j}/n_{j} = (k/n)(1 + o(1))$ for every $j$, the log-rate factor
 $L_{j}(\tau_{n}) = \log(k/(n(1 - \tau_{n}))) + o(1)$ becomes a
 sample-free quantity. Writing $L^{\star}$ for its common limit,
 \eqref{eq:pool-int:sigma-xi} simplifies to
@@ -882,7 +887,7 @@ couples the two pooled inputs through $\mathrm{diag}(\bm L^{\star})$
 and is a genuine structural feature of the expectile target. As
 \Cref{sec:pool-int:weights} shows, however, the additional freedom is
 not exploited by the variance optimum in the equal-fraction
-distributed-inference case: under the additional equal-fraction
+distributed case: under the additional equal-fraction
 specialisation of \Cref{sec:pool-int:setup}, the variance-optimal
 quantile weights remain
 $\bm\omega^{\xi,\mathrm{Var}}_{q}=\bm\omega^{\mathrm{Var}}$
@@ -931,9 +936,10 @@ simultaneously by one pair
 $(\bm\omega_{\gamma}, \bm\omega_{q})$ depends on whether the linear
 constraint induced on $\bm u$ by the sum-to-one constraints is
 sample-free. This happens when $\bm L^{\star}$ is a scalar multiple of
-$\bm 1$; in the distributed-inference specialisation of
-\Cref{sec:pool-int:setup}, this algebraic collapse is induced by the
-equal-fraction condition $k_{j}/n_{j} = (k/n)(1 + o(1))$.
+$\bm 1$; in the independent common-distribution distributed
+specialisation of \Cref{sec:pool-int:setup}, this algebraic collapse is
+induced by the equal-fraction condition
+$k_{j}/n_{j} = (k/n)(1 + o(1))$.
 
 \begin{proposition}[Variance-optimal weights, equal-fraction distributed inference]
 \label{prop:pool-int:var-opt-distrib}
@@ -961,8 +967,9 @@ with corresponding asymptotic variance
 \end{equation}
 If $m(\gamma) \ne 0$, the variance-optimal pair is unique and
 $\bm\omega^{\xi,\mathrm{Var}}_{\gamma} = \bm\omega^{\mathrm{Var}}$
-as well, so both pooled inputs receive the Paper~3 quantile-pooling
-weights. If $m(\gamma) = 0$, the asymptotic variance does not depend
+as well, so both pooled inputs receive the quantile-pooling weights of
+\textcite{DaouiaPadoanStupfler2021}. If $m(\gamma) = 0$, the
+asymptotic variance does not depend
 on $\bm\omega_{\gamma}$: any admissible vector is then
 variance-optimal, and the matched representative
 $\bm\omega^{\xi,\mathrm{Var}}_{\gamma} = \bm\omega^{\mathrm{Var}}$ is
@@ -983,7 +990,7 @@ invariant under the change of target from extreme quantile to
 extreme expectile.} The two targets share the same data-fusion
 recipe; the only change in the asymptotic variance is the
 multiplicative factor $(m(\gamma) + L^{\star})^{2} + 1$ replacing the
-Paper~3 Hill/extreme-quantile factor of $1$ under the corresponding
+corresponding Hill/extreme-quantile factor of $1$ under the corresponding
 normalisation. Under the stronger oracle-rate equal-fraction condition
 of \Cref{cor:bg:pool-distrib-oracle}, this identifies the same pooling
 rule that would enter the corresponding unfeasible pooled-sample
@@ -1026,12 +1033,12 @@ Under the assumptions of \Cref{thm:pool-int:main} and $m(\gamma) \ne
 gives $ac - b^{2} \ge 0$, with equality iff $\bm L^{\star}$ is a
 scalar multiple of $\bm 1$. This is the limiting collapse induced by
 the equal-effective-sample-fraction condition in the
-distributed-inference specialisation. Consequently
+distributed specialisation. Consequently
 \[
   \Delta \;=\; a^{2} + (ac - b^{2}) \;\ge\; a^{2} \;>\; 0,
 \]
 with $\Delta = a^{2}$ exactly under the equal-fraction
-distributed-inference setting of
+distributed specialisation of
 \Cref{prop:pool-int:var-opt-distrib}. The variance-optimal pooling
 weights for the pooled QB intermediate expectile estimator are unique
 and given by
@@ -1058,7 +1065,8 @@ and the associated minimum asymptotic variance is
   \;=\;
   \frac{(m(\gamma)^{2} + 1)\,a \;+\; 2\,m(\gamma)\,b \;+\; c}{\Delta}.
 \end{equation}
-In the distributed-inference setting $\bm L^{\star} = L^{\star}\bm 1$
+Under the equal-effective-fraction condition
+$\bm L^{\star} = L^{\star}\bm 1$
 one has $b = L^{\star}a$, $c = (L^{\star})^{2}a$, $\Delta = a^{2}$;
 formulas
 \eqref{eq:pool-int:var-opt-general-q}--\eqref{eq:pool-int:var-opt-general-value}
@@ -1087,7 +1095,8 @@ $\bm\omega_{q}$ recorded in \Cref{app:proofs:var-opt-general}.
 
 \paragraph{Departure from the matched-weight diagonal.}
 The discrepancy between $(\bm\omega^{\xi,\mathrm{Var}}_{\gamma},
-\bm\omega^{\xi,\mathrm{Var}}_{q})$ and the Paper~3 matched-weight
+\bm\omega^{\xi,\mathrm{Var}}_{q})$ and the Daouia--Padoan--Stupfler
+matched-weight
 pair $(\bm\omega^{\mathrm{Var}}, \bm\omega^{\mathrm{Var}})$ is
 controlled by the $\Vc^{-1}$-Cauchy--Schwarz defect $ac - b^{2} \ge
 0$, which vanishes exactly when $\bm L^{\star}$ is a scalar multiple
@@ -1116,7 +1125,7 @@ a^{2} + (ac - b^{2})$ exhibits its scalar prefactor as
   \left[1 \;+\; O\!\left(\frac{ac - b^{2}}{a^{2}}\right)\right]
 \]
 in the small Cauchy--Schwarz defect regime $ac - b^{2} \ll a^{2}$.
-The Paper~3 weights therefore remain near-optimal whenever the
+The quantile-pooling weights therefore remain near-optimal whenever the
 log-rate vector is nearly sample-free ($ac - b^{2} \approx 0$, i.e.\
 $\bm L^{\star}$ nearly constant in the $\Vc^{-1}\bm 1$-weighted
 sense). The quantile-weight component
@@ -1136,6 +1145,12 @@ $\bm\omega^{\mathrm{Var}}$ in the equal-fraction setting and
 deviates from it otherwise.
 
 \subsection*{AMSE-optimal weights}
+
+For the closed-form stacked optimisation in this subsection, assume
+$m(\gamma)\ne0$. The degenerate case $m(\gamma)=0$ requires a reduced
+optimisation because the variance term no longer identifies the Hill
+weights; we return to that boundary case whenever it affects a stated
+collapse result.
 
 The AMSE-optimal pair
 $(\bm\omega^{\xi,\mathrm{AMSE}}_{\gamma},
@@ -1161,8 +1176,9 @@ pooled-Hill bias enters rescaled by the QB Jacobian $m(\gamma)$, while
 the pooled-Weissman bias enters unrescaled. Only after restricting to
 the matched-weight diagonal $\bm\omega_{\gamma} = \bm\omega_{q}$ does
 one see the composite direction $m(\gamma)\Bc + \Bc^{\star}$, which is
-the expectile analogue of the single Paper~3 bias vector $\Bc$. In
-addition, $\mu^{\xi}$ carries the additive offset $b^{\xi/\Quant}$ of
+the expectile analogue of the single quantile-pooling bias vector
+$\Bc$. In addition, $\mu^{\xi}$ carries the additive offset
+$b^{\xi/\Quant}$ of
 \eqref{eq:pool-int:b-xi-Q-def}. This offset has no effect on the
 variance problem, but it enters the AMSE first-order conditions whenever
 the remaining bias part depends on the weights.
@@ -1283,14 +1299,15 @@ as in \Cref{prop:pool-int:var-opt-distrib},
 and when $m(\gamma)=0$ the same indeterminacy of
 $\bm\omega_\gamma$ described in
 \Cref{prop:pool-int:var-opt-distrib} remains. This is exactly parallel
-to Paper~3 in the equal-fraction distributed setting: there too the
-Paper~3 bias vector $\Bc$ is collinear with $\bm 1$, so the AMSE
-criterion collapses to the variance criterion under the affine
-constraint.
+to the equal-fraction distributed setting of
+\textcite{DaouiaPadoanStupfler2021}: there too the quantile-pooling
+bias vector $\Bc$ is collinear with $\bm 1$, so the AMSE criterion
+collapses to the variance criterion under the affine constraint.
 
-\paragraph{Comparison with the Paper~3 AMSE optimum away from equal fractions.}
+\paragraph{Comparison with the Daouia--Padoan--Stupfler AMSE optimum away from equal fractions.}
 Outside the equal-fraction collapse regime, the expectile
-AMSE-optimum generally does \emph{not} reduce to the Paper~3
+AMSE-optimum generally does \emph{not} reduce to the
+Daouia--Padoan--Stupfler
 AMSE-optimum of \Cref{prop:bg:optimal-weights}(ii). Three structural
 differences are responsible:
 \begin{enumerate}[label=(\roman*)]
@@ -1307,15 +1324,17 @@ differences are responsible:
         Hill and Weissman blocks of $\bm h$ enter asymmetrically
         through $m(\gamma)\Bc$ and $\Bc^{\star}$.
 \end{enumerate}
-Exact coincidence with the Paper~3 AMSE weights can occur, but it is a
+Exact coincidence with the Daouia--Padoan--Stupfler AMSE weights can
+occur, but it is a
 compatibility condition on the full FOC system rather than a simple
 proportionality of $\Bc$ and $\Bc^\star$. One would have to insert the
-Paper~3 candidate weight into \eqref{eq:pool-int:amse-foc}, impose the
-two affine constraints, and solve the resulting block equations in the
-quantities $(\Vc,\bm D,\Bc,\Bc^{\star},b^{\xi/\Quant})$. We do not
-characterise that exceptional locus here. The robust qualitative point
-is narrower and sharper: equal-fraction distributed inference preserves
-the Paper~3 weights for both variance and AMSE, whereas unequal
+Daouia--Padoan--Stupfler candidate weight into
+\eqref{eq:pool-int:amse-foc}, impose the two affine constraints, and
+solve the resulting block equations in the quantities
+$(\Vc,\bm D,\Bc,\Bc^{\star},b^{\xi/\Quant})$. We do not characterise
+that exceptional locus here. The robust qualitative point is narrower
+and sharper: the equal-fraction distributed specialisation preserves
+the Daouia--Padoan--Stupfler weights for both variance and AMSE, whereas unequal
 effective sample fractions generically make the expectile AMSE
 calibration target-dependent.
 
@@ -1363,7 +1382,8 @@ by \textcite[\S3.2]{DaouiaPadoanStupfler2021},
   \qquad j = 1,\ldots,m.
 \end{equation}
 Equivalently, any consistent diagonal covariance plug-in $\hatVc
-\toprob\Vc$ may be inserted into the generic Paper~3 formula
+\toprob\Vc$ may be inserted into the generic formula of
+\textcite{DaouiaPadoanStupfler2021},
 $\hatVc^{-1}\bm 1/(\bm 1^\top\hatVc^{-1}\bm 1)$; it has the same limit.
 These are two asymptotically equivalent implementations, not the same
 finite-sample rule unless $\hatVc$ has the distributed diagonal shape
@@ -1567,8 +1587,13 @@ interval
   \frac{\hat\sigma^{\xi}(\hat{\bm\omega}_{\gamma},
                          \hat{\bm\omega}_{q})}{\sqrt{k}}
 \end{equation}
-and the associated original-scale interval $I_{n} \coloneqq
-\exp(I_{n}^{\log})$ are asymptotic $(1 - \alpha)$ confidence intervals
+and the associated original-scale interval
+\[
+  I_{n} \coloneqq \exp(I_{n}^{\log})
+  = [\exp(a_n), \exp(b_n)]
+  \quad\text{when } I_{n}^{\log}=[a_n,b_n],
+\]
+are asymptotic $(1 - \alpha)$ confidence intervals
 for $\log \expectile{\tau_{n}}$ and $\expectile{\tau_{n}}$
 respectively:
 \[
@@ -1597,7 +1622,7 @@ First, the log-scale interval \eqref{eq:pool-int:CI-log} is symmetric
 in $\log \expectile{\tau_{n}}$ while its exponential is not; the
 latter is the natural form for applications in which
 $\expectile{\tau_{n}}$ is interpreted as a monetary risk measure.
-Second, under the equal-fraction distributed-inference setting of
+Second, under the equal-fraction distributed specialisation of
 \Cref{prop:pool-int:var-opt-distrib} the variance-optimal weights are
 identical across the two pooled inputs. With the canonical
 effective-sample-size weights
@@ -1951,7 +1976,7 @@ standing regimes of the chapter:
 \item the undersmoothing calibration \eqref{eq:pool-int:undersmoothing},
       under which $\Bc = \Bc^{\star} = \bm 0$ and $b^{\xi/\Quant} = 0$,
       hence $\bm\beta = \bm 0$;
-\item the equal-fraction distributed-inference setting
+\item the equal-fraction distributed specialisation
       $k_{j}/n_{j} = (k/n)(1 + o(1))$ described in
       \Cref{sec:pool-int:setup}, under which every coordinate of
       $\bm\beta$ collapses to one common value.
@@ -1982,7 +2007,7 @@ without modelling heterogeneity. Second, the central calibration in
 calibration that underlies the confidence interval of
 \Cref{cor:pool-int:CI}: case (i) is exactly the undersmoothing
 condition \eqref{eq:pool-int:undersmoothing} adopted there, and case
-(ii) is the equal-fraction distributed-inference regime in which the
+(ii) is the equal-fraction distributed regime in which the
 variance-optimal weights of \Cref{prop:pool-int:var-opt-distrib} are
 used. Outside both regimes the asymptotic bias $\bm\beta$ is
 generically not collinear with $\bm 1$, the limit is the noncentral

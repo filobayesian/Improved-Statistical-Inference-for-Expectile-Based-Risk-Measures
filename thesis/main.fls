@@ -390,6 +390,8 @@ INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/lmbsy10.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/lmbsy5.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/bbm/bbm9.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/bbm/bbm5.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmri8.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmri7.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/rm-lmr12.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/rm-lmr10.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/rm-lmr7.tfm

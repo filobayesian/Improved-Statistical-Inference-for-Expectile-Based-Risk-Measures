@@ -52,14 +52,14 @@
 \contentsline {paragraph}{Derivative of $\log \psi $.}{30}{section*.21}%
 \contentsline {paragraph}{The deterministic expectile--quantile gap.}{30}{section*.22}%
 \contentsline {paragraph}{Reduction to the iid baseline.}{31}{section*.23}%
-\contentsline {paragraph}{Distributed-inference simplification.}{32}{section*.24}%
+\contentsline {paragraph}{Equal-fraction distributed simplification.}{32}{section*.24}%
 \contentsline {paragraph}{Why two weight vectors.}{32}{section*.25}%
 \contentsline {section}{\numberline {3.5}Variance- and AMSE-optimal weights}{32}{section.3.5}%
 \contentsline {paragraph}{Beyond the equal-fraction setting.}{33}{section*.27}%
 \contentsline {paragraph}{Departure from the matched-weight diagonal.}{34}{section*.28}%
 \contentsline {paragraph}{Stacked notation.}{35}{section*.30}%
 \contentsline {paragraph}{Equal-fraction AMSE collapse.}{36}{section*.31}%
-\contentsline {paragraph}{Comparison with the Paper~3 AMSE optimum away from equal fractions.}{37}{section*.32}%
+\contentsline {paragraph}{Comparison with the Daouia--Padoan--Stupfler AMSE optimum away from equal fractions.}{37}{section*.32}%
 \contentsline {section}{\numberline {3.6}Estimated weights and confidence intervals}{37}{section.3.6}%
 \contentsline {paragraph}{Practical recommendation.}{39}{section*.34}%
 \contentsline {paragraph}{Practical remarks.}{40}{section*.36}%
@@ -104,7 +104,7 @@
 \contentsline {paragraph}{Step (iii): solving for the multipliers.}{61}{section*.58}%
 \contentsline {paragraph}{Step (iv): the primal solution.}{61}{section*.59}%
 \contentsline {paragraph}{Step (v): the departure formula.}{62}{section*.60}%
-\contentsline {paragraph}{Specialisation to the distributed-inference setting.}{62}{section*.61}%
+\contentsline {paragraph}{Specialisation to equal effective fractions.}{62}{section*.61}%
 \contentsline {paragraph}{The case $m(\gamma ) = 0$.}{62}{section*.62}%
 \contentsline {section}{\numberline {A.5}Proof of \Cref {prop:pool-int:amse-opt}}{62}{section.A.5}%
 \contentsline {paragraph}{Step (i): rewriting the AMSE as a quadratic form.}{63}{section*.63}%

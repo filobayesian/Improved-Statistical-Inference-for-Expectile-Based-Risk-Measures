@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.26)  1 JUN 2026 12:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.26)  1 JUN 2026 13:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1012,17 +1012,17 @@ Chapter 3.
 
 ] [23] [24] [25]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 382.
+(Font)              <9> on input line 384.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 382.
+(Font)              <5> on input line 384.
  [26] [27] [28] [29] [30] [31] [32] [33] [34] [35] [36]
 [37] [38] [39] [40] [41]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 1716.
+(Font)              <14.4> on input line 1741.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 1716.
+(Font)              <10> on input line 1741.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 1716.
+(Font)              <7> on input line 1741.
  [42] [43] [44]) [45]
 \openout2 = `chapters/04_pooled_extreme.aux'.
 
@@ -1072,11 +1072,11 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 26451 strings out of 474116
- 469751 string characters out of 5743681
+ 26467 strings out of 474116
+ 469949 string characters out of 5743681
  1952187 words of memory out of 5000000
- 47576 multiletter control sequences out of 15000+600000
- 707852 words of font info for 371 fonts, out of 8000000 for 9000
+ 47584 multiletter control sequences out of 15000+600000
+ 716786 words of font info for 376 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  74i,21n,84p,1001b,2270s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/filippogombac/Library/texlive/2024/texmf-var/fonts/pk/ljfour/public/
@@ -1103,10 +1103,10 @@ texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2024/texmf-dist
 /lmsy9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt10.pfb
 ></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10
 .pfb>
-Output written on main.pdf (76 pages, 823584 bytes).
+Output written on main.pdf (76 pages, 824925 bytes).
 PDF statistics:
- 1859 PDF objects out of 2073 (max. 8388607)
- 1706 compressed objects within 18 object streams
+ 1864 PDF objects out of 2073 (max. 8388607)
+ 1711 compressed objects within 18 object streams
  392 named destinations out of 1000 (max. 500000)
- 76753 words of extra memory for PDF output out of 89155 (max. 10000000)
+ 80849 words of extra memory for PDF output out of 89155 (max. 10000000)
 
