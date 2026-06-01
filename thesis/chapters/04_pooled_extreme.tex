@@ -505,80 +505,327 @@ asymptotically.
 \section{Main extrapolation theorem}
 \label{sec:pool-ext:CLT}
 
-\todo{State the main theorem as a direct application of
-\Cref{prop:bg:plug-in-clt} with $a_n=\sqrt{k}$:
-\[
+We can now state the chapter's main limit theorem. It is a direct
+application of the plug-in extrapolation result
+\Cref{prop:bg:plug-in-clt} to the pooled intermediate input of
+\Cref{prop:pool-ext:input-clt}. The theorem is intentionally
+short: all expectile-specific work has already been done at the
+intermediate level, and the very-extreme scale keeps only the
+pooled-Hill component.
+
+\begin{theorem}[Pooled Weissman extrapolation for extreme expectiles]
+\label{thm:pool-ext:main}
+Assume the setup and rate conditions of \Cref{sec:pool-ext:regime}.
+Let $\bm\omega_\gamma,\bm\omega_q\in\R^m$ be deterministic affine
+weight vectors satisfying
+$\bm\omega_\gamma^\top\bm 1=\bm\omega_q^\top\bm 1=1$, and define
+$\hatexpectile{\tau_n^\prime}^{\mathrm{pool},\star}
+(\bm\omega_\gamma,\bm\omega_q)$ by
+\eqref{eq:pool-ext:estimator}. Then
+\begin{equation}
+\label{eq:pool-ext:main-clt}
   \frac{\sqrt{k}}{\ell_n}
-  \!\left(\frac{\hatexpectile{\tau_n^\prime}^{\mathrm{pool},\star}}
-                {\expectile{\tau_n^\prime}}-1\right)
+  \left(
+    \frac{\hatexpectile{\tau_n^\prime}^{\mathrm{pool},\star}
+      (\bm\omega_\gamma,\bm\omega_q)}
+         {\expectile{\tau_n^\prime}}
+    - 1
+  \right)
   \;\todist\;
+  \mathcal N\!\left(
+    \bm\omega_\gamma^\top\Bc,\;
+    \bm\omega_\gamma^\top\Vc\bm\omega_\gamma
+  \right),
+\end{equation}
+where $\ell_n=\log\{(1-\tau_n)/(1-\tau_n^\prime)\}$.
+
+The same conclusion holds with estimated weights
+$(\hat{\bm\omega}_\gamma,\hat{\bm\omega}_q)$, provided
+\[
+  \hat{\bm\omega}_\gamma^\top\bm 1
+  =
+  \hat{\bm\omega}_q^\top\bm 1
+  =
+  1
+  \quad\text{exactly,}
+  \qquad
+  \hat{\bm\omega}_\gamma\toprob\bm\omega_\gamma,
+  \qquad
+  \hat{\bm\omega}_q\toprob\bm\omega_q .
+\]
+\end{theorem}
+
+\begin{proof}
+\Cref{sec:pool-ext:regime} verifies the non-Gaussian hypotheses of
+\Cref{prop:bg:plug-in-clt} with
+$a_n=\sqrt{k}$,
+$\hat\gamma_n=\hat\gamma_n(\bm\omega_\gamma)$ and
+$\widehat\xi_{\tau_n}^{\,I}
+=\hatexpectile{\tau_n}^{\mathrm{pool}}
+(\bm\omega_\gamma,\bm\omega_q)$. The required joint input is precisely
+\Cref{prop:pool-ext:input-clt}; its first coordinate has limiting law
+\[
+  \Gamma
+  \sim
   \mathcal N\!\left(
     \bm\omega_\gamma^\top\Bc,\;
     \bm\omega_\gamma^\top\Vc\bm\omega_\gamma
   \right).
 \]
-Use \Cref{sec:pool-ext:regime} to verify the hypotheses of
-\Cref{prop:bg:plug-in-clt}. The proof should explicitly show the
-log-decomposition
-\[
-  \log\frac{\hatexpectile{\tau_n^\prime}^{\mathrm{pool},\star}}
-           {\expectile{\tau_n^\prime}}
-  =
+Thus \Cref{prop:bg:plug-in-clt} already gives
+\eqref{eq:pool-ext:main-clt}. We spell out the log-scale mechanism,
+because it is the structural reason why $\bm\omega_q$ vanishes from
+the first-order limit.
+
+On the high-probability positivity event fixed in
+\Cref{sec:pool-ext:estimator},
+\begin{equation}
+\label{eq:pool-ext:log-decomposition}
+\begin{aligned}
+  \log\frac{
+    \hatexpectile{\tau_n^\prime}^{\mathrm{pool},\star}
+      (\bm\omega_\gamma,\bm\omega_q)}
+    {\expectile{\tau_n^\prime}}
+  &=
   \ell_n\{\hat\gamma_n(\bm\omega_\gamma)-\gamma\}
   +
-  \log\frac{\hatexpectile{\tau_n}^{\mathrm{pool}}}
-           {\expectile{\tau_n}}
+  \log\frac{
+    \hatexpectile{\tau_n}^{\mathrm{pool}}
+      (\bm\omega_\gamma,\bm\omega_q)}
+    {\expectile{\tau_n}}
+  \\
+  &\quad
   -
   \{\log\expectile{\tau_n^\prime}
      -\log\expectile{\tau_n}
-     -\gamma\ell_n\},
+     -\gamma\ell_n\}.
+\end{aligned}
+\end{equation}
+Multiplication by $\sqrt{k}/\ell_n$ sends the first term to the
+pooled-Hill Gaussian limit of \Cref{thm:bg:pool-hill}. For the second
+term, \Cref{prop:pool-ext:input-clt} gives
+\[
+  \sqrt{k}
+  \left\{
+    \frac{\hatexpectile{\tau_n}^{\mathrm{pool}}
+      (\bm\omega_\gamma,\bm\omega_q)}
+         {\expectile{\tau_n}}
+    -1
+  \right\}
+  =
+  O_p(1),
 \]
-then divide by $\ell_n/\sqrt{k}$. The second term is
-$O_p(k^{-1/2})$ by \Cref{thm:pool-int:main}, hence disappears after
-multiplication by $\sqrt{k}/\ell_n$, and the deterministic third term
-is negligible by \Cref{rem:bg:plugin-ratio-control}.}
+and the corresponding log-ratio is also $O_p(k^{-1/2})$ because the
+relative error is $o_p(1)$. Since $\ell_n\to\infty$, this term is
+$o_p(1)$ after multiplication by $\sqrt{k}/\ell_n$. The third term in
+\eqref{eq:pool-ext:log-decomposition} is $o(\ell_n/\sqrt{k})$ by the
+deterministic ratio control verified in \Cref{sec:pool-ext:regime}
+and recorded abstractly in \Cref{rem:bg:plugin-ratio-control}. Hence
+\[
+  \frac{\sqrt{k}}{\ell_n}
+  \log\frac{
+    \hatexpectile{\tau_n^\prime}^{\mathrm{pool},\star}
+      (\bm\omega_\gamma,\bm\omega_q)}
+    {\expectile{\tau_n^\prime}}
+  \;\todist\;
+  \Gamma .
+\]
+Because $\ell_n/\sqrt{k}\to0$, the unnormalised log-ratio is
+$o_p(1)$, and therefore $e^x-1=x+o(x)$ transfers the same limit from
+the log-ratio to the relative error. This proves
+\eqref{eq:pool-ext:main-clt}.
+
+For estimated weights, use the estimated-weight extension of
+\Cref{prop:pool-ext:input-clt}. Exact affine normalisation removes
+any consistency error in the deterministic centring, and
+$\hat{\bm\omega}_\gamma\toprob\bm\omega_\gamma$ carries the
+pooled-Hill mean and variance to the deterministic limits in
+\eqref{eq:pool-ext:main-clt} by Slutsky's theorem. The convergence of
+$\hat{\bm\omega}_q$ affects only the intermediate-anchor term, which
+has already been shown to vanish on the $\sqrt{k}/\ell_n$ scale.
+\end{proof}
+
+\Cref{thm:pool-ext:main} is the exact expectile analogue of
+\Cref{thm:bg:pool-weissman}. In both cases, extrapolation to a
+very-extreme level multiplies the tail-index estimation error by a
+diverging logarithmic distance, while the intermediate scale estimate
+is too small to survive the normalisation. The only role of the
+expectile construction is to provide a valid positive intermediate
+anchor and to verify the deterministic expectile-ratio control needed
+by \Cref{prop:bg:plug-in-clt}. This is why the theorem contains
+neither the QB derivative $m(\gamma)$ nor the intermediate
+expectile-bias terms $\Bc^\star$ and $b^{\xi/\Quant}$.
 
 \section{Optimal weights for extrapolation}
 \label{sec:pool-ext:weights}
 
-\todo{Because the asymptotic variance is governed solely by
-$\hat\gamma_n(\bm\omega_\gamma)$, the variance-optimal weights for
-extrapolation coincide with $\bm\omega^{\mathrm{Var}}$ of
-\textcite{DaouiaPadoanStupfler2021}:
-$\bm\omega^{\mathrm{Var},\star} = \Vc^{-1}\bm 1/(\bm 1^\top\Vc^{-1}\bm 1)$.
-In the independent common-distribution distributed case
-($R_{j,\ell}\equiv 0$), these reduce
-to $\omega_j \propto k_j$ (effective-sample-size weighting), which is
-the same conclusion as for extreme-quantile extrapolation.
-This is exactly the variance part of \Cref{prop:bg:optimal-weights} and
-the distributed simplification \eqref{eq:bg:V-opt-distrib}.}
-
-\todo{Add the AMSE statement, which is different from Chapter 3 but
-identical to Paper 3's Hill/extreme-quantile criterion. If the
-asymptotic bias $\bm\omega_\gamma^\top\Bc$ is retained, minimise
+The limiting law in \Cref{sec:pool-ext:CLT} has the same optimal-weight
+structure as the pooled Hill and pooled Weissman limits of
+\Cref{thm:bg:pool-hill,thm:bg:pool-weissman}. Indeed, after the
+normalisation by $\sqrt{k}/\ell_n$, the intermediate anchor
 \[
+  \hatexpectile{\tau_n}^{\mathrm{pool}}
+    (\bm\omega_\gamma,\bm\omega_q)
+\]
+contributes only an $o_p(1)$ term. The first-order mean and variance
+are therefore
+\begin{equation}
+\label{eq:pool-ext:mean-var}
+  \mu^{\xi,\star}(\bm\omega_\gamma)
+  =
+  \bm\omega_\gamma^\top\Bc,
+  \qquad
+  \sigma^{\xi,\star}(\bm\omega_\gamma)^2
+  =
+  \bm\omega_\gamma^\top\Vc\bm\omega_\gamma .
+\end{equation}
+This is exactly the quadratic structure in
+\Cref{prop:bg:optimal-weights}, and it is also the structure that
+\textcite[Theorem~2]{DaouiaPadoanStupfler2021} obtain for the
+weighted-geometric pooled Weissman quantile. The only difference is
+interpretive: here the extrapolated target is the common expectile
+$\expectile{\tau_n^\prime}$ rather than the common extreme quantile.
+
+\begin{proposition}[First-order optimal weights for extrapolated expectiles]
+\label{prop:pool-ext:optimal-weights}
+Assume the hypotheses of \Cref{thm:pool-ext:main}, and suppose that
+$\Vc$ is positive definite.
+Among affine Hill weights $\bm\omega_\gamma^\top\bm 1=1$, the
+variance-optimal extrapolation weight is
+\begin{equation}
+\label{eq:pool-ext:var-opt}
+  \bm\omega_\gamma^{\xi,\mathrm{Var},\star}
+  =
+  \bm\omega^{\mathrm{Var}}
+  =
+  \frac{\Vc^{-1}\bm 1}{\bm 1^\top\Vc^{-1}\bm 1},
+\end{equation}
+and the minimum first-order variance is
+\begin{equation}
+\label{eq:pool-ext:var-opt-value}
+  \sigma^{\xi,\star}
+    (\bm\omega_\gamma^{\xi,\mathrm{Var},\star})^2
+  =
+  \frac{1}{\bm 1^\top\Vc^{-1}\bm 1}.
+\end{equation}
+If the limiting bias is retained, the first-order AMSE criterion is
+\begin{equation}
+\label{eq:pool-ext:amse-def}
   \mathrm{AMSE}^{\xi,\star}(\bm\omega_\gamma)
   =
-  (\bm\omega_\gamma^\top\Bc)^2
+  \big(\bm\omega_\gamma^\top\Bc\big)^2
   +
-  \bm\omega_\gamma^\top\Vc\bm\omega_\gamma
-\]
-under $\bm\omega_\gamma^\top\bm 1=1$, giving the AMSE-optimal weights
-of \Cref{prop:bg:optimal-weights}(ii). Explain why the
-expectile-specific Chapter 3 quantities
-$\Bc^\star$, $b^{\xi/\Quant}$, $m(\gamma)$ and $\bm\omega_q$ do not
-enter this first-order extreme AMSE: they are in the intermediate
-component $\Delta$, which \Cref{prop:bg:plug-in-clt} removes through
-division by $\ell_n$.}
+  \bm\omega_\gamma^\top\Vc\bm\omega_\gamma,
+  \qquad
+  \bm\omega_\gamma^\top\bm 1=1,
+\end{equation}
+whose unique minimiser is
+\begin{equation}
+\label{eq:pool-ext:amse-opt}
+  \bm\omega_\gamma^{\xi,\mathrm{AMSE},\star}
+  =
+  \bm\omega^{\mathrm{AMSE}}
+  =
+  \frac{(1 + \Bc^\top\Vc^{-1}\Bc)\,\Vc^{-1}\bm 1
+        - (\bm 1^\top\Vc^{-1}\Bc)\,\Vc^{-1}\Bc}
+       {(1 + \Bc^\top\Vc^{-1}\Bc)(\bm 1^\top\Vc^{-1}\bm 1)
+        - (\bm 1^\top\Vc^{-1}\Bc)^2}.
+\end{equation}
+The corresponding minimum AMSE is
+\begin{equation}
+\label{eq:pool-ext:amse-opt-value}
+  \mathrm{AMSE}^{\xi,\star}
+    (\bm\omega_\gamma^{\xi,\mathrm{AMSE},\star})
+  =
+  \frac{1+\Bc^\top\Vc^{-1}\Bc}
+       {(1 + \Bc^\top\Vc^{-1}\Bc)(\bm 1^\top\Vc^{-1}\bm 1)
+        - (\bm 1^\top\Vc^{-1}\Bc)^2}.
+\end{equation}
+The quantile-anchor weight $\bm\omega_q$ is not identified by either
+first-order criterion: for the variance objective, every pair
+$(\bm\omega^{\mathrm{Var}},\bm\nu)$ with
+$\bm\nu^\top\bm 1=1$ has the same first-order variance, and for the
+AMSE objective the same is true of every pair
+$(\bm\omega^{\mathrm{AMSE}},\bm\nu)$.
+\end{proposition}
 
-\todo{Clarify the role of $\bm\omega_q$. It is not identified by the
-first-order extreme-level variance or AMSE, but it still affects the
-finite-sample point estimator and higher-order terms through the
-intermediate anchor. The natural default is the matched choice
-$\bm\omega_q=\bm\omega_\gamma$, especially when
-$\bm\omega_\gamma$ is chosen as $\bm\omega^{\mathrm{Var}}$ or
-$\bm\omega^{\mathrm{AMSE}}$, because matched weights recover the
-Paper-3 geometric Weissman form exactly at $\tau_n^\prime$.}
+\begin{proof}
+\Cref{prop:bg:plug-in-clt}, applied in
+\Cref{sec:pool-ext:CLT}, gives the first-order mean and variance
+\eqref{eq:pool-ext:mean-var}. The variance problem is therefore the
+same constrained quadratic programme as
+\Cref{prop:bg:optimal-weights}(i), and the AMSE problem is the same
+programme as \Cref{prop:bg:optimal-weights}(ii). This gives
+\eqref{eq:pool-ext:var-opt}--\eqref{eq:pool-ext:amse-opt-value}.
+Since neither \eqref{eq:pool-ext:mean-var} nor
+\eqref{eq:pool-ext:amse-def} contains $\bm\omega_q$, the whole affine
+hyperplane $\{\bm\nu\in\R^m:\bm\nu^\top\bm 1=1\}$ is first-order
+equivalent for the anchor weight once $\bm\omega_\gamma$ is fixed at
+the relevant optimum.
+\end{proof}
+
+In the independent common-distribution distributed setting used
+throughout the contribution chapters, $\Rjl\equiv0$ for $j\ne\ell$
+and \Cref{eq:bg:V_c-diagonal} gives a diagonal covariance matrix.
+Consequently \eqref{eq:pool-ext:var-opt} reduces to
+\begin{equation}
+\label{eq:pool-ext:var-opt-distrib}
+  \omega_{\gamma,j}^{\xi,\mathrm{Var},\star}
+  =
+  \left(\sum_{i=1}^{m}c_i^{-1}\right)^{-1}c_j^{-1}
+  \;\sim\;
+  \frac{k_j}{k},
+  \qquad j=1,\ldots,m.
+\end{equation}
+Thus, at very-extreme expectile levels, the variance-optimal
+distributed rule is again effective-sample-size weighting. This is
+the same simplification as in the pooled extreme-quantile case of
+\Cref{eq:bg:V-opt-distrib}. If the second-order bias vector is
+collinear with $\bm 1$ --- in particular under the undersmoothing
+calibration that makes $\Bc=\bm0$, or under the equal-effective-fraction
+common-distribution regime in which the per-sample Hill biases have a
+common limit --- then
+$\bm\omega_\gamma^\top\Bc$ is constant on the affine constraint set.
+In that case the AMSE criterion
+\eqref{eq:pool-ext:amse-def} differs from the variance criterion only
+by an additive constant, so
+$\bm\omega_\gamma^{\xi,\mathrm{AMSE},\star}
+=\bm\omega_\gamma^{\xi,\mathrm{Var},\star}$.
+
+\Cref{prop:pool-ext:optimal-weights} also explains why the
+very-extreme chapter differs from \Cref{sec:pool-int:weights}. At
+intermediate levels the delta method through the QB map retains the
+full pair of primitive contributions, and the expectile variance and
+AMSE involve
+$m(\gamma)$, $\bm L^\star$, $\Bc^\star$ and $b^{\xi/\Quant}$; see
+\eqref{eq:pool-int:sigma-xi}--\eqref{eq:pool-int:mu-xi}. At
+very-extreme levels those quantities live in the intermediate
+component $\Delta$ of \Cref{prop:bg:plug-in-clt}. The division by the
+diverging extrapolation log-rate $\ell_n$ removes that component from
+the first-order law, leaving only the pooled-Hill mean and variance in
+\eqref{eq:pool-ext:mean-var}. Hence the Chapter~4 AMSE weights are
+not the Chapter~3 expectile AMSE weights; they are the
+Daouia--Padoan--Stupfler Hill, and therefore extreme-quantile,
+weights read through the expectile extrapolation theorem.
+
+The non-identification of $\bm\omega_q$ is only a first-order
+statement. The anchor weight still changes the finite-sample point
+estimator in \eqref{eq:pool-ext:estimator}, and it may affect
+higher-order accuracy through the intermediate estimator. A natural
+canonical representative is therefore the matched choice
+\[
+  \bm\omega_q=\bm\omega_\gamma,
+\]
+with $\bm\omega_\gamma$ chosen as either
+\eqref{eq:pool-ext:var-opt} or \eqref{eq:pool-ext:amse-opt}. This
+choice keeps the extrapolated expectile in the same weighted-geometric
+Weissman form as \Cref{eq:pool-ext:matched-expectile-identity}: for
+matched weights, the estimator is exactly
+$\psifn(\hat\gamma_n(\bm\omega_\gamma))\,
+\hatWei_n(\tau_n^\prime\mid\bm\omega_\gamma)$. It also gives a single
+default implementation for the confidence intervals of
+\Cref{sec:pool-ext:CI}, whose first-order standard errors depend only
+on $\bm\omega_\gamma$.
 
 \section{Bias-reduction}
 \label{sec:pool-ext:bias-reduction}
