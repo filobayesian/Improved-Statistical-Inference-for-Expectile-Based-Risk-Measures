@@ -29,8 +29,9 @@ very-extreme regime
   \qquad
   n(1-\tau_n^\prime)\to c\in[0,\infty),
 \]
-where the target lies beyond, or at the edge of, the range supported by
-the observed upper order statistics. As recalled in
+where only finitely many observations are expected beyond the target
+level, so the direct intermediate-level asymptotics of \Cref{ch:pool-int}
+no longer apply. As recalled in
 \Cref{sec:bg:weissman-expectile}, the iid extreme-expectile theory of
 \textcite{DaouiaGirardStupfler2018} handles this regime by
 extrapolating an intermediate-level expectile estimator with a
@@ -42,8 +43,10 @@ very-extreme target is reached by extrapolation.
 The pooling protocol is unchanged. Each sample still communicates only
 the two primitives inherited from \textcite{DaouiaPadoanStupfler2021}:
 the local Hill estimator $\hat\gamma_j(k_j)$ and the local Weissman
-quantile input $\hat q_j^\star(\,\cdot\,\mid k_j)$, together with the
-asymptotic covariance information needed for pooling. No raw
+quantile input $\hat q_j^\star(\,\cdot\,\mid k_j)$. The asymptotic
+covariance matrix, or its plug-in estimate in feasible procedures, is
+used to choose weights and standard errors; it is not an additional
+expectile-specific primitive. No raw
 observations and no expectile-specific scalar, such as a local LAWS
 estimate, are introduced at this stage. Consequently the
 intermediate-level anchor available for extrapolation is precisely the
@@ -61,9 +64,9 @@ The role of \Cref{prop:bg:plug-in-clt}, the thesis-level version of
 \textcite[Proposition~C.6]{DavisonPadoanStupfler2023}, is exactly to
 make this transfer modular. Once an intermediate estimator and a
 tail-index estimator satisfy a joint root-rate limit, their
-Weissman-extrapolated expectile has an extreme-level limit governed
-only by the tail-index component. Chapter~3 supplies that joint limit
-for
+Weissman-extrapolated expectile will have an extreme-level limit
+governed only by the tail-index component. Chapter~3 supplies that
+joint limit for
 $\big(\hat\gamma_n(\bm\omega_\gamma),
 \hatexpectile{\tau_n}^{\mathrm{pool}}(\bm\omega_\gamma,\bm\omega_q)\big)$.
 The remaining sections of the present chapter therefore do not develop
@@ -74,31 +77,41 @@ distribution and optimal weights from the pooled Hill component.
 \section{Extrapolation regime and input limit}
 \label{sec:pool-ext:regime}
 
-The standing assumptions of \Cref{sec:pool-int:setup} remain in force.
-Thus $m$ is fixed; the $m$ samples are independent and have common
-distribution function $F$; $k=\sum_{j=1}^{m}k_j$ with
-$k_j\to\infty$ and $k_j/n_j\to0$; the proportionality conditions
-\eqref{eq:bg:pool-rates} hold; and the intermediate anchor satisfies
+Throughout this chapter we keep the setup of
+\Cref{sec:pool-int:setup}. The number of samples $m$ is fixed; the
+samples are independent and have common marginal distribution function
+$F$; $n=\sum_{j=1}^{m}n_j$ and $k=\sum_{j=1}^{m}k_j$ with
+$n_j\to\infty$, $k_j\to\infty$ and $k_j/n_j\to0$; and the
+proportionality conditions \eqref{eq:bg:pool-rates} hold. The common
+margin satisfies $\mathcal C_2(\gamma,\rho,A)$, with
+$\gamma\in(0,1/2)$, is strictly increasing in a neighbourhood of its
+upper endpoint, and obeys the lower-tail moment condition
+\[
+  \E|\min(X,0)|^{2+\delta}<\infty
+  \qquad\text{for some }\delta>0.
+\]
+The per-sample bias-rate conditions
+$\sqrt{k_j}A(n_j/k_j)\to\lambda_j\in\R$ are in force. The
+intermediate anchor level satisfies
 \[
   L_j(\tau_n)
   =
   \log\!\frac{k_j}{n_j(1-\tau_n)}
   \;\longrightarrow\;
   L_j^\star\in\R,
-  \qquad j=1,\ldots,m.
+  \qquad j=1,\ldots,m,
 \]
-The moment and log-domain conventions are also inherited: throughout
-we work under $\gamma\in(0,1/2)$,
-$\E|\min(X,0)|^{2+\delta}<\infty$ for some $\delta>0$,
+and the moment-negligibility condition is
 \begin{equation}
 \label{eq:pool-ext:moment-rate}
-  \frac{\sqrt{k}}{\Quant_X(\tau_n)}\;\longrightarrow\;0,
+  \frac{\sqrt{k}}{\Quant_X(\tau_n)}\;\longrightarrow\;0.
 \end{equation}
-and all logarithms of Hill, Weissman and QB quantities are understood
-on the high-probability positivity event described in
-\Cref{sec:pool-int:estimator}. The only strengthening relative to the
-intermediate chapter is that the second-order condition is now
-assumed with
+All logarithms of Hill, Weissman and QB quantities are understood on
+the high-probability positivity event described in
+\Cref{sec:pool-int:estimator}; arbitrary definitions on its complement
+do not affect the weak limits. The only strengthening relative to the
+intermediate chapter is that the second-order index is now assumed to
+satisfy
 \begin{equation}
 \label{eq:pool-ext:rho-strict}
   \rho<0.
@@ -138,22 +151,73 @@ $n_j(1-\tau_n)$ has the same order as $k_j$ for every $j$. Hence
 \eqref{eq:pool-ext:very-extreme-level} is exactly the pair of regimes
 required by \Cref{prop:bg:plug-in-clt}: $\tau_n$ is intermediate and
 $\tau_n^\prime$ is very-extreme.
+Moreover, if $\alpha_j=\lim n_j/n\in(0,1)$, then
+$n_j(1-\tau_n^\prime)\to \alpha_jc$; the very-extreme level is
+therefore global, but it has the expected local interpretation under
+the proportional-growth assumptions.
 
-The remaining high-level conditions in \Cref{prop:bg:plug-in-clt} are
-also supplied by Chapter~3. With $a_n=\sqrt{k}$, the second-order
-expectile--quantile expansion \eqref{eq:bg:c-gamma-rho} and
-\Cref{eq:pool-int:Lambda-bullet} give
+For the application of \Cref{prop:bg:plug-in-clt} we take
+\[
+  a_n=\sqrt{k},\qquad
+  \hat\gamma_n=\hat\gamma_n(\bm\omega_\gamma),\qquad
+  \widehat\xi_{\tau_n}^{\,I}
+  =
+  \hatexpectile{\tau_n}^{\mathrm{pool}}
+    (\bm\omega_\gamma,\bm\omega_q).
+\]
+The non-Gaussian hypotheses of the proposition are then verified as
+follows. Since $k\to\infty$, $a_n\to\infty$. The preceding paragraph
+gives $n(1-\tau_n)\to\infty$, while
+\eqref{eq:pool-ext:very-extreme-level} gives
+$n(1-\tau_n^\prime)\to c$ and
+$(1-\tau_n^\prime)/(1-\tau_n)\to0$. The Weissman-rate condition is
+\eqref{eq:pool-ext:weissman-rate}. The second-order limit
 \[
   a_n A((1-\tau_n)^{-1})
   =
   \sqrt{k}\,A((1-\tau_n)^{-1})
   \;\longrightarrow\;
-  \Lambda^\bullet\in\R,
+  \Lambda^\bullet\in\R
 \]
-while \eqref{eq:pool-ext:moment-rate} gives
+is \Cref{eq:pool-int:Lambda-bullet}, and
+\eqref{eq:pool-ext:moment-rate} gives
 $a_n/\Quant_X(\tau_n)\to0$. Finally,
-\Cref{rem:bg:plugin-ratio-control} verifies the deterministic
-expectile-ratio condition
+$\Prob(\widehat\xi_{\tau_n}^{\,I}>0)\to1$ because
+$\hatWei_n(\tau_n\mid\bm\omega_q)>0$ on the local Weissman positivity
+event and $\psifn(\hat\gamma_n(\bm\omega_\gamma))>0$ on the event on
+which the pooled Hill estimator lies in $(0,1)$.
+
+It remains only to spell out the deterministic extrapolation-bias
+control used in \Cref{rem:bg:plugin-ratio-control}. Decompose
+\[
+  \begin{aligned}
+  &\log\expectile{\tau_n^\prime}
+    - \log\expectile{\tau_n}
+    - \gamma\ell_n
+  \\
+  &\quad =
+  \big[
+    \log\Quant_X(\tau_n^\prime)
+    - \log\Quant_X(\tau_n)
+    - \gamma\ell_n
+  \big]
+  \\
+  &\qquad\quad
+  +
+  \big[
+    \log\{\expectile{\tau_n^\prime}/\Quant_X(\tau_n^\prime)\}
+    - \log\{\expectile{\tau_n}/\Quant_X(\tau_n)\}
+  \big].
+  \end{aligned}
+\]
+The first bracket is controlled by the second-order quantile expansion
+under $\mathcal C_2(\gamma,\rho,A)$, and the second by the
+expectile--quantile expansion \eqref{eq:bg:c-gamma-rho}. Since
+$\rho<0$, Potter bounds for the regularly varying auxiliary function
+keep the relevant $A$-terms along $\tau_n^\prime$ of order
+$A((1-\tau_n)^{-1})$ or smaller. The moment terms are bounded by a
+constant multiple of $\Quant_X(\tau_n)^{-1}$ because
+$\Quant_X(\tau_n^\prime)\ge \Quant_X(\tau_n)$ eventually. Therefore
 \[
   \frac{\sqrt{k}}{\ell_n}
   \left\{
@@ -161,13 +225,10 @@ expectile-ratio condition
     - \log\expectile{\tau_n}
     - \gamma\ell_n
   \right\}
-  \;\longrightarrow\;0.
+  \;\longrightarrow\;0,
 \]
-Indeed, the $A$-term in \eqref{eq:bg:c-gamma-rho} is
-$O(\sqrt{k}A((1-\tau_n)^{-1})/\ell_n)=o(1)$ because
-$\ell_n\to\infty$, and the first-moment contribution is
-$O(\sqrt{k}/\{\Quant_X(\tau_n)\ell_n\})=o(1)$ by
-\eqref{eq:pool-ext:moment-rate}.
+as $\sqrt{k}A((1-\tau_n)^{-1})=O(1)$,
+$\sqrt{k}/\Quant_X(\tau_n)\to0$ and $\ell_n\to\infty$.
 
 It remains to record the exact intermediate Gaussian input that will
 be fed into the plug-in extrapolation lemma. Put
@@ -179,7 +240,7 @@ be fed into the plug-in extrapolation lemma. Put
 
 \begin{proposition}[Joint input for the extrapolation step]
 \label{prop:pool-ext:input-clt}
-Under the assumptions stated above, for any affine weight vectors
+Under the assumptions stated above, for any deterministic affine weight vectors
 $\bm\omega_\gamma,\bm\omega_q\in\R^m$ satisfying
 $\bm\omega_\gamma^\top\bm 1=\bm\omega_q^\top\bm 1=1$,
 \begin{equation}
@@ -219,28 +280,43 @@ where $\mu^\xi$ and $\sigma^\xi$ are given in
 \begin{proof}
 \Cref{prop:pool-int:joint-clt} gives the joint Gaussian limit of
 $\hat\gamma_n(\bm\omega_\gamma)$ and
-$\log\hatWei_n(\tau_n\mid\bm\omega_q)$. Apply the same first-order
-delta method used in the proof of \Cref{thm:pool-int:main} to the
-two-dimensional map
+$\log\hatWei_n(\tau_n\mid\bm\omega_q)$. The first-order Taylor
+expansion of $\log\psifn$ around $\gamma$, combined with
+\eqref{eq:pool-int:b-xi-Q-def}, gives
 \[
-  (g,x)
-  \longmapsto
-  \left(
-    g,\,
-    \log\psifn(g)+x-\log\expectile{\tau_n}
-  \right),
+  \begin{aligned}
+  &\sqrt{k}\log\frac{
+    \hatexpectile{\tau_n}^{\mathrm{pool}}
+      (\bm\omega_\gamma,\bm\omega_q)}
+    {\expectile{\tau_n}}
+  \\
+  &\quad =
+  m(\gamma)\sqrt{k}\{\hat\gamma_n(\bm\omega_\gamma)-\gamma\}
+  +
+  \sqrt{k}\{\log\hatWei_n(\tau_n\mid\bm\omega_q)
+            -\log\Quant_X(\tau_n)\}
+  +
+  b^{\xi/\Quant}
+  +o_p(1).
+  \end{aligned}
 \]
-together with the deterministic expectile--quantile bias
-\eqref{eq:pool-int:b-xi-Q-def}. The second coordinate has the
-asymptotic mean and variance displayed in
-\eqref{eq:pool-int:mu-xi} and \eqref{eq:pool-int:sigma-xi}. Its
-covariance with the first coordinate is the covariance of the
-pooled-Hill component with
-$m(\gamma)$ times itself plus the pooled log-Weissman component,
-which is exactly \eqref{eq:pool-ext:gamma-xi-cross} by
-\eqref{eq:pool-int:Sigma}. Passing from the centred log-ratio to the
-relative error does not change the limit, because
-$e^x-1=x+o(x)$ uniformly for $x=O_p(k^{-1/2})$.
+Thus the second coordinate is the image of the joint limit in
+\Cref{prop:pool-int:joint-clt} under the row
+$(m(\gamma),1)$, plus the deterministic offset
+$b^{\xi/\Quant}$. This yields the mean and variance
+\eqref{eq:pool-int:mu-xi}--\eqref{eq:pool-int:sigma-xi}. Its covariance
+with the first coordinate is the covariance of the pooled-Hill
+component with $m(\gamma)$ times itself plus the pooled log-Weissman
+component, namely
+\[
+  m(\gamma)\,\bm\omega_\gamma^\top\Vc\bm\omega_\gamma
+  +
+  \bm\omega_\gamma^\top\bm D^\star\Vc\bm\omega_q,
+\]
+by \eqref{eq:pool-int:Sigma}. Passing from the centred log-ratio to
+the relative error, and from its covariance with the Hill component,
+does not change the limit, because $e^x-1=x+o(x)$ whenever
+$x=O_p(k^{-1/2})$.
 \end{proof}
 
 \Cref{prop:pool-ext:input-clt} is more information than the final
@@ -258,49 +334,173 @@ state here: it is exactly the hypothesis of the plug-in theorem, with
   \text{ equal to the second component of }
   \eqref{eq:pool-ext:input-clt}.
 \]
+Together with the hypothesis verification above, this is precisely the
+input required by \Cref{prop:bg:plug-in-clt}. The estimated-weight
+version follows under the same exact affine normalisation and
+consistency assumptions used in \Cref{sec:pool-int:CI}.
 
 \section{The pooled extrapolated expectile estimator}
 \label{sec:pool-ext:estimator}
 
-\todo{Define the pooled extrapolated estimator by Weissman-style lifting
-of the pooled intermediate-level estimator of \Cref{ch:pool-int}:
+The extrapolated estimator is obtained by applying the Weissman-type
+lift of \Cref{eq:bg:weissman-expectile} to the pooled intermediate
+anchor of \Cref{eq:pool-int:expectile-pool}. For affine weights
+$\bm\omega_{\gamma},\bm\omega_q\in\R^m$ satisfying
+$\bm\omega_\gamma^\top\bm 1=\bm\omega_q^\top\bm 1=1$, define
+\begin{equation}
+\label{eq:pool-ext:estimator}
+  \hatexpectile{\tau_n^\prime}^{\mathrm{pool},\star}
+    (\bm\omega_\gamma,\bm\omega_q)
+  \;\coloneqq\;
+  \left(\frac{1-\tau_n^\prime}{1-\tau_n}\right)^{
+    -\hat\gamma_n(\bm\omega_\gamma)}
+  \hatexpectile{\tau_n}^{\mathrm{pool}}
+    (\bm\omega_\gamma,\bm\omega_q).
+\end{equation}
+Although $\bm\omega_q$ affects the finite-sample anchor and the
+intermediate-level component of the joint input limit, it disappears
+from the first-order very-extreme CLT after normalisation by
+$\sqrt{k}/\ell_n$. It remains part of the definition because different
+choices of $\bm\omega_q$ give different finite-sample estimators and
+higher-order terms.
+Equivalently, using \Cref{eq:pool-int:expectile-pool},
 \[
   \hatexpectile{\tau_n^\prime}^{\mathrm{pool},\star}
-  \;\coloneqq\;
-  \left(\frac{1-\tau_n^\prime}{1-\tau_n}\right)^{-\hat\gamma_n(\bm\omega_\gamma)}
-  \hatexpectile{\tau_n}^{\mathrm{pool}}(\bm\omega_\gamma,\bm\omega_q).
+    (\bm\omega_\gamma,\bm\omega_q)
+  =
+  \exp\{\ell_n\hat\gamma_n(\bm\omega_\gamma)\}\,
+  \psifn\!\big(\hat\gamma_n(\bm\omega_\gamma)\big)\,
+  \hatWei_n(\tau_n\mid\bm\omega_q),
 \]
-Emphasise that this keeps the same two primitive weight vectors as
-\Cref{eq:pool-int:expectile-pool}: $\bm\omega_\gamma$ acts on the
-pooled Hill estimator and $\bm\omega_q$ acts on the pooled
-weighted-geometric quantile input.}
+where $\ell_n$ is the log-rate in \eqref{eq:pool-ext:ell-def}. Thus
+the same two weight vectors used at the intermediate level remain
+visible: $\bm\omega_\gamma$ acts on the pooled Hill input, both in the
+QB factor $\psifn(\hat\gamma_n)$ and in the extrapolation power, while
+$\bm\omega_q$ acts only on the weighted-geometric quantile input that
+forms the intermediate anchor. As in \Cref{sec:pool-int:estimator},
+all log-scale and real-power expressions are read on the
+high-probability positivity event for the local Weissman factors and
+on the event where the pooled Hill estimator entering $\psifn$ lies in
+$(0,1)$. This event also gives
+$\Prob\{\hatexpectile{\tau_n}^{\mathrm{pool}}
+(\bm\omega_\gamma,\bm\omega_q)>0\}\to1$, the positivity hypothesis in
+\Cref{prop:bg:plug-in-clt}; arbitrary definitions on the complementary
+event do not alter the weak limits.
 
-\todo{Replace the old adjusted-quantile-level alternative. The
-same-level equivalence in \Cref{prop:bg:expectile-quantile} is
-$\expectile{\tau}/\Quant_X(\tau)\to\psifn(\gamma)$; Chapter 4 should
-not introduce
-$1-(1-\tau_n^\prime)/(\gamma^{-1}-1)$ as an expectile target level.
-Instead record the two legitimate comparisons. First, at matched
-weights $\bm\omega_\gamma=\bm\omega_q=\bm\omega$, the identity
+The construction targets the same expectile level $\tau_n^\prime$ that
+appears in the population quantity $\expectile{\tau_n^\prime}$. No
+adjusted quantile level is introduced. The reason is that the
+expectile--quantile bridge of \Cref{prop:bg:expectile-quantile} is a
+same-level equivalence,
+$\expectile{\tau}/\Quant_X(\tau)\to\psifn(\gamma)$, and the
+Weissman step in \Cref{prop:bg:plug-in-clt} extrapolates the
+intermediate expectile itself from $\tau_n$ to $\tau_n^\prime$.
+
+At matched weights, \eqref{eq:pool-ext:estimator} is exactly the
+QB plug-in applied to the pooled Weissman quantile at the
+very-extreme level. Indeed, by the local Weissman identity,
 \[
+  \hat q_j^\star(\tau_n^\prime\mid k_j)
+  =
+  \left(\frac{1-\tau_n^\prime}{1-\tau_n}\right)^{
+    -\hat\gamma_j(k_j)}
+  \hat q_j^\star(\tau_n\mid k_j),
+\]
+and therefore, for every affine $\bm\omega$,
+\begin{equation}
+\label{eq:pool-ext:matched-weissman-identity}
   \hatWei_n(\tau_n^\prime\mid\bm\omega)
   =
   \left(\frac{1-\tau_n^\prime}{1-\tau_n}\right)^{
     -\hat\gamma_n(\bm\omega)}
-  \hatWei_n(\tau_n\mid\bm\omega)
+  \hatWei_n(\tau_n\mid\bm\omega).
+\end{equation}
+Combining \eqref{eq:pool-ext:matched-weissman-identity} with
+\eqref{eq:pool-ext:estimator} gives the exact matched-weight identity
+\begin{equation}
+\label{eq:pool-ext:matched-expectile-identity}
+  \hatexpectile{\tau_n^\prime}^{\mathrm{pool},\star}
+    (\bm\omega,\bm\omega)
+  =
+  \psifn\!\big(\hat\gamma_n(\bm\omega)\big)\,
+  \hatWei_n(\tau_n^\prime\mid\bm\omega).
+\end{equation}
+Thus, on the matched diagonal, the Chapter~4 estimator is not a new
+third primitive: it is the same pooled-Hill / pooled-Weissman QB
+pipeline as in Chapter~3, evaluated after the Weissman quantile input
+has been extrapolated to $\tau_n^\prime$.
+
+\begin{remark}[Matched local-QB equivalence]
+\label{rem:pool-ext:matched-local-qb}
+There is also a local-QB analogue of the construction, parallel to
+\Cref{eq:pool-int:expectile-B}. Define the marginal extrapolated QB
+expectile on sample $j$ by
+\[
+  \hatexpectile{\tau_n^\prime,j}^{\star}
+  \;\coloneqq\;
+  \left(\frac{1-\tau_n^\prime}{1-\tau_n}\right)^{
+    -\hat\gamma_j(k_j)}
+  \psifn\!\big(\hat\gamma_j(k_j)\big)\,
+  \hat q_j^\star(\tau_n\mid k_j)
+  =
+  \psifn\!\big(\hat\gamma_j(k_j)\big)\,
+  \hat q_j^\star(\tau_n^\prime\mid k_j),
 \]
-shows that
-$\hatexpectile{\tau_n^\prime}^{\mathrm{pool},\star}
-=\psifn(\hat\gamma_n(\bm\omega))\hatWei_n(\tau_n^\prime\mid\bm\omega)$
-exactly. Second, geometric pooling of marginal extrapolated QB
-expectiles is asymptotically equivalent to this matched-weight
-construction by the same Taylor argument as
-\Cref{prop:pool-int:A-B-equiv}. If
-$\bm\omega_\gamma\ne\bm\omega_q$, plugging
-$\hatWei_n(\tau_n^\prime\mid\bm\omega_q)$ into
-$\psifn(\hat\gamma_n(\bm\omega_\gamma))$ changes the exponent from
-$\bm\omega_\gamma$ to $\bm\omega_q$ and generally changes the
-first-order limit; do not present it as an equivalent construction.}
+and geometrically pool these $m$ scalars:
+\begin{equation}
+\label{eq:pool-ext:local-qb-geometric}
+  \hatexpectile{\tau_n^\prime}^{\mathrm{loc},\star}(\bm\omega)
+  \;\coloneqq\;
+  \prod_{j=1}^{m}
+    \big[\hatexpectile{\tau_n^\prime,j}^{\star}\big]^{\omega_j}.
+\end{equation}
+The comparison with \eqref{eq:pool-ext:matched-expectile-identity} is
+identical to \Cref{prop:pool-int:A-B-equiv}, because the
+very-extreme Weissman factor is common to both estimators. More
+precisely,
+\[
+  \log\!\frac{
+    \hatexpectile{\tau_n^\prime}^{\mathrm{pool},\star}
+      (\bm\omega,\bm\omega)}
+    {\hatexpectile{\tau_n^\prime}^{\mathrm{loc},\star}(\bm\omega)}
+  =
+  \log\psifn\!\big(\hat\gamma_n(\bm\omega)\big)
+  -
+  \sum_{j=1}^{m}\omega_j
+    \log\psifn\!\big(\hat\gamma_j(k_j)\big),
+\]
+so the unscaled log-ratio is $O_p(k^{-1})$ and in particular is
+negligible both on the intermediate $\sqrt{k}$ scale and on the
+extreme $\sqrt{k}/\ell_n$ scale. The canonical estimator
+\eqref{eq:pool-ext:estimator} is therefore consistent with the
+local-QB interpretation whenever the weights are matched.
+\end{remark}
+
+This matched-weight qualification is important. If
+$\bm\omega_\gamma\ne\bm\omega_q$, the alternative estimator
+\[
+  \psifn\!\big(\hat\gamma_n(\bm\omega_\gamma)\big)\,
+  \hatWei_n(\tau_n^\prime\mid\bm\omega_q)
+\]
+is generally first-order different from the object analysed in this
+chapter; it is not an equivalent rewrite of
+\eqref{eq:pool-ext:estimator}. By
+\eqref{eq:pool-ext:matched-weissman-identity}, it replaces the
+extrapolation power $\hat\gamma_n(\bm\omega_\gamma)$ by
+$\hat\gamma_n(\bm\omega_q)$, and their log-ratio is
+\[
+  \ell_n\{
+    \hat\gamma_n(\bm\omega_q)-\hat\gamma_n(\bm\omega_\gamma)
+  \}.
+\]
+After multiplication by the extreme normalisation
+$\sqrt{k}/\ell_n$, this term contributes
+$\sqrt{k}\{\hat\gamma_n(\bm\omega_q)-\hat\gamma_n(\bm\omega_\gamma)\}$,
+which is generally non-negligible. Hence the two-weight estimator in
+\eqref{eq:pool-ext:estimator} is the object to which the plug-in CLT
+will be applied; replacing its extrapolation exponent changes the
+first-order extreme limit unless the two Hill weightings agree
+asymptotically.
 
 \section{Main extrapolation theorem}
 \label{sec:pool-ext:CLT}
