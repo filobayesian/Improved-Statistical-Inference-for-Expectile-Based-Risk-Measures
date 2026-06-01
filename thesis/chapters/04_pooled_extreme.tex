@@ -74,69 +74,190 @@ distribution and optimal weights from the pooled Hill component.
 \section{Extrapolation regime and input limit}
 \label{sec:pool-ext:regime}
 
-\todo{State the assumptions inherited from
-\Cref{sec:pool-int:setup}: fixed $m$, independent common-distribution
-samples, $k=\sum_j k_j$, proportionality of $(n_j,k_j)$, the
-finite-log intermediate anchor $L_j(\tau_n)\to L_j^\star$, the
-moment-negligibility condition
-$\sqrt{k}/\Quant_X(\tau_n)\to0$, and the positivity/log-domain
-convention. Strengthen the second-order condition to $\rho<0$, because
-this is required by \Cref{prop:bg:plug-in-clt} and by the pooled
-Weissman theorem \Cref{thm:bg:pool-weissman}.}
-
-\todo{Introduce the very-extreme level by
+The standing assumptions of \Cref{sec:pool-int:setup} remain in force.
+Thus $m$ is fixed; the $m$ samples are independent and have common
+distribution function $F$; $k=\sum_{j=1}^{m}k_j$ with
+$k_j\to\infty$ and $k_j/n_j\to0$; the proportionality conditions
+\eqref{eq:bg:pool-rates} hold; and the intermediate anchor satisfies
 \[
-  \tau_n^\prime\uparrow1,\qquad
-  n(1-\tau_n^\prime)\to c\in[0,\infty),\qquad
-  \frac{1-\tau_n^\prime}{1-\tau_n}\to0,
+  L_j(\tau_n)
+  =
+  \log\!\frac{k_j}{n_j(1-\tau_n)}
+  \;\longrightarrow\;
+  L_j^\star\in\R,
+  \qquad j=1,\ldots,m.
 \]
-and set
-\[
+The moment and log-domain conventions are also inherited: throughout
+we work under $\gamma\in(0,1/2)$,
+$\E|\min(X,0)|^{2+\delta}<\infty$ for some $\delta>0$,
+\begin{equation}
+\label{eq:pool-ext:moment-rate}
+  \frac{\sqrt{k}}{\Quant_X(\tau_n)}\;\longrightarrow\;0,
+\end{equation}
+and all logarithms of Hill, Weissman and QB quantities are understood
+on the high-probability positivity event described in
+\Cref{sec:pool-int:estimator}. The only strengthening relative to the
+intermediate chapter is that the second-order condition is now
+assumed with
+\begin{equation}
+\label{eq:pool-ext:rho-strict}
+  \rho<0.
+\end{equation}
+This strict version is part of the extrapolation theory in
+\textcite[Proposition~C.6]{DavisonPadoanStupfler2023}, restated here
+as \Cref{prop:bg:plug-in-clt}, and is the same strict second-order
+condition that appears in the pooled Weissman theorem
+\Cref{thm:bg:pool-weissman}.
+
+The new target level is a very-extreme sequence
+\begin{equation}
+\label{eq:pool-ext:very-extreme-level}
+  \tau_n^\prime\uparrow1,
+  \qquad
+  n(1-\tau_n^\prime)\to c\in[0,\infty),
+  \qquad
+  \frac{1-\tau_n^\prime}{1-\tau_n}\to0.
+\end{equation}
+Write the associated Weissman log-rate as
+\begin{equation}
+\label{eq:pool-ext:ell-def}
   \ell_n
-  \coloneqq
+  \;\coloneqq\;
   \log\!\left(\frac{1-\tau_n}{1-\tau_n^\prime}\right).
-\]
-Assume the Weissman-rate condition $\sqrt{k}/\ell_n\to\infty$. Point
-out that \Cref{rem:bg:plugin-ratio-control}, together with the
-second-order expectile--quantile expansion
-\eqref{eq:bg:c-gamma-rho}, verifies the deterministic ratio condition
-in \Cref{prop:bg:plug-in-clt} with $a_n=\sqrt{k}$.}
+\end{equation}
+Then $\ell_n\to\infty$, and the extrapolation is not allowed to be so
+far into the tail that the Weissman normalisation overtakes the
+available root-$k$ information:
+\begin{equation}
+\label{eq:pool-ext:weissman-rate}
+  \frac{\sqrt{k}}{\ell_n}\;\longrightarrow\;\infty.
+\end{equation}
+The finite-log condition $L_j(\tau_n)\to L_j^\star$ already implies
+$n(1-\tau_n)\to\infty$, because
+$n_j(1-\tau_n)$ has the same order as $k_j$ for every $j$. Hence
+\eqref{eq:pool-ext:very-extreme-level} is exactly the pair of regimes
+required by \Cref{prop:bg:plug-in-clt}: $\tau_n$ is intermediate and
+$\tau_n^\prime$ is very-extreme.
 
-\todo{Record the exact joint input that Chapter 4 feeds to
-\Cref{prop:bg:plug-in-clt}. As a corollary of
-\Cref{prop:pool-int:joint-clt,thm:pool-int:main},
+The remaining high-level conditions in \Cref{prop:bg:plug-in-clt} are
+also supplied by Chapter~3. With $a_n=\sqrt{k}$, the second-order
+expectile--quantile expansion \eqref{eq:bg:c-gamma-rho} and
+\Cref{eq:pool-int:Lambda-bullet} give
 \[
+  a_n A((1-\tau_n)^{-1})
+  =
+  \sqrt{k}\,A((1-\tau_n)^{-1})
+  \;\longrightarrow\;
+  \Lambda^\bullet\in\R,
+\]
+while \eqref{eq:pool-ext:moment-rate} gives
+$a_n/\Quant_X(\tau_n)\to0$. Finally,
+\Cref{rem:bg:plugin-ratio-control} verifies the deterministic
+expectile-ratio condition
+\[
+  \frac{\sqrt{k}}{\ell_n}
+  \left\{
+    \log\expectile{\tau_n^\prime}
+    - \log\expectile{\tau_n}
+    - \gamma\ell_n
+  \right\}
+  \;\longrightarrow\;0.
+\]
+Indeed, the $A$-term in \eqref{eq:bg:c-gamma-rho} is
+$O(\sqrt{k}A((1-\tau_n)^{-1})/\ell_n)=o(1)$ because
+$\ell_n\to\infty$, and the first-moment contribution is
+$O(\sqrt{k}/\{\Quant_X(\tau_n)\ell_n\})=o(1)$ by
+\eqref{eq:pool-ext:moment-rate}.
+
+It remains to record the exact intermediate Gaussian input that will
+be fed into the plug-in extrapolation lemma. Put
+\[
+  \bm D^\star \coloneqq \mathrm{diag}(\bm L^\star),
+  \qquad
+  \bm L^\star=(L_1^\star,\ldots,L_m^\star)^\top .
+\]
+
+\begin{proposition}[Joint input for the extrapolation step]
+\label{prop:pool-ext:input-clt}
+Under the assumptions stated above, for any affine weight vectors
+$\bm\omega_\gamma,\bm\omega_q\in\R^m$ satisfying
+$\bm\omega_\gamma^\top\bm 1=\bm\omega_q^\top\bm 1=1$,
+\begin{equation}
+\label{eq:pool-ext:input-clt}
   \sqrt{k}
   \begin{pmatrix}
-    \hat\gamma_n(\bm\omega_\gamma)-\gamma \\
+    \hat\gamma_n(\bm\omega_\gamma)-\gamma \\[2pt]
     \hatexpectile{\tau_n}^{\mathrm{pool}}
       (\bm\omega_\gamma,\bm\omega_q)/\expectile{\tau_n}-1
   \end{pmatrix}
-  \todist
+  \;\todist\;
   \mathcal N\!\left(
   \begin{pmatrix}
-    \bm\omega_\gamma^\top\Bc \\
+    \bm\omega_\gamma^\top\Bc \\[2pt]
     \mu^\xi(\bm\omega_\gamma,\bm\omega_q)
   \end{pmatrix},
   \begin{pmatrix}
     \bm\omega_\gamma^\top\Vc\bm\omega_\gamma
-      & s_{\gamma,\xi} \\
-    s_{\gamma,\xi}
+      & s_{\gamma,\xi}(\bm\omega_\gamma,\bm\omega_q) \\[2pt]
+    s_{\gamma,\xi}(\bm\omega_\gamma,\bm\omega_q)
       & \sigma^\xi(\bm\omega_\gamma,\bm\omega_q)^2
   \end{pmatrix}
   \right),
-\]
-where
-\[
-  s_{\gamma,\xi}
+\end{equation}
+where $\mu^\xi$ and $\sigma^\xi$ are given in
+\eqref{eq:pool-int:mu-xi} and \eqref{eq:pool-int:sigma-xi}, and
+\begin{equation}
+\label{eq:pool-ext:gamma-xi-cross}
+  s_{\gamma,\xi}(\bm\omega_\gamma,\bm\omega_q)
   =
   m(\gamma)\,\bm\omega_\gamma^\top\Vc\bm\omega_\gamma
   +
-  \bm\omega_\gamma^\top\mathrm{diag}(\bm L^\star)\Vc\bm\omega_q.
+  \bm\omega_\gamma^\top\bm D^\star\Vc\bm\omega_q .
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+\Cref{prop:pool-int:joint-clt} gives the joint Gaussian limit of
+$\hat\gamma_n(\bm\omega_\gamma)$ and
+$\log\hatWei_n(\tau_n\mid\bm\omega_q)$. Apply the same first-order
+delta method used in the proof of \Cref{thm:pool-int:main} to the
+two-dimensional map
+\[
+  (g,x)
+  \longmapsto
+  \left(
+    g,\,
+    \log\psifn(g)+x-\log\expectile{\tau_n}
+  \right),
 \]
-The theorem in this chapter ultimately uses only the first component
-of this vector, but the joint statement is needed to match the
-hypotheses of \Cref{prop:bg:plug-in-clt}.}
+together with the deterministic expectile--quantile bias
+\eqref{eq:pool-int:b-xi-Q-def}. The second coordinate has the
+asymptotic mean and variance displayed in
+\eqref{eq:pool-int:mu-xi} and \eqref{eq:pool-int:sigma-xi}. Its
+covariance with the first coordinate is the covariance of the
+pooled-Hill component with
+$m(\gamma)$ times itself plus the pooled log-Weissman component,
+which is exactly \eqref{eq:pool-ext:gamma-xi-cross} by
+\eqref{eq:pool-int:Sigma}. Passing from the centred log-ratio to the
+relative error does not change the limit, because
+$e^x-1=x+o(x)$ uniformly for $x=O_p(k^{-1/2})$.
+\end{proof}
+
+\Cref{prop:pool-ext:input-clt} is more information than the final
+very-extreme theorem will visibly retain. The extrapolated limit uses
+only the first component, the pooled Hill estimator, because
+\Cref{prop:bg:plug-in-clt} divides by the diverging log-rate
+$\ell_n$. The joint statement is nevertheless the right object to
+state here: it is exactly the hypothesis of the plug-in theorem, with
+\[
+  \Gamma\sim
+  \mathcal N\!\big(\bm\omega_\gamma^\top\Bc,\,
+                   \bm\omega_\gamma^\top\Vc\bm\omega_\gamma\big),
+  \qquad
+  \Delta
+  \text{ equal to the second component of }
+  \eqref{eq:pool-ext:input-clt}.
+\]
 
 \section{The pooled extrapolated expectile estimator}
 \label{sec:pool-ext:estimator}

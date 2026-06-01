@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.18.0 (TeX Live 2024)  (format=lualatex 2024.12.26)  1 JUN 2026 15:08
+This is LuaHBTeX, Version 1.18.0 (TeX Live 2024)  (format=lualatex 2024.12.26)  1 JUN 2026 15:20
  system commands enabled.
  file:line:error style messages enabled.
 **/Users/filippogombac/Documents/GitHub/Improved-Statistical-Inference-for-Expectile-Based-Risk-Measures/thesis/main.tex
@@ -1037,29 +1037,29 @@ Chapter 4.
 
 
 
-] [47] [48] [49]) [50]
+] [47] [48] [49] [50]) [51]
 \openout2 = chapters/05_discussion.aux
  (./chapters/05_discussion.tex
 Chapter 5.
-) [51
+) [52
 
 
 
 
-] [52]
+] [53]
 Appendix A.
-[53
+[54
 
 
 
-] [54] [55] [56] [57] [58] [59] [60] [61] [62] [63] [64] [65] [66] [67] [68] [69] [70] [71] [72] [73]
+] [55] [56] [57] [58] [59] [60] [61] [62] [63] [64] [65] [66] [67] [68] [69] [70] [71] [72] [73] [74]
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
- [74
+ [75
 
 
-] [75] (./main.aux (./chapters/01_introduction.aux) (./chapters/02_background.aux) (./chapters/03_pooled_intermediate.aux) (./chapters/04_pooled_extreme.aux) (./chapters/05_discussion.aux))
+] [76] (./main.aux (./chapters/01_introduction.aux) (./chapters/02_background.aux) (./chapters/03_pooled_intermediate.aux) (./chapters/04_pooled_extreme.aux) (./chapters/05_discussion.aux))
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -1072,19 +1072,19 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 26644 strings out of 476447
+ 26670 strings out of 476447
  125056,1977958 words of node,token memory allocated
- 5189 words of node memory still in use:
-   8 hlist, 2 vlist, 2 rule, 1 local_par, 5 glue, 4 kern, 1 penalty, 1 margin_kern, 3 glyph, 1517 attribute, 69 glue_spec, 760 attribute_list, 1 write, 4 pdf_action nodes
-   avail lists: 1:1,2:1746,3:435,4:298,5:679,6:133,7:8330,8:77,9:1418,10:22,11:644
- 47776 multiletter control sequences out of 65536+600000
+ 5297 words of node memory still in use:
+   8 hlist, 2 vlist, 2 rule, 1 local_par, 5 glue, 4 kern, 1 penalty, 1 margin_kern, 3 glyph, 1553 attribute, 69 glue_spec, 778 attribute_list, 1 write, 4 pdf_action nodes
+   avail lists: 1:1,2:1746,3:435,4:298,5:682,6:133,7:8331,8:78,9:1418,10:22,11:644
+ 47793 multiletter control sequences out of 65536+600000
  118 fonts using 7836543 bytes
  74i,21n,81p,1110b,2162s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}<</Users/filippogombac/Library/texlive/2024/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.657pk>>{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmib10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmro10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (79 pages, 871882 bytes).
+Output written on main.pdf (80 pages, 879320 bytes).
 
-PDF statistics: 1882 PDF objects out of 2073 (max. 8388607)
- 1757 compressed objects within 18 object streams
- 396 named destinations out of 1000 (max. 131072)
+PDF statistics: 1916 PDF objects out of 2073 (max. 8388607)
+ 1787 compressed objects within 18 object streams
+ 405 named destinations out of 1000 (max. 131072)
  473 words of extra memory for PDF output out of 10000 (max. 100000000)
 

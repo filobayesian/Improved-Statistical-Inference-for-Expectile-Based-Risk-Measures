@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1780319162.38634 "main.bcf" "main.bbl" "main" 1780319299.39343 0
-  "main.bcf" 1780319299.28191 116474 f92c06074176753ac9e6d3b4b47dc195 "lualatex"
+["biber main"] 1780319944.1092 "main.bcf" "main.bbl" "main" 1780320047.36802 0
+  "main.bcf" 1780320047.27164 116556 f66cb35ab0b630a82c9ef1a6385dce5b "lualatex"
   "references.bib" 1780312399.95551 7120 6e0669a5bf4c4b09719537fa61ede822 ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["lualatex"] 1780319296.88269 "/Users/filippogombac/Documents/GitHub/Improved-Statistical-Inference-for-Expectile-Based-Risk-Measures/thesis/main.tex" "main.pdf" "main" 1780319299.3939 0
+["lualatex"] 1780320044.76642 "/Users/filippogombac/Documents/GitHub/Improved-Statistical-Inference-for-Expectile-Based-Risk-Measures/thesis/main.tex" "main.pdf" "main" 1780320047.36845 0
   "/Users/filippogombac/Documents/GitHub/Improved-Statistical-Inference-for-Expectile-Based-Risk-Measures/thesis/main.tex" 1780312395.03176 83010 f1fcc8b735957496ca303f6ecd1738ba ""
   "/Users/filippogombac/Library/texlive/2024/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.657pk" 1779132859.78267 7808 b778b35f869b37ca1d137622207fc6be ""
   "/Users/filippogombac/Library/texlive/2024/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-regular.luc" 1735236218.35305 127327 76a1047b4dbbf48407ed6ace26562c1b ""
@@ -255,22 +255,22 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1735212710.83392 5467645 128b85b7cde5f5edc5cb7f1dd7ff8736 ""
   "/usr/local/texlive/2024/texmf-var/tex/generic/config/language.dat" 1710266660 6831 bfdb703c6246bf92c6e7b254b6450228 ""
   "/usr/local/texlive/2024/texmf-var/web2c/luahbtex/lualatex.fmt" 1735212658 12256655 50f457c12e8b34be2310fc16ed3eeb59 ""
-  "chapters/01_introduction.aux" 1780319298.15601 6022 bcf4a6075d0fd6a58ab8fb4cdbb5faaf "lualatex"
+  "chapters/01_introduction.aux" 1780320046.08015 6022 bcf4a6075d0fd6a58ab8fb4cdbb5faaf "lualatex"
   "chapters/01_introduction.tex" 1780312383.81878 9970 3c6b792f7cb02dbbeff82d657f3ba877 ""
-  "chapters/02_background.aux" 1780319298.53749 15901 151527765886d577a91ddf052b8be2d3 "lualatex"
+  "chapters/02_background.aux" 1780320046.48085 15901 151527765886d577a91ddf052b8be2d3 "lualatex"
   "chapters/02_background.tex" 1780312428.36502 57659 04d43a3b45a777e27864fdea8bf66b7c ""
-  "chapters/03_pooled_intermediate.aux" 1780319298.90385 20658 45d9e7fea4b117749cb4f1fca36ad762 "lualatex"
+  "chapters/03_pooled_intermediate.aux" 1780320046.87118 20658 45d9e7fea4b117749cb4f1fca36ad762 "lualatex"
   "chapters/03_pooled_intermediate.tex" 1780312445.37537 92899 2e65052fcca2806214b76f4fcf07cf30 ""
-  "chapters/04_pooled_extreme.aux" 1780319298.97005 6308 1d2c5f47ad71c4afacaf26a776758317 "lualatex"
-  "chapters/04_pooled_extreme.tex" 1780319150.56735 13085 7dc713ad2760153e8530a31baa4c3eb1 ""
-  "chapters/05_discussion.aux" 1780319299.00198 5356 b1b84897b890b177b02ed1c1ad7da8e9 "lualatex"
+  "chapters/04_pooled_extreme.aux" 1780320046.95606 7748 b12b39e9f18ec6d988f90d09a0ce6bf8 "lualatex"
+  "chapters/04_pooled_extreme.tex" 1780319932.17334 17435 e9c84c6a573420532c4fab2c6c4d9cf9 ""
+  "chapters/05_discussion.aux" 1780320046.98743 5356 96483946cd4df53f7497b9293a27ff9a "lualatex"
   "chapters/05_discussion.tex" 1779132902.13302 3278 8376b869c51d1bc83250e1b836c6b3ed ""
-  "main.aux" 1780319299.2702 30304 5edfde037855241ad3c49aca1114e63b "lualatex"
-  "main.bbl" 1780319164.33032 24688 c20088060f4e24e79b267183e37e3b92 "biber main"
-  "main.out" 1780319299.28091 12341 308030a9860c8b91cbd6bd0d36eeba32 "lualatex"
-  "main.run.xml" 1780319299.28323 2346 5de0f744871ed2da5be4bd19bbdf404b "lualatex"
+  "main.aux" 1780320047.25969 30418 0a31b64ef5dfe56a18a063c19228911b "lualatex"
+  "main.bbl" 1780319946.15855 24688 c20088060f4e24e79b267183e37e3b92 "biber main"
+  "main.out" 1780320047.27063 12341 308030a9860c8b91cbd6bd0d36eeba32 "lualatex"
+  "main.run.xml" 1780320047.27251 2346 5de0f744871ed2da5be4bd19bbdf404b "lualatex"
   "main.tex" 1780312395.03176 83010 f1fcc8b735957496ca303f6ecd1738ba ""
-  "main.toc" 1780319299.28329 11190 96e686fce6b3e7ebd86afd3ae3e54bc7 "lualatex"
+  "main.toc" 1780320047.27256 11190 0d70adbb8649ce0276a9f304402ffc41 "lualatex"
   "preamble.tex" 1779132892.28944 2934 86972072cbe00a1c236ead3c1a65ba09 ""
   (generated)
   "chapters/01_introduction.aux"
