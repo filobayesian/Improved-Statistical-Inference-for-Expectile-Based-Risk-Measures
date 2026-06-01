@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.26)  1 JUN 2026 17:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.26)  1 JUN 2026 17:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1033,7 +1033,7 @@ Chapter 4.
 
 
 
-] [47] [48] [49] [50] [51] [52] [53] [54] [55] [56] [57] [58]) [59] [60]
+] [47] [48] [49] [50] [51] [52] [53] [54] [55] [56] [57] [58] [59]) [60]
 \openout2 = `chapters/05_discussion.aux'.
 
 
@@ -1104,10 +1104,10 @@ fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type
 /lmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy9.pfb>
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/loca
 l/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (89 pages, 901143 bytes).
+Output written on main.pdf (89 pages, 905549 bytes).
 PDF statistics:
- 2132 PDF objects out of 2487 (max. 8388607)
- 1959 compressed objects within 20 object streams
+ 2140 PDF objects out of 2487 (max. 8388607)
+ 1967 compressed objects within 20 object streams
  440 named destinations out of 1000 (max. 500000)
  80857 words of extra memory for PDF output out of 89155 (max. 10000000)
 

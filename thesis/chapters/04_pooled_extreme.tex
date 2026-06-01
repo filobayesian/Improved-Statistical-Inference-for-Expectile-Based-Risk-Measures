@@ -940,8 +940,9 @@ on $\bm\omega_\gamma$.
 \section{Bias-reduction}
 \label{sec:pool-ext:bias-reduction}
 
-The limit in \Cref{thm:pool-ext:main} retains the same asymptotic bias
-as the pooled Hill estimator:
+The limit in \Cref{thm:pool-ext:main} retains, on the
+$\sqrt{k}/\ell_n$ scale, the same asymptotic bias as the pooled Hill
+estimator:
 \[
   \mu^{\xi,\star}(\bm\omega_\gamma)
   =
@@ -962,6 +963,10 @@ available,
 \label{eq:pool-ext:Bc-hat-consistency}
   \hatBc \toprob \Bc .
 \end{equation}
+The following result is therefore conditional on a feasible
+second-order bias-estimation step; under the abstract condition
+$\mathcal C_2(\gamma,\rho,A)$ alone,
+\eqref{eq:pool-ext:Bc-hat-consistency} is not automatic.
 For any affine Hill-weight vector $\bm\omega_\gamma^\top\bm 1=1$,
 define the bias-reduced pooled tail-index estimator
 \begin{equation}
@@ -985,11 +990,31 @@ extrapolation exponent by \eqref{eq:pool-ext:bias-reduced-gamma}:
   \hatexpectile{\tau_n}^{\mathrm{pool}}
     (\bm\omega_\gamma,\bm\omega_q).
 \end{equation}
+For feasible estimated weights satisfying the exact affine constraints
+we use the corresponding plug-in convention
+\[
+  \overline\gamma_n(\hat{\bm\omega}_\gamma)
+  =
+  \hat\gamma_n(\hat{\bm\omega}_\gamma)
+  -
+  \frac{\hat{\bm\omega}_\gamma^\top\hatBc}{\sqrt{k}},
+\]
+and define
+\[
+  \hatexpectile{\tau_n^\prime}^{\mathrm{pool},\star,\mathrm{bc}}
+    (\hat{\bm\omega}_\gamma,\hat{\bm\omega}_q)
+  =
+  \left(\frac{1-\tau_n^\prime}{1-\tau_n}\right)^{
+    -\overline\gamma_n(\hat{\bm\omega}_\gamma)}
+  \hatexpectile{\tau_n}^{\mathrm{pool}}
+    (\hat{\bm\omega}_\gamma,\hat{\bm\omega}_q).
+\]
 Only the exponent is corrected because only the exponent contributes at
 the $\sqrt{k}/\ell_n$ scale. Replacing the occurrence of
 $\hat\gamma_n(\bm\omega_\gamma)$ inside the intermediate QB factor
 $\psifn(\hat\gamma_n(\bm\omega_\gamma))$ by
-$\overline\gamma_n(\bm\omega_\gamma)$ would change
+$\overline\gamma_n(\bm\omega_\gamma)$, on the same high-probability
+compact event used for Taylor expansion of $\log\psifn$, would change
 \eqref{eq:pool-ext:bias-reduced-estimator} by a log-ratio of order
 $O_p(k^{-1/2})$, hence by $o_p(1)$ after multiplication by
 $\sqrt{k}/\ell_n$. The minimal correction above is therefore enough
@@ -998,7 +1023,9 @@ for the first-order very-extreme theorem.
 \begin{corollary}[Bias-reduced extrapolated expectile CLT]
 \label{cor:pool-ext:bias-reduced-clt}
 Assume the hypotheses of \Cref{thm:pool-ext:main}, and assume
-\eqref{eq:pool-ext:Bc-hat-consistency}. Let
+\eqref{eq:pool-ext:Bc-hat-consistency}; in particular
+$\ell_n\to\infty$ and $\sqrt{k}/\ell_n\to\infty$, and the positivity
+convention of \Cref{sec:pool-ext:estimator} is in force. Let
 $\bm\omega_\gamma,\bm\omega_q\in\R^m$ be deterministic affine weight
 vectors. Then the estimator
 \eqref{eq:pool-ext:bias-reduced-estimator} satisfies
@@ -1040,6 +1067,41 @@ By \Cref{thm:bg:pool-hill} and \eqref{eq:pool-ext:Bc-hat-consistency},
     0,\bm\omega_\gamma^\top\Vc\bm\omega_\gamma
   \right).
 \]
+Moreover,
+\[
+  \sqrt{k}\{\overline\gamma_n(\bm\omega_\gamma)-\gamma\}
+  =
+  \sqrt{k}\{\hat\gamma_n(\bm\omega_\gamma)-\gamma\}
+  -
+  \bm\omega_\gamma^\top\Bc
+  +o_p(1).
+\]
+Combining this recentering with \Cref{prop:pool-ext:input-clt} gives
+the joint input
+\[
+  \sqrt{k}
+  \begin{pmatrix}
+    \overline\gamma_n(\bm\omega_\gamma)-\gamma \\[2pt]
+    \hatexpectile{\tau_n}^{\mathrm{pool}}
+      (\bm\omega_\gamma,\bm\omega_q)/\expectile{\tau_n}-1
+  \end{pmatrix}
+  \todist
+  \mathcal N\!\left(
+  \begin{pmatrix}
+    0 \\[2pt]
+    \mu^\xi(\bm\omega_\gamma,\bm\omega_q)
+  \end{pmatrix},
+  \begin{pmatrix}
+    \bm\omega_\gamma^\top\Vc\bm\omega_\gamma
+      & s_{\gamma,\xi}(\bm\omega_\gamma,\bm\omega_q) \\[2pt]
+    s_{\gamma,\xi}(\bm\omega_\gamma,\bm\omega_q)
+      & \sigma^\xi(\bm\omega_\gamma,\bm\omega_q)^2
+  \end{pmatrix}
+  \right).
+\]
+Subtracting the consistent estimate of the deterministic bias shifts
+only the first-coordinate mean and leaves the covariance matrix
+unchanged.
 Now repeat the log-decomposition
 \eqref{eq:pool-ext:log-decomposition}, with
 $\overline\gamma_n(\bm\omega_\gamma)$ in place of
@@ -1056,9 +1118,21 @@ For estimated weights,
 $\hat{\bm\omega}_\gamma^\top\hatBc\toprob
 \bm\omega_\gamma^\top\Bc$ by the assumed convergences, and the
 estimated-weight part of \Cref{thm:pool-ext:main} supplies the
-corresponding Slutsky step for the pooled Hill component. The anchor
-weight remains first-order invisible on the very-extreme scale, as in
-\Cref{thm:pool-ext:main}.
+corresponding Slutsky step for the pooled Hill component. With the
+explicit estimated-weight definition above,
+\[
+  \sqrt{k}\{\overline\gamma_n(\hat{\bm\omega}_\gamma)-\gamma\}
+  =
+  \sqrt{k}\{\hat\gamma_n(\hat{\bm\omega}_\gamma)-\gamma\}
+  -
+  \hat{\bm\omega}_\gamma^\top\hatBc
+  \todist
+  \mathcal N\!\left(
+    0,\bm\omega_\gamma^\top\Vc\bm\omega_\gamma
+  \right).
+\]
+The anchor weight remains first-order invisible on the very-extreme
+scale, as in \Cref{thm:pool-ext:main}.
 \end{proof}
 
 \Cref{cor:pool-ext:bias-reduced-clt} is deliberately a first-order
@@ -1079,7 +1153,7 @@ $\rho$ and $\beta$. This extra layer is not a consequence of the
 abstract condition $\mathcal C_2(\gamma,\rho,A)$ alone. It is an
 additional modelling and estimation step, and it inherits the usual
 instability of second-order bias estimation noted both by
-\textcite[Remark~4]{DaouiaPadoanStupfler2021} and, for expectile
+\textcite[Remark~6]{DaouiaPadoanStupfler2021} and, for expectile
 estimation, by \textcite[\S3.1.1]{DaouiaGirardStupfler2018}.
 
 Once \eqref{eq:pool-ext:bias-reduced-estimator} is used, the
@@ -1092,6 +1166,9 @@ AMSE weight from \eqref{eq:pool-ext:amse-opt} is still asymptotically
 valid, but after bias correction it is no longer first-order
 variance-optimal unless it coincides with
 $\bm\omega^{\mathrm{Var}}$.
+No additional first-order variance term appears from $\hatBc$, because
+its estimation error enters the normalised log ratio as
+$-\bm\omega_\gamma^\top(\hatBc-\Bc)=o_p(1)$.
 
 \section{Asymptotic confidence intervals}
 \label{sec:pool-ext:CI}
@@ -1103,9 +1180,9 @@ Weissman quantiles, and it is also the scale on which
 \textcite[\S B.1]{DavisonPadoanStupfler2023} formulate their
 expectile confidence intervals. In the present chapter the standard
 error has a particularly simple form: the intermediate anchor is
-first-order invisible, and the only variance that remains is the
-pooled-Hill variance multiplied by the extrapolation distance
-$\ell_n$.
+first-order invisible, and the standard error is the pooled-Hill
+standard error multiplied by the extrapolation distance $\ell_n$.
+Equivalently, the log-scale variance is scaled by $\ell_n^2/k$.
 
 For estimated Hill weights define
 \begin{equation}
@@ -1163,19 +1240,27 @@ undersmoothing calibration \eqref{eq:pool-int:undersmoothing} --- or
     (\hat{\bm\omega}_{\gamma},\hat{\bm\omega}_{q})
 \]
 under the bias-reduction assumptions of
-\Cref{cor:pool-ext:bias-reduced-clt}. Then, for every
-$\alpha\in(0,1)$, the log-scale interval
+\Cref{cor:pool-ext:bias-reduced-clt}. Under the positivity convention
+of \Cref{sec:pool-ext:estimator} and the expectile--quantile
+equivalence, both $\widehat\zeta_{\tau_n^\prime}$ and
+$\expectile{\tau_n^\prime}$ are positive with probability tending to
+one. Then, for every $\alpha\in(0,1)$, with
 \begin{equation}
 \label{eq:pool-ext:CI-log}
-  I_{n,\star}^{\log}
+  r_{n,\star}
   \;\coloneqq\;
-  \log\widehat\zeta_{\tau_n^\prime}
-  \;\pm\;
   z_{1-\alpha/2}\,
   \ell_n
-  \sqrt{\frac{\hat\sigma_{\gamma,n}^{\star\,2}}{k}}
+  \sqrt{\frac{\hat\sigma_{\gamma,n}^{\star\,2}}{k}},
+  \qquad
+  I_{n,\star}^{\log}
+  \;\coloneqq\;
+  \big[
+    \log\widehat\zeta_{\tau_n^\prime}-r_{n,\star},\,
+    \log\widehat\zeta_{\tau_n^\prime}+r_{n,\star}
+  \big],
 \end{equation}
-and its exponential image
+the log-scale interval $I_{n,\star}^{\log}$ and its exponential image
 \[
   I_{n,\star}
   \;\coloneqq\;
@@ -1221,6 +1306,20 @@ with the same estimated-weight Slutsky step as in the theorem. Under
 $\bm\omega_{\gamma}^{\top}\Bc=0$ this limit is centred. Under the
 bias-reduced construction, \Cref{cor:pool-ext:bias-reduced-clt}
 gives the identical centred log-scale limit with the same variance.
+Consequently, in either case in the statement,
+\[
+  \frac{\sqrt{k}}{\ell_n}
+  \left\{
+    \log\widehat\zeta_{\tau_n^\prime}
+    -
+    \log\expectile{\tau_n^\prime}
+  \right\}
+  \todist
+  \mathcal N\!\left(
+    0,\,
+    \bm\omega_{\gamma}^{\top}\Vc\bm\omega_{\gamma}
+  \right).
+\]
 The consistency of $\hatVc$ and
 $\hat{\bm\omega}_{\gamma}$ implies
 \[
@@ -1252,20 +1351,40 @@ $\bm\omega_{\gamma}^{\top}\Bc=0$. Suppose instead that
   \toprob
   \bm\omega_{\gamma}^{\top}\Bc .
 \]
-Then the log-scale bias-centred interval
+The subscript $\gamma$ emphasises that, on the very-extreme scale, the
+surviving first-order bias is the Hill-bias component. With the same
+weights and the same $\hatBc$, this centering is algebraically
+identical to using the minimal exponent-corrected estimator in
+\eqref{eq:pool-ext:CI-log}, since
+\[
+  \log
+  \hatexpectile{\tau_n^\prime}^{\mathrm{pool},\star,\mathrm{bc}}
+    (\hat{\bm\omega}_{\gamma},\hat{\bm\omega}_{q})
+  =
+  \log
+  \hatexpectile{\tau_n^\prime}^{\mathrm{pool},\star}
+    (\hat{\bm\omega}_{\gamma},\hat{\bm\omega}_{q})
+  -
+  \hat\mu_{\gamma,n}^{\star}\frac{\ell_n}{\sqrt{k}}.
+\]
+Then, for every $\alpha\in(0,1)$, using the radius $r_{n,\star}$ from
+\eqref{eq:pool-ext:CI-log}, the log-scale bias-centred interval
 \begin{equation}
 \label{eq:pool-ext:CI-log-bias-centred}
-  I_{n,\star,\mathrm{bcen}}^{\log}
+  C_{n,\star,\mathrm{bcen}}
   \;\coloneqq\;
   \log
   \hatexpectile{\tau_n^\prime}^{\mathrm{pool},\star}
     (\hat{\bm\omega}_{\gamma},\hat{\bm\omega}_{q})
   -
-  \hat\mu_{\gamma,n}^{\star}\frac{\ell_n}{\sqrt{k}}
-  \;\pm\;
-  z_{1-\alpha/2}\,
-  \ell_n
-  \sqrt{\frac{\hat\sigma_{\gamma,n}^{\star\,2}}{k}}
+  \hat\mu_{\gamma,n}^{\star}\frac{\ell_n}{\sqrt{k}},
+  \qquad
+  I_{n,\star,\mathrm{bcen}}^{\log}
+  \;\coloneqq\;
+  \big[
+    C_{n,\star,\mathrm{bcen}}-r_{n,\star},\,
+    C_{n,\star,\mathrm{bcen}}+r_{n,\star}
+  \big]
 \end{equation}
 has the same asymptotic coverage as
 \eqref{eq:pool-ext:CI-log}, and so does its exponential image. This is
@@ -1295,14 +1414,18 @@ not the first-order very-extreme normalisation. For the same reason
 there is no special restriction at the root $m(\gamma)=0$ in this
 section.
 
-In the distributed common-distribution case, the conservative default
-is to pair \Cref{cor:pool-ext:CI} with the variance-optimal
-effective-sample-size weights of
+In the distributed common-distribution case, the natural
+variance-dominated choice is to pair \Cref{cor:pool-ext:CI} with the
+variance-optimal effective-sample-size weights of
 \eqref{eq:pool-ext:var-opt-distrib}, using the matched convention
 $\hat{\bm\omega}_q=\hat{\bm\omega}_\gamma$ for the point estimator.
-This choice uses only $\hatVc$ for the first-order standard error and
-avoids estimating $\Bc$. AMSE weights and the bias-centred interval
-\eqref{eq:pool-ext:CI-log-bias-centred} remain valid under their
-stronger consistency assumptions, but they belong to the
-second-order-calibrated regime rather than to the variance-dominated
-calibration used for the default interval.
+Under undersmoothing, or more generally whenever
+$\bm\omega_\gamma^\top\Bc=0$, this yields the variance-only interval
+\eqref{eq:pool-ext:CI-log} without estimating $\Bc$. Outside such a
+centred calibration, the same variance-only interval is not
+asymptotically centred; valid inference then requires either the
+bias-reduced estimator of \eqref{eq:pool-ext:bias-reduced-estimator}
+or, equivalently, the bias-centred log interval
+\eqref{eq:pool-ext:CI-log-bias-centred}. Both require a consistent
+estimator of the Hill-bias vector and therefore belong to the
+second-order-calibrated regime.
