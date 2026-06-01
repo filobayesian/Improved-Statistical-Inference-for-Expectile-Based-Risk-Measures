@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1780312474.26589 "main.bcf" "main.bbl" "main" 1780312480.41734 0
-  "main.bcf" 1780312480.27803 116544 d59a7790a1158ebfd74e8f7ee923ba29 "pdflatex"
+["biber main"] 1780318617.57595 "main.bcf" "main.bbl" "main" 1780318646.57437 0
+  "main.bcf" 1780318646.43831 116230 729843411d6692750c9e2846442effc5 "pdflatex"
   "references.bib" 1780312399.95551 7120 6e0669a5bf4c4b09719537fa61ede822 ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1780312478.28897 "main.tex" "main.pdf" "main" 1780312480.41777 0
+["pdflatex"] 1780318644.44148 "main.tex" "main.pdf" "main" 1780318646.57488 0
   "/Users/filippogombac/Library/texlive/2024/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.657pk" 1779132859.78267 7808 b778b35f869b37ca1d137622207fc6be ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1254269338 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc" 1202520719 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
@@ -214,22 +214,22 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1735212710.83392 5467645 128b85b7cde5f5edc5cb7f1dd7ff8736 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1735212675 8221434 0c0422bde2dc7f9c7511840f033622fe ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "chapters/01_introduction.aux" 1780312479.27636 6022 bcf4a6075d0fd6a58ab8fb4cdbb5faaf "pdflatex"
+  "chapters/01_introduction.aux" 1780318645.45377 6022 bcf4a6075d0fd6a58ab8fb4cdbb5faaf "pdflatex"
   "chapters/01_introduction.tex" 1780312383.81878 9970 3c6b792f7cb02dbbeff82d657f3ba877 ""
-  "chapters/02_background.aux" 1780312479.64434 15901 151527765886d577a91ddf052b8be2d3 "pdflatex"
+  "chapters/02_background.aux" 1780318645.82062 15901 151527765886d577a91ddf052b8be2d3 "pdflatex"
   "chapters/02_background.tex" 1780312428.36502 57659 04d43a3b45a777e27864fdea8bf66b7c ""
-  "chapters/03_pooled_intermediate.aux" 1780312479.96005 20658 45d9e7fea4b117749cb4f1fca36ad762 "pdflatex"
+  "chapters/03_pooled_intermediate.aux" 1780318646.13238 20658 45d9e7fea4b117749cb4f1fca36ad762 "pdflatex"
   "chapters/03_pooled_intermediate.tex" 1780312445.37537 92899 2e65052fcca2806214b76f4fcf07cf30 ""
-  "chapters/04_pooled_extreme.aux" 1780312480.00907 5998 51f3f011610b195c2bc178760c8d8984 "pdflatex"
-  "chapters/04_pooled_extreme.tex" 1780312387.8735 4795 b3339e867ce176915799f74424b03f00 ""
-  "chapters/05_discussion.aux" 1780312480.04375 5356 aef7fa09b3d08be7247118f2ae1eaff2 "pdflatex"
+  "chapters/04_pooled_extreme.aux" 1780318646.18026 6307 0996edba85850fe1a6a9c288a90494ab "pdflatex"
+  "chapters/04_pooled_extreme.tex" 1780318638.34705 11371 01edadcce7f79a57693719991fd3fae8 ""
+  "chapters/05_discussion.aux" 1780318646.21435 5356 f579b20ad0ddad9beb526d858c707b62 "pdflatex"
   "chapters/05_discussion.tex" 1779132902.13302 3278 8376b869c51d1bc83250e1b836c6b3ed ""
-  "main.aux" 1780312480.26619 30394 046ca24611f43ecfeb25b03a002437f8 "pdflatex"
-  "main.bbl" 1780312476.09128 24688 c20088060f4e24e79b267183e37e3b92 "biber main"
-  "main.out" 1780312480.27694 12076 da2c4dc1f569b0434cce7e4d2270165c "pdflatex"
-  "main.run.xml" 1780312480.27887 2311 e66a0e3ff336a5af941c7fe634558519 "pdflatex"
+  "main.aux" 1780318646.4274 29966 08a518f8938ca7f14ca6099a2a48de73 "pdflatex"
+  "main.bbl" 1780318620.9645 24688 c20088060f4e24e79b267183e37e3b92 "biber main"
+  "main.out" 1780318646.43718 12341 308030a9860c8b91cbd6bd0d36eeba32 "pdflatex"
+  "main.run.xml" 1780318646.43966 2311 e66a0e3ff336a5af941c7fe634558519 "pdflatex"
   "main.tex" 1780312395.03176 83010 f1fcc8b735957496ca303f6ecd1738ba ""
-  "main.toc" 1780312480.27893 11090 2bce0443bf29fb34d7174a6fbac64dc8 "pdflatex"
+  "main.toc" 1780318646.43976 11190 573fcf28fd8fda32b7b008df18d126ac "pdflatex"
   "preamble.tex" 1779132892.28944 2934 86972072cbe00a1c236ead3c1a65ba09 ""
   (generated)
   "chapters/01_introduction.aux"
