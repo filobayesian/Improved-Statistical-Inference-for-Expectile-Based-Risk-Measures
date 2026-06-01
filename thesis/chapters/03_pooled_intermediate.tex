@@ -1372,8 +1372,8 @@ When $k_{j}/n_{j}$ varies across $j$, the closed forms
 \eqref{eq:pool-int:var-opt-general-q}--\eqref{eq:pool-int:var-opt-general-g}
 also depend on $m(\gamma)$ and on the log-rate vector $\bm L^{\star}$.
 The plug-in therefore additionally requires
-$\hat m \toprob m(\gamma)$ and $\hat L_{j}^{\star} \to L_{j}^{\star}$;
-the latter is deterministic ($\hat L_{j}^{\star} \coloneqq
+$\hat m \toprob m(\gamma)$ and $L_{j,n} \to L_{j}^{\star}$;
+the latter is deterministic ($L_{j,n} \coloneqq
 L_{j}(\tau_{n}) = \log(k_{j}/(n_{j}(1 - \tau_{n})))$ converges by the
 chapter setup of \Cref{sec:pool-int:setup}), so the only random
 plug-in beyond $\hatVc$ is $\hat m$. To avoid circularity --- the
@@ -1599,10 +1599,10 @@ is the direct substitution
   \hat\sigma^{\xi}(\hat{\bm\omega}^{k},
                     \hat{\bm\omega}^{k})^{2}
   \;=\;
-  \big[(\hat m + \hat L^{\star})^{2} + 1\big]\,
+  \big[(\hat m + L_{n})^{2} + 1\big]\,
   (\hat{\bm\omega}^{k})^{\top}\hatVc\,\hat{\bm\omega}^{k},
   \qquad
-  \hat L^{\star} \;=\; \log\!\big(k/(n(1 - \tau_{n}))\big).
+  L_{n} \;=\; \log\!\big(k/(n(1 - \tau_{n}))\big).
 \]
 If one instead uses the inverse-covariance plug-in
 $\hat{\bm\omega}^{V}=\hatVc^{-1}\bm 1/
@@ -1612,7 +1612,7 @@ exactly to
   \hat\sigma^{\xi}(\hat{\bm\omega}^{V},
                     \hat{\bm\omega}^{V})^{2}
   \;=\;
-  \big[(\hat m + \hat L^{\star})^{2} + 1\big]
+  \big[(\hat m + L_{n})^{2} + 1\big]
   \big/ \big(\bm 1^{\top}\hatVc^{-1}\bm 1\big),
 \]
 the direct plug-in image of the limit
@@ -1638,10 +1638,10 @@ $\hat{\bm\omega}^{k}$ of \eqref{eq:pool-int:plugin-eqfrac}
 remains well defined and consistent, and the CI
 \eqref{eq:pool-int:CI-log} retains its $(1 - \alpha)$ asymptotic
 coverage; the variance simply reduces to
-$\hat\sigma^{\xi,\,2} = [(\hat L^{\star})^{2} + 1]\,
+$\hat\sigma^{\xi,\,2} = [L_{n}^{2} + 1]\,
 (\hat{\bm\omega}^{k})^\top\hatVc\,\hat{\bm\omega}^{k}$. For the
 inverse-covariance plug-in $\hat{\bm\omega}^{V}$, this same statement
-uses $[(\hat L^{\star})^{2} + 1]/(\bm 1^\top\hatVc^{-1}\bm 1)$.
+uses $[L_{n}^{2} + 1]/(\bm 1^\top\hatVc^{-1}\bm 1)$.
 
 \begin{remark}[Bias-corrected confidence interval]
 \label{rem:pool-int:CI-bias-correction}
@@ -1704,18 +1704,22 @@ variance-dominated regime. This trade-off is the operational reason why
 \Cref{prop:pool-int:amse-opt} --- is the natural default companion to
 \Cref{cor:pool-int:CI} in applications.
 
-\section{A test of expectile-tail-homogeneity}
+\section{A root-\texorpdfstring{$k$}{k} diagnostic for high-expectile homogeneity}
 \label{sec:pool-int:test}
 
 The variance-optimal pooling of \Cref{prop:pool-int:var-opt-distrib}
-rests on the common-$\gamma$ assumption $(H_{\gamma})$
-across the $m$ samples. Although the chapter assumes a common
-marginal $F$ throughout, in practice this assumption ought to be
-validated before pooling. The chi-square test of
-\Cref{thm:bg:tail-homogeneity-test} provides such a diagnostic at the
-tail-index level; we adapt it here to a target formulated directly in
-terms of the expectile, which is the quantity actually being
-inferred.
+rests on the common-$\gamma$ assumption $(H_{\gamma})$ and, in the
+distributed-inference interpretation, on a common high-expectile target
+across the $m$ samples. Although the chapter assumes a common marginal
+$F$ throughout, no finite-dimensional statistic can validate equality
+of the entire marginal distribution. The statistic below should
+therefore be read more narrowly: it is a root-$k$ diagnostic for
+equality of the high-expectile targets being pooled. It can reveal
+tail-index or tail-scale incompatibilities that affect the expectile
+level, but failure to reject does not validate the full common-marginal
+model. This mirrors the chi-square test of
+\Cref{thm:bg:tail-homogeneity-test}, which diagnoses tail-index
+homogeneity rather than equality of complete distributions.
 
 Let
 \begin{equation}
@@ -1737,6 +1741,11 @@ logarithms into the vector
   \big(\log\hatexpectile{\tau_{n},\,1}, \ldots,
        \log\hatexpectile{\tau_{n},\,m}\big)^{\!\top}.
 \]
+As in \Cref{sec:pool-int:estimator}, all logarithms are understood on
+the high-probability event on which the local Weissman factors are
+positive and the local Hill estimators entering $\log\psifn$ lie in
+$(0,1)$; arbitrary definitions on the complementary event do not change
+the weak limits.
 
 \paragraph{Joint limit of the per-sample log-expectiles.}
 Applying the expectile-specific Jacobian row $(m(\gamma),\,1)$ ---
@@ -1750,17 +1759,17 @@ yields the joint central limit theorem
   \sqrt{k}\,\big(\hat{\bm\Xi}_{n}
                  - \log\expectile{\tau_{n}}\,\bm 1\big)
   \;\todist\;
-  \mathcal N\!\big(\bm\beta,\, \bm\Sigma\big),
+  \mathcal N\!\big(\bm\beta,\, \bm\Sigma_{\Xi}\big),
 \end{equation}
 with diagonal covariance matrix
 \begin{equation}
-\label{eq:pool-int:test-Sigma}
-  \bm\Sigma
+\label{eq:pool-int:test-Sigma-Xi}
+  \bm\Sigma_{\Xi}
   \;=\;
   \mathrm{diag}\!\big((m(\gamma) + L_{j}^{\star})^{2} + 1\big)_{j = 1}^{m}\,
   \Vc,
   \qquad
-  (\bm\Sigma)_{j, j}
+  (\bm\Sigma_{\Xi})_{j, j}
   \;=\;
   \big[(m(\gamma) + L_{j}^{\star})^{2} + 1\big]\,(\Vc)_{j, j},
 \end{equation}
@@ -1774,7 +1783,7 @@ and asymptotic mean vector
 where $\Vc$, $\Bc$, $\Bc^{\star}$, $b^{\xi/\Quant}$ and the log-rate
 limits $L_{j}^{\star}$ are exactly the quantities of
 \Cref{prop:pool-int:joint-clt,thm:pool-int:main}. The covariance
-\eqref{eq:pool-int:test-Sigma} is diagonal because the $m$ samples
+\eqref{eq:pool-int:test-Sigma-Xi} is diagonal because the $m$ samples
 are independent \eqref{eq:pool-int:R-zero}; its $j$th diagonal entry
 is the $\sqrt{k}$-rescaled per-sample log-expectile variance
 $\gamma^{2}\big[(m(\gamma) + L_{j}^{\star})^{2} + 1\big]\,(k/k_{j})$,
@@ -1798,27 +1807,27 @@ weighted mean is captured by the deviance statistic
   \Lambda^{\xi}_{n}
   \;\coloneqq\;
   k\,\big(\hat{\bm\Xi}_{n} - \hat\nu_{n}\bm 1\big)^{\!\top}
-    \hat{\bm\Sigma}_{n}^{-1}
+    \hat{\bm\Sigma}_{\Xi,n}^{-1}
     \big(\hat{\bm\Xi}_{n} - \hat\nu_{n}\bm 1\big),
   \qquad
   \hat\nu_{n}
   \;=\;
-  \frac{\bm 1^{\top}\hat{\bm\Sigma}_{n}^{-1}\hat{\bm\Xi}_{n}}
-       {\bm 1^{\top}\hat{\bm\Sigma}_{n}^{-1}\bm 1},
+  \frac{\bm 1^{\top}\hat{\bm\Sigma}_{\Xi,n}^{-1}\hat{\bm\Xi}_{n}}
+       {\bm 1^{\top}\hat{\bm\Sigma}_{\Xi,n}^{-1}\bm 1},
 \end{equation}
 in which $\hat\nu_{n}$ is the GLS estimator of the common
 log-expectile under \eqref{eq:pool-int:test-clt} and
-$\hat{\bm\Sigma}_{n}$ is the plug-in image of
-\eqref{eq:pool-int:test-Sigma} assembled from the consistent
+$\hat{\bm\Sigma}_{\Xi,n}$ is the plug-in image of
+\eqref{eq:pool-int:test-Sigma-Xi} assembled from the consistent
 estimators of \Cref{sec:pool-int:CI},
 \begin{equation}
-\label{eq:pool-int:test-Sigma-hat}
-  \hat{\bm\Sigma}_{n}
+\label{eq:pool-int:test-Sigma-Xi-hat}
+  \hat{\bm\Sigma}_{\Xi,n}
   \;=\;
-  \mathrm{diag}\!\big((\hat m + \hat L_{j}^{\star})^{2} + 1\big)_{j = 1}^{m}\,
+  \mathrm{diag}\!\big((\hat m + L_{j,n})^{2} + 1\big)_{j = 1}^{m}\,
   \hatVc,
   \qquad
-  \hat L_{j}^{\star}
+  L_{j,n}
   \;=\;
   \log\!\big(k_{j}/(n_{j}(1 - \tau_{n}))\big),
 \end{equation}
@@ -1857,12 +1866,26 @@ $\expectile{\tau_n,j}/\expectile{\tau_n,\ell}\to1$ is useful for
 interpreting the target of the diagnostic, but by itself it is not
 strong enough to justify a root-$k$ chi-square calibration.
 
-\begin{theorem}[Expectile-tail-homogeneity test]
+It is useful to keep three objects separate. The \emph{model null} is
+the common-marginal/common-tail setup under which
+\eqref{eq:pool-int:test-clt} supplies the covariance
+$\bm\Sigma_{\Xi}$ and bias vector $\bm\beta$. The
+\emph{target-homogeneity null} is the root-$k$ condition
+$H_{0,k}^{\xi}$ above. The \emph{central-calibration null} requires, in
+addition, that the asymptotic bias be invisible to the GLS residual
+projection, namely $\bm\beta\in\mathrm{span}\{\bm 1\}$. The theorem
+gives the general noncentral limit; the following corollary extracts
+the ordinary central chi-square rejection rule.
+
+\begin{theorem}[Noncentral high-expectile homogeneity diagnostic]
 \label{thm:pool-int:hom-test}
-Adopt the assumptions of \Cref{thm:pool-int:main} and suppose
-$\hat{\bm\Sigma}_{n} \toprob \bm\Sigma$ with $\bm\Sigma$ positive
-definite. Under the chapter's common-marginal null model, equivalently
-under the common-target centring
+Adopt the assumptions of \Cref{thm:pool-int:main}, assume $m\ge2$, and
+work on the high-probability logarithmic domain described above. Suppose
+$\hat{\bm\Sigma}_{\Xi,n}$ is symmetric positive definite with
+probability tending one and
+$\hat{\bm\Sigma}_{\Xi,n} \toprob \bm\Sigma_{\Xi}$, with
+$\bm\Sigma_{\Xi}$ positive definite. Under the chapter's
+common-marginal null model, which implies the common-target centring
 $\bm\Xi_{n}^{\star}=\log\expectile{\tau_n}\bm 1$,
 the statistic \eqref{eq:pool-int:test-stat} converges to a
 noncentral chi-square,
@@ -1872,73 +1895,88 @@ noncentral chi-square,
   \qquad
   \delta
   \;=\;
-  \bm\beta^{\top}\bm\Sigma^{-1}\bm\beta
+  \bm\beta^{\top}\bm\Sigma_{\Xi}^{-1}\bm\beta
   \;-\;
-  \frac{\big(\bm 1^{\top}\bm\Sigma^{-1}\bm\beta\big)^{2}}
-       {\bm 1^{\top}\bm\Sigma^{-1}\bm 1}
+  \frac{\big(\bm 1^{\top}\bm\Sigma_{\Xi}^{-1}\bm\beta\big)^{2}}
+       {\bm 1^{\top}\bm\Sigma_{\Xi}^{-1}\bm 1}
   \;\ge\; 0,
 \end{equation}
-with $\bm\beta$, $\bm\Sigma$ as in
-\eqref{eq:pool-int:test-Sigma}--\eqref{eq:pool-int:test-beta}. The
-noncentrality $\delta$ is the squared $\bm\Sigma^{-1}$-norm of
+with $\bm\beta$, $\bm\Sigma_{\Xi}$ as in
+\eqref{eq:pool-int:test-Sigma-Xi}--\eqref{eq:pool-int:test-beta}. The
+noncentrality $\delta$ is the squared $\bm\Sigma_{\Xi}^{-1}$-norm of
 $\bm\beta$ projected off the direction $\bm 1$, and vanishes ---
 so that the limit is the \emph{central} $\chi^{2}_{m - 1}$ ---
-exactly when $\bm\beta \in \mathrm{span}\{\bm 1\}$. Two standing
-regimes of the chapter guarantee $\delta = 0$:
-\begin{enumerate}[label=(\roman*)]
-\item the undersmoothing calibration \eqref{eq:pool-int:undersmoothing},
-      under which $\Bc = \Bc^{\star} = \bm 0$ and $b^{\xi/\Quant} = 0$,
-      hence $\bm\beta = \bm 0$;
-\item the equal-fraction distributed-inference setting
-      $k_{j}/n_{j} = (k/n)(1 + o(1))$ described in
-      \Cref{sec:pool-int:setup}, under which every coordinate
-      of $\bm\beta$ collapses to one common value, so that
-      $\bm\beta \in \mathrm{span}\{\bm 1\}$.
-\end{enumerate}
+exactly when $\bm\beta \in \mathrm{span}\{\bm 1\}$.
 Moreover, if the statistic is used diagnostically outside the
 common-marginal model in a setting where
 $\hat{\bm\Xi}_{n}-\bm\Xi_{n}^{\star}=O_{p}(k^{-1/2})$ and the plug-in
-precision matrices $\hat{\bm\Sigma}_{n}^{-1}$ remain bounded and
-uniformly positive definite in probability, then under any alternative
-for which the population log-expectiles are separated faster than
-$k^{-1/2}$ --- formally,
+precision matrices $\hat{\bm\Sigma}_{\Xi,n}^{-1}$ remain bounded and
+uniformly positive definite in probability, then under any separated
+alternative for which the population log-expectiles are separated
+faster than $k^{-1/2}$ --- formally,
 $\sqrt{k}\,\min_{c \in \R}\big\|(\log\expectile{\tau_{n},\,j})_{j=1}^{m}
 - c\,\bm 1\big\| \to \infty$ --- the statistic diverges,
-$\Lambda^{\xi}_{n} \toprob \infty$. Consequently, the central
-chi-square rejection rule
-$\Lambda^{\xi}_{n} > \chi^{2}_{m - 1,\, 1 - \alpha}$, the
-$(1 - \alpha)$-quantile of the \emph{central} $\chi^{2}_{m - 1}$
-law, has asymptotic size $\alpha$ in the regimes where $\delta=0$
-above. If $\delta>0$, its null rejection probability converges instead
-to
-$\Prob\{\chi^{2}_{m-1}(\delta)>\chi^{2}_{m - 1,\,1-\alpha}\}$, which is
-larger than $\alpha$.
+$\Lambda^{\xi}_{n} \toprob \infty$. This alternative-side statement is
+only a divergence result. It does not supply a central null calibration
+for heterogeneous margins satisfying root-$k$ target equality; such a
+calibration would require the corresponding heterogeneous covariance
+and bias structure.
 \end{theorem}
 
 \begin{proof}
 See \Cref{app:proofs:hom-test}.
 \end{proof}
 
+\begin{corollary}[Central chi-square calibration]
+\label{cor:pool-int:hom-test-central}
+Under the assumptions of \Cref{thm:pool-int:hom-test}, the central
+chi-square rejection rule
+\[
+  \Lambda^{\xi}_{n} > \chi^{2}_{m - 1,\, 1 - \alpha},
+\]
+with $\chi^{2}_{m - 1,\, 1 - \alpha}$ the $(1-\alpha)$-quantile of the
+central $\chi^{2}_{m-1}$ law, has asymptotic size $\alpha$ whenever
+$\bm\beta\in\mathrm{span}\{\bm 1\}$. In particular this holds in two
+standing regimes of the chapter:
+\begin{enumerate}[label=(\roman*)]
+\item the undersmoothing calibration \eqref{eq:pool-int:undersmoothing},
+      under which $\Bc = \Bc^{\star} = \bm 0$ and $b^{\xi/\Quant} = 0$,
+      hence $\bm\beta = \bm 0$;
+\item the equal-fraction distributed-inference setting
+      $k_{j}/n_{j} = (k/n)(1 + o(1))$ described in
+      \Cref{sec:pool-int:setup}, under which every coordinate of
+      $\bm\beta$ collapses to one common value.
+\end{enumerate}
+If $\delta>0$ under the common-marginal model, the same central
+critical value has limiting rejection probability
+$\Prob\{\chi^{2}_{m-1}(\delta)>\chi^{2}_{m - 1,\,1-\alpha}\}$, which is
+larger than $\alpha$.
+\end{corollary}
+
+\begin{proof}
+The sufficient conditions in (i)--(ii) are verified in
+\Cref{app:proofs:hom-test}. The size statement follows immediately
+from \Cref{thm:pool-int:hom-test} and the continuity of the central
+chi-square distribution function at its quantiles.
+\end{proof}
+
 \paragraph{Discussion.}
 Three comments situate the test. First, under the chapter's standing
 assumption of a common marginal $F$ the root-$k$ null
 $H_{0,k}^{\xi}$ holds automatically, so the test is a specification
-check on the pooling
-hypothesis rather than a test of a substantive scientific null: a
-non-rejection licenses the variance-optimal pooling recipes of
-\Cref{sec:pool-int:weights,sec:pool-int:CI}, while a rejection warns
-that the samples are not tail-homogeneous and that pooling would
-import bias. Second, the central-limit calibration of the test is the
-same one that underlies the confidence interval of
-\Cref{cor:pool-int:CI}: case (i) of \Cref{thm:pool-int:hom-test} is
-exactly the undersmoothing condition \eqref{eq:pool-int:undersmoothing}
-adopted there, and case (ii) is the equal-fraction
-distributed-inference regime in which the variance-optimal weights of
-\Cref{prop:pool-int:var-opt-distrib} are used --- so whenever the
-pooling recipe of this chapter is operated, one of the two regimes
-that delivers the central $\chi^{2}_{m - 1}$ is in force. Outside
-both regimes the asymptotic bias $\bm\beta$ is generically not
-collinear with $\bm 1$, the limit is the noncentral
+check on the pooling hypothesis rather than a test of a substantive
+scientific null. A non-rejection is consistent with using the pooling
+recipes of \Cref{sec:pool-int:weights,sec:pool-int:CI} at the tested
+level, while a rejection warns that the samples should not be pooled
+without modelling heterogeneity. Second, the central calibration in
+\Cref{cor:pool-int:hom-test-central} is the same variance-dominated
+calibration that underlies the confidence interval of
+\Cref{cor:pool-int:CI}: case (i) is exactly the undersmoothing
+condition \eqref{eq:pool-int:undersmoothing} adopted there, and case
+(ii) is the equal-fraction distributed-inference regime in which the
+variance-optimal weights of \Cref{prop:pool-int:var-opt-distrib} are
+used. Outside both regimes the asymptotic bias $\bm\beta$ is
+generically not collinear with $\bm 1$, the limit is the noncentral
 $\chi^{2}_{m - 1}(\delta)$ of \eqref{eq:pool-int:test-noncentral},
 and the central critical value over-rejects by an amount governed by
 $\delta$; this is the expectile-level counterpart of the identical
@@ -1966,9 +2004,9 @@ included. The complementary strength of $\Lambda^{\xi}_{n}$ is instead
 scale sensitivity: when the tail indices are equal but the
 tail-homoskedasticity condition $(\mathcal H)$ of
 \Cref{cond:bg:tail-homoskedasticity} fails, the tail-index test can
-accept $H_{0}$ while $H_{0,0}^{\xi}$ fails. In that case the expectile
-test registers departures in the actual inferential target --- the
-expectile --- to which a test of the tail index alone is by
+fail to reject $H_{0}$ while $H_{0,0}^{\xi}$ fails. In that case the
+expectile test registers departures in the actual inferential target
+--- the expectile --- to which a test of the tail index alone is by
 construction blind. The two diagnostics are therefore complementary:
 one targets tail-index equality, the other targets equality of the
 high-expectile levels being pooled.

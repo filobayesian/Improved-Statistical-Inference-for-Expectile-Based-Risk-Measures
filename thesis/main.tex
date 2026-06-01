@@ -1577,10 +1577,10 @@ $\Vc$ is positive definite, $\bm\omega_{q}^{\top}\bm 1 = 1$ forces
 $\bm\omega_{q} \ne \bm 0$, and the structurally non-negative
 contribution $\bm\omega_{q}^{\top}\Vc\bm\omega_{q}$ to
 \eqref{eq:pool-int:sigma-xi} is strictly positive. The plug-in
-substitutes $\hatVc, \hat L_{j}^{\star} \coloneqq L_{j}(\tau_{n}),
-\hat m, \hat{\bm\omega}_{\gamma}, \hat{\bm\omega}_{q}$ for their
-population analogues. The log-rate plug-in
-$\hat L_{j}^{\star} = L_{j}(\tau_{n}) =
+substitutes $\hatVc, L_{j,n} \coloneqq L_{j}(\tau_{n}), \hat m,
+\hat{\bm\omega}_{\gamma}, \hat{\bm\omega}_{q}$ for their population
+analogues. The log-rate plug-in
+$L_{j,n} = L_{j}(\tau_{n}) =
 \log(k_{j}/(n_{j}(1 - \tau_{n})))$ is deterministic and converges to
 $L_{j}^{\star}$ by the chapter setup of \Cref{sec:pool-int:setup}; the
 remaining four convergences are the assumptions
@@ -1634,20 +1634,22 @@ hence
 $\Prob(\expectile{\tau_{n}} \in I_{n})
 = \Prob(\log\expectile{\tau_{n}} \in I_{n}^{\log}) \to 1 - \alpha$. \qed
 
-\section{Proof of \texorpdfstring{\Cref{thm:pool-int:hom-test}}{Theorem 3.9}}
+\section{Proof of \texorpdfstring{\Cref{thm:pool-int:hom-test}
+and \Cref{cor:pool-int:hom-test-central}}{Theorem 3.9 and Corollary 3.10}}
 \label{app:proofs:hom-test}
 
-We prove the expectile-tail-homogeneity test of
-\Cref{thm:pool-int:hom-test} under the standing assumptions of
-\Cref{sec:pool-int:setup}, with $\hat{\bm\Sigma}_{n} \toprob
-\bm\Sigma$ and $\bm\Sigma$ positive definite. The argument composes
-six steps:
+We prove the high-expectile homogeneity diagnostic of
+\Cref{thm:pool-int:hom-test} and the central calibration of
+\Cref{cor:pool-int:hom-test-central} under the standing assumptions of
+\Cref{sec:pool-int:setup}, with
+$\hat{\bm\Sigma}_{\Xi,n} \toprob \bm\Sigma_{\Xi}$ and
+$\bm\Sigma_{\Xi}$ positive definite. The argument composes six steps:
 (i) the per-sample QB log-expectile CLT, obtained by the single-sample
 specialisation of \Cref{app:proofs:main-clt};
 (ii) aggregation across the independent samples and rescaling to the
 common $\sqrt{k}$ scale, which yields the joint limit
 \eqref{eq:pool-int:test-clt} with covariance
-\eqref{eq:pool-int:test-Sigma} and mean
+\eqref{eq:pool-int:test-Sigma-Xi} and mean
 \eqref{eq:pool-int:test-beta};
 (iii) the GLS algebra reducing the statistic to a quadratic form in a
 single asymptotically Gaussian vector;
@@ -1703,9 +1705,11 @@ L_{j}^{\star}\,b_{j}^{H} + b_{j}^{R}\big)^{\top}$,
 $b_{j}^{R} = -\lambda_{j}\,\Psi_{\rho}(e^{L_{j}^{\star}})$ (the
 order-statistic bias being zero by \eqref{eq:app:within-input}), and
 covariance $\gamma^{2}\big(1, L_{j}^{\star};\, L_{j}^{\star},
-1 + (L_{j}^{\star})^{2}\big)$. The deterministic gap satisfies, by the
-second-order expansion \eqref{eq:app:main:xi-Q-expansion} and the
-regular variation of $A$ used in \eqref{eq:app:main:Lambda-bullet},
+1 + (L_{j}^{\star})^{2}\big)$. The deterministic gap is controlled by
+the second-order expansion \eqref{eq:app:main:xi-Q-expansion} and the
+regular variation of $A$ used in \eqref{eq:app:main:Lambda-bullet}. The
+moment remainder is $o(k_j^{-1/2})$ because $k_j\asymp k$ and
+\eqref{eq:pool-int:moment-rate} is in force. Consequently,
 \[
   \sqrt{k_{j}}\,(\mathrm G)
   \;=\;
@@ -1736,10 +1740,14 @@ so Slutsky's theorem yields
 
 \paragraph{Step (ii): aggregation and rescaling to $\sqrt{k}$.}
 The $m$ samples are independent \eqref{eq:pool-int:R-zero}, so the
-scalars in \eqref{eq:app:hom:per-sample} are independent across $j$,
-and the vector $\sqrt{k}(\hat{\bm\Xi}_{n} -
-\log\expectile{\tau_{n}}\bm 1)$ has independent (hence jointly
-Gaussian, in the limit) coordinates obtained by multiplying
+scalars in \eqref{eq:app:hom:per-sample} are independent across $j$.
+Joint convergence follows by the Cramér--Wold device: for any fixed
+vector $\bm a$, the corresponding linear combination is a sum of
+independent per-sample terms whose characteristic functions factor, and
+the marginal limits in \eqref{eq:app:hom:per-sample} therefore combine
+into the stated Gaussian law. Thus the vector
+$\sqrt{k}(\hat{\bm\Xi}_{n} - \log\expectile{\tau_{n}}\bm 1)$ has
+independent limiting coordinates obtained by multiplying
 \eqref{eq:app:hom:per-sample} by $\sqrt{k/k_{j}} \to \sqrt{c_{j} S}$.
 The $j$th limiting variance is
 \[
@@ -1747,9 +1755,9 @@ The $j$th limiting variance is
   \;=\;
   \big[(m(\gamma) + L_{j}^{\star})^{2} + 1\big]\,(\Vc)_{j, j},
 \]
-which is the $j$th diagonal entry of $\bm\Sigma$ in
-\eqref{eq:pool-int:test-Sigma}; the off-diagonal entries vanish by
-independence, so the limiting covariance is exactly $\bm\Sigma$. The
+which is the $j$th diagonal entry of $\bm\Sigma_{\Xi}$ in
+\eqref{eq:pool-int:test-Sigma-Xi}; the off-diagonal entries vanish by
+independence, so the limiting covariance is exactly $\bm\Sigma_{\Xi}$. The
 $j$th limiting mean is $\sqrt{c_{j} S}\,\beta_{j}^{\circ}$. Splitting
 $\beta_{j}^{\circ}$ as in \eqref{eq:app:hom:per-sample} and using the
 $\sqrt{k}$-rescaled bias identities of \Cref{app:proofs:joint-clt},
@@ -1793,13 +1801,13 @@ is $\bm\beta = m(\gamma)\Bc + \Bc^{\star} + b^{\xi/\Quant}\bm 1$ of
 \paragraph{Step (iii): GLS reduction to a quadratic form.}
 Write $\bm Y_{n} \coloneqq \sqrt{k}(\hat{\bm\Xi}_{n} -
 \log\expectile{\tau_{n}}\bm 1)$, so $\bm Y_{n} \todist
-\bm Y \sim \mathcal N(\bm\beta, \bm\Sigma)$ by Step (ii). Introduce
+\bm Y \sim \mathcal N(\bm\beta, \bm\Sigma_{\Xi})$ by Step (ii). Introduce
 the random oblique projection
 \[
   \bm P_{n}
   \;\coloneqq\;
-  \bm I - \frac{\bm 1\,\bm 1^{\top}\hat{\bm\Sigma}_{n}^{-1}}
-               {\bm 1^{\top}\hat{\bm\Sigma}_{n}^{-1}\bm 1},
+  \bm I - \frac{\bm 1\,\bm 1^{\top}\hat{\bm\Sigma}_{\Xi,n}^{-1}}
+               {\bm 1^{\top}\hat{\bm\Sigma}_{\Xi,n}^{-1}\bm 1},
 \]
 which satisfies $\bm P_{n}\bm 1 = \bm 0$ and, from the definition of
 $\hat\nu_{n}$ in \eqref{eq:pool-int:test-stat},
@@ -1813,38 +1821,40 @@ into \eqref{eq:pool-int:test-stat},
   \Lambda^{\xi}_{n}
   \;=\;
   k\,\big(k^{-1/2}\bm P_{n}\bm Y_{n}\big)^{\top}
-     \hat{\bm\Sigma}_{n}^{-1}
+     \hat{\bm\Sigma}_{\Xi,n}^{-1}
      \big(k^{-1/2}\bm P_{n}\bm Y_{n}\big)
   \;=\;
   \bm Y_{n}^{\top}\,
-    \bm P_{n}^{\top}\hat{\bm\Sigma}_{n}^{-1}\bm P_{n}\,
+    \bm P_{n}^{\top}\hat{\bm\Sigma}_{\Xi,n}^{-1}\bm P_{n}\,
   \bm Y_{n}.
 \end{equation}
-By hypothesis $\hat{\bm\Sigma}_{n} \toprob \bm\Sigma$, so
+By hypothesis $\hat{\bm\Sigma}_{\Xi,n} \toprob \bm\Sigma_{\Xi}$, so
 $\bm P_{n} \toprob \bm P \coloneqq \bm I -
-\bm 1\bm 1^{\top}\bm\Sigma^{-1}/(\bm 1^{\top}\bm\Sigma^{-1}\bm 1)$ and
-$\bm P_{n}^{\top}\hat{\bm\Sigma}_{n}^{-1}\bm P_{n} \toprob
-\bm M \coloneqq \bm P^{\top}\bm\Sigma^{-1}\bm P$, both by the
+\bm 1\bm 1^{\top}\bm\Sigma_{\Xi}^{-1}/(\bm 1^{\top}\bm\Sigma_{\Xi}^{-1}\bm 1)$ and
+$\bm P_{n}^{\top}\hat{\bm\Sigma}_{\Xi,n}^{-1}\bm P_{n} \toprob
+\bm M \coloneqq \bm P^{\top}\bm\Sigma_{\Xi}^{-1}\bm P$, both by the
 continuous-mapping theorem. A direct computation, writing
-$\bm w \coloneqq \bm\Sigma^{-1}\bm 1$ and $s \coloneqq
-\bm 1^{\top}\bm\Sigma^{-1}\bm 1 = \bm 1^{\top}\bm w$, gives the
+$\bm w \coloneqq \bm\Sigma_{\Xi}^{-1}\bm 1$ and $s \coloneqq
+\bm 1^{\top}\bm\Sigma_{\Xi}^{-1}\bm 1 = \bm 1^{\top}\bm w$, gives the
 standard GLS identity
 \begin{equation}
 \label{eq:app:hom:M-identity}
   \bm M
   \;=\;
-  \bm P^{\top}\bm\Sigma^{-1}\bm P
+  \bm P^{\top}\bm\Sigma_{\Xi}^{-1}\bm P
   \;=\;
-  \bm\Sigma^{-1}
+  \bm\Sigma_{\Xi}^{-1}
   \;-\;
-  \frac{\bm\Sigma^{-1}\bm 1\,\bm 1^{\top}\bm\Sigma^{-1}}
-       {\bm 1^{\top}\bm\Sigma^{-1}\bm 1},
+  \frac{\bm\Sigma_{\Xi}^{-1}\bm 1\,\bm 1^{\top}\bm\Sigma_{\Xi}^{-1}}
+       {\bm 1^{\top}\bm\Sigma_{\Xi}^{-1}\bm 1},
 \end{equation}
-since the three cross terms in the expansion of
-$(\bm I - \bm w\bm 1^{\top}/s)\bm\Sigma^{-1}
-(\bm I - \bm 1\bm w^{\top}/s)$ each reduce to
-$\bm w\bm w^{\top}/s$ (using $\bm 1^{\top}\bm w = s$ and symmetry of
-$\bm\Sigma^{-1}$), leaving $\bm\Sigma^{-1} - \bm w\bm w^{\top}/s$. The
+because the two first-order cross terms in the expansion of
+$(\bm I - \bm w\bm 1^{\top}/s)\bm\Sigma_{\Xi}^{-1}
+(\bm I - \bm 1\bm w^{\top}/s)$ each contribute
+$-\bm w\bm w^{\top}/s$, while the second-order term contributes
+$+\bm w\bm w^{\top}/s$ (using $\bm 1^{\top}\bm w = s$ and symmetry of
+$\bm\Sigma_{\Xi}^{-1}$), leaving
+$\bm\Sigma_{\Xi}^{-1} - \bm w\bm w^{\top}/s$. The
 matrix $\bm M$ is symmetric positive semi-definite and satisfies
 $\bm M\bm 1 = \bm w - \bm w(s/s) = \bm 0$. By
 \eqref{eq:app:hom:quadratic}, Slutsky's theorem, and the
@@ -1853,26 +1863,26 @@ quadratic-form map $(\bm A, \bm y) \mapsto \bm y^{\top}\bm A\bm y$,
 \begin{equation}
 \label{eq:app:hom:quadratic-limit}
   \Lambda^{\xi}_{n} \;\todist\; \bm Y^{\top}\bm M\,\bm Y,
-  \qquad \bm Y \sim \mathcal N(\bm\beta, \bm\Sigma).
+  \qquad \bm Y \sim \mathcal N(\bm\beta, \bm\Sigma_{\Xi}).
 \end{equation}
 
 \paragraph{Step (iv): the noncentral chi-square limit.}
-Standardise $\bm Z \coloneqq \bm\Sigma^{-1/2}\bm Y \sim
-\mathcal N(\bm\Sigma^{-1/2}\bm\beta, \bm I_{m})$, where
-$\bm\Sigma^{-1/2}$ is the symmetric positive-definite square root of
-$\bm\Sigma^{-1}$. Then
+Standardise $\bm Z \coloneqq \bm\Sigma_{\Xi}^{-1/2}\bm Y \sim
+\mathcal N(\bm\Sigma_{\Xi}^{-1/2}\bm\beta, \bm I_{m})$, where
+$\bm\Sigma_{\Xi}^{-1/2}$ is the symmetric positive-definite square root
+of $\bm\Sigma_{\Xi}^{-1}$. Then
 $\bm Y^{\top}\bm M\bm Y = \bm Z^{\top}\widetilde{\bm M}\bm Z$ with
 \[
   \widetilde{\bm M}
   \;\coloneqq\;
-  \bm\Sigma^{1/2}\bm M\,\bm\Sigma^{1/2}
+  \bm\Sigma_{\Xi}^{1/2}\bm M\,\bm\Sigma_{\Xi}^{1/2}
   \;=\;
   \bm I_{m} - \frac{\bm v\bm v^{\top}}{\bm v^{\top}\bm v},
   \qquad
-  \bm v \coloneqq \bm\Sigma^{-1/2}\bm 1,
+  \bm v \coloneqq \bm\Sigma_{\Xi}^{-1/2}\bm 1,
 \]
 using \eqref{eq:app:hom:M-identity} and
-$\bm\Sigma^{1/2}\bm w = \bm\Sigma^{-1/2}\bm 1 = \bm v$,
+$\bm\Sigma_{\Xi}^{1/2}\bm w = \bm\Sigma_{\Xi}^{-1/2}\bm 1 = \bm v$,
 $s = \bm v^{\top}\bm v$. The matrix $\widetilde{\bm M}$ is the
 orthogonal projection onto $\bm v^{\perp}$: it is symmetric,
 idempotent, and of rank $m - 1$. A quadratic form
@@ -1880,7 +1890,7 @@ $\bm Z^{\top}\widetilde{\bm M}\bm Z$ in a unit-covariance Gaussian
 $\bm Z \sim \mathcal N(\bm\mu_{Z}, \bm I_{m})$ with $\widetilde{\bm M}$
 a rank-$r$ orthogonal projection is noncentral $\chi^{2}_{r}$ with
 noncentrality $\bm\mu_{Z}^{\top}\widetilde{\bm M}\bm\mu_{Z}$. Here
-$r = m - 1$ and $\bm\mu_{Z} = \bm\Sigma^{-1/2}\bm\beta$, so
+$r = m - 1$ and $\bm\mu_{Z} = \bm\Sigma_{\Xi}^{-1/2}\bm\beta$, so
 \[
   \Lambda^{\xi}_{n}
   \;\todist\;
@@ -1888,20 +1898,21 @@ $r = m - 1$ and $\bm\mu_{Z} = \bm\Sigma^{-1/2}\bm\beta$, so
   \qquad
   \delta
   \;=\;
-  \bm\beta^{\top}\bm\Sigma^{-1/2}\widetilde{\bm M}\bm\Sigma^{-1/2}\bm\beta
+  \bm\beta^{\top}\bm\Sigma_{\Xi}^{-1/2}
+  \widetilde{\bm M}\bm\Sigma_{\Xi}^{-1/2}\bm\beta
   \;=\;
   \bm\beta^{\top}\bm M\bm\beta
   \;=\;
-  \bm\beta^{\top}\bm\Sigma^{-1}\bm\beta
-  - \frac{(\bm 1^{\top}\bm\Sigma^{-1}\bm\beta)^{2}}
-         {\bm 1^{\top}\bm\Sigma^{-1}\bm 1},
+  \bm\beta^{\top}\bm\Sigma_{\Xi}^{-1}\bm\beta
+  - \frac{(\bm 1^{\top}\bm\Sigma_{\Xi}^{-1}\bm\beta)^{2}}
+         {\bm 1^{\top}\bm\Sigma_{\Xi}^{-1}\bm 1},
 \]
 the last equality by \eqref{eq:app:hom:M-identity}. This is
 \eqref{eq:pool-int:test-noncentral}. Since $\widetilde{\bm M}$ is
 positive semi-definite, $\delta \ge 0$, with $\delta = 0$ iff
-$\widetilde{\bm M}\bm\Sigma^{-1/2}\bm\beta = \bm 0$, i.e.\
-$\bm\Sigma^{-1/2}\bm\beta \in \mathrm{span}\{\bm v\}
-= \mathrm{span}\{\bm\Sigma^{-1/2}\bm 1\}$, equivalently
+$\widetilde{\bm M}\bm\Sigma_{\Xi}^{-1/2}\bm\beta = \bm 0$, i.e.\
+$\bm\Sigma_{\Xi}^{-1/2}\bm\beta \in \mathrm{span}\{\bm v\}
+= \mathrm{span}\{\bm\Sigma_{\Xi}^{-1/2}\bm 1\}$, equivalently
 $\bm\beta \in \mathrm{span}\{\bm 1\}$.
 
 \paragraph{Step (v): the two regimes with $\delta = 0$.}
@@ -1963,7 +1974,7 @@ rather than the common-target CLT of Steps (i)--(v).
 Write $\bm\Xi_{n}^{\star} \coloneqq (\log\expectile{\tau_{n},\,1},
 \ldots, \log\expectile{\tau_{n},\,m})^{\top}$ for the vector of
 \emph{population} per-sample log-expectiles, and abbreviate
-$\bm D_{n} \coloneqq \hat{\bm\Sigma}_{n}^{-1}$, with induced norm
+$\bm D_{n} \coloneqq \hat{\bm\Sigma}_{\Xi,n}^{-1}$, with induced norm
 $\|\bm x\|_{\bm D_{n}}^{2} \coloneqq \bm x^{\top}\bm D_{n}\bm x$.
 Assume $\hat{\bm\Xi}_{n} - \bm\Xi_{n}^{\star}=O_{p}(k^{-1/2})$,
 $\|\bm D_n\|=O_p(1)$, and
@@ -1981,17 +1992,27 @@ $\mathrm{span}\{\bm 1\}$:
   \;=\;
   k\,\min_{c \in \R}\big\|\hat{\bm\Xi}_{n} - c\bm 1\big\|_{\bm D_{n}}^{2}.
 \]
-By the triangle inequality for $\|\cdot\|_{\bm D_{n}}$ and the bound
-$\min_{c}\|\bm x - c\bm 1\|_{\bm D_{n}} \ge
-\lambda_{\min}(\bm D_{n})^{1/2}\,\min_{c}\|\bm x - c\bm 1\|$ (valid
-because, at the $\|\cdot\|_{\bm D_{n}}$-optimal $c$, the Rayleigh
-quotient inequality
-$\bm x^{\top}\bm D_{n}\bm x \ge \lambda_{\min}(\bm D_{n})\|\bm x\|^{2}$
-applies),
+On the event $\lambda_{\min}(\bm D_n)>\eta$, the norm
+$\|\cdot\|_{\bm D_n}$ is well defined and the triangle inequality gives,
+with $S_{1}\coloneqq \mathrm{span}\{\bm 1\}$ and
+$d_{\bm D_n}(\bm x,S_1)\coloneqq \inf_{\bm s\in S_1}
+\|\bm x-\bm s\|_{\bm D_n}$ (while $d$ denotes Euclidean distance),
 \[
   \sqrt{\Lambda^{\xi}_{n}}
   \;=\;
-  \sqrt{k}\,\min_{c}\big\|\hat{\bm\Xi}_{n} - c\bm 1\big\|_{\bm D_{n}}
+  \sqrt{k}\,d_{\bm D_n}(\hat{\bm\Xi}_n,S_1)
+  \;\ge\;
+  \sqrt{k}\,d_{\bm D_n}(\bm\Xi_n^\star,S_1)
+  \;-\;
+  \sqrt{k}\,\big\|\hat{\bm\Xi}_{n} - \bm\Xi_{n}^{\star}\big\|_{\bm D_{n}}.
+\]
+Moreover
+$d_{\bm D_n}(\bm\Xi_n^\star,S_1)\ge
+\sqrt{\lambda_{\min}(\bm D_n)}\,d(\bm\Xi_n^\star,S_1)$, since the
+Rayleigh quotient bound applies to every vector
+$\bm\Xi_n^\star-c\bm 1$. Therefore, on the same event,
+\[
+  \sqrt{\Lambda^{\xi}_{n}}
   \;\ge\;
   \lambda_{\min}(\bm D_{n})^{1/2}\,
   \sqrt{k}\,\min_{c}\big\|\bm\Xi_{n}^{\star} - c\bm 1\big\|
