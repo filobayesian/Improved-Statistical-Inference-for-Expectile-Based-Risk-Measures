@@ -10,8 +10,9 @@ $\tau_n^\prime \uparrow 1$ with
 $n(1-\tau_n^\prime) \to c \in [0, \infty)$. The argument is deliberately
 short: the pooled intermediate result of \Cref{thm:pool-int:main} is
 fed into the plug-in extrapolation lemma
-\Cref{prop:bg:plug-in-clt}, which is the thesis-level formulation of
-\textcite[Proposition~C.6]{DavisonPadoanStupfler2023}. In the
+\Cref{prop:bg:plug-in-clt}, which is the thesis-level adaptation of
+\textcite[Proposition~C.6]{DavisonPadoanStupfler2023} proved in
+\Cref{app:proofs:plugin-clt}. In the
 independent common-margin distributed setting of \Cref{ch:pool-int},
 the resulting limit is the first-order expectile analogue of the
 pooled Weissman extreme-quantile limit in \Cref{thm:bg:pool-weissman}:
@@ -60,10 +61,13 @@ canonical pooled QB estimator
   \hatWei_n(\tau_n\mid\bm\omega_q)
 \]
 from \Cref{eq:pool-int:expectile-pool}.
+This is a consequence of the Paper-3 communication protocol, not a
+claim that QB extrapolation is intrinsically preferable to every
+possible expectile-specific procedure.
 
-The role of \Cref{prop:bg:plug-in-clt}, the thesis-level version of
-\textcite[Proposition~C.6]{DavisonPadoanStupfler2023}, is exactly to
-make this transfer modular. Once an intermediate estimator and a
+The role of \Cref{prop:bg:plug-in-clt}, the thesis-level plug-in
+lemma adapted from \textcite[Proposition~C.6]{DavisonPadoanStupfler2023},
+is exactly to make this transfer modular. Once an intermediate estimator and a
 tail-index estimator satisfy a joint root-rate limit, their
 Weissman-extrapolated expectile will have an extreme-level limit
 governed only by the tail-index component. Chapter~3 supplies that
@@ -85,8 +89,7 @@ $F$; $n=\sum_{j=1}^{m}n_j$ and $k=\sum_{j=1}^{m}k_j$ with
 $n_j\to\infty$, $k_j\to\infty$ and $k_j/n_j\to0$; and the
 proportionality conditions \eqref{eq:bg:pool-rates} hold. The common
 margin satisfies $\mathcal C_2(\gamma,\rho,A)$, with
-$\gamma\in(0,1)$, is strictly increasing in a neighbourhood of its
-upper endpoint, and obeys the finite first-moment condition
+$\gamma\in(0,1)$, and obeys the finite first-moment condition
 \[
   \E X^{-}<\infty .
 \]
@@ -117,7 +120,7 @@ satisfy
   \rho<0.
 \end{equation}
 This strict version is part of the extrapolation theory in
-\textcite[Proposition~C.6]{DavisonPadoanStupfler2023}, restated here
+\textcite[Proposition~C.6]{DavisonPadoanStupfler2023}, adapted here
 as \Cref{prop:bg:plug-in-clt}, and is the same strict second-order
 condition that appears in the pooled Weissman theorem
 \Cref{thm:bg:pool-weissman}.
@@ -712,7 +715,7 @@ $\widehat\xi_{\tau_n}^{\,I}
     \bm\omega_\gamma^\top\Vc\bm\omega_\gamma
   \right).
 \]
-Thus \Cref{prop:bg:plug-in-clt} already gives
+Applying \Cref{prop:bg:plug-in-clt} therefore gives
 \eqref{eq:pool-ext:main-clt}. We spell out the log-scale mechanism,
 because it is the structural reason why $\bm\omega_q$ vanishes from
 the first-order limit.

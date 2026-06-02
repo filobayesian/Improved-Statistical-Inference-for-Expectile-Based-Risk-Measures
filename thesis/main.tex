@@ -38,7 +38,7 @@
 \label{app:proofs}
 
 This appendix collects the detailed proofs of the named results of
-\Cref{ch:pool-int,ch:pool-ext} whose proof sketches in the main
+\Cref{ch:background,ch:pool-int,ch:pool-ext} whose proof sketches in the main
 text omit routine bookkeeping. Each section is self-contained and
 re-uses only the notation and named results of the body of the
 thesis.
@@ -2033,6 +2033,124 @@ the stated alternative $\sqrt{k}\,\min_{c}\|\bm\Xi_{n}^{\star}
 away from zero in probability. The first term on the right therefore
 diverges in probability and dominates the $O_{p}(1)$ correction, so
 $\Lambda^{\xi}_{n} \toprob \infty$. \qed
+
+\section{Proof of \texorpdfstring{\Cref{prop:bg:plug-in-clt}}{the plug-in CLT}}
+\label{app:proofs:plugin-clt}
+
+We prove the thesis-level plug-in CLT used in \Cref{ch:pool-ext}. The
+argument is the log-scale core of
+\textcite[Proposition~C.6]{DavisonPadoanStupfler2023}, with the
+normalising sequence written as a generic $a_n$ and the deterministic
+population extrapolation error imposed explicitly.
+
+Let
+\[
+  \ell_n
+  =
+  \log\!\left(\frac{1-\tau_n}{1-\tau_n'}\right),
+\]
+so $\ell_n\to\infty$ by
+$(1-\tau_n')/(1-\tau_n)\to0$, and
+$\ell_n/a_n\to0$ by the assumption $a_n/\ell_n\to\infty$. Work on the
+event on which $\widehat\xi_{\tau_n}^{\,I}>0$; this event has
+probability tending one by assumption, and arbitrary definitions on
+its complement do not affect the weak limit. On this event,
+\[
+  \widehat\xi_{\tau_n'}^{\,\star}
+  =
+  \exp(\ell_n\hat\gamma_n)\,\widehat\xi_{\tau_n}^{\,I}.
+\]
+Define the log-relative extrapolation error
+\[
+  Z_n
+  \coloneqq
+  \log\frac{\widehat\xi_{\tau_n'}^{\,\star}}
+           {\expectile{\tau_n'}} .
+\]
+A direct decomposition gives
+\begin{equation}
+\label{eq:app:plugin:log-decomp}
+  Z_n
+  =
+  \ell_n(\hat\gamma_n-\gamma)
+  +
+  \log\frac{\widehat\xi_{\tau_n}^{\,I}}{\expectile{\tau_n}}
+  -
+  \left\{
+    \log\expectile{\tau_n'}
+    -\log\expectile{\tau_n}
+    -\gamma\ell_n
+  \right\}.
+\end{equation}
+Multiplying \eqref{eq:app:plugin:log-decomp} by $a_n/\ell_n$ yields
+\[
+  \frac{a_n}{\ell_n}Z_n
+  =
+  a_n(\hat\gamma_n-\gamma)
+  +
+  \frac{a_n}{\ell_n}
+    \log\frac{\widehat\xi_{\tau_n}^{\,I}}{\expectile{\tau_n}}
+  -
+  \frac{a_n}{\ell_n}
+  \left\{
+    \log\expectile{\tau_n'}
+    -\log\expectile{\tau_n}
+    -\gamma\ell_n
+  \right\}.
+\]
+The first term converges in distribution to $\Gamma$ by the joint
+input limit \eqref{eq:bg:joint-input}. The third term converges to
+zero by the deterministic extrapolation-error assumption. For the
+middle term, the same input limit gives
+\[
+  \frac{\widehat\xi_{\tau_n}^{\,I}}{\expectile{\tau_n}}-1
+  =
+  O_{p}(a_n^{-1})=o_{p}(1).
+\]
+Therefore
+\[
+  \log\frac{\widehat\xi_{\tau_n}^{\,I}}{\expectile{\tau_n}}
+  =
+  O_{p}(a_n^{-1}),
+\]
+by the Taylor expansion $\log(1+x)=x+O(x^2)$ for $x=o_{p}(1)$, and so
+\[
+  \frac{a_n}{\ell_n}
+  \log\frac{\widehat\xi_{\tau_n}^{\,I}}{\expectile{\tau_n}}
+  =
+  O_{p}(\ell_n^{-1})
+  =
+  o_{p}(1).
+\]
+Slutsky's theorem gives the log-scale limit
+\begin{equation}
+\label{eq:app:plugin:log-limit}
+  \frac{a_n}{\ell_n}
+  \log\frac{\widehat\xi_{\tau_n'}^{\,\star}}
+           {\expectile{\tau_n'}}
+  \;\todist\;
+  \Gamma .
+\end{equation}
+
+It remains only to pass from the log-relative error to the relative
+error in the statement of \Cref{prop:bg:plug-in-clt}. From
+\eqref{eq:app:plugin:log-limit},
+$Z_n=O_{p}(\ell_n/a_n)=o_{p}(1)$. Hence
+\[
+  \exp(Z_n)-1-Z_n
+  =
+  O_{p}(Z_n^2),
+  \qquad
+  \frac{a_n}{\ell_n}\{\exp(Z_n)-1-Z_n\}
+  =
+  O_{p}\!\left(\frac{\ell_n}{a_n}\right)
+  =
+  o_{p}(1).
+\]
+Since $\exp(Z_n)-1 =
+\widehat\xi_{\tau_n'}^{\,\star}/\expectile{\tau_n'}-1$, combining
+this display with \eqref{eq:app:plugin:log-limit} proves the stated
+relative-error convergence. \qed
 
 \backmatter
 \printbibliography[heading=bibintoc]

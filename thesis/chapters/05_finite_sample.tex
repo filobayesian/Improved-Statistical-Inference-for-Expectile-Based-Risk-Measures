@@ -94,11 +94,13 @@ first computed on every machine. The feasible pooled estimators are:
 \item the plug-in AMSE estimator obtained by inserting estimated
       second-order quantities into the Chapter~3 stacked AMSE formula.
 \end{enumerate}
-The plug-in AMSE row follows the implementation strategy of
+The plug-in AMSE row is exploratory. It follows the implementation strategy of
 \textcite[\S2.2 and \S3.2]{DaouiaPadoanStupfler2021}: when the R
 package \texttt{evt0} is available, the simulation scripts attempt to
 obtain second-order estimates from its MOP routines and insert them into
-the bias vector. Because second-order estimation is often unstable in
+the bias vector. This feasibility does not follow from the abstract
+$\mathcal C_2(\gamma,\rho,A)$ condition alone; it relies on a working
+second-order calibration. Because such estimation is often unstable in
 finite samples, two diagnostic comparators are also reported: an
 oracle AMSE estimator, using the known second-order constants of the
 data-generating model, and an infeasible full-sample QB benchmark

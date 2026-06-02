@@ -445,8 +445,8 @@ The results in this section are due, in the iid setting, to
 \textcite{DaouiaGirardStupfler2018,DaouiaGirardStupfler2019,DaouiaGirardStupfler2020};
 the time-series extension that we have used to organise the
 exposition is \textcite{DavisonPadoanStupfler2023}, and we shall
-borrow Proposition~C.6 of that paper's supplement to formulate the
-abstract plug-in lemma that the contribution chapters use.
+adapt Proposition~C.6 of that paper's supplement into the abstract
+plug-in lemma that the contribution chapters use.
 
 \subsection{The expectile--quantile asymptotic equivalence}
 
@@ -605,9 +605,7 @@ $k = \lfloor n(1 - \tau_{n})\rfloor$.
                 \textcite{DaouiaGirardStupfler2020}, Proposition~1]
 \label{thm:bg:qb-iid}
 Assume $\mathcal C_{2}(\gamma, \rho, A)$ with
-$\gamma \in (0,1)$ and assume $\E X^{-}<\infty$. Assume also that $F$
-is strictly increasing in a neighbourhood of its upper endpoint.
-Let
+$\gamma \in (0,1)$ and assume $\E X^{-}<\infty$. Let
 $\tau_n \to 1$ with $n(1-\tau_n)\to\infty$ and suppose
 \[
   \sqrt{n(1-\tau_n)}\, A\big((1-\tau_n)^{-1}\big)\to \lambda\in\R,
@@ -659,6 +657,15 @@ needed later to isolate the second-order tail bias.
 multivariate QB result under the same finite-mean range
 $0<\gamma_j<1$, and explicitly contrasts it with the stronger
 finite-variance assumptions required by direct LAWS estimation.
+This is why the contribution chapters impose only the finite-mean
+QB range $0<\gamma<1$: the restriction $\gamma<1/2$ belongs to
+direct LAWS asymptotic normality, not to the quantile-based route.
+The older strict-monotonicity assumption in
+\textcite{DaouiaGirardStupfler2018} is not retained here; the
+generalised-inverse quantile convention used in
+\Cref{sec:bg:rv} is sufficient for the QB formulation, in line with
+\textcite[Proposition~1]{DaouiaGirardStupfler2020} and
+\textcite[Corollary~2.3]{PadoanStupfler2022}.
 
 \paragraph{Comparison.}
 The LAWS estimator has asymptotic variance
@@ -721,9 +728,7 @@ LAWS-anchored and QB-anchored extrapolations, respectively.
                 \textcite{DaouiaGirardStupfler2018}, Corollaries~3--4]
 \label{thm:bg:weissman-expectile-iid}
 Assume $\mathcal C_{2}(\gamma,\rho,A)$ with
-$\gamma\in(0,1)$ and $\rho<0$, and assume $\E X^{-}<\infty$. Assume
-also that $F$ is strictly increasing in a neighbourhood of its upper
-endpoint. Let
+$\gamma\in(0,1)$ and $\rho<0$, and assume $\E X^{-}<\infty$. Let
 $\tau_n\to1$ satisfy $n(1-\tau_n)\to\infty$ and let
 $\tau_{n}^{\prime} \to 1$ satisfy
 $n(1-\tau'_n)\to c\in[0,\infty)$,
@@ -774,15 +779,19 @@ in the iid heavy-tailed setting. For the pooled inference developed
 in \Cref{ch:pool-int,ch:pool-ext}, however, we require a more abstract
 formulation that decouples the asymptotic distribution of the inputs
 $(\hat\gamma_{n}, \overline{\xi}_{\tau_{n}})$ from the way in which
-they are obtained. We use the following high-level consequence of
-\emph{Proposition~C.6} in the supplement to
-\textcite{DavisonPadoanStupfler2023}. It packages the deterministic
-expectile-ratio control as an explicit assumption and writes the
+they are obtained. We use the following thesis-level plug-in lemma,
+adapted from \emph{Proposition~C.6} in the supplement to
+\textcite{DavisonPadoanStupfler2023}. The source proposition is stated
+at the natural rate $\sqrt{n(1-\tau_n)}$ under its high-level
+Condition~$C^\ast$; the version below isolates the deterministic
+extrapolation error as an explicit assumption and writes the
 normalising rate as a generic sequence $a_n$, which is the form needed
-when the intermediate estimator is itself produced by pooling.
+when the intermediate estimator is itself produced by pooling. Its
+short proof is given in \Cref{app:proofs:plugin-clt}.
 
 \begin{proposition}[Plug-in CLT for extrapolated expectiles;
-                    cf.\ \textcite{DavisonPadoanStupfler2023}, Prop.~C.6]
+                    adapted from
+                    \textcite{DavisonPadoanStupfler2023}, Prop.~C.6]
 \label{prop:bg:plug-in-clt}
 Assume $\mathcal C_2(\gamma,\rho,A)$ with
 $\gamma\in(0,1)$ and $\rho<0$, and assume $\E X^{-}<\infty$.
@@ -877,11 +886,11 @@ $O(a_n/\{\Quant_X(\tau_n)\ell_n\})=o(1)$.
 
 \Cref{prop:bg:plug-in-clt} is the technical workhorse of the thesis.
 The original supplement of \textcite{DavisonPadoanStupfler2023}
-states the result under broader high-level assumptions; the version
-above is deliberately restricted to the heavy-tailed iid regime used
-throughout this thesis; \Cref{rem:bg:plugin-ratio-control} records the
-deterministic step that links this concrete regime to the abstract
-formulation.
+states the result under broader high-level assumptions and a concrete
+root-rate normalisation. The version above is deliberately restricted
+to the heavy-tailed iid regime used throughout this thesis, while
+\Cref{rem:bg:plugin-ratio-control} records the deterministic step that
+links this concrete regime to the abstract source formulation.
 It says that the asymptotic distribution of the extrapolated expectile
 at very-extreme levels is governed \emph{only} by the asymptotic
 distribution of the tail-index estimator: the contribution of the

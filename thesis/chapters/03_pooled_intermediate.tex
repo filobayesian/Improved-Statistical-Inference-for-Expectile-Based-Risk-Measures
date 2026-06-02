@@ -28,6 +28,10 @@ one common population target $\expectile{\tau_n}$ and one common
 quantile function $\Quant_X$, whereas heterogeneous margins would
 require sample-specific targets and additional tail-scale alignment
 conditions before pooled expectile inference could be interpreted.
+Thus the chapter is intentionally narrower than the full
+heterogeneous-tail-copula scope of \textcite{DaouiaPadoanStupfler2021}:
+the restriction is what makes the pooled object a single common
+expectile rather than a collection of sample-specific targets.
 
 The equal effective sample fraction condition
 $k_{j}/n_{j} = (k/n)(1 + o(1))$
@@ -97,8 +101,7 @@ $\mathcal C_{2}(\gamma, \rho, A)$ of \Cref{cond:bg:second-order} with
 \end{equation}
 the per-sample bias-rate condition
 $\sqrt{k_{j}}\, A(n_{j}/k_{j}) \to \lambda_{j} \in \R$ holds for every
-$j$, $F$ is strictly increasing in a neighbourhood of its upper
-endpoint, and the moment-negligibility condition
+$j$, and the moment-negligibility condition
 \begin{equation}
 \label{eq:pool-int:moment-rate}
   \frac{\sqrt{k}}{\Quant_{X}(\tau_{n})} \;\to\; 0
@@ -158,7 +161,7 @@ $(\hat\gamma_{j}(k_{j}),\,\hat q^{\star}_{j}(\,\cdot\,\mid k_{j}))$
 and no expectile-specific summary statistic, the only one of the two
 standard intermediate-expectile constructions considered in the thesis
 that can be assembled \emph{locally} on each sample, before pooling,
-is the QB plug-in
+under this communication protocol is the QB plug-in
 \eqref{eq:bg:qb} obtained by factoring through the
 expectile--quantile equivalence of \Cref{prop:bg:expectile-quantile}:
 \[
@@ -177,9 +180,10 @@ quantile primitives; this lies outside the pooling protocol of
 uniformly dominates the other on the direct-LAWS range
 $\gamma \in (0, 1/2)$; the QB construction is therefore adopted not
 because it is uniformly more efficient, but because it is the available
-member of this pair under the communicated pooling primitives. The choice is a derived
-consequence of the pooling protocol, not an independent methodological
-preference.
+member of this pair under the communicated pooling primitives. The
+choice is a derived consequence of the Paper-3 communication protocol,
+not a claim that QB is intrinsically optimal among all possible
+expectile procedures.
 
 \paragraph{Roadmap.}
 \Cref{sec:pool-int:estimator} defines the pooled QB intermediate
@@ -1460,11 +1464,14 @@ second-order parameters can be inserted into
 the formula for $\Bc$ from \Cref{thm:bg:pool-hill}. Without this extra
 model, \eqref{eq:pool-int:plugin-amse} should be read as a high-level
 assumption that consistent estimators of the limiting bias constants are
-available.
+available, not as a consequence of $\mathcal C_{2}(\gamma,\rho,A)$
+alone.
 In the absence of such a model and of estimators satisfying
 \eqref{eq:pool-int:plugin-amse}, the AMSE-optimal formula is best read
 as an oracle or sensitivity-analysis device rather than as a fully
-feasible procedure. The closed form in \Cref{prop:pool-int:amse-opt} is
+feasible procedure. Thus a practical plug-in AMSE implementation is
+exploratory unless the application supplies, and defends, a stable
+second-order calibration. The closed form in \Cref{prop:pool-int:amse-opt} is
 also not claimed at the root $m(\gamma)=0$; confidence intervals at
 that root require an externally supplied consistent affine weight pair.
 \end{enumerate}
