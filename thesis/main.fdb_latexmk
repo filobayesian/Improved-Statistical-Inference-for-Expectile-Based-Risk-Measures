@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1780327340.50051 "main.bcf" "main.bbl" "main" 1780328493.9371 0
-  "main.bcf" 1780328493.7847 117043 807dde77e39eb4e52701bb85b25d26a9 "pdflatex"
+["biber main"] 1780386963.05455 "main.bcf" "main.bbl" "main" 1780386969.25189 0
+  "main.bcf" 1780386969.10273 117369 44e40e7b4a9908d60cd2c032bbe92d50 "pdflatex"
   "references.bib" 1780312399.95551 7120 6e0669a5bf4c4b09719537fa61ede822 ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1780328491.61037 "main.tex" "main.pdf" "main" 1780328493.93768 0
+["pdflatex"] 1780386967.11638 "main.tex" "main.pdf" "main" 1780386969.25245 0
   "/Users/filippogombac/Library/texlive/2024/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.657pk" 1779132859.78267 7808 b778b35f869b37ca1d137622207fc6be ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1254269338 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc" 1202520719 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
@@ -215,22 +215,22 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1735212710.83392 5467645 128b85b7cde5f5edc5cb7f1dd7ff8736 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1735212675 8221434 0c0422bde2dc7f9c7511840f033622fe ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "chapters/01_introduction.aux" 1780328492.63737 6022 bcf4a6075d0fd6a58ab8fb4cdbb5faaf "pdflatex"
+  "chapters/01_introduction.aux" 1780386968.02464 6022 bcf4a6075d0fd6a58ab8fb4cdbb5faaf "pdflatex"
   "chapters/01_introduction.tex" 1780312383.81878 9970 3c6b792f7cb02dbbeff82d657f3ba877 ""
-  "chapters/02_background.aux" 1780328493.02821 15901 151527765886d577a91ddf052b8be2d3 "pdflatex"
-  "chapters/02_background.tex" 1780312428.36502 57659 04d43a3b45a777e27864fdea8bf66b7c ""
-  "chapters/03_pooled_intermediate.aux" 1780328493.34407 20658 45d9e7fea4b117749cb4f1fca36ad762 "pdflatex"
+  "chapters/02_background.aux" 1780386968.39215 15901 cc1e7a399fc5a1cb9fd46d72edace4e3 "pdflatex"
+  "chapters/02_background.tex" 1780386934.55217 58009 83e50b1cfac5a592ad3cee44e882a773 ""
+  "chapters/03_pooled_intermediate.aux" 1780386968.6763 20658 3d2d6a3f3663ff9a08a697fe4409064c "pdflatex"
   "chapters/03_pooled_intermediate.tex" 1780312445.37537 92899 2e65052fcca2806214b76f4fcf07cf30 ""
-  "chapters/04_pooled_extreme.aux" 1780328493.51624 12773 f904c36643db563d9c06259f51ae84fa "pdflatex"
-  "chapters/04_pooled_extreme.tex" 1780328478.05848 52961 799f3a52227a35be534e37bac81d1096 ""
-  "chapters/05_discussion.aux" 1780328493.55503 5356 c0cda5efaeaefbca1704907c84dda3a5 "pdflatex"
+  "chapters/04_pooled_extreme.aux" 1780386968.86384 13349 a83050c5ccafb0a5297af23cd83a9d38 "pdflatex"
+  "chapters/04_pooled_extreme.tex" 1780386951.51351 55810 1df1d389660b430c5d18a71977f57724 ""
+  "chapters/05_discussion.aux" 1780386968.89896 5356 023fab81f827e1b70f956383e68e648a "pdflatex"
   "chapters/05_discussion.tex" 1779132902.13302 3278 8376b869c51d1bc83250e1b836c6b3ed ""
-  "main.aux" 1780328493.77285 31092 839a9c6c70eed4605ec0612fca276d7d "pdflatex"
-  "main.bbl" 1780327342.58614 24688 c20088060f4e24e79b267183e37e3b92 "biber main"
-  "main.out" 1780328493.7835 12432 ab457873579443163e168b96f6ca220f "pdflatex"
-  "main.run.xml" 1780328493.78571 2311 e66a0e3ff336a5af941c7fe634558519 "pdflatex"
+  "main.aux" 1780386969.09284 31544 18d0ab9f5cb112e4645bf1d11c048d05 "pdflatex"
+  "main.bbl" 1780386965.0666 24688 c20088060f4e24e79b267183e37e3b92 "biber main"
+  "main.out" 1780386969.10189 12432 ab457873579443163e168b96f6ca220f "pdflatex"
+  "main.run.xml" 1780386969.10346 2311 e66a0e3ff336a5af941c7fe634558519 "pdflatex"
   "main.tex" 1780312395.03176 83010 f1fcc8b735957496ca303f6ecd1738ba ""
-  "main.toc" 1780328493.78578 11207 1aa47b8f0256ae956a8e13b002bef633 "pdflatex"
+  "main.toc" 1780386969.10351 11207 456a3245444331700e4cb1fa7872226c "pdflatex"
   "preamble.tex" 1779132892.28944 2934 86972072cbe00a1c236ead3c1a65ba09 ""
   (generated)
   "chapters/01_introduction.aux"

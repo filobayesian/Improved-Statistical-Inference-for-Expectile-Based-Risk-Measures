@@ -840,12 +840,19 @@ bias control. It is precisely the negligibility
 \]
 In the original supplement of
 \textcite{DavisonPadoanStupfler2023}, this control is part of the
-high-level condition $C^\ast$. In the iid heavy-tailed setting of this
-thesis, under the strict upper-tail monotonicity used for the DGS
-second-order expansion, it follows from the second-order quantile
-expansion and \eqref{eq:bg:c-gamma-rho}: the $A$-term contributes
-$O(a_n A((1-\tau_n)^{-1})/\ell_n)=o(1)$ and the lower-tail remainder
-contributes $O(a_n/\{\Quant_X(\tau_n)\ell_n\})=o(1)$.
+high-level condition $C^\ast$. In the iid heavy-tailed setting, this
+is supplied by the very-extreme expectile extrapolation argument of
+\textcite[Theorem~5]{DaouiaGirardStupfler2020}, which is the proof
+step invoked by \textcite[Proposition~C.6]{DavisonPadoanStupfler2023}.
+The relevant quantile expansion is the sequential Weissman form along
+the diverging ratio
+$y_n=(1-\tau_n)/(1-\tau_n^\prime)\to\infty$, not merely the fixed-$y$
+display in \Cref{cond:bg:second-order}. In applications of
+\Cref{prop:bg:plug-in-clt}, this source-paper control combines with
+\eqref{eq:bg:c-gamma-rho}: the $A$-term contributes
+$O(a_n\abs{A((1-\tau_n)^{-1})}/\ell_n)=o(1)$ and the lower-tail
+remainder contributes
+$O(a_n/\{\Quant_X(\tau_n)\ell_n\})=o(1)$.
 \end{remark}
 
 \Cref{prop:bg:plug-in-clt} is the technical workhorse of the thesis.

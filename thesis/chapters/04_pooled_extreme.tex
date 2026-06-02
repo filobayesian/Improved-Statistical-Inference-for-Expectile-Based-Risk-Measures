@@ -11,11 +11,12 @@ $n(1-\tau_n^\prime) \to c \in [0, \infty)$. The argument is deliberately
 short: the pooled intermediate result of \Cref{thm:pool-int:main} is
 fed into the plug-in extrapolation lemma
 \Cref{prop:bg:plug-in-clt}, which is the thesis-level formulation of
-\textcite[Proposition~C.6]{DavisonPadoanStupfler2023}. The resulting
-limit is the expectile analogue of the pooled Weissman extreme-quantile
-limit in \Cref{thm:bg:pool-weissman}: after division by the diverging
-log-rate, only the pooled Hill estimator remains visible at first
-order.
+\textcite[Proposition~C.6]{DavisonPadoanStupfler2023}. In the
+independent common-margin distributed setting of \Cref{ch:pool-int},
+the resulting limit is the first-order expectile analogue of the
+pooled Weissman extreme-quantile limit in \Cref{thm:bg:pool-weissman}:
+after division by the diverging log-rate, only the pooled Hill
+estimator remains visible at first order.
 
 \section{Motivation}
 \label{sec:pool-ext:motivation}
@@ -121,6 +122,10 @@ This strict version is part of the extrapolation theory in
 as \Cref{prop:bg:plug-in-clt}, and is the same strict second-order
 condition that appears in the pooled Weissman theorem
 \Cref{thm:bg:pool-weissman}.
+All results below are therefore statements in the independent
+common-margin distributed specialisation. References to
+\Cref{thm:bg:pool-weissman} are analogies within this setting, not
+extensions to the full tail-copula framework of \Cref{sec:bg:pooling}.
 
 The new target level is a very-extreme sequence
 \begin{equation}
@@ -151,10 +156,37 @@ $n_j(1-\tau_n)$ has the same order as $k_j$ for every $j$. Hence
 \eqref{eq:pool-ext:very-extreme-level} is exactly the pair of regimes
 required by \Cref{prop:bg:plug-in-clt}: $\tau_n$ is intermediate and
 $\tau_n^\prime$ is very-extreme.
-Moreover, if $\alpha_j=\lim n_j/n\in(0,1)$, then
-$n_j(1-\tau_n^\prime)\to \alpha_jc$; the very-extreme level is
-therefore global, but it has the expected local interpretation under
-the proportional-growth assumptions.
+Moreover, if $\alpha_j=\lim n_j/n\in(0,1)$, then the proportionality
+conditions give
+\[
+  \alpha_j
+  =
+  \frac{b_j^{-1}}{\sum_{i=1}^{m}b_i^{-1}},
+  \qquad
+  n_j(1-\tau_n^\prime)\to \alpha_jc.
+\]
+The very-extreme level is therefore global, but it has the expected
+local interpretation under the proportional-growth assumptions.
+
+The logarithmic rate used here is also aligned with the pooled
+Weissman rate in \Cref{thm:bg:pool-weissman}. The finite-log condition
+and proportionality assumptions imply
+\[
+  \log\!\frac{k}{n(1-\tau_n)} = O(1),
+\]
+and hence
+\begin{equation}
+\label{eq:pool-ext:rate-alignment}
+  \log\!\frac{k}{n(1-\tau_n^\prime)}
+  =
+  \ell_n
+  +
+  \log\!\frac{k}{n(1-\tau_n)}
+  =
+  \ell_n + O(1).
+\end{equation}
+Since $\ell_n\to\infty$, the two logarithmic normalisers are
+asymptotically equivalent on the very-extreme scale.
 
 For the application of \Cref{prop:bg:plug-in-clt} we take
 \[
@@ -187,8 +219,42 @@ $\hatWei_n(\tau_n\mid\bm\omega_q)>0$ on the local Weissman positivity
 event and $\psifn(\hat\gamma_n(\bm\omega_\gamma))>0$ on the event on
 which the pooled Hill estimator lies in $(0,1)$.
 
-It remains only to spell out the deterministic extrapolation-bias
-control used in \Cref{rem:bg:plugin-ratio-control}. Decompose
+\begin{lemma}[Deterministic very-extreme ratio control]
+\label{lem:pool-ext:det-ratio}
+Under the tail and rate assumptions of this section,
+\[
+  \frac{\sqrt{k}}{\ell_n}
+  \left\{
+    \log\expectile{\tau_n^\prime}
+    - \log\expectile{\tau_n}
+    - \gamma\ell_n
+  \right\}
+  \;\longrightarrow\;0.
+\]
+This lemma records, in the present notation, the deterministic
+population control used in
+\textcite[Theorem~5]{DaouiaGirardStupfler2020} and in the proof of
+\textcite[Proposition~C.6]{DavisonPadoanStupfler2023}; it is not a
+new contribution of the thesis.
+\end{lemma}
+
+\begin{proof}
+Put $t_n=(1-\tau_n)^{-1}$ and
+$y_n=(1-\tau_n)/(1-\tau_n^\prime)$, so $y_n\to\infty$ and
+$\ell_n=\log y_n$. The source proofs use, under $\rho<0$, the
+sequential Weissman form of the second-order quantile control,
+\begin{equation}
+\label{eq:pool-ext:sequential-quantile-control}
+  \log U(t_ny_n)-\log U(t_n)-\gamma\log y_n
+  =
+  O\!\big(\abs{A(t_n)}\big).
+\end{equation}
+This is the point at which the strict condition $\rho<0$ enters the
+deterministic extrapolation step: the fixed-$y$ statement of
+\Cref{cond:bg:second-order} alone is not the form being used along
+the diverging sequence $y_n\to\infty$.
+
+Decompose
 \[
   \begin{aligned}
   &\log\expectile{\tau_n^\prime}
@@ -210,25 +276,34 @@ control used in \Cref{rem:bg:plugin-ratio-control}. Decompose
   \big].
   \end{aligned}
 \]
-The first bracket is controlled by the second-order quantile expansion
-under $\mathcal C_2(\gamma,\rho,A)$, and the second by the
-expectile--quantile expansion \eqref{eq:bg:c-gamma-rho}. Since
-$\rho<0$, Potter bounds for the regularly varying auxiliary function
-keep the relevant $A$-terms along $\tau_n^\prime$ of order
-$A((1-\tau_n)^{-1})$ or smaller. The moment terms are bounded by a
-constant multiple of $\Quant_X(\tau_n)^{-1}$ because
-$\Quant_X(\tau_n^\prime)\ge \Quant_X(\tau_n)$ eventually. Therefore
+The first bracket is exactly
+\eqref{eq:pool-ext:sequential-quantile-control}. The second bracket is
+controlled by the expectile--quantile expansion
+\eqref{eq:bg:c-gamma-rho}. Since $A\in RV_\rho$ with $\rho<0$,
+Potter bounds give $\abs{A(t_ny_n)}=O(\abs{A(t_n)})$ along
+$y_n\ge1$, and the monotonicity of the upper quantile gives
+$\Quant_X(\tau_n^\prime)\ge\Quant_X(\tau_n)$ eventually. Hence
 \[
-  \frac{\sqrt{k}}{\ell_n}
-  \left\{
-    \log\expectile{\tau_n^\prime}
-    - \log\expectile{\tau_n}
-    - \gamma\ell_n
-  \right\}
-  \;\longrightarrow\;0,
+  \begin{aligned}
+  &\log\expectile{\tau_n^\prime}
+  - \log\expectile{\tau_n}
+  - \gamma\ell_n
+  \\
+  &\quad =
+  O\!\big(\abs{A((1-\tau_n)^{-1})}\big)
+  +
+  O\!\big(\Quant_X(\tau_n)^{-1}\big)
+  +
+  o\!\big(\abs{A((1-\tau_n)^{-1})}\big)
+  +
+  o\!\big(\Quant_X(\tau_n)^{-1}\big).
+  \end{aligned}
 \]
-as $\sqrt{k}A((1-\tau_n)^{-1})=O(1)$,
-$\sqrt{k}/\Quant_X(\tau_n)\to0$ and $\ell_n\to\infty$.
+Multiplying by $\sqrt{k}/\ell_n$ gives the result, because
+$\sqrt{k}A((1-\tau_n)^{-1})$ converges to the finite limit
+$\Lambda^\bullet$, $\sqrt{k}/\Quant_X(\tau_n)\to0$, and
+$\ell_n\to\infty$.
+\end{proof}
 
 It remains to record the exact intermediate Gaussian input that will
 be fed into the plug-in extrapolation lemma. Put
@@ -333,8 +408,34 @@ component, namely
 \]
 by \eqref{eq:pool-int:Sigma}. Passing from the centred log-ratio to
 the relative error, and from its covariance with the Hill component,
-does not change the limit, because $e^x-1=x+o(x)$ whenever
-$x=O_p(k^{-1/2})$.
+does not change the limit. Indeed, with
+\[
+  R_n
+  =
+  \log\frac{
+    \hatexpectile{\tau_n}^{\mathrm{pool}}
+      (\bm\omega_\gamma,\bm\omega_q)}
+    {\expectile{\tau_n}},
+  \qquad
+  R_n=O_p(k^{-1/2}),
+\]
+we have
+\[
+  \sqrt{k}\left[
+    \left\{
+      \frac{
+        \hatexpectile{\tau_n}^{\mathrm{pool}}
+          (\bm\omega_\gamma,\bm\omega_q)}
+        {\expectile{\tau_n}}
+      -1
+    \right\}
+    - R_n
+  \right]
+  =
+  \sqrt{k}\,O_p(R_n^2)
+  =
+  o_p(1).
+\]
 
 For estimated weights, exact affine normalisation removes the
 deterministic centring. For example,
@@ -555,7 +656,7 @@ in particular, $\rho<0$, $\sqrt{k}/\Quant_X(\tau_n)\to0$,
 $\ell_n\to\infty$ and $\sqrt{k}/\ell_n\to\infty$. Use the
 positivity and log-domain convention of
 \Cref{sec:pool-ext:estimator}, and the deterministic ratio control
-verified in \Cref{sec:pool-ext:regime}.
+verified in \Cref{lem:pool-ext:det-ratio}.
 Let $\bm\omega_\gamma,\bm\omega_q\in\R^m$ be deterministic affine
 weight vectors satisfying
 $\bm\omega_\gamma^\top\bm 1=\bm\omega_q^\top\bm 1=1$, and define
@@ -666,12 +767,9 @@ second term, \Cref{prop:pool-ext:input-clt} gives
 and the corresponding log-ratio is also $O_p(k^{-1/2})$ because the
 relative error is $o_p(1)$. Since $\ell_n\to\infty$, this term is
 $o_p(1)$ after multiplication by $\sqrt{k}/\ell_n$. The deterministic
-log-ratio condition in \Cref{prop:bg:plug-in-clt} holds by the
-verification in \Cref{sec:pool-ext:regime}, using
-$\sqrt{k}A((1-\tau_n)^{-1})=O(1)$,
-$\sqrt{k}/\Quant_X(\tau_n)\to0$ and $\ell_n\to\infty$; therefore the
-third term in \eqref{eq:pool-ext:log-decomposition} is
-$o(\ell_n/\sqrt{k})$. Hence
+log-ratio condition in \Cref{prop:bg:plug-in-clt} holds by
+\Cref{lem:pool-ext:det-ratio}; therefore the third term in
+\eqref{eq:pool-ext:log-decomposition} is $o(\ell_n/\sqrt{k})$. Hence
 \[
   \frac{\sqrt{k}}{\ell_n}
   \log\frac{
@@ -714,17 +812,19 @@ $\hat{\bm\omega}_q$ affects only the intermediate-anchor term, which
 has already been shown to vanish on the $\sqrt{k}/\ell_n$ scale.
 \end{proof}
 
-\Cref{thm:pool-ext:main} is the exact expectile analogue of
-\Cref{thm:bg:pool-weissman}. In both cases, extrapolation to a
-very-extreme level multiplies the tail-index estimation error by a
-diverging logarithmic distance, while the intermediate scale estimate
-is too small to survive the normalisation. The only role of the
-expectile construction is to provide a valid positive intermediate
-anchor and to verify the deterministic expectile-ratio control needed
-by \Cref{prop:bg:plug-in-clt}. The QB derivative $m(\gamma)$ and the
-intermediate expectile-bias terms $\Bc^\star$ and $b^{\xi/\Quant}$ are
-not zero in general; they are lower order on the very-extreme
-normalisation because they enter only through the intermediate anchor.
+\Cref{thm:pool-ext:main} is the first-order expectile analogue of
+\Cref{thm:bg:pool-weissman} in the independent common-margin
+specialisation used in the contribution chapters. In both cases,
+extrapolation to a very-extreme level multiplies the tail-index
+estimation error by a diverging logarithmic distance, while the
+intermediate scale estimate is too small to survive the normalisation.
+The only role of the expectile construction is to provide a valid
+positive intermediate anchor and to verify the deterministic
+expectile-ratio control needed by \Cref{prop:bg:plug-in-clt}. The QB
+derivative $m(\gamma)$ and the intermediate expectile-bias terms
+$\Bc^\star$ and $b^{\xi/\Quant}$ are not zero in general; they are
+lower order on the very-extreme normalisation because they enter only
+through the intermediate anchor.
 
 \section{First-order optimal Hill weights for extrapolation}
 \label{sec:pool-ext:weights}
@@ -749,10 +849,11 @@ are therefore
   =
   \bm\omega_\gamma^\top\Vc\bm\omega_\gamma .
 \end{equation}
-This is exactly the quadratic structure in
+This is the same first-order quadratic structure as in
 \Cref{prop:bg:optimal-weights}, and it is also the structure that
 \textcite[Theorem~2]{DaouiaPadoanStupfler2021} obtain for the
-weighted-geometric pooled Weissman quantile. The only difference is
+weighted-geometric pooled Weissman quantile. Within the independent
+common-margin setting of this chapter, the only difference is
 interpretive: here the extrapolated target is the common expectile
 $\expectile{\tau_n^\prime}$ rather than the common extreme quantile.
 The first-order criterion therefore identifies only the extrapolation
@@ -1019,6 +1120,9 @@ compact event used for Taylor expansion of $\log\psifn$, would change
 $O_p(k^{-1/2})$, hence by $o_p(1)$ after multiplication by
 $\sqrt{k}/\ell_n$. The minimal correction above is therefore enough
 for the first-order very-extreme theorem.
+The correction introduces no new log-domain restriction: the
+extrapolation base is deterministic and positive, so the only random
+positivity requirement remains that of the intermediate anchor.
 
 \begin{corollary}[Bias-reduced extrapolated expectile CLT]
 \label{cor:pool-ext:bias-reduced-clt}
@@ -1027,7 +1131,9 @@ Assume the hypotheses of \Cref{thm:pool-ext:main}, and assume
 $\ell_n\to\infty$ and $\sqrt{k}/\ell_n\to\infty$, and the positivity
 convention of \Cref{sec:pool-ext:estimator} is in force. Let
 $\bm\omega_\gamma,\bm\omega_q\in\R^m$ be deterministic affine weight
-vectors. Then the estimator
+vectors satisfying
+$\bm\omega_\gamma^\top\bm 1=\bm\omega_q^\top\bm 1=1$.
+Then the estimator
 \eqref{eq:pool-ext:bias-reduced-estimator} satisfies
 \begin{equation}
 \label{eq:pool-ext:bias-reduced-clt}
@@ -1108,9 +1214,9 @@ $\overline\gamma_n(\bm\omega_\gamma)$ in place of
 $\hat\gamma_n(\bm\omega_\gamma)$. The intermediate-anchor term is
 still $o_p(1)$ on the $\sqrt{k}/\ell_n$ scale by
 \Cref{prop:pool-ext:input-clt}, and the deterministic extrapolation
-error is still negligible by the verification in
-\Cref{sec:pool-ext:regime}. Thus the log-ratio limit is the centred
-Gaussian display above. Since $\ell_n/\sqrt{k}\to0$, the final
+error is still negligible by \Cref{lem:pool-ext:det-ratio}. Thus the
+log-ratio limit is the centred Gaussian display above. Since
+$\ell_n/\sqrt{k}\to0$, the final
 passage from log-ratio to relative error is the same exponential
 Taylor argument used in the proof of \Cref{thm:pool-ext:main}.
 
