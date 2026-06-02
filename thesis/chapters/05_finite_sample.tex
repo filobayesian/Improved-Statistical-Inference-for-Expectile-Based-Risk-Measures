@@ -46,7 +46,12 @@ root solving of
 using numerical integration of the distribution function and survival
 function of the data-generating model.
 
-Four heavy-tailed marginal distributions are used:
+Six heavy-tailed marginal distributions are used. The first four lie in
+the finite-variance range $\gamma<1/2$, where comparison with direct
+LAWS theory is meaningful. The final two are finite-mean but
+infinite-variance stress cases with $\gamma=0.6$; they are included to
+check the QB estimator in the wider range allowed by the theory of
+\Cref{thm:bg:qb-iid}.
 \begin{center}
 \begin{tabular}{lll}
 \toprule
@@ -56,11 +61,15 @@ Pareto & survival $x^{-1/\gamma}$, $x\ge1$ & $\gamma=0.25$ \\
 Fr\'echet & $F(x)=\exp(-x^{-1/\gamma})$ & $\gamma=0.25$ \\
 Burr & $F(x)=1-(1+x^{-\rho/\gamma})^{1/\rho}$, $\rho=-1$ & $\gamma=0.25$ \\
 Absolute Student & $X=|T_3|$ & $\gamma=1/3$ \\
+ParetoHeavy & survival $x^{-1/\gamma}$, $x\ge1$ & $\gamma=0.6$ \\
+BurrHeavy & $F(x)=1-(1+x^{-\rho/\gamma})^{1/\rho}$, $\rho=-1$ & $\gamma=0.6$ \\
 \bottomrule
 \end{tabular}
 \end{center}
-All four choices satisfy the finite-variance requirement
-$\gamma\in(0,1/2)$ used throughout the expectile theory.
+All six distributions are nonnegative, so the lower-tail integrability
+condition is automatic. The two heavier cases deliberately fall outside
+the direct-LAWS finite-variance regime while remaining inside the
+finite-mean QB regime $0<\gamma<1$.
 
 The machine dimension is $m\in\{5,10,20\}$. For each $m$, the final
 grid includes balanced, moderately unbalanced and strongly unbalanced
@@ -105,6 +114,11 @@ the scripts report bias, variance, MSE, empirical coverage of nominal
 95\% confidence intervals, average confidence-interval length, the
 frequency with which AMSE weights are negative, and the average maximum
 absolute AMSE weight.
+For the heavier DGPs, a finite-sample Hill estimate may occasionally
+fall outside the QB domain $(0,1)$. The scripts do not truncate such
+estimates. They record the corresponding estimator as invalid, compute
+log-error and coverage summaries over valid replications only, and
+report the invalid-domain rate separately.
 
 \section{Reproducibility}
 \label{sec:finite-reproducibility}
@@ -153,6 +167,24 @@ run; the final thesis version should be regenerated from the
 \label{tab:finite-summary}
 \end{table}
 
+\begin{table}[htbp]
+\centering
+\IfFileExists{tables/simulation/domain_validity.tex}
+  {\input{tables/simulation/domain_validity.tex}}
+  {\begin{tabular}{llrr}
+   \toprule
+   DGP & Estimator & Invalid rate & Valid reps \\
+   \midrule
+   Run & simulation/render\_results.R & -- & 0 \\
+   \bottomrule
+   \end{tabular}}
+\caption{QB domain-validity diagnostic for the intermediate target.
+Invalid rows correspond to finite-sample pooled or full-sample Hill
+estimates outside $(0,1)$; they are not truncated and are excluded from
+the bias, MSE and coverage summaries.}
+\label{tab:finite-domain-validity}
+\end{table}
+
 \begin{figure}[htbp]
 \centering
 \IfFileExists{figures/simulation/mse_by_estimator.pdf}
@@ -180,7 +212,7 @@ sample fraction $k/n$ in the strongly unbalanced regime.}
 \begin{table}[htbp]
 \centering
 \IfFileExists{tables/simulation/weight_stability.tex}
-  {\input{tables/simulation/weight_stability.tex}}
+  {{\small\input{tables/simulation/weight_stability.tex}}}
   {\begin{tabular}{llrlrr}
    \toprule
    DGP & Regime & $m$ & Estimator & Neg. rate & Avg. max $|w|$ \\

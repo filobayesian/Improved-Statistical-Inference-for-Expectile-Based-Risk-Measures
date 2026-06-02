@@ -71,6 +71,8 @@ summary$variance <- pmax(summary$mse - summary$bias^2, 0)
 summary$coverage <- summary$covered
 summary$negative_weight_rate <- summary$any_negative_weight
 summary$avg_max_abs_weight <- summary$max_abs_weight
+summary$valid_rate <- summary$valid_replications / summary$n_replications
+summary$valid_ci_rate <- summary$valid_ci_replications / summary$n_replications
 
 out_dir <- file.path(repo_root, "simulation", "results")
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)

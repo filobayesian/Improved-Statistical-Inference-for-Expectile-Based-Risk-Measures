@@ -36,10 +36,11 @@ pooling expectiles. The test of \Cref{sec:pool-int:test} should be
 applied first.\\
 (ii) The choice of effective sample sizes $k_j$ is data-driven and
 introduces variability that the asymptotic theory does not account for.\\
-(iii) The asymptotic equivalence
-\eqref{eq:intro:asymptotic-equivalence} requires $\gamma<1/2$ for a
-finite second moment; very heavy tails ($\gamma\ge 1/2$) fall outside
-the scope.\\
+(iii) The quantile-based route remains theoretically available for
+finite-mean tails $\gamma\in[1/2,1)$, but standard direct-LAWS
+finite-variance CLTs no longer apply there; simulation evidence in that
+range should therefore be interpreted as QB stress testing rather than
+LAWS comparison.\\
 (iv) The framework is iid within and across samples. Time-series
 dependence within a sample and dependence across samples are excluded.}
 
@@ -65,4 +66,3 @@ and climate (multi-station extremes) are natural use cases.\\
 (v) \emph{Bias-robust pooled estimators.} Use bias-reduced tail-index
 estimators (e.g.\ corrected Hill) in place of the plain Hill estimator
 in the pooled construction.}
-

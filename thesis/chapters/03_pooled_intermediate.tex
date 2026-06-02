@@ -91,10 +91,9 @@ The common marginal $F$ satisfies the second-order condition
 $\mathcal C_{2}(\gamma, \rho, A)$ of \Cref{cond:bg:second-order} with
 \begin{equation}
 \label{eq:pool-int:moment}
-  \gamma \in (0, 1/2),
+  \gamma \in (0, 1),
   \qquad
-  \E\big|\min(X, 0)\big|^{2 + \delta} < \infty
-  \quad\text{for some } \delta > 0,
+  \E X^{-} < \infty,
 \end{equation}
 the per-sample bias-rate condition
 $\sqrt{k_{j}}\, A(n_{j}/k_{j}) \to \lambda_{j} \in \R$ holds for every
@@ -104,11 +103,12 @@ endpoint, and the moment-negligibility condition
 \label{eq:pool-int:moment-rate}
   \frac{\sqrt{k}}{\Quant_{X}(\tau_{n})} \;\to\; 0
 \end{equation}
-is in force. The restriction $\gamma < 1/2$ is the finite-variance
-regime in which the expectile central limit theorems used in the
-thesis apply. It strengthens the first-order range $\gamma < 1$
-needed for the expectile--quantile asymptotic equivalence
-\eqref{eq:bg:expectile-quantile-equivalence}. Condition
+is in force. The range $\gamma<1$ and the integrability of $X^{-}$
+place the analysis in the finite-mean regime in which expectiles are
+well defined and the quantile-based expectile--quantile bridge applies.
+The stronger finite-variance restriction $\gamma<1/2$ is needed only
+for the direct LAWS estimator reviewed in \Cref{thm:bg:laws-iid}; it is
+not an assumption of the pooled QB results below. Condition
 \eqref{eq:pool-int:moment-rate} is the multi-sample counterpart of the
 $\sqrt{n(1 - \tau_{n})}\,/\Quant_{X}(\tau_{n}) \to 0$ hypothesis of
 the QB intermediate theorem and the second-order
@@ -124,11 +124,10 @@ $\Quant_X(\tau_n) \asymp (n/k)^\gamma$, so
 \eqref{eq:pool-int:moment-rate} requires
 $k^{1/2+\gamma}/n^\gamma \to 0$.
 The endpoint $\rho=0$ is retained in this intermediate-level chapter:
-the expectile--quantile expansion and QB CLT used below are the
-\textcite{DaouiaGirardStupfler2020} versions stated under the same
-$\rho\le0$ convention as \Cref{cond:bg:second-order}. The stricter
-$\rho<0$ assumption re-enters only for the very-extreme extrapolation
-step in \Cref{ch:pool-ext}, through
+the expectile--quantile expansion and the QB CLT used below are stated
+under the same $\rho\le0$ convention as \Cref{cond:bg:second-order}.
+The stricter $\rho<0$ assumption re-enters only for the very-extreme
+extrapolation step in \Cref{ch:pool-ext}, through
 \Cref{prop:bg:plug-in-clt,thm:bg:pool-weissman}.
 
 \paragraph{The target.}
@@ -175,10 +174,10 @@ estimation problem rather than assembled from the Hill and Weissman
 quantile primitives; this lies outside the pooling protocol of
 \Cref{sec:bg:pooling}. The comparison of
 \Cref{thm:bg:qb-iid,thm:bg:laws-iid} shows that neither LAWS nor QB
-uniformly dominates the other over $\gamma \in (0, 1/2)$; the QB
-construction is therefore adopted not because it is uniformly more
-efficient, but because it is the available member of this pair under
-the communicated pooling primitives. The choice is a derived
+uniformly dominates the other on the direct-LAWS range
+$\gamma \in (0, 1/2)$; the QB construction is therefore adopted not
+because it is uniformly more efficient, but because it is the available
+member of this pair under the communicated pooling primitives. The choice is a derived
 consequence of the pooling protocol, not an independent methodological
 preference.
 
@@ -2027,7 +2026,7 @@ Per-sample expectile--quantile equivalence
 $\expectile{\tau_{n},\,j} \sim \psifn(\gamma_{j})\,
 \Quant_{X_{j}}(\tau_{n})$, so $H_{0,0}^{\xi}$ requires the products
 $\psifn(\gamma_{j})\,\Quant_{X_{j}}(\tau_{n})$ to agree across
-samples in the limit. The non-injectivity of $\psifn$ on $(0,1/2)$
+samples in the limit. The non-injectivity of $\psifn$ on $(0,1)$
 should not be read in isolation: under regular variation, different
 tail indices force the quantile ratio
 $\Quant_{X_j}(\tau)/\Quant_{X_\ell}(\tau)$ to tend to $0$ or

@@ -105,7 +105,22 @@ means slower convergence and therefore larger second-order bias of the
 tail-index estimators we shall encounter in
 \Cref{sec:bg:tail-index-quantile}.
 
-\begin{condition}[Lower-tail moment condition]
+\begin{condition}[Finite first-moment condition]
+\label{cond:bg:finite-first-moment}
+The extreme-value index satisfies $\gamma \in (0,1)$ and the negative
+part $X^{-}=\max(-X,0)$ satisfies
+\[
+  \E X^{-}<\infty .
+\]
+\end{condition}
+
+Under \Cref{cond:bg:first-order}, the condition $\gamma<1$ controls the
+positive tail and gives $\E X^{+}<\infty$; the displayed integrability
+condition controls the lower tail. Together they are the natural
+finite-mean regime in which expectiles are well defined and the
+quantile-based expectile approximation is available.
+
+\begin{condition}[LAWS lower-tail moment condition]
 \label{cond:bg:lower-tail-moment}
 For some $\delta>0$, the negative part
 $X^{-}=\max(-X,0)$ satisfies
@@ -118,13 +133,10 @@ $X^{-}=\max(-X,0)$ satisfies
 $\E|Y_-|^{2+\delta}<\infty$ with $Y_-=\min(Y,0)$; here $X^-$ denotes
 the nonnegative negative part.
 
-For the expectile CLTs used below we shall work in the range
-$\gamma \in (0, 1/2)$ together with an explicit lower-tail moment
-condition. The restriction $\gamma < 1/2$ controls the positive tail
-and ensures $\E (X^{+})^{2} < \infty$; since $X$ is real-valued, it does
-not by itself control the negative part. \Cref{cond:bg:lower-tail-moment}
-is the corresponding left-tail assumption used in the extreme-expectile
-limit theorems.
+This stronger condition is kept for direct LAWS expectile estimation,
+whose asymptotic normality is built from tail averages and requires
+finite-variance-type control. It is not part of the quantile-based
+plug-in route used in the contribution chapters.
 
 \section{Tail-index and extreme-quantile estimation}
 \label{sec:bg:tail-index-quantile}
@@ -447,7 +459,8 @@ proportional to the quantile of the same level.
                     \textcite{DaouiaGirardStupfler2019}, Corollary~1 with $p=2$]
 \label{prop:bg:expectile-quantile}
 Suppose $X$ satisfies \Cref{cond:bg:first-order} with index
-$\gamma \in (0, 1)$ and $\E X^{-} < \infty$. Then
+$\gamma \in (0, 1)$ and $\E X^{-} < \infty$; equivalently, suppose
+\Cref{cond:bg:finite-first-moment} holds. Then
 \begin{equation}
 \label{eq:bg:expectile-quantile-equivalence}
   \frac{\expectile{\tau}(X)}{\Quant_{X}(\tau)}
@@ -461,8 +474,9 @@ inference: it converts asymptotic statements about extreme quantiles
 into asymptotic statements about extreme expectiles, and vice versa.
 The first-order equivalence in
 \Cref{prop:bg:expectile-quantile} requires $\gamma < 1$ together with
-the integrability of the lower tail; the stronger range
-$\gamma < 1/2$ enters the CLT-level inference below.
+the integrability of the lower tail. The stronger range
+$\gamma < 1/2$ is not needed for this bridge; it enters only when one
+uses direct LAWS expectile CLTs.
 The function $\psifn$ is continuous on $(0, 1)$, with
 $\psifn(\gamma) \to 1$ as $\gamma \downarrow 0$ and
 $\psifn(\gamma) \to \infty$ as $\gamma \uparrow 1$. It is \emph{not}
@@ -480,14 +494,13 @@ $m(\gamma^{\star}) = 0$, so $\psifn$ decreases on $(0, \gamma^{\star})$
 to a minimum $\psifn(\gamma^{\star}) \approx 0.757$ and increases on
 $(\gamma^{\star}, 1)$; in particular it returns to $\psifn = 1$ at
 $\gamma = 1/2$. Only for tail indices beyond $\gamma^{\star}$ does a
-heavier tail move the expectile closer to, and for $\gamma>1/2$ above,
-the same-level quantile.
+heavier tail move the expectile closer to the same-level quantile; for
+$\gamma>1/2$, the factor $\psifn(\gamma)$ is larger than one.
 
 Under the second-order condition $\mathcal C_{2}(\gamma, \rho, A)$ with
-$\gamma \in (0, 1/2)$ and \Cref{cond:bg:lower-tail-moment}, and assuming
-that $F$ is strictly increasing in a neighbourhood of its upper endpoint,
-the first-order equivalence \eqref{eq:bg:expectile-quantile-equivalence}
-sharpens to the second-order expansion
+$\gamma \in (0, 1)$ and $\E X^{-}<\infty$, the first-order equivalence
+\eqref{eq:bg:expectile-quantile-equivalence} sharpens to the
+second-order expansion
 \parencite[Proposition~1(i)]{DaouiaGirardStupfler2020}
 \begin{equation}
 \label{eq:bg:c-gamma-rho}
@@ -511,9 +524,9 @@ sharpens to the second-order expansion
   \end{aligned}
 \end{equation}
 The displayed form is the version used in the thesis: it combines the
-second-order tail expansion with the lower-tail moment condition
-sufficient to control the non-tail contribution to the expectile
-equation. At the endpoint $\rho=0$, the second term in $c(\gamma,\rho)$
+second-order tail expansion with finite first-moment control of the
+non-tail contribution to the expectile equation. At the endpoint
+$\rho=0$, the second term in $c(\gamma,\rho)$
 is read by continuity as $\rho\to0$, so that
 $c(\gamma,0)=m(\gamma)$. The constant $c(\gamma, \rho)$ measures the
 deterministic gap between the extreme expectile and the same-level
@@ -521,8 +534,8 @@ quantile beyond the leading factor $\psifn(\gamma)$. The term
 $\gamma(\gamma^{-1}-1)^{\gamma}\E X/\Quant_{X}(\tau)$ is the explicit
 first-moment contribution in the expansion of
 \textcite{DaouiaGirardStupfler2020}; it is often abbreviated below as an
-$O(\Quant_{X}(\tau)^{-1})$ contribution, because the lower-tail moment
-assumption ensures that it is well controlled. Under the moment condition
+$O(\Quant_{X}(\tau)^{-1})$ contribution, because $\E X^{-}<\infty$ and
+$\gamma<1$ ensure that it is well controlled. Under the moment condition
 $\sqrt{n(1 - \tau_{n})}\,/\Quant_{X}(\tau_{n}) \to 0$ adopted below it
 is $\sqrt{n(1 - \tau_{n})}$-negligible, so the $A$-driven term alone
 governs the asymptotic bias of the quantile-based estimator. This
@@ -588,11 +601,12 @@ estimator of \eqref{eq:bg:hill} with effective sample size
 $k = \lfloor n(1 - \tau_{n})\rfloor$.
 
 \begin{theorem}[Intermediate QB CLT;
-                \textcite{DaouiaGirardStupfler2020}, Theorem~4 with $\beta=1$]
+                \textcite{DaouiaGirardStupfler2018}, Corollary~2;
+                \textcite{DaouiaGirardStupfler2020}, Proposition~1]
 \label{thm:bg:qb-iid}
 Assume $\mathcal C_{2}(\gamma, \rho, A)$ with
-$\gamma \in (0,1/2)$ and \Cref{cond:bg:lower-tail-moment}. Assume also
-that $F$ is strictly increasing in a neighbourhood of its upper endpoint.
+$\gamma \in (0,1)$ and assume $\E X^{-}<\infty$. Assume also that $F$
+is strictly increasing in a neighbourhood of its upper endpoint.
 Let
 $\tau_n \to 1$ with $n(1-\tau_n)\to\infty$ and suppose
 \[
@@ -625,8 +639,11 @@ the theorem ensures that the moment-term contribution to the
 expectile--quantile gap is negligible.
 \end{theorem}
 
-This is the $\lambda_2=0$ specialisation of the more general
-intermediate QB CLT of \textcite{DaouiaGirardStupfler2020}, where
+This is the zero-first-moment-bias specialisation of the iid
+quantile-based CLT of \textcite[Corollary~2]{DaouiaGirardStupfler2018},
+combined with the second-order expectile--quantile expansion of
+\textcite[Proposition~1]{DaouiaGirardStupfler2020}. In the more
+general statement one allows
 \[
   \lambda_2
   =
@@ -638,10 +655,10 @@ term of order $\lambda_2$ depending on the first moment of $X$. The
 present thesis imposes
 $\sqrt{n(1-\tau_n)}/\Quant_X(\tau_n)\to0$ because this is the regime
 needed later to isolate the second-order tail bias.
-\textcite[Corollary~2]{DaouiaGirardStupfler2018} is the original iid
-QB statement under the stricter $\rho<0$ convention; the 2020 tail
-expectile process result is the version that matches
-\Cref{cond:bg:second-order} at the intermediate level.
+\textcite[Corollary~2.3]{PadoanStupfler2022} states the analogous
+multivariate QB result under the same finite-mean range
+$0<\gamma_j<1$, and explicitly contrasts it with the stronger
+finite-variance assumptions required by direct LAWS estimation.
 
 \paragraph{Comparison.}
 The LAWS estimator has asymptotic variance
@@ -704,9 +721,9 @@ LAWS-anchored and QB-anchored extrapolations, respectively.
                 \textcite{DaouiaGirardStupfler2018}, Corollaries~3--4]
 \label{thm:bg:weissman-expectile-iid}
 Assume $\mathcal C_{2}(\gamma,\rho,A)$ with
-$\gamma\in(0,1/2)$, $\rho<0$, and
-\Cref{cond:bg:lower-tail-moment}. Assume also that $F$ is strictly
-increasing in a neighbourhood of its upper endpoint. Let
+$\gamma\in(0,1)$ and $\rho<0$, and assume $\E X^{-}<\infty$. Assume
+also that $F$ is strictly increasing in a neighbourhood of its upper
+endpoint. Let
 $\tau_n\to1$ satisfy $n(1-\tau_n)\to\infty$ and let
 $\tau_{n}^{\prime} \to 1$ satisfy
 $n(1-\tau'_n)\to c\in[0,\infty)$,
@@ -719,8 +736,8 @@ $\sqrt{n(1 - \tau_{n})}\,/\log((1 - \tau_{n})/(1 - \tau_{n}^{\prime}))
   \frac{\sqrt{n(1-\tau_n)}}{\Quant_X(\tau_n)}\to 0 .
 \]
 If $\hat\gamma_n$ is the Hill estimator and
-$\overline\xi_{\tau_n}$ is either the LAWS or QB intermediate
-estimator above, then
+$\overline\xi_{\tau_n}$ is the QB intermediate estimator of
+\Cref{thm:bg:qb-iid}, then
 \[
   \frac{\sqrt{n(1 - \tau_{n})}}
        {\log\!\big((1 - \tau_{n})/(1 - \tau_{n}^{\prime})\big)}
@@ -729,6 +746,10 @@ estimator above, then
   \;\todist\;
   \mathcal N\!\left(\frac{\lambda}{1 - \rho},\; \gamma^{2}\right).
 \]
+The same conclusion holds with $\overline\xi_{\tau_n}$ equal to the
+LAWS estimator of \Cref{thm:bg:laws-iid} under the additional
+direct-LAWS assumptions $\gamma\in(0,1/2)$ and
+\Cref{cond:bg:lower-tail-moment}.
 \end{theorem}
 
 Two remarks are in order. First, the rate
@@ -764,8 +785,7 @@ when the intermediate estimator is itself produced by pooling.
                     cf.\ \textcite{DavisonPadoanStupfler2023}, Prop.~C.6]
 \label{prop:bg:plug-in-clt}
 Assume $\mathcal C_2(\gamma,\rho,A)$ with
-$\gamma\in(0,1/2)$ and $\rho<0$, and assume
-\Cref{cond:bg:lower-tail-moment}.
+$\gamma\in(0,1)$ and $\rho<0$, and assume $\E X^{-}<\infty$.
 Let $a_n\to\infty$, let $\hat\gamma_n$ be an estimator of $\gamma$,
 and let $\widehat\xi_{\tau_n}^{\,I}$ be an intermediate-level
 estimator of $\expectile{\tau_n}$ satisfying the joint asymptotic

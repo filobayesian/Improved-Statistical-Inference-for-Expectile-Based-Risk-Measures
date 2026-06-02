@@ -56,6 +56,37 @@ if (nrow(selected) == 0) {
 writeLines(c("\\bottomrule", "\\end{tabular}"), con)
 close(con)
 
+validity <- summary[summary$k_fraction == 0.05 &
+                      summary$target == "intermediate" &
+                      summary$m == 10 &
+                      summary$regime == "strong" &
+                      summary$estimator %in% c("naive", "variance",
+                                               "amse_oracle", "amse_plugin",
+                                               "full_sample"), ]
+validity <- validity[order(validity$dgp, validity$estimator), ]
+valid_path <- file.path(tab_dir, "domain_validity.tex")
+con <- file(valid_path, open = "w")
+writeLines(c(
+  "\\begin{tabular}{llrr}",
+  "\\toprule",
+  "DGP & Estimator & Invalid rate & Valid reps \\\\",
+  "\\midrule"
+), con)
+if (nrow(validity) == 0) {
+  writeLines("No rows & -- & -- & 0 \\\\", con)
+} else {
+  for (i in seq_len(nrow(validity))) {
+    row <- validity[i, ]
+    writeLines(sprintf(
+      "%s & %s & %s & %d \\\\",
+      row$dgp, gsub("_", "\\\\_", row$estimator),
+      fmt(row$invalid_rate, digits = 4), as.integer(row$valid_replications)
+    ), con)
+  }
+}
+writeLines(c("\\bottomrule", "\\end{tabular}"), con)
+close(con)
+
 stability <- summary[summary$estimator %in% c("amse_oracle", "amse_plugin") &
                        summary$target == "intermediate" &
                        summary$m == 10 &

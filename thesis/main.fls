@@ -443,6 +443,9 @@ INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmtt8.tfm
 INPUT ./tables/simulation/finite_sample_summary.tex
 INPUT ./tables/simulation/finite_sample_summary.tex
 INPUT tables/simulation/finite_sample_summary.tex
+INPUT ./tables/simulation/domain_validity.tex
+INPUT ./tables/simulation/domain_validity.tex
+INPUT tables/simulation/domain_validity.tex
 INPUT ./figures/simulation/mse_by_estimator.pdf
 INPUT ./figures/simulation/mse_by_estimator.pdf
 INPUT ./figures/simulation/mse_by_estimator.pdf
@@ -453,6 +456,7 @@ INPUT ./figures/simulation/k_sensitivity.pdf
 INPUT ./figures/simulation/k_sensitivity.pdf
 INPUT ./tables/simulation/weight_stability.tex
 INPUT ./tables/simulation/weight_stability.tex
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/lm/ec-lmr10.tfm
 INPUT tables/simulation/weight_stability.tex
 INPUT ./chapters/06_discussion.tex
 INPUT ./chapters/06_discussion.tex

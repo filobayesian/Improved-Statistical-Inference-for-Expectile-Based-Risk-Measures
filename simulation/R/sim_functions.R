@@ -4,12 +4,22 @@
 # used only through optional hooks because they are not guaranteed to be
 # installed on every machine that compiles the thesis.
 
+valid_gamma_domain <- function(gamma) {
+  is.finite(gamma) & gamma > 0 & gamma < 1
+}
+
 psi_fn <- function(gamma) {
-  ((1 / gamma) - 1)^(-gamma)
+  out <- rep(NA_real_, length(gamma))
+  ok <- valid_gamma_domain(gamma)
+  out[ok] <- ((1 / gamma[ok]) - 1)^(-gamma[ok])
+  out
 }
 
 m_fn <- function(gamma) {
-  1 / (1 - gamma) - log((1 / gamma) - 1)
+  out <- rep(NA_real_, length(gamma))
+  ok <- valid_gamma_domain(gamma)
+  out[ok] <- 1 / (1 - gamma[ok]) - log((1 / gamma[ok]) - 1)
+  out
 }
 
 c_gamma_rho <- function(gamma, rho) {
@@ -56,6 +66,17 @@ make_dgp <- function(name) {
         quantile = function(tau) (1 - tau)^(-gamma)
       )
     },
+    pareto_heavy = {
+      gamma <- 0.60
+      list(
+        name = "ParetoHeavy", key = "pareto_heavy", gamma = gamma, rho = -1,
+        beta = 0,
+        r = function(n) stats::runif(n)^(-gamma),
+        cdf = function(x) ifelse(x < 1, 0, 1 - x^(-1 / gamma)),
+        surv = function(x) ifelse(x < 1, 1, x^(-1 / gamma)),
+        quantile = function(tau) (1 - tau)^(-gamma)
+      )
+    },
     frechet = {
       gamma <- 0.25
       list(
@@ -71,6 +92,24 @@ make_dgp <- function(name) {
       rho <- -1
       list(
         name = "Burr", key = "burr", gamma = gamma, rho = rho, beta = 1,
+        r = function(n) {
+          p <- 1 - stats::runif(n)
+          (p^rho - 1)^(-gamma / rho)
+        },
+        cdf = function(x) ifelse(x <= 0, 0, 1 - (1 + x^(-rho / gamma))^(1 / rho)),
+        surv = function(x) ifelse(x <= 0, 1, (1 + x^(-rho / gamma))^(1 / rho)),
+        quantile = function(tau) {
+          p <- 1 - tau
+          (p^rho - 1)^(-gamma / rho)
+        }
+      )
+    },
+    burr_heavy = {
+      gamma <- 0.60
+      rho <- -1
+      list(
+        name = "BurrHeavy", key = "burr_heavy", gamma = gamma, rho = rho,
+        beta = 1,
         r = function(n) {
           p <- 1 - stats::runif(n)
           (p^rho - 1)^(-gamma / rho)
@@ -158,7 +197,12 @@ local_primitives <- function(samples, k_vec, tau) {
 
 pooled_qb_expectile <- function(gamma_hat, q_hat, w_gamma, w_q) {
   gamma_pool <- sum(w_gamma * gamma_hat)
+  if (!valid_gamma_domain(gamma_pool) || any(!is.finite(q_hat)) ||
+      any(q_hat <= 0)) {
+    return(NA_real_)
+  }
   q_pool <- exp(sum(w_q * log(q_hat)))
+  if (!is.finite(q_pool) || q_pool <= 0) return(NA_real_)
   psi_fn(gamma_pool) * q_pool
 }
 
@@ -185,6 +229,7 @@ variance_weights <- function(k_vec) {
 intermediate_amse_weights <- function(gamma, Vc, L, Bc, Bcstar, b_gap) {
   m <- length(L)
   mg <- m_fn(gamma)
+  if (!is.finite(mg)) return(NULL)
   D <- diag(L, nrow = m)
   h <- c(mg * Bc, Bcstar)
   Q <- rbind(
@@ -238,12 +283,15 @@ plugin_bias_inputs <- function(samples, n_vec, k_vec, tau, gamma_hat) {
   rho_hat <- sum((n_vec / sum(n_vec)) * vapply(second, `[[`, numeric(1), "rho"))
   beta_hat <- sum((n_vec / sum(n_vec)) * vapply(second, `[[`, numeric(1), "beta"))
   if (!is.finite(rho_hat) || !is.finite(beta_hat) || rho_hat >= 0) return(NULL)
-  dgp_hat <- list(gamma = mean(gamma_hat), rho = rho_hat, beta = beta_hat)
+  gamma_bar <- mean(gamma_hat)
+  if (!valid_gamma_domain(gamma_bar)) return(NULL)
+  dgp_hat <- list(gamma = gamma_bar, rho = rho_hat, beta = beta_hat)
   oracle_bias_inputs(dgp_hat, n_vec, k_vec, tau)
 }
 
 sigma2_intermediate <- function(gamma, Vc, L, w_gamma, w_q) {
   mg <- m_fn(gamma)
+  if (!is.finite(mg)) return(NA_real_)
   D <- diag(L, nrow = length(L))
   as.numeric(mg^2 * t(w_gamma) %*% Vc %*% w_gamma +
                2 * mg * t(w_gamma) %*% D %*% Vc %*% w_q +
@@ -255,6 +303,9 @@ sigma2_extreme <- function(Vc, w_gamma) {
 }
 
 ci_log <- function(est, se_log, alpha = 0.05) {
+  if (!is.finite(est) || est <= 0 || !is.finite(se_log)) {
+    return(c(NA_real_, NA_real_))
+  }
   z <- stats::qnorm(1 - alpha / 2)
   c(log(est) - z * se_log, log(est) + z * se_log)
 }
@@ -269,15 +320,16 @@ allocation_weights <- function(m, regime) {
 }
 
 scenario_grid <- function(mode) {
-  dgp_names <- c("pareto", "frechet", "burr", "student")
+  dgp_names <- c("pareto", "frechet", "burr", "student",
+                 "pareto_heavy", "burr_heavy")
   if (mode == "smoke") {
-    return(data.frame(dgp = "burr", m = 5, regime = "strong",
+    return(data.frame(dgp = "burr_heavy", m = 5, regime = "strong",
                       k_fraction = 0.05, n_total = 3000,
                       stringsAsFactors = FALSE))
   }
   if (mode == "pilot") {
     return(expand.grid(
-      dgp = c("pareto", "burr"),
+      dgp = c("pareto", "burr", "pareto_heavy"),
       m = c(5, 10),
       regime = c("balanced", "strong"),
       k_fraction = 0.05,
@@ -372,10 +424,18 @@ run_one_replication <- function(scenario, rep_id, tau = 0.99, alpha = 0.05) {
   }
 
   rows <- list()
-  add_row <- function(estimator, target, xi_hat, truth, w_gamma, w_q,
+  add_row <- function(estimator, target, xi_hat, truth, gamma_est, w_gamma, w_q,
                       sigma2, ell = 1, kind = "feasible") {
-    se_log <- ell * sqrt(max(sigma2, 0) / k_total)
+    domain_ok <- valid_gamma_domain(gamma_est)
+    estimate_ok <- domain_ok && is.finite(xi_hat) && xi_hat > 0 &&
+      is.finite(truth) && truth > 0
+    se_log <- if (is.finite(sigma2) && sigma2 >= 0) {
+      ell * sqrt(sigma2 / k_total)
+    } else {
+      NA_real_
+    }
     ci <- ci_log(xi_hat, se_log, alpha)
+    ci_ok <- estimate_ok && all(is.finite(ci))
     rows[[length(rows) + 1]] <<- data.frame(
       rep = rep_id,
       dgp = dgp$name,
@@ -389,12 +449,20 @@ run_one_replication <- function(scenario, rep_id, tau = 0.99, alpha = 0.05) {
       estimator = estimator,
       estimator_kind = kind,
       target = target,
-      estimate = xi_hat,
+      gamma_estimate = gamma_est,
+      estimate = if (estimate_ok) xi_hat else NA_real_,
       truth = truth,
-      log_error = log(xi_hat / truth),
-      covered = as.integer(log(truth) >= ci[1] && log(truth) <= ci[2]),
-      ci_log_length = ci[2] - ci[1],
-      ci_length = exp(ci[2]) - exp(ci[1]),
+      log_error = if (estimate_ok) log(xi_hat / truth) else NA_real_,
+      covered = if (ci_ok) {
+        as.integer(log(truth) >= ci[1] && log(truth) <= ci[2])
+      } else {
+        NA_integer_
+      },
+      ci_log_length = if (ci_ok) ci[2] - ci[1] else NA_real_,
+      ci_length = if (ci_ok) exp(ci[2]) - exp(ci[1]) else NA_real_,
+      invalid_domain = as.integer(!domain_ok),
+      valid_estimate = as.integer(estimate_ok),
+      valid_ci = as.integer(ci_ok),
       any_negative_weight = as.integer(any(c(w_gamma, w_q) < 0)),
       max_abs_weight = max(abs(c(w_gamma, w_q))),
       plugin_available = requireNamespace("evt0", quietly = TRUE),
@@ -407,52 +475,92 @@ run_one_replication <- function(scenario, rep_id, tau = 0.99, alpha = 0.05) {
     xi_int <- pooled_qb_expectile(prim$gamma_hat, prim$q_hat,
                                   est$w_gamma, est$w_q)
     gamma_pool <- sum(est$w_gamma * prim$gamma_hat)
-    xi_ext <- ((1 - tau) / (1 - tau_ext))^gamma_pool * xi_int
+    xi_ext <- if (valid_gamma_domain(gamma_pool) && is.finite(xi_int) &&
+                  xi_int > 0) {
+      ((1 - tau) / (1 - tau_ext))^gamma_pool * xi_int
+    } else {
+      NA_real_
+    }
     sig_int <- sigma2_intermediate(gamma_seed, Vc_hat, L,
                                    est$w_gamma, est$w_q)
     sig_ext <- sigma2_extreme(Vc_hat, est$w_gamma)
     ell <- log((1 - tau) / (1 - tau_ext))
-    add_row(name, "intermediate", xi_int, truth_int, est$w_gamma, est$w_q,
-            sig_int, kind = est$kind)
-    add_row(name, "very_extreme", xi_ext, truth_ext, est$w_gamma, est$w_q,
-            sig_ext, ell = ell, kind = est$kind)
+    add_row(name, "intermediate", xi_int, truth_int, gamma_pool,
+            est$w_gamma, est$w_q, sig_int, kind = est$kind)
+    add_row(name, "very_extreme", xi_ext, truth_ext, gamma_pool,
+            est$w_gamma, est$w_q, sig_ext, ell = ell, kind = est$kind)
   }
 
   gamma_full <- hill_estimator(combined, k_total)
   q_full <- weissman_quantile(combined, k_total, tau, gamma_full)
-  xi_full_int <- psi_fn(gamma_full) * q_full
-  xi_full_ext <- ((1 - tau) / (1 - tau_ext))^gamma_full * xi_full_int
+  xi_full_int <- if (valid_gamma_domain(gamma_full) && is.finite(q_full) &&
+                     q_full > 0) {
+    psi_fn(gamma_full) * q_full
+  } else {
+    NA_real_
+  }
+  xi_full_ext <- if (valid_gamma_domain(gamma_full) && is.finite(xi_full_int) &&
+                     xi_full_int > 0) {
+    ((1 - tau) / (1 - tau_ext))^gamma_full * xi_full_int
+  } else {
+    NA_real_
+  }
   L_full <- log(k_total / (n_total * (1 - tau)))
   V_full <- matrix(gamma_full^2, 1, 1)
   sig_full_int <- sigma2_intermediate(gamma_full, V_full, L_full, 1, 1)
   sig_full_ext <- gamma_full^2
-  add_row("full_sample", "intermediate", xi_full_int, truth_int, 1, 1,
-          sig_full_int, kind = "benchmark")
-  add_row("full_sample", "very_extreme", xi_full_ext, truth_ext, 1, 1,
-          sig_full_ext, ell = log((1 - tau) / (1 - tau_ext)),
+  add_row("full_sample", "intermediate", xi_full_int, truth_int,
+          gamma_full, 1, 1, sig_full_int, kind = "benchmark")
+  add_row("full_sample", "very_extreme", xi_full_ext, truth_ext,
+          gamma_full, 1, 1, sig_full_ext, ell = log((1 - tau) / (1 - tau_ext)),
           kind = "benchmark")
 
   do.call(rbind, rows)
 }
 
 summarise_results <- function(results) {
+  mean_na <- function(x) {
+    if (all(is.na(x))) return(NA_real_)
+    mean(x, na.rm = TRUE)
+  }
+  sum_na <- function(x) sum(x, na.rm = TRUE)
+  group_vars <- c("dgp", "gamma", "m", "regime", "k_fraction", "n_total",
+                  "k_total", "estimator", "estimator_kind", "target",
+                  "plugin_available")
+  summary_input <- transform(
+    results,
+    log_error_sq = ifelse(is.na(log_error), NA_real_, log_error^2)
+  )
   out <- aggregate(
     cbind(log_error, log_error_sq = log_error^2, covered, ci_log_length,
           ci_length, any_negative_weight, max_abs_weight) ~
       dgp + gamma + m + regime + k_fraction + n_total + k_total +
       estimator + estimator_kind + target + plugin_available,
-    data = transform(results, log_error_sq = log_error^2),
-    FUN = mean
+    data = summary_input,
+    FUN = mean_na,
+    na.action = na.pass
   )
   counts <- aggregate(
     rep ~ dgp + gamma + m + regime + k_fraction + n_total + k_total +
       estimator + estimator_kind + target + plugin_available,
-    data = results,
-    FUN = length
+    data = summary_input,
+    FUN = length,
+    na.action = na.pass
+  )
+  diagnostics <- aggregate(
+    cbind(valid_estimate, valid_ci, invalid_domain) ~
+      dgp + gamma + m + regime + k_fraction + n_total + k_total +
+      estimator + estimator_kind + target + plugin_available,
+    data = summary_input,
+    FUN = sum_na,
+    na.action = na.pass
   )
   names(counts)[names(counts) == "rep"] <- "n_replications"
-  merge(out, counts,
-        by = c("dgp", "gamma", "m", "regime", "k_fraction", "n_total",
-               "k_total", "estimator", "estimator_kind", "target",
-               "plugin_available"))
+  names(diagnostics)[names(diagnostics) == "valid_estimate"] <- "valid_replications"
+  names(diagnostics)[names(diagnostics) == "valid_ci"] <- "valid_ci_replications"
+  names(diagnostics)[names(diagnostics) == "invalid_domain"] <- "invalid_count"
+  merged <- merge(out, counts, by = group_vars)
+  merged <- merge(merged, diagnostics, by = group_vars)
+  merged$invalid_rate <- merged$invalid_count / merged$n_replications
+  merged
 }

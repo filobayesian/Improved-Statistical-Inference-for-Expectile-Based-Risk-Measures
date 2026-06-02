@@ -98,8 +98,8 @@ enters the remainder of this proof.
 The map $g \mapsto \log\psifn(g) = -g\log(g^{-1} - 1)$ is defined
 on the open interval $(0, 1)$ and singular at its endpoints, so the
 Taylor expansion below is carried out on a compact subinterval of
-$(0,1)$. Choose $\eta \in (0,\gamma)$; since
-$\gamma \in (0,1/2)$, this gives $\gamma \in (\eta,1-\eta)$. By
+$(0,1)$. Choose $\eta \in (0,\min\{\gamma,1-\gamma\})$, so that
+$\gamma \in (\eta,1-\eta)$. By
 \Cref{thm:bg:hill}, $\hat\gamma_{j}(k_{j}) \toprob \gamma$ for every
 $j$. The pooled estimator also satisfies
 $\hat\gamma_{n}(\bm\omega)
@@ -296,7 +296,7 @@ $\big(\hat\gamma_{n}(\bm\omega_{\gamma}),\,
 \log\hatWei_{n}(\tau_{n} \mid \bm\omega_{q})\big)$ under the
 standing assumptions of \Cref{sec:pool-int:setup}: $m$ independent
 samples sharing the common marginal $F$ and the common tail index
-$\gamma \in (0, 1/2)$, the proportionality conditions
+$\gamma \in (0, 1)$, the proportionality conditions
 \eqref{eq:bg:pool-rates}, the second-order condition
 $\mathcal C_{2}(\gamma, \rho, A)$ with the per-sample bias rate
 $\sqrt{k_{j}}\,A(n_{j}/k_{j}) \to \lambda_{j} \in \R$, an intermediate
@@ -323,8 +323,7 @@ $\sqrt{k_{j}}$-asymptotics of the Hill estimator and its companion
 intermediate log-order statistic is a standard
 tail-empirical-process result
 \parencite[Theorem~2.4.8 and \S5.1]{deHaanFerreira2006}; in the form
-we use it is the input to the iid QB plug-in CLT of
-\textcite{DaouiaGirardStupfler2020} reproduced as
+we use it is the input to the iid QB plug-in CLT reproduced as
 \Cref{thm:bg:qb-iid}. Under $\mathcal C_{2}(\gamma, \rho, A)$ with
 $k_{j} \to \infty$, $k_{j}/n_{j} \to 0$, and
 $\sqrt{k_{j}}\,A(n_{j}/k_{j}) \to \lambda_{j} \in \R$,
@@ -663,7 +662,7 @@ $\bm\Sigma(\bm\omega_{\gamma}, \bm\omega_{q})$, which is precisely
 We prove the pooled QB intermediate-expectile CLT
 \eqref{eq:pool-int:main-clt} under the standing assumptions of
 \Cref{sec:pool-int:setup}: $m$ independent samples with common
-marginal $F$, common tail index $\gamma \in (0, 1/2)$, the
+marginal $F$, common tail index $\gamma \in (0, 1)$, the
 proportionality conditions \eqref{eq:bg:pool-rates}, the second-order
 condition $\mathcal C_{2}(\gamma, \rho, A)$ with per-sample bias rate
 $\sqrt{k_{j}}\,A(n_{j}/k_{j}) \to \lambda_{j} \in \R$, an intermediate
@@ -745,8 +744,7 @@ $m(g)$ defined in \eqref{eq:pool-int:m-function} and second derivative
   \qquad g \in (0, 1).
 \]
 By \Cref{thm:bg:hill} and \eqref{eq:pool-int:moment},
-$\hat\gamma_{n}(\bm\omega_{\gamma}) \toprob \gamma \in (0, 1/2)
-\subset (0, 1)$, so the event
+$\hat\gamma_{n}(\bm\omega_{\gamma}) \toprob \gamma \in (0, 1)$, so the event
 $E_{n} \coloneqq \{\hat\gamma_{n}(\bm\omega_{\gamma}) \in (0, 1)\}$
 satisfies $\mathbb{P}(E_{n}) \to 1$ and we may work on it without
 affecting convergence in distribution. On $E_{n}$, Taylor's theorem
@@ -785,9 +783,8 @@ The first-order equivalence of \Cref{prop:bg:expectile-quantile},
   \qquad \tau \uparrow 1,
 \]
 sharpens, under the second-order condition
-$\mathcal C_{2}(\gamma, \rho, A)$ with the moment bound
-$\E |X_{-}|^{2 + \delta} < \infty$ of \eqref{eq:pool-int:moment}, via
-the second-order expansion
+$\mathcal C_{2}(\gamma, \rho, A)$ with the finite first-moment
+condition in \eqref{eq:pool-int:moment}, via the second-order expansion
 \begin{equation}
 \label{eq:app:main:xi-Q-expansion}
   \begin{aligned}
@@ -822,7 +819,7 @@ $o(A)$ term is also $o(k^{-1/2})$. Consequently,
   c(\gamma,\rho)\sqrt{k}\,A\!\big((1-\tau_n)^{-1}\big)
   + o(1).
 \end{equation}
-Only the finiteness of $c(\gamma, \rho)$ for $\gamma \in (0, 1/2)$ and
+Only the finiteness of $c(\gamma, \rho)$ for $\gamma \in (0, 1)$ and
 $\rho \le 0$ is used below.
 
 To identify the deterministic shift in

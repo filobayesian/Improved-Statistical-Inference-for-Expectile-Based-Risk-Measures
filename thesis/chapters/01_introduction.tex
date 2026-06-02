@@ -55,7 +55,7 @@ one, in two situations that are increasingly relevant in practice:
 The central bridge between expectile estimation and classical
 extreme-value theory is the \emph{expectile--quantile asymptotic
 equivalence}. Under heavy-tailed assumptions with extreme-value index
-$\gamma \in (0, 1/2)$,
+$\gamma \in (0, 1)$ and finite first moment,
 \begin{equation}
 \label{eq:intro:asymptotic-equivalence}
   \frac{\expectile{\tau}(X)}{\Quant_X(\tau)}
@@ -121,9 +121,11 @@ The scope is restricted as follows:
       distributed setting of
       \textcite{DaouiaPadoanStupfler2021};
 \item the loss distribution is heavy-tailed with extreme-value index
-      $\gamma \in (0, 1/2)$ --- the standard range that guarantees the
-      existence of the expectile and the validity of the
-      asymptotic equivalence \eqref{eq:intro:asymptotic-equivalence};
+      $\gamma \in (0, 1)$ and finite first moment, the natural range for
+      the quantile-based expectile--quantile bridge used by the thesis;
+      the stronger finite-variance range $\gamma \in (0,1/2)$ is invoked
+      only when direct LAWS expectile estimators are discussed for
+      comparison;
 \item the input to the pooling procedure is summary statistics, not raw
       data, in line with practical distributed-inference constraints.
 \end{itemize}
