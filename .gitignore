@@ -1,3 +1,5 @@
 papers/
 notes/
 CLAUDE.md
+AGENT.md
+simulation/results/*.rds
