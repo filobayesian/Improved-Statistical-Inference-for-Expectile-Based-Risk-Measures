@@ -50,7 +50,7 @@ Six heavy-tailed marginal distributions are used. The first four lie in
 the finite-variance range $\gamma<1/2$, where comparison with direct
 LAWS theory is meaningful. The final two are finite-mean but
 infinite-variance stress cases with $\gamma=0.6$; they are included to
-check the QB estimator in the wider range allowed by the theory of
+illustrate the QB estimator in the wider range allowed by the theory of
 \Cref{thm:bg:qb-iid}.
 \begin{center}
 \begin{tabular}{lll}
@@ -81,6 +81,11 @@ $k/n$ over $\{0.02,0.05,0.10,0.15\}$ in the strongly unbalanced
 regime, and a separate stress block keeps $k_j$ equal across machines
 under strongly unbalanced $n_j$ to make the unequal-fraction AMSE
 effects visible.
+These fixed threshold fractions are finite-sample tuning choices. They
+are not intended as a numerical verification of the asymptotic rate
+conditions $k\to\infty$ and $k/n\to0$, but as a controlled comparison
+of the proposed pooling rules under thresholds commonly used in
+simulation studies.
 
 \section{Estimators and metrics}
 \label{sec:finite-estimators}
@@ -234,6 +239,6 @@ effective fractions, \Cref{prop:pool-int:var-opt-distrib} predicts that
 the variance-weighted rule should inherit the same first-order
 efficiency logic as the quantile-pooling estimator of
 \textcite{DaouiaPadoanStupfler2021}. The unequal-fraction stress block
-is designed to probe the complementary Chapter~3 message: AMSE
+is designed to illustrate the complementary Chapter~3 message: AMSE
 calibration becomes target-dependent once the effective-fraction
 collapse is broken.

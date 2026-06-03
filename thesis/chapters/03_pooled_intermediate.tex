@@ -202,7 +202,7 @@ them with the corresponding optima for the quantile target.
 \Cref{sec:pool-int:CI} provides feasible confidence intervals built
 from estimated weights, and \Cref{sec:pool-int:test} adapts the
 tail-homogeneity test of \Cref{thm:bg:tail-homogeneity-test} to the
-expectile-tail-homogeneity null hypothesis.
+target-level expectile-tail-homogeneity null hypothesis.
 
 \section{The pooled QB expectile estimator}
 \label{sec:pool-int:estimator}
@@ -474,9 +474,10 @@ estimator is a smooth functional of the centred log-spacings above
 $X_{n_{j} - k_{j} : n_{j},\,j}$, while the intermediate-threshold
 fluctuation is the centred $(k_{j}+1)$-th upper log-order statistic
 itself, and the two decouple in the tail-empirical-process limit.
-This same joint behaviour underlies the iid QB plug-in CLT of
-\textcite{DaouiaGirardStupfler2020} reproduced in
-\Cref{thm:bg:qb-iid}. Combining it with
+  This Hill/intermediate-quantile joint behaviour is the
+  tail-quantile-process input behind the iid QB plug-in CLT reviewed in
+  \Cref{thm:bg:qb-iid}; the same zero Hill--quantile covariance appears
+  explicitly in \textcite{DaouiaGirardStupfler2020}. Combining it with
 \eqref{eq:pool-int:weissman-decomp}, while using the second-order
 tail-quantile expansion for the deterministic centering, yields the
 within-sample joint central limit theorem
@@ -686,10 +687,12 @@ expansion \eqref{eq:bg:c-gamma-rho}
   \end{aligned}
 \end{equation}
 Here the constant $c(\gamma, \rho)$ is given explicitly in
-\eqref{eq:bg:c-gamma-rho}. The final term in
-\eqref{eq:pool-int:xi-Q-gap} is the first-moment contribution in the
-DGS expansion; it is not, in general, an $o(A)$ term. What is needed
-for the CLT is only its sequence-level disappearance after
+  \eqref{eq:bg:c-gamma-rho}. The final term in
+  \eqref{eq:pool-int:xi-Q-gap} is the first-moment contribution in the
+  second-order expectile--quantile expansion of
+  \textcite[Proposition~1(i)]{DaouiaGirardStupfler2020}; it is not, in
+  general, an $o(A)$ term. What is needed for the CLT is only its
+  sequence-level disappearance after
 multiplication by $\sqrt{k}$. Along the chapter target $\tau_n$,
 \eqref{eq:pool-int:moment-rate} gives
 $\sqrt{k}/\Quant_X(\tau_n) \to 0$, while the bias-rate assumptions
@@ -829,15 +832,23 @@ weight-optimisation section exploits exactly this factorisation.
 special case $m = 1$ with the chapter target aligned to the single
 sample's intermediate level. The weight vectors collapse to scalars
 $\omega_{\gamma} = \omega_{q} = 1$; the alignment forces
-$L_{1}^{\star} = 0$, $\Psi_{\rho}(e^{L_{1}^{\star}}) = 0$, and
-$\Vc = \gamma^{2}$. The asymptotic variance \eqref{eq:pool-int:sigma-xi}
-collapses to $\gamma^{2}(1 + m(\gamma)^{2})$, in exact agreement with
-\Cref{thm:bg:qb-iid}. The bias \eqref{eq:pool-int:mu-xi} collapses
-likewise. The pooled-Weissman bias vanishes, $\Bc^{\star} = 0$: at
-$L_{1}^{\star} = 0$ the bracket in \eqref{eq:pool-int:Bcstar-def}
-reduces to $L_{1}^{\star}/(1 - \rho) - \Psi_{\rho}(1) = 0$, since the
-intermediate order statistic has zero asymptotic bias on the
-$\sqrt{k}$ scale. Hence
+$L_{1}^{\star} = 0$ and $\Psi_{\rho}(e^{L_{1}^{\star}}) =
+\Psi_{\rho}(1) = 0$. Since $k = k_{1}$, the proportionality constants
+satisfy $c_{1}=1$ and $S=\sum_i c_i^{-1}=1$, so
+\[
+  \Vc = \gamma^{2},\qquad
+  \Bc = \frac{\lambda}{1-\rho},\qquad
+  \Lambda^{\bullet}=\lambda,\qquad
+  b^{\xi/\Quant}=-c(\gamma,\rho)\lambda .
+\]
+The pooled-Weissman bias also vanishes: at $L_{1}^{\star}=0$ the
+bracket in \eqref{eq:pool-int:Bcstar-def} reduces to
+$L_{1}^{\star}/(1-\rho)-\Psi_{\rho}(1)=0$. This is consistent with the
+fact that, at the aligned intermediate level, the order-statistic
+component contributes no $\sqrt{k}$-scale bias. Therefore the variance
+\eqref{eq:pool-int:sigma-xi} becomes
+$\gamma^{2}(1+m(\gamma)^{2})$, and the bias
+\eqref{eq:pool-int:mu-xi} becomes
 \begin{equation}
 \label{eq:pool-int:iid-bias}
   \mu^{\xi}
@@ -848,21 +859,27 @@ $\sqrt{k}$ scale. Hence
   \;=\;
   \Big(\frac{m(\gamma)}{1 - \rho} - c(\gamma, \rho)\Big)\lambda,
 \end{equation}
-the Hill bias $\lambda/(1 - \rho)$ propagated through $m(\gamma)$,
-minus the deterministic expectile--quantile gap $c(\gamma, \rho)\lambda$
-of \eqref{eq:bg:c-gamma-rho}. This is precisely the bias of
-\Cref{thm:bg:qb-iid}: there is no cancellation between an
-order-statistic bias and the gap, because --- as
-\Cref{app:proofs:joint-clt} establishes --- the intermediate order
-statistic has zero asymptotic bias on the $\sqrt{k}$ scale and
-contributes no bias term at all.
+in exact agreement with \Cref{thm:bg:qb-iid}. The two terms are the
+Hill bias $\lambda/(1-\rho)$ propagated through $m(\gamma)$ and the
+deterministic expectile--quantile gap
+$-c(\gamma,\rho)\lambda$ of \eqref{eq:bg:c-gamma-rho}; there is no
+cancellation with an order-statistic bias, because
+\Cref{app:proofs:joint-clt} establishes that this bias is zero on the
+$\sqrt{k}$ scale.
 
 \paragraph{Equal-fraction distributed simplification.}
 Under the equal-effective-fraction distributed specialisation,
 $k_{j}/n_{j} = (k/n)(1 + o(1))$ for every $j$, the log-rate factor
-$L_{j}(\tau_{n}) = \log(k/(n(1 - \tau_{n}))) + o(1)$ becomes a
-sample-free quantity. Writing $L^{\star}$ for its common limit,
-\eqref{eq:pool-int:sigma-xi} simplifies to
+$L_{j}(\tau_{n})$ satisfies
+\[
+  L_{j}(\tau_{n})
+  =
+  \log\frac{k}{n(1-\tau_{n})}+o(1).
+\]
+Thus the limits $L_{j}^{\star}$ in \Cref{prop:pool-int:joint-clt}, when
+finite, coincide across samples; write the common value as $L^{\star}$.
+Equivalently, $\bm D^{\star}=\mathrm{diag}(\bm L^{\star})=L^{\star}\bm I$,
+and \eqref{eq:pool-int:sigma-xi} simplifies to
 \begin{equation}
 \label{eq:pool-int:sigma-xi-distrib}
   \sigma^{\xi}(\bm\omega_{\gamma},\bm\omega_{q})^{2}
@@ -876,11 +893,12 @@ sample-free quantity. Writing $L^{\star}$ for its common limit,
     \bm\omega_{q}^{\top}\Vc\bm\omega_{q}.
 \end{equation}
 With matched weights $\bm\omega_{\gamma} = \bm\omega_{q} = \bm\omega$
-and the chapter target aligned to the common per-sample intermediate
-level ($L^{\star} = 0$), \eqref{eq:pool-int:sigma-xi-distrib}
-collapses to $(1 + m(\gamma)^{2})\,\bm\omega^{\top}\Vc\bm\omega$ ---
-the natural pooled analogue of the iid intermediate QB variance
-$\gamma^{2}(1 + m(\gamma)^{2})$ of \Cref{thm:bg:qb-iid}.
+and the chapter target aligned to this common intermediate level,
+$1-\tau_n=(k/n)(1+o(1))$, one has $L^{\star}=0$. Then
+\eqref{eq:pool-int:sigma-xi-distrib} collapses to
+$(1+m(\gamma)^{2})\,\bm\omega^{\top}\Vc\bm\omega$, the natural pooled
+analogue of the iid intermediate QB variance
+$\gamma^{2}(1+m(\gamma)^{2})$ of \Cref{thm:bg:qb-iid}.
 
 \paragraph{Why two weight vectors.}
 The separate weight pair $(\bm\omega_{\gamma}, \bm\omega_{q})$ is
@@ -913,7 +931,11 @@ $\bm\omega_{\gamma}^{\top}\bm 1 = \bm\omega_{q}^{\top}\bm 1 = 1$.
 The qualitative question driving this section is whether the
 expectile-optimal weights coincide with those for the quantile target
 of \Cref{prop:bg:optimal-weights}, or whether the expectile target
-requires its own weight scheme.
+requires its own weight scheme. The answer has an important collapse
+case: under equal effective fractions, the limiting bias is common
+across samples, so the AMSE criterion reduces to the variance criterion
+up to an additive constant; target-specific AMSE weights arise only
+away from that regime.
 
 \subsection*{Variance-optimal weights}
 
@@ -1639,15 +1661,22 @@ is the direct substitution
   \hat\sigma^{\xi}(\hat{\bm\omega}^{k},
                     \hat{\bm\omega}^{k})^{2}
   \;=\;
-  \big[(\hat m + L_{n})^{2} + 1\big]\,
-  (\hat{\bm\omega}^{k})^{\top}\hatVc\,\hat{\bm\omega}^{k},
+  \sum_{j=1}^{m}(\hat\omega_j^k)^2\,\hat V_{jj}\,
+  \big[(\hat m + L_{j,n})^{2} + 1\big],
   \qquad
-  L_{n} \;=\; \log\!\big(k/(n(1 - \tau_{n}))\big).
+  L_{j,n}
+  \;=\;
+  \log\!\big(k_j/(n_j(1 - \tau_{n}))\big),
 \]
+where $\hat V_{jj}$ denotes the $j$th diagonal entry of $\hatVc$.
+If the effective fractions are exactly equal at finite $n$, this
+reduces to the common-log-rate form with
+$L_n=\log(k/(n(1-\tau_n)))$; under the asymptotic equal-fraction
+condition it has the same limit as that common-log-rate simplification.
 If one instead uses the inverse-covariance plug-in
 $\hat{\bm\omega}^{V}=\hatVc^{-1}\bm 1/
-(\bm 1^\top\hatVc^{-1}\bm 1)$, the corresponding variance simplifies
-exactly to
+(\bm 1^\top\hatVc^{-1}\bm 1)$, then under an exactly common finite-$n$
+log rate the corresponding variance simplifies to
 \[
   \hat\sigma^{\xi}(\hat{\bm\omega}^{V},
                     \hat{\bm\omega}^{V})^{2}
@@ -1658,7 +1687,8 @@ exactly to
 the direct plug-in image of the limit
 \eqref{eq:pool-int:var-opt-distrib-value}. The two variance estimates
 have the same limit, and they agree exactly when $\hatVc$ has the
-distributed diagonal structure described above.
+distributed diagonal structure described above and the finite-$n$
+log-rate is common.
 
 \paragraph{CI validity at $m(\gamma) = 0$.}
 The hypotheses of \Cref{cor:pool-int:CI} do \emph{not} require
@@ -1678,10 +1708,18 @@ $\hat{\bm\omega}^{k}$ of \eqref{eq:pool-int:plugin-eqfrac}
 remains well defined and consistent, and the CI
 \eqref{eq:pool-int:CI-log} retains its $(1 - \alpha)$ asymptotic
 coverage; the variance simply reduces to
-$\hat\sigma^{\xi,\,2} = [L_{n}^{2} + 1]\,
-(\hat{\bm\omega}^{k})^\top\hatVc\,\hat{\bm\omega}^{k}$. For the
-inverse-covariance plug-in $\hat{\bm\omega}^{V}$, this same statement
-uses $[L_{n}^{2} + 1]/(\bm 1^\top\hatVc^{-1}\bm 1)$.
+\[
+  \hat\sigma^{\xi,\,2}
+  =
+  \sum_{j=1}^{m}(\hat\omega_j^k)^2\,\hat V_{jj}\,
+  (L_{j,n}^{2}+1),
+\]
+with the common-$L_n$ simplification
+$[L_n^2+1](\hat{\bm\omega}^{k})^\top\hatVc\,\hat{\bm\omega}^{k}$
+available when the finite-$n$ log rates coincide. For the
+inverse-covariance plug-in $\hat{\bm\omega}^{V}$, the corresponding
+common-log-rate simplification uses
+$[L_{n}^{2} + 1]/(\bm 1^\top\hatVc^{-1}\bm 1)$.
 
 \begin{remark}[Bias-corrected confidence interval]
 \label{rem:pool-int:CI-bias-correction}
@@ -1730,7 +1768,9 @@ the AMSE plug-in weights and the second-order bias estimators in
 \eqref{eq:pool-int:plugin-amse}, a hypothesis substantially more
 demanding than \eqref{eq:pool-int:CI-consistency} because it requires
 consistent estimation of the second-order parameter $\rho$ and the rate
-function $A$ \parencite[\S5.2]{deHaanFerreira2006}.
+function $A$, as in the Hall-type plug-in calibration of
+\textcite[\S2.2]{DaouiaPadoanStupfler2021} and the bias-reduction
+discussion of \textcite[\S3.1.1]{DaouiaGirardStupfler2018}.
 \end{remark}
 
 Standard practice in the extreme-value literature accordingly favours
@@ -1757,7 +1797,8 @@ therefore be read more narrowly: it is a root-$k$ diagnostic for
 equality of the high-expectile targets being pooled. It can reveal
 tail-index or tail-scale incompatibilities that affect the expectile
 level, but failure to reject does not validate the full common-marginal
-model. This mirrors the chi-square test of
+model, and rejection localises only a target-level incompatibility.
+This mirrors the chi-square test of
 \Cref{thm:bg:tail-homogeneity-test}, which diagnoses tail-index
 homogeneity rather than equality of complete distributions.
 
@@ -1806,8 +1847,9 @@ with diagonal covariance matrix
 \label{eq:pool-int:test-Sigma-Xi}
   \bm\Sigma_{\Xi}
   \;=\;
-  \mathrm{diag}\!\big((m(\gamma) + L_{j}^{\star})^{2} + 1\big)_{j = 1}^{m}\,
-  \Vc,
+  \mathrm{diag}\!\left(
+    \big[(m(\gamma) + L_{j}^{\star})^{2} + 1\big]\,(\Vc)_{j, j}
+  \right)_{j = 1}^{m},
   \qquad
   (\bm\Sigma_{\Xi})_{j, j}
   \;=\;
@@ -1829,7 +1871,11 @@ is the $\sqrt{k}$-rescaled per-sample log-expectile variance
 $\gamma^{2}\big[(m(\gamma) + L_{j}^{\star})^{2} + 1\big]\,(k/k_{j})$,
 read off from \eqref{eq:pool-int:per-sample-clt} through the row
 $(m(\gamma), 1)$ and recognising $\gamma^{2}\,(k/k_{j}) \to
-(\Vc)_{j, j}$. The mean \eqref{eq:pool-int:test-beta} is the
+  (\Vc)_{j, j}$. Equivalently, since \eqref{eq:bg:V_c-diagonal} makes
+  $\Vc$ diagonal in the present independent-samples setting,
+  \eqref{eq:pool-int:test-Sigma-Xi} can be written compactly as
+  $\mathrm{diag}((m(\gamma)+L_j^\star)^2+1)_{j=1}^{m}\Vc$. The mean
+  \eqref{eq:pool-int:test-beta} is the
 per-sample analogue of the pooled bias \eqref{eq:pool-int:mu-xi},
 the deterministic expectile--quantile offset $b^{\xi/\Quant}$ of
 \eqref{eq:pool-int:b-xi-Q-def} entering every coordinate equally (it
@@ -1906,8 +1952,8 @@ $\expectile{\tau_n,j}/\expectile{\tau_n,\ell}\to1$ is useful for
 interpreting the target of the diagnostic, but by itself it is not
 strong enough to justify a root-$k$ chi-square calibration.
 
-It is useful to keep three objects separate. The \emph{model null} is
-the common-marginal/common-tail setup under which
+It is useful to keep three objects separate. The \emph{working model}
+is the common-marginal/common-tail setup under which
 \eqref{eq:pool-int:test-clt} supplies the covariance
 $\bm\Sigma_{\Xi}$ and bias vector $\bm\beta$. The
 \emph{target-homogeneity null} is the root-$k$ condition
@@ -1925,7 +1971,7 @@ $\hat{\bm\Sigma}_{\Xi,n}$ is symmetric positive definite with
 probability tending one and
 $\hat{\bm\Sigma}_{\Xi,n} \toprob \bm\Sigma_{\Xi}$, with
 $\bm\Sigma_{\Xi}$ positive definite. Under the chapter's
-common-marginal null model, which implies the common-target centring
+common-marginal working model, which implies the common-target centring
 $\bm\Xi_{n}^{\star}=\log\expectile{\tau_n}\bm 1$,
 the statistic \eqref{eq:pool-int:test-stat} converges to a
 noncentral chi-square,
@@ -1987,7 +2033,7 @@ standing regimes of the chapter:
       \Cref{sec:pool-int:setup}, under which every coordinate of
       $\bm\beta$ collapses to one common value.
 \end{enumerate}
-If $\delta>0$ under the common-marginal model, the same central
+If $\delta>0$ under the common-marginal working model, the same central
 critical value has limiting rejection probability
 $\Prob\{\chi^{2}_{m-1}(\delta)>\chi^{2}_{m - 1,\,1-\alpha}\}$, which is
 larger than $\alpha$.
@@ -2004,11 +2050,12 @@ chi-square distribution function at its quantiles.
 Three comments situate the test. First, under the chapter's standing
 assumption of a common marginal $F$ the root-$k$ null
 $H_{0,k}^{\xi}$ holds automatically, so the test is a specification
-check on the pooling hypothesis rather than a test of a substantive
-scientific null. A non-rejection is consistent with using the pooling
-recipes of \Cref{sec:pool-int:weights,sec:pool-int:CI} at the tested
-level, while a rejection warns that the samples should not be pooled
-without modelling heterogeneity. Second, the central calibration in
+check on the target-level pooling hypothesis rather than a test that
+the full marginal laws are equal. A non-rejection is consistent with
+using the pooling recipes of \Cref{sec:pool-int:weights,sec:pool-int:CI}
+at the tested level, while a rejection warns that the samples should
+not be pooled at that expectile level without modelling heterogeneity.
+Second, the central calibration in
 \Cref{cor:pool-int:hom-test-central} is the same variance-dominated
 calibration that underlies the confidence interval of
 \Cref{cor:pool-int:CI}: case (i) is exactly the undersmoothing
@@ -2019,9 +2066,11 @@ used. Outside both regimes the asymptotic bias $\bm\beta$ is
 generically not collinear with $\bm 1$, the limit is the noncentral
 $\chi^{2}_{m - 1}(\delta)$ of \eqref{eq:pool-int:test-noncentral},
 and the central critical value over-rejects by an amount governed by
-$\delta$; this is the expectile-level counterpart of the identical
-bias caveat carried, but left implicit, by the tail-index test of
-\Cref{thm:bg:tail-homogeneity-test}.
+$\delta$; this is the expectile-level counterpart of the retained-bias
+Gaussian extension recorded after \Cref{thm:bg:tail-homogeneity-test},
+whereas the tail-index test stated in
+\textcite[Corollary~3]{DaouiaPadoanStupfler2021} uses the bias-free
+central calibration.
 
 Third, the first-order expectile null
 $H_{0,0}^{\xi}\colon

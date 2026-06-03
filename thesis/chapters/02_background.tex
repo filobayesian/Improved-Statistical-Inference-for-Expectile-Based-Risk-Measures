@@ -681,11 +681,13 @@ $\gamma$, the LAWS variance is smaller. For sufficiently heavy tails,
 and especially as $\gamma \uparrow 1/2$, the QB variance is smaller
 because the LAWS variance diverges. The thesis works with the QB
 construction throughout not because it uniformly dominates LAWS, but
-because it composes directly with the pooled $(\hat\gamma,\hat Q)$
-inputs of the pooling framework. This comparison concerns direct
+because it is the expectile construction that composes directly with
+the pooled Hill and Weissman quantile inputs of
+\textcite{DaouiaPadoanStupfler2021}. This comparison concerns direct
 intermediate-level expectile estimation; in the very-extreme
-extrapolation regime below, the first-order limit is instead driven by
-the tail-index estimator.
+extrapolation regime below, the first-order expectile limit is instead
+driven by the tail-index estimator, as in
+\textcite{DaouiaGirardStupfler2018,DavisonPadoanStupfler2023}.
 
 \subsection{Weissman extrapolation to very-extreme expectile levels}
 \label{sec:bg:weissman-expectile}
@@ -786,8 +788,7 @@ at the natural rate $\sqrt{n(1-\tau_n)}$ under its high-level
 Condition~$C^\ast$; the version below isolates the deterministic
 extrapolation error as an explicit assumption and writes the
 normalising rate as a generic sequence $a_n$, which is the form needed
-when the intermediate estimator is itself produced by pooling. Its
-short proof is given in \Cref{app:proofs:plugin-clt}.
+when the intermediate estimator is itself produced by pooling.
 
 \begin{proposition}[Plug-in CLT for extrapolated expectiles;
                     adapted from
@@ -852,6 +853,10 @@ satisfies
   \Gamma.
 \]
 \end{proposition}
+
+\begin{proof}
+See \Cref{app:proofs:plugin-clt}.
+\end{proof}
 
 \begin{remark}[Deterministic ratio control]
 \label{rem:bg:plugin-ratio-control}
@@ -1113,7 +1118,8 @@ are constrained only by $\bm\omega^\top\bm 1=1$; the optimal weights
 therefore need not be convex weights.
 
 \begin{proposition}[Optimal weights;
-                    \textcite{DaouiaPadoanStupfler2021}, Theorem~1 and \S2.2]
+                    \textcite{DaouiaPadoanStupfler2021}, Theorem~1;
+                    estimated-weight implementation in \S2.2 and Corollary~1]
 \label{prop:bg:optimal-weights}
 Suppose $\Vc$ is positive definite. Under the common-$\gamma$
 condition $(H_{\gamma})$:
@@ -1159,6 +1165,15 @@ where the equivalence uses $c_{i}^{-1} = \lim k_{i}/k_{1}$. Thus the
 samples contribute to the pooled tail index in proportion to their
 effective sample size, the same rule that one would expect from the
 unfeasible Hill estimator built from the entire combined sample.
+The finite-sample version used in the distributed corollaries of
+\textcite{DaouiaPadoanStupfler2021} is
+\[
+  \tilde{\bm\omega}_{n}^{\mathrm{Var}}
+  =
+  (k_{1}/k,\ldots,k_{m}/k)^{\top},
+\]
+which is a nonrandom, exactly normalised estimator of
+$\bm\omega^{\mathrm{Var}}$.
 
 In practice $\Vc$ and $\Bc$ must be replaced by consistent estimators
 $\hatVc$ and $\hatBc$ to render the optimal weights data-driven. The
@@ -1316,9 +1331,10 @@ $\Lambda_{n} > \chi^{2}_{m - 1,\, 1 - \alpha}$.
 \end{theorem}
 
 \textcite{DaouiaPadoanStupfler2021} state the bias-free version above.
-The same Gaussian GLS calculation also shows that, if the asymptotic
-bias is retained rather than removed by undersmoothing or bias
-correction, the deviance has the noncentral limit
+As a direct Gaussian consequence, rather than as an additional result
+stated in that paper, the same GLS calculation also shows that, if the
+asymptotic bias is retained rather than removed by undersmoothing or
+bias correction, the deviance has the noncentral limit
 \[
   \Lambda_n \todist \chi^2_{m-1}(\delta_\gamma),
   \qquad
@@ -1374,15 +1390,15 @@ fractions are asymptotically equal in the stronger sense
 $k_{j} / n_{j} = (k/n)(1 + O(k^{-1/2}))$ for every $j$. Then, under the
 conditions of their Theorem~3, the variance-optimally-pooled Hill
 estimator
-$\hat\gamma_{n}(\bm\omega^{\mathrm{Var}})$ is $\sqrt{k}$-asymptotically
-equivalent to the unfeasible benchmark Hill estimator
+$\hat\gamma_{n}(\tilde{\bm\omega}_{n}^{\mathrm{Var}})$ is
+$\sqrt{k}$-asymptotically equivalent to the unfeasible benchmark Hill estimator
 $\hat\gamma_{n}^{(\mathrm{Hill})}(k)$ built from the entire combined
 sample. If, in addition, $\rho<0$ and $p=p(n)$ satisfies
 $k/(np)\to\infty$ and $\sqrt{k}/\log(k/(np))\to\infty$, then the
 variance-optimally-pooled Weissman estimator
-$\hatWei_{n}(1 - p \mid \bm\omega^{\mathrm{Var}})$ is asymptotically
-equivalent to the unfeasible benchmark Weissman estimator built from
-the combined sample.
+$\hatWei_{n}(1 - p \mid \tilde{\bm\omega}_{n}^{\mathrm{Var}})$ is
+asymptotically equivalent to the unfeasible benchmark Weissman estimator
+built from the combined sample.
 \end{corollary}
 
 \Cref{cor:bg:pool-distrib-oracle} is the central efficiency result of
