@@ -2151,6 +2151,457 @@ away from zero in probability. The first term on the right therefore
 diverges in probability and dominates the $O_{p}(1)$ correction, so
 $\Lambda^{\xi}_{n} \toprob \infty$. \qed
 
+
+\section{Proof of \texorpdfstring{\Cref{lem:pool-ext:det-ratio}}{Lemma 4.1}}
+\label{app:proofs:pool-ext-det-ratio}
+
+Put $t_n=(1-\tau_n)^{-1}$ and
+$y_n=(1-\tau_n)/(1-\tau_n^\prime)$, so $y_n\to\infty$ and
+$\ell_n=\log y_n$. At the quantile level, the source proofs use,
+under $\rho<0$, the sequential Weissman form of the second-order
+log-quantile control (a consequence of
+\textcite[Theorem~B.2.18]{deHaanFerreira2006}; see also the use in
+\textcite[Supplement, Eq.~(B.18)]{DaouiaPadoanStupfler2021}),
+\begin{equation}
+\label{eq:pool-ext:sequential-quantile-control}
+  \log U(t_ny_n)-\log U(t_n)-\gamma\log y_n
+  =
+  O\!\big(\abs{A(t_n)}\big).
+\end{equation}
+This is the point at which the strict condition $\rho<0$ enters the
+deterministic extrapolation step: the fixed-$y$ statement of
+\Cref{cond:bg:second-order} alone is not the form being used along
+the diverging sequence $y_n\to\infty$.
+
+Decompose
+\[
+  \begin{aligned}
+  &\log\expectile{\tau_n^\prime}
+    - \log\expectile{\tau_n}
+    - \gamma\ell_n
+  \\
+  &\quad =
+  \big[
+    \log\Quant_X(\tau_n^\prime)
+    - \log\Quant_X(\tau_n)
+    - \gamma\ell_n
+  \big]
+  \\
+  &\qquad\quad
+  +
+  \big[
+    \log\{\expectile{\tau_n^\prime}/\Quant_X(\tau_n^\prime)\}
+    - \log\{\expectile{\tau_n}/\Quant_X(\tau_n)\}
+  \big].
+  \end{aligned}
+\]
+The first bracket is exactly
+\eqref{eq:pool-ext:sequential-quantile-control}. The second bracket is
+controlled by the logged expectile--quantile expansion
+\eqref{eq:pool-int:xi-Q-gap}, obtained from
+\eqref{eq:bg:c-gamma-rho}. Since $A\in RV_\rho$ with $\rho<0$,
+Potter bounds give $\abs{A(t_ny_n)}=O(\abs{A(t_n)})$ along
+$y_n\ge1$, and the monotonicity of the upper quantile gives
+$\Quant_X(\tau_n^\prime)\ge\Quant_X(\tau_n)$ eventually. Hence
+\[
+  \begin{aligned}
+  &\log\expectile{\tau_n^\prime}
+  - \log\expectile{\tau_n}
+  - \gamma\ell_n
+  \\
+  &\quad =
+  O\!\big(\abs{A((1-\tau_n)^{-1})}\big)
+  +
+  O\!\big(\Quant_X(\tau_n)^{-1}\big)
+  +
+  o\!\big(\abs{A((1-\tau_n)^{-1})}\big)
+  +
+  o\!\big(\Quant_X(\tau_n)^{-1}\big).
+  \end{aligned}
+\]
+Multiplying by $\sqrt{k}/\ell_n$ gives the result, because
+$\sqrt{k}A((1-\tau_n)^{-1})$ converges to the finite limit
+$\Lambda^\bullet$, $\sqrt{k}/\Quant_X(\tau_n)\to0$, and
+$\ell_n\to\infty$. \qed
+
+\section{Proof of \texorpdfstring{\Cref{prop:pool-ext:input-clt}}{Proposition 4.2}}
+\label{app:proofs:pool-ext-input-clt}
+
+\Cref{prop:pool-int:joint-clt} gives the joint Gaussian limit of
+$\hat\gamma_n(\bm\omega_\gamma)$ and
+$\log\hatWei_n(\tau_n\mid\bm\omega_q)$. The first-order Taylor
+expansion of $\log\psifn$ around $\gamma$, combined with
+\eqref{eq:pool-int:b-xi-Q-def}, gives
+\[
+  \begin{aligned}
+  &\sqrt{k}\log\frac{
+    \hatexpectile{\tau_n}^{\mathrm{pool}}
+      (\bm\omega_\gamma,\bm\omega_q)}
+    {\expectile{\tau_n}}
+  \\
+  &\quad =
+  m(\gamma)\sqrt{k}\{\hat\gamma_n(\bm\omega_\gamma)-\gamma\}
+  +
+  \sqrt{k}\{\log\hatWei_n(\tau_n\mid\bm\omega_q)
+            -\log\Quant_X(\tau_n)\}
+  +
+  b^{\xi/\Quant}
+  +o_p(1).
+  \end{aligned}
+\]
+Thus the second coordinate is the image of the joint limit in
+\Cref{prop:pool-int:joint-clt} under the row
+$(m(\gamma),1)$, plus the deterministic offset
+$b^{\xi/\Quant}$. This yields the mean and variance
+\eqref{eq:pool-int:mu-xi}--\eqref{eq:pool-int:sigma-xi}. Its covariance
+with the first coordinate is the covariance of the pooled-Hill
+component with $m(\gamma)$ times itself plus the pooled log-Weissman
+component, namely
+\[
+  m(\gamma)\,\bm\omega_\gamma^\top\Vc\bm\omega_\gamma
+  +
+  \bm\omega_\gamma^\top\bm D^\star\Vc\bm\omega_q,
+\]
+by \eqref{eq:pool-int:Sigma}. Passing from the centred log-ratio to
+the relative error, and from its covariance with the Hill component,
+does not change the limit. Indeed, with
+\[
+  R_n
+  =
+  \log\frac{
+    \hatexpectile{\tau_n}^{\mathrm{pool}}
+      (\bm\omega_\gamma,\bm\omega_q)}
+    {\expectile{\tau_n}},
+  \qquad
+  R_n=O_p(k^{-1/2}),
+\]
+we have
+\[
+  \sqrt{k}\left[
+    \left\{
+      \frac{
+        \hatexpectile{\tau_n}^{\mathrm{pool}}
+          (\bm\omega_\gamma,\bm\omega_q)}
+        {\expectile{\tau_n}}
+      -1
+    \right\}
+    - R_n
+  \right]
+  =
+  \sqrt{k}\,O_p(R_n^2)
+  =
+  o_p(1).
+\]
+
+For estimated weights, exact affine normalisation removes the
+deterministic centring. For example,
+\[
+  \sqrt{k}\{\hat\gamma_n(\hat{\bm\omega}_\gamma)-\gamma\}
+  =
+  \hat{\bm\omega}_\gamma^\top
+  \sqrt{k}(\hat{\bm\gamma}_n-\gamma\bm 1).
+\]
+Since the vector on the right is tight and
+$\hat{\bm\omega}_\gamma\toprob\bm\omega_\gamma$, this differs by
+$o_p(1)$ from the same display with $\bm\omega_\gamma$. The
+weighted-geometric Weissman input obeys the identical argument on the
+log scale, using
+$\hat{\bm\omega}_q^\top\bm 1=1$ and
+$\hat{\bm\omega}_q\toprob\bm\omega_q$. Substituting these two
+Slutsky steps into the Taylor expansion above gives the stated
+estimated-weight extension, with limiting mean and covariance computed
+at the deterministic probability limits. \qed
+
+\section{Proof of \texorpdfstring{\Cref{thm:pool-ext:main}}{Theorem 4.4}}
+\label{app:proofs:pool-ext-main}
+
+\Cref{sec:pool-ext:regime} verifies the non-Gaussian hypotheses of
+\Cref{prop:bg:plug-in-clt} with
+$a_n=\sqrt{k}$,
+$\hat\gamma_n=\hat\gamma_n(\bm\omega_\gamma)$ and
+$\widehat\xi_{\tau_n}^{\,I}
+=\hatexpectile{\tau_n}^{\mathrm{pool}}
+(\bm\omega_\gamma,\bm\omega_q)$. The required joint input is precisely
+\Cref{prop:pool-ext:input-clt}; its first coordinate has limiting law
+\[
+  \Gamma
+  \sim
+  \mathcal N\!\left(
+    \bm\omega_\gamma^\top\Bc,\;
+    \bm\omega_\gamma^\top\Vc\bm\omega_\gamma
+  \right).
+\]
+Applying \Cref{prop:bg:plug-in-clt} therefore gives
+\eqref{eq:pool-ext:main-clt}. We spell out the log-scale mechanism,
+because it is the structural reason why $\bm\omega_q$ vanishes from
+the first-order limit.
+
+On the high-probability positivity event fixed in
+\Cref{sec:pool-ext:estimator},
+\begin{equation}
+\label{eq:pool-ext:log-decomposition}
+\begin{aligned}
+  \log\frac{
+    \hatexpectile{\tau_n^\prime}^{\mathrm{pool},\star}
+      (\bm\omega_\gamma,\bm\omega_q)}
+    {\expectile{\tau_n^\prime}}
+  &=
+  \ell_n\{\hat\gamma_n(\bm\omega_\gamma)-\gamma\}
+  +
+  \log\frac{
+    \hatexpectile{\tau_n}^{\mathrm{pool}}
+      (\bm\omega_\gamma,\bm\omega_q)}
+    {\expectile{\tau_n}}
+  \\
+  &\quad
+  -
+  \{\log\expectile{\tau_n^\prime}
+     -\log\expectile{\tau_n}
+     -\gamma\ell_n\}.
+\end{aligned}
+\end{equation}
+Multiplication by $\sqrt{k}/\ell_n$ sends the first term to
+\[
+  \sqrt{k}\{\hat\gamma_n(\bm\omega_\gamma)-\gamma\}
+  \;\todist\;
+  \mathcal N\!\left(
+    \bm\omega_\gamma^\top\Bc,\;
+    \bm\omega_\gamma^\top\Vc\bm\omega_\gamma
+  \right),
+\]
+the pooled-Hill Gaussian limit of \Cref{thm:bg:pool-hill}. For the
+second term, \Cref{prop:pool-ext:input-clt} gives
+\[
+  \sqrt{k}
+  \left\{
+    \frac{\hatexpectile{\tau_n}^{\mathrm{pool}}
+      (\bm\omega_\gamma,\bm\omega_q)}
+         {\expectile{\tau_n}}
+    -1
+  \right\}
+  =
+  O_p(1),
+\]
+and the corresponding log-ratio is also $O_p(k^{-1/2})$ because the
+relative error is $o_p(1)$. Since $\ell_n\to\infty$, this term is
+$o_p(1)$ after multiplication by $\sqrt{k}/\ell_n$. The deterministic
+log-ratio condition in \Cref{prop:bg:plug-in-clt} holds by
+\Cref{lem:pool-ext:det-ratio}; therefore the third term in
+\eqref{eq:pool-ext:log-decomposition} is $o(\ell_n/\sqrt{k})$. Hence
+\[
+  \frac{\sqrt{k}}{\ell_n}
+  \log\frac{
+    \hatexpectile{\tau_n^\prime}^{\mathrm{pool},\star}
+      (\bm\omega_\gamma,\bm\omega_q)}
+    {\expectile{\tau_n^\prime}}
+  \;\todist\;
+  \Gamma .
+\]
+Let
+\[
+  Z_n =
+  \log\frac{
+    \hatexpectile{\tau_n^\prime}^{\mathrm{pool},\star}
+      (\bm\omega_\gamma,\bm\omega_q)}
+    {\expectile{\tau_n^\prime}} .
+\]
+The preceding display gives $(\sqrt{k}/\ell_n)Z_n\todist\Gamma$,
+hence $Z_n=O_p(\ell_n/\sqrt{k})=o_p(1)$ because
+$\ell_n/\sqrt{k}\to0$. Therefore
+\[
+  \exp(Z_n)-1-Z_n=O_p(Z_n^2),
+  \qquad
+  \frac{\sqrt{k}}{\ell_n}\{\exp(Z_n)-1-Z_n\}
+  =
+  O_p\!\left(\frac{\ell_n}{\sqrt{k}}\right)
+  =
+  o_p(1).
+\]
+Thus the relative-error normalisation has the same limit as the
+log-ratio normalisation, proving \eqref{eq:pool-ext:main-clt}.
+
+For estimated weights, use the estimated-weight part of
+\Cref{prop:pool-ext:input-clt}. Exact affine normalisation removes
+any deterministic centring error, and
+$\hat{\bm\omega}_\gamma\toprob\bm\omega_\gamma$ carries the
+pooled-Hill mean and variance to the deterministic limits in
+\eqref{eq:pool-ext:main-clt} by Slutsky's theorem. The convergence of
+$\hat{\bm\omega}_q$ affects only the intermediate-anchor term, which
+has already been shown to vanish on the $\sqrt{k}/\ell_n$ scale. \qed
+
+\section{Proof of \texorpdfstring{\Cref{prop:pool-ext:optimal-weights}}{Proposition 4.5}}
+\label{app:proofs:pool-ext-optimal-weights}
+
+\Cref{prop:bg:plug-in-clt}, applied in
+\Cref{thm:pool-ext:main}, gives the first-order mean and variance
+\eqref{eq:pool-ext:mean-var}. The variance problem is therefore the
+same constrained quadratic programme as
+\Cref{prop:bg:optimal-weights}(i), giving
+\eqref{eq:pool-ext:var-opt}--\eqref{eq:pool-ext:var-opt-value}.
+
+For AMSE, set $\bm M=\Vc+\Bc\Bc^\top$. Since $\Vc$ is positive
+definite, so is $\bm M$. The constrained quadratic programme
+\[
+  \min_{\bm\omega_\gamma^\top\bm 1=1}
+  \bm\omega_\gamma^\top\bm M\bm\omega_\gamma
+\]
+has solution
+\[
+  \bm\omega_\gamma =
+  \frac{\bm M^{-1}\bm 1}{\bm 1^\top\bm M^{-1}\bm 1}.
+\]
+Applying the Sherman--Morrison identity,
+\[
+  \bm M^{-1}
+  =
+  \Vc^{-1}
+  -
+  \frac{\Vc^{-1}\Bc\Bc^\top\Vc^{-1}}
+       {1+\Bc^\top\Vc^{-1}\Bc},
+\]
+yields \eqref{eq:pool-ext:amse-opt}. The minimum value is
+$(\bm 1^\top\bm M^{-1}\bm 1)^{-1}$, which gives
+\eqref{eq:pool-ext:amse-opt-value}. Positivity follows from positive
+definiteness of $\bm M$.
+Since neither \eqref{eq:pool-ext:mean-var} nor
+\eqref{eq:pool-ext:amse-def} contains $\bm\omega_q$, the whole affine
+hyperplane $\{\bm\nu\in\R^m:\bm\nu^\top\bm 1=1\}$ is first-order
+equivalent for the anchor weight once $\bm\omega_\gamma$ is fixed at
+the relevant optimum. \qed
+
+\section{Proof of \texorpdfstring{\Cref{cor:pool-ext:bias-reduced-clt}}{Corollary 4.6}}
+\label{app:proofs:pool-ext-bias-reduced-clt}
+
+By \Cref{thm:bg:pool-hill} and \eqref{eq:pool-ext:Bc-hat-consistency},
+\[
+  \sqrt{k}\{\overline\gamma_n(\bm\omega_\gamma)-\gamma\}
+  =
+  \sqrt{k}\{\hat\gamma_n(\bm\omega_\gamma)-\gamma\}
+  -
+  \bm\omega_\gamma^\top\hatBc
+  \;\todist\;
+  \mathcal N\!\left(
+    0,\bm\omega_\gamma^\top\Vc\bm\omega_\gamma
+  \right).
+\]
+Moreover,
+\[
+  \sqrt{k}\{\overline\gamma_n(\bm\omega_\gamma)-\gamma\}
+  =
+  \sqrt{k}\{\hat\gamma_n(\bm\omega_\gamma)-\gamma\}
+  -
+  \bm\omega_\gamma^\top\Bc
+  +o_p(1).
+\]
+Combining this recentering with \Cref{prop:pool-ext:input-clt} gives
+the joint input
+\[
+  \sqrt{k}
+  \begin{pmatrix}
+    \overline\gamma_n(\bm\omega_\gamma)-\gamma \\[2pt]
+    \hatexpectile{\tau_n}^{\mathrm{pool}}
+      (\bm\omega_\gamma,\bm\omega_q)/\expectile{\tau_n}-1
+  \end{pmatrix}
+  \todist
+  \mathcal N\!\left(
+  \begin{pmatrix}
+    0 \\[2pt]
+    \mu^\xi(\bm\omega_\gamma,\bm\omega_q)
+  \end{pmatrix},
+  \begin{pmatrix}
+    \bm\omega_\gamma^\top\Vc\bm\omega_\gamma
+      & s_{\gamma,\xi}(\bm\omega_\gamma,\bm\omega_q) \\[2pt]
+    s_{\gamma,\xi}(\bm\omega_\gamma,\bm\omega_q)
+      & \sigma^\xi(\bm\omega_\gamma,\bm\omega_q)^2
+  \end{pmatrix}
+  \right).
+\]
+Subtracting the consistent estimate of the deterministic bias shifts
+only the first-coordinate mean and leaves the covariance matrix
+unchanged.
+Now repeat the log-decomposition
+\eqref{eq:pool-ext:log-decomposition}, with
+$\overline\gamma_n(\bm\omega_\gamma)$ in place of
+$\hat\gamma_n(\bm\omega_\gamma)$. The intermediate-anchor term is
+still $o_p(1)$ on the $\sqrt{k}/\ell_n$ scale by
+\Cref{prop:pool-ext:input-clt}, and the deterministic extrapolation
+error is still negligible by \Cref{lem:pool-ext:det-ratio}. Thus the
+log-ratio limit is the centred Gaussian display above. Since
+$\ell_n/\sqrt{k}\to0$, the final
+passage from log-ratio to relative error is the same exponential
+Taylor argument used in the proof of \Cref{thm:pool-ext:main}.
+
+For estimated weights,
+$\hat{\bm\omega}_\gamma^\top\hatBc\toprob
+\bm\omega_\gamma^\top\Bc$ by the assumed convergences, and the
+estimated-weight extension of \Cref{prop:pool-ext:input-clt} supplies the
+corresponding Slutsky step for the pooled Hill component. With the
+explicit estimated-weight definition above,
+\[
+  \sqrt{k}\{\overline\gamma_n(\hat{\bm\omega}_\gamma)-\gamma\}
+  =
+  \sqrt{k}\{\hat\gamma_n(\hat{\bm\omega}_\gamma)-\gamma\}
+  -
+  \hat{\bm\omega}_\gamma^\top\hatBc
+  \todist
+  \mathcal N\!\left(
+    0,\bm\omega_\gamma^\top\Vc\bm\omega_\gamma
+  \right).
+\]
+The anchor weight remains first-order invisible on the very-extreme
+scale, as in \Cref{thm:pool-ext:main}. \qed
+
+\section{Proof of \texorpdfstring{\Cref{cor:pool-ext:CI}}{Corollary 4.7}}
+\label{app:proofs:pool-ext-CI}
+
+The proof of \Cref{thm:pool-ext:main} gives the log-scale convergence
+\[
+  \frac{\sqrt{k}}{\ell_n}
+  \left\{
+    \log
+    \hatexpectile{\tau_n^\prime}^{\mathrm{pool},\star}
+      (\hat{\bm\omega}_{\gamma},\hat{\bm\omega}_{q})
+    -
+    \log\expectile{\tau_n^\prime}
+  \right\}
+  \;\todist\;
+  \mathcal N\!\left(
+    \bm\omega_{\gamma}^{\top}\Bc,\,
+    \bm\omega_{\gamma}^{\top}\Vc\bm\omega_{\gamma}
+  \right),
+\]
+with the same estimated-weight Slutsky step as in the theorem. Under
+$\bm\omega_{\gamma}^{\top}\Bc=0$ this limit is centred. Under the
+bias-reduced construction, \Cref{cor:pool-ext:bias-reduced-clt}
+gives the identical centred log-scale limit with the same variance.
+Consequently, in either case in the statement,
+\[
+  \frac{\sqrt{k}}{\ell_n}
+  \left\{
+    \log\widehat\zeta_{\tau_n^\prime}
+    -
+    \log\expectile{\tau_n^\prime}
+  \right\}
+  \todist
+  \mathcal N\!\left(
+    0,\,
+    \bm\omega_{\gamma}^{\top}\Vc\bm\omega_{\gamma}
+  \right).
+\]
+The consistency of $\hatVc$ and
+$\hat{\bm\omega}_{\gamma}$ implies
+\[
+  \hat\sigma_{\gamma,n}^{\star\,2}
+  =
+  \hat{\bm\omega}_{\gamma}^{\top}\hatVc
+  \hat{\bm\omega}_{\gamma}
+  \toprob
+  \bm\omega_{\gamma}^{\top}\Vc\bm\omega_{\gamma},
+\]
+so self-normalisation gives a standard normal limit. The coverage of
+\eqref{eq:pool-ext:CI-log} follows, and the original-scale statement
+is the image of the same event under the strictly increasing map
+$x\mapsto\exp(x)$. \qed
 \backmatter
 \printbibliography[heading=bibintoc]
 
