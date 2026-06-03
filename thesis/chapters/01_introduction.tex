@@ -2,191 +2,79 @@
 \chapter{Introduction}
 \label{ch:intro}
 
-\section{Motivation}
+\section{Motivation and question}
 \label{sec:intro:motivation}
 
-Quantitative risk management routinely needs to summarise the tail of a
-loss distribution by a single number. The industry-standard summary has
-long been the Value-at-Risk (VaR), defined as a high quantile of the loss
-distribution. VaR is intuitive and easy to compute, but it suffers from
-two well-known shortcomings that have shaped the search for alternatives.
-First, VaR is not subadditive: it can deem a diversified portfolio more
-risky than its components, contradicting the diversification principle and
-disqualifying VaR from the class of \emph{coherent} risk measures in the
-sense of \textcite{ArtznerDelbaenEberHeath1999}. Expected Shortfall (ES)
-corrects this defect and has progressively replaced VaR in regulatory
-practice. However, ES is not \emph{elicitable}~\parencite{Gneiting2011}:
-no scoring function has its expectation uniquely minimised at the true ES,
-so ES forecasts cannot be ranked or backtested directly.
+Tail risk is usually reported through a single high-level functional of
+the loss distribution. Value-at-Risk is transparent but not coherent in
+the sense of \textcite{ArtznerDelbaenEberHeath1999}; Expected Shortfall
+is coherent but not elicitable on its own \parencite{Gneiting2011}.
+Expectiles occupy the useful intersection: for $\tau\ge1/2$ they are
+coherent and elicitable
+\parencite{BelliniKlarMullerRosazzaGianin2014}, and because they are
+defined through asymmetric squared loss they react to the magnitude of
+tail losses, not only to their frequency.
 
-Expectiles are the only law-invariant risk measure that is simultaneously
-coherent (for confidence levels $\tau \ge 1/2$) and elicitable
-\parencite{BelliniKlarMullerRosazzaGianin2014}. Originally introduced by
-\textcite{NeweyPowell1987}, the $\tau$-expectile of a random loss $X$ is
-defined as the minimiser of an asymmetric squared loss:
-\[
-  \expectile{\tau}(X) \;=\; \argmin_{\theta \in \R}\;
-    \E\!\left[\,\abs{\tau - \one\{X \le \theta\}}\,(X-\theta)^2 \,\right].
-\]
-Setting $\tau = 1/2$ recovers the mean; setting $\tau \to 1$ moves the
-expectile into the right tail. Because the asymmetric loss is squared
-rather than absolute, expectiles --- unlike quantiles --- are sensitive
-to the \emph{magnitude} of tail losses, not just to their frequency.
-\textcite{EhmGneitingJordanKrueger2016} place expectiles within a broader
-theory of consistent scoring functions and Choquet representations.
+At extreme levels, expectile estimation becomes an extreme-value
+problem. In the heavy-tailed finite-mean regime, the
+expectile--quantile equivalence
+$\expectile{\tau}/\Quant_X(\tau)\to\psifn(\gamma)
+=(\gamma^{-1}-1)^{-\gamma}$ as $\tau\uparrow1$ makes a
+quantile-based (QB) route natural: estimate the tail index, estimate an
+extreme quantile, and plug both into the bridge. The single-sample
+theory is developed by
+\textcite{DaouiaGirardStupfler2018,DaouiaGirardStupfler2020}; the
+plug-in extrapolation lemma used here comes from
+\textcite{DavisonPadoanStupfler2023}.
 
-This thesis addresses inference for expectiles at levels $\tau$ close to
-one, in two situations that are increasingly relevant in practice:
-\begin{enumerate}[label=(\roman*)]
-\item the loss distribution is heavy-tailed, in the sense of having an
-      extreme-value index $\gamma > 0$, so that the empirical
-      asymmetric-least-squares estimator becomes unstable as $\tau$ approaches
-      one and extreme-value theory becomes the natural framework;
-\item the data are spread across several independent samples --- whether
-      because of distributed computation, regulatory data-sharing
-      restrictions, or natural heterogeneity between studies --- and
-      inference must be conducted by communicating only summary statistics
-      between sources.
-\end{enumerate}
+This thesis asks how that QB expectile route should be pooled when the
+data are distributed. Starting from the optimal-pooling framework of
+\textcite{DaouiaPadoanStupfler2021}, each source communicates exactly a
+local Hill estimator, a local Weissman extreme-quantile estimator, and
+their asymptotic covariance. The research question is how to combine
+these Paper-3 primitives to estimate, extrapolate and make inference on
+an extreme expectile of a common heavy-tailed distribution.
 
-\section{Extreme expectile inference}
-\label{sec:intro:extreme-expectiles}
-
-The central bridge between expectile estimation and classical
-extreme-value theory is the \emph{expectile--quantile asymptotic
-equivalence}. Under heavy-tailed assumptions with extreme-value index
-$\gamma \in (0, 1)$ and finite first moment,
-\begin{equation}
-\label{eq:intro:asymptotic-equivalence}
-  \frac{\expectile{\tau}(X)}{\Quant_X(\tau)}
-  \;\xrightarrow{\tau \uparrow 1}\;
-  \psifn(\gamma) \;\coloneqq\; \big(\gamma^{-1} - 1\big)^{-\gamma},
-\end{equation}
-where $\Quant_X(\tau)$ is the $\tau$-quantile of $X$. Two families of
-estimators arise naturally from \eqref{eq:intro:asymptotic-equivalence}.
-The \emph{asymmetric-least-squares} (LAWS) estimator minimises the
-empirical asymmetric criterion over the data; the \emph{quantile-based}
-(QB) estimator substitutes consistent estimators of $\gamma$ and of an
-extreme quantile of $X$ into the asymptotic-equivalence formula. Their
-asymptotic theory at intermediate levels and via Weissman-type
-extrapolation to very-extreme levels was developed for iid heavy-tailed
-data by \textcite{DaouiaGirardStupfler2018} and subsequent work, and
-extended to the dependent setting by \textcite{DavisonPadoanStupfler2023};
-to the multivariate setting by \textcite{PadoanStupfler2022}. The relevant
-machinery is reviewed in \Cref{ch:background}.
-
-\section{Pooled inference across samples}
-\label{sec:intro:pooling}
-
-When $m$ samples are available, with heterogeneous sizes and possibly
-heterogeneous tails, the natural question is how best to combine them.
-\textcite{DaouiaPadoanStupfler2021} develop an optimal pooling framework
-for the tail index $\gamma$ and for extreme quantiles. Their estimators
-take the form of weighted arithmetic combinations (for the tail index)
-and weighted \emph{geometric} combinations (for extreme quantiles), the
-latter specifically adapted to the multiplicative-power structure of the
-Weissman extrapolation. They derive the joint asymptotic normality of
-the per-sample estimators across $m$ samples, allowing for asymptotic
-dependence between samples driven by a tail-copula, and identify the
-variance-optimal and AMSE-optimal pooling weights in closed form. In the
-important special case of \emph{distributed inference} --- where data are
-iid both within and across machines --- the cross-sample tail-copula
-vanishes, off-diagonal entries of the joint asymptotic covariance
-collapse to zero, and the pooled estimators recover the asymptotic
-efficiency of the unfeasible Hill / Weissman estimator built from the
-combined sample.
-
-The framework of \textcite{DaouiaPadoanStupfler2021} is the methodological
-foundation of this thesis. The framework does not address expectiles; the
-question of how to combine $m$ pairs $(\hat\gamma_j, \hat\Quant_j(p_j))$
-into a coherent inference procedure for an extreme expectile
-$\expectile{\tau_n}$ has not been studied.
-
-\section{Research question and scope}
+\section{Scope}
 \label{sec:intro:question}
 
-The thesis answers the following question:
-\begin{quote}
-\itshape Given $m$ independent samples of iid heavy-tailed observations,
-with each sample $j$ contributing point estimates $(\hat\gamma_j,
-\hat\Quant_j(p_j))$ together with their joint asymptotic covariance, how
-should one combine these summary statistics to perform inference and
-Weissman-style extrapolation for an extreme expectile of the common
-underlying distribution?
-\end{quote}
-The scope is restricted as follows:
-\begin{itemize}
-\item the data within each sample are univariate iid (no time-series
-      dependence), matching the independent common-distribution
-      distributed setting of
-      \textcite{DaouiaPadoanStupfler2021};
-\item the loss distribution is heavy-tailed with extreme-value index
-      $\gamma \in (0, 1)$ and finite first moment, the natural range for
-      the quantile-based expectile--quantile bridge used by the thesis;
-      the stronger finite-variance range $\gamma \in (0,1/2)$ is invoked
-      only when direct LAWS expectile estimators are discussed for
-      comparison;
-\item the input to the pooling procedure is summary statistics, not raw
-      data, in line with practical distributed-inference constraints.
-\end{itemize}
+The setting is deliberately narrow. The samples are univariate, iid
+within source, independent across sources, and share one common marginal
+distribution. The QB theory is used under $\gamma\in(0,1)$ and
+$\E X^-<\infty$; the stronger $\gamma<1/2$ finite-variance range enters
+only for direct LAWS comparisons. No raw observations, local LAWS
+expectiles, or expectile-specific summaries are communicated. The
+intermediate order statistic is already contained in the Weissman
+primitive and is not an additional shared input. Time-series dependence,
+multivariate samples, real-data applications and alternative
+communication protocols are left as future work.
 
 \section{Contributions}
 \label{sec:intro:contributions}
 
-\begin{enumerate}
-\item We define a \emph{pooled extreme-expectile estimator} at
-      intermediate levels by feeding the pooled tail-index estimator
-      $\hat\gamma_n(\bm\omega_\gamma)$ and the pooled weighted-geometric
-      Weissman extreme-quantile estimator $\hatWei_n(\,\cdot\,;\bm\omega_q)$
-      of \textcite{DaouiaPadoanStupfler2021} into the
-      asymptotic-equivalence formula
-      \eqref{eq:intro:asymptotic-equivalence}.
-\item We derive the joint asymptotic distribution of the pooled inputs,
-      accounting for the cross-source structure (which is diagonal
-      because the samples are independent) and for the within-source
-      dependence between $\hat\gamma_j$ and $\hat\Quant_j$ induced by the
-      use of overlapping top order statistics.
-\item Applying the delta method through $\psifn$ to this joint pooled
-      CLT, we obtain the asymptotic normality of the pooled
-      intermediate-level expectile estimator together with explicit
-      forms of its asymptotic bias and variance.
-\item We characterise the \emph{variance-optimal} and \emph{AMSE-optimal}
-      pooling weights tailored to the pooled expectile estimator. These
-      need not coincide with the weights optimal for the tail index or
-      for the extreme quantile alone, owing to the non-trivial dependence
-      between the two pieces of information.
-\item We extend the construction to very-extreme levels $\tau_n^{\prime}
-      \uparrow 1$ with $n(1-\tau_n^{\prime}) \to c < \infty$ via a
-      Weissman-style extrapolation of the pooled intermediate-level
-      estimator, and derive the corresponding central limit theorem
-      by feeding the joint intermediate-level limit of the previous
-      contribution into the plug-in CLT of
-      \textcite[Proposition~C.6]{DavisonPadoanStupfler2023}.
-      As in the single-sample case, the extrapolated estimator inherits
-      the asymptotic variance of the pooled tail-index estimator.
-\item We construct asymptotic confidence intervals for extreme expectiles
-      and a target-level diagnostic for
-      \emph{expectile-tail-homogeneity} across the $m$ samples, modelled
-      on the tail-quantile-homogeneity test of
-      \textcite{DaouiaPadoanStupfler2021} and on the GLS-weighted
-      equality-of-means test of \textcite[Section~3.3]{PadoanStupfler2022}.
-      This diagnostic is not a test of equality of the full marginal
-      distributions.
+The contributions are:
+\begin{enumerate}[label=(\roman*)]
+\item a pooled QB expectile estimator at intermediate levels, built only
+      from pooled Hill and weighted-geometric Weissman primitives, with
+      $\sqrt{k}$-equivalence between pooling primitives first and pooling
+      matched local QB plug-ins first;
+\item a joint pooled Gaussian limit for the tail-index and log-quantile
+      inputs, followed by the delta-method CLT for the pooled
+      intermediate expectile, including explicit bias and variance;
+\item variance- and AMSE-optimal expectile weights. Under equal
+      effective fractions they collapse to the Paper-3
+      effective-sample-size weights; outside that regime the expectile
+      target has its own formulas;
+\item feasible log-scale confidence intervals and an
+      expectile-tail-homogeneity diagnostic, with a noncentral
+      chi-square limit in general and a central limit under the
+      undersmoothing and equal-fraction regimes used for inference;
+\item a very-extreme Weissman extrapolation, obtained by feeding the
+      Chapter~3 input CLT into
+      \textcite[Supplement, Proposition~C.6]{DavisonPadoanStupfler2023};
+      at this scale the first-order variance and AMSE are governed by
+      the pooled Hill component;
+\item a reproducible simulation study comparing naive,
+      variance-weighted, plug-in AMSE, oracle AMSE and full-sample
+      benchmarks for intermediate and very-extreme expectile targets.
 \end{enumerate}
-
-\section{Outline of the thesis}
-\label{sec:intro:outline}
-
-\Cref{ch:background} collects the technical background: regular
-variation and the second-order condition, the Hill and Weissman
-estimators, expectiles and their characterisation, single-sample iid
-extreme-expectile inference, and the optimal pooling framework of
-\textcite{DaouiaPadoanStupfler2021}.
-\Cref{ch:pool-int} develops the pooled estimator at intermediate
-expectile levels and the associated asymptotic theory.
-\Cref{ch:pool-ext} treats the Weissman-style extrapolation to
-very-extreme expectile levels.
-\Cref{ch:discussion} discusses limitations, the link to Expected
-Shortfall, and avenues for future work, including extensions to
-time-series dependence and multivariate observations.
-Detailed proofs are gathered in \Cref{app:proofs}.
