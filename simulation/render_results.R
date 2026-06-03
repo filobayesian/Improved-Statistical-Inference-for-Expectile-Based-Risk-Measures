@@ -22,32 +22,28 @@ fmt <- function(x, digits = 3) {
 }
 
 selected <- summary[summary$k_fraction == 0.05 &
-                      summary$target == "intermediate" &
+                      summary$target %in% c("intermediate", "very_extreme") &
                       summary$m == 10 &
                       summary$regime == "strong" &
-                      summary$estimator %in% c("naive", "variance",
-                                               "amse_oracle", "amse_plugin",
-                                               "full_sample"), ]
-selected <- selected[order(selected$dgp, selected$m, selected$regime,
-                           selected$estimator), ]
-selected <- selected[selected$estimator != "full_sample", ]
+                      summary$estimator %in% c("variance", "full_sample"), ]
+selected <- selected[order(selected$target, selected$dgp, selected$estimator), ]
 
 table_path <- file.path(tab_dir, "finite_sample_summary.tex")
 con <- file(table_path, open = "w")
 writeLines(c(
-  "\\begin{tabular}{llrlrrr}",
+  "\\begin{tabular}{lllrrr}",
   "\\toprule",
-  "DGP & Regime & $m$ & Estimator & Bias & MSE & Coverage \\\\",
+  "Target & DGP & Estimator & Bias & MSE & Coverage \\\\",
   "\\midrule"
 ), con)
 if (nrow(selected) == 0) {
-  writeLines("No rows & -- & 0 & -- & -- & -- & -- \\\\", con)
+  writeLines("No rows & -- & -- & -- & -- & -- \\\\", con)
 } else {
   for (i in seq_len(nrow(selected))) {
     row <- selected[i, ]
     writeLines(sprintf(
-      "%s & %s & %d & %s & %s & %s & %s \\\\",
-      row$dgp, gsub("_", "\\\\_", row$regime), row$m,
+      "%s & %s & %s & %s & %s & %s \\\\",
+      gsub("_", "\\\\_", row$target), row$dgp,
       gsub("_", "\\\\_", row$estimator),
       fmt(row$bias), fmt(row$mse), fmt(row$coverage)
     ), con)

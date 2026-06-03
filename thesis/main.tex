@@ -2602,6 +2602,49 @@ so self-normalisation gives a standard normal limit. The coverage of
 \eqref{eq:pool-ext:CI-log} follows, and the original-scale statement
 is the image of the same event under the strictly increasing map
 $x\mapsto\exp(x)$. \qed
+
+\chapter{Additional finite-sample diagnostics}
+\label{app:finite-diagnostics}
+
+This appendix reports the simulation diagnostics referenced in
+\Cref{ch:finite-sample}. They are kept out of the main body because
+they support implementation checks rather than the central Monte Carlo
+comparison.
+
+\begin{table}[htbp]
+\centering
+\IfFileExists{tables/simulation/domain_validity.tex}
+  {\input{tables/simulation/domain_validity.tex}}
+  {\begin{tabular}{llrr}
+   \toprule
+   DGP & Estimator & Invalid rate & Valid reps \\
+   \midrule
+   Run & simulation/render\_results.R & -- & 0 \\
+   \bottomrule
+   \end{tabular}}
+\caption{QB domain-validity diagnostic for the intermediate target.
+Invalid rows correspond to finite-sample pooled or full-sample Hill
+estimates outside $(0,1)$; they are not truncated and are excluded from
+the bias, MSE and coverage summaries.}
+\label{tab:finite-domain-validity}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\IfFileExists{tables/simulation/weight_stability.tex}
+  {{\small\input{tables/simulation/weight_stability.tex}}}
+  {\begin{tabular}{llrlrr}
+   \toprule
+   DGP & Regime & $m$ & Estimator & Neg. rate & Avg. max $|w|$ \\
+   \midrule
+   Run & simulation/render\_results.R & 0 & -- & -- & -- \\
+   \bottomrule
+   \end{tabular}}
+\caption{AMSE-weight stability diagnostics. Negative weights are not
+forbidden by the affine pooling theory, but high negative-weight rates
+or large maximum absolute weights indicate finite-sample instability.}
+\label{tab:finite-stability}
+\end{table}
 \backmatter
 \printbibliography[heading=bibintoc]
 

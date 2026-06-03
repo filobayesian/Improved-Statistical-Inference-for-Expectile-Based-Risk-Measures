@@ -1,30 +1,30 @@
-\begin{tabular}{llrlrrr}
+\begin{tabular}{lllrrr}
 \toprule
-DGP & Regime & $m$ & Estimator & Bias & MSE & Coverage \\
+Target & DGP & Estimator & Bias & MSE & Coverage \\
 \midrule
-AbsStudent3 & strong & 10 & amse\_oracle & -0.048 & 0.004 & 0.813 \\
-AbsStudent3 & strong & 10 & amse\_plugin & -0.048 & 0.004 & 0.813 \\
-AbsStudent3 & strong & 10 & naive & -0.050 & 0.006 & 0.867 \\
-AbsStudent3 & strong & 10 & variance & -0.048 & 0.004 & 0.813 \\
-Burr & strong & 10 & amse\_oracle & -0.127 & 0.017 & 0.004 \\
-Burr & strong & 10 & amse\_plugin & -0.127 & 0.017 & 0.004 \\
-Burr & strong & 10 & naive & -0.127 & 0.017 & 0.033 \\
-Burr & strong & 10 & variance & -0.127 & 0.017 & 0.004 \\
-BurrHeavy & strong & 10 & amse\_oracle & -0.006 & 0.018 & 0.946 \\
-BurrHeavy & strong & 10 & amse\_plugin & -0.006 & 0.018 & 0.946 \\
-BurrHeavy & strong & 10 & naive & -0.009 & 0.030 & 0.947 \\
-BurrHeavy & strong & 10 & variance & -0.006 & 0.018 & 0.947 \\
-Frechet & strong & 10 & amse\_oracle & -0.143 & 0.021 & 0.000 \\
-Frechet & strong & 10 & amse\_plugin & -0.143 & 0.021 & 0.000 \\
-Frechet & strong & 10 & naive & -0.144 & 0.022 & 0.011 \\
-Frechet & strong & 10 & variance & -0.143 & 0.021 & 0.000 \\
-Pareto & strong & 10 & amse\_oracle & -0.158 & 0.025 & 0.000 \\
-Pareto & strong & 10 & amse\_plugin & -0.157 & 0.026 & 0.000 \\
-Pareto & strong & 10 & naive & -0.159 & 0.026 & 0.004 \\
-Pareto & strong & 10 & variance & -0.158 & 0.025 & 0.000 \\
-ParetoHeavy & strong & 10 & amse\_oracle & -0.062 & 0.020 & 0.889 \\
-ParetoHeavy & strong & 10 & amse\_plugin & -0.062 & 0.020 & 0.889 \\
-ParetoHeavy & strong & 10 & naive & -0.063 & 0.031 & 0.910 \\
-ParetoHeavy & strong & 10 & variance & -0.062 & 0.020 & 0.888 \\
+intermediate & AbsStudent3 & full\_sample & -0.046 & 0.004 & 0.816 \\
+intermediate & AbsStudent3 & variance & -0.048 & 0.004 & 0.813 \\
+intermediate & Burr & full\_sample & -0.124 & 0.016 & 0.005 \\
+intermediate & Burr & variance & -0.127 & 0.017 & 0.004 \\
+intermediate & BurrHeavy & full\_sample & -0.002 & 0.018 & 0.949 \\
+intermediate & BurrHeavy & variance & -0.006 & 0.018 & 0.947 \\
+intermediate & Frechet & full\_sample & -0.141 & 0.020 & 0.000 \\
+intermediate & Frechet & variance & -0.143 & 0.021 & 0.000 \\
+intermediate & Pareto & full\_sample & -0.156 & 0.025 & 0.000 \\
+intermediate & Pareto & variance & -0.158 & 0.025 & 0.000 \\
+intermediate & ParetoHeavy & full\_sample & -0.056 & 0.019 & 0.895 \\
+intermediate & ParetoHeavy & variance & -0.062 & 0.020 & 0.888 \\
+very\_extreme & AbsStudent3 & full\_sample & 0.189 & 0.050 & 0.376 \\
+very\_extreme & AbsStudent3 & variance & 0.190 & 0.050 & 0.381 \\
+very\_extreme & Burr & full\_sample & -0.008 & 0.006 & 0.829 \\
+very\_extreme & Burr & variance & -0.009 & 0.006 & 0.823 \\
+very\_extreme & BurrHeavy & full\_sample & 0.112 & 0.080 & 0.643 \\
+very\_extreme & BurrHeavy & variance & 0.108 & 0.079 & 0.651 \\
+very\_extreme & Frechet & full\_sample & -0.028 & 0.006 & 0.799 \\
+very\_extreme & Frechet & variance & -0.030 & 0.006 & 0.800 \\
+very\_extreme & Pareto & full\_sample & -0.045 & 0.007 & 0.741 \\
+very\_extreme & Pareto & variance & -0.047 & 0.008 & 0.730 \\
+very\_extreme & ParetoHeavy & full\_sample & 0.004 & 0.064 & 0.665 \\
+very\_extreme & ParetoHeavy & variance & -0.002 & 0.064 & 0.664 \\
 \bottomrule
 \end{tabular}

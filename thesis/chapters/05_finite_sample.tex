@@ -160,37 +160,25 @@ directly from the formulas of \Cref{ch:pool-int,ch:pool-ext}.
 \centering
 \IfFileExists{tables/simulation/finite_sample_summary.tex}
   {\input{tables/simulation/finite_sample_summary.tex}}
-  {\begin{tabular}{llrlrrr}
+  {\begin{tabular}{lllrrr}
    \toprule
-   DGP & Regime & $m$ & Estimator & Bias & MSE & Coverage \\
+   Target & DGP & Estimator & Bias & MSE & Coverage \\
    \midrule
-   Run & simulation/render\_results.R & 0 & -- & -- & -- & -- \\
+   Run & simulation/render\_results.R & -- & -- & -- & -- \\
    \bottomrule
    \end{tabular}}
-\caption{Monte Carlo summary for the intermediate expectile target.
-The displayed rows are produced automatically from the latest simulation
-run; the final thesis version should be regenerated from the
-\texttt{--final} grid.}
+\caption{Core Monte Carlo summary for the variance-weighted distributed
+estimator and the infeasible full-sample QB benchmark. Rows use
+$m=10$, the strongly unbalanced allocation, $k/n=0.05$, and the
+5,000-replication final grid.}
 \label{tab:finite-summary}
 \end{table}
 
-\begin{table}[htbp]
-\centering
-\IfFileExists{tables/simulation/domain_validity.tex}
-  {\input{tables/simulation/domain_validity.tex}}
-  {\begin{tabular}{llrr}
-   \toprule
-   DGP & Estimator & Invalid rate & Valid reps \\
-   \midrule
-   Run & simulation/render\_results.R & -- & 0 \\
-   \bottomrule
-   \end{tabular}}
-\caption{QB domain-validity diagnostic for the intermediate target.
-Invalid rows correspond to finite-sample pooled or full-sample Hill
-estimates outside $(0,1)$; they are not truncated and are excluded from
-the bias, MSE and coverage summaries.}
-\label{tab:finite-domain-validity}
-\end{table}
+Additional diagnostics are reported in
+\Cref{app:finite-diagnostics}. The domain-validity table
+\Cref{tab:finite-domain-validity} checks how often finite-sample Hill
+estimates leave the QB domain, while \Cref{tab:finite-stability}
+records AMSE-weight instability away from the equal-fraction collapse.
 
 \begin{figure}[htbp]
 \centering
@@ -216,29 +204,23 @@ sample fraction $k/n$ in the strongly unbalanced regime.}
 \label{fig:finite-k-sensitivity}
 \end{figure}
 
-\begin{table}[htbp]
-\centering
-\IfFileExists{tables/simulation/weight_stability.tex}
-  {{\small\input{tables/simulation/weight_stability.tex}}}
-  {\begin{tabular}{llrlrr}
-   \toprule
-   DGP & Regime & $m$ & Estimator & Neg. rate & Avg. max $|w|$ \\
-   \midrule
-   Run & simulation/render\_results.R & 0 & -- & -- & -- \\
-   \bottomrule
-   \end{tabular}}
-\caption{AMSE-weight stability diagnostics. Negative weights are not
-forbidden by the affine pooling theory, but high negative-weight rates
-or large maximum absolute weights indicate finite-sample instability.}
-\label{tab:finite-stability}
-\end{table}
+\paragraph{Interpretation.}
+The results give a compact finite-sample check of the theory. In the
+equal-fraction blocks, the variance rule is almost indistinguishable
+from the oracle and plug-in AMSE rules; this is the numerical analogue
+of \Cref{prop:pool-int:var-opt-distrib}. It also stays close to the
+infeasible full-sample benchmark in \Cref{tab:finite-summary}, so the
+main practical loss is not the choice of distributed weights. The naive
+rule is mainly a foil: \Cref{fig:finite-mse} shows the expected MSE
+penalty when unbalanced machines are averaged as if they carried equal
+tail information.
 
-The main comparison is between the variance-weighted distributed
-estimator and the infeasible full-sample benchmark. Under equal
-effective fractions, \Cref{prop:pool-int:var-opt-distrib} predicts that
-the variance-weighted rule should inherit the same first-order
-efficiency logic as the quantile-pooling estimator of
-\textcite{DaouiaPadoanStupfler2021}. The unequal-fraction stress block
-is designed to illustrate the complementary Chapter~3 message: AMSE
-calibration becomes target-dependent once the effective-fraction
-collapse is broken.
+Coverage should be read as a first-order diagnostic, not as evidence
+for exact finite-sample calibration. The severe undercoverage in some
+intermediate finite-variance rows is driven by visible second-order bias
+under the fixed threshold fraction $k/n=0.05$; the intervals used here
+are variance-only and not bias-centred. Finally,
+\Cref{tab:finite-stability} shows why the feasible AMSE rule is treated
+as exploratory: once the equal-fraction collapse is broken, AMSE
+weights can become negative or large, especially in the
+strong-equal-$k$ stress block.
