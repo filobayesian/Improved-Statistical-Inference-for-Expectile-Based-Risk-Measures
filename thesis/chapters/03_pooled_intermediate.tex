@@ -2,20 +2,6 @@
 \chapter[Pooled intermediate expectiles]{Pooled inference for extreme expectiles at intermediate levels}
 \label{ch:pool-int}
 
-\section*{Overview}
-
-This chapter introduces the pooled extreme-expectile estimator at
-intermediate levels and develops its asymptotic theory. The construction
-plugs the pooled tail-index estimator $\hat\gamma_n(\bm\omega_\gamma)$
-and the pooled weighted-geometric Weissman extreme-quantile estimator
-$\hatWei_n(\,\cdot\,\mid\bm\omega_q)$ of
-\textcite{DaouiaPadoanStupfler2021} into the expectile--quantile
-asymptotic equivalence
-$\expectile{\tau} \approx \psifn(\gamma)\,\Quant_X(\tau)$. The
-delta method applied through $\psifn$ yields a joint Gaussian limit,
-from which we read off the variance- and AMSE-optimal pooling weights
-tailored to the pooled expectile target.
-
 \section{Setup and notation}
 \label{sec:pool-int:setup}
 
@@ -184,25 +170,6 @@ member of this pair under the communicated pooling primitives. The
 choice is a derived consequence of the Paper-3 communication protocol,
 not a claim that QB is intrinsically optimal among all possible
 expectile procedures.
-
-\paragraph{Roadmap.}
-\Cref{sec:pool-int:estimator} defines the pooled QB intermediate
-expectile estimator from the pooled Hill and pooled Weissman inputs.
-\Cref{sec:pool-int:joint-clt} derives the joint $\sqrt{k}$-CLT for
-the pooled Hill and log-Weissman inputs, combining the pooled-Hill
-limit of \Cref{thm:bg:pool-hill} and the weighted-geometric pooling map
-with the local Hill / intermediate-threshold joint CLT, specialised to
-the independent-samples case \eqref{eq:pool-int:R-zero}. The output is
-the Gaussian input to which the delta method is then applied.
-\Cref{sec:pool-int:expectile-clt} applies the delta method through
-$\psifn$ and states the main asymptotic-normality theorem of the
-chapter. \Cref{sec:pool-int:weights} derives the variance- and
-AMSE-optimal pooling weights for the expectile target and compares
-them with the corresponding optima for the quantile target.
-\Cref{sec:pool-int:CI} provides feasible confidence intervals built
-from estimated weights, and \Cref{sec:pool-int:test} adapts the
-tail-homogeneity test of \Cref{thm:bg:tail-homogeneity-test} to the
-target-level expectile-tail-homogeneity null hypothesis.
 
 \section{The pooled QB expectile estimator}
 \label{sec:pool-int:estimator}
