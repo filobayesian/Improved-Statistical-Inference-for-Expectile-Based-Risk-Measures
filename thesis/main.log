@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.26)  3 JUN 2026 15:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.26)  3 JUN 2026 15:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1047,13 +1047,13 @@ Chapter 4.
 
 
 
-] [36] [37] [38] [39] [40] [41] [42] [43] [44] [45] [46] [47]) [48]
+] [36] [37] [38] [39] [40] [41] [42] [43] [44]) [45]
 \openout2 = `chapters/05_finite_sample.aux'.
 
 
 (./chapters/05_finite_sample.tex
 Chapter 5.
-[49
+[46
 
 
 
@@ -1068,16 +1068,16 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [50]
+ [47]
 (./tables/simulation/finite_sample_summary.tex)
 (./tables/simulation/domain_validity.tex)
-<figures/simulation/mse_by_estimator.pdf, id=1307, 519.9425pt x 375.4025pt>
+<figures/simulation/mse_by_estimator.pdf, id=1227, 519.9425pt x 375.4025pt>
 File: figures/simulation/mse_by_estimator.pdf Graphic file (type pdf)
 <use figures/simulation/mse_by_estimator.pdf>
 Package pdftex.def Info: figures/simulation/mse_by_estimator.pdf  used on input
  line 201.
 (pdftex.def)             Requested size: 452.9679pt x 327.04433pt.
-<figures/simulation/k_sensitivity.pdf, id=1308, 519.9425pt x 317.185pt>
+<figures/simulation/k_sensitivity.pdf, id=1228, 519.9425pt x 317.185pt>
 File: figures/simulation/k_sensitivity.pdf Graphic file (type pdf)
 <use figures/simulation/k_sensitivity.pdf>
 Package pdftex.def Info: figures/simulation/k_sensitivity.pdf  used on input li
@@ -1087,33 +1087,33 @@ ne 213.
 (./tables/simulation/weight_stability.tex
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 1.
-)) [51] [52] [53] [54 <./figures/simulation/mse_by_estimator.pdf> <./figures/si
-mulation/k_sensitivity.pdf>] [55]
-[56]
+)) [48] [49] [50] [51 <./figures/simulation/mse_by_estimator.pdf> <./figures/si
+mulation/k_sensitivity.pdf>] [52]
+[53]
 \openout2 = `chapters/06_discussion.aux'.
 
  (./chapters/06_discussion.tex
 Chapter 6.
-[57
+[54
 
 
 
 
-]) [58]
+]) [55]
 Appendix A.
-[59
+[56
 
 
 
-] [60] [61] [62] [63] [64] [65] [66] [67] [68] [69] [70] [71] [72] [73]
-[74] [75] [76] [77] [78] [79] [80] [81] [82] [83] [84]
+] [57] [58] [59] [60] [61] [62] [63] [64] [65] [66] [67] [68] [69] [70]
+[71] [72] [73] [74] [75] [76] [77] [78] [79] [80] [81]
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
- [85
+ [82
 
 
-] [86] (./main.aux
+] [83] (./main.aux
 (./chapters/01_introduction.aux) (./chapters/02_background.aux)
 (./chapters/03_pooled_intermediate.aux) (./chapters/04_pooled_extreme.aux)
 (./chapters/05_finite_sample.aux) (./chapters/06_discussion.aux))
@@ -1122,17 +1122,17 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 82BAC7EE47C3139B5D245E2ED2951281;14405.
+(rerunfilecheck)             Checksum: 173DF9C8FF07E74D5197EAB17C9F53AD;14405.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 26825 strings out of 474116
- 478453 string characters out of 5743681
+ 26807 strings out of 474116
+ 478284 string characters out of 5743681
  1964187 words of memory out of 5000000
- 47868 multiletter control sequences out of 15000+600000
- 708829 words of font info for 359 fonts, out of 8000000 for 9000
+ 47861 multiletter control sequences out of 15000+600000
+ 708818 words of font info for 359 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  74i,21n,84p,1001b,2295s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/filippogombac/Library/texlive/2024/texmf-var/fonts/pk/ljfour/public/
@@ -1157,10 +1157,10 @@ exlive/2024/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/202
 t/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/typ
 e1/public/lm/lmtt10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/
 amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (91 pages, 843164 bytes).
+Output written on main.pdf (88 pages, 825111 bytes).
 PDF statistics:
- 2083 PDF objects out of 2487 (max. 8388607)
- 1913 compressed objects within 20 object streams
- 468 named destinations out of 1000 (max. 500000)
+ 2001 PDF objects out of 2073 (max. 8388607)
+ 1838 compressed objects within 19 object streams
+ 457 named destinations out of 1000 (max. 500000)
  77891 words of extra memory for PDF output out of 89155 (max. 10000000)
 
