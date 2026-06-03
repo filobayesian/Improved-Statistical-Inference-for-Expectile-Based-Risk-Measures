@@ -519,44 +519,6 @@
       \field{pages}{819\bibrangedash 847}
       \range{pages}{29}
     \endentry
-    \entry{PadoanStupfler2022}{article}{}
-      \name{author}{2}{}{%
-        {{un=0,uniquepart=base,hash=0c11d850708ce6fef1d53c0b8af5f7eb}{%
-           family={Padoan},
-           familyi={P\bibinitperiod},
-           given={Simone\bibnamedelima A.},
-           giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=c1e0be9e5ef95568a2e36070aadcdeb8}{%
-           family={Stupfler},
-           familyi={S\bibinitperiod},
-           given={Gilles},
-           giveni={G\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{5648aaf64525589c1512861e13ff33f8}
-      \strng{fullhash}{5648aaf64525589c1512861e13ff33f8}
-      \strng{bibnamehash}{5648aaf64525589c1512861e13ff33f8}
-      \strng{authorbibnamehash}{5648aaf64525589c1512861e13ff33f8}
-      \strng{authornamehash}{5648aaf64525589c1512861e13ff33f8}
-      \strng{authorfullhash}{5648aaf64525589c1512861e13ff33f8}
-      \field{sortinit}{P}
-      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Bernoulli}
-      \field{number}{2}
-      \field{title}{Joint inference on extreme expectiles for multivariate heavy-tailed distributions}
-      \field{volume}{28}
-      \field{year}{2022}
-      \field{pages}{1021\bibrangedash 1048}
-      \range{pages}{28}
-      \verb{doi}
-      \verb 10.3150/21-BEJ1375
-      \endverb
-    \endentry
     \entry{Weissman1978}{article}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=96396faee478b5f31a8d7af6c12930be}{%
