@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.18.0 (TeX Live 2024)  (format=lualatex 2024.12.26)  3 JUN 2026 11:23
+This is LuaHBTeX, Version 1.18.0 (TeX Live 2024)  (format=lualatex 2024.12.26)  3 JUN 2026 11:26
  system commands enabled.
  file:line:error style messages enabled.
 **/Users/filippogombac/Documents/GitHub/Improved-Statistical-Inference-for-Expectile-Based-Risk-Measures/thesis/main.tex
@@ -1044,19 +1044,19 @@ Chapter 3.
 
 
 
-] [24] [25] [26] [27]
+] [24] [25] [26]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 387.
+(Font)              <9> on input line 377.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 387.
- [28] [29] [30] [31] [32] [33] [34] [35] [36] [37] [38] [39] [40] [41] [42]
+(Font)              <5> on input line 377.
+ [27] [28] [29] [30] [31] [32] [33] [34] [35] [36] [37] [38] [39] [40] [41] [42]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 1787.
+(Font)              <14.4> on input line 1777.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 1787.
+(Font)              <10> on input line 1777.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 1787.
- [43] [44] [45] [46]) [47]
+(Font)              <7> on input line 1777.
+ [43] [44] [45]) [46] [47]
 \openout2 = chapters/04_pooled_extreme.aux
  (./chapters/04_pooled_extreme.tex
 Chapter 4.
@@ -1124,12 +1124,12 @@ Here is how much of LuaTeX's memory you used:
  156327,1977958 words of node,token memory allocated
  6262 words of node memory still in use:
    8 hlist, 2 vlist, 2 rule, 1 local_par, 5 glue, 4 kern, 1 penalty, 1 margin_kern, 3 glyph, 1863 attribute, 70 glue_spec, 933 attribute_list, 1 write, 9 pdf_action nodes
-   avail lists: 1:2,2:3179,3:491,4:378,5:678,6:157,7:13809,8:109,9:1404,10:22,11:782
+   avail lists: 1:2,2:3179,3:491,4:377,5:678,6:158,7:13809,8:109,9:1404,10:22,11:782
  48098 multiletter control sequences out of 65536+600000
  121 fonts using 8082087 bytes
  74i,21n,81p,1110b,2162s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}<</Users/filippogombac/Library/texlive/2024/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.657pk>>{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmib10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmro10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy9.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (102 pages, 1020876 bytes).
+Output written on main.pdf (102 pages, 1019473 bytes).
 
 PDF statistics: 2312 PDF objects out of 2487 (max. 8388607)
  2152 compressed objects within 22 object streams

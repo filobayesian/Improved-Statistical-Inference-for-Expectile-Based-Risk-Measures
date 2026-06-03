@@ -42,13 +42,13 @@
 \contentsline {section}{\numberline {3.2}The pooled QB expectile estimator}{26}{section.3.2}%
 \contentsline {paragraph}{Pooled Hill and pooled Weissman primitives.}{26}{section*.14}%
 \contentsline {paragraph}{The two candidate estimators.}{27}{section*.15}%
-\contentsline {paragraph}{Canonical choice.}{28}{section*.16}%
+\contentsline {paragraph}{Canonical choice.}{27}{section*.16}%
 \contentsline {paragraph}{Two weight vectors, not one.}{28}{section*.17}%
 \contentsline {paragraph}{Why the pooled Weissman at the intermediate level.}{28}{section*.18}%
-\contentsline {section}{\numberline {3.3}Joint asymptotic distribution of the pooled inputs}{29}{section.3.3}%
+\contentsline {section}{\numberline {3.3}Joint asymptotic distribution of the pooled inputs}{28}{section.3.3}%
 \contentsline {paragraph}{Within-sample decomposition.}{29}{section*.19}%
 \contentsline {paragraph}{Pooling under independence.}{29}{section*.20}%
-\contentsline {section}{\numberline {3.4}Asymptotic normality of the pooled expectile estimator}{31}{section.3.4}%
+\contentsline {section}{\numberline {3.4}Asymptotic normality of the pooled expectile estimator}{30}{section.3.4}%
 \contentsline {paragraph}{Derivative of $\log \psi $.}{31}{section*.21}%
 \contentsline {paragraph}{The deterministic expectile--quantile gap.}{31}{section*.22}%
 \contentsline {paragraph}{Reduction to the iid baseline.}{32}{section*.23}%
@@ -60,7 +60,7 @@
 \contentsline {paragraph}{Stacked notation.}{37}{section*.30}%
 \contentsline {paragraph}{Equal-fraction AMSE collapse.}{37}{section*.31}%
 \contentsline {paragraph}{Comparison with the Daouia--Padoan--Stupfler AMSE optimum away from equal fractions.}{38}{section*.32}%
-\contentsline {section}{\numberline {3.6}Estimated weights and confidence intervals}{39}{section.3.6}%
+\contentsline {section}{\numberline {3.6}Estimated weights and confidence intervals}{38}{section.3.6}%
 \contentsline {paragraph}{Practical recommendation.}{40}{section*.34}%
 \contentsline {paragraph}{Practical remarks.}{42}{section*.36}%
 \contentsline {paragraph}{CI validity at $m(\gamma ) = 0$.}{42}{section*.37}%
