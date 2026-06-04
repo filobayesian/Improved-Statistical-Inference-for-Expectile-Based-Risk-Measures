@@ -21,14 +21,18 @@ where `\widehat q_n^\star(\tau_n\mid\omega)` is the Daouia--Padoan--Stupfler geo
 
 As of 2026-06-04, the compiled thesis scaffold has been cleaned so it no longer presents the withdrawn pooled-intermediate route as a validated contribution. The old full draft still exists in git history and in generated/stale materials, but the live thesis files now mark the reset explicitly.
 
-Current source-audit status: the `A_n` pooled Weissman component of the exact
-decomposition has been validated at scratch-note level in
-`notes/source_audit_pooled_extreme_expectile.md`. For the finite-`m`
-iid/common-marginal distributed route, use Daouia--Padoan--Stupfler Corollary
-9 as the clean source statement; use Theorem 2 plus the supplement proof only
-if Chapter 4 needs the broader tail-homoskedastic or direct log-expansion
-route. This validates only the quantile component `A_n`, not the final
-normalisation or theorem for `A_n+B_n-C_n`.
+Current source-audit status: the `A_n` pooled Weissman component and the `B_n`
+plug-in-`\psi` component of the exact decomposition have been validated at
+scratch-note level in `notes/source_audit_pooled_extreme_expectile.md`. For
+the finite-`m` iid/common-marginal distributed route, use
+Daouia--Padoan--Stupfler Corollary 9 as the clean source statement for `A_n`;
+use Theorem 2 plus the supplement proof only if Chapter 4 needs the broader
+tail-homoskedastic or direct log-expansion route. For `B_n`, use the pooled
+Hill CLT and the compact-event Taylor expansion
+`B_n=m(\gamma)(\widehat\gamma_n(\omega)-\gamma)+O_P(k^{-1})`, keeping the
+exceptional case `m(\gamma)=0` visible. This validates only the component
+ledgers for `A_n` and `B_n`, not the final normalisation or theorem for
+`A_n+B_n-C_n`.
 
 The error is that the thesis was built around a standalone pooled intermediate QB expectile theory:
 \[
@@ -169,22 +173,22 @@ New proof work still required:
 
 - Match the thesis notation exactly to the source notation, especially `p_n=1-\tau_n`, the intermediate thresholds `k_j`, and the target quantile/expectile.
 - Prove and use the exact log decomposition `A_n+B_n-C_n`.
-- Taylor expand `B_n=\log\psi(\widehat\gamma_n(\omega))-\log\psi(\gamma)` with a compactness argument inside `(0,1)` and an explicit remainder.
 - Convert the DGS ratio expansion for `C_n` into a log expansion and control the log-conversion remainder.
-- Only after the `B_n` and `C_n` components are validated alongside the completed `A_n` audit, compare their orders to determine the correct scale, centring, variance, and bias.
+- Only after the `C_n` component is validated alongside the completed `A_n` and `B_n` audits, compare their orders to determine the correct scale, centring, variance, and bias.
 
 ## Immediate Next Step
 
 The active working artifact is `notes/source_audit_pooled_extreme_expectile.md`. It already contains the source audit and a component ledger for `A_n+B_n-C_n`.
 
-The next task is to validate `B_n` in the common-marginal iid/distributed
-setting: cite the pooled Hill CLT for
-`\widehat\gamma_n(\omega)-\gamma`, prove the compact-subset event inside
-`(0,1)`, and write the Taylor expansion of `\log\psi` with an explicit
-remainder. After that, validate `C_n`, and only then perform the order
-comparison inside the note. Do not choose or state a final normalisation,
-theorem, weights, confidence intervals, or simulation design until the ledger
-shows which terms survive and which source assumptions justify that conclusion.
+The next task is to validate `C_n` in the common-marginal iid/distributed
+setting. Confirm the exact Daouia--Girard--Stupfler (2020) Proposition 1(i)
+assumptions in the thesis notation, convert the population ratio expansion for
+`\xi_{\tau_n}/(\psi(\gamma)Q(\tau_n))` into a log expansion, and control the
+log-conversion remainder. Only after `C_n` is validated should the note perform
+the order comparison for `A_n+B_n-C_n`. Do not choose or state a final
+normalisation, theorem, weights, confidence intervals, or simulation design
+until the ledger shows which terms survive and which source assumptions justify
+that conclusion.
 
 ## Full Research Plan
 
@@ -284,12 +288,21 @@ Term 1 (`A_n`, source-audited for the finite-`m` iid/common-marginal route):
   conclusion to the broader tail-homoskedastic route without explicitly
   choosing the target population.
 
-Term 2:
+Term 2 (`B_n`, source-audited for the finite-`m` iid/common-marginal route):
 
-- What exact pooled Hill statement applies to `\widehat\gamma_n(\omega)-\gamma`?
-- What assumptions ensure `\widehat\gamma_n(\omega)` lies in a compact subset of `(0,1)` with high probability?
-- What Taylor expansion of `\log\psi` is valid, and what remainder bound is needed?
-- On any proposed final normalisation, does `B_n` contribute or vanish? Prove, do not guess.
+- Use Daouia--Padoan--Stupfler Theorem 1 as the general pooled Hill CLT, and
+  Corollary 5 as the clean iid/common-marginal distributed specialisation.
+- The pooled Hill CLT gives
+  `\widehat\gamma_n(\omega)-\gamma=O_P(k^{-1/2})` and
+  `\widehat\gamma_n(\omega)\to_P\gamma`.
+- For any `0<\varepsilon<\min(\gamma,1-\gamma)`, the event
+  `|\widehat\gamma_n(\omega)-\gamma|\le\varepsilon` has probability tending to
+  one and places the estimator in a compact subset of `(0,1)`.
+- On that compact event, Taylor expansion of `g(x)=\log\psi(x)` gives
+  `B_n=m(\gamma)(\widehat\gamma_n(\omega)-\gamma)+O_P(k^{-1})`.
+- Keep the exceptional case `m(\gamma)=0` visible. Do not decide whether `B_n`
+  contributes or vanishes under the final theorem scale until after `C_n` is
+  validated and the order comparison is performed.
 
 Term 3:
 
@@ -298,7 +311,7 @@ Term 3:
 - Which second-order and moment assumptions enter?
 - On any proposed final normalisation, does `C_n` contribute or vanish? Prove, do not guess.
 
-Only after the three answers are complete should the note propose a final normalisation for `A_n+B_n-C_n`.
+Only after the `C_n` answer is complete should the note propose a final normalisation for `A_n+B_n-C_n`.
 
 ### Phase 5: Main Theorem
 

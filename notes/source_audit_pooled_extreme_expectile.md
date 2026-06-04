@@ -293,8 +293,14 @@ For the finite-$m$ iid/common-marginal setting, point 1 is validated as follows:
 
 ### Source theorem
 
-Daouia--Padoan--Stupfler Theorem 1 gives, under the assumptions listed above
-except the extra Weissman conditions $(H)$, $\rho_j<0$, and the $p$-regime,
+Daouia--Padoan--Stupfler Theorem 1 gives the general finite-$m$ pooled Hill
+input. Under the marginal second-order conditions $C_2(\gamma_j,\rho_j,A_j)$,
+the tail-copula condition $J(R)$, proportional sample and threshold sizes
+$n_1/n_j\to b_j\in(0,\infty)$ and $k_1/k_j\to c_j\in(0,\infty)$, and the
+Hill-bias calibration $\sqrt{k_j}A_j(n_j/k_j)\to\lambda_j$, their theorem
+first gives the joint CLT for the marginal Hill estimators. Under the common
+tail-index condition $\gamma_1=\cdots=\gamma_m=\gamma$, it then implies, for
+any deterministic weight vector satisfying $\omega^\top1=1$,
 
 $$
 \sqrt{k}\{\widehat\gamma_n(\omega)-\gamma\}
@@ -302,7 +308,31 @@ $$
 N(\omega^\top B_c,\omega^\top V_c\omega).
 $$
 
-This is the source statement for the random input to $B_n$.
+This is the source statement for the random input to $B_n$. It does not require
+the extra Weissman conditions: no tail homoskedasticity $(H)$, no strict
+$\rho_j<0$ requirement beyond what is needed for the relevant bias calibration,
+and no extreme-level $p$-regime. In the iid/common-marginal distributed route,
+Daouia--Padoan--Stupfler Corollary 5 is the direct specialisation:
+
+$$
+\sqrt{k}\{\widehat\gamma_n(\omega)-\gamma\}
+\Rightarrow
+N\left(
+  \frac{\lambda}{1-\rho}\sum_{j=1}^m d_j^\rho\omega_j,
+  \gamma^2
+  \left(\sum_{j=1}^m\frac1{c_j}\right)
+  \left(\sum_{j=1}^m c_j\omega_j^2\right)
+\right),
+$$
+
+with $d_j$ as in the $A_n$ audit. This common-marginal version is the cleanest
+source for the first thesis route. Theorem 1 or Corollary 5 also gives
+
+$$
+\widehat\gamma_n(\omega)-\gamma=O_P(k^{-1/2})
+\quad\text{and}\quad
+\widehat\gamma_n(\omega)\xrightarrow{P}\gamma.
+$$
 
 ### Compactness Inside $(0,1)$
 
@@ -331,6 +361,21 @@ has probability tending to one. The same argument works for estimated weights
 if they are exactly normalised and converge to a deterministic admissible
 weight vector, as in the source theorem.
 
+Equivalently, with
+
+$$
+E_{n,\varepsilon}
+=\left\{
+  |\widehat\gamma_n(\omega)-\gamma|\le\varepsilon
+ \right\},
+$$
+
+we have $P(E_{n,\varepsilon})\to1$ and, on this event, the whole line segment
+between $\gamma$ and $\widehat\gamma_n(\omega)$ lies in the compact interval
+$K_\varepsilon=[\gamma-\varepsilon,\gamma+\varepsilon]\subset(0,1)$.
+The Taylor statements below are therefore high-probability-event statements;
+outside $E_{n,\varepsilon}$ no expansion is needed for the limiting argument.
+
 ### Taylor expansion
 
 Let
@@ -346,7 +391,25 @@ $$
 g'(x)=m(x)=\frac{1}{1-x}-\log(x^{-1}-1).
 $$
 
-Therefore, on the high-probability compact event,
+Moreover,
+
+$$
+g''(x)=m'(x)
+=
+\frac{1}{(1-x)^2}
++
+\frac{1}{1-x}
++
+\frac{1}{x}.
+$$
+
+For the compact interval $K_\varepsilon$, define the finite constant
+
+$$
+M_\varepsilon=\sup_{x\in K_\varepsilon}|g''(x)|.
+$$
+
+Therefore, on $E_{n,\varepsilon}$,
 
 $$
 B_n
@@ -356,9 +419,28 @@ m(\gamma)\{\widehat\gamma_n(\omega)-\gamma\}
 R_n^\psi,
 $$
 
-where $R_n^\psi$ is the Taylor remainder made explicit in the component ledger
-below. The pooled Hill theorem is the later source for controlling
-$\widehat\gamma_n(\omega)-\gamma$; this note does not scale $B_n$.
+where the Taylor remainder satisfies the explicit bound
+
+$$
+|R_n^\psi|
+\le
+\frac12 M_\varepsilon
+\{\widehat\gamma_n(\omega)-\gamma\}^2.
+$$
+
+Together with the pooled Hill CLT,
+
+$$
+R_n^\psi=O_P(k^{-1}),
+\qquad
+B_n
+=
+m(\gamma)\{\widehat\gamma_n(\omega)-\gamma\}
++O_P(k^{-1}).
+$$
+
+This records only the intrinsic order of the $B_n$ pieces. It does not choose a
+normalisation for the full sum $A_n+B_n-C_n$.
 
 Special caution: $m(\gamma)$ vanishes near $\gamma=0.2178$. If the final
 theorem includes a first-order contribution from $B_n$, that root may require
@@ -621,8 +703,18 @@ $$
 B_n=g(\overline\gamma_n)-g(\gamma).
 $$
 
-On the event that the line segment between $\gamma$ and
-$\overline\gamma_n$ lies inside $(0,1)$, Taylor's formula gives
+For any $0<\varepsilon<\min(\gamma,1-\gamma)$, define
+
+$$
+E_{n,\varepsilon}
+=\{|\overline\gamma_n-\gamma|\le\varepsilon\},
+\qquad
+K_\varepsilon=[\gamma-\varepsilon,\gamma+\varepsilon].
+$$
+
+The pooled Hill CLT gives $P(E_{n,\varepsilon})\to1$, and
+$K_\varepsilon$ is a compact subset of $(0,1)$. On $E_{n,\varepsilon}$,
+Taylor's formula gives
 
 $$
 B_n
@@ -660,9 +752,40 @@ m'(x)
 \frac{1}{x}.
 $$
 
-This is only a decomposition. The next proof still has to justify the
-high-probability compact event and then decide how, or whether, to scale the
-linear and remainder pieces.
+Since $m'$ is continuous on $K_\varepsilon$,
+
+$$
+M_\varepsilon=\sup_{x\in K_\varepsilon}|m'(x)|<\infty,
+$$
+
+and therefore, on $E_{n,\varepsilon}$,
+
+$$
+|R_n^\psi|
+\le
+\frac12 M_\varepsilon(\overline\gamma_n-\gamma)^2.
+$$
+
+The same pooled Hill CLT gives
+
+$$
+\overline\gamma_n-\gamma=O_P(k^{-1/2}),
+\qquad
+R_n^\psi=O_P(k^{-1}).
+$$
+
+Thus the validated ledger for $B_n$ is
+
+$$
+B_n
+=
+m(\gamma)(\overline\gamma_n-\gamma)
++O_P(k^{-1}).
+$$
+
+If $m(\gamma)=0$, the linear part vanishes and this ledger only records
+$B_n=O_P(k^{-1})$. Whether that exceptional case matters depends on the later
+order comparison with $A_n$ and $C_n$.
 
 ### $C_n$: sourced population-ratio ledger plus exact log remainder
 
@@ -771,7 +894,8 @@ and the new log-conversion remainder.
    proof of Theorem 2 as a package, or to reproduce the two component controls
    from standard EVT inputs.
 
-4. For $B_n$, prove the compact-event Taylor step cleanly and keep the
+4. $B_n$ is now validated as a compact-event Taylor expansion:
+   $B_n=m(\gamma)\{\widehat\gamma_n(\omega)-\gamma\}+O_P(k^{-1})$, with the
    exceptional case $m(\gamma)=0$ visible. Do not infer its importance before
    the later scale comparison.
 
@@ -779,8 +903,8 @@ and the new log-conversion remainder.
    prove the log conversion by controlling $R_n^{log}$ after the relevant scale
    has been identified.
 
-6. Only after the $B_n$ and $C_n$ ledgers have also been validated should the
-   note compare orders and propose a normalisation for $A_n+B_n-C_n$.
+6. Only after the $C_n$ ledger has also been validated should the note compare
+   orders and propose a normalisation for $A_n+B_n-C_n$.
 
 7. Do not import Daouia--Padoan--Stupfler weights until the final theorem has
    identified the variance or AMSE criterion for the complete sum
