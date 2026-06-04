@@ -1,217 +1,386 @@
 # AGENTS.md
 
-Working context for Codex (and any other AI assistant) collaborating in this repository.
+Working context for Codex and any other AI assistant collaborating in this repository.
 
-## What this project is
+## What This Project Is
 
-A **Master's thesis, with LaTeX source and reproducible R simulation support**, by Filippo Gombac extending the optimal-pooling / distributed-inference framework of Daouia, Padoan & Stupfler (2021, arXiv:2111.03173) from the tail index and extreme **quantiles** to extreme **expectiles**, in the heavy-tailed finite-mean regime for the quantile-based route ($0<\gamma<1$ and $\E X^-<\infty$). The stronger $\gamma \in (0,1/2)$ finite-variance range is only needed for direct LAWS expectile CLTs and LAWS comparisons.
+A Master's thesis, with LaTeX source and reproducible R simulation support, by Filippo Gombac on pooled inference for extreme expectile-based risk measures. The project extends the optimal-pooling / distributed-inference framework of Daouia, Padoan & Stupfler, *Optimal pooling and distributed inference for the tail index and extreme quantiles*, from extreme quantiles toward extreme expectiles.
 
-Working title: *"Improved Statistical Inference for Expectile-Based Risk Measures."*
+Working title: *Improved Statistical Inference for Expectile-Based Risk Measures*.
 
-**Driving research question.** Given $m$ independent samples each sharing the **same primitives Paper 3 pools** — a local Hill estimator $\hat\gamma_j(k_j)$ and a local Weissman extreme-quantile estimator $\hat q^\star_j(p_n')$ — together with their joint asymptotic covariance, how should one combine these summary statistics to perform inference and Weissman-style extrapolation for an extreme **expectile** of the common underlying distribution?
+The research is currently in a reset phase after supervisor feedback on 2026-06-03. Do not treat the existing Chapter 3/4 theory as settled. The new direction is to rebuild from first principles around the pooled extreme-expectile estimator
+\[
+  \widehat\xi_{\tau_n}^{pool,\star}
+  =
+  \psi(\widehat\gamma_n(\omega))\,
+  \widehat q_n^\star(\tau_n\mid\omega),
+\]
+where `\widehat q_n^\star(\tau_n\mid\omega)` is the Daouia--Padoan--Stupfler geometrically pooled Weissman extreme-quantile estimator and `\psi(\gamma)=(\gamma^{-1}-1)^{-\gamma}` is the high-expectile / high-quantile asymptotic constant.
 
-## Repository layout
+## Current Repository Status: Research Reset
+
+As of 2026-06-04, the compiled thesis scaffold has been cleaned so it no longer presents the withdrawn pooled-intermediate route as a validated contribution. The old full draft still exists in git history and in generated/stale materials, but the live thesis files now mark the reset explicitly.
+
+The error is that the thesis was built around a standalone pooled intermediate QB expectile theory:
+\[
+  \widehat\xi_{\tau_n}^{pool}
+  =
+  \psi(\widehat\gamma^{pool})\,
+  \widehat q^{pool}(\tau_n),
+\]
+treated as an intermediate-level target with its own CLT, its own two-weight variance formula, and its own closed-form variance-/AMSE-optimal expectile weights. This is not the path the supervisor wants, and it exposes the thesis to unnecessary and fragile derivations.
+
+The live scaffold now has the following reset status:
+
+- `thesis/chapters/01_introduction.tex` states the new direction without claiming a theorem.
+- `thesis/chapters/03_pooled_intermediate.tex` is a withdrawal marker for the old intermediate route.
+- `thesis/chapters/04_pooled_extreme.tex` contains only the working estimator, the exact log decomposition, and source-audit questions.
+- `thesis/chapters/05_finite_sample.tex` freezes simulations pending a proved theorem.
+- `thesis/main.tex` no longer compiles the obsolete proof and finite-sample diagnostic appendices.
+
+### What Is Affected
+
+- `thesis/chapters/01_introduction.tex`: the contribution list and research question must be rewritten only after the new theorem is derived.
+- `thesis/chapters/03_pooled_intermediate.tex`: the pooled intermediate QB CLT, A/B estimator comparison, two-weight optimality results, AMSE closed form, CI, and expectile-homogeneity diagnostic should not be used as established thesis contributions.
+- `thesis/chapters/04_pooled_extreme.tex`: keep it as a scaffold until the source audit and proof are complete. Do not add a normalisation, negligibility claim, theorem, weights, or interval before deriving them.
+- Appendix proofs in `thesis/main.tex`: the old Chapter 3/4 proof appendix has been removed from the compiled draft. Individual algebraic ideas may be useful as scratch work, but do not cite them as validated results.
+- `thesis/chapters/05_finite_sample.tex` and `simulation/`: the existing simulations were designed around the old estimator and old weight menu. They are not final evidence for the rebuilt thesis.
+- Generated tables/figures under `thesis/tables/simulation/` and `thesis/figures/simulation/`: treat as stale until the new estimator and simulation design are settled.
+
+### What To Keep
+
+- The repository layout, LaTeX infrastructure, macros, bibliography, build workflow, and simulation scaffolding.
+- The background material on regular variation, Hill, Weissman, expectiles, the expectile--quantile asymptotic equivalence, and Daouia--Padoan--Stupfler optimal pooling, subject to source rechecking.
+- The source PDFs in `papers/`, especially:
+  - `Optimal Pooling.pdf` and `optimal pooling supp.pdf`;
+  - `Daouia-Estimationtailrisk-2018.pdf`;
+  - `DGS2019.pdf`;
+  - `DGS2020.pdf`;
+  - `Tail Risk Inference via Expectiles in Heavy-Tailed Time Series.pdf`;
+  - `ubes_a_2078332_sm7626.pdf`.
+- The corrected facts already identified about `\psi`: it is not monotone on `(0,1)`, and `m(\gamma)=d\log\psi(\gamma)/d\gamma` vanishes near `0.2178`.
+- The corrected second-order expectile--quantile constant, pending source rechecking before reuse:
+\[
+  c(\gamma,\rho)
+  =
+  \frac{(\gamma^{-1}-1)^{-\rho}}{1-\gamma-\rho}
+  +
+  \frac{(\gamma^{-1}-1)^{-\rho}-1}{\rho}.
+\]
+
+### What Not To Keep As A Contribution
+
+- Do not preserve the old thesis claim that Chapter 3 is a completed standalone pooled-intermediate-expectile theory.
+- Do not preserve the old two-weight expectile variance/AMSE optimization as a main result unless it is independently rederived and explicitly requested.
+- Do not keep the old claim that the intermediate case is the structural foundation of the extreme case.
+- Do not develop arithmetic-vs-geometric expectile pooling unless it becomes necessary. It is currently a parked side question, not part of the least-action path.
+- Do not widen to time series, multivariate expectiles, real data, or new methodology outside the rebuilt iid/distributed extreme-expectile target without explicit approval from Filippo.
+
+## Supervisor Feedback To Use As Guide
+
+Filippo met his supervisor on 2026-06-03. The feedback should guide all next work:
+
+1. The current thesis has a huge setup error: it relies too heavily on a closed-form/asymptotic QB expression for expectiles at the intermediate level and then builds a large bespoke theory on top of it.
+2. Do not make the closed-form intermediate expectile theory the main contribution. Follow the structure of Daouia--Padoan--Stupfler's optimal-pooling framework more closely.
+3. The supervisor was fairly satisfied with the object
+\[
+  \widehat\xi_{\tau_n}^{pool,\star}
+  =
+  \psi(\widehat\gamma_n(\omega))\,
+  \widehat q_n^\star(\tau_n\mid\omega)
+\]
+as the object of analysis. Here the pooling is first Padoan's pooled extreme quantile, then the expectile--quantile asymptotic bridge is applied at the pooled level.
+4. The supervisor suggested that relaxing the communication assumption to allow local QB expectiles and pooling through the asymptotic equivalence may be essentially the same informationally: a local QB expectile `\psi(\widehat\gamma_j)\widehat q_j^\star` contains no information beyond `(\widehat\gamma_j,\widehat q_j^\star)`, and vice versa when `\widehat\gamma_j` is known.
+5. The supervisor had mixed feelings about simply asserting that the limiting distribution is the same as in Padoan's quantile-pooling theorem. It may be true by a speed argument, but it must be proved from the exact decomposition.
+6. The supervisor speculated that expectiles might naturally be pooled arithmetically rather than geometrically, but did not elaborate. For now, do not add this as a moving part. Park it unless the main estimator forces a comparison.
+
+## Guiding Research Principles
+
+### First Principles, Not Retrofitting
+
+Do not start from the old theorems and try to salvage them. Start from the estimator, write exact identities, and let the math determine the result. If a term vanishes, prove it. If it survives, keep it. If a rate condition is needed, state it precisely and check whether it is already in the source literature.
+
+### No Hypothetical Control Terms
+
+Keep the scaffold free of inferred or anticipated results. It is acceptable to define exact objects, such as the estimator and the algebraic decomposition terms. It is not acceptable to introduce a candidate scale, negligibility statement, bias term, weight formula, confidence interval, or simulation design before the source audit and proof justify it.
+
+In particular, do not import the pooled Weissman normalisation `\sqrt{k}/\ell_n` into the new expectile theorem merely because it is plausible. The correct normalisation for the expectile estimator is a conclusion to derive from the three-term decomposition, not an input to the scaffold.
+
+### Ground Every Step In Previous Work
+
+The rebuilt thesis should be a careful composition of existing results, not a large invention of new machinery. Use:
+
+- Daouia--Padoan--Stupfler for pooled Hill and geometrically pooled Weissman extreme-quantile theory.
+- Daouia--Girard--Stupfler and Davison--Padoan--Stupfler for the expectile--quantile asymptotic bridge and its second-order remainder.
+- de Haan--Ferreira only for standard EVT inputs that the cited papers invoke or that are unavoidable.
+
+When in doubt, extract the exact source statement from the PDFs and record the page/theorem/proposition before using it.
+
+### Sequential Research
+
+Proceed in small mathematical steps. Do not assume the desired theorem and fill in a proof afterward. The sequence is:
+
+1. define the estimator and record its provenance;
+2. decompose it exactly;
+3. introduce only neutral notation for the exact terms;
+4. identify the exact source results relevant to each term, including assumptions and normalisations;
+5. derive which terms contribute and what scale is justified;
+6. only then state the theorem, weights, intervals, and simulations.
+
+### Path Of Least Action
+
+Prefer the leanest defensible result. The less the thesis needs to prove, discuss, or numerically validate, the fewer opportunities there are for errors. Avoid side comparisons, alternative estimators, extra optimality criteria, or new tests unless they are necessary for the main theorem or explicitly requested.
+
+The current least-action path is one estimator, one exact decomposition, one source audit, and only then one theorem. Padoan weights are allowed only if the proof actually yields a theorem for which those weights are justified.
+
+## Immediate Next Step
+
+The next task is to create a short source-audit research note outside the polished thesis flow. Suggested location: `notes/source_audit_pooled_extreme_expectile.md` or another clearly named note file.
+
+The note should answer the Phase 4 questions for the exact decomposition
+`A_n+B_n-C_n`. It should not edit Chapter 4 into theorem prose yet, and it should not introduce a final normalisation, negligibility claim, bias formula, weights, confidence intervals, or simulations before they are derived.
+
+## Full Research Plan
+
+### Phase 0: Freeze The Old Contribution Claims
+
+This phase is mostly complete in the live scaffold. Do not reintroduce old contribution claims while editing. The next working artifact should be a short research note or scratch derivation outside the polished thesis flow. The note should be used to discuss the rebuilt mathematical architecture with Filippo and, if needed, the supervisor.
+
+Minimum deliverable:
+
+- exact estimator definition;
+- estimator provenance: Padoan pooled Weissman quantile plus DGS/Bellini expectile--quantile bridge;
+- exact log decomposition;
+- neutral term notation, e.g. `A_n+B_n-C_n`;
+- source-audit table for each term, including theorem/proposition number, assumptions, and normalisation;
+- a list of open proof obligations;
+- no candidate scale, candidate theorem, weights, intervals, or simulation design unless already derived in the note.
+
+### Phase 1: Notation Reset
+
+Separate clearly:
+
+- the intermediate threshold used inside Weissman estimators, usually governed by `k_j`;
+- the very-extreme expectile target level, currently denoted generically by `\tau_n`;
+- any logarithmic normaliser that appears in a source theorem.
+
+Avoid using the same symbol for both an intermediate anchor and a very-extreme target. The old draft blurred this distinction. Do not define a final normalising scale for the new expectile estimator until the source audit shows which source normalisations actually survive in the combined decomposition.
+
+### Phase 2: Source Audit
+
+Re-read and extract the exact source statements needed:
+
+1. Daouia--Padoan--Stupfler pooled Hill CLT.
+2. Daouia--Padoan--Stupfler weighted-geometric pooled Weissman theorem.
+3. DGS / Bellini / Davison--Padoan--Stupfler expectile--quantile asymptotic equivalence:
+\[
+  \xi_\tau / Q(\tau) \to \psi(\gamma).
+\]
+4. The strongest available second-order expansion controlling
+\[
+  \log \frac{\xi_\tau}{\psi(\gamma)Q(\tau)}.
+\]
+5. Daouia--Padoan--Stupfler variance- and AMSE-optimal weights only after a theorem has identified the relevant variance or AMSE criterion.
+
+Record theorem/proposition numbers and assumptions. Do not rely on memory.
+
+### Phase 3: Main Exact Decomposition
+
+For
+\[
+  \widehat\xi_{\tau_n}^{pool,\star}
+  =
+  \psi(\widehat\gamma_n(\omega))\,
+  \widehat q_n^\star(\tau_n\mid\omega),
+\]
+write
+\[
+  \log\frac{\widehat\xi_{\tau_n}^{pool,\star}}{\xi_{\tau_n}}
+  =
+  \log\frac{\widehat q_n^\star(\tau_n\mid\omega)}{Q(\tau_n)}
+  +
+  \{\log\psi(\widehat\gamma_n(\omega))-\log\psi(\gamma)\}
+  -
+  \log\frac{\xi_{\tau_n}}{\psi(\gamma)Q(\tau_n)}.
+\]
+
+This identity is the central object. Everything follows from it.
+
+### Phase 4: Source-Audit Questions For The Three Terms
+
+Do not start this phase by choosing a scale. First name the exact terms
+\[
+  A_n
+  =
+  \log\frac{\widehat q_n^\star(\tau_n\mid\omega)}{Q(\tau_n)},
+  \qquad
+  B_n
+  =
+  \log\psi(\widehat\gamma_n(\omega))-\log\psi(\gamma),
+  \qquad
+  C_n
+  =
+  \log\frac{\xi_{\tau_n}}{\psi(\gamma)Q(\tau_n)}.
+\]
+Then answer the following questions.
+
+Term 1:
+
+- What exact pooled Weissman statement applies to `A_n`?
+- Is the source theorem stated for relative error or log-relative error?
+- What assumptions are used for common margins/tail homoskedasticity, `rho`, and the `p`/`k` regime?
+- What normalisation appears in the source theorem?
+
+Term 2:
+
+- What exact pooled Hill statement applies to `\widehat\gamma_n(\omega)-\gamma`?
+- What assumptions ensure `\widehat\gamma_n(\omega)` lies in a compact subset of `(0,1)` with high probability?
+- What Taylor expansion of `\log\psi` is valid, and what remainder bound is needed?
+- On any proposed final normalisation, does `B_n` contribute or vanish? Prove, do not guess.
+
+Term 3:
+
+- What exact expectile--quantile expansion applies to `C_n`?
+- Is it a ratio expansion, log expansion, or something that must be logged?
+- Which second-order and moment assumptions enter?
+- On any proposed final normalisation, does `C_n` contribute or vanish? Prove, do not guess.
+
+Only after the three answers are complete should the note propose a final normalisation for `A_n+B_n-C_n`.
+
+### Phase 5: Main Theorem
+
+Only after Phase 4, state the actual theorem. Do not present alternative outcomes as if they are already likely. The theorem should contain exactly the normalisation, centring, variance, bias, and assumptions that the source audit and proof justify.
+
+### Phase 6: Weights And Intervals
+
+Do not derive new expectile-specific closed-form weights unless Phase 5 forces them.
+
+If the proved theorem has the same optimisation criterion as Daouia--Padoan--Stupfler, use their weights directly. Otherwise, do not import their weights by analogy.
+
+Confidence intervals should follow the main theorem. Bias-centering should be included only if the retained theorem has a nonzero bias term and if the required bias estimators are source-grounded.
+
+### Phase 7: Thesis Restructure
+
+Expected lean structure:
+
+1. Introduction: rewritten around pooled extreme expectiles through Padoan pooled Weissman plus expectile bridge.
+2. Background: keep and tighten; remove overbuilt intermediate machinery.
+3. Main theory: define the estimator, use the decomposition to prove the theorem, then state weights and intervals if justified.
+4. Simulation: redesign only after the main theorem is fixed.
+5. Discussion: limitations and future work.
+
+The old Chapter 3 should likely be deleted, shortened to a source/background note, or replaced by the new main-theory chapter. Do not preserve it merely because it is already written.
+
+### Phase 8: Simulation Rebuild
+
+Only after the theorem is stable:
+
+- update `simulation/R/sim_functions.R` to compute the new estimator;
+- remove old estimator rows that correspond only to the obsolete two-weight intermediate theory;
+- run `Rscript simulation/run_simulation.R --smoke`;
+- run pilot/final only when Filippo asks or when the theorem-driven design is settled;
+- regenerate tables/figures and rebuild LaTeX afterward.
+
+## Repository Layout
 
 ```
 /
-├── AGENTS.md                                   # This file.
-├── notes.md                                    # Top-level scratchpad (informal, not part of the thesis).
-├── notes/                                      # Per-proposition walkthroughs reviewed with Filippo. One file per proof (e.g. 3_2.md = Prop 3.1, 3_3.md = Prop 3.2). Each file contains: full statement, step-by-step proof, "validate together" flags, and a revision log capturing colleague-review corrections.
-├── papers/                                     # Source literature (PDFs)
-│   ├── Optimal Pooling.pdf                     # Paper 3 — framework being extended
-│   ├── optimal pooling supp.pdf                # Paper 3 supplement
-│   ├── Tail Risk Inference via Expectiles ...  # Paper 1 — extreme expectile theory
-│   ├── ubes_a_2078332_sm7626.pdf               # Paper 1 supplement (JBES)
-│   ├── BEJ1375.pdf                             # Paper 2 — multivariate expectiles
-│   ├── bej1375supp.pdf                         # Paper 2 supplement
-│   ├── jrsssb_78_3_505.pdf                     # Ehm-Gneiting-Jordan-Krüger (2016)
-│   └── Extreme Value Theory ...                # de Haan & Ferreira (2006), textbook
-├── simulation/                                 # Reproducible finite-sample simulation support
-│   ├── R/sim_functions.R                       # DGPs, truth calculation, estimators, summaries
-│   ├── run_simulation.R                        # --smoke, --pilot, --final Monte Carlo runner
-│   ├── render_results.R                        # Converts RDS outputs to thesis tables/figures
-│   └── results/                                # Raw/summary RDS outputs; RDS files are gitignored
+├── AGENTS.md
+├── notes.md
+├── papers/
+├── simulation/
+│   ├── R/sim_functions.R
+│   ├── run_simulation.R
+│   ├── render_results.R
+│   └── results/
 └── thesis/
-    ├── main.tex                                # Top-level document
-    ├── preamble.tex                            # Packages, theorem envs, math macros
-    ├── references.bib                          # Bibliography (biblatex/biber)
-    ├── main.pdf                                # Build output (gitignored or check-in optional)
-    ├── figures/simulation/                     # Generated finite-sample figures
-    ├── tables/simulation/                      # Generated finite-sample tables
+    ├── main.tex
+    ├── preamble.tex
+    ├── references.bib
+    ├── figures/simulation/
+    ├── tables/simulation/
     └── chapters/
-        ├── 01_introduction.tex                 # FULLY DRAFTED
-        ├── 02_background.tex                   # COMPLETED — background
-        ├── 03_pooled_intermediate.tex          # COMPLETED — pooled intermediate contribution
-        ├── 04_pooled_extreme.tex               # COMPLETED — pooled extreme extrapolation
-        ├── 05_finite_sample.tex                # DRAFTED — simulation-only finite-sample study
-        └── 06_discussion.tex                   # STUBS — discussion / future work
+        ├── 01_introduction.tex
+        ├── 02_background.tex
+        ├── 03_pooled_intermediate.tex
+        ├── 04_pooled_extreme.tex
+        ├── 05_finite_sample.tex
+        └── 06_discussion.tex
 ```
 
-## Building the document
+The files are aligned only as a reset scaffold. Treat the layout as a workspace, not as a statement that the chapter structure is final.
+
+## Building The Document
 
 From `thesis/`:
 
 ```bash
-latexmk -pdf main.tex          # build (handles biber and multiple passes)
-latexmk -C                     # clean intermediate files
+latexmk -pdf main.tex
+latexmk -C
 ```
 
-The MacTeX distribution at `/Library/TeX/texbin/` has `latexmk`, `pdflatex`, `biber`, `xelatex` already in PATH. After a build failure, latexmk may leave behind `*.bcf-SAVE-ERROR` / `*.bbl-SAVE-ERROR` files; `rm -f` them before retrying.
+The MacTeX distribution at `/Library/TeX/texbin/` has `latexmk`, `pdflatex`, `biber`, and `xelatex` in PATH. After a build failure, latexmk may leave behind `*.bcf-SAVE-ERROR` / `*.bbl-SAVE-ERROR` files; remove them before retrying.
 
-Every file under `thesis/chapters/` and `thesis/preamble.tex` carries a `% !TEX root = .../main.tex` magic comment, so any LaTeX-aware IDE (TeXShop, VS Code LaTeX Workshop, TeXstudio) compiles `main.tex` regardless of which file is active. **Do not try to compile `preamble.tex` or a chapter file standalone — they are fragments, not documents.**
+Every file under `thesis/chapters/` and `thesis/preamble.tex` carries a `% !TEX root = .../main.tex` magic comment. Do not compile `preamble.tex` or chapter files standalone.
 
-## Running the finite-sample simulation
+## Running The Simulation
 
-The simulation code is intentionally narrow and supports Chapter 5 only. From the repository root:
+From the repository root:
 
 ```bash
-Rscript simulation/run_simulation.R --smoke          # 10-replication smoke run
-Rscript simulation/run_simulation.R --pilot          # 300-replication debugging grid
+Rscript simulation/run_simulation.R --smoke
+Rscript simulation/run_simulation.R --pilot
 Rscript simulation/run_simulation.R --final --cores=8
 Rscript simulation/render_results.R --final
 ```
 
-`simulation/run_simulation.R --final` runs the 5,000-replication publication grid. The scripts write raw and summary RDS files under `simulation/results/`; rendered thesis assets are written to `thesis/tables/simulation/` and `thesis/figures/simulation/`. The random seed is fixed at `20260602`.
+The existing simulation outputs were produced for the old design. Do not use them as final evidence for the rebuilt thesis. For simulation-code edits, run the smoke test first. Run pilot/final only after the new estimator and metrics are settled or Filippo explicitly asks.
 
-The package `evt0` is used for feasible plug-in AMSE second-order estimates when available. It is installed locally as version 1.1.5 in the current working environment. If `evt0` is unavailable, the scripts skip feasible plug-in AMSE rows and still report the naive, variance-weighted, oracle-AMSE and full-sample benchmarks. `ExtremeRisks` is optional and used only as a validation reference for standard expectile tooling; thesis-specific pooled QB expectile estimators are implemented directly in `simulation/R/sim_functions.R`.
+## Notation Conventions
 
-## Scope (locked decisions, do not silently widen)
+Defaults follow Daouia--Padoan--Stupfler for pooled Hill and Weissman notation; expectile-specific symbols follow DGS / Davison--Padoan--Stupfler where appropriate.
 
-**In scope.**
-- Univariate **iid** samples within each source, $m$ independent sources. Matches the distributed-inference setting of Paper 3.
-- Heavy-tailed loss with extreme-value index $\gamma \in (0, 1)$ and $\E X^-<\infty$ for the thesis's QB route. Direct LAWS comparisons remain restricted to $\gamma \in (0,1/2)$ with stronger lower-tail moments.
-- Pooling consumes the **exact Paper 3 primitives**: each machine shares $(\hat\gamma_j(k_j),\,\hat q^\star_j(p_n'))$ with their joint asymptotic covariance — **no raw data, no expectile-specific primitives** crossing between machines. See "Architectural commitments (locked)" below.
-- Inference + Weissman-style extrapolation for both intermediate and very-extreme expectile levels.
-- A **simulation-only finite-sample study** restricted to the same iid/common-marginal/distributed-primitives setting. The full-sample estimator appears only as an infeasible benchmark inside the simulation chapter.
-
-**Out of scope** (parked as "future work" in Chapter 6):
-- Time-series dependence within each sample (that direction would lean on Paper 1 / Davison-Padoan-Stupfler 2023).
-- Multivariate observations within each sample (that direction would lean on Paper 2 / Padoan-Stupfler 2022).
-- Real-data empirical applications.
-- New methodological code beyond reproducible Chapter 5 simulation support, unless Filippo explicitly asks for it.
-
-If a task starts to drift into any of the above, surface it explicitly to Filippo before proceeding.
-
-## Architectural commitments (locked)
-
-These pin down the contract between chapters and were agreed on 2026-05-20. Do not silently revise — surface to Filippo first.
-
-1. **Shared primitives are Paper 3's primitives, full stop.** Each machine shares $(\hat\gamma_j(k_j),\,\hat q^\star_j(p_n'))$ — its local Hill estimator and its local Weissman extreme-quantile estimator — together with the joint asymptotic covariance. **No** expectile-specific quantity (no local LAWS estimate, no local QB expectile) is communicated between machines. The intermediate-level order statistic $X_{n_j-k_j:n_j,\,j}$ is **already inside** $\hat q^\star_j$: given $(\hat\gamma_j,\hat q^\star_j,k_j,n_j,p_n')$ it is recoverable by one line of algebra, so it is *not* a third primitive.
-
-2. **Per-machine expectile estimator is forced to QB plug-in (consequence, not choice).** Because the LAWS direct estimator would require sharing a different primitive, commitment (1) automatically restricts the per-machine expectile estimator to the QB plug-in $\widehat\xi_j(\tau)=\psifn(\hat\gamma_j)\,\hat Q_j(\tau)$. State this in the thesis as a derived consequence, not as an independent methodological decision to defend.
-
-3. **What Papers 1 and 3 each supply (do not muddle these).** Paper 3 supplies the **pooling mechanism** (linear weights for $\hat\gamma$, weighted-geometric weights for $\hat q^\star$, variance-/AMSE-optimal weight formulas). Paper 1 — specifically Proposition C.6 of its supplement, plus the older DGS (2018, 2019) results — supplies the **expectile/quantile bridge** ($\xi_\tau/Q_X(\tau)\to\psifn(\gamma)$, the plug-in CLT). Paper 2 (multivariate expectiles) is *not* on the critical path; cite only if a side remark genuinely needs it.
-
-4. **Intermediate case = degenerate limit of extreme case.** Following Paper 3's own structure, the pooled-intermediate-expectile result emerges as the no-extrapolation limit $\tau_n' \to \tau_{n_j}$ of the pooled-extreme-expectile theorem. There is no need for a separate intermediate-quantile primitive or a parallel proof.
-
-5. **Chapter 3 vs Chapter 4 split is settled.** Keep Chapter 3 as the standalone pooled-intermediate theory and Chapter 4 as the Weissman-style very-extreme extrapolation chapter. Do not fold Chapter 3 into Chapter 4 unless Filippo explicitly asks for a structural rewrite.
-
-## Technical architecture (how the proof composes)
-
-The thesis is a composition of three pre-existing pieces, applied in the order **(1) → (3) → (2)**: Chapter 3 chains (1) into (3); Chapter 4 chains the Chapter 3 output into (2).
-
-1. **Pooled inputs are jointly Gaussian.** Theorems 1 (Hill) and 2 (weighted-geometric Weissman) of Paper 3 give a joint $\sqrt{k}$-CLT for the per-sample estimators across $m$ samples with cross-sample covariance driven by the tail copula $R_{j,\ell}$. Because **our $m$ samples are independent**, $R_{j,\ell}\equiv 0$ across sources, so the cross-source blocks of $\Vc$ vanish and the joint covariance is block-diagonal with diagonal $\gamma^2/c_j$ (where $c_j = \lim k_j/k$). The variance-optimal weights then reduce to effective-sample-size weighting: $\omega^{\text{Var}}_j \propto k_j$. Chapter 3 verifies that these Paper-3-optimal weights remain optimal for the expectile target in the distributed-inference / equal-fraction regime after the delta method through $\psifn$; see `prop:pool-int:var-opt-distrib`.
-
-2. **Plug-in CLT (the bridge — used in Chapter 4).** *Proposition C.6 in the supplement to Paper 1* (Davison-Padoan-Stupfler 2023) is a generic technical lemma: **any** joint $\sqrt{n(1-\tau_n)}$-Gaussian limit of $(\hat\gamma, \overline\xi)$ at intermediate level lifts to a CLT for the Weissman-extrapolated expectile at extreme level. Feeding the pooled intermediate-expectile Gaussian limit produced in Chapter 3 through this proposition yields the pooled extreme-expectile CLT essentially for free. This is the single most important lemma in the thesis.
-
-3. **Expectile-specific delta-method calculus (used in Chapter 3).** The only expectile-specific computation is the delta method applied through $\psifn(\gamma) = (\gamma^{-1}-1)^{-\gamma}$, with derivative factor $m(\gamma) = (1-\gamma)^{-1} - \log(\gamma^{-1}-1)$. Applied to the pooled $(\hat\gamma^{\text{pool}},\hat Q^{\text{pool}})$ from piece (1), it produces a joint Gaussian limit for $(\hat\gamma^{\text{pool}},\widehat\xi^{\text{pool}}_{\tau_n})$ — exactly the input piece (2) consumes. The asymptotic equivalence $\xi_\tau / Q_X(\tau) \to \psifn(\gamma)$ as $\tau \uparrow 1$ is from Proposition 1 of DGS (2019).
-
-The iid substrate for extreme-expectile inference itself is Daouia-Girard-Stupfler (2018, *JRSS B* 80, 263–292); the PDF is available in `/papers` as `Daouia-Estimationtailrisk-2018.pdf`.
-
-## Notation conventions
-
-Defaults follow Paper 3 (Daouia-Padoan-Stupfler 2021); expectile-specific symbols follow Paper 1 (Davison-Padoan-Stupfler 2023). The preamble defines:
-
-| Macro | Renders as | Meaning |
-|---|---|---|
-| `\expectile{τ}` | $\xi_\tau$ | Population expectile at level $\tau$ |
-| `\tildexpectile{τ}` | $\widetilde\xi_\tau$ | LAWS direct estimator |
-| `\hatexpectile{τ}` | $\widehat\xi_\tau$ | QB plug-in estimator |
-| `\psifn` | $\psi$ | Asymptotic-equivalence constant $(\gamma^{-1}-1)^{-\gamma}$ |
-| `\Quant`, `\hatQuant` | $Q$, $\widehat Q$ | Quantile, estimator |
-| `\Wei`, `\hatWei` | $q^\star$, $\widehat q^\star$ | Weissman estimator (the macro **already includes** the $\star$) |
-| `\Vc`, `\Bc`, `\hatVc`, `\hatBc` | $\Vc$, $\Bc$, $\hatVc$, $\hatBc$ | Covariance / bias from Paper 3 and their estimators |
-| `\Rjl` | $R_{j,\ell}$ | Tail copula between samples $j$ and $\ell$ |
-| `\todist`, `\toprob`, `\toas` | $\todist$, $\toprob$, $\toas$ | Convergence in distribution / probability / a.s. |
-| `\todo{…}` | red bold marker | Visible placeholder for unfinished content |
-
-**Common pitfall.** Writing `\hatWei^\star` triggers a "Double superscript" fatal error because `\hatWei` already carries the $\star$. Use plain `\hatWei` for both intermediate and extreme levels — the level is encoded in the argument, not the symbol.
-
-All theorem-like environments (`theorem`, `lemma`, `proposition`, `corollary`, `definition`, `assumption`, `condition`, `example`, `remark`) share a single counter that resets at each chapter (e.g. Theorem 2.1, Lemma 2.2, Theorem 3.1, ...).
-
-## Verified bibliography (already in `references.bib`)
-
-- **Paper 1** — Davison, A. C., Padoan, S. A., & Stupfler, G. (2023). *Tail risk inference via expectiles in heavy-tailed time series.* JBES **41**(3), 876–889. DOI: 10.1080/07350015.2022.2078332.
-- **Paper 2** — Padoan, S. A., & Stupfler, G. (2022). *Joint inference on extreme expectiles for multivariate heavy-tailed distributions.* Bernoulli **28**(2), 1021–1048. DOI: 10.3150/21-BEJ1375.
-- **Paper 3** — Daouia, A., Padoan, S. A., & Stupfler, G. (2021). *Optimal pooling and distributed inference for the tail index and extreme quantiles.* arXiv:2111.03173. (Confirm journal acceptance and update the entry.)
-- **iid substrate** — Daouia, A., Girard, S., & Stupfler, G. (2018). *Estimation of tail risk based on extreme expectiles.* JRSS B **80**(2), 263–292.
-- Also: Newey-Powell (1987); Artzner-Delbaen-Eber-Heath (1999); Gneiting (2011); Bellini-Klar-Müller-Rosazza Gianin (2014); Ehm-Gneiting-Jordan-Krüger (2016); de Haan-Ferreira (2006); Hill (1975); Weissman (1978); DGS (2019) — *Bernoulli* M-quantiles; DGS (2020) — *Bernoulli* tail expectile process.
-- R package/manual references already present: `ExtremeRisksR` and `evt0R`.
-
-When adding new entries, prefer verified DOIs / journal volumes. Mark unverified pieces with a `% TODO verify` comment rather than inserting `\todo{}` inside a bib field (that breaks biber).
-
-## State of the document (as of 2026-06-02)
-
-| File | State |
+| Macro | Meaning |
 |---|---|
-| `01_introduction.tex` | Fully drafted (~4 pages): motivation, expectile inference, pooling, research question, six contributions, outline. |
-| `02_background.tex` | **Completed (~26 pages — all non-original material is in place).** §2.1 regular variation + $\mathcal C_2(\gamma,\rho,A)$; §2.2 Hill + Weissman with named theorems; §2.3 expectiles, properties, coherence + elicitability (Bellini-Klar-Müller-Rosazza Gianin 2014); §2.4 iid extreme expectile inference (DGS 2018) — asymptotic equivalence, LAWS + QB intermediate CLTs, Weissman-style extreme CLT, culminating in the **Proposition C.6 plug-in CLT** (Davison-Padoan-Stupfler 2023) that Chapter 3–4 cite verbatim; §2.5 the optimal pooling framework (Paper 3) — Theorem 1 (joint Hill CLT), Theorem 2 (geometric Weissman pooling), variance/AMSE-optimal weights, tail-homogeneity chi-square test, distributed-inference oracle corollary. |
-| `03_pooled_intermediate.tex` | **Completed (~9 pages of new material).** §3.1 setup; §3.2 pooled QB expectile estimator with two weight vectors; §3.3 joint pooled $\sqrt{k}$-CLT (`prop:pool-int:joint-clt`) via Weissman decomposition + de Haan-Ferreira asymptotic independence — proposition statement carries the explicit form of the **limiting** pooled-Weissman bias vector $\Bc^\star$ (`eq:pool-int:Bcstar-def`; **note: no $\tau_n$ argument — it is a limit**), proof in Appendix §A.2; §3.4 main theorem `thm:pool-int:main` (pooled QB intermediate-expectile CLT) by delta method through $\log\psifn$; §3.5 weight optimality — three formal propositions: (i) `prop:pool-int:var-opt-distrib` (variance-optimum collapses to Paper 3's $\bm\omega^{\mathrm{Var}}$ under distributed inference); (ii) `prop:pool-int:var-opt-general` (variance-optimum in closed form via the $\Vc^{-1}$-Cauchy–Schwarz scalars $a, b, c, \Delta$, with explicit departure formula `eq:pool-int:var-opt-general-departure`); (iii) **`prop:pool-int:amse-opt`** (AMSE-optimum in closed form via stacked notation $\bm h, \bm Q, \bm M = \bm Q + \bm h\bm h^\top$; under equal-fraction distributed inference the bias is collinear with $\bm 1$, so the AMSE criterion collapses to the variance criterion and the matched optimum is $\bm\omega^{\mathrm{Var}}$; away from that collapse regime the expectile AMSE optimum generally does *not* coincide with the Paper 3 AMSE optimum because the expectile bias carries $(m(\gamma)\Bc,\Bc^\star)$ and the affine offset $b^{\xi/\Quant}$). §3.6 plug-in CIs — three-tier feasibility (equal-fraction variance: only $\hatVc$; general variance: adds $\hat m$ via the preliminary effective-sample-size seed `eq:pool-int:plugin-m` that breaks the $\hat m \leftrightarrow \hat{\bm\omega}_\gamma$ circularity; AMSE: adds `eq:pool-int:plugin-amse` second-order consistencies $\hatBc, \hatBc^\star, \hat b^{\xi/\Quant}$) → `cor:pool-int:CI` (variance-only log-scale CI under the **undersmoothing calibration** `eq:pool-int:undersmoothing` $\sqrt{k_j}A(n_j/k_j)\to 0$ which forces $\mu^\xi = 0$) → `rem:pool-int:CI-bias-correction` (AMSE-regime bias-corrected variant). A dedicated paragraph notes that CI validity does **not** require $m(\gamma) \ne 0$ — that condition enters only in the optimal-weight closed forms. §3.7 expectile-tail-homogeneity test (`thm:pool-int:hom-test`, **fully drafted**): per-sample QB log-expectile vector $\hat{\bm\Xi}_n$, its joint $\sqrt{k}$-CLT (`eq:pool-int:test-clt`) with explicit diagonal covariance $\bm\Sigma_{\Xi}=\mathrm{diag}(\{[(m(\gamma)+L_j^\star)^2+1](\Vc)_{jj}\}_{j=1}^{m})$ (`eq:pool-int:test-Sigma-Xi`) and mean $\bm\beta=m(\gamma)\Bc+\Bc^\star+b^{\xi/\Quant}\bm 1$ (`eq:pool-int:test-beta`), GLS deviance statistic `eq:pool-int:test-stat` with plug-in $\hat{\bm\Sigma}_{\Xi,n}$ (`eq:pool-int:test-Sigma-Xi-hat`) → theorem gives **noncentral** $\chi^2_{m-1}(\delta)$ (`eq:pool-int:test-noncentral`, $\delta=\bm\beta^\top\bm\Sigma_\Xi^{-1}\bm\beta-(\bm 1^\top\bm\Sigma_\Xi^{-1}\bm\beta)^2/\bm 1^\top\bm\Sigma_\Xi^{-1}\bm 1\ge 0$), collapsing to **central** $\chi^2_{m-1}$ iff $\bm\beta\in\mathrm{span}\{\bm 1\}$, which holds under (i) undersmoothing or (ii) equal-fraction distributed inference (where $\bm\beta=\beta_0\bm 1$). Proof in Appendix §A.7. The closing discussion corrects a subtlety: $\psifn$ is **not injective** on $(0,1)$, so under $(\mathcal H)$ the expectile null $H_0^\xi$ is *weaker* than the tail-index null $H_0$; the expectile test's complementary power appears when $(\mathcal H)$ fails (scale heterogeneity). |
-| `04_pooled_extreme.tex` | **Completed (~16 pages of new material).** §4.1 motivation; §4.2 extrapolation regime and input limit, including deterministic very-extreme ratio control (`lem:pool-ext:det-ratio`) and the joint input CLT (`prop:pool-ext:input-clt`); §4.3 pooled extrapolated estimator (`eq:pool-ext:estimator`), matched-weight identities, and matched local-QB equivalence (`rem:pool-ext:matched-local-qb`); §4.4 main theorem `thm:pool-ext:main` (pooled Weissman extrapolation for very-extreme expectiles) by feeding the Chapter 3 input through `prop:bg:plug-in-clt`; §4.5 first-order variance-/AMSE-optimal Hill weights (`prop:pool-ext:optimal-weights`); §4.6 bias-reduced estimator and CLT (`cor:pool-ext:bias-reduced-clt`); §4.7 variance-only and bias-centred CIs (`cor:pool-ext:CI`, `rem:pool-ext:CI-bias-centred`). Proofs are written inside Chapter 4 rather than moved to Appendix A. |
-| `05_finite_sample.tex` | **Drafted (~6 pages).** Simulation-only finite-sample performance chapter. It covers purpose/scope, design, estimators/metrics, reproducibility, generated summaries, two generated figures and three generated tables. It remains inside the thesis setting: iid observations, independent machines, common marginal distribution, finite-mean QB regime with finite-variance and heavier $\gamma=0.6$ DGP blocks, and only Paper-3 primitives communicated by feasible pooled estimators. |
-| `06_discussion.tex` | All sections are detailed `\todo{}` stubs moved from the former Chapter 5 discussion/future-work file. |
-| Appendix A (Proofs) | Seven full proofs: §A.1 (A-B-equiv), §A.2 (joint-clt), §A.3 (main-clt), §A.4 (covers both `var-opt-distrib` and `var-opt-general` — the equal-fraction case is the $\bm L^\star = L^\star\bm 1$ specialisation), §A.5 (amse-opt), §A.6 (`app:proofs:CI`, Cor 3.7), §A.7 (`app:proofs:hom-test`, Thm 3.9 — GLS covariance + noncentral $\chi^2$). Chapter 3 proofs complete. |
-| Abstract | Stub. |
-| Title page | Supervisor and institution are `\todo{}` placeholders — fill in before printing. |
+| `\expectile{τ}` | Population expectile `\xi_\tau` |
+| `\tildexpectile{τ}` | LAWS direct estimator |
+| `\hatexpectile{τ}` | Generic estimated expectile / QB plug-in where explicitly stated |
+| `\psifn` | Expectile--quantile constant `\psi` |
+| `\Quant`, `\hatQuant` | Quantile and quantile estimator |
+| `\Wei`, `\hatWei` | Weissman estimator; the macro already includes the star |
+| `\Vc`, `\Bc`, `\hatVc`, `\hatBc` | Padoan covariance/bias objects and estimators |
+| `\Rjl` | Tail copula between samples |
+| `\todist`, `\toprob`, `\toas` | Convergence symbols |
+| `\todo{...}` | Visible placeholder |
 
-Remaining `\todo{...}` markers are expected only in the abstract, title page, and Chapter 6 unless a new draft stub is intentionally added. Chapters 2–5 are considered drafted/completed and should not contain unfinished `\todo{...}` markers.
+Common pitfall: writing `\hatWei^\star` triggers a double-superscript error because `\hatWei` already carries the star. Use plain `\hatWei`; encode the level in the argument.
 
-The current build is **97 pages**, ~943 KB. Chapters 2–4 are completed, Chapter 5 is drafted with generated final-grid simulation assets, and Chapter 6 (discussion), the abstract, and title-page metadata remain to draft/fill. Appendix A (Proofs) carries seven full Chapter 3 proofs: §A.1 `app:proofs:A-B-equiv` discharges Prop 3.1 (the (A)–(B) $\sqrt{k}$-equivalence) via Taylor with Lagrange remainder + the proportionality condition $k_j \asymp k$; §A.2 `app:proofs:joint-clt` discharges Prop 3.2 (the joint pooled $\sqrt{k}$-CLT at intermediate level) in four steps — within-sample joint CLT (Hill + intermediate log-order statistic, dHF Theorem 2.4.8 + §5.1) → linear lift to (Hill, log-Weissman) via the Weissman log-decomposition with second-order control of the deterministic remainder $r_j(\tau_n) = -A(n_j/k_j)\Psi_\rho(e^{L_j^\star}) + o(A(n_j/k_j))$ → cross-sample independence and rescaling to $\sqrt{k}$ → linear pooling map $\bm A = \mathrm{diag}(\bm\omega_\gamma^\top, \bm\omega_q^\top)$; §A.3 `app:proofs:main-clt` discharges Thm 3.3 (the pooled QB intermediate-expectile CLT) by log-decomposition + Taylor linearisation of $\log\psifn$ + the second-order expectile–quantile expansion of DGS 2018 + delta method; §A.4 `app:proofs:var-opt-general` discharges Prop 3.5 (closed-form variance-optimal weights) via the $(\bm u, \bm\omega_q)$ change of variables, Lagrangian duality with the $2\times 2$ dual system $\binom{a+c\ -b}{-b\ \ a}\binom{\mu/2}{\nu/2}=\binom{m(\gamma)}{1}$, Cauchy–Schwarz for $\Delta > 0$, specialisation to distributed-inference, and the $m(\gamma)=0$ degenerate case; §A.5 `app:proofs:amse-opt` discharges Prop 3.6 (closed-form AMSE-optimal weights) via the stacked Lagrangian $\bm w = \bm M^{-1}[\tfrac{1}{2}\bm A\bm\nu - b^{\xi/\Quant}\bm h]$ with $\bm M = \bm Q + \bm h\bm h^\top$ positive definite under $m(\gamma)\ne 0$, plus block-by-block equivalence with the FOC system `eq:pool-int:amse-foc`; §A.6 `app:proofs:CI` discharges Cor 3.7 (variance-only log-scale CI) in four steps — log-scale recasting of Thm 3.3 → estimated-weight lift via the exact simplex identity $(\hat{\bm\omega} - \bm\omega)^\top \bm 1 = 0$ and Slutsky → self-normalisation through plug-in variance under undersmoothing → original-scale transport by strict monotonicity of $\exp$; §A.7 `app:proofs:hom-test` discharges Thm 3.9 (the expectile-tail-homogeneity test) in six steps — per-sample QB log-expectile CLT (single-sample specialisation of §A.3 through the row $(m(\gamma),1)$) → aggregation under independence + $\sqrt{k}$-rescaling yielding the diagonal covariance $\bm\Sigma$ and mean $\bm\beta=m(\gamma)\Bc+\Bc^\star+b^{\xi/\Quant}\bm 1$ → GLS reduction $\Lambda^\xi_n=\bm Y_n^\top\bm P_n^\top\hat{\bm\Sigma}_n^{-1}\bm P_n\bm Y_n$ with the standard GLS identity $\bm M=\bm\Sigma^{-1}-\bm\Sigma^{-1}\bm 1\bm 1^\top\bm\Sigma^{-1}/(\bm 1^\top\bm\Sigma^{-1}\bm 1)$ → standardisation to noncentral $\chi^2_{m-1}(\delta)$ via the rank-$(m-1)$ orthogonal projector $\tilde{\bm M}=\bm I-\bm v\bm v^\top/\|\bm v\|^2$, $\bm v=\bm\Sigma^{-1/2}\bm 1$ → the two regimes $\delta=0$ (undersmoothing; equal-fraction, where $\sqrt{c_jS}\lambda_j=\Lambda^\bullet e^{-\rho L^\star}$ is sample-free so $\bm\beta=\beta_0\bm 1$) → consistency under the alternative via the GLS-residual-minimisation bound. **All Chapter 3 proofs are complete; Chapter 4 proves its own results in the chapter body.**
+## Bibliography Guidance
 
-## State of the simulation (as of 2026-06-02)
+Already present in `thesis/references.bib`:
 
-- `simulation/run_simulation.R --final --cores=8` has been run successfully with `evt0` installed.
-- The final grid has 78 scenarios, 5,000 replications per scenario, and rows for `naive`, `variance`, `amse_plugin`, `amse_oracle`, and `full_sample` for both intermediate and very-extreme targets when the relevant AMSE plug-in is available. It includes ParetoHeavy and BurrHeavy finite-mean/infinite-variance DGPs with $\gamma=0.6$.
-- Latest final outputs are stored as `simulation/results/finite_sample_final_raw_latest.rds` and `simulation/results/finite_sample_final_summary_latest.rds`. Timestamped outputs from the latest complete final run use the stamp `20260602-152156`.
-- `simulation/render_results.R --final` has regenerated the Chapter 5 tables and figures, and `latexmk -pdf main.tex` succeeds from `thesis/`.
+- Davison, Padoan & Stupfler (2023), *Tail risk inference via expectiles in heavy-tailed time series*.
+- Padoan & Stupfler (2022), *Joint inference on extreme expectiles for multivariate heavy-tailed distributions*.
+- Daouia, Padoan & Stupfler, *Optimal pooling and distributed inference for the tail index and extreme quantiles*.
+- Daouia, Girard & Stupfler (2018), *Estimation of tail risk based on extreme expectiles*.
+- DGS (2019), DGS (2020), de Haan--Ferreira (2006), Hill (1975), Weissman (1978), and expectile/risk-measure background references.
 
-**Bias bookkeeping — verified against DGS 2018/2020 and Padoan-Stupfler 2022 (do not regress; see `notes/3_4-issue.md`).** The intermediate-order statistic is $\sqrt{k}$-**unbiased**, so $b_j^Q = 0$ (DGS 2018 Thm 2 has quantile bias 0); the earlier §3.4 "cancellation" $b_1^Q+b^{\xi/\Quant}=0$ was false and is gone. The QB intermediate bias is stated under the finite-mean QB regime $0<\gamma<1$: with $b^Q=0$ and the standing moment condition `eq:pool-int:moment-rate` ($\sqrt{k}/Q_X(\tau_n)\to0$, killing the second DGS rate $\lambda_2$), the iid bias is $(\tfrac{m(\gamma)}{1-\rho}-c(\gamma,\rho))\lambda$ (`eq:pool-int:iid-bias`, matching corrected `thm:bg:qb-iid`). The **correct** second-order constant is $c(\gamma,\rho)=\frac{(\gamma^{-1}-1)^{-\rho}}{1-\gamma-\rho}+\frac{(\gamma^{-1}-1)^{-\rho}-1}{\rho}$, defined once in the background as `eq:bg:c-gamma-rho` (the old chapter form $\frac{(1-\gamma)^{-\rho}-\psi(\gamma)^\rho}{1-\gamma-\rho}$ was **wrong** — removed). Also corrected: the background's false "$\psi$ strictly increasing" claim — $\psi$ is U-shaped on $(0,1)$ (min $\psi(\gamma^\star)\approx0.757$ at $\gamma^\star\approx0.2178$ where $m(\gamma^\star)=0$), consistent with §3.7's non-injectivity remark. DGS 2018 is cited author-year (working-paper theorem numbers ≠ journal numbers).
+When adding entries, prefer verified DOIs / journal volumes. Mark unverified pieces with a `% TODO verify` comment rather than inserting `\todo{}` inside a bib field.
 
-Named theorems and propositions that downstream chapters reference (use `\Cref{...}` against these labels):
-- `thm:bg:hill`, `thm:bg:weissman` — Hill and Weissman CLTs.
-- `prop:bg:expectile-properties` — basic expectile properties.
-- `thm:bg:expectile-coherence` — Bellini et al.'s coherence-iff-$\tau\ge1/2$.
-- `prop:bg:expectile-quantile` — the $\psi(\gamma)$ asymptotic equivalence.
-- `thm:bg:laws-iid`, `thm:bg:qb-iid`, `thm:bg:weissman-expectile-iid` — iid extreme-expectile CLTs.
-- **`prop:bg:plug-in-clt`** — the plug-in CLT (Davison-Padoan-Stupfler 2023, Prop. C.6); the workhorse for Chapter 4.
-- `thm:bg:pool-hill`, `thm:bg:pool-weissman` — Paper 3's joint Hill and Weissman CLTs.
-- `prop:bg:optimal-weights` — variance- and AMSE-optimal weight formulas.
-- `thm:bg:tail-homogeneity-test`, `cor:bg:pool-distrib-oracle` — testing and oracle equivalence under distributed inference.
+## Working Conventions
 
-Chapter 3 (new contributions):
-- `prop:pool-int:A-B-equiv` — $\sqrt{k}$-asymptotic equivalence of the two candidate pooled QB estimators (A: pool inputs then plug in; B: plug in locally then geometric-pool). **Stated for fixed $m$ and deterministic $\bm\omega$**; raw log-ratio is $O_p(k^{-1})$, one order sharper than the CLT needs (random-$\bm\omega$ extension is a one-line Slutsky corollary). §3.2 adopts (A) as canonical by *parsimony* — direct lift of `thm:bg:qb-iid`. The earlier elaborate "Jensen-bias" proposition was dropped (sub-leading to the EVT bias control, hence outside the chapter's asymptotic order); the Jensen observation survives only as a footnote.
-- `prop:pool-int:joint-clt` — joint pooled $\sqrt{k}$-Gaussian limit of $(\hat\gamma_n, \log\hatWei_n)$ at intermediate level (independent-samples specialization).
-- **`thm:pool-int:main`** — pooled QB intermediate-expectile CLT, the main result of Chapter 3.
-- `prop:pool-int:var-opt-distrib` — variance-optimal expectile-pooling weights coincide with Paper 3's quantile-pooling weights under distributed inference (sample-free $L^\star$).
-- `prop:pool-int:var-opt-general` — closed-form variance-optimal weights when $\bm L^\star$ varies across samples, parametrised by $a=\bm 1^\top\Vc^{-1}\bm 1$, $b=\bm 1^\top\Vc^{-1}\bm L^\star$, $c=(\bm L^\star)^\top\Vc^{-1}\bm L^\star$, $\Delta=a^2+ac-b^2$; departure from Paper 3 along direction $\Vc^{-1}(\bm L^\star - \bar L^\star \bm 1)$ with scalar prefactor $(m(\gamma)a+b)/\Delta$.
-- **`prop:pool-int:amse-opt`** — closed-form AMSE-optimal weights via stacked notation $\bm h=(m(\gamma)\Bc;\Bc^\star)$, $\bm Q$ (block Hessian), $\bm M=\bm Q+\bm h\bm h^\top$; under equal-fraction distributed inference the bias is collinear with $\bm 1$, so the AMSE criterion collapses to the variance criterion and the matched optimum is $\bm\omega^{\mathrm{Var}}$; away from that collapse regime, expectile AMSE optima generally do **not** coincide with Paper 3's AMSE optimum because the expectile bias carries the stacked gradient $(m(\gamma)\Bc,\Bc^\star)$ and the affine offset $b^{\xi/\Quant}$.
-- `cor:pool-int:CI` — feasible asymptotic confidence interval for $\xi_{\tau_n}$.
-- `thm:pool-int:hom-test` — chi-square test of expectile-tail-homogeneity (analogue of Paper 3's tail-homogeneity test at the expectile level). Limit is **noncentral** $\chi^2_{m-1}(\delta)$ in general, **central** $\chi^2_{m-1}$ iff the asymptotic bias $\bm\beta\in\mathrm{span}\{\bm 1\}$ — guaranteed under undersmoothing or equal-fraction distributed inference, the same two regimes in which the chapter's CI/weights are used.
+1. Primary artifact is the thesis. Code changes are allowed for the reproducible finite-sample study under `simulation/`, plus generated tables/figures consumed by LaTeX.
+2. Before rewriting thesis text, settle the source-audit research note. Do not polish around an unproved theorem.
+3. Edit existing stubs in place when drafting thesis prose, but do not preserve old sections whose mathematical role has collapsed.
+4. Centralise notation. Check `thesis/preamble.tex` before adding symbols.
+5. After non-trivial LaTeX edits or regenerated tables/figures, run `latexmk -pdf main.tex` from `thesis/`.
+6. For simulation-code edits, run `Rscript simulation/run_simulation.R --smoke` first.
+7. Keep scope narrow: iid/common-marginal/distributed setting unless Filippo explicitly approves a broader direction.
+8. Prefer source-grounded theorem statements over original closed forms. Every assumption in the new main theorem should be traceable to a source theorem or to a clearly identified additional rate condition.
 
-## Working conventions
+## What Is Not Here
 
-1. **Primary artifact is still the thesis.** Code changes are allowed for the reproducible Chapter 5 simulation support under `simulation/`, plus generated tables/figures consumed by LaTeX. Do not introduce unrelated software infrastructure.
-2. **Edit existing stubs in place.** When fleshing out a section, replace the existing `\todo{...}` with content rather than appending; the stub describes the intended scope.
-3. **Centralise notation.** When introducing a new symbol, check `preamble.tex` first. Add to the preamble (rather than redefine inline) if the symbol will be reused.
-4. **Simulation workflow.** For simulation-code edits, run `Rscript simulation/run_simulation.R --smoke` first. Run `--pilot` or `--final` only when Filippo asks or when the change genuinely requires regenerated production assets. After a successful final/pilot run, run `Rscript simulation/render_results.R --final` (or `--pilot` for debugging assets) before rebuilding the thesis.
-5. **Sanity-check the build.** After any non-trivial LaTeX edit or regenerated table/figure, run `latexmk -pdf main.tex` from `thesis/`. Watch for the `\hatWei^\star` double-superscript regression (the macro already includes the $\star$).
-6. **Citations.** Add new entries to `references.bib` with verified DOIs or stable manual/package URLs. Never put `\todo{}` inside a `@article{...}` field — that breaks biber. Use a `% TODO verify` comment instead.
-7. **Scope discipline.** Before extending a contribution into the time-series or multivariate setting, surface the scope decision to Filippo. Same for adding real-data empirical work or code outside the Chapter 5 simulation support.
-8. **Match the paper's notation.** Default to Paper 3 conventions; defer to Paper 1 for expectile-specific symbols. If a conflict arises, note it and ask.
-
-## What is *not* here
-
-- A real-data application or data directory.
+- A validated final thesis structure after the 2026-06-03 reset.
+- A real-data application.
 - Time-series, multivariate, or dependent-data simulations.
-- Production software beyond the narrow R simulation scripts supporting Chapter 5.
-- An ONBOARDING.md — only one human is working in this repo.
+- Production software beyond the narrow R simulation scripts.

@@ -1,226 +1,32 @@
 % !TEX root = ../main.tex
-\chapter{Finite-sample performance}
+\chapter{Finite-sample study: frozen pending theorem}
 \label{ch:finite-sample}
 
-\section{Purpose and scope}
-\label{sec:finite-purpose}
+\section{Status}
+\label{sec:finite-status}
 
-The asymptotic results of \Cref{ch:pool-int,ch:pool-ext} are
-first-order statements. They identify the limiting distribution of the
-pooled QB expectile estimator, the weight vectors that minimise the
-leading variance or AMSE, and the log-scale confidence intervals that
-follow from the corresponding Gaussian approximations. A finite-sample
-study is useful for a different question: whether those first-order
-rules already behave sensibly at sample sizes comparable to the
-distributed extreme-value examples of
-\textcite{DaouiaPadoanStupfler2021}.
+The finite-sample study from the previous draft is frozen. It was
+designed around the withdrawn intermediate pooled expectile estimator,
+the old two-weight variance and AMSE formulas, and simulation rows that
+no longer correspond to the rebuilt thesis target.
 
-The study in this chapter is simulation-only. It deliberately remains
-inside the thesis setting: observations are iid within each machine and
-independent across machines, all machines have the same marginal
-distribution, and only the communicated primitives
-\[
-  \big(\hat\gamma_j(k_j),\hat q_j^\star(\,\cdot\,\mid k_j)\big),
-  \qquad j=1,\ldots,m,
-\]
-are used by the pooled procedures. No local LAWS expectile, raw
-observation, time-series feature, or multivariate observation is
-introduced. This keeps the numerical experiment aligned with the
-distributed-inference specialisation of
-\Cref{sec:bg:pool-distrib}, rather than the more general
-tail-dependent pooling framework of
-\textcite[\S2]{DaouiaPadoanStupfler2021}.
+The existing scripts, generated tables, and generated figures are kept
+as scaffolding only. They should not be interpreted as final evidence
+for the estimator in \Cref{eq:pool-ext:working-estimator}.
 
-\section{Simulation design}
-\label{sec:finite-design}
+\section{Before simulations resume}
+\label{sec:finite-before-resume}
 
-The simulation has two targets. The intermediate target is
-$\expectile{\tau_n}$ with $\tau_n=0.99$. The very-extreme target is
-$\expectile{\tau'_n}$ with $\tau'_n=1-1/n$, estimated by the
-Weissman-style extrapolation of \Cref{ch:pool-ext} from the
-intermediate anchor. The true expectiles are computed by deterministic
-root solving of
-\[
-  \tau\,\E[(X-x)_+]=(1-\tau)\,\E[(x-X)_+],
-\]
-using numerical integration of the distribution function and survival
-function of the data-generating model.
-
-Six heavy-tailed marginal distributions are used. The first four lie in
-the finite-variance range $\gamma<1/2$, where comparison with direct
-LAWS theory is meaningful. The final two are finite-mean but
-infinite-variance stress cases with $\gamma=0.6$; they are included to
-illustrate the QB estimator in the wider range allowed by the theory of
-\Cref{thm:bg:qb-iid}.
-\begin{center}
-\begin{tabular}{lll}
-\toprule
-Model & Parameters & Tail index \\
-\midrule
-Pareto & survival $x^{-1/\gamma}$, $x\ge1$ & $\gamma=0.25$ \\
-Fr\'echet & $F(x)=\exp(-x^{-1/\gamma})$ & $\gamma=0.25$ \\
-Burr & $F(x)=1-(1+x^{-\rho/\gamma})^{1/\rho}$, $\rho=-1$ & $\gamma=0.25$ \\
-Absolute Student & $X=|T_3|$ & $\gamma=1/3$ \\
-ParetoHeavy & survival $x^{-1/\gamma}$, $x\ge1$ & $\gamma=0.6$ \\
-BurrHeavy & $F(x)=1-(1+x^{-\rho/\gamma})^{1/\rho}$, $\rho=-1$ & $\gamma=0.6$ \\
-\bottomrule
-\end{tabular}
-\end{center}
-All six distributions are nonnegative, so the lower-tail integrability
-condition is automatic. The two heavier cases deliberately fall outside
-the direct-LAWS finite-variance regime while remaining inside the
-finite-mean QB regime $0<\gamma<1$.
-
-The machine dimension is $m\in\{5,10,20\}$. For each $m$, the final
-grid includes balanced, moderately unbalanced and strongly unbalanced
-sample allocations. The main effective-sample rule is the
-equal-fraction choice $k_j/n_j=k/n$ with $k/n=0.05$, the regime in
-which the variance-optimal expectile weights collapse to the
-Daouia--Padoan--Stupfler distributed weights. A sensitivity block varies
-$k/n$ over $\{0.02,0.05,0.10,0.15\}$ in the strongly unbalanced
-regime, and a separate stress block keeps $k_j$ equal across machines
-under strongly unbalanced $n_j$ to make the unequal-fraction AMSE
-effects visible.
-These fixed threshold fractions are finite-sample tuning choices. They
-are not intended as a numerical verification of the asymptotic rate
-conditions $k\to\infty$ and $k/n\to0$, but as a controlled comparison
-of the proposed pooling rules under thresholds commonly used in
-simulation studies.
-
-\section{Estimators and metrics}
-\label{sec:finite-estimators}
-
-For each generated dataset, the local Hill and Weissman primitives are
-first computed on every machine. The feasible pooled estimators are:
+Simulation work should restart only after the main theorem for the
+direct pooled extreme-expectile estimator is settled. At that point the
+simulation design should be rebuilt from the proved statement:
 \begin{enumerate}[label=(\roman*)]
-\item the naive pooled QB estimator with equal weights;
-\item the variance-weighted estimator with
-      $\omega_j^{\mathrm{Var}}=k_j/k$;
-\item the plug-in AMSE estimator obtained by inserting estimated
-      second-order quantities into the Chapter~3 stacked AMSE formula.
+\item implement the estimator
+      $\psifn(\widehat\gamma_n(\bm\omega))
+      \widehat q_n^\star(\tau_n\mid\bm\omega)$;
+\item remove estimator rows that exist only for the obsolete
+      intermediate two-weight theory;
+\item choose weights, centring, and standard errors only from the
+      proved asymptotic statement;
+\item run the smoke test before regenerating thesis tables or figures.
 \end{enumerate}
-The plug-in AMSE row is exploratory. It follows the implementation strategy of
-\textcite[\S2.2 and \S3.2]{DaouiaPadoanStupfler2021}: when the R
-package \texttt{evt0} is available, the simulation scripts attempt to
-obtain second-order estimates from its MOP routines and insert them into
-the bias vector. This feasibility does not follow from the abstract
-$\mathcal C_2(\gamma,\rho,A)$ condition alone; it relies on a working
-second-order calibration. Because such estimation is often unstable in
-finite samples, two diagnostic comparators are also reported: an
-oracle AMSE estimator, using the known second-order constants of the
-data-generating model, and an infeasible full-sample QB benchmark
-computed from the combined raw sample.
-
-Performance is evaluated on the log-relative-error scale
-\[
-  \log(\widehat\xi/\xi),
-\]
-which matches the log-scale form of the confidence intervals in
-\Cref{sec:pool-int:CI,sec:pool-ext:CI}. For each estimator and target
-the scripts report bias, variance, MSE, empirical coverage of nominal
-95\% confidence intervals, average confidence-interval length, the
-frequency with which AMSE weights are negative, and the average maximum
-absolute AMSE weight.
-For the heavier DGPs, a finite-sample Hill estimate may occasionally
-fall outside the QB domain $(0,1)$. The scripts do not truncate such
-estimates. They record the corresponding estimator as invalid, compute
-log-error and coverage summaries over valid replications only, and
-report the invalid-domain rate separately.
-
-\section{Reproducibility}
-\label{sec:finite-reproducibility}
-
-The simulation code lives in the repository under \texttt{simulation/}.
-The command
-\[
-  \texttt{Rscript simulation/run\_simulation.R --pilot}
-\]
-runs a 300-replication debugging grid. The command
-\[
-  \texttt{Rscript simulation/run\_simulation.R --final}
-\]
- runs the 5,000-replication publication grid. Results are stored as RDS
-files under \path{simulation/results/}; rendered tables and figures
-are generated by
-\[
-  \texttt{Rscript simulation/render\_results.R --final}.
-\]
-The random seed is fixed at 20260602. If \texttt{evt0} is not
-installed, the feasible plug-in AMSE rows are skipped and the scripts
-still report the naive, variance-optimal, oracle-AMSE and full-sample
-benchmarks. The package \texttt{ExtremeRisks} is used only as an
-external validation reference for standard expectile routines when it
-is available; the pooled expectile estimators themselves are implemented
-directly from the formulas of \Cref{ch:pool-int,ch:pool-ext}.
-
-\section{Generated summaries}
-\label{sec:finite-results}
-
-\begin{table}[htbp]
-\centering
-\IfFileExists{tables/simulation/finite_sample_summary.tex}
-  {\input{tables/simulation/finite_sample_summary.tex}}
-  {\begin{tabular}{lllrrr}
-   \toprule
-   Target & DGP & Estimator & Bias & MSE & Coverage \\
-   \midrule
-   Run & simulation/render\_results.R & -- & -- & -- & -- \\
-   \bottomrule
-   \end{tabular}}
-\caption{Core Monte Carlo summary for the variance-weighted distributed
-estimator and the infeasible full-sample QB benchmark. Rows use
-$m=10$, the strongly unbalanced allocation, $k/n=0.05$, and the
-5,000-replication final grid.}
-\label{tab:finite-summary}
-\end{table}
-
-Additional diagnostics are reported in
-\Cref{app:finite-diagnostics}. The domain-validity table
-\Cref{tab:finite-domain-validity} checks how often finite-sample Hill
-estimates leave the QB domain, while \Cref{tab:finite-stability}
-records AMSE-weight instability away from the equal-fraction collapse.
-
-\begin{figure}[htbp]
-\centering
-\IfFileExists{figures/simulation/mse_by_estimator.pdf}
-  {\includegraphics[width=\textwidth]{figures/simulation/mse_by_estimator.pdf}}
-  {\fbox{\parbox{0.9\textwidth}{Run
-  \texttt{Rscript simulation/render\_results.R --final} to generate
-  this figure.}}}
-\caption{MSE of log-relative error across estimators, DGPs and sample
-allocation regimes.}
-\label{fig:finite-mse}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\IfFileExists{figures/simulation/k_sensitivity.pdf}
-  {\includegraphics[width=\textwidth]{figures/simulation/k_sensitivity.pdf}}
-  {\fbox{\parbox{0.9\textwidth}{Run
-  \texttt{Rscript simulation/render\_results.R --final} to generate
-  this figure.}}}
-\caption{Sensitivity of the intermediate-expectile MSE to the effective
-sample fraction $k/n$ in the strongly unbalanced regime.}
-\label{fig:finite-k-sensitivity}
-\end{figure}
-
-\paragraph{Interpretation.}
-The results give a compact finite-sample check of the theory. In the
-equal-fraction blocks, the variance rule is almost indistinguishable
-from the oracle and plug-in AMSE rules; this is the numerical analogue
-of \Cref{prop:pool-int:var-opt-distrib}. It also stays close to the
-infeasible full-sample benchmark in \Cref{tab:finite-summary}, so the
-main practical loss is not the choice of distributed weights. The naive
-rule is mainly a foil: \Cref{fig:finite-mse} shows the expected MSE
-penalty when unbalanced machines are averaged as if they carried equal
-tail information.
-
-Coverage should be read as a first-order diagnostic, not as evidence
-for exact finite-sample calibration. The severe undercoverage in some
-intermediate finite-variance rows is driven by visible second-order bias
-under the fixed threshold fraction $k/n=0.05$; the intervals used here
-are variance-only and not bias-centred. Finally,
-\Cref{tab:finite-stability} shows why the feasible AMSE rule is treated
-as exploratory: once the equal-fraction collapse is broken, AMSE
-weights can become negative or large, especially in the
-strong-equal-$k$ stress block.

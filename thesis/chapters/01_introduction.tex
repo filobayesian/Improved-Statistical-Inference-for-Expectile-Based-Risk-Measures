@@ -18,63 +18,76 @@ tail losses, not only to their frequency.
 At extreme levels, expectile estimation becomes an extreme-value
 problem. In the heavy-tailed finite-mean regime, the
 expectile--quantile equivalence
-$\expectile{\tau}/\Quant_X(\tau)\to\psifn(\gamma)
-=(\gamma^{-1}-1)^{-\gamma}$ as $\tau\uparrow1$ makes a
-quantile-based (QB) route natural: estimate the tail index, estimate an
-extreme quantile, and plug both into the bridge. The single-sample
+\[
+  \frac{\expectile{\tau}}{\Quant_X(\tau)}
+  \longrightarrow
+  \psifn(\gamma)
+  =
+  (\gamma^{-1}-1)^{-\gamma},
+  \qquad \tau\uparrow1,
+\]
+makes a quantile-based route natural: estimate the tail index, estimate
+an extreme quantile, and apply the asymptotic bridge. The single-sample
 theory is developed by
 \textcite{DaouiaGirardStupfler2018,DaouiaGirardStupfler2020}; the
-plug-in extrapolation lemma used here comes from
+plug-in extrapolation tools used as background are drawn from
 \textcite{DavisonPadoanStupfler2023}.
 
-This thesis asks how that QB expectile route should be pooled when the
-data are distributed. Starting from the optimal-pooling framework of
-\textcite{DaouiaPadoanStupfler2021}, each source communicates exactly a
-local Hill estimator, a local Weissman extreme-quantile estimator, and
-their asymptotic covariance. The research question is how to combine
-these Paper-3 primitives to estimate, extrapolate and make inference on
-an extreme expectile of a common heavy-tailed distribution.
+This thesis studies how that route should be used when data are
+distributed. The intended foundation is the optimal-pooling framework
+of \textcite{DaouiaPadoanStupfler2021}: local machines communicate
+tail-index and Weissman extreme-quantile primitives, and the central
+procedure combines them for inference on a common heavy-tailed target.
+After supervisor feedback on 3 June 2026, the thesis is being rebuilt
+around the direct pooled extreme-expectile estimator
+\[
+  \widehat\xi_{\tau_n}^{pool,\star}
+  =
+  \psifn\!\big(\widehat\gamma_n(\bm\omega)\big)\,
+  \widehat q_n^\star(\tau_n\mid\bm\omega),
+\]
+where $\widehat q_n^\star(\tau_n\mid\bm\omega)$ is the
+weighted-geometric pooled Weissman estimator of
+\textcite{DaouiaPadoanStupfler2021}. The current research question is
+therefore narrower and more sequential: determine, from an exact
+decomposition and source-grounded arguments, what asymptotic statement
+is actually justified after the expectile--quantile bridge is applied
+to the pooled Weissman estimator.
 
 \section{Scope}
-\label{sec:intro:question}
+\label{sec:intro:scope}
 
 The setting is deliberately narrow. The samples are univariate, iid
-within source, independent across sources, and share one common marginal
-distribution. The QB theory is used under $\gamma\in(0,1)$ and
-$\E X^-<\infty$; the stronger $\gamma<1/2$ finite-variance range enters
-only for direct LAWS comparisons. No raw observations, local LAWS
-expectiles, or expectile-specific summaries are communicated. The
-intermediate order statistic is already contained in the Weissman
-primitive and is not an additional shared input. Time-series dependence,
-multivariate samples, real-data applications and alternative
-communication protocols are left as future work.
+within source, independent across sources, and share one common
+marginal distribution. The quantile-based expectile bridge is used under
+$\gamma\in(0,1)$ and $\E X^-<\infty$. No raw observations, local LAWS
+expectiles, time-series features, multivariate observations, or
+alternative communication protocols are introduced.
 
-\section{Contributions}
-\label{sec:intro:contributions}
+The old draft developed a standalone pooled intermediate
+quantile-based expectile theory and then used it as the structural
+anchor for very-extreme inference. That route is no longer treated as a
+settled contribution. In particular, the former two-weight intermediate
+CLT, its variance- and AMSE-optimal expectile weights, the
+expectile-tail-homogeneity diagnostic, and the simulation comparisons
+based on those objects are withdrawn pending a first-principles
+rederivation.
 
-The contributions are:
+\section{Current working programme}
+\label{sec:intro:working-programme}
+
+The thesis now proceeds as a research reset. The immediate mathematical
+task is not to polish the old results but to establish the following
+chain:
 \begin{enumerate}[label=(\roman*)]
-\item a pooled QB expectile estimator at intermediate levels, built only
-      from pooled Hill and weighted-geometric Weissman primitives, with
-      $\sqrt{k}$-equivalence between pooling primitives first and pooling
-      matched local QB plug-ins first;
-\item a joint pooled Gaussian limit for the tail-index and log-quantile
-      inputs, followed by the delta-method CLT for the pooled
-      intermediate expectile, including explicit bias and variance;
-\item variance- and AMSE-optimal expectile weights. Under equal
-      effective fractions they collapse to the Paper-3
-      effective-sample-size weights; outside that regime the expectile
-      target has its own formulas;
-\item feasible log-scale confidence intervals and an
-      expectile-tail-homogeneity diagnostic, with a noncentral
-      chi-square limit in general and a central limit under the
-      undersmoothing and equal-fraction regimes used for inference;
-\item a very-extreme Weissman extrapolation, obtained by feeding the
-      Chapter~3 input CLT into
-      \textcite[Supplement, Proposition~C.6]{DavisonPadoanStupfler2023};
-      at this scale the first-order variance and AMSE are governed by
-      the pooled Hill component;
-\item a reproducible simulation study comparing naive,
-      variance-weighted, plug-in AMSE, oracle AMSE and full-sample
-      benchmarks for intermediate and very-extreme expectile targets.
+\item define the direct pooled extreme-expectile estimator;
+\item decompose its log-relative error exactly into the pooled
+      Weissman term, the plug-in $\psifn(\widehat\gamma)$ term, and the
+      deterministic expectile--quantile bridge remainder;
+\item identify the source results relevant to each term, including
+      their exact assumptions and normalisations;
+\item derive, rather than assume, which terms contribute on the final
+      scale;
+\item only then decide what theorem, weights, confidence intervals, and
+      simulation design are justified.
 \end{enumerate}

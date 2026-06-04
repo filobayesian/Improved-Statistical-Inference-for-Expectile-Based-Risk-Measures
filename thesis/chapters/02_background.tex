@@ -190,8 +190,8 @@ Suppose $\sqrt{k}\, A(n/k) \to \lambda \in \R$. Then
 The log-denominator is the cost of extrapolation. Up to that factor the
 limit is the Hill limit, which is why
 \textcite[\S2.3]{DaouiaPadoanStupfler2021} pool Weissman estimators
-geometrically and why \Cref{ch:pool-ext} again reduces to pooled
-tail-index inference at first order.
+geometrically. Whether the rebuilt expectile estimator has exactly this
+first-order law is the question isolated in \Cref{ch:pool-ext}.
 
 \section{Expectiles}
 \label{sec:bg:expectiles}
@@ -646,8 +646,11 @@ satisfies
 \]
 \end{proposition}
 
-\begin{proof}
-See \Cref{app:proofs:plugin-clt}.
+\begin{proof}[Proof sketch]
+The statement is the log-scale Slutsky argument behind
+\textcite[Supplement, Proposition~C.6]{DavisonPadoanStupfler2023},
+written here as a background tool. The detailed thesis proof will be
+restored only if this plug-in route is used in the rebuilt main theorem.
 \end{proof}
 
 \begin{remark}[Deterministic ratio control]
@@ -672,17 +675,18 @@ $y_n=(1-\tau_n)/(1-\tau_n^\prime)\to\infty$ together with
 \eqref{eq:bg:c-gamma-rho}.
 \end{remark}
 
-\Cref{prop:bg:plug-in-clt} is the technical workhorse for
-\Cref{ch:pool-ext}: after division by the diverging log-rate, the
-extreme-level law is governed only by the tail-index component
-$\Gamma$, while the intermediate expectile component washes out.
+\Cref{prop:bg:plug-in-clt} remains useful background, but the rebuilt
+argument must verify directly whether its speed mechanism applies to
+the pooled estimator in \Cref{eq:pool-ext:working-estimator}.
 
 \section{The optimal pooling framework}
 \label{sec:bg:pooling}
 
 We now recall the pooling framework of
-\textcite{DaouiaPadoanStupfler2021}, which the contribution chapters
-extend from quantiles to expectiles. The framework pools tail-index and
+\textcite{DaouiaPadoanStupfler2021}. The rebuilt thesis uses this
+framework as the source theory for pooled tail-index and
+extreme-quantile inference before applying the expectile--quantile
+bridge. The framework pools tail-index and
 extreme-quantile estimators from $m$ samples, allowing heterogeneous
 sizes, second-order properties and cross-sample tail dependence.
 
@@ -843,8 +847,8 @@ becomes the diagonal matrix
   \gamma^{2}\!\left(\sum_{i = 1}^{m} c_{i}^{-1}\right)
     \mathrm{diag}(c_{1}, \ldots, c_{m}).
 \end{equation}
-\Cref{eq:bg:V_c-diagonal} is the covariance form used in
-\Cref{ch:pool-int,ch:pool-ext}.
+\Cref{eq:bg:V_c-diagonal} is the covariance form to be used when the
+rebuilt main theorem is specialised to independent samples.
 
 \subsection{Variance- and AMSE-optimal weights}
 
@@ -1083,5 +1087,6 @@ built from the combined sample.
 \end{corollary}
 
 \Cref{cor:bg:pool-distrib-oracle} is the efficiency benchmark the
-pooled-expectile constructions in \Cref{ch:pool-int,ch:pool-ext} seek to
-preserve.
+rebuilt pooled-expectile construction should preserve if the
+expectile-specific terms in \Cref{eq:pool-ext:central-decomposition}
+are negligible on the pooled Weissman scale.
