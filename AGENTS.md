@@ -21,18 +21,24 @@ where `\widehat q_n^\star(\tau_n\mid\omega)` is the Daouia--Padoan--Stupfler geo
 
 As of 2026-06-04, the compiled thesis scaffold has been cleaned so it no longer presents the withdrawn pooled-intermediate route as a validated contribution. The old full draft still exists in git history and in generated/stale materials, but the live thesis files now mark the reset explicitly.
 
-Current source-audit status: the `A_n` pooled Weissman component and the `B_n`
-plug-in-`\psi` component of the exact decomposition have been validated at
-scratch-note level in `notes/source_audit_pooled_extreme_expectile.md`. For
-the finite-`m` iid/common-marginal distributed route, use
-Daouia--Padoan--Stupfler Corollary 9 as the clean source statement for `A_n`;
-use Theorem 2 plus the supplement proof only if Chapter 4 needs the broader
-tail-homoskedastic or direct log-expansion route. For `B_n`, use the pooled
-Hill CLT and the compact-event Taylor expansion
+Current source-audit status: the `A_n` pooled Weissman component, the `B_n`
+plug-in-`\psi` component, and the `C_n` population bridge component of the
+exact decomposition have been validated at scratch-note level in
+`notes/source_audit_pooled_extreme_expectile.md`. For the finite-`m`
+iid/common-marginal distributed route, use Daouia--Padoan--Stupfler Corollary
+9 as the clean source statement for `A_n`; use Theorem 2 plus the supplement
+proof only if Chapter 4 needs the broader tail-homoskedastic or direct
+log-expansion route. For `B_n`, use the pooled Hill CLT and the compact-event
+Taylor expansion
 `B_n=m(\gamma)(\widehat\gamma_n(\omega)-\gamma)+O_P(k^{-1})`, keeping the
-exceptional case `m(\gamma)=0` visible. This validates only the component
-ledgers for `A_n` and `B_n`, not the final normalisation or theorem for
-`A_n+B_n-C_n`.
+exceptional case `m(\gamma)=0` visible. For `C_n`, use
+Daouia--Girard--Stupfler (2020), Proposition 1(i), for the source-studied ratio
+error
+`\Delta_n=\xi_{\tau_n}/\{\psi(\gamma)Q(1-p_n)\}-1`, then apply only the
+elementary log step `C_n=\log(1+\Delta_n)=\Delta_n+R_n^{log}`. The log
+remainder is a square-order ledger item, not a pre-decided negligible term.
+This validates only the component ledgers for `A_n`, `B_n`, and `C_n`, not the
+final normalisation or theorem for `A_n+B_n-C_n`.
 
 The error is that the thesis was built around a standalone pooled intermediate QB expectile theory:
 \[
@@ -166,29 +172,45 @@ Directly importable, subject to notation matching and assumption checking:
 - Daouia--Padoan--Stupfler pooled Hill CLT for `\widehat\gamma_n(\omega)-\gamma`.
 - Daouia--Padoan--Stupfler pooled Weissman theorem for the pooled quantile term `A_n`. In the finite-`m` iid/common-marginal route, this is now source-audited through Corollary 9; the supplement's log-scale expansion remains the detailed proof source if the thesis needs to work directly on log scale.
 - Bellini / Daouia--Girard--Stupfler first-order expectile--quantile bridge `\xi_\tau/Q(\tau)\to\psi(\gamma)`.
-- Daouia--Girard--Stupfler (2020), Proposition 1(i), for the second-order population ratio expansion of `\xi_\tau/(\psi(\gamma)Q(\tau))`.
+- Daouia--Girard--Stupfler (2020), Proposition 1(i), for the second-order
+  population ratio expansion of
+  `\Delta_\tau=\xi_\tau/\{\psi(\gamma)Q(\tau)\}-1`. In thesis notation this
+  yields the two leading deterministic pieces
+  `c(\gamma,\rho)A((1-\tau)^{-1})` and
+  `\gamma(\gamma^{-1}-1)^\gamma EX/Q(\tau)`, plus
+  `o(|A((1-\tau)^{-1})|)+o(Q(\tau)^{-1})`. Do not introduce a new
+  `d(\gamma)` shorthand for the mean coefficient, because DPS already uses
+  `d_j` elsewhere.
 - Daouia--Padoan--Stupfler variance- and AMSE-optimal weights only after the generic-weight theorem proves that their optimisation criterion is indeed the relevant one.
 
 New proof work still required:
 
 - Match the thesis notation exactly to the source notation, especially `p_n=1-\tau_n`, the intermediate thresholds `k_j`, and the target quantile/expectile.
 - Prove and use the exact log decomposition `A_n+B_n-C_n`.
-- Convert the DGS ratio expansion for `C_n` into a log expansion and control the log-conversion remainder.
-- Only after the `C_n` component is validated alongside the completed `A_n` and `B_n` audits, compare their orders to determine the correct scale, centring, variance, and bias.
+- Convert the sourced DGS ratio expansion into the log term through the
+  elementary calculus identity
+  `C_n=\log(1+\Delta_n)=\Delta_n+R_n^{log}` and record
+  `R_n^{log}=O((|A(1/p_n)|+Q(1-p_n)^{-1})^2)`. This is stitching, not a new
+  expectile asymptotic result.
+- Compare the orders of all pieces in `A_n+B_n-C_n`, including
+  `A(1/p_n)`, `Q(1-p_n)^{-1}`, the DGS little-`o` remainders, and the
+  square-order log-conversion remainder, to determine the correct scale,
+  centring, variance, bias, and any additional rate conditions.
 
 ## Immediate Next Step
 
 The active working artifact is `notes/source_audit_pooled_extreme_expectile.md`. It already contains the source audit and a component ledger for `A_n+B_n-C_n`.
 
-The next task is to validate `C_n` in the common-marginal iid/distributed
-setting. Confirm the exact Daouia--Girard--Stupfler (2020) Proposition 1(i)
-assumptions in the thesis notation, convert the population ratio expansion for
-`\xi_{\tau_n}/(\psi(\gamma)Q(\tau_n))` into a log expansion, and control the
-log-conversion remainder. Only after `C_n` is validated should the note perform
-the order comparison for `A_n+B_n-C_n`. Do not choose or state a final
-normalisation, theorem, weights, confidence intervals, or simulation design
-until the ledger shows which terms survive and which source assumptions justify
-that conclusion.
+The next task is to perform the order comparison for `A_n+B_n-C_n` in the
+common-marginal iid/distributed setting. The `C_n` ledger is now validated as:
+the DGS 2020 Proposition 1(i) ratio expansion for
+`\Delta_n=\xi_{\tau_n}/\{\psi(\gamma)Q(1-p_n)\}-1`, followed by the elementary
+log Taylor step `C_n=\Delta_n+R_n^{log}` with
+`R_n^{log}=O((|A(1/p_n)|+Q(1-p_n)^{-1})^2)`. Compare this ledger with the
+already-audited `A_n` and `B_n` pieces before choosing any scale. Do not choose
+or state a final normalisation, theorem, weights, confidence intervals, or
+simulation design until the ledger shows which terms survive and which source
+assumptions justify that conclusion.
 
 ## Full Research Plan
 
@@ -227,7 +249,8 @@ Re-read and extract the exact source statements needed:
 \[
   \xi_\tau / Q(\tau) \to \psi(\gamma).
 \]
-4. The strongest available second-order expansion controlling
+4. The strongest available second-order ratio expansion that can be converted
+   by elementary Taylor calculus into a ledger for
 \[
   \log \frac{\xi_\tau}{\psi(\gamma)Q(\tau)}.
 \]
@@ -301,17 +324,29 @@ Term 2 (`B_n`, source-audited for the finite-`m` iid/common-marginal route):
 - On that compact event, Taylor expansion of `g(x)=\log\psi(x)` gives
   `B_n=m(\gamma)(\widehat\gamma_n(\omega)-\gamma)+O_P(k^{-1})`.
 - Keep the exceptional case `m(\gamma)=0` visible. Do not decide whether `B_n`
-  contributes or vanishes under the final theorem scale until after `C_n` is
-  validated and the order comparison is performed.
+  contributes or vanishes under the final theorem scale until the order
+  comparison with `A_n` and `C_n` is performed.
 
-Term 3:
+Term 3 (`C_n`, source-audited for the finite-`m` iid/common-marginal route):
 
-- What exact expectile--quantile expansion applies to `C_n`?
-- Is it a ratio expansion, log expansion, or something that must be logged?
-- Which second-order and moment assumptions enter?
-- On any proposed final normalisation, does `C_n` contribute or vanish? Prove, do not guess.
+- Use Daouia--Girard--Stupfler (2020), Proposition 1(i), for the population
+  ratio error `\Delta_n=\xi_{\tau_n}/\{\psi(\gamma)Q(1-p_n)\}-1`.
+- The source expansion is a ratio expansion, not a log expansion. The log step
+  is our elementary calculus stitching:
+  `C_n=\log(1+\Delta_n)=\Delta_n+R_n^{log}`.
+- The DGS assumptions are `E|X^-|<\infty`, `0<\gamma<1`, and
+  `C_2(\gamma,\rho,A)` with `\rho\le0`; the DPS Weissman route may impose the
+  stricter `\rho<0` separately.
+- The leading deterministic pieces are
+  `c(\gamma,\rho)A(1/p_n)` and
+  `\gamma(\gamma^{-1}-1)^\gamma EX/Q(1-p_n)`, plus sourced little-`o`
+  remainders.
+- The log-conversion remainder is
+  `O((|A(1/p_n)|+Q(1-p_n)^{-1})^2)`. This is a ledger item, not a
+  negligibility claim.
 
-Only after the `C_n` answer is complete should the note propose a final normalisation for `A_n+B_n-C_n`.
+Only after comparing the `A_n`, `B_n`, and `C_n` ledgers should the note
+propose a final normalisation for `A_n+B_n-C_n`.
 
 ### Phase 5: Main Theorem
 

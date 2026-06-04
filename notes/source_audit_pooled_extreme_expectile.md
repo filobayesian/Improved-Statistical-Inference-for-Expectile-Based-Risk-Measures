@@ -63,7 +63,7 @@ Daouia--Padoan--Stupfler, the target population must be specified separately.
 | $A_n$ log conversion | Same paper, supplement, proof of Theorem 2; Lemma B.2. Local file: `papers/optimal pooling supp.pdf`. | Shows the log Weissman error equals the dominant Hill term plus a lower-order log remainder. | This is a proof ingredient, not the headline theorem statement. In the common-marginal case the target-alignment term is exactly zero, so Lemma B.2 is only needed for the broader $(H)$ route. |
 | $B_n$ | Daouia--Padoan--Stupfler, Theorem 1, Section 2.1. | Joint CLT for marginal Hill estimators and pooled Hill CLT under common $\gamma$. | Passing through $\log\psi$ is our Taylor step. |
 | $C_n$ first order | Bellini et al. (2014), and Daouia--Girard--Stupfler (2019), Corollary 1 with $p=2$. Local file for DGS 2019: `papers/DGS2019.pdf`. | $\xi_\tau/Q(\tau) \to \psi(\gamma)$ for $0<\gamma<1$ with finite lower-tail first moment. | First order only; no rate for $C_n$. |
-| $C_n$ second order | Daouia--Girard--Stupfler, *Tail expectile process and risk assessment*, Proposition 1(i). Local file: `papers/DGS2020.pdf`. | Ratio expansion for $\xi_\tau/Q(\tau)$ with second-order term and first-moment term. | It is a ratio expansion, not a log expansion. Logging requires a Taylor remainder check. |
+| $C_n$ second order | Daouia--Girard--Stupfler, *Tail expectile process and risk assessment*, Proposition 1(i). Local file: `papers/DGS2020.pdf`. | Ratio expansion for $\xi_\tau/Q(\tau)$ with second-order term and first-moment term. | It is a ratio expansion, not a log expansion. Logging adds an explicit deterministic square-order remainder whose scaled order must be checked later. |
 | Context only | Daouia--Girard--Stupfler (2018), Corollaries 3-4; Davison--Padoan--Stupfler (2023), Theorem 3.5. Local files: `papers/Daouia-Estimationtailrisk-2018.pdf`, `papers/Tail Risk Inference via Expectiles in Heavy-Tailed Time Series.pdf`. | Full extrapolated expectile CLTs in single-sample/time-series settings. | Do not import these as the pooled theorem; use only as consistency checks for notation and rates. |
 
 ## Term 1: $A_n$, pooled Weissman error
@@ -472,8 +472,39 @@ This confirms $C_n \to 0$, but it does not provide a usable rate.
 ### Second-order ratio expansion
 
 Daouia--Girard--Stupfler (2020), Proposition 1(i), gives the needed
-second-order population expansion. Under $E|Y^-|<\infty$,
-$C_2(\gamma,\rho,A)$, and $0<\gamma<1$,
+second-order population expansion. In their notation, the right tail is
+Pareto-type with tail quantile
+
+$$
+U(t)=q_{1-t^{-1}},
+$$
+
+and the second-order condition $C_2(\gamma,\rho,A)$ is
+
+$$
+\lim_{t\to\infty}
+\frac{1}{A(t)}
+\left\{
+  \frac{U(tx)}{U(t)}-x^\gamma
+\right\}
+=
+x^\gamma\frac{x^\rho-1}{\rho},
+\qquad x>0,
+$$
+
+where $\rho\le0$, $A(t)\to0$, $A$ has ultimately constant sign, and
+$(x^\rho-1)/\rho$ is read as $\log x$ when $\rho=0$. Proposition 1(i)
+assumes $E|Y^-|<\infty$ and $0<\gamma<1$; together these conditions imply that
+$EY$ exists. The proposition does not require the strict monotonicity condition
+that appeared in the earlier DGS expansion. For the common-marginal thesis
+route, identify $Y$ with the common observation variable and set
+
+$$
+q_\tau=Q(\tau)=Q_0(1-p),
+\qquad p=1-\tau.
+$$
+
+Then, as $\tau\to1$,
 
 $$
 \frac{\xi_\tau}{Q(\tau)}
@@ -484,7 +515,7 @@ $$
   + c(\gamma,\rho) A((1-\tau)^{-1})
   + \gamma(\gamma^{-1}-1)^\gamma
     \frac{E Y}{Q(\tau)}
-  + o(A((1-\tau)^{-1}))
+  + o(|A((1-\tau)^{-1})|)
   + o(Q(\tau)^{-1})
 \right],
 $$
@@ -506,39 +537,81 @@ $$
 m(\gamma)=\frac{1}{1-\gamma}-\log(\gamma^{-1}-1).
 $$
 
-This source statement is a ratio expansion. It implies that
+This source statement is a ratio expansion. With
 
 $$
-C_n
-=
-\log(1+\Delta_{\tau_n}),
+a_\tau=A((1-\tau)^{-1}),
+\qquad
+b_\tau=Q(\tau)^{-1},
 $$
 
-with
+it implies
 
 $$
 \Delta_{\tau}
 =
 c(\gamma,\rho) A((1-\tau)^{-1})
 +
-\gamma(\gamma^{-1}-1)^\gamma \frac{E Y}{Q(\tau)}
+\gamma(\gamma^{-1}-1)^\gamma E Y\, Q(\tau)^{-1}
 +
-o(A((1-\tau)^{-1}))
+o(|A((1-\tau)^{-1})|)
 +
 o(Q(\tau)^{-1}).
 $$
 
-Since $A(t)\to0$ and $Q(\tau)\to\infty$, $\Delta_\tau\to0$; hence the log is
-well-defined eventually. The thesis proof still has to check the Taylor
-remainder
+Equivalently,
 
 $$
-\log(1+\Delta_{\tau_n})-\Delta_{\tau_n}
-=O(\Delta_{\tau_n}^2)
+\Delta_\tau
+=
+c(\gamma,\rho)a_\tau
++\gamma(\gamma^{-1}-1)^\gamma EY\,b_\tau
++o(|a_\tau|)
++o(b_\tau),
 $$
 
-against the final scale. This note does not decide whether $C_n$ contributes
-or vanishes.
+and hence $\Delta_\tau=O(|a_\tau|+b_\tau)$. Since $A(t)\to0$ and
+$Q(\tau)\to\infty$, $\Delta_\tau\to0$; for all sufficiently high $\tau$,
+$|\Delta_\tau|\le1/2$ and the logarithm is well-defined. The exact $C_n$ term
+therefore satisfies
+
+$$
+C_n
+=
+\log(1+\Delta_{\tau_n})
+=
+\Delta_{\tau_n}
++R_{\tau_n}^{log},
+$$
+
+where
+
+$$
+R_{\tau_n}^{log}
+=
+\log(1+\Delta_{\tau_n})-\Delta_{\tau_n}.
+$$
+
+Taylor's theorem gives the deterministic bound
+
+$$
+|R_{\tau_n}^{log}|
+\le
+2\Delta_{\tau_n}^2
+=
+O\left((|A(1/p_n)|+Q(1-p_n)^{-1})^2\right)
+$$
+
+once $|\Delta_{\tau_n}|\le1/2$. This is an order ledger, not a negligibility
+claim. If a later candidate scale is called $s_n$, the order comparison must
+check $s_nA(1/p_n)$, $s_nQ(1-p_n)^{-1}$, and
+
+$$
+s_n(|A(1/p_n)|+Q(1-p_n)^{-1})^2.
+$$
+
+Depending on the target-level regime, the last display may vanish, survive, or
+force an additional rate condition. This note does not decide which case holds.
 
 ## Component ledger before any rate comparison
 
@@ -805,15 +878,17 @@ C_n=\log(1+\Delta_n).
 $$
 
 In the common-marginal setting, DGS 2020 Proposition 1(i) gives a sourced
-asymptotic ledger for $\Delta_n$. With
+asymptotic ledger for $\Delta_n$. Its assumptions, translated to the thesis
+notation, are:
 
-$$
-d(\gamma)=\gamma(\gamma^{-1}-1)^\gamma,
-\qquad
-\mu=E X,
-$$
+- $0<\gamma<1$;
+- $E|X^-|<\infty$, so $EX$ exists under the Pareto-type right tail;
+- $C_2(\gamma,\rho,A)$ for the common tail quantile $Q(1-1/t)=U(t)$, with
+  $\rho\le0$, $A(t)\to0$, and $A$ ultimately of constant sign.
 
-write
+The Daouia--Padoan--Stupfler Weissman component later imposes the stricter
+$\rho<0$ in the common-marginal route, but the DGS population-ratio expansion
+itself allows $\rho=0$. With $\mu=E X$, write
 
 $$
 \Delta_n
@@ -834,7 +909,8 @@ $$
 $$
 \Delta_n^{mean}
 =
-d(\gamma)\frac{\mu}{Q_0(1-p_n)},
+\gamma(\gamma^{-1}-1)^\gamma
+\frac{\mu}{Q_0(1-p_n)},
 $$
 
 and
@@ -847,6 +923,13 @@ r_{A,n}A(1/p_n)
 r_{Q,n}Q_0(1-p_n)^{-1},
 \qquad
 r_{A,n}\to0,\quad r_{Q,n}\to0.
+$$
+
+Because $A(1/p_n)\to0$ and $Q_0(1-p_n)\to\infty$,
+
+$$
+\Delta_n=O(|A(1/p_n)|+Q_0(1-p_n)^{-1})
+\to0.
 $$
 
 The log conversion is another exact decomposition:
@@ -874,9 +957,21 @@ C_n
 +R_n^{log}.
 $$
 
+Once $|\Delta_n|\le1/2$, Taylor's theorem gives
+
+$$
+|R_n^{log}|
+\le
+2\Delta_n^2
+=
+O\left((|A(1/p_n)|+Q_0(1-p_n)^{-1})^2\right).
+$$
+
 No conclusion is made here about which of these pieces matters. The ledger only
 separates the second-order tail term, the first-moment term, the DGS remainder,
-and the new log-conversion remainder.
+and the new log-conversion remainder. A later scale comparison must check the
+two first-order deterministic pieces and the square-order log remainder
+separately.
 
 ## Open proof obligations
 
@@ -899,12 +994,15 @@ and the new log-conversion remainder.
    exceptional case $m(\gamma)=0$ visible. Do not infer its importance before
    the later scale comparison.
 
-5. For $C_n$, confirm the DGS 2020 assumptions in the exact thesis setting and
-   prove the log conversion by controlling $R_n^{log}$ after the relevant scale
-   has been identified.
+5. $C_n$ is now validated as a source-grounded ratio-to-log ledger in the
+   common-marginal setting. The later order comparison must check
+   $A(1/p_n)$, $Q(1-p_n)^{-1}$, the DGS remainder, and the square-order
+   log-conversion remainder without assuming in advance that any of them
+   vanish.
 
-6. Only after the $C_n$ ledger has also been validated should the note compare
-   orders and propose a normalisation for $A_n+B_n-C_n$.
+6. The next mathematical step is to compare the orders in $A_n+B_n-C_n$ and
+   only then decide whether a normalisation, centring, or additional rate
+   condition is justified.
 
 7. Do not import Daouia--Padoan--Stupfler weights until the final theorem has
    identified the variance or AMSE criterion for the complete sum
