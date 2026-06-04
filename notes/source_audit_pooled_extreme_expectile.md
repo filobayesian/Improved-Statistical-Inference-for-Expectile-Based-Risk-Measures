@@ -2,8 +2,9 @@
 
 Status: scratch research note, not theorem prose. This note records source
 statements for the exact decomposition in Chapter 4 and lists the remaining
-proof obligations. It intentionally does not choose a final normalisation,
-state weights, construct intervals, or propose a simulation design.
+proof obligations. It records the conservative first-theorem rate choice
+$\eta_n\to0$, but it does not state a theorem, state weights, construct
+intervals, or propose a simulation design.
 
 ## Object and exact identity
 
@@ -58,13 +59,13 @@ Daouia--Padoan--Stupfler, the target population must be specified separately.
 
 | Term | Source | What the source gives | Important caveat |
 |---|---|---|---|
-| $A_n$ | Daouia--Padoan--Stupfler, *Optimal weighted pooling for inference about the tail index and extreme quantiles*, Theorem 2, Section 2.3. Local file: `papers/Optimal Pooling.pdf`. | General finite-$m$ pooled weighted-geometric Weissman CLT for relative error. | Main statement is for relative error, not log-relative error. The pooled-quantile part also needs tail homoskedasticity $(H)$ if the margins are not literally common. |
-| $A_n$ common-marginal specialisation | Same paper, Corollary 9, Section 3.3. | Common-marginal distributed version of the same relative-error CLT, with simplified bias and variance. | This is the cleanest source statement for the iid/common-marginal route. It still uses the Weissman source normalisation only for the quantile component. |
+| $A_n$ | Daouia--Padoan--Stupfler, *Optimal weighted pooling for inference about the tail index and extreme quantiles*, Theorem 2, Section 2.3. Local files: `papers/Optimal Weighted Pooling Bernoulli 2024.pdf` and arXiv file `papers/Optimal Pooling.pdf`. | General finite-$m$ pooled weighted-geometric Weissman CLT for relative error. | Main statement is for relative error, not log-relative error. The pooled-quantile part also needs tail homoskedasticity $(H)$ if the margins are not literally common. |
+| $A_n$ common-marginal specialisation | Same paper, Corollary 8 in the published Bernoulli version, Section 3.3. | Common-marginal distributed version of the same relative-error CLT, with simplified bias and variance. | This is the cleanest source statement for the iid/common-marginal route. The arXiv file numbers this result as Corollary 9; the thesis bibliography cites the published version, so theorem prose should cite Corollary 8. |
 | $A_n$ log conversion | Same paper, supplement, proof of Theorem 2; Lemma B.2. Local file: `papers/optimal pooling supp.pdf`. | Shows the log Weissman error equals the dominant Hill term plus a lower-order log remainder. | This is a proof ingredient, not the headline theorem statement. In the common-marginal case the target-alignment term is exactly zero, so Lemma B.2 is only needed for the broader $(H)$ route. |
 | $B_n$ | Daouia--Padoan--Stupfler, Theorem 1, Section 2.1. | Joint CLT for marginal Hill estimators and pooled Hill CLT under common $\gamma$. | Passing through $\log\psi$ is our Taylor step. |
 | $C_n$ first order | Bellini et al. (2014), and Daouia--Girard--Stupfler (2019), Corollary 1 with $p=2$. Local file for DGS 2019: `papers/DGS2019.pdf`. | $\xi_\tau/Q(\tau) \to \psi(\gamma)$ for $0<\gamma<1$ with finite lower-tail first moment. | First order only; no rate for $C_n$. |
 | $C_n$ second order | Daouia--Girard--Stupfler, *Tail expectile process and risk assessment*, Proposition 1(i). Local file: `papers/DGS2020.pdf`. | Ratio expansion for $\xi_\tau/Q(\tau)$ with second-order term and first-moment term. | It is a ratio expansion, not a log expansion. Logging adds an explicit deterministic square-order remainder whose scaled order must be checked later. |
-| Context only | Daouia--Girard--Stupfler (2018), Corollaries 3-4; Davison--Padoan--Stupfler (2023), Theorem 3.5. Local files: `papers/Daouia-Estimationtailrisk-2018.pdf`, `papers/Tail Risk Inference via Expectiles in Heavy-Tailed Time Series.pdf`. | Full extrapolated expectile CLTs in single-sample/time-series settings. | Do not import these as the pooled theorem; use only as consistency checks for notation and rates. |
+| Single-sample sanity check / rate guide | Daouia--Girard--Stupfler (2018), Corollaries 3-4; Davison--Padoan--Stupfler (2023), Theorem 3.5. Local files: `papers/Daouia-Estimationtailrisk-2018.pdf`, `papers/Tail Risk Inference via Expectiles in Heavy-Tailed Time Series.pdf`. | Full extrapolated expectile CLTs in single-sample/time-series settings. DGS 2018 Corollary 3 reduces to the same QB extreme-expectile object when $m=1$. | Do not import these as the pooled theorem. Use DGS 2018 as an $m=1$ sanity check, with explicit translation because their $\tau_n$ is intermediate and their $\tau'_n$ is extreme. |
 
 ## Term 1: $A_n$, pooled Weissman error
 
@@ -136,8 +137,9 @@ in Chapter 4.
 
 Section 3 of Daouia--Padoan--Stupfler specialises the framework to distributed
 inference with all observations iid from a common distribution satisfying
-$C_2(\gamma,\rho,A)$. Corollary 9 gives, under the conditions of Corollary 5 and
-the extra Weissman conditions listed below,
+$C_2(\gamma,\rho,A)$. In the published Bernoulli version, Corollary 8 gives,
+under the conditions of Corollary 5 and the extra Weissman conditions listed
+below,
 
 $$
 \frac{\sqrt{k}}{\ell_n}
@@ -186,7 +188,7 @@ For the general Theorem 2 route, carry forward:
 - Weights with $\omega^\top 1=1$; for estimated weights, the source requires
   exact normalisation and convergence to a deterministic weight vector.
 
-For the finite-$m$ iid/common-marginal Corollary 9 route, this simplifies to:
+For the finite-$m$ iid/common-marginal Corollary 8 route, this simplifies to:
 
 - iid observations across and within machines, with common distribution
   satisfying $C_2(\gamma,\rho,A)$.
@@ -204,7 +206,8 @@ layer can be ignored at first by taking $\widehat\omega_n=\omega$.
 
 ### Relative error versus log-relative error
 
-The main theorem and Corollary 9 are stated for relative error. Since
+Daouia--Padoan--Stupfler Theorem 2 and Corollary 8 are stated for relative
+error. Since
 $A_n$ is a log-relative error, there are two validated source-grounded routes.
 
 First, the supplement proof of Theorem 2 works directly with
@@ -243,11 +246,11 @@ The proof decomposes the log error into:
 
 In the common-marginal route, the last term is exactly zero because all
 $q_j=q$. The remaining controls are precisely the ingredients behind Corollary
-9.
+8.
 
 Second, one may convert the headline relative-error theorem to log scale. The
 source regime $\sqrt{k}/\ell_n\to\infty$ implies
-$\ell_n/\sqrt{k}\to0$, so the relative error in Theorem 2 or Corollary 9 is
+$\ell_n/\sqrt{k}\to0$, so the relative error in Theorem 2 or Corollary 8 is
 $o_P(1)$. Therefore
 
 $$
@@ -283,11 +286,73 @@ For the finite-$m$ iid/common-marginal setting, point 1 is validated as follows:
 
 | Question | Answer for $A_n$ |
 |---|---|
-| Exact source statement | Use Daouia--Padoan--Stupfler Corollary 9 for the common-marginal distributed route; use Theorem 2 for the broader tail-homoskedastic route. |
+| Exact source statement | Use Daouia--Padoan--Stupfler Corollary 8 in the published Bernoulli version for the common-marginal distributed route; use Theorem 2 for the broader tail-homoskedastic route. |
 | Source normalisation | $\sqrt{k}/\ell_n$ with $\ell_n=\log(k/(np))$, for the pooled Weissman quantile component. |
 | Relative or log scale? | Headline source statement is relative error. The supplement proof gives a direct log expansion, and the source regime also permits a Taylor conversion from relative to log error. |
 | Common-marginal target issue | No issue: $A_n^{target}=0$ exactly because $q_j=q=Q$. |
-| Still not decided | Whether the final expectile theorem uses the same normalisation must wait until $B_n$ and $C_n$ are compared with $A_n$. |
+| Settled design choice | The order comparison below chooses the conservative first-theorem condition $\eta_n\to0$, under which the full expectile decomposition uses the pooled-Weissman benchmark scale with no retained population-bridge bias. |
+
+### Single-sample sanity check: DGS 2018
+
+Daouia--Girard--Stupfler (2018), Corollary 3, should be used as a sanity
+check and rate guide, not as the proof of the pooled theorem. Their notation
+uses $\tau_n$ for the intermediate level and $\tau'_n$ for the extreme level,
+whereas this note uses $\tau_n$ for the extreme target. To avoid confusion,
+write their levels here as
+
+$$
+\tau_n^{int}\quad\text{and}\quad \tau_n^{ext},
+\qquad
+k=n(1-\tau_n^{int}),
+\qquad
+p_n=1-\tau_n^{ext}.
+$$
+
+Their QB extrapolated extreme-expectile estimator in equation (11) is
+
+$$
+\widehat\xi_{\tau_n^{ext}}^\star
+=
+(\widehat\gamma^{-1}-1)^{-\widehat\gamma}
+\widehat q_{\tau_n^{ext}}^\star,
+$$
+
+which matches the present estimator when $m=1$. Their Corollary 3 uses the
+scale
+
+$$
+\frac{\sqrt{n(1-\tau_n^{int})}}
+{\log\{(1-\tau_n^{int})/(1-\tau_n^{ext})\}}
+=
+\frac{\sqrt{k}}{\ell_n},
+$$
+
+and imposes, among other conditions,
+
+$$
+\sqrt{k}\,q_{\tau_n^{int}}^{-1}=O(1),
+\qquad
+\sqrt{k}\,A\{(1-\tau_n^{int})^{-1}\}=O(1),
+\qquad
+\frac{\sqrt{k}}{\ell_n}\to\infty.
+$$
+
+Since $q_{\tau_n^{ext}}\ge q_{\tau_n^{int}}$ for the extreme level, the first
+of these conditions implies
+
+$$
+\eta_n
+=
+\frac{\sqrt{k}}{\ell_n Q(1-p_n)}
+\le
+\frac{\sqrt{k}}{\ell_n q_{\tau_n^{int}}}
+\to0.
+$$
+
+This supports the conservative $\eta_n\to0$ first-theorem route and confirms
+that the $m=1$ reduction has the expected scale and stochastic limit. It does
+not replace the pooled proof, which still has to follow from the exact
+$A_n+B_n-C_n$ decomposition and the DPS pooled-Weissman input.
 
 ## Term 2: $B_n$, the cost of estimating $\gamma$ inside $\psi$
 
@@ -757,7 +822,7 @@ The source map for these four components, after validating point 1, is:
 |---|---|---|
 | $A_n^{Hill}$ | Daouia--Padoan--Stupfler Theorem 1 and the proof of Theorem 2. | The common-log pooled-Hill piece is the source-dominant part for $A_n$ under the Weissman source normalisation. The local-log correction is lower order because $\ell_{j,n}/\ell_n\to1$ and $\sqrt{k_j}(\widehat\gamma_j-\gamma)=O_P(1)$. |
 | $A_n^{thr}$ | Intermediate order-statistic expansion used in the supplement proof of Theorem 2. | Controlled as part of the supplement's $O_P(k^{-1/2})$ log remainder when $m$ is fixed and $k_j/k$ has positive limits. |
-| $A_n^{tail}$ | Second-order regular variation $C_2$ and supplement Lemma B.2/proof of Theorem 2. | The deterministic tail approximation is controlled by $\rho<0$, $k/(np)\to\infty$, and $\sqrt{k}A(n/k)=O(1)$ in the common-marginal route. It can be cited through Corollary 9/supplement unless Chapter 4 needs the component proof reproduced. |
+| $A_n^{tail}$ | Second-order regular variation $C_2$ and supplement Lemma B.2/proof of Theorem 2. | The deterministic tail approximation is controlled by $\rho<0$, $k/(np)\to\infty$, and $\sqrt{k}A(n/k)=O(1)$ in the common-marginal route. It can be cited through Corollary 8/supplement unless Chapter 4 needs the component proof reproduced. |
 | $A_n^{target}$ | Tail homoskedasticity $(H)$ and supplement Lemma B.2 for the broad route. | Exactly zero in the iid/common-marginal route. Under only $(H)$, Lemma B.2 gives the required marginal log-quantile alignment. |
 
 ### $B_n$: exact Taylor ledger
@@ -969,9 +1034,266 @@ $$
 
 No conclusion is made here about which of these pieces matters. The ledger only
 separates the second-order tail term, the first-moment term, the DGS remainder,
-and the new log-conversion remainder. A later scale comparison must check the
+and the new log-conversion remainder. The order comparison below checks the
 two first-order deterministic pieces and the square-order log remainder
 separately.
+
+## Order comparison for $A_n+B_n-C_n$
+
+Status: scratch rate comparison, not theorem prose. This section works in the
+finite-$m$ iid/common-marginal distributed route with deterministic admissible
+weights $\omega^\top 1=1$. Its purpose is to compare the already-audited
+ledgers, not to state a final limit theorem.
+
+### Benchmark scale and neutral rate notation
+
+The pooled Weissman source result uses
+
+$$
+r_n=\frac{k}{np_n},
+\qquad
+\ell_n=\log r_n,
+\qquad
+s_{A,n}=\frac{\sqrt{k}}{\ell_n},
+$$
+
+with
+
+$$
+r_n\to\infty,
+\qquad
+\ell_n\to\infty,
+\qquad
+\frac{\sqrt{k}}{\ell_n}\to\infty.
+$$
+
+Here $s_{A,n}$ is only a benchmark inherited from the $A_n$ source theorem. It
+is not declared as the final normalisation for the complete expectile
+decomposition.
+
+For the population bridge terms, write
+
+$$
+a_n=A(1/p_n),
+\qquad
+b_n=Q_0(1-p_n)^{-1},
+\qquad
+\eta_n=s_{A,n}b_n
+=\frac{\sqrt{k}}{\ell_n Q_0(1-p_n)}.
+$$
+
+Also set
+
+$$
+\alpha_\gamma=\gamma(\gamma^{-1}-1)^\gamma,
+\qquad
+\mu=EX.
+$$
+
+The DPS common-marginal Weissman route assumes $\rho<0$ and
+$\sqrt{k}A(n/k)\to\lambda\in\mathbb R$. Since $A$ is regularly varying with
+index $\rho$, and
+
+$$
+\frac{1/p_n}{n/k}=r_n\to\infty,
+$$
+
+we have
+
+$$
+\frac{A(1/p_n)}{A(n/k)}
+=
+r_n^\rho\{1+o(1)\}
+\to0.
+$$
+
+Consequently,
+
+$$
+\sqrt{k}\,a_n
+=
+\sqrt{k}A(n/k)
+\frac{A(1/p_n)}{A(n/k)}
+\to0,
+\qquad
+s_{A,n}a_n
+=
+\frac{\sqrt{k}\,a_n}{\ell_n}
+\to0.
+$$
+
+This conclusion uses the stricter DPS Weissman condition $\rho<0$. The DGS
+population expansion alone allows $\rho=0$, but that broader case is not part
+of the current least-action common-marginal route.
+
+### Random terms: $A_n$ versus $B_n$
+
+The audited $A_n$ source statement gives, on log scale,
+
+$$
+A_n
+=
+\ell_n\{\widehat\gamma_n(\omega)-\gamma\}
++o_P\left(\frac{\ell_n}{\sqrt{k}}\right),
+$$
+
+and therefore
+
+$$
+s_{A,n}A_n
+=
+\sqrt{k}\{\widehat\gamma_n(\omega)-\gamma\}
++o_P(1).
+$$
+
+The pooled Hill CLT supplies the non-degenerate stochastic order in the last
+display.
+
+For $B_n$, the Taylor ledger gives
+
+$$
+B_n
+=
+m(\gamma)\{\widehat\gamma_n(\omega)-\gamma\}
++O_P(k^{-1}).
+$$
+
+On the same benchmark scale,
+
+$$
+s_{A,n}B_n
+=
+\frac{m(\gamma)}{\ell_n}
+\sqrt{k}\{\widehat\gamma_n(\omega)-\gamma\}
++O_P\left(\frac{1}{\ell_n\sqrt{k}}\right)
+=o_P(1),
+$$
+
+because $\ell_n\to\infty$. Thus the plug-in-$\psi$ stochastic term is lower
+order than the Weissman extrapolation term on the pooled-quantile source
+scale. If $m(\gamma)=0$, the conclusion is even stronger:
+
+$$
+s_{A,n}B_n
+=
+O_P\left(\frac{1}{\ell_n\sqrt{k}}\right)
+=o_P(1).
+$$
+
+The exceptional root of $m$ therefore remains visible in the algebra, but it
+does not change the first-order order comparison whenever the $A_n$ benchmark
+scale is the relevant scale.
+
+### Population bridge term: $C_n$
+
+The audited ledger is
+
+$$
+C_n
+=
+c(\gamma,\rho)a_n
++\alpha_\gamma\mu b_n
++r_{A,n}a_n
++r_{Q,n}b_n
++R_n^{log},
+$$
+
+where $r_{A,n}\to0$, $r_{Q,n}\to0$, and
+
+$$
+R_n^{log}
+=
+O\{(|a_n|+b_n)^2\}.
+$$
+
+The second-order tail bridge is automatically smaller than the $A_n$ benchmark:
+
+$$
+s_{A,n}c(\gamma,\rho)a_n\to0.
+$$
+
+The first-moment bridge is not decided by the DPS Weissman assumptions alone:
+
+$$
+s_{A,n}\alpha_\gamma\mu b_n
+=
+\alpha_\gamma\mu\,\eta_n.
+$$
+
+Thus the remaining theorem-design rate is exactly the behaviour of
+
+$$
+\eta_n
+=
+\frac{\sqrt{k}}{\ell_n Q_0(1-p_n)}.
+$$
+
+For the first theorem, choose the conservative condition
+
+$$
+\eta_n\to0.
+$$
+
+Under this condition, the whole first-moment bridge disappears on the $A_n$
+benchmark scale. This choice is aligned with the $m=1$ DGS 2018 sanity check
+above and avoids introducing a new expectile-specific AMSE objective.
+
+The mathematically possible branch $\eta_n\to\eta\in(0,\infty)$ is parked. In
+that branch the first-moment term would survive as a deterministic bridge-bias
+contribution; since $C_n$ enters the exact decomposition as $A_n+B_n-C_n$, the
+sign of this contribution in the log estimator error would be negative.
+Because the shift is weight-independent but changes the AMSE criterion from
+the DPS one, this branch should not be used in the first thesis theorem unless
+Filippo explicitly reopens it.
+
+The DGS little-$o$ remainder and the log-conversion remainder are also
+controlled under the chosen condition $\eta_n\to0$. Indeed,
+
+$$
+s_{A,n}r_{A,n}a_n=o(1),
+\qquad
+s_{A,n}r_{Q,n}b_n=r_{Q,n}\eta_n=o(1),
+$$
+
+and, because $a_n\to0$, $b_n\to0$, $s_{A,n}a_n\to0$, and
+$s_{A,n}b_n=\eta_n\to0$,
+
+$$
+s_{A,n}(|a_n|+b_n)^2\to0.
+$$
+
+If $\eta_n\to\infty$, the first-moment bridge is larger than the pooled
+Weissman stochastic scale. The current DGS ledger is then not enough to justify
+a centred source-scale theorem, because the term
+$s_{A,n}r_{Q,n}b_n=r_{Q,n}\eta_n$ need not vanish without a sharper rate for
+the DGS little-$o$ remainder. This case should be avoided in the first theorem
+unless a stronger source statement is found.
+
+### Comparison summary
+
+Relative to the pooled-Weissman benchmark $s_{A,n}=\sqrt{k}/\ell_n$:
+
+| Piece | Scaled order | Consequence for the scratch ledger |
+|---|---|---|
+| $A_n$ | $s_{A,n}A_n=\sqrt{k}\{\widehat\gamma_n(\omega)-\gamma\}+o_P(1)$ | Non-degenerate pooled-Weissman source component. |
+| $B_n$ | $s_{A,n}B_n=o_P(1)$ | Plug-in $\psi$ cost is first-order negligible because $\ell_n\to\infty$. |
+| $c(\gamma,\rho)A(1/p_n)$ in $C_n$ | $o(1)$ | Second-order expectile-quantile bridge vanishes under the DPS $\rho<0$ route. |
+| $\alpha_\gamma\mu/Q_0(1-p_n)$ in $C_n$ | $\alpha_\gamma\mu\,\eta_n=o(1)$ | First-moment bridge vanishes under the chosen first-theorem condition $\eta_n\to0$. |
+| DGS little-$o$ terms in $C_n$ | $o(1)$ | Controlled under $\eta_n\to0$. |
+| $R_n^{log}$ | $o(1)$ | Square-order log conversion is harmless under $\eta_n\to0$. |
+
+The conservative first-theorem design choice is therefore:
+
+$$
+\eta_n=\frac{\sqrt{k}}{\ell_n Q_0(1-p_n)}
+\to0.
+$$
+
+This gives no retained deterministic population-bridge bias on the pooled
+Weissman benchmark scale. This is a proof-design conclusion, not yet theorem
+prose. Chapter 4 should not state a normalisation, centring, variance, or
+interval until the generic-weight theorem is written and checked in this
+scratch note.
 
 ## Open proof obligations
 
@@ -981,9 +1303,10 @@ separately.
    expectiles, not just quantiles.
 
 2. $A_n$ is now validated against Daouia--Padoan--Stupfler for the
-   finite-$m$ iid/common-marginal route. Before theorem prose, decide whether
-   Chapter 4 cites Corollary 9 directly or cites Theorem 2 plus the supplement
-   proof, and keep the broader tail-homoskedastic route separate.
+   finite-$m$ iid/common-marginal route. Theorem prose should cite Corollary 8
+   in the published Bernoulli version for the common-marginal route, or cite
+   Theorem 2 plus the supplement proof if the chapter needs the broader
+   tail-homoskedastic or direct log-expansion route.
 
 3. For $A_n^{thr}$ and $A_n^{tail}$, decide whether to cite the DPS supplement
    proof of Theorem 2 as a package, or to reproduce the two component controls
@@ -991,18 +1314,21 @@ separately.
 
 4. $B_n$ is now validated as a compact-event Taylor expansion:
    $B_n=m(\gamma)\{\widehat\gamma_n(\omega)-\gamma\}+O_P(k^{-1})$, with the
-   exceptional case $m(\gamma)=0$ visible. Do not infer its importance before
-   the later scale comparison.
+   exceptional case $m(\gamma)=0$ visible. The order comparison above shows
+   that $B_n$ is lower order on the pooled-Weissman benchmark scale because
+   $\ell_n\to\infty$.
 
 5. $C_n$ is now validated as a source-grounded ratio-to-log ledger in the
-   common-marginal setting. The later order comparison must check
+   common-marginal setting. The order comparison above checks
    $A(1/p_n)$, $Q(1-p_n)^{-1}$, the DGS remainder, and the square-order
-   log-conversion remainder without assuming in advance that any of them
-   vanish.
+   log-conversion remainder.
 
-6. The next mathematical step is to compare the orders in $A_n+B_n-C_n$ and
-   only then decide whether a normalisation, centring, or additional rate
-   condition is justified.
+6. The order comparison above shows that, on the pooled-Weissman benchmark
+   scale, $B_n$ and the second-order $A(1/p_n)$ bridge vanish, while the
+   first-moment bridge is governed by
+   $\eta_n=\sqrt{k}/\{\ell_n Q_0(1-p_n)\}$. The conservative first-theorem
+   route is now to impose $\eta_n\to0$, so no deterministic bridge-bias
+   constant is retained.
 
 7. Do not import Daouia--Padoan--Stupfler weights until the final theorem has
    identified the variance or AMSE criterion for the complete sum

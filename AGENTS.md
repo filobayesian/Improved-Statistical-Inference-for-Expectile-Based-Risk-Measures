@@ -4,7 +4,7 @@ Working context for Codex and any other AI assistant collaborating in this repos
 
 ## What This Project Is
 
-A Master's thesis, with LaTeX source and reproducible R simulation support, by Filippo Gombac on pooled inference for extreme expectile-based risk measures. The project extends the optimal-pooling / distributed-inference framework of Daouia, Padoan & Stupfler, *Optimal pooling and distributed inference for the tail index and extreme quantiles*, from extreme quantiles toward extreme expectiles.
+A Master's thesis, with LaTeX source and reproducible R simulation support, by Filippo Gombac on pooled inference for extreme expectile-based risk measures. The project extends the optimal-pooling / distributed-inference framework of Daouia, Padoan & Stupfler, *Optimal weighted pooling for inference about the tail index and extreme quantiles*, from extreme quantiles toward extreme expectiles.
 
 Working title: *Improved Statistical Inference for Expectile-Based Risk Measures*.
 
@@ -24,21 +24,32 @@ As of 2026-06-04, the compiled thesis scaffold has been cleaned so it no longer 
 Current source-audit status: the `A_n` pooled Weissman component, the `B_n`
 plug-in-`\psi` component, and the `C_n` population bridge component of the
 exact decomposition have been validated at scratch-note level in
-`notes/source_audit_pooled_extreme_expectile.md`. For the finite-`m`
-iid/common-marginal distributed route, use Daouia--Padoan--Stupfler Corollary
-9 as the clean source statement for `A_n`; use Theorem 2 plus the supplement
-proof only if Chapter 4 needs the broader tail-homoskedastic or direct
-log-expansion route. For `B_n`, use the pooled Hill CLT and the compact-event
-Taylor expansion
+`notes/source_audit_pooled_extreme_expectile.md`. The order comparison for
+`A_n+B_n-C_n` has also been carried out there for the finite-`m`
+iid/common-marginal route with deterministic admissible weights. On the
+pooled-Weissman benchmark scale `s_{A,n}=\sqrt{k}/\ell_n`, the comparison shows
+that `A_n` carries the DPS stochastic component, `B_n` is lower order, and the
+second-order bridge term `A(1/p_n)` in `C_n` is lower order under the DPS
+`\rho<0` route. The conservative first-theorem bridge-rate choice is now to
+impose `\eta_n=\sqrt{k}/\{\ell_n Q(1-p_n)\}\to0`, which removes the
+first-moment population bridge from the benchmark-scaled limit.
+
+For the finite-`m` iid/common-marginal distributed route, use
+Daouia--Padoan--Stupfler Corollary 8 in the published Bernoulli version as the
+clean source statement for `A_n`; use Theorem 2 plus the supplement proof only
+if Chapter 4 needs the broader tail-homoskedastic or direct log-expansion
+route. For `B_n`, use the pooled Hill CLT and the compact-event Taylor expansion
 `B_n=m(\gamma)(\widehat\gamma_n(\omega)-\gamma)+O_P(k^{-1})`, keeping the
-exceptional case `m(\gamma)=0` visible. For `C_n`, use
-Daouia--Girard--Stupfler (2020), Proposition 1(i), for the source-studied ratio
-error
+exceptional case `m(\gamma)=0` visible, but note that it is first-order
+negligible on the pooled-Weissman benchmark scale because `\ell_n\to\infty`.
+For `C_n`, use Daouia--Girard--Stupfler (2020), Proposition 1(i), for the
+source-studied ratio error
 `\Delta_n=\xi_{\tau_n}/\{\psi(\gamma)Q(1-p_n)\}-1`, then apply only the
 elementary log step `C_n=\log(1+\Delta_n)=\Delta_n+R_n^{log}`. The log
-remainder is a square-order ledger item, not a pre-decided negligible term.
-This validates only the component ledgers for `A_n`, `B_n`, and `C_n`, not the
-final normalisation or theorem for `A_n+B_n-C_n`.
+remainder is a square-order ledger item; it is controlled on the benchmark
+scale under the chosen `\eta_n\to0` route. This validates the component ledgers,
+the benchmark order comparison, and the conservative bridge-rate choice, not
+yet the final theorem statement, weights, intervals, or simulation design.
 
 The error is that the thesis was built around a standalone pooled intermediate QB expectile theory:
 \[
@@ -161,7 +172,7 @@ As of 2026-06-04, the agreed conservative research design is:
 - Do not start with variance-optimal or AMSE-optimal weights. First prove the generic-weight theorem, then read off the variance and bias criterion, and only then import Daouia--Padoan--Stupfler weights if the criterion matches.
 - Do not derive new expectile-specific closed-form weights unless the generic-weight theorem forces a different objective.
 - Do not add estimated weights, confidence intervals, or simulations until the theorem and any justified weight corollary are settled.
-- Keep all mathematical scratch work in `notes/source_audit_pooled_extreme_expectile.md` until the theorem is derived. Do not move theorem prose into Chapter 4 while the component ledger and order comparison are still being worked out.
+- Keep all mathematical scratch work in `notes/source_audit_pooled_extreme_expectile.md` until the theorem is derived. Do not move theorem prose into Chapter 4 until the theorem statement is settled.
 
 ### Imported Results Versus New Proof Work
 
@@ -170,7 +181,7 @@ The rebuilt theorem should be a careful composition of imported results plus a s
 Directly importable, subject to notation matching and assumption checking:
 
 - Daouia--Padoan--Stupfler pooled Hill CLT for `\widehat\gamma_n(\omega)-\gamma`.
-- Daouia--Padoan--Stupfler pooled Weissman theorem for the pooled quantile term `A_n`. In the finite-`m` iid/common-marginal route, this is now source-audited through Corollary 9; the supplement's log-scale expansion remains the detailed proof source if the thesis needs to work directly on log scale.
+- Daouia--Padoan--Stupfler pooled Weissman theorem for the pooled quantile term `A_n`. In the finite-`m` iid/common-marginal route, this is now source-audited through Corollary 8 in the published Bernoulli version; the supplement's log-scale expansion remains the detailed proof source if the thesis needs to work directly on log scale.
 - Bellini / Daouia--Girard--Stupfler first-order expectile--quantile bridge `\xi_\tau/Q(\tau)\to\psi(\gamma)`.
 - Daouia--Girard--Stupfler (2020), Proposition 1(i), for the second-order
   population ratio expansion of
@@ -192,25 +203,25 @@ New proof work still required:
   `C_n=\log(1+\Delta_n)=\Delta_n+R_n^{log}` and record
   `R_n^{log}=O((|A(1/p_n)|+Q(1-p_n)^{-1})^2)`. This is stitching, not a new
   expectile asymptotic result.
-- Compare the orders of all pieces in `A_n+B_n-C_n`, including
-  `A(1/p_n)`, `Q(1-p_n)^{-1}`, the DGS little-`o` remainders, and the
-  square-order log-conversion remainder, to determine the correct scale,
-  centring, variance, bias, and any additional rate conditions.
+- Use the completed order comparison under the conservative theorem-design
+  condition `\eta_n=\sqrt{k}/\{\ell_n Q(1-p_n)\}\to0`, so no
+  first-moment population-bridge bias is retained. Keep the
+  `\eta_n\to\eta\in(0,\infty)` branch parked unless Filippo explicitly
+  reopens it.
 
 ## Immediate Next Step
 
-The active working artifact is `notes/source_audit_pooled_extreme_expectile.md`. It already contains the source audit and a component ledger for `A_n+B_n-C_n`.
+The active working artifact is `notes/source_audit_pooled_extreme_expectile.md`.
+It now contains the source audit, the component ledger for `A_n+B_n-C_n`, and
+the benchmark order comparison.
 
-The next task is to perform the order comparison for `A_n+B_n-C_n` in the
-common-marginal iid/distributed setting. The `C_n` ledger is now validated as:
-the DGS 2020 Proposition 1(i) ratio expansion for
-`\Delta_n=\xi_{\tau_n}/\{\psi(\gamma)Q(1-p_n)\}-1`, followed by the elementary
-log Taylor step `C_n=\Delta_n+R_n^{log}` with
-`R_n^{log}=O((|A(1/p_n)|+Q(1-p_n)^{-1})^2)`. Compare this ledger with the
-already-audited `A_n` and `B_n` pieces before choosing any scale. Do not choose
-or state a final normalisation, theorem, weights, confidence intervals, or
-simulation design until the ledger shows which terms survive and which source
-assumptions justify that conclusion.
+The conservative theorem-design route has been chosen in the scratch note:
+impose `\eta_n=\sqrt{k}/\{\ell_n Q(1-p_n)\}\to0` in the first generic-weight
+theorem. The next task is to write and check that generic deterministic-weight
+theorem inside the scratch note, using the exact decomposition and the sourced
+component ledgers. Do not add weights, confidence intervals, simulations, or
+polished Chapter 4 theorem text until that theorem statement and proof are
+settled.
 
 ## Full Research Plan
 
@@ -225,7 +236,8 @@ Minimum deliverable:
 - exact log decomposition;
 - neutral term notation, e.g. `A_n+B_n-C_n`;
 - source-audit table for each term, including theorem/proposition number, assumptions, and normalisation;
-- component ledger for the exact pieces of `A_n`, `B_n`, and `C_n`, before rate comparison;
+- component ledger for the exact pieces of `A_n`, `B_n`, and `C_n`;
+- benchmark order comparison for `A_n+B_n-C_n`;
 - a list of open proof obligations;
 - no candidate scale, candidate theorem, weights, intervals, or simulation design unless already derived in the note.
 
@@ -300,8 +312,9 @@ Then answer the following questions.
 
 Term 1 (`A_n`, source-audited for the finite-`m` iid/common-marginal route):
 
-- Use Daouia--Padoan--Stupfler Corollary 9 as the clean common-marginal
-  distributed statement for the pooled Weissman component.
+- Use Daouia--Padoan--Stupfler Corollary 8 in the published Bernoulli version
+  as the clean common-marginal distributed statement for the pooled Weissman
+  component.
 - The headline source result is relative-error scale; the supplement gives the
   direct log expansion, and the source regime also permits relative-to-log
   Taylor conversion.
@@ -323,9 +336,9 @@ Term 2 (`B_n`, source-audited for the finite-`m` iid/common-marginal route):
   one and places the estimator in a compact subset of `(0,1)`.
 - On that compact event, Taylor expansion of `g(x)=\log\psi(x)` gives
   `B_n=m(\gamma)(\widehat\gamma_n(\omega)-\gamma)+O_P(k^{-1})`.
-- Keep the exceptional case `m(\gamma)=0` visible. Do not decide whether `B_n`
-  contributes or vanishes under the final theorem scale until the order
-  comparison with `A_n` and `C_n` is performed.
+- Keep the exceptional case `m(\gamma)=0` visible. The completed order
+  comparison shows that `B_n` is lower order on the pooled-Weissman benchmark
+  scale because `\ell_n\to\infty`.
 
 Term 3 (`C_n`, source-audited for the finite-`m` iid/common-marginal route):
 
@@ -345,12 +358,20 @@ Term 3 (`C_n`, source-audited for the finite-`m` iid/common-marginal route):
   `O((|A(1/p_n)|+Q(1-p_n)^{-1})^2)`. This is a ledger item, not a
   negligibility claim.
 
-Only after comparing the `A_n`, `B_n`, and `C_n` ledgers should the note
-propose a final normalisation for `A_n+B_n-C_n`.
+The note has now compared the `A_n`, `B_n`, and `C_n` ledgers on the
+pooled-Weissman benchmark scale and chosen the conservative first-theorem route
+`\eta_n\to0`. Keep the `\eta_n\to\eta\in(0,\infty)` branch parked unless
+Filippo explicitly reopens it.
 
 ### Phase 5: Main Theorem
 
-Only after Phase 4 and the component-ledger order comparison, state the actual theorem. The first theorem should be for generic deterministic admissible weights satisfying `\omega^\top\mathbf 1=1`, in the iid/common-marginal distributed setting unless Filippo explicitly approves a broader setting. Do not present alternative outcomes as if they are already likely. The theorem should contain exactly the normalisation, centring, variance, bias, and assumptions that the source audit and proof justify.
+Only after Phase 4, the component-ledger order comparison, and the chosen
+`\eta_n\to0` route, state the actual theorem. The first theorem should be for generic
+deterministic admissible weights satisfying `\omega^\top\mathbf 1=1`, in the
+iid/common-marginal distributed setting unless Filippo explicitly approves a
+broader setting. Do not present alternative outcomes as if they are already
+likely. The theorem should contain exactly the normalisation, centring,
+variance, bias, and assumptions that the source audit and proof justify.
 
 ### Phase 6: Weights And Intervals
 
@@ -465,7 +486,7 @@ Already present in `thesis/references.bib`:
 
 - Davison, Padoan & Stupfler (2023), *Tail risk inference via expectiles in heavy-tailed time series*.
 - Padoan & Stupfler (2022), *Joint inference on extreme expectiles for multivariate heavy-tailed distributions*.
-- Daouia, Padoan & Stupfler, *Optimal pooling and distributed inference for the tail index and extreme quantiles*.
+- Daouia, Padoan & Stupfler, *Optimal weighted pooling for inference about the tail index and extreme quantiles*.
 - Daouia, Girard & Stupfler (2018), *Estimation of tail risk based on extreme expectiles*.
 - DGS (2019), DGS (2020), de Haan--Ferreira (2006), Hill (1975), Weissman (1978), and expectile/risk-measure background references.
 
