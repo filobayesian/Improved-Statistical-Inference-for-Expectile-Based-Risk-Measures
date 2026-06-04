@@ -21,6 +21,15 @@ where `\widehat q_n^\star(\tau_n\mid\omega)` is the Daouia--Padoan--Stupfler geo
 
 As of 2026-06-04, the compiled thesis scaffold has been cleaned so it no longer presents the withdrawn pooled-intermediate route as a validated contribution. The old full draft still exists in git history and in generated/stale materials, but the live thesis files now mark the reset explicitly.
 
+Current source-audit status: the `A_n` pooled Weissman component of the exact
+decomposition has been validated at scratch-note level in
+`notes/source_audit_pooled_extreme_expectile.md`. For the finite-`m`
+iid/common-marginal distributed route, use Daouia--Padoan--Stupfler Corollary
+9 as the clean source statement; use Theorem 2 plus the supplement proof only
+if Chapter 4 needs the broader tail-homoskedastic or direct log-expansion
+route. This validates only the quantile component `A_n`, not the final
+normalisation or theorem for `A_n+B_n-C_n`.
+
 The error is that the thesis was built around a standalone pooled intermediate QB expectile theory:
 \[
   \widehat\xi_{\tau_n}^{pool}
@@ -131,20 +140,57 @@ Proceed in small mathematical steps. Do not assume the desired theorem and fill 
 
 Prefer the leanest defensible result. The less the thesis needs to prove, discuss, or numerically validate, the fewer opportunities there are for errors. Avoid side comparisons, alternative estimators, extra optimality criteria, or new tests unless they are necessary for the main theorem or explicitly requested.
 
-The current least-action path is one estimator, one exact decomposition, one source audit, and only then one theorem. Padoan weights are allowed only if the proof actually yields a theorem for which those weights are justified.
+The current least-action path is one estimator, one exact decomposition, one component/source audit, one generic-weight theorem, and only then optimisation. Padoan weights are allowed only if the proved generic-weight theorem yields the same variance or AMSE criterion as Daouia--Padoan--Stupfler.
+
+### Current Conservative Design Choices
+
+As of 2026-06-04, the agreed conservative research design is:
+
+- Work first in the iid/common-marginal distributed setting. This avoids a separate expectile target-selection problem under tail homoskedastic but nonidentical margins.
+- Prove the main asymptotic theorem first for generic deterministic admissible weights, with `\omega^\top\mathbf 1=1`. This includes meaningful deterministic distributed weights such as `k_j/k` and oracle deterministic population weights. It excludes, for the first theorem, random plug-in weights estimated from the same data.
+- Do not start with variance-optimal or AMSE-optimal weights. First prove the generic-weight theorem, then read off the variance and bias criterion, and only then import Daouia--Padoan--Stupfler weights if the criterion matches.
+- Do not derive new expectile-specific closed-form weights unless the generic-weight theorem forces a different objective.
+- Do not add estimated weights, confidence intervals, or simulations until the theorem and any justified weight corollary are settled.
+- Keep all mathematical scratch work in `notes/source_audit_pooled_extreme_expectile.md` until the theorem is derived. Do not move theorem prose into Chapter 4 while the component ledger and order comparison are still being worked out.
+
+### Imported Results Versus New Proof Work
+
+The rebuilt theorem should be a careful composition of imported results plus a small amount of stitching. Be explicit about which is which.
+
+Directly importable, subject to notation matching and assumption checking:
+
+- Daouia--Padoan--Stupfler pooled Hill CLT for `\widehat\gamma_n(\omega)-\gamma`.
+- Daouia--Padoan--Stupfler pooled Weissman theorem for the pooled quantile term `A_n`. In the finite-`m` iid/common-marginal route, this is now source-audited through Corollary 9; the supplement's log-scale expansion remains the detailed proof source if the thesis needs to work directly on log scale.
+- Bellini / Daouia--Girard--Stupfler first-order expectile--quantile bridge `\xi_\tau/Q(\tau)\to\psi(\gamma)`.
+- Daouia--Girard--Stupfler (2020), Proposition 1(i), for the second-order population ratio expansion of `\xi_\tau/(\psi(\gamma)Q(\tau))`.
+- Daouia--Padoan--Stupfler variance- and AMSE-optimal weights only after the generic-weight theorem proves that their optimisation criterion is indeed the relevant one.
+
+New proof work still required:
+
+- Match the thesis notation exactly to the source notation, especially `p_n=1-\tau_n`, the intermediate thresholds `k_j`, and the target quantile/expectile.
+- Prove and use the exact log decomposition `A_n+B_n-C_n`.
+- Taylor expand `B_n=\log\psi(\widehat\gamma_n(\omega))-\log\psi(\gamma)` with a compactness argument inside `(0,1)` and an explicit remainder.
+- Convert the DGS ratio expansion for `C_n` into a log expansion and control the log-conversion remainder.
+- Only after the `B_n` and `C_n` components are validated alongside the completed `A_n` audit, compare their orders to determine the correct scale, centring, variance, and bias.
 
 ## Immediate Next Step
 
-The next task is to create a short source-audit research note outside the polished thesis flow. Suggested location: `notes/source_audit_pooled_extreme_expectile.md` or another clearly named note file.
+The active working artifact is `notes/source_audit_pooled_extreme_expectile.md`. It already contains the source audit and a component ledger for `A_n+B_n-C_n`.
 
-The note should answer the Phase 4 questions for the exact decomposition
-`A_n+B_n-C_n`. It should not edit Chapter 4 into theorem prose yet, and it should not introduce a final normalisation, negligibility claim, bias formula, weights, confidence intervals, or simulations before they are derived.
+The next task is to validate `B_n` in the common-marginal iid/distributed
+setting: cite the pooled Hill CLT for
+`\widehat\gamma_n(\omega)-\gamma`, prove the compact-subset event inside
+`(0,1)`, and write the Taylor expansion of `\log\psi` with an explicit
+remainder. After that, validate `C_n`, and only then perform the order
+comparison inside the note. Do not choose or state a final normalisation,
+theorem, weights, confidence intervals, or simulation design until the ledger
+shows which terms survive and which source assumptions justify that conclusion.
 
 ## Full Research Plan
 
 ### Phase 0: Freeze The Old Contribution Claims
 
-This phase is mostly complete in the live scaffold. Do not reintroduce old contribution claims while editing. The next working artifact should be a short research note or scratch derivation outside the polished thesis flow. The note should be used to discuss the rebuilt mathematical architecture with Filippo and, if needed, the supervisor.
+This phase is mostly complete in the live scaffold. Do not reintroduce old contribution claims while editing. The current working artifact is `notes/source_audit_pooled_extreme_expectile.md`; use it for scratch derivation outside the polished thesis flow and for discussing the rebuilt mathematical architecture with Filippo and, if needed, the supervisor.
 
 Minimum deliverable:
 
@@ -153,6 +199,7 @@ Minimum deliverable:
 - exact log decomposition;
 - neutral term notation, e.g. `A_n+B_n-C_n`;
 - source-audit table for each term, including theorem/proposition number, assumptions, and normalisation;
+- component ledger for the exact pieces of `A_n`, `B_n`, and `C_n`, before rate comparison;
 - a list of open proof obligations;
 - no candidate scale, candidate theorem, weights, intervals, or simulation design unless already derived in the note.
 
@@ -224,12 +271,18 @@ Do not start this phase by choosing a scale. First name the exact terms
 \]
 Then answer the following questions.
 
-Term 1:
+Term 1 (`A_n`, source-audited for the finite-`m` iid/common-marginal route):
 
-- What exact pooled Weissman statement applies to `A_n`?
-- Is the source theorem stated for relative error or log-relative error?
-- What assumptions are used for common margins/tail homoskedasticity, `rho`, and the `p`/`k` regime?
-- What normalisation appears in the source theorem?
+- Use Daouia--Padoan--Stupfler Corollary 9 as the clean common-marginal
+  distributed statement for the pooled Weissman component.
+- The headline source result is relative-error scale; the supplement gives the
+  direct log expansion, and the source regime also permits relative-to-log
+  Taylor conversion.
+- The source normalisation is `\sqrt{k}/\ell_n`, with
+  `\ell_n=\log(k/(np_n))`, for `A_n` only.
+- In the common-marginal route, `A_n^{target}=0` exactly. Do not extend this
+  conclusion to the broader tail-homoskedastic route without explicitly
+  choosing the target population.
 
 Term 2:
 
@@ -249,13 +302,15 @@ Only after the three answers are complete should the note propose a final normal
 
 ### Phase 5: Main Theorem
 
-Only after Phase 4, state the actual theorem. Do not present alternative outcomes as if they are already likely. The theorem should contain exactly the normalisation, centring, variance, bias, and assumptions that the source audit and proof justify.
+Only after Phase 4 and the component-ledger order comparison, state the actual theorem. The first theorem should be for generic deterministic admissible weights satisfying `\omega^\top\mathbf 1=1`, in the iid/common-marginal distributed setting unless Filippo explicitly approves a broader setting. Do not present alternative outcomes as if they are already likely. The theorem should contain exactly the normalisation, centring, variance, bias, and assumptions that the source audit and proof justify.
 
 ### Phase 6: Weights And Intervals
 
-Do not derive new expectile-specific closed-form weights unless Phase 5 forces them.
+Do not derive new expectile-specific closed-form weights unless Phase 5 forces them. Do not start Phase 5 by plugging in variance-optimal or AMSE-optimal weights.
 
-If the proved theorem has the same optimisation criterion as Daouia--Padoan--Stupfler, use their weights directly. Otherwise, do not import their weights by analogy.
+If the proved generic-weight theorem has the same optimisation criterion as Daouia--Padoan--Stupfler, use their variance-optimal or AMSE-optimal weights directly as corollaries. Otherwise, do not import their weights by analogy.
+
+Estimated plug-in weights are a separate layer. Add them only if the required consistency argument is source-grounded and short; otherwise keep the theorem at deterministic admissible weights and deterministic/oracle weight corollaries.
 
 Confidence intervals should follow the main theorem. Bias-centering should be included only if the retained theorem has a nonzero bias term and if the required bias estimators are source-grounded.
 
@@ -286,7 +341,8 @@ Only after the theorem is stable:
 ```
 /
 ├── AGENTS.md
-├── notes.md
+├── notes/
+│   └── source_audit_pooled_extreme_expectile.md
 ├── papers/
 ├── simulation/
 │   ├── R/sim_functions.R
