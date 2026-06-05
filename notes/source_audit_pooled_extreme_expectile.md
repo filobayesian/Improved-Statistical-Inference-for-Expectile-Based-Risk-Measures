@@ -1,10 +1,20 @@
 # Source audit: pooled extreme-expectile decomposition
 
 Status: scratch research note, not theorem prose. This note records source
-statements for the exact decomposition in Chapter 4 and lists the remaining
-proof obligations. It records the conservative first-theorem rate choice
-$\eta_n\to0$, but it does not state a theorem, state weights, construct
-intervals, or propose a simulation design.
+statements for the exact decomposition in Chapter 4, audits the possible rate
+regimes exposed by the decomposition, and lists the remaining proof
+obligations. It now contains a provisional scratch theorem candidate, but it
+does not state final theorem prose, state weights, construct intervals, or
+propose a simulation design.
+
+Source-check status as of 2026-06-05: the provisional $\eta_n\to0$ theorem
+candidate has been checked against the local PDFs of Daouia--Padoan--Stupfler
+Corollary 8 in the published Bernoulli version, the supplement proof of
+Theorem 2, and Daouia--Girard--Stupfler (2020), Proposition 1(i). The theorem
+route is source-consistent after carrying forward the source conventions on
+continuity, common iid data, aggregate $n$ and $k$, and eventual positivity of
+the upper tail needed for the log-Weissman expressions. The result is still
+scratch theorem material, not Chapter 4 prose.
 
 ## Object and exact identity
 
@@ -190,8 +200,13 @@ For the general Theorem 2 route, carry forward:
 
 For the finite-$m$ iid/common-marginal Corollary 8 route, this simplifies to:
 
-- iid observations across and within machines, with common distribution
-  satisfying $C_2(\gamma,\rho,A)$.
+- iid observations across and within machines, with common continuous
+  right-heavy-tailed distribution satisfying $C_2(\gamma,\rho,A)$.
+- Eventual upper-tail positivity, equivalently $Q(1-1/t)=U(t)>0$ for all large
+  $t$, so the Hill and Weissman logarithms are well defined with probability
+  tending to one. This is implicit in the source log-Weissman setup and should
+  be explicit in thesis theorem prose.
+- Aggregate sizes $n=\sum_{j=1}^m n_j$ and $k=\sum_{j=1}^m k_j$.
 - Proportionality $n_1/n_j\to b_j\in(0,\infty)$ and
   $k_1/k_j\to c_j\in(0,\infty)$.
 - $k\to\infty$, $k/n\to0$, and $\sqrt{k}A(n/k)\to\lambda\in\mathbb R$.
@@ -290,7 +305,7 @@ For the finite-$m$ iid/common-marginal setting, point 1 is validated as follows:
 | Source normalisation | $\sqrt{k}/\ell_n$ with $\ell_n=\log(k/(np))$, for the pooled Weissman quantile component. |
 | Relative or log scale? | Headline source statement is relative error. The supplement proof gives a direct log expansion, and the source regime also permits a Taylor conversion from relative to log error. |
 | Common-marginal target issue | No issue: $A_n^{target}=0$ exactly because $q_j=q=Q$. |
-| Settled design choice | The order comparison below chooses the conservative first-theorem condition $\eta_n\to0$, under which the full expectile decomposition uses the pooled-Weissman benchmark scale with no retained population-bridge bias. |
+| Rate-audit role | The order comparison below treats $\sqrt{k}/\ell_n$ as the $A_n$ source benchmark and then asks which additional conditions are needed before it can be used for the full expectile decomposition. |
 
 ### Single-sample sanity check: DGS 2018
 
@@ -349,9 +364,9 @@ $$
 \to0.
 $$
 
-This supports the conservative $\eta_n\to0$ first-theorem route and confirms
-that the $m=1$ reduction has the expected scale and stochastic limit. It does
-not replace the pooled proof, which still has to follow from the exact
+This is consistent with the $\eta_n\to0$ branch and confirms that the $m=1$
+reduction has the expected scale and stochastic limit. It does not choose the
+pooled theorem design, which still has to follow from the exact
 $A_n+B_n-C_n$ decomposition and the DPS pooled-Weissman input.
 
 ## Term 2: $B_n$, the cost of estimating $\gamma$ inside $\psi$
@@ -1206,13 +1221,15 @@ R_n^{log}
 O\{(|a_n|+b_n)^2\}.
 $$
 
-The second-order tail bridge is automatically smaller than the $A_n$ benchmark:
+The second-order tail bridge is automatically smaller than the $A_n$ benchmark
+under the current DPS common-marginal assumptions:
 
 $$
 s_{A,n}c(\gamma,\rho)a_n\to0.
 $$
 
-The first-moment bridge is not decided by the DPS Weissman assumptions alone:
+The first-moment bridge is not decided by the DPS Weissman assumptions alone.
+On the $A_n$ benchmark scale,
 
 $$
 s_{A,n}\alpha_\gamma\mu b_n
@@ -1220,7 +1237,7 @@ s_{A,n}\alpha_\gamma\mu b_n
 \alpha_\gamma\mu\,\eta_n.
 $$
 
-Thus the remaining theorem-design rate is exactly the behaviour of
+Thus the next rate split is forced by the behaviour of
 
 $$
 \eta_n
@@ -1228,31 +1245,55 @@ $$
 \frac{\sqrt{k}}{\ell_n Q_0(1-p_n)}.
 $$
 
-For the first theorem, choose the conservative condition
+No conclusion about the full decomposition should be made before this split is
+recorded.
+
+### Source-scale consequences by $\eta_n$ regime
+
+The exact decomposition and the audited ledgers imply
 
 $$
-\eta_n\to0.
+s_{A,n}\left(
+  A_n+B_n-C_n
+\right)
+=
+s_{A,n}A_n
++o_P(1)
+-s_{A,n}C_n.
 $$
 
-Under this condition, the whole first-moment bridge disappears on the $A_n$
-benchmark scale. This choice is aligned with the $m=1$ DGS 2018 sanity check
-above and avoids introducing a new expectile-specific AMSE objective.
+The $B_n$ term has already been absorbed into $o_P(1)$ because
+$s_{A,n}B_n=o_P(1)$.
 
-The mathematically possible branch $\eta_n\to\eta\in(0,\infty)$ is parked. In
-that branch the first-moment term would survive as a deterministic bridge-bias
-contribution; since $C_n$ enters the exact decomposition as $A_n+B_n-C_n$, the
-sign of this contribution in the log estimator error would be negative.
-Because the shift is weight-independent but changes the AMSE criterion from
-the DPS one, this branch should not be used in the first thesis theorem unless
-Filippo explicitly reopens it.
-
-The DGS little-$o$ remainder and the log-conversion remainder are also
-controlled under the chosen condition $\eta_n\to0$. Indeed,
+For $C_n$, the second-order bridge and its $r_{A,n}$ remainder are also already
+absorbed:
 
 $$
-s_{A,n}r_{A,n}a_n=o(1),
+s_{A,n}c(\gamma,\rho)a_n\to0,
 \qquad
-s_{A,n}r_{Q,n}b_n=r_{Q,n}\eta_n=o(1),
+s_{A,n}r_{A,n}a_n=o(1).
+$$
+
+The remaining pieces are
+
+$$
+s_{A,n}C_n
+=
+\alpha_\gamma\mu\,\eta_n
++r_{Q,n}\eta_n
++s_{A,n}R_n^{log}
++o(1),
+$$
+
+where the displayed $o(1)$ includes the second-order bridge pieces just noted.
+The three relevant cases are therefore the following.
+
+#### Case 1: $\eta_n\to0$
+
+Then
+
+$$
+r_{Q,n}\eta_n=o(1),
 $$
 
 and, because $a_n\to0$, $b_n\to0$, $s_{A,n}a_n\to0$, and
@@ -1262,45 +1303,512 @@ $$
 s_{A,n}(|a_n|+b_n)^2\to0.
 $$
 
-If $\eta_n\to\infty$, the first-moment bridge is larger than the pooled
-Weissman stochastic scale. The current DGS ledger is then not enough to justify
-a centred source-scale theorem, because the term
-$s_{A,n}r_{Q,n}b_n=r_{Q,n}\eta_n$ need not vanish without a sharper rate for
-the DGS little-$o$ remainder. This case should be avoided in the first theorem
-unless a stronger source statement is found.
+Hence
 
-### Comparison summary
+$$
+s_{A,n}C_n\to0.
+$$
+
+In this regime, the source-scale decomposition reduces to the pooled Weissman
+component:
+
+$$
+s_{A,n}\left(
+  A_n+B_n-C_n
+\right)
+=
+s_{A,n}A_n+o_P(1).
+$$
+
+This is the minimal-rate route if the thesis wants no retained deterministic
+population-bridge shift on the pooled-Weissman source scale.
+
+#### Case 2: $\eta_n\to\eta\in(0,\infty)$
+
+The same remainder controls still hold:
+
+$$
+r_{Q,n}\eta_n=o(1),
+\qquad
+s_{A,n}(|a_n|+b_n)^2\to0.
+$$
+
+The first-moment bridge now survives:
+
+$$
+s_{A,n}C_n
+\to
+\alpha_\gamma\mu\,\eta.
+$$
+
+Because $C_n$ enters the exact decomposition with a minus sign, the
+source-scale log estimator error has the same stochastic $A_n$ component but a
+deterministic shift
+
+$$
+-\alpha_\gamma\mu\,\eta.
+$$
+
+This branch is mathematically visible from the decomposition. It is not the
+same theorem design as the no-bridge-bias route: it changes the centring or
+bias ledger, although the shift is deterministic and weight-independent.
+
+If $\eta_n$ is bounded but does not converge, the same calculation gives
+
+$$
+s_{A,n}C_n
+=
+\alpha_\gamma\mu\,\eta_n+o(1).
+$$
+
+That supports only a sequence-centred statement or subsequential statements,
+not a single uncentred weak limit.
+
+#### Case 3: $\eta_n\to\infty$
+
+On the uncentred pooled-Weissman source scale, the first-moment bridge is
+larger than the source stochastic component unless $\alpha_\gamma\mu=0$:
+
+$$
+s_{A,n}\alpha_\gamma\mu b_n
+=
+\alpha_\gamma\mu\,\eta_n.
+$$
+
+The present DGS ledger is not enough to recover a centred source-scale CLT
+after subtracting this deterministic sequence. Such a route would require at
+least the extra conditions
+
+$$
+r_{Q,n}\eta_n\to0,
+\qquad
+s_{A,n}(|a_n|+b_n)^2\to0.
+$$
+
+Since the second display is equivalent, given $s_{A,n}a_n\to0$, to requiring
+
+$$
+\eta_n b_n\to0,
+$$
+
+the missing controls are not automatic from the currently cited source
+statements.
+
+There is also a bridge-dominated deterministic scale. Because
+$s_{A,n}a_n\to0$ and $\eta_n\to\infty$ imply
+
+$$
+\frac{a_n}{b_n}
+=
+\frac{s_{A,n}a_n}{\eta_n}
+\to0,
+$$
+
+we have, on the scale $b_n^{-1}=Q_0(1-p_n)$,
+
+$$
+b_n^{-1}A_n=o_P(1),
+\qquad
+b_n^{-1}B_n=o_P(1),
+\qquad
+b_n^{-1}C_n\to\alpha_\gamma\mu.
+$$
+
+Thus
+
+$$
+b_n^{-1}\left(
+  A_n+B_n-C_n
+\right)
+\to
+-\alpha_\gamma\mu
+$$
+
+deterministically, subject to the same common-marginal assumptions and
+$\alpha_\gamma\mu$ being the leading bridge constant. This is not a useful
+pooled-Weissman inference theorem, but it shows what the decomposition says
+when the population bridge is allowed to dominate.
+
+### Rate-audit summary
 
 Relative to the pooled-Weissman benchmark $s_{A,n}=\sqrt{k}/\ell_n$:
 
-| Piece | Scaled order | Consequence for the scratch ledger |
+| Piece | Scaled order before choosing $\eta_n$ | What the decomposition permits |
 |---|---|---|
 | $A_n$ | $s_{A,n}A_n=\sqrt{k}\{\widehat\gamma_n(\omega)-\gamma\}+o_P(1)$ | Non-degenerate pooled-Weissman source component. |
-| $B_n$ | $s_{A,n}B_n=o_P(1)$ | Plug-in $\psi$ cost is first-order negligible because $\ell_n\to\infty$. |
-| $c(\gamma,\rho)A(1/p_n)$ in $C_n$ | $o(1)$ | Second-order expectile-quantile bridge vanishes under the DPS $\rho<0$ route. |
-| $\alpha_\gamma\mu/Q_0(1-p_n)$ in $C_n$ | $\alpha_\gamma\mu\,\eta_n=o(1)$ | First-moment bridge vanishes under the chosen first-theorem condition $\eta_n\to0$. |
-| DGS little-$o$ terms in $C_n$ | $o(1)$ | Controlled under $\eta_n\to0$. |
-| $R_n^{log}$ | $o(1)$ | Square-order log conversion is harmless under $\eta_n\to0$. |
+| $B_n$ | $s_{A,n}B_n=o_P(1)$ | Plug-in $\psi$ cost is lower order on the $A_n$ source scale. |
+| $c(\gamma,\rho)A(1/p_n)$ in $C_n$ | $o(1)$ | Second-order expectile-quantile bridge is lower order under the DPS $\rho<0$ route. |
+| $\alpha_\gamma\mu/Q_0(1-p_n)$ in $C_n$ | $\alpha_\gamma\mu\,\eta_n$ | This is the only audited first-order competitor to $A_n$ on the source scale. |
+| DGS $o(Q^{-1})$ remainder in $C_n$ | $r_{Q,n}\eta_n$ | Automatic if $\eta_n$ is bounded; needs extra control if $\eta_n\to\infty$. |
+| $R_n^{log}$ | $O\{s_{A,n}(|a_n|+b_n)^2\}$ | Automatic if $\eta_n$ is bounded; if $\eta_n\to\infty$, a sufficient extra condition is $\eta_n b_n\to0$. |
 
-The conservative first-theorem design choice is therefore:
+The decomposition therefore leaves two source-scale theorem routes visible:
+
+1. Impose $\eta_n\to0$ to retain only the pooled-Weissman source component.
+2. Allow $\eta_n\to\eta\in(0,\infty)$ and carry the deterministic shift
+   $-\alpha_\gamma\mu\eta$ in the log-error centring or bias ledger.
+
+The first route is the leanest if the thesis wants to preserve the DPS
+variance and AMSE criterion without adding an expectile-specific bridge-bias
+term. The second route is available algebraically but changes the bias ledger.
+The $\eta_n\to\infty$ route is not source-scale theorem-ready unless a sharper
+DGS remainder statement or additional rate assumptions are deliberately
+introduced.
+
+## Provisional generic-weight theorem under $\eta_n\to0$
+
+Status: scratch theorem candidate. This is the first theorem-shaped statement
+supported by the decomposition. It is not yet Chapter 4 prose.
+
+### Statement
+
+Work in the finite-$m$ iid/common-marginal distributed setting. Let the data
+points within and across machines be iid from a common continuous
+right-heavy-tailed distribution $F$ with tail quantile
+$Q(1-1/t)=U(t)$ satisfying $C_2(\gamma,\rho,A)$, with
+$0<\gamma<1$ and $\rho<0$. Assume $E|X^-|<\infty$ and $U(t)>0$ for all large
+$t$. Set
 
 $$
-\eta_n=\frac{\sqrt{k}}{\ell_n Q_0(1-p_n)}
+n=\sum_{j=1}^m n_j,
+\qquad
+k=\sum_{j=1}^m k_j.
+$$
+
+Let the sample and threshold sizes satisfy the proportionality conditions
+
+$$
+\frac{n_1}{n_j}\to b_j\in(0,\infty),
+\qquad
+\frac{k_1}{k_j}\to c_j\in(0,\infty),
+$$
+
+and assume the DPS common-marginal Hill and Weissman conditions
+
+$$
+k\to\infty,
+\qquad
+\frac{k}{n}\to0,
+\qquad
+\sqrt{k}A(n/k)\to\lambda\in\mathbb R.
+$$
+
+Let $p_n=1-\tau_n$ denote the target tail probability and set
+
+$$
+\ell_n=\log\frac{k}{np_n}.
+$$
+
+Assume the DPS Weissman extreme extrapolation regime
+
+$$
+p_n\to0,
+\qquad
+\frac{k}{np_n}\to\infty,
+\qquad
+\frac{\sqrt{k}}{\ell_n}\to\infty,
+$$
+
+and impose the additional expectile-bridge rate condition
+
+$$
+\eta_n
+=
+\frac{\sqrt{k}}{\ell_n Q(1-p_n)}
 \to0.
 $$
 
-This gives no retained deterministic population-bridge bias on the pooled
-Weissman benchmark scale. This is a proof-design conclusion, not yet theorem
-prose. Chapter 4 should not state a normalisation, centring, variance, or
-interval until the generic-weight theorem is written and checked in this
-scratch note.
+Let $\omega\in\mathbb R^m$ be deterministic and admissible, with
+$\omega^\top\mathbf 1=1$. Define
 
-## Open proof obligations
+$$
+\widehat\xi_{\tau_n}^{pool,\star}
+=
+\psi(\widehat\gamma_n(\omega))\,
+\widehat q_n^\star(\tau_n\mid\omega),
+\qquad
+\psi(\gamma)=(\gamma^{-1}-1)^{-\gamma}.
+$$
 
-1. Specify the target population before the theorem. The cleanest route is the
-   iid/common-marginal distributed setting. A theorem under only tail
-   homoskedasticity needs an additional target-selection argument for
-   expectiles, not just quantiles.
+Then, on log-relative scale,
+
+$$
+\frac{\sqrt{k}}{\ell_n}
+\log
+\frac{\widehat\xi_{\tau_n}^{pool,\star}}{\xi_{\tau_n}}
+\Rightarrow
+N\left(
+  B_\omega,
+  V_\omega
+\right),
+$$
+
+where
+
+$$
+B_\omega
+=
+\frac{\lambda}{1-\rho}\sum_{j=1}^m d_j^\rho\omega_j,
+\qquad
+V_\omega
+=
+\gamma^2
+\left(\sum_{j=1}^m\frac1{c_j}\right)
+\left(\sum_{j=1}^m c_j\omega_j^2\right),
+$$
+
+with
+
+$$
+d_j
+=
+\frac{c_j}{b_j}\,
+\frac{\sum_{i=1}^m c_i^{-1}}{\sum_{i=1}^m b_i^{-1}}.
+$$
+
+Since $\sqrt{k}/\ell_n\to\infty$, the log error is $o_P(1)$. Therefore the
+same first-order limit also holds for relative error:
+
+$$
+\frac{\sqrt{k}}{\ell_n}
+\left(
+  \frac{\widehat\xi_{\tau_n}^{pool,\star}}{\xi_{\tau_n}}-1
+\right)
+\Rightarrow
+N(B_\omega,V_\omega).
+$$
+
+### Proof draft
+
+Start from the exact identity
+
+$$
+\log
+\frac{\widehat\xi_{\tau_n}^{pool,\star}}{\xi_{\tau_n}}
+=
+A_n+B_n-C_n.
+$$
+
+For $A_n$, DPS Corollary 8 in the published Bernoulli version gives the
+common-marginal pooled Weissman source result. With
+
+$$
+x_n
+=
+\frac{\widehat q_n^\star(1-p_n\mid\omega)}{Q(1-p_n)}
+-1,
+$$
+
+and deterministic $\omega$, that source result gives
+
+$$
+\frac{\sqrt{k}}{\ell_n}x_n
+\Rightarrow
+N(B_\omega,V_\omega).
+$$
+
+Thus $x_n=O_P(\ell_n/\sqrt{k})=o_P(1)$ because
+$\sqrt{k}/\ell_n\to\infty$. Since
+
+$$
+\log(1+x_n)=x_n+O_P(x_n^2),
+$$
+
+we have
+
+$$
+\frac{\sqrt{k}}{\ell_n}
+\{\log(1+x_n)-x_n\}
+=
+O_P\left(\frac{\ell_n}{\sqrt{k}}\right)
+=o_P(1).
+$$
+
+Therefore
+
+$$
+\frac{\sqrt{k}}{\ell_n}A_n
+=
+\frac{\sqrt{k}}{\ell_n}x_n+o_P(1)
+\Rightarrow
+N(B_\omega,V_\omega).
+$$
+
+Equivalently, this log conclusion may be read from the DPS supplement's direct
+log expansion. The displayed Taylor step records the conversion needed if only
+the published relative-error statement is cited.
+
+For $B_n$, the compact-event Taylor ledger gives
+
+$$
+B_n
+=
+m(\gamma)\{\widehat\gamma_n(\omega)-\gamma\}
++O_P(k^{-1}),
+$$
+
+with $\widehat\gamma_n(\omega)-\gamma=O_P(k^{-1/2})$. Hence
+
+$$
+\frac{\sqrt{k}}{\ell_n}B_n
+=
+\frac{m(\gamma)}{\ell_n}
+\sqrt{k}\{\widehat\gamma_n(\omega)-\gamma\}
++O_P\left(\frac{1}{\ell_n\sqrt{k}}\right)
+=o_P(1),
+$$
+
+because $\ell_n\to\infty$. If $m(\gamma)=0$, the same conclusion follows from
+the quadratic remainder alone.
+
+For $C_n$, write
+
+$$
+a_n=A(1/p_n),
+\qquad
+b_n=Q(1-p_n)^{-1},
+\qquad
+\alpha_\gamma=\gamma(\gamma^{-1}-1)^\gamma,
+\qquad
+\mu=EX.
+$$
+
+The DGS 2020 Proposition 1(i) ratio expansion plus the elementary log step
+give the following log ledger. This is not quoted as a source log theorem; it
+comes from applying $\log(1+\Delta_n)=\Delta_n+R_n^{log}$ to the sourced ratio
+expansion:
+
+$$
+C_n
+=
+c(\gamma,\rho)a_n
++\alpha_\gamma\mu b_n
++r_{A,n}a_n
++r_{Q,n}b_n
++R_n^{log},
+$$
+
+where $r_{A,n}\to0$, $r_{Q,n}\to0$, and
+
+$$
+R_n^{log}
+=
+O\{(|a_n|+b_n)^2\}.
+$$
+
+The DPS condition $\rho<0$, regular variation of $A$, and
+$k/(np_n)\to\infty$ imply
+
+$$
+\frac{\sqrt{k}}{\ell_n}a_n\to0.
+$$
+
+The imposed bridge-rate condition gives
+
+$$
+\frac{\sqrt{k}}{\ell_n}b_n=\eta_n\to0.
+$$
+
+Consequently,
+
+$$
+\frac{\sqrt{k}}{\ell_n}r_{A,n}a_n=o(1),
+\qquad
+\frac{\sqrt{k}}{\ell_n}r_{Q,n}b_n=r_{Q,n}\eta_n=o(1),
+$$
+
+and
+
+$$
+\frac{\sqrt{k}}{\ell_n}(|a_n|+b_n)^2\to0.
+$$
+
+Therefore
+
+$$
+\frac{\sqrt{k}}{\ell_n}C_n\to0.
+$$
+
+Combining the three displays gives
+
+$$
+\frac{\sqrt{k}}{\ell_n}
+\log
+\frac{\widehat\xi_{\tau_n}^{pool,\star}}{\xi_{\tau_n}}
+=
+\frac{\sqrt{k}}{\ell_n}A_n+o_P(1),
+$$
+
+and Slutsky's theorem gives the stated log-relative limit.
+
+For the relative-error version, let
+
+$$
+L_n
+=
+\log
+\frac{\widehat\xi_{\tau_n}^{pool,\star}}{\xi_{\tau_n}}.
+$$
+
+The log-limit gives $L_n=O_P(\ell_n/\sqrt{k})=o_P(1)$. Taylor's formula gives
+
+$$
+e^{L_n}-1=L_n+O_P(L_n^2),
+$$
+
+and hence
+
+$$
+\frac{\sqrt{k}}{\ell_n}
+\left\{
+  \left(
+    \frac{\widehat\xi_{\tau_n}^{pool,\star}}{\xi_{\tau_n}}-1
+  \right)
+  -L_n
+\right\}
+=
+O_P\left(\frac{\ell_n}{\sqrt{k}}\right)
+=o_P(1).
+$$
+
+The log-relative and relative-error limits are therefore identical.
+
+### Immediate design implication
+
+Under $\eta_n\to0$, the complete expectile estimator has the same first-order
+source-scale bias and variance as the DPS pooled Weissman quantile component.
+This makes a later check of the DPS variance and AMSE weight corollaries
+legitimate for the rebuilt expectile theorem. The weights and intervals are
+still not stated in this note.
+
+## Source-check verdict before Chapter 4
+
+This pass checks the provisional theorem against the exact local source
+statements. The conservative $\eta_n\to0$ route survives the check, with the
+following details to carry into any later theorem prose:
+
+| Item | Source-check verdict |
+|---|---|
+| DPS common-marginal input | Corollary 8 in the published Bernoulli version is the right headline source. It is stated under Corollary 5's iid distributed setup, with common continuous right-heavy-tailed distribution satisfying $C_2(\gamma,\rho,A)$, aggregate $n=\sum_j n_j$, aggregate $k=\sum_j k_j$, $k/n\to0$, $\sqrt{k}A(n/k)\to\lambda$, $\rho<0$, $p\to0$, $k/(np)\to\infty$, and $\sqrt{k}/\log\{k/(np)\}\to\infty$. |
+| DPS constants | The scratch theorem's $B_\omega$, $V_\omega$, and $d_j=(c_j/b_j)(\sum_i c_i^{-1})/(\sum_i b_i^{-1})$ match Corollaries 5 and 8. Deterministic weights are obtained by taking $\widehat\omega_n=\omega$ in the source statement. |
+| Relative-to-log step for $A_n$ | Corollary 8 is relative-error scale. Since the source regime gives $\ell_n/\sqrt{k}\to0$, the relative error is $o_P(1)$ and $\log(1+x_n)=x_n+O_P(x_n^2)$ yields the displayed log-scale limit. The supplement proof of Theorem 2 gives the same conclusion directly on log scale. |
+| Positivity/log convention | DPS works with Hill and log-Weissman expressions. The thesis theorem should state or inherit eventual upper-tail positivity, $U(t)>0$ for large $t$, so the high order statistics and Weissman estimators are positive with probability tending to one. |
+| $B_n$ plug-in cost | Corollary 5 gives $\widehat\gamma_n(\omega)-\gamma=O_P(k^{-1/2})$ and consistency. The compact-event Taylor expansion of $g=\log\psi$ is elementary and valid because $0<\gamma<1$; on the pooled-Weissman scale it is $o_P(1)$ because $\ell_n\to\infty$. |
+| DGS bridge input | DGS 2020 Proposition 1(i) assumes $E|X^-|<\infty$, $0<\gamma<1$, and $C_2(\gamma,\rho,A)$ with $\rho\le0$. It gives a ratio expansion for $\xi_\tau/Q(\tau)$, not a log expansion, and it explicitly removes the older strict-monotonicity requirement. The DPS route imposes the stricter $\rho<0$ separately. |
+| Ratio-to-log step for $C_n$ | After setting $\Delta_n=\xi_{\tau_n}/\{\psi(\gamma)Q(1-p_n)\}-1$, DGS gives $\Delta_n=c(\gamma,\rho)A(1/p_n)+\gamma(\gamma^{-1}-1)^\gamma EX/Q(1-p_n)+o(|A(1/p_n)|)+o(Q(1-p_n)^{-1})$. Since $\Delta_n\to0$, $C_n=\log(1+\Delta_n)=\Delta_n+O(\Delta_n^2)$. |
+| Rate comparison | Under $\rho<0$, $\sqrt{k}A(n/k)=O(1)$, and $k/(np_n)\to\infty$, regular variation gives $(\sqrt{k}/\ell_n)A(1/p_n)\to0$. The extra condition $\eta_n=\sqrt{k}/\{\ell_n Q(1-p_n)\}\to0$ removes the first-moment bridge and also controls the DGS $o(Q^{-1})$ and log-square remainders. |
+
+No source-level contradiction was found in the provisional theorem route. The
+remaining work is now drafting discipline rather than mathematical rescue:
+state only the checked iid/common-marginal deterministic-weight theorem first,
+and keep broader tail-homoskedastic targets, random plug-in weights, weights,
+intervals, and simulations parked until that theorem prose is written cleanly.
+
+## Residual obligations before Chapter 4
+
+1. The provisional theorem now specifies the common-marginal target population.
+   A broader theorem under only tail homoskedasticity would still need an
+   additional target-selection argument for expectiles, not just quantiles.
 
 2. $A_n$ is now validated against Daouia--Padoan--Stupfler for the
    finite-$m$ iid/common-marginal route. Theorem prose should cite Corollary 8
@@ -1323,16 +1831,26 @@ scratch note.
    $A(1/p_n)$, $Q(1-p_n)^{-1}$, the DGS remainder, and the square-order
    log-conversion remainder.
 
-6. The order comparison above shows that, on the pooled-Weissman benchmark
-   scale, $B_n$ and the second-order $A(1/p_n)$ bridge vanish, while the
-   first-moment bridge is governed by
-   $\eta_n=\sqrt{k}/\{\ell_n Q_0(1-p_n)\}$. The conservative first-theorem
-   route is now to impose $\eta_n\to0$, so no deterministic bridge-bias
-   constant is retained.
+6. When moving the theorem into Chapter 4, carry forward the source conventions
+   now checked above: common continuous iid data, aggregate
+   $n=\sum_j n_j$ and $k=\sum_j k_j$, $U(t)>0$ eventually for log expressions,
+   and DGS's quantile convention, which does not require the old strict
+   monotonicity assumption.
 
-7. Do not import Daouia--Padoan--Stupfler weights until the final theorem has
-   identified the variance or AMSE criterion for the complete sum
-   $A_n+B_n-C_n$.
+7. The order comparison above shows that, on the pooled-Weissman benchmark
+   scale, $B_n$ and the second-order $A(1/p_n)$ bridge are lower order, while
+   the first-moment bridge is governed by
+   $\eta_n=\sqrt{k}/\{\ell_n Q_0(1-p_n)\}$. The theorem-design fork is now
+   explicit: $\eta_n\to0$ gives no retained population-bridge shift;
+   $\eta_n\to\eta\in(0,\infty)$ retains the deterministic shift
+   $-\alpha_\gamma\mu\eta$; and $\eta_n\to\infty$ needs sharper remainder
+   control or a different, bridge-dominated interpretation.
 
-8. Do not edit Chapter 4 into theorem prose until these obligations are
+8. After the Chapter 4 theorem statement and proof are drafted from this
+   checked version, decide whether to add DPS variance- and AMSE-weight
+   corollaries. Under $\eta_n\to0$ the candidate criterion is the DPS
+   criterion, but the actual weight formulas should still be copied from DPS
+   only after the theorem statement is final.
+
+9. Do not edit Chapter 4 into theorem prose until these obligations are
    resolved.

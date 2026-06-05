@@ -49,10 +49,9 @@ around the direct pooled extreme-expectile estimator
 where $\widehat q_n^\star(\tau_n\mid\bm\omega)$ is the
 weighted-geometric pooled Weissman estimator of
 \textcite{DaouiaPadoanStupfler2021}. The current research question is
-therefore narrower and more sequential: determine, from an exact
-decomposition and source-grounded arguments, what asymptotic statement
-is actually justified after the expectile--quantile bridge is applied
-to the pooled Weissman estimator.
+therefore narrower and more sequential: use an exact decomposition and
+source-grounded arguments to determine what happens after the
+expectile--quantile bridge is applied to the pooled Weissman estimator.
 
 \section{Scope}
 \label{sec:intro:scope}
@@ -73,21 +72,23 @@ expectile-tail-homogeneity diagnostic, and the simulation comparisons
 based on those objects are withdrawn pending a first-principles
 rederivation.
 
-\section{Current working programme}
+\section{Current working contribution}
 \label{sec:intro:working-programme}
 
-The thesis now proceeds as a research reset. The immediate mathematical
-task is not to polish the old results but to establish the following
-chain:
+The first rebuilt result is the deterministic-weight theorem in
+\Cref{thm:pool-ext:deterministic}. It is deliberately modest: in the
+finite-$m$ iid distributed common-marginal setting, and under the
+additional bridge-rate condition
+$\sqrt{k}/\{\ell_n Q(1-p_n)\}\to0$, the direct pooled
+extreme-expectile estimator has the same first-order log-relative limit
+as the Daouia--Padoan--Stupfler pooled Weissman quantile component.
+
+The remaining work is sequential:
 \begin{enumerate}[label=(\roman*)]
-\item define the direct pooled extreme-expectile estimator;
-\item decompose its log-relative error exactly into the pooled
-      Weissman term, the plug-in $\psifn(\widehat\gamma)$ term, and the
-      deterministic expectile--quantile bridge remainder;
-\item identify the source results relevant to each term, including
-      their exact assumptions and normalisations;
-\item derive, rather than assume, which terms contribute on the final
-      scale;
-\item only then decide what theorem, weights, confidence intervals, and
-      simulation design are justified.
+\item decide which Daouia--Padoan--Stupfler weight corollaries can be
+      imported from this theorem without changing the objective;
+\item derive confidence intervals only after the centring and variance
+      choices are fixed;
+\item rebuild the finite-sample study from the proved estimator,
+      weights and standard errors.
 \end{enumerate}

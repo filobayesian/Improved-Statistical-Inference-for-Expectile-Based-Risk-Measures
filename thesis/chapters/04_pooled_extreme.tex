@@ -21,10 +21,11 @@ expectiles is applied once, after quantile pooling, through
 \[
   \psifn(\gamma)=(\gamma^{-1}-1)^{-\gamma}.
 \]
-
-No theorem is asserted in this chapter yet. The purpose of the current
-draft is to isolate the exact algebraic objects that the source audit
-and subsequent proof have to address.
+The first result below works in the iid distributed setting with a
+common marginal distribution and deterministic admissible weights. This
+is the smallest setting in which the pooled Weissman theorem and the
+expectile--quantile bridge can be combined without an additional target
+selection problem.
 
 \section{Exact log decomposition}
 \label{sec:pool-ext:decomposition}
@@ -45,14 +46,14 @@ $\xi_{\tau_n}$, the log-relative error satisfies the identity
   -
   \log\frac{\xi_{\tau_n}}{\psifn(\gamma)Q(\tau_n)}.
 \end{equation}
-This identity is the new load-bearing object. The first term is the
+This identity is the load-bearing object. The first term is the
 pooled Weissman error. The second term is the additional cost of
 estimating $\gamma$ inside the expectile--quantile constant. The third
 term is the deterministic population error in replacing the expectile
 by $\psifn(\gamma)Q(\tau_n)$.
 
-\section{Source-audit tasks}
-\label{sec:pool-ext:source-audit}
+\section{A deterministic-weight limit theorem}
+\label{sec:pool-ext:theorem}
 
 For reference, write the three terms in
 \eqref{eq:pool-ext:central-decomposition} as
@@ -80,25 +81,305 @@ These definitions are only notation for the exact identity
   A_n+B_n-C_n.
 \]
 
-The next research note should answer the following source-audit
-questions before the chapter states any theorem:
-\begin{enumerate}[label=(\roman*)]
-\item What exact pooled Weissman statement applies to $A_n$, and is it
-      formulated for log-relative error or relative error?
-\item What exact pooled Hill statement applies to
-      $\widehat\gamma_n(\bm\omega)-\gamma$, and what additional
-      argument is needed to pass through $\log\psifn$?
-\item What exact expectile--quantile expansion applies to $C_n$, and
-      under which assumptions?
-\item After the first three questions are answered, what normalisation
-      is actually justified for the sum $A_n+B_n-C_n$?
-\end{enumerate}
+The source audit reduces the first theorem to the case in which
+$A_n$ is the only first-order term. The additional condition that makes
+this true is
+\[
+  \eta_n
+  \coloneqq
+  \frac{\sqrt{k}}{\ell_n Q(1-p_n)}
+  \to 0,
+  \qquad
+  \ell_n=\log\!\left(\frac{k}{n p_n}\right),
+  \qquad
+  p_n=1-\tau_n.
+\]
+It removes the first-moment part of the deterministic
+expectile--quantile bridge on the pooled Weissman scale.
+
+\begin{theorem}[Direct pooled extreme expectile, deterministic weights]
+\label{thm:pool-ext:deterministic}
+Let $m$ be fixed. Suppose the data points within and across machines are
+iid from a common continuous right-heavy-tailed distribution $F$ with
+tail quantile $Q(1-1/t)=U(t)$ satisfying
+$\mathcal C_{2}(\gamma,\rho,A)$, where $0<\gamma<1$ and $\rho<0$.
+Assume $\E X^{-}<\infty$ and $U(t)>0$ for all sufficiently large $t$.
+Set
+\[
+  n=\sum_{j=1}^{m}n_j,
+  \qquad
+  k=\sum_{j=1}^{m}k_j,
+\]
+and assume
+\[
+  \frac{n_1}{n_j}\to b_j\in(0,\infty),
+  \qquad
+  \frac{k_1}{k_j}\to c_j\in(0,\infty)
+  \qquad (j=1,\ldots,m),
+\]
+with $b_1=c_1=1$. Let $k\to\infty$, $k/n\to0$, and
+$\sqrt{k}A(n/k)\to\lambda\in\R$.
+
+Let $p_n=1-\tau_n\to0$ and
+\[
+  \ell_n=\log\!\left(\frac{k}{n p_n}\right).
+\]
+Assume
+\[
+  \frac{k}{n p_n}\to\infty,
+  \qquad
+  \frac{\sqrt{k}}{\ell_n}\to\infty,
+  \qquad
+  \eta_n
+  =
+  \frac{\sqrt{k}}{\ell_n Q(1-p_n)}
+  \to0.
+\]
+For a deterministic vector $\bm\omega\in\R^m$ satisfying
+$\bm\omega^\top\bm 1=1$, define
+\[
+  \widehat\xi_{\tau_n}^{pool,\star}
+  =
+  \psifn\!\big(\widehat\gamma_n(\bm\omega)\big)\,
+  \widehat q_n^\star(\tau_n\mid\bm\omega).
+\]
+Then
+\begin{equation}
+\label{eq:pool-ext:log-limit}
+  \frac{\sqrt{k}}{\ell_n}
+  \log\frac{\widehat\xi_{\tau_n}^{pool,\star}}{\xi_{\tau_n}}
+  \todist
+  \mathcal N(B_{\bm\omega}, V_{\bm\omega}),
+\end{equation}
+where
+\[
+  B_{\bm\omega}
+  =
+  \frac{\lambda}{1-\rho}
+  \sum_{j=1}^{m}d_j^\rho \omega_j,
+  \qquad
+  V_{\bm\omega}
+  =
+  \gamma^2
+  \left(\sum_{j=1}^{m}\frac{1}{c_j}\right)
+  \left(\sum_{j=1}^{m}c_j\omega_j^2\right),
+\]
+and
+\[
+  d_j
+  =
+  \frac{c_j}{b_j}\,
+  \frac{\sum_{i=1}^{m}c_i^{-1}}{\sum_{i=1}^{m}b_i^{-1}}.
+\]
+Equivalently,
+\begin{equation}
+\label{eq:pool-ext:relative-limit}
+  \frac{\sqrt{k}}{\ell_n}
+  \left(
+    \frac{\widehat\xi_{\tau_n}^{pool,\star}}{\xi_{\tau_n}}-1
+  \right)
+  \todist
+  \mathcal N(B_{\bm\omega}, V_{\bm\omega}).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The proof follows the exact decomposition
+\eqref{eq:pool-ext:central-decomposition}. Since
+$p_n=1-\tau_n$, the common-marginal version of
+\textcite[Corollary~8]{DaouiaPadoanStupfler2021} gives, for
+\[
+  x_n
+  =
+  \frac{\widehat q_n^\star(1-p_n\mid\bm\omega)}{Q(1-p_n)}-1,
+\]
+the relative-error limit
+\[
+  \frac{\sqrt{k}}{\ell_n}x_n
+  \todist
+  \mathcal N(B_{\bm\omega}, V_{\bm\omega}).
+\]
+Thus $x_n=O_P(\ell_n/\sqrt{k})=o_P(1)$. The elementary expansion
+$\log(1+x_n)=x_n+O_P(x_n^2)$ gives
+\[
+  \frac{\sqrt{k}}{\ell_n}
+  \left\{
+    \log(1+x_n)-x_n
+  \right\}
+  =
+  O_P\!\left(\frac{\ell_n}{\sqrt{k}}\right)
+  =
+  o_P(1),
+\]
+and therefore
+\begin{equation}
+\label{eq:pool-ext:A-limit}
+  \frac{\sqrt{k}}{\ell_n}A_n
+  \todist
+  \mathcal N(B_{\bm\omega}, V_{\bm\omega}).
+\end{equation}
+The same log-scale conclusion can also be read directly from the proof
+of Theorem~2 in the supplement to
+\textcite{DaouiaPadoanStupfler2021}; the preceding display records the
+short conversion from the published relative-error statement.
+
+Next consider $B_n$. By the pooled Hill CLT in
+\textcite[Corollary~5]{DaouiaPadoanStupfler2021},
+\[
+  \widehat\gamma_n(\bm\omega)-\gamma=O_P(k^{-1/2}),
+  \qquad
+  \widehat\gamma_n(\bm\omega)\toprob\gamma.
+\]
+Let $g(x)=\log\psifn(x)$. On any compact subinterval of $(0,1)$,
+$g$ is twice continuously differentiable and
+\[
+  g'(\gamma)
+  =
+  m(\gamma)
+  =
+  \frac{1}{1-\gamma}-\log(\gamma^{-1}-1).
+\]
+Since $0<\gamma<1$, a Taylor expansion on the event
+$\widehat\gamma_n(\bm\omega)$ lies in such a compact interval gives
+\[
+  B_n
+  =
+  m(\gamma)\{\widehat\gamma_n(\bm\omega)-\gamma\}
+  +
+  O_P(k^{-1}).
+\]
+Consequently,
+\[
+  \frac{\sqrt{k}}{\ell_n}B_n
+  =
+  \frac{m(\gamma)}{\ell_n}\,
+  \sqrt{k}\{\widehat\gamma_n(\bm\omega)-\gamma\}
+  +
+  O_P\!\left(\frac{1}{\ell_n\sqrt{k}}\right)
+  =
+  o_P(1),
+\]
+because $\ell_n\to\infty$. If $m(\gamma)=0$, the same conclusion
+follows from the quadratic remainder alone.
+
+It remains to control $C_n$. Put
+\[
+  a_n=A(1/p_n),
+  \qquad
+  b_n=Q(1-p_n)^{-1},
+  \qquad
+  \alpha_\gamma=\gamma(\gamma^{-1}-1)^\gamma,
+  \qquad
+  \mu=\E X.
+\]
+By \textcite[Proposition~1(i)]{DaouiaGirardStupfler2020}, applied to
+the common marginal distribution,
+\[
+  \Delta_n
+  \coloneqq
+  \frac{\xi_{\tau_n}}{\psifn(\gamma)Q(1-p_n)}-1
+  =
+  c(\gamma,\rho)a_n
+  +
+  \alpha_\gamma\mu b_n
+  +
+  r_{A,n}a_n
+  +
+  r_{Q,n}b_n,
+\]
+where $r_{A,n}\to0$ and $r_{Q,n}\to0$. The source statement is a ratio
+expansion, not a log expansion. Since $\Delta_n\to0$,
+\[
+  C_n
+  =
+  \log(1+\Delta_n)
+  =
+  \Delta_n+R_n^{log},
+  \qquad
+  R_n^{log}
+  =
+  O\{(\abs{a_n}+b_n)^2\}.
+\]
+The DPS assumptions $\rho<0$, $\sqrt{k}A(n/k)=O(1)$ and
+$k/(n p_n)\to\infty$, together with regular variation of $A$, imply
+\[
+  \frac{\sqrt{k}}{\ell_n}a_n\to0.
+\]
+The additional bridge condition is exactly
+\[
+  \frac{\sqrt{k}}{\ell_n}b_n=\eta_n\to0.
+\]
+It follows that
+\[
+  \frac{\sqrt{k}}{\ell_n}r_{A,n}a_n=o(1),
+  \qquad
+  \frac{\sqrt{k}}{\ell_n}r_{Q,n}b_n=r_{Q,n}\eta_n=o(1),
+\]
+and
+\[
+  \frac{\sqrt{k}}{\ell_n}(\abs{a_n}+b_n)^2\to0.
+\]
+Hence
+\begin{equation}
+\label{eq:pool-ext:C-negligible}
+  \frac{\sqrt{k}}{\ell_n}C_n\to0.
+\end{equation}
+
+Combining \eqref{eq:pool-ext:A-limit}, the negligibility of $B_n$, and
+\eqref{eq:pool-ext:C-negligible} in
+\eqref{eq:pool-ext:central-decomposition}, Slutsky's theorem gives
+\eqref{eq:pool-ext:log-limit}.
+
+Finally, \eqref{eq:pool-ext:log-limit} implies
+\[
+  L_n
+  \coloneqq
+  \log\frac{\widehat\xi_{\tau_n}^{pool,\star}}{\xi_{\tau_n}}
+  =
+  O_P(\ell_n/\sqrt{k})
+  =
+  o_P(1).
+\]
+Since $e^{L_n}-1=L_n+O_P(L_n^2)$,
+\[
+  \frac{\sqrt{k}}{\ell_n}
+  \left[
+    \left\{
+      \frac{\widehat\xi_{\tau_n}^{pool,\star}}{\xi_{\tau_n}}-1
+    \right\}
+    -
+    L_n
+  \right]
+  =
+  O_P\!\left(\frac{\ell_n}{\sqrt{k}}\right)
+  =
+  o_P(1),
+\]
+which proves the relative-error version
+\eqref{eq:pool-ext:relative-limit}.
+\end{proof}
+
+\begin{remark}[Why no bridge bias appears]
+\label{rem:pool-ext:eta}
+The term
+$\gamma(\gamma^{-1}-1)^\gamma \E X/Q(1-p_n)$ in the DGS bridge is the
+only audited component that can compete with the pooled Weissman term on
+the scale $\sqrt{k}/\ell_n$. The condition $\eta_n\to0$ deliberately
+rules out that competition. If instead
+$\eta_n\to\eta\in(0,\infty)$, the same decomposition keeps a
+deterministic shift
+$-\gamma(\gamma^{-1}-1)^\gamma \E X\,\eta$ in the log-relative limit.
+That branch is mathematically visible but is not used for the first
+theorem because it changes the bias ledger and would have to be carried
+into any AMSE discussion.
+\end{remark}
 
 \section{Parked material}
 \label{sec:pool-ext:parked}
 
 No arithmetic-versus-geometric expectile pooling comparison is added at
 this stage. Likewise, no expectile-specific AMSE weights, bias-reduced
-confidence intervals, or new simulation design should be introduced
-until the source audit in \Cref{sec:pool-ext:source-audit} has been
-completed and converted into a proof.
+confidence intervals, random plug-in weights, or new simulation design
+are introduced before the deterministic theorem is used to decide which
+Daouia--Padoan--Stupfler weight corollaries, if any, can be imported
+without changing the objective.

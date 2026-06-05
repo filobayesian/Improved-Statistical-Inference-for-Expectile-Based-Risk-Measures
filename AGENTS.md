@@ -19,7 +19,7 @@ where `\widehat q_n^\star(\tau_n\mid\omega)` is the Daouia--Padoan--Stupfler geo
 
 ## Current Repository Status: Research Reset
 
-As of 2026-06-04, the compiled thesis scaffold has been cleaned so it no longer presents the withdrawn pooled-intermediate route as a validated contribution. The old full draft still exists in git history and in generated/stale materials, but the live thesis files now mark the reset explicitly.
+As of 2026-06-05, the compiled thesis scaffold has been cleaned so it no longer presents the withdrawn pooled-intermediate route as a validated contribution. The old full draft still exists in git history and in generated/stale materials, but the live thesis files now mark the reset explicitly.
 
 Current source-audit status: the `A_n` pooled Weissman component, the `B_n`
 plug-in-`\psi` component, and the `C_n` population bridge component of the
@@ -30,15 +30,32 @@ iid/common-marginal route with deterministic admissible weights. On the
 pooled-Weissman benchmark scale `s_{A,n}=\sqrt{k}/\ell_n`, the comparison shows
 that `A_n` carries the DPS stochastic component, `B_n` is lower order, and the
 second-order bridge term `A(1/p_n)` in `C_n` is lower order under the DPS
-`\rho<0` route. The conservative first-theorem bridge-rate choice is now to
-impose `\eta_n=\sqrt{k}/\{\ell_n Q(1-p_n)\}\to0`, which removes the
-first-moment population bridge from the benchmark-scaled limit.
+`\rho<0` route. The theorem-design fork has been made explicit: the
+first-moment bridge is governed by
+`\eta_n=\sqrt{k}/\{\ell_n Q(1-p_n)\}`. The conservative first theorem route is
+to impose `\eta_n\to0`, which removes the first-moment population bridge from
+the benchmark-scaled limit. The finite nonzero branch
+`\eta_n\to\eta\in(0,\infty)` remains visible in the scratch note as a
+deterministic bridge-shift branch, but it is not the current thesis route.
+
+The scratch note now contains a provisional generic deterministic-weight
+theorem under `\eta_n\to0`, including a proof draft from the exact
+`A_n+B_n-C_n` decomposition. It is not yet polished Chapter 4 theorem prose.
+Before moving it into the thesis, source-check every assumption against the
+exact wording of Daouia--Padoan--Stupfler Corollary 8 and
+Daouia--Girard--Stupfler (2020), Proposition 1(i), including
+strict-increase/quantile-continuity conventions, positivity needed for
+log-Weissman expressions, and the definitions of aggregate `k` and `n`.
 
 For the finite-`m` iid/common-marginal distributed route, use
 Daouia--Padoan--Stupfler Corollary 8 in the published Bernoulli version as the
-clean source statement for `A_n`; use Theorem 2 plus the supplement proof only
-if Chapter 4 needs the broader tail-homoskedastic or direct log-expansion
-route. For `B_n`, use the pooled Hill CLT and the compact-event Taylor expansion
+clean source statement for `A_n`; use Theorem 2 plus the supplement proof if
+Chapter 4 needs the broader tail-homoskedastic route or if the proof is written
+directly on log scale. DPS Corollary 8 is a relative-error theorem, so if it is
+cited as the main source statement, explicitly convert it to log scale through
+`x_n=O_P(\ell_n/\sqrt{k})=o_P(1)` and
+`\log(1+x_n)=x_n+O_P(x_n^2)`. For `B_n`, use the pooled Hill CLT and the
+compact-event Taylor expansion
 `B_n=m(\gamma)(\widehat\gamma_n(\omega)-\gamma)+O_P(k^{-1})`, keeping the
 exceptional case `m(\gamma)=0` visible, but note that it is first-order
 negligible on the pooled-Weissman benchmark scale because `\ell_n\to\infty`.
@@ -48,8 +65,8 @@ source-studied ratio error
 elementary log step `C_n=\log(1+\Delta_n)=\Delta_n+R_n^{log}`. The log
 remainder is a square-order ledger item; it is controlled on the benchmark
 scale under the chosen `\eta_n\to0` route. This validates the component ledgers,
-the benchmark order comparison, and the conservative bridge-rate choice, not
-yet the final theorem statement, weights, intervals, or simulation design.
+the benchmark order comparison, and the provisional theorem route, not yet
+weights, intervals, or simulation design.
 
 The error is that the thesis was built around a standalone pooled intermediate QB expectile theory:
 \[
@@ -70,9 +87,9 @@ The live scaffold now has the following reset status:
 
 ### What Is Affected
 
-- `thesis/chapters/01_introduction.tex`: the contribution list and research question must be rewritten only after the new theorem is derived.
+- `thesis/chapters/01_introduction.tex`: the contribution list and research question must be rewritten only after the new theorem is source-checked and accepted as thesis prose.
 - `thesis/chapters/03_pooled_intermediate.tex`: the pooled intermediate QB CLT, A/B estimator comparison, two-weight optimality results, AMSE closed form, CI, and expectile-homogeneity diagnostic should not be used as established thesis contributions.
-- `thesis/chapters/04_pooled_extreme.tex`: keep it as a scaffold until the source audit and proof are complete. Do not add a normalisation, negligibility claim, theorem, weights, or interval before deriving them.
+- `thesis/chapters/04_pooled_extreme.tex`: keep it as a scaffold until the source audit and proof are complete. Do not add the provisional normalisation, negligibility claims, theorem, weights, or interval before the scratch theorem has been source-checked and accepted for thesis prose.
 - Appendix proofs in `thesis/main.tex`: the old Chapter 3/4 proof appendix has been removed from the compiled draft. Individual algebraic ideas may be useful as scratch work, but do not cite them as validated results.
 - `thesis/chapters/05_finite_sample.tex` and `simulation/`: the existing simulations were designed around the old estimator and old weight menu. They are not final evidence for the rebuilt thesis.
 - Generated tables/figures under `thesis/tables/simulation/` and `thesis/figures/simulation/`: treat as stale until the new estimator and simulation design are settled.
@@ -165,14 +182,19 @@ The current least-action path is one estimator, one exact decomposition, one com
 
 ### Current Conservative Design Choices
 
-As of 2026-06-04, the agreed conservative research design is:
+As of 2026-06-05, the agreed conservative research design is:
 
 - Work first in the iid/common-marginal distributed setting. This avoids a separate expectile target-selection problem under tail homoskedastic but nonidentical margins.
 - Prove the main asymptotic theorem first for generic deterministic admissible weights, with `\omega^\top\mathbf 1=1`. This includes meaningful deterministic distributed weights such as `k_j/k` and oracle deterministic population weights. It excludes, for the first theorem, random plug-in weights estimated from the same data.
+- Use the `\eta_n\to0` route for the first theorem:
+  `\eta_n=\sqrt{k}/\{\ell_n Q(1-p_n)\}\to0`. The theorem should make clear
+  that `p_n\to0` is only tail movement; the Weissman extreme extrapolation
+  regime is `k/(np_n)\to\infty`, together with the DPS scale condition
+  `\sqrt{k}/\ell_n\to\infty`, where `\ell_n=\log\{k/(np_n)\}`.
 - Do not start with variance-optimal or AMSE-optimal weights. First prove the generic-weight theorem, then read off the variance and bias criterion, and only then import Daouia--Padoan--Stupfler weights if the criterion matches.
 - Do not derive new expectile-specific closed-form weights unless the generic-weight theorem forces a different objective.
 - Do not add estimated weights, confidence intervals, or simulations until the theorem and any justified weight corollary are settled.
-- Keep all mathematical scratch work in `notes/source_audit_pooled_extreme_expectile.md` until the theorem is derived. Do not move theorem prose into Chapter 4 until the theorem statement is settled.
+- Keep all mathematical scratch work in `notes/source_audit_pooled_extreme_expectile.md` until the theorem is source-checked. Do not move theorem prose into Chapter 4 until the theorem statement and proof draft are settled.
 
 ### Imported Results Versus New Proof Work
 
@@ -198,30 +220,37 @@ New proof work still required:
 
 - Match the thesis notation exactly to the source notation, especially `p_n=1-\tau_n`, the intermediate thresholds `k_j`, and the target quantile/expectile.
 - Prove and use the exact log decomposition `A_n+B_n-C_n`.
+- For the pooled Weissman component, either cite the DPS supplement's log
+  expansion directly or explicitly convert the published Corollary 8
+  relative-error result to log scale via
+  `x_n=O_P(\ell_n/\sqrt{k})=o_P(1)` and
+  `\log(1+x_n)=x_n+O_P(x_n^2)`.
 - Convert the sourced DGS ratio expansion into the log term through the
   elementary calculus identity
   `C_n=\log(1+\Delta_n)=\Delta_n+R_n^{log}` and record
   `R_n^{log}=O((|A(1/p_n)|+Q(1-p_n)^{-1})^2)`. This is stitching, not a new
   expectile asymptotic result.
-- Use the completed order comparison under the conservative theorem-design
-  condition `\eta_n=\sqrt{k}/\{\ell_n Q(1-p_n)\}\to0`, so no
-  first-moment population-bridge bias is retained. Keep the
-  `\eta_n\to\eta\in(0,\infty)` branch parked unless Filippo explicitly
-  reopens it.
+- Source-check and refine the provisional generic deterministic-weight theorem
+  under `\eta_n=\sqrt{k}/\{\ell_n Q(1-p_n)\}\to0`, so no first-moment
+  population-bridge bias is retained. Keep the
+  `\eta_n\to\eta\in(0,\infty)` branch visible as a scratch-note comparison but
+  parked unless Filippo explicitly reopens it.
 
 ## Immediate Next Step
 
 The active working artifact is `notes/source_audit_pooled_extreme_expectile.md`.
 It now contains the source audit, the component ledger for `A_n+B_n-C_n`, and
-the benchmark order comparison.
+the benchmark order comparison. It also contains a provisional generic
+deterministic-weight theorem under `\eta_n\to0` and a proof draft.
 
-The conservative theorem-design route has been chosen in the scratch note:
-impose `\eta_n=\sqrt{k}/\{\ell_n Q(1-p_n)\}\to0` in the first generic-weight
-theorem. The next task is to write and check that generic deterministic-weight
-theorem inside the scratch note, using the exact decomposition and the sourced
-component ledgers. Do not add weights, confidence intervals, simulations, or
-polished Chapter 4 theorem text until that theorem statement and proof are
-settled.
+The immediate next task is to source-check that theorem candidate, not to add a
+new result. Verify the assumptions and notation against DPS Corollary 8 and
+DGS 2020 Proposition 1(i), including the DPS extreme-level assumptions
+`p_n\to0`, `k/(np_n)\to\infty`, and `\sqrt{k}/\ell_n\to\infty`, the
+relative-to-log Taylor conversion for `A_n`, the ratio-to-log conversion for
+`C_n`, and the definitions of aggregate `k` and `n`. Do not add weights,
+confidence intervals, simulations, or polished Chapter 4 theorem text until
+this source-check is complete.
 
 ## Full Research Plan
 
@@ -238,7 +267,7 @@ Minimum deliverable:
 - source-audit table for each term, including theorem/proposition number, assumptions, and normalisation;
 - component ledger for the exact pieces of `A_n`, `B_n`, and `C_n`;
 - benchmark order comparison for `A_n+B_n-C_n`;
-- a list of open proof obligations;
+- a list of remaining source checks / proof obligations;
 - no candidate scale, candidate theorem, weights, intervals, or simulation design unless already derived in the note.
 
 ### Phase 1: Notation Reset
@@ -359,19 +388,23 @@ Term 3 (`C_n`, source-audited for the finite-`m` iid/common-marginal route):
   negligibility claim.
 
 The note has now compared the `A_n`, `B_n`, and `C_n` ledgers on the
-pooled-Weissman benchmark scale and chosen the conservative first-theorem route
-`\eta_n\to0`. Keep the `\eta_n\to\eta\in(0,\infty)` branch parked unless
-Filippo explicitly reopens it.
+pooled-Weissman benchmark scale, recorded the theorem-design fork, and drafted
+the conservative first-theorem route under `\eta_n\to0`. Keep the
+`\eta_n\to\eta\in(0,\infty)` branch visible as a scratch-note comparison but
+parked unless Filippo explicitly reopens it.
 
 ### Phase 5: Main Theorem
 
-Only after Phase 4, the component-ledger order comparison, and the chosen
-`\eta_n\to0` route, state the actual theorem. The first theorem should be for generic
-deterministic admissible weights satisfying `\omega^\top\mathbf 1=1`, in the
-iid/common-marginal distributed setting unless Filippo explicitly approves a
-broader setting. Do not present alternative outcomes as if they are already
-likely. The theorem should contain exactly the normalisation, centring,
-variance, bias, and assumptions that the source audit and proof justify.
+The scratch note now contains a provisional theorem for generic deterministic
+admissible weights satisfying `\omega^\top\mathbf 1=1` in the finite-`m`
+iid/common-marginal distributed setting under `\eta_n\to0`. Phase 5 is now to
+source-check and refine that theorem, not to invent a new one. The theorem
+must keep the DPS extreme-level assumptions explicit:
+`p_n\to0`, `k/(np_n)\to\infty`, and `\sqrt{k}/\ell_n\to\infty`, with
+`\ell_n=\log\{k/(np_n)\}`. The proof must show the relative-to-log conversion
+for `A_n`, the Taylor negligibility of `B_n`, and the ratio-to-log conversion
+plus rate controls for `C_n`. Do not move the theorem into Chapter 4 until
+these source checks are complete.
 
 ### Phase 6: Weights And Intervals
 
