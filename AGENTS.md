@@ -17,7 +17,16 @@ The research is currently in a reset phase after supervisor feedback on 2026-06-
 \]
 where `\widehat q_n^\star(\tau_n\mid\omega)` is the Daouia--Padoan--Stupfler geometrically pooled Weissman extreme-quantile estimator, `\widehat\gamma_n(\nu)` is a separately pooled Hill estimator used only in the outer expectile bridge, and `\psi(\gamma)=(\gamma^{-1}-1)^{-\gamma}` is the high-expectile / high-quantile asymptotic constant. The previous one-weight estimator is the diagonal special case `\nu=\omega`, not the active unrestricted design.
 
-## Current Repository Status: First Rebuilt Theorem And Closed Markdown Two-Weight Audit
+As of the 2026-06-05 inference-design decision, the practical bridge-Hill
+convention for downstream inference is fixed as
+`\nu_n^k=(k_1/k,\ldots,k_m/k)`. This keeps the outer bridge-Hill weight vector
+deterministic while allowing the pooled-Weissman weight vector `\omega` to use
+DPS deterministic/oracle or source-admissible estimated variance- and
+AMSE-optimal weights. Do not describe `\nu_n^k` as optimal; it is a transparent
+deterministic convention chosen precisely to avoid making random
+`\nu=\widehat\omega_n`.
+
+## Current Repository Status: First Rebuilt Theorem, Two-Weight Audit, And Estimated-Weight Transfer
 
 As of 2026-06-05, the compiled thesis no longer presents the withdrawn
 pooled-intermediate route as a validated contribution. The old full draft still
@@ -39,9 +48,16 @@ iid/common-marginal deterministic two-weight route under
 `\eta_n=\sqrt{k}/\{\ell_n Q(1-p_n)\}\to0`, provided the theorem carries the
 source conventions on common continuous iid data, aggregate
 `n=\sum_j n_j`, aggregate `k=\sum_j k_j`, and eventual upper-tail positivity
-for log-Weissman expressions. As of the latest Markdown pass, this
-first-order deterministic two-weight research layer is closed in the audit
-note; it has not yet been promoted to `.tex` theorem prose.
+for log-Weissman expressions. The latest Markdown pass also source-checks the
+DPS estimated-weight / plug-in transfer layer for the `\omega` role, using DPS
+Theorem A.1 in the supplement, Section 2.2, Corollary 1, Theorem 2,
+Corollary 6, Corollary 7, and Corollary 8. DPS Corollary 4 remains a later
+inference-design source for intervals; the audit note does not promote its
+interval formula to the expectile estimator. As of that pass, the
+first-order deterministic two-weight research layer is the base theorem layer,
+and the first-order source-admissible estimated-`\omega` result is an optional
+DPS-sourced transfer corollary; neither has yet been promoted to `.tex`
+theorem prose.
 
 `thesis/chapters/04_pooled_extreme.tex` now contains Theorem 4.1, a generic
 deterministic-weight CLT for the diagonal estimator
@@ -73,6 +89,33 @@ not on `\nu`:
 `\frac{\sqrt{k}}{\ell_n}\log\{\widehat\xi_{\tau_n}^{pool,\star}(\nu,\omega)/\xi_{\tau_n}\}
 \Rightarrow N(B_\omega,V_\omega)`.
 
+The audit note now also checks the source-admissible random-`\omega` estimator
+as a transfer corollary, not as a replacement for the deterministic base
+theorem:
+\[
+  \widehat\xi_{\tau_n}^{pool,\star}(\nu,\widehat\omega_n)
+  =
+  \psi(\widehat\gamma_n(\nu))\,
+  \widehat q_n^\star(\tau_n\mid\widehat\omega_n),
+\]
+where `\nu` remains deterministic admissible and, for the practical downstream
+route, is fixed at the threshold-allocation convention
+`\nu_n^k=(k_1/k,\ldots,k_m/k)`. The conditions
+`\widehat\omega_n^\top\mathbf 1=1`, `\widehat\omega_n\toprob\omega` are the
+DPS random-weight conditions. DPS already covers
+`A_n(\widehat\omega_n)` for the pooled Weissman component; the exact expectile
+decomposition adds only the already checked lower-order `B_n(\nu)` and `C_n`
+terms under `\eta_n\to0`. Therefore
+`\frac{\sqrt{k}}{\ell_n}\log\{
+\widehat\xi_{\tau_n}^{pool,\star}(\nu,\widehat\omega_n)/\xi_{\tau_n}\}
+\Rightarrow N(B_\omega,V_\omega)`. Plug-in centring and variance objects
+`\widehat B_{\omega,n}` and `\widehat V_{\omega,n}` transfer if the DPS source
+conditions give their consistency. This is a first-order `\omega` transfer
+only; it does not optimise `\nu`. The practical convention is
+`\nu=\nu_n^k`, not `\nu=\widehat\omega_n`. Random bridge-Hill weights remain
+outside the checked result and would need a separate compact-event/order audit
+for `B_n(\nu)`.
+
 For the finite-`m` iid/common-marginal distributed route, use
 Daouia--Padoan--Stupfler Corollary 8 in the published Bernoulli version as the
 clean source statement for `A_n`; use Theorem 2 plus the supplement proof if
@@ -93,31 +136,34 @@ remainder is a square-order ledger item; it is controlled on the benchmark
 scale under the chosen `\eta_n\to0` route. This validates the component ledgers,
 the benchmark order comparison, the Chapter 4 deterministic-weight theorem
 route for the diagonal one-weight estimator, and the deterministic two-weight
-theorem candidate in the audit note. The next layer is not to promote a
-one-weight DPS weight corollary, and it is not to start a lower-order
-`\nu`-optimality theory by default. If Filippo decides to leave the Markdown
-research layer, the next thesis-prose move is to revise Chapter 4 to the
-deterministic two-weight theorem or explicitly state that the diagonal
-estimator is a convention `\nu=\omega`.
+theorem candidate in the audit note. The sequential hierarchy is important:
+first state/prove the deterministic `(\nu,\omega)` theorem; only afterward add
+the source-admissible estimated-`\omega` transfer as a corollary if desired.
+The next layer is not to promote a one-weight DPS weight corollary, and it is
+not to start a lower-order `\nu`-optimality theory by default. If Filippo
+decides to leave the Markdown research layer, the next thesis-prose move is to
+revise Chapter 4 to the deterministic two-weight theorem or explicitly state
+that the diagonal estimator is a convention `\nu=\omega`; the estimated
+`\omega` transfer should remain a separate optional corollary.
 
 The checked weight-criterion layer shows that, under `\eta_n\to0`, the
-first-order AMSE
-criterion for the leading pooled-Weissman/geometric quantile weights is
-`(\omega^\top B_c^{dist})^2+\omega^\top V_c^{dist}\omega`, up to the common
-scale factor `\ell_n^2/k`. This imports DPS deterministic/oracle
-variance-optimal and AMSE-optimal formulas for `\omega` only. It does not
-choose the bridge-Hill weights `\nu`, and it does not justify calling
-`\nu=\omega` optimal. In the two-weight route, `\nu` is first-order
-unidentified unless a separate lower-order optimality theory is developed.
-The current research decision is to keep the thesis at this first-order layer
-by default, not to open lower-order `\nu`-optimality unless Filippo explicitly
-asks for it. The next research layer should remain in Markdown and should
-source-audit the DPS estimated-weight / plug-in inference machinery for
-`\omega`, then prove the transfer step for the expectile estimator. Do not
-assume that DPS plug-in weights, estimated `B_\omega`, estimated `V_\omega`,
-confidence intervals, or simulations automatically transfer merely because the
-oracle first-order limit matches DPS; each practical layer must be checked as a
-separate mathematical statement.
+first-order AMSE criterion for the leading pooled-Weissman/geometric quantile
+weights is `(\omega^\top B_c^{dist})^2+\omega^\top V_c^{dist}\omega`, up to
+the common scale factor `\ell_n^2/k`. This imports DPS deterministic/oracle
+variance-optimal and AMSE-optimal formulas for `\omega` only. The subsequent
+estimated-weight audit shows that source-admissible DPS estimated weights also
+transfer for `\omega`, including plug-in `B_\omega` and `V_\omega` objects
+when DPS consistency assumptions hold. This does not choose the bridge-Hill
+weights `\nu`, and it does not justify calling `\nu=\omega` optimal. In the
+two-weight route, `\nu` is first-order unidentified unless a separate
+lower-order optimality theory is developed. The current research decision is
+to keep the thesis at this first-order layer by default, not to open
+lower-order `\nu`-optimality unless Filippo explicitly asks for it, and to use
+the deterministic convention `\nu_n^k=(k_1/k,\ldots,k_m/k)` for downstream
+inference work. The next open layer is not to reprove estimated `\omega`
+transfer or choose `\nu`; it is to settle the inferential
+centring/standard-error route before writing final confidence intervals or
+simulations.
 
 The error is that the thesis was built around a standalone pooled intermediate QB expectile theory:
 \[
@@ -132,18 +178,18 @@ The live scaffold now has the following status:
 
 - `thesis/chapters/01_introduction.tex` states Theorem 4.1 as the first rebuilt contribution and keeps weights, intervals, and simulations sequential.
 - `thesis/chapters/03_pooled_intermediate.tex` is a withdrawal marker for the old intermediate route.
-- `thesis/chapters/04_pooled_extreme.tex` contains the diagonal one-weight theorem, its proof, and a parked bridge-shift remark. Do not revise it automatically; the two-weight theorem should move into `.tex` only when Filippo chooses to promote the checked Markdown result.
-- `notes/source_audit_pooled_extreme_expectile.md` now records the active deterministic two-weight estimator, the exact `A_n(\omega)+B_n(\nu)-C_n` decomposition, the `B_n(\nu)` Taylor/order check, the checked deterministic two-weight theorem candidate, the deterministic/oracle DPS weight-criterion match for `\omega` only, and the default decision not to open lower-order `\nu` optimality.
-- `thesis/chapters/05_finite_sample.tex` freezes simulations pending theorem-driven choices of weights, centring, and standard errors.
+- `thesis/chapters/04_pooled_extreme.tex` contains the diagonal one-weight theorem, its proof, and a parked bridge-shift remark. Do not revise it automatically; the two-weight theorem and any source-admissible estimated-`\omega` corollary should move into `.tex` only when Filippo chooses to promote the checked Markdown result.
+- `notes/source_audit_pooled_extreme_expectile.md` now records the active two-weight estimator, the exact `A_n(\omega)+B_n(\nu)-C_n` decomposition, the `B_n(\nu)` Taylor/order check, the checked deterministic two-weight theorem candidate, the deterministic/oracle DPS weight-criterion match for `\omega` only, the source-admissible estimated-`\omega` transfer, the plug-in standardisation ledger, the fixed practical bridge convention `\nu_n^k=(k_1/k,\ldots,k_m/k)`, and the default decision not to open lower-order `\nu` optimality.
+- `thesis/chapters/05_finite_sample.tex` freezes simulations pending theorem-driven choices of centring and standard errors; the bridge-Hill convention is now fixed as `\nu_n^k`.
 - `thesis/main.tex` no longer compiles the obsolete proof and finite-sample diagnostic appendices.
 
 ### What Is Affected
 
-- `thesis/chapters/01_introduction.tex`: the contribution framing currently reflects Theorem 4.1. It may be broadened to the deterministic two-weight route only after Filippo chooses to promote the checked Markdown result and Chapter 4 theorem prose is revised. Do not add weight, interval, or simulation claims until those layers are proved.
+- `thesis/chapters/01_introduction.tex`: the contribution framing currently reflects Theorem 4.1. It may be broadened to the two-weight route and, if desired, the source-admissible estimated-`\omega` transfer only after Filippo chooses to promote the checked Markdown result and Chapter 4 theorem prose is revised. Do not add final interval or simulation claims until centring and standard-error choices are fixed; the practical `\nu` convention is `\nu_n^k`.
 - `thesis/chapters/03_pooled_intermediate.tex`: the pooled intermediate QB CLT, A/B estimator comparison, two-weight optimality results, AMSE closed form, CI, and expectile-homogeneity diagnostic should not be used as established thesis contributions.
-- `thesis/chapters/04_pooled_extreme.tex`: Theorem 4.1 is accepted thesis prose for the narrow diagonal deterministic-weight route, but the checked audit now supports a deterministic two-weight theorem candidate. The next thesis edit, when Filippo asks to leave the Markdown layer, should either revise Theorem 4.1 to `(\nu,\omega)` or explicitly retain the diagonal estimator as the convention `\nu=\omega`. Do not add intervals, random plug-in weights, simulations, or broader tail-homoskedastic target claims before they are separately source-grounded.
+- `thesis/chapters/04_pooled_extreme.tex`: Theorem 4.1 is accepted thesis prose for the narrow diagonal deterministic-weight route, but the checked audit now supports a deterministic two-weight theorem candidate and a source-admissible estimated-`\omega` transfer. The next thesis edit, when Filippo asks to leave the Markdown layer, should either revise Theorem 4.1 to `(\nu,\omega)` or explicitly retain the diagonal estimator as the convention `\nu=\omega`; a random-`\omega` corollary can be promoted only from the checked Markdown transfer. Do not add final intervals, simulations, or broader tail-homoskedastic target claims before those layers are separately source-grounded.
 - Appendix proofs in `thesis/main.tex`: the old Chapter 3/4 proof appendix has been removed from the compiled draft. Individual algebraic ideas may be useful as scratch work, but do not cite them as validated results.
-- `thesis/chapters/05_finite_sample.tex` and `simulation/`: the existing simulations were designed around the old estimator and old weight menu. They are not final evidence for the rebuilt thesis and should stay frozen until weight/standard-error choices are settled.
+- `thesis/chapters/05_finite_sample.tex` and `simulation/`: the existing simulations were designed around the old estimator and old weight menu. They are not final evidence for the rebuilt thesis and should stay frozen until centring and standard-error choices are settled; the main practical bridge-Hill convention is `\nu_n^k`.
 - Generated tables/figures under `thesis/tables/simulation/` and `thesis/figures/simulation/`: treat as stale until the new estimator and simulation design are settled.
 
 ### What To Keep
@@ -209,10 +255,11 @@ source audit and proof justify that specific layer.
 
 The pooled Weissman normalisation `\sqrt{k}/\ell_n` is now justified for the
 narrow diagonal Theorem 4.1 route and, in the audit note, for the deterministic
-two-weight theorem candidate under `\eta_n\to0`, as a conclusion of the
-three-term decomposition. Do not reuse the normalisation for broader routes,
-alternative estimators, lower-order optimality, random weights, intervals, or
-simulation claims without rechecking the decomposition.
+two-weight theorem candidate and source-admissible estimated-`\omega` transfer
+under `\eta_n\to0`, as a conclusion of the exact decomposition. Do not reuse
+the normalisation for broader routes, alternative estimators, lower-order
+optimality, estimated `\nu`, final intervals, or simulation claims without
+rechecking the decomposition.
 
 ### Ground Every Step In Previous Work
 
@@ -255,15 +302,18 @@ Prefer the leanest defensible result. The less the thesis needs to prove, discus
 
 The current least-action path has completed one diagonal estimator, one exact
 decomposition, one source audit, one generic deterministic-weight theorem, one
-deterministic two-weight audit, and one deterministic/oracle weight-criterion
-check for the DPS pooled-Weissman weights `\omega`. A hidden design restriction
-has now been resolved in the Markdown audit note: the diagonal choice
-`\nu=\omega` is not forced by the first-order theorem. The least-action
-research stopping point is the checked deterministic two-weight theorem under
-`\eta_n\to0`, with `\omega` first-order optimisable and `\nu` first-order
-unidentified. Do not open lower-order `\nu` optimality by default. The next
-thesis-prose move happens only when Filippo decides to promote the checked
-Markdown result.
+deterministic two-weight audit, one deterministic/oracle weight-criterion
+check for the DPS pooled-Weissman weights `\omega`, and one source-admissible
+estimated-`\omega` transfer audit. A hidden design restriction has now been
+resolved in the Markdown audit note: the diagonal choice `\nu=\omega` is not
+forced by the first-order theorem. The least-action research stopping point is
+the checked deterministic two-weight theorem under `\eta_n\to0`, plus the
+optional source-admissible estimated-`\omega` transfer corollary under the DPS
+random-weight conditions. The weight `\omega` is first-order optimisable and
+may be DPS-estimated under source conditions in that corollary, while `\nu`
+remains deterministic and first-order unidentified. Do not open random `\nu`
+or lower-order `\nu` optimality by default. The next thesis-prose move happens
+only when Filippo decides to promote the checked Markdown result.
 
 ### Current Conservative Design Choices
 
@@ -276,6 +326,16 @@ As of 2026-06-05, the agreed conservative research design is:
   `\nu^\top\mathbf 1=1` and `\omega^\top\mathbf 1=1`. Here `\omega` weights
   the DPS geometrically pooled Weissman quantile, while `\nu` weights only the
   pooled Hill estimator inside the outer `\psi` bridge.
+- For downstream practical inference, fix the bridge-Hill convention
+  `\nu=\nu_n^k=(k_1/k,\ldots,k_m/k)`. This is deterministic once the
+  intermediate thresholds are chosen and keeps `\nu` separate from estimated
+  optimal `\omega`. It is not an optimality result.
+- Keep deterministic and random weights sequential. The base theorem uses
+  deterministic admissible `(\nu,\omega)`. Random weights enter only later as
+  a source-admissible DPS transfer corollary replacing `\omega` by
+  `\widehat\omega_n` in the pooled-Weissman component. This sequence is
+  standard in DPS, but it is conditional on exact affine normalisation and
+  convergence in probability of the estimated weights.
 - Use the `\eta_n\to0` route for the first theorem:
   `\eta_n=\sqrt{k}/\{\ell_n Q(1-p_n)\}\to0`. When this route is promoted to
   theorem prose, make clear that `p_n\to0` is only tail movement; the Weissman
@@ -285,19 +345,22 @@ As of 2026-06-05, the agreed conservative research design is:
 - Under `\eta_n\to0`, the checked first-order limit depends on `\omega` but
   not on `\nu`. This implies that DPS deterministic/oracle variance and AMSE
   weights may be used only for `\omega`, not for `\nu`.
-- Do not claim `\nu=\omega` is optimal. If the diagonal choice is retained, it
-  must be described as a convention or special case. If Filippo explicitly
+- Do not claim any `\nu` choice is optimal. The chosen practical convention is
+  `\nu=\nu_n^k`; the diagonal choice `\nu=\omega` remains only a deterministic
+  prototype/special case when `\omega` is deterministic. If Filippo explicitly
   asks for an optimal `\nu`, develop a separate lower-order AMSE theory first.
-- The agreed forward route is to stop the main theorem at first order and next
-  investigate the DPS plug-in layer for `\omega`: estimated variance-optimal
-  weights, estimated AMSE-optimal weights, estimated bias/variance objects, and
-  Gaussian inference. This is a source-audit and transfer task, not an
-  automatic corollary.
-- Do not add estimated weights, confidence intervals, or simulations from the
-  first-order calculation alone. They require separate source-grounded layers:
-  first a DPS plug-in transfer result for `\omega`, then an explicit convention
-  for `\nu`, then centring/standard-error choices, then CI and simulation
-  design.
+- The DPS plug-in layer for `\omega` has now been checked at first order:
+  estimated variance-optimal weights, estimated AMSE-optimal weights, and
+  estimated bias/variance objects transfer when the corresponding DPS source
+  consistency conditions hold. This transfer applies to `\omega` only and is
+  an optional corollary, not part of the deterministic base theorem.
+- Do not make `\nu` random, including by setting `\nu=\widehat\omega_n`,
+  without a separate audit of the compact-event Taylor expansion and order of
+  `B_n(\nu)` for the proposed random bridge-Hill convention.
+- Do not add final confidence intervals or simulations from the first-order
+  calculation alone. They still require separate source-grounded choices:
+  a centring route, standard-error objects, and then CI and simulation design.
+  The `\nu` convention is now fixed as `\nu_n^k`.
 - Keep mathematical research work in `notes/source_audit_pooled_extreme_expectile.md`
   or a new note before moving additional results into thesis prose.
 
@@ -327,18 +390,19 @@ Directly importable, subject to notation matching and assumption checking:
   weights under `\eta_n\to0` only for the leading pooled-Weissman/geometric
   quantile weights `\omega`.
 - Daouia--Padoan--Stupfler estimated-weight and plug-in inference machinery for
-  `\omega`, but only after extracting the exact source statements and checking
-  their assumptions. The expected transfer is: if DPS proves
-  `\widehat\omega_n\toprob\omega`, `\widehat B_{\widehat\omega_n}\toprob
-  B_\omega`, and/or `\widehat V_{\widehat\omega_n}\toprob V_\omega` under its
-  conditions, then the expectile estimator may inherit the same first-order
-  plug-in limit only after proving that the additional `B_n(\nu)` and `C_n`
-  terms remain negligible and that the random-`\omega` version of
-  `A_n(\omega)` is covered by the DPS source theorem.
+  `\omega`, as source-audited in the Markdown note. If DPS proves
+  `\widehat\omega_n\toprob\omega`, `\widehat B_{\omega,n}\toprob B_\omega`,
+  and/or `\widehat V_{\omega,n}\toprob V_\omega` under its conditions, then the
+  expectile estimator inherits the same first-order plug-in limit because
+  `A_n(\widehat\omega_n)` is source-covered and the additional `B_n(\nu)` and
+  `C_n` terms remain negligible under `\eta_n\to0`. This remains an optional
+  `\omega` transfer statement only. DPS Corollary 4 may later inform interval
+  design, but it is not part of the checked first-order transfer proof.
 - Any optimality theory for the bridge-Hill weights `\nu` remains a separate
   lower-order layer.
 
-Proof work completed for Theorem 4.1 and the two-weight audit:
+Proof work completed for Theorem 4.1, the two-weight audit, and the
+estimated-`\omega` transfer:
 
 - The thesis notation has been matched to the source notation, especially
   `p_n=1-\tau_n`, aggregate `k`, aggregate `n`, and the common target
@@ -364,19 +428,35 @@ Proof work completed for Theorem 4.1 and the two-weight audit:
 - The deterministic two-weight theorem candidate is recorded in the audit note:
   for deterministic admissible `(\nu,\omega)`, the first-order limit remains
   `N(B_\omega,V_\omega)` and is independent of `\nu`.
+- The source-admissible estimated-`\omega` transfer is recorded in the audit
+  note as a corollary after the deterministic theorem: for deterministic
+  admissible `\nu` and
+  `\widehat\omega_n^\top\mathbf 1=1`, `\widehat\omega_n\toprob\omega`, the
+  first-order limit remains `N(B_\omega,V_\omega)`. Consistent DPS plug-in
+  `B_\omega` and `V_\omega` objects transfer by Slutsky.
+- The latest housekeeping pass in
+  `notes/source_audit_pooled_extreme_expectile.md` makes the sequentiality
+  explicit: deterministic `(\nu,\omega)` theorem first; optional estimated
+  `\omega` transfer second; random `\nu` remains unaudited.
 
-Remaining choices after the closed Markdown two-weight audit:
+Remaining choices after the closed Markdown two-weight and estimated-`\omega`
+audit:
 
 - Default research decision: stop the main theorem at "any deterministic
-  admissible `\nu`" at first order, with `\nu` first-order unidentified and no
-  optimality claim.
-- Next Markdown research layer: audit DPS estimated-weight / plug-in inference
-  results for `\omega` and prove a transfer lemma for the expectile estimator.
-  This includes deciding whether the thesis uses variance-optimal `\omega`,
-  AMSE-optimal `\omega`, bias correction, or undersmoothing/no-bias centring.
-- After the `\omega` plug-in transfer is proved, fix `\nu` by an explicit
-  convention, such as `\nu=\omega`, equal weights, or `k_j/k`. The convention
-  may be compared numerically, but it is not an optimality result.
+  admissible `\nu`" at first order. The base theorem uses deterministic
+  `(\nu,\omega)`. A separate optional corollary may use source-admissible
+  DPS-estimated `\omega`; `\nu` remains deterministic and first-order
+  unidentified, with no `\nu` optimality claim. For downstream inference, use
+  the deterministic convention `\nu=\nu_n^k=(k_1/k,\ldots,k_m/k)`.
+- The next Markdown research layer, if Filippo wants intervals or simulations,
+  is to choose and source-ground the inferential route: variance-optimal versus
+  AMSE-optimal `\omega`, bias correction versus undersmoothing/no-bias
+  centring, and standard-error objects. The bridge-Hill convention is already
+  fixed at `\nu_n^k`.
+- Optional finite-sample sensitivity checks may compare other deterministic
+  `\nu` choices such as `\nu=\omega` or equal weights, but the main practical
+  route should use `\nu_n^k` and no `\nu` choice should be described as
+  optimal.
 - If Filippo decides to leave the Markdown research layer, revise Chapter 4
   theorem prose from the diagonal theorem to deterministic `(\nu,\omega)`, or
   explicitly retain the diagonal estimator as a convention `\nu=\omega`.
@@ -394,24 +474,26 @@ The active thesis result is Theorem 4.1 in
 `thesis/chapters/04_pooled_extreme.tex`; the active audit trail is
 `notes/source_audit_pooled_extreme_expectile.md`.
 
-The immediate next research step is not an automatic `.tex` edit. Stay in the
-Markdown research layer and add a source-audited section on estimated DPS
-weights and plug-in inference for the expectile estimator.
+The immediate next research step is not an automatic `.tex` edit. The
+estimated-`\omega` transfer is now checked in Markdown, and the bridge-Hill
+convention is fixed as `\nu=\nu_n^k=(k_1/k,\ldots,k_m/k)`. The next unresolved
+research/design step is to settle the inferential layer: choose the practical
+DPS `\omega` route and decide whether intervals use DPS
+bias-negligible/undersmoothing centring, DPS plug-in bias centring, or a
+deliberately bias-reduced estimator.
 
-The next Markdown section should prove, not assume, a transfer statement of the
-form: if DPS conditions give `\widehat\omega_n\toprob\omega` and consistent
-plug-in objects for the leading pooled-Weissman component, then
-`\widehat\xi_{\tau_n}^{pool,\star}(\nu,\widehat\omega_n)` inherits the same
-first-order limit after the exact decomposition is rechecked with random
-`\widehat\omega_n`. The proof must verify that the `B_n(\nu)` plug-in-`\psi`
-term and the population bridge `C_n` remain lower order on the same scale.
+At first order, DPS variance- and AMSE-optimal weights apply to `\omega` only,
+including source-admissible estimated weights. The practical route should use
+`\nu_n^k` for the bridge-Hill estimator so that estimated optimal `\omega`
+can be used without making `\nu` random. Simulations may later explore
+finite-sample sensitivity to `\nu`, but they must not be used to claim an
+optimal `\nu` without a separately proved lower-order theory.
 
-At first order, DPS variance- and AMSE-optimal weights apply to `\omega` only;
-`\nu` remains deterministic admissible and first-order unidentified. The
-default thesis route is to choose `\nu` by transparent convention after the
-`\omega` plug-in layer is settled, then develop CIs and simulations. Simulations
-may explore finite-sample sensitivity to `\nu`, but they must not be used to
-claim an optimal `\nu` without a separately proved lower-order theory.
+When promoting results out of Markdown, preserve this order: deterministic
+two-weight theorem first; optional estimated-`\omega` transfer corollary
+second; inference/interval design only after the centring and standard-error
+choices are made, using the fixed `\nu_n^k` bridge convention unless Filippo
+explicitly reopens that decision.
 
 ## Full Research Plan
 
@@ -436,7 +518,9 @@ Completed deliverable:
 - Theorem 4.1 in Chapter 4;
 - a deterministic/oracle DPS weight-criterion check under `\eta_n\to0`,
   recorded in the audit note;
-- no estimated weights, intervals, or simulation design.
+- a source-admissible estimated-`\omega` transfer check and plug-in
+  standardisation ledger, recorded in the audit note;
+- no final intervals or simulation design.
 
 Completed deliverable for the two-weight pivot:
 
@@ -447,16 +531,24 @@ Completed deliverable for the two-weight pivot:
 - theorem candidate showing the first-order limit depends on `\omega` only;
 - a clear status statement that DPS weights optimise `\omega`, while `\nu`
   is not first-order identified.
+- source-admissible estimated-`\omega` transfer for deterministic admissible
+  `\nu`, including the condition
+  `\widehat\omega_n^\top\mathbf 1=1`,
+  `\widehat\omega_n\toprob\omega`, recorded as a transfer corollary rather
+  than the base theorem.
 
 Remaining deliverable before moving beyond first-order theory:
 
 - no further first-order Markdown proof work is required for the deterministic
-  two-weight route under `\eta_n\to0`;
-- next, source-audit DPS plug-in weights and inference for `\omega`, then write
-  the expectile transfer proof before any CI or simulation design;
+  two-weight route or source-admissible estimated-`\omega` transfer under
+  `\eta_n\to0`;
+- next, settle the CI/simulation design choices in Markdown before any `.tex`
+  interval or finite-sample claims: centring, standard errors, and `\nu`
+  convention;
 - when Filippo asks to promote the result, revise Chapter 4 theorem prose to
-  the deterministic two-weight route, or explicitly keep the diagonal
-  estimator as the convention `\nu=\omega`.
+  the deterministic two-weight route first plus, if desired, a separate
+  source-admissible estimated-`\omega` corollary; or explicitly keep the
+  diagonal estimator as the convention `\nu=\omega`.
 
 ### Phase 1: Notation Reset
 
@@ -470,19 +562,21 @@ Separate clearly:
 
 Avoid using the same symbol for both an intermediate anchor and a very-extreme
 target. The old draft blurred this distinction. For Theorem 4.1 and the
-checked deterministic two-weight audit, the justified normalising scale is
+checked deterministic two-weight audit, and the checked source-admissible
+estimated-`\omega` transfer, the justified normalising scale is
 `\sqrt{k}/\ell_n` under `\eta_n\to0`; do not assume the same scale for broader
-routes, lower-order criteria, random weights, intervals, simulations, or
-alternative estimators. Avoid reusing `\omega` for the outer bridge-Hill
+routes, lower-order criteria, estimated `\nu`, final intervals, simulations,
+or alternative estimators. Avoid reusing `\omega` for the outer bridge-Hill
 estimator unless explicitly specialising to the diagonal case.
 
 ### Phase 2: Source Audit
 
-Completed for Theorem 4.1 and the deterministic two-weight theorem candidate.
+Completed for Theorem 4.1, the deterministic two-weight theorem candidate, and
+the source-admissible estimated-`\omega` transfer.
 Re-read and extract exact source statements again before adding any new layer,
-especially lower-order `\nu` optimality, intervals, random weights, estimated
-plug-in weights, simulations, or broader target settings. The checked sources
-for the theorem route are:
+especially lower-order `\nu` optimality, final intervals, simulations,
+estimated `\nu`, or broader target settings. The checked sources for the
+theorem route are:
 
 1. Daouia--Padoan--Stupfler pooled Hill CLT.
 2. Daouia--Padoan--Stupfler weighted-geometric pooled Weissman theorem.
@@ -498,7 +592,10 @@ for the theorem route are:
 5. Daouia--Padoan--Stupfler variance- and AMSE-optimal deterministic/oracle
    weights for the leading pooled-Weissman/geometric quantile weights
    `\omega`, source-checked in the audit note for the `\eta_n\to0` route.
-6. For any proposed optimality theory for `\nu`, source-check or derive the
+6. Daouia--Padoan--Stupfler estimated-weight and plug-in machinery for
+   source-admissible `\widehat\omega_n`, source-checked in the audit note for
+   the `\eta_n\to0` route.
+7. For any proposed optimality theory for `\nu`, source-check or derive the
    needed lower-order joint expansion before writing formulas.
 
 Record theorem/proposition numbers and assumptions. Do not rely on memory.
@@ -529,7 +626,8 @@ is the diagonal special case `\nu=\omega`.
 
 ### Phase 4: Source-Audit Questions For The Three Terms
 
-Completed for the diagonal Theorem 4.1 and the deterministic two-weight audit.
+Completed for the diagonal Theorem 4.1, the deterministic two-weight audit,
+and the source-admissible estimated-`\omega` transfer.
 For any future route, do not start by choosing a scale. First name the exact terms
 \[
   A_n(\omega)
@@ -597,7 +695,8 @@ Term 3 (`C_n`, source-audited for the finite-`m` iid/common-marginal route):
 The note has compared the diagonal and two-weight ledgers on the
 pooled-Weissman benchmark scale, recorded the theorem-design fork, supplied the
 source-checked route now written as Theorem 4.1, and supplied the checked
-deterministic two-weight theorem candidate. Keep the
+deterministic two-weight theorem candidate and estimated-`\omega` transfer.
+Keep the
 `\eta_n\to\eta\in(0,\infty)` branch visible as a Markdown comparison and
 Chapter 4 remark, but parked unless Filippo explicitly reopens it.
 
@@ -613,35 +712,45 @@ in the finite-`m` iid/common-marginal distributed setting under
 rate controls for `C_n`.
 
 The audit note now restates this result for deterministic two-weight vectors
-`(\nu,\omega)`. Under the same route,
+`(\nu,\omega)`. This deterministic statement is the base theorem candidate.
+Under the same route,
 `\frac{\sqrt{k}}{\ell_n}\log\{
 \widehat\xi_{\tau_n}^{pool,\star}(\nu,\omega)/\xi_{\tau_n}\}`
-has limit `N(B_\omega,V_\omega)`. The limit depends on `\omega` only.
+has limit `N(B_\omega,V_\omega)`. The note also checks the optional
+source-admissible estimated-`\omega` transfer: for deterministic admissible
+`\nu` and
+`\widehat\omega_n^\top\mathbf 1=1`,
+`\widehat\omega_n\toprob\omega`, the same limit holds with
+`\widehat\xi_{\tau_n}^{pool,\star}(\nu,\widehat\omega_n)`. The limit depends
+on the limiting `\omega` only.
 
 The active theorem work in Markdown is closed at first order. The thesis-prose
 move is parked until Filippo asks to promote the checked result: then revise
-Chapter 4 to state and prove the deterministic two-weight theorem, or
-explicitly retain the diagonal estimator as a convention `\nu=\omega`.
+Chapter 4 to state and prove the two-weight theorem, optionally add the
+source-admissible estimated-`\omega` corollary, or explicitly retain the
+diagonal estimator as a convention `\nu=\omega`.
 
 ### Phase 6: Weights And Intervals
 
 Do not draft a one-weight corollary as if `\nu=\omega` were optimal. The
-deterministic two-weight theorem is source-checked in the audit note; Chapter 4
-theorem prose should be updated only when Filippo decides to promote the
-Markdown result. First-order status under `\eta_n\to0`: DPS variance-optimal
-and AMSE-optimal deterministic/oracle weights apply to `\omega`, the
+deterministic two-weight theorem and source-admissible estimated-`\omega`
+transfer corollary are source-checked in the audit note; Chapter 4 theorem
+prose should be updated only when Filippo decides to promote the Markdown
+result.
+First-order status under `\eta_n\to0`: DPS variance-optimal and AMSE-optimal
+deterministic/oracle or estimated weights apply to `\omega`, the
 pooled-Weissman/geometric quantile weights, while `\nu` remains deterministic
 admissible and first-order unidentified.
 
 The default route is first-order and practical:
 
-1. Import the DPS variance-/AMSE-optimal machinery for `\omega` only after
-   source-auditing the exact estimated-weight and plug-in inference statements.
-   The Markdown proof must show how those statements transfer through
-   `A_n(\widehat\omega_n)+B_n(\nu)-C_n`.
-2. Choose `\nu` by explicit convention after the `\omega` layer is settled.
-   Plausible conventions include `\nu=\omega`, equal weights, or `k_j/k`; none
-   is optimal unless a separate lower-order theory proves it.
+1. Use the checked DPS variance-/AMSE-optimal machinery for `\omega` only,
+   including source-admissible estimated `\omega` when the DPS consistency
+   conditions hold.
+2. Use the fixed bridge-Hill convention
+   `\nu=\nu_n^k=(k_1/k,\ldots,k_m/k)` for final inference or simulations.
+   Other deterministic `\nu` choices may appear only as sensitivity checks;
+   none is optimal unless a separate lower-order theory proves it.
 3. Decide the inferential centring: bias-correct with a source-grounded
    estimator of `B_\omega`, impose an undersmoothing/no-bias route if justified,
    or deliberately use uncorrected intervals while documenting the coverage
@@ -657,14 +766,14 @@ requires additional mathematics: a joint expansion of the leading
 sharper `A_n` and `C_n` remainder controls at the `k^{-1/2}` scale, and a
 precise admissible class for `\nu`. Do not open this route by default.
 
-Estimated plug-in weights are now the next planned Markdown audit layer for
-`\omega`, but they are still not validated until the source statements,
-assumptions, consistency arguments, and expectile transfer proof are written.
+Estimated plug-in weights for `\omega` are validated at first order in the
+Markdown audit note. They are still not a final CI or simulation design until
+the centring and standard-error choices are fixed.
 
-Confidence intervals should follow only after the deterministic theorem,
-weight convention, and standard-error layer are settled. Bias-centering should
-be included only if the retained theorem/corollary has a nonzero bias term and
-if the required bias estimators are source-grounded.
+Confidence intervals should follow only after the retained theorem/corollary,
+fixed `\nu_n^k` convention, centring route, and standard-error layer are settled.
+Bias-centering should be included only if the retained theorem/corollary has a
+nonzero bias term and if the required bias estimators are source-grounded.
 
 ### Phase 7: Thesis Restructure
 
@@ -673,19 +782,22 @@ Expected lean structure:
 1. Introduction: rewritten around pooled extreme expectiles through Padoan pooled Weissman plus expectile bridge.
 2. Background: keep and tighten; remove overbuilt intermediate machinery.
 3. Main theory: define the estimator, use the decomposition to prove the theorem, then state weights and intervals if justified.
-4. Simulation: redesign only after weights, centring, and standard errors are fixed.
+4. Simulation: redesign only after weights, centring, standard errors, and the `\nu` convention are fixed.
 5. Discussion: limitations and future work.
 
 The old Chapter 3 should likely be deleted, shortened to a source/background note, or replaced by the new main-theory chapter. Do not preserve it merely because it is already written.
 
 ### Phase 8: Simulation Rebuild
 
-Only after weights, centring, and standard errors are stable:
+Only after the `\omega` route, centring, and standard errors are stable:
 
 - simulations should use the first-order theorem and DPS plug-in transfer as
   their mathematical base;
-- simulations may compare transparent conventions for `\nu` as finite-sample
-  sensitivity analysis, not as evidence of a theoretically optimal `\nu`;
+- simulations should use `\nu_n^k=(k_1/k,\ldots,k_m/k)` as the main
+  bridge-Hill convention;
+- simulations may compare other deterministic choices for `\nu` as
+  finite-sample sensitivity analysis, not as evidence of a theoretically
+  optimal `\nu`;
 - update `simulation/R/sim_functions.R` to compute the new estimator;
 - remove old estimator rows that correspond only to the obsolete two-weight intermediate theory;
 - run `Rscript simulation/run_simulation.R --smoke`;
