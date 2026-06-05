@@ -3,18 +3,19 @@
 Status: scratch research note, not theorem prose. This note records source
 statements for the exact decomposition in Chapter 4, audits the possible rate
 regimes exposed by the decomposition, and lists the remaining proof
-obligations. It now contains a provisional scratch theorem candidate, but it
-does not state final theorem prose, state weights, construct intervals, or
-propose a simulation design.
+obligations. It now contains the scratch trail behind the Chapter 4 theorem and
+a first deterministic-weight criterion check, but it does not construct
+intervals, estimated plug-in weights, or a simulation design.
 
-Source-check status as of 2026-06-05: the provisional $\eta_n\to0$ theorem
-candidate has been checked against the local PDFs of Daouia--Padoan--Stupfler
-Corollary 8 in the published Bernoulli version, the supplement proof of
-Theorem 2, and Daouia--Girard--Stupfler (2020), Proposition 1(i). The theorem
-route is source-consistent after carrying forward the source conventions on
-continuity, common iid data, aggregate $n$ and $k$, and eventual positivity of
-the upper tail needed for the log-Weissman expressions. The result is still
-scratch theorem material, not Chapter 4 prose.
+Source-check status as of 2026-06-05: the $\eta_n\to0$ theorem route has been
+checked against the local PDFs of Daouia--Padoan--Stupfler Corollary 8 in the
+published Bernoulli version, the supplement proof of Theorem 2, and
+Daouia--Girard--Stupfler (2020), Proposition 1(i). The theorem route is
+source-consistent after carrying forward the source conventions on continuity,
+common iid data, aggregate $n$ and $k$, and eventual positivity of the upper
+tail needed for the log-Weissman expressions. The first theorem has now been
+moved into Chapter 4; this note remains the scratch area for any further
+layers.
 
 ## Object and exact identity
 
@@ -1777,15 +1778,394 @@ The log-relative and relative-error limits are therefore identical.
 
 Under $\eta_n\to0$, the complete expectile estimator has the same first-order
 source-scale bias and variance as the DPS pooled Weissman quantile component.
-This makes a later check of the DPS variance and AMSE weight corollaries
-legitimate for the rebuilt expectile theorem. The weights and intervals are
-still not stated in this note.
+This makes a check of the DPS variance and AMSE weight corollaries legitimate
+for the rebuilt expectile theorem. The scratch comparison is recorded next.
 
-## Source-check verdict before Chapter 4
+## Scratch check: are the Hill and quantile weights the same?
 
-This pass checks the provisional theorem against the exact local source
-statements. The conservative $\eta_n\to0$ route survives the check, with the
-following details to carry into any later theorem prose:
+Status: notation and estimator-design audit. This section records a possible
+hidden restriction before the deterministic DPS weight corollary is moved into
+thesis prose.
+
+There are two different meanings of "Hill weights" in the current notation.
+
+First, the pooled Weissman estimator itself is
+
+$$
+\widehat q_n^\star(1-p_n\mid\omega)
+=
+\prod_{j=1}^m
+\left\{
+  X_{n_j-k_j:n_j,j}
+  \left(\frac{k_j}{n_jp_n}\right)^{\widehat\gamma_j(k_j)}
+\right\}^{\omega_j}.
+$$
+
+Here the geometric quantile weights $\omega_j$ necessarily also weight the
+local Hill errors inside the Weissman extrapolation. Indeed the exact ledger
+contains
+
+$$
+A_n^{Hill}
+=
+\sum_{j=1}^m\omega_j\ell_{j,n}
+  \{\widehat\gamma_j(k_j)-\gamma\}.
+$$
+
+This is not an extra assumption made by the expectile bridge; it is part of the
+DPS pooled-Weissman estimator. If one wanted a different weight vector inside
+the Weissman exponent while keeping geometric quantile weights $\omega$, that
+would be a different estimator and DPS Corollary 8 would no longer apply
+directly without a fresh source audit or proof.
+
+Second, the expectile estimator currently also uses the same $\omega$ in the
+outer bridge factor,
+
+$$
+\psi(\widehat\gamma_n(\omega))\,
+\widehat q_n^\star(1-p_n\mid\omega).
+$$
+
+This same-weight choice is stronger than is needed for the current
+$\eta_n\to0$ theorem. A more explicit two-weight estimator would be
+
+$$
+\widehat\xi_{\tau_n}^{pool,\star}(\nu,\omega)
+=
+\psi(\widehat\gamma_n(\nu))\,
+\widehat q_n^\star(1-p_n\mid\omega),
+\qquad
+\nu^\top\mathbf 1=1,\quad \omega^\top\mathbf 1=1,
+$$
+
+with deterministic admissible $\nu$ and $\omega$. Its exact decomposition is
+
+$$
+\log
+\frac{\widehat\xi_{\tau_n}^{pool,\star}(\nu,\omega)}{\xi_{\tau_n}}
+=
+A_n(\omega)+B_n(\nu)-C_n,
+$$
+
+where
+
+$$
+B_n(\nu)
+=
+\log\psi(\widehat\gamma_n(\nu))-\log\psi(\gamma).
+$$
+
+The same compact-event Taylor argument gives
+
+$$
+B_n(\nu)
+=
+m(\gamma)\{\widehat\gamma_n(\nu)-\gamma\}
++O_P(k^{-1}),
+$$
+
+and the pooled Hill CLT gives
+$\widehat\gamma_n(\nu)-\gamma=O_P(k^{-1/2})$. Therefore, on the
+pooled-Weissman benchmark scale,
+
+$$
+\frac{\sqrt{k}}{\ell_n}B_n(\nu)
+=
+\frac{m(\gamma)}{\ell_n}
+\sqrt{k}\{\widehat\gamma_n(\nu)-\gamma\}
++O_P\left(\frac{1}{\ell_n\sqrt{k}}\right)
+=o_P(1),
+$$
+
+because $\ell_n\to\infty$. Under $\eta_n\to0$,
+
+$$
+\frac{\sqrt{k}}{\ell_n}
+\log
+\frac{\widehat\xi_{\tau_n}^{pool,\star}(\nu,\omega)}{\xi_{\tau_n}}
+\Rightarrow
+N(B_\omega,V_\omega).
+$$
+
+Thus the first-order bias and variance criterion depends on the geometric
+pooled-Weissman weights $\omega$, not on the outer bridge-Hill weights $\nu$.
+The existing one-weight notation implicitly sets $\nu=\omega$, but this is a
+parsimony choice rather than a first-order necessity for the $\psi$ plug-in.
+
+Design implication: deterministic/oracle DPS variance and AMSE weights can only
+be claimed for the pooled-Weissman/geometric quantile weights $\omega$. The
+outer bridge-Hill weights $\nu$ are first-order unidentified by the current
+theorem route; choosing or estimating them would be a separate, lower-order
+design layer. For the least-action thesis path, keep $\nu=\omega$ unless there
+is a concrete reason to expose the additional degree of freedom, and do not
+call $\nu$ variance- or AMSE-optimal on the basis of Theorem 4.1.
+
+## Scratch check: deterministic DPS weight criterion
+
+Status: mathematical scratch layer only. This section decides whether the
+deterministic/oracle DPS weight criteria match the Chapter 4 theorem. It does
+not introduce estimated plug-in weights, confidence intervals, or simulations.
+
+### Source criterion in DPS
+
+The generic pooling result in Daouia--Padoan--Stupfler Theorem 1, and its
+supplementary Theorem A.1, is the source for the weight formulas. If
+
+$$
+\sqrt{k}\{\widehat\gamma_n(\omega)-\gamma\}
+\Rightarrow
+N(\omega^\top B_c,\omega^\top V_c\omega),
+\qquad
+\omega^\top\mathbf 1=1,
+$$
+
+then the DPS variance criterion is
+
+$$
+\omega^\top V_c\omega,
+$$
+
+and the DPS AMSE criterion is
+
+$$
+(\omega^\top B_c)^2+\omega^\top V_c\omega.
+$$
+
+The unique variance-optimal weights, when $V_c$ is positive definite, are
+
+$$
+\omega^{Var}
+=
+\frac{V_c^{-1}\mathbf 1}{\mathbf 1^\top V_c^{-1}\mathbf 1}.
+$$
+
+The unique AMSE-optimal weights are
+
+$$
+\omega^{AMSE}
+=
+\frac{
+  (1+B_c^\top V_c^{-1}B_c)V_c^{-1}\mathbf 1
+  -
+  (\mathbf 1^\top V_c^{-1}B_c)V_c^{-1}B_c
+}{
+  (1+B_c^\top V_c^{-1}B_c)(\mathbf 1^\top V_c^{-1}\mathbf 1)
+  -
+  (\mathbf 1^\top V_c^{-1}B_c)^2
+}.
+$$
+
+These formulas are copied as source formulas only for deterministic/oracle
+objects. The estimated-weight layer in DPS is separate and is not imported
+here.
+
+### Criterion implied by Theorem 4.1
+
+The Chapter 4 theorem gives, on the pooled-Weissman benchmark scale
+
+$$
+s_n=\frac{\sqrt{k}}{\ell_n},
+$$
+
+the limit
+
+$$
+s_n
+\log\frac{\widehat\xi_{\tau_n}^{pool,\star}}{\xi_{\tau_n}}
+\Rightarrow
+N(B_\omega,V_\omega),
+$$
+
+where
+
+$$
+B_\omega
+=
+\frac{\lambda}{1-\rho}\sum_{j=1}^m d_j^\rho\omega_j,
+\qquad
+V_\omega
+=
+\gamma^2
+\left(\sum_{j=1}^m c_j^{-1}\right)
+\left(\sum_{j=1}^m c_j\omega_j^2\right).
+$$
+
+Define the common-marginal DPS vectors
+
+$$
+B_c^{dist}
+=
+\frac{\lambda}{1-\rho}
+\begin{pmatrix}
+d_1^\rho\\
+\vdots\\
+d_m^\rho
+\end{pmatrix},
+\qquad
+V_c^{dist}
+=
+\gamma^2
+\left(\sum_{i=1}^m c_i^{-1}\right)
+\operatorname{diag}(c_1,\ldots,c_m).
+$$
+
+Then
+
+$$
+B_\omega=\omega^\top B_c^{dist},
+\qquad
+V_\omega=\omega^\top V_c^{dist}\omega.
+$$
+
+This is exactly the bias and variance criterion in DPS Corollary 5 for the
+pooled Hill estimator and DPS Corollary 8 for the common-marginal pooled
+Weissman estimator.
+
+For log-relative error,
+
+$$
+\log\frac{\widehat\xi_{\tau_n}^{pool,\star}}{\xi_{\tau_n}}
+=
+\frac{1}{s_n}Z_n(\omega),
+\qquad
+Z_n(\omega)\Rightarrow N(B_\omega,V_\omega).
+$$
+
+Therefore the first-order scaled MSE criterion is
+
+$$
+\operatorname{AMSE}_{log}(\omega)
+=
+B_\omega^2+V_\omega
+=
+(\omega^\top B_c^{dist})^2
++\omega^\top V_c^{dist}\omega.
+$$
+
+The unscaled log-error MSE only multiplies this by
+$s_n^{-2}=\ell_n^2/k$, which is independent of $\omega$. The relative-error
+version has the same first-order criterion because the theorem already proves
+that log-relative and relative-error limits agree on the same scale.
+
+Verdict: under the Chapter 4 route $\eta_n\to0$, the deterministic/oracle DPS
+variance and AMSE objectives match exactly. There is no expectile-specific
+weight formula to derive at this layer.
+
+### Resulting deterministic/oracle formulas
+
+For the iid/common-marginal independent distributed route, $V_c^{dist}$ is
+diagonal and positive definite. The variance-optimal weights reduce to
+
+$$
+\omega_j^{Var}
+=
+\frac{c_j^{-1}}{\sum_{i=1}^m c_i^{-1}},
+\qquad j=1,\ldots,m.
+$$
+
+Since $c_j=\lim k_1/k_j$, this is the limit of the deterministic finite-sample
+allocation weights
+
+$$
+\widetilde\omega_{j,n}^{Var}
+=
+\frac{k_j}{k}.
+$$
+
+The AMSE-optimal deterministic/oracle weights are the DPS formula with
+$B_c=B_c^{dist}$ and $V_c=V_c^{dist}$:
+
+$$
+\omega^{AMSE}
+=
+\frac{
+  (1+(B_c^{dist})^\top (V_c^{dist})^{-1}B_c^{dist})
+  (V_c^{dist})^{-1}\mathbf 1
+  -
+  (\mathbf 1^\top (V_c^{dist})^{-1}B_c^{dist})
+  (V_c^{dist})^{-1}B_c^{dist}
+}{
+  (1+(B_c^{dist})^\top (V_c^{dist})^{-1}B_c^{dist})
+  (\mathbf 1^\top (V_c^{dist})^{-1}\mathbf 1)
+  -
+  (\mathbf 1^\top (V_c^{dist})^{-1}B_c^{dist})^2
+}.
+$$
+
+Two useful special cases:
+
+- If $\lambda=0$, then $B_c^{dist}=0$ and AMSE-optimal weights equal
+  variance-optimal weights.
+- If the threshold fractions are asymptotically aligned so that
+  $k_j/n_j=(k/n)(1+o(1))$, then $d_j\to1$, so $B_c^{dist}$ is proportional
+  to $\mathbf 1$; under the affine constraint $\omega^\top\mathbf 1=1$, the
+  bias is weight-independent and the AMSE-optimal weights again reduce to
+  variance-optimal weights.
+
+### What breaks in the parked bridge-shift branch
+
+If the parked route $\eta_n\to\eta\in(0,\infty)$ were kept, the same
+decomposition would give the shifted limit
+
+$$
+s_n
+\log\frac{\widehat\xi_{\tau_n}^{pool,\star}}{\xi_{\tau_n}}
+\Rightarrow
+N(B_\omega-\kappa,V_\omega),
+\qquad
+\kappa=\gamma(\gamma^{-1}-1)^\gamma \mu\,\eta,
+\qquad
+\mu=\mathbb E X.
+$$
+
+The variance criterion would remain $V_\omega$, so the variance-optimal
+weights would be unchanged. The AMSE criterion, however, would become
+
+$$
+(B_\omega-\kappa)^2+V_\omega,
+$$
+
+which is not the DPS criterion unless $\kappa=0$ or a degenerate cancellation
+occurs. Algebraically, with
+
+$$
+M=V_c^{dist}+B_c^{dist}(B_c^{dist})^\top,
+\qquad
+a=\mathbf 1^\top M^{-1}\mathbf 1,
+\qquad
+b=\mathbf 1^\top M^{-1}B_c^{dist},
+$$
+
+the shifted-AMSE optimizer would solve
+
+$$
+\omega_\kappa
+=
+\frac{1-\kappa b}{a}M^{-1}\mathbf 1
++\kappa M^{-1}B_c^{dist}.
+$$
+
+At $\kappa=0$, this collapses to the DPS AMSE optimizer. For
+$\kappa\ne0$, it is a different, expectile-specific formula. This is the main
+reason the $\eta_n\to0$ theorem route is the only one that permits a clean DPS
+AMSE-weight corollary.
+
+### Scratch conclusion
+
+The deterministic/oracle weight layer is source-consistent under the current
+Chapter 4 theorem:
+
+1. variance-optimal weights import directly from DPS;
+2. AMSE-optimal deterministic/oracle weights import directly from DPS because
+   the bridge term is lower order under $\eta_n\to0$;
+3. estimated plug-in weights, standard errors, confidence intervals, and
+   simulations remain separate layers.
+
+## Source-check verdict for the Chapter 4 theorem route
+
+This pass checks the theorem route against the exact local source statements.
+The conservative $\eta_n\to0$ route survives the check, with the following
+details to keep attached to the Chapter 4 theorem and any later corollaries:
 
 | Item | Source-check verdict |
 |---|---|
@@ -1798,23 +2178,23 @@ following details to carry into any later theorem prose:
 | Ratio-to-log step for $C_n$ | After setting $\Delta_n=\xi_{\tau_n}/\{\psi(\gamma)Q(1-p_n)\}-1$, DGS gives $\Delta_n=c(\gamma,\rho)A(1/p_n)+\gamma(\gamma^{-1}-1)^\gamma EX/Q(1-p_n)+o(|A(1/p_n)|)+o(Q(1-p_n)^{-1})$. Since $\Delta_n\to0$, $C_n=\log(1+\Delta_n)=\Delta_n+O(\Delta_n^2)$. |
 | Rate comparison | Under $\rho<0$, $\sqrt{k}A(n/k)=O(1)$, and $k/(np_n)\to\infty$, regular variation gives $(\sqrt{k}/\ell_n)A(1/p_n)\to0$. The extra condition $\eta_n=\sqrt{k}/\{\ell_n Q(1-p_n)\}\to0$ removes the first-moment bridge and also controls the DGS $o(Q^{-1})$ and log-square remainders. |
 
-No source-level contradiction was found in the provisional theorem route. The
-remaining work is now drafting discipline rather than mathematical rescue:
-state only the checked iid/common-marginal deterministic-weight theorem first,
-and keep broader tail-homoskedastic targets, random plug-in weights, weights,
-intervals, and simulations parked until that theorem prose is written cleanly.
+No source-level contradiction was found in the theorem route. The current
+scratch extension above shows that deterministic/oracle DPS weight criteria
+match under $\eta_n\to0$. Broader tail-homoskedastic targets, random plug-in
+weights, intervals, and simulations remain parked until each layer is checked
+separately.
 
-## Residual obligations before Chapter 4
+## Residual obligations after the first Chapter 4 theorem
 
-1. The provisional theorem now specifies the common-marginal target population.
+1. The first theorem specifies the common-marginal target population.
    A broader theorem under only tail homoskedasticity would still need an
    additional target-selection argument for expectiles, not just quantiles.
 
 2. $A_n$ is now validated against Daouia--Padoan--Stupfler for the
-   finite-$m$ iid/common-marginal route. Theorem prose should cite Corollary 8
-   in the published Bernoulli version for the common-marginal route, or cite
-   Theorem 2 plus the supplement proof if the chapter needs the broader
-   tail-homoskedastic or direct log-expansion route.
+   finite-$m$ iid/common-marginal route. Chapter 4 should keep Corollary 8 in
+   the published Bernoulli version as the headline common-marginal source, or
+   cite Theorem 2 plus the supplement proof if the chapter later needs the
+   broader tail-homoskedastic or direct log-expansion route.
 
 3. For $A_n^{thr}$ and $A_n^{tail}$, decide whether to cite the DPS supplement
    proof of Theorem 2 as a package, or to reproduce the two component controls
@@ -1831,11 +2211,10 @@ intervals, and simulations parked until that theorem prose is written cleanly.
    $A(1/p_n)$, $Q(1-p_n)^{-1}$, the DGS remainder, and the square-order
    log-conversion remainder.
 
-6. When moving the theorem into Chapter 4, carry forward the source conventions
-   now checked above: common continuous iid data, aggregate
-   $n=\sum_j n_j$ and $k=\sum_j k_j$, $U(t)>0$ eventually for log expressions,
-   and DGS's quantile convention, which does not require the old strict
-   monotonicity assumption.
+6. Keep the checked source conventions attached to Chapter 4 and to any
+   corollary: common continuous iid data, aggregate $n=\sum_j n_j$ and
+   $k=\sum_j k_j$, $U(t)>0$ eventually for log expressions, and DGS's quantile
+   convention, which does not require the old strict monotonicity assumption.
 
 7. The order comparison above shows that, on the pooled-Weissman benchmark
    scale, $B_n$ and the second-order $A(1/p_n)$ bridge are lower order, while
@@ -1846,11 +2225,10 @@ intervals, and simulations parked until that theorem prose is written cleanly.
    $-\alpha_\gamma\mu\eta$; and $\eta_n\to\infty$ needs sharper remainder
    control or a different, bridge-dominated interpretation.
 
-8. After the Chapter 4 theorem statement and proof are drafted from this
-   checked version, decide whether to add DPS variance- and AMSE-weight
-   corollaries. Under $\eta_n\to0$ the candidate criterion is the DPS
-   criterion, but the actual weight formulas should still be copied from DPS
-   only after the theorem statement is final.
+8. The deterministic/oracle weight criterion check is now recorded above.
+   Under $\eta_n\to0$, the DPS variance and AMSE objectives match exactly.
+   The formulas should still remain in this scratch note until Filippo decides
+   they are ready to move into thesis prose.
 
-9. Do not edit Chapter 4 into theorem prose until these obligations are
-   resolved.
+9. Do not add estimated plug-in weights, confidence intervals, or simulations
+   from this calculation alone. Each of those is a separate layer.
