@@ -1,30 +1,21 @@
-\begin{tabular}{lllrrr}
+\begin{tabular}{lrllrrr}
 \toprule
-Target & DGP & Estimator & Bias & MSE & Coverage \\
+DGP & $m$ & Regime & Estimator & Log bias & Log RMSE & Valid rate \\
 \midrule
-intermediate & AbsStudent3 & full\_sample & -0.046 & 0.004 & 0.816 \\
-intermediate & AbsStudent3 & variance & -0.048 & 0.004 & 0.813 \\
-intermediate & Burr & full\_sample & -0.124 & 0.016 & 0.005 \\
-intermediate & Burr & variance & -0.127 & 0.017 & 0.004 \\
-intermediate & BurrHeavy & full\_sample & -0.002 & 0.018 & 0.949 \\
-intermediate & BurrHeavy & variance & -0.006 & 0.018 & 0.947 \\
-intermediate & Frechet & full\_sample & -0.141 & 0.020 & 0.000 \\
-intermediate & Frechet & variance & -0.143 & 0.021 & 0.000 \\
-intermediate & Pareto & full\_sample & -0.156 & 0.025 & 0.000 \\
-intermediate & Pareto & variance & -0.158 & 0.025 & 0.000 \\
-intermediate & ParetoHeavy & full\_sample & -0.056 & 0.019 & 0.895 \\
-intermediate & ParetoHeavy & variance & -0.062 & 0.020 & 0.888 \\
-very\_extreme & AbsStudent3 & full\_sample & 0.189 & 0.050 & 0.376 \\
-very\_extreme & AbsStudent3 & variance & 0.190 & 0.050 & 0.381 \\
-very\_extreme & Burr & full\_sample & -0.008 & 0.006 & 0.829 \\
-very\_extreme & Burr & variance & -0.009 & 0.006 & 0.823 \\
-very\_extreme & BurrHeavy & full\_sample & 0.112 & 0.080 & 0.643 \\
-very\_extreme & BurrHeavy & variance & 0.108 & 0.079 & 0.651 \\
-very\_extreme & Frechet & full\_sample & -0.028 & 0.006 & 0.799 \\
-very\_extreme & Frechet & variance & -0.030 & 0.006 & 0.800 \\
-very\_extreme & Pareto & full\_sample & -0.045 & 0.007 & 0.741 \\
-very\_extreme & Pareto & variance & -0.047 & 0.008 & 0.730 \\
-very\_extreme & ParetoHeavy & full\_sample & 0.004 & 0.064 & 0.665 \\
-very\_extreme & ParetoHeavy & variance & -0.002 & 0.064 & 0.664 \\
+Burr heavy & 10 & strong & Centralised & 0.077 & 0.226 & 1.000 \\
+Burr heavy & 10 & strong & DPS AMSE plug-in & 0.075 & 0.223 & 1.000 \\
+Burr heavy & 10 & strong & DPS variance & 0.075 & 0.223 & 1.000 \\
+Burr light & 10 & strong & Centralised & -0.039 & 0.069 & 1.000 \\
+Burr light & 10 & strong & DPS AMSE plug-in & -0.041 & 0.070 & 1.000 \\
+Burr light & 10 & strong & DPS variance & -0.041 & 0.070 & 1.000 \\
+Pareto heavy & 10 & strong & Centralised & -0.007 & 0.204 & 1.000 \\
+Pareto heavy & 10 & strong & DPS AMSE plug-in & -0.012 & 0.205 & 1.000 \\
+Pareto heavy & 10 & strong & DPS variance & -0.012 & 0.204 & 1.000 \\
+Pareto light & 10 & strong & Centralised & -0.069 & 0.089 & 1.000 \\
+Pareto light & 10 & strong & DPS AMSE plug-in & -0.071 & 0.091 & 1.000 \\
+Pareto light & 10 & strong & DPS variance & -0.071 & 0.090 & 1.000 \\
+Abs. Student-3 & 10 & strong & Centralised & 0.110 & 0.143 & 1.000 \\
+Abs. Student-3 & 10 & strong & DPS AMSE plug-in & 0.109 & 0.142 & 1.000 \\
+Abs. Student-3 & 10 & strong & DPS variance & 0.109 & 0.142 & 1.000 \\
 \bottomrule
 \end{tabular}

@@ -2,4 +2,264 @@
 \chapter{Finite-sample study}
 \label{ch:finite-sample}
 
-\todo{}
+This chapter reports a finite-sample study for the estimator developed in
+\Cref{ch:pooled-extreme}. The purpose is deliberately narrow. We study the
+pooled extreme-expectile estimator
+\[
+  \widehat\xi_{\tau}^{\mathrm{pool},\star}
+    (\bm\nu_n^k,\bm\omega)
+  =
+  \psifn\!\big(\hat\gamma_n(\bm\nu_n^k)\big)
+  \hatWei_n(1-p\mid\bm\omega),
+  \qquad
+  \bm\nu_n^k=(k_1/k,\ldots,k_m/k)^\top,
+\]
+where \(p=1-\tau\) and \(k=\sum_{j=1}^{m}k_j\). Thus the bridge-Hill
+weights are fixed at the deterministic threshold-allocation convention,
+whereas the pooled-Weissman weights \(\bm\omega\) vary across the
+Daouia--Padoan--Stupfler choices studied below. The simulations do not claim
+optimality of \(\bm\nu_n^k\), do not use random bridge-Hill weights, and do
+not revive the intermediate expectile-pooling route discarded earlier.
+
+\section{Estimators and implementation}
+\label{sec:sim:estimators}
+
+For each machine \(j\), the local Hill estimator and Weissman quantile
+estimator are computed using the \texttt{HTailIndex} and \texttt{extQuantile}
+routines from the \texttt{ExtremeRisks} package \parencite{ExtremeRisksR}.
+The simulation code only adds the thesis-specific pooling layer: geometric
+pooling of the local Weissman estimates, the map \(\psifn\), the deterministic
+bridge-Hill convention \(\bm\nu_n^k\), and the summary calculations.
+
+The following estimators are recorded in every scenario:
+\begin{itemize}
+\item \emph{equal}: \(\omega_j=1/m\);
+\item \emph{DPS variance}: \(\omega_j=k_j/k\), the finite-sample independent
+      distributed version of the DPS variance weights;
+\item \emph{DPS AMSE oracle}: the DPS AMSE formula evaluated with the
+      population second-order parameters of the data-generating model;
+\item \emph{DPS AMSE plug-in}: the same formula with second-order inputs
+      estimated using \texttt{evt0} \parencite{evt0R};
+\item \emph{centralised}: the corresponding single-sample estimator computed
+      from the combined sample, used only as a benchmark.
+\end{itemize}
+All distributed estimators use the same bridge-Hill vector
+\(\bm\nu_n^k\). In particular, the plug-in AMSE estimator randomises
+\(\bm\omega\) only.
+
+For each estimator, inference is assessed with the log-scale interval from
+\Cref{cor:pool-ext:plugin-inference}. In a Monte Carlo replication, if
+\(\widehat B_\omega\) and \(\widehat V_\omega\) denote the selected DPS
+centring and variance objects, the interval is
+\[
+  \widehat\xi
+  \left[
+    \exp\!\left\{-\frac{\ell}{\sqrt{k}}
+      \big(\widehat B_\omega+z_{0.975}\sqrt{\widehat V_\omega}\big)\right\},
+    \exp\!\left\{-\frac{\ell}{\sqrt{k}}
+      \big(\widehat B_\omega-z_{0.975}\sqrt{\widehat V_\omega}\big)\right\}
+  \right],
+  \qquad
+  \ell=\log\!\left(\frac{k}{np}\right).
+\]
+The interval is included as a diagnostic of the first-order plug-in route,
+not as a claim of finite-sample calibration.
+
+\section{Design}
+\label{sec:sim:design}
+
+The study stays within the iid common-marginal setting of the theorem. The
+data-generating models are Pareto with \(\gamma=0.25\), Pareto with
+\(\gamma=0.60\), Burr with \(\gamma=0.25\) and \(\rho=-1\), Burr with
+\(\gamma=0.60\) and \(\rho=-1\), and the absolute Student distribution with
+three degrees of freedom. The latter has \(\gamma=1/3\). The true expectile
+\(\xi_\tau\) is computed numerically from the population expectile equation
+\[
+  \tau\,\E[(X-\xi_\tau)_+]
+  =
+  (1-\tau)\,\E[(\xi_\tau-X)_+],
+\]
+rather than by the asymptotic expectile--quantile bridge.
+
+The final simulation uses \(5000\) Monte Carlo replications per scenario. The
+main design has \(n=10000\), \(k_j/n_j=0.05\), \(np=5\),
+\(m\in\{5,10\}\), and either balanced allocation or a strong imbalanced
+allocation with machine proportions increasing geometrically from \(1\) to
+\(10\). Two sensitivity blocks then fix \(m=10\) and the strong allocation:
+one varies \(k_j/n_j\in\{0.03,0.05,0.10\}\), and the other varies
+\(np\in\{1,5,10\}\).
+
+Performance is measured by the Monte Carlo mean of the log relative error,
+the root mean squared log relative error, empirical coverage of the nominal
+\(95\%\) log interval, average log interval width, invalid-estimate rate, and
+weight-stability diagnostics.
+
+\section{Point estimation}
+\label{sec:sim:point}
+
+\Cref{tab:sim:point-main} reports the representative main design with
+\(m=10\), strong sample-size imbalance, \(k_j/n_j=0.05\), and \(np=5\). The
+distributed DPS variance estimator tracks the centralised benchmark closely
+across all five models. The log RMSE is essentially unchanged in the Burr
+heavy case, the Student case, and the Pareto heavy case, and differs only
+slightly in the lighter-tailed Pareto and Burr settings.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Point-estimation performance in the representative main design
+\((m=10\), strong allocation, \(k_j/n_j=0.05\), \(np=5)\).}
+\label{tab:sim:point-main}
+\resizebox{\textwidth}{!}{\input{tables/simulation/finite_sample_summary}}
+\end{table}
+
+The plug-in AMSE weights do not deliver a systematic improvement over the
+variance weights in this design. This is not surprising: in the common
+distributed setting the variance allocation is already the dominant stable
+choice, and the estimated second-order quantities add finite-sample noise.
+The conclusion is therefore practical rather than theoretical. The
+simulation supports the use of DPS variance weights as a stable baseline for
+\(\bm\omega\); it does not suggest opening a new optimisation layer for
+\(\bm\nu\).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/simulation/rmse_pooled_vs_centralised.pdf}
+\caption{Log RMSE of the DPS variance pooled estimator against the
+centralised benchmark in the main grid with \(k_j/n_j=0.05\) and \(np=5\).
+The dashed line is equality. Points near the line indicate that the pooled
+route tracks the centralised benchmark closely.}
+\label{fig:sim:rmse-estimator}
+\end{figure}
+
+\section{Plug-in interval performance}
+\label{sec:sim:intervals}
+
+\Cref{tab:sim:interval-main} shows that the first-order log intervals are
+not uniformly well calibrated at this sample size. Coverage is close to
+nominal only in the absolute Student case, where the DPS variance and plug-in
+AMSE intervals cover about \(92\%\) of replications. In the Pareto and Burr
+cases, coverage is materially below \(95\%\), especially for the lighter-tailed
+models. The centralised benchmark displays the same qualitative undercoverage,
+so this is not mainly a distributed-pooling artefact. It is a finite-sample
+calibration issue for the first-order log approximation and the plug-in
+centring objects.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Empirical coverage and log-width of nominal \(95\%\) intervals in
+the representative main design.}
+\label{tab:sim:interval-main}
+\resizebox{\textwidth}{!}{\input{tables/simulation/interval_summary}}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/simulation/coverage_heatmap.pdf}
+\caption{Empirical coverage in the representative main design
+\((m=10\), strong allocation, \(k_j/n_j=0.05\), \(np=5)\). Cell labels give
+coverage; colour records the deviation from the nominal \(95\%\) level.}
+\label{fig:sim:coverage-estimator}
+\end{figure}
+
+The interval results therefore support a cautious interpretation of
+\Cref{cor:pool-ext:plugin-inference}. The corollary gives the asymptotic
+studentisation when the DPS source route supplies consistent plug-in objects;
+the finite-sample study shows that the resulting interval can still be
+noticeably under-calibrated in moderate samples and biased tail models.
+
+\Cref{fig:sim:bridge-diagnostic} gives a targeted diagnostic for this
+undercoverage. It evaluates the same oracle first-order interval against both
+the exact population expectile and the first-order bridge target
+\(\psifn(\gamma)Q(1-p)\). In the light Pareto and Burr designs, much of the
+coverage loss against the exact expectile disappears when the bridge target is
+used, and exact-target coverage improves in the larger-\(n\), smaller
+\(k/n\) diagnostic design. This supports the interpretation that the main
+undercoverage is a plausible finite-sample bridge and first-order calibration
+effect, not a sign error or a failure of the pooling construction. The
+diagnostic is not uniform across all heavy-tailed designs, so the conclusion
+remains cautionary rather than corrective.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/simulation/bridge_target_diagnostic.pdf}
+\caption{Interval diagnostic comparing empirical coverage against the exact
+population expectile and against the first-order bridge target
+\(\psifn(\gamma)Q(1-p)\). The diagnostic uses oracle DPS centring and
+variance objects and is separate from the final main grid.}
+\label{fig:sim:bridge-diagnostic}
+\end{figure}
+
+\section{Sensitivity to thresholds and targets}
+\label{sec:sim:sensitivity}
+
+The threshold sensitivity in \Cref{tab:sim:threshold} shows the usual
+bias--variance trade-off. For the Burr light model, increasing
+\(k_j/n_j\) reduces log RMSE but worsens coverage sharply, consistent with
+second-order bias becoming visible. For the absolute Student model, the
+larger threshold \(0.10\) increases log RMSE. The Pareto heavy case benefits
+from a larger threshold in RMSE terms, reflecting the absence of second-order
+bias in the exact Pareto model. No single threshold is uniformly best across
+models and metrics.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Threshold sensitivity for \(m=10\), strong allocation and \(np=5\).}
+\label{tab:sim:threshold}
+\resizebox{\textwidth}{!}{\input{tables/simulation/threshold_sensitivity}}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/simulation/threshold_tradeoff.pdf}
+\caption{Threshold trade-off for the DPS variance estimator with \(m=10\),
+strong allocation and \(np=5\). The two panels show point-estimation error and
+interval coverage on the same threshold grid.}
+\label{fig:sim:k-sensitivity}
+\end{figure}
+
+\Cref{tab:sim:target} varies the target through \(np\). The least extreme
+target, \(np=10\), often has smaller log RMSE than \(np=1\), as expected from
+the shorter extrapolation distance. Coverage, however, need not improve when
+the target is less extreme; in the light Burr and light Pareto cases it falls
+as \(np\) increases. This again points to the interaction between
+second-order bias, threshold choice, and first-order interval centring.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Target sensitivity for \(m=10\), strong allocation and
+\(k_j/n_j=0.05\).}
+\label{tab:sim:target}
+\resizebox{\textwidth}{!}{\input{tables/simulation/target_sensitivity}}
+\end{table}
+
+\section{Weight stability and limitations}
+\label{sec:sim:limitations}
+
+\Cref{tab:sim:weights} reports the AMSE weight diagnostics in the
+representative imbalanced design. The oracle and plug-in AMSE weights are
+stable in this grid: negative weights are essentially absent, and the average
+maximum absolute weight is close to the largest deterministic allocation
+weight. The stability of the weights is one reason the point-estimation
+performance of DPS variance and plug-in AMSE weights is nearly identical in
+\Cref{tab:sim:point-main}.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{AMSE weight diagnostics in the representative main design.}
+\label{tab:sim:weights}
+\resizebox{\textwidth}{!}{\input{tables/simulation/weight_stability}}
+\end{table}
+
+The simulation evidence is intentionally limited. It supports the promoted
+estimator in the iid common-marginal distributed setting and suggests that
+DPS variance weights are a robust practical choice for \(\bm\omega\). It also
+shows that first-order plug-in intervals may under-cover at realistic sample
+sizes. The study does not address non-identical margins, time series,
+multivariate targets, random bridge-Hill weights, or lower-order optimality
+of \(\bm\nu\). Those questions would require additional mathematical work
+before they could become simulation targets.

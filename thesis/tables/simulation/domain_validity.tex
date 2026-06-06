@@ -1,36 +1,106 @@
-\begin{tabular}{llrr}
+\begin{tabular}{lrllrr}
 \toprule
-DGP & Estimator & Invalid rate & Valid reps \\
+DGP & $m$ & Regime & Estimator & Invalid rate & Valid reps \\
 \midrule
-AbsStudent3 & amse\_oracle & 0.0000 & 5000 \\
-AbsStudent3 & amse\_plugin & 0.0000 & 5000 \\
-AbsStudent3 & full\_sample & 0.0000 & 5000 \\
-AbsStudent3 & naive & 0.0000 & 5000 \\
-AbsStudent3 & variance & 0.0000 & 5000 \\
-Burr & amse\_oracle & 0.0000 & 5000 \\
-Burr & amse\_plugin & 0.0000 & 5000 \\
-Burr & full\_sample & 0.0000 & 5000 \\
-Burr & naive & 0.0000 & 5000 \\
-Burr & variance & 0.0000 & 5000 \\
-BurrHeavy & amse\_oracle & 0.0000 & 5000 \\
-BurrHeavy & amse\_plugin & 0.0000 & 5000 \\
-BurrHeavy & full\_sample & 0.0000 & 5000 \\
-BurrHeavy & naive & 0.0000 & 5000 \\
-BurrHeavy & variance & 0.0000 & 5000 \\
-Frechet & amse\_oracle & 0.0000 & 5000 \\
-Frechet & amse\_plugin & 0.0000 & 5000 \\
-Frechet & full\_sample & 0.0000 & 5000 \\
-Frechet & naive & 0.0000 & 5000 \\
-Frechet & variance & 0.0000 & 5000 \\
-Pareto & amse\_oracle & 0.0000 & 5000 \\
-Pareto & amse\_plugin & 0.0010 & 4995 \\
-Pareto & full\_sample & 0.0000 & 5000 \\
-Pareto & naive & 0.0000 & 5000 \\
-Pareto & variance & 0.0000 & 5000 \\
-ParetoHeavy & amse\_oracle & 0.0000 & 5000 \\
-ParetoHeavy & amse\_plugin & 0.0004 & 4998 \\
-ParetoHeavy & full\_sample & 0.0000 & 5000 \\
-ParetoHeavy & naive & 0.0000 & 5000 \\
-ParetoHeavy & variance & 0.0000 & 5000 \\
+Burr heavy & 5 & balanced & Centralised & 0.000 & 5000 \\
+Burr heavy & 5 & balanced & DPS AMSE oracle & 0.000 & 5000 \\
+Burr heavy & 5 & balanced & DPS AMSE plug-in & 0.000 & 5000 \\
+Burr heavy & 5 & balanced & DPS variance & 0.000 & 5000 \\
+Burr heavy & 5 & balanced & Equal & 0.000 & 5000 \\
+Burr light & 5 & balanced & Centralised & 0.000 & 5000 \\
+Burr light & 5 & balanced & DPS AMSE oracle & 0.000 & 5000 \\
+Burr light & 5 & balanced & DPS AMSE plug-in & 0.000 & 5000 \\
+Burr light & 5 & balanced & DPS variance & 0.000 & 5000 \\
+Burr light & 5 & balanced & Equal & 0.000 & 5000 \\
+Pareto heavy & 5 & balanced & Centralised & 0.000 & 5000 \\
+Pareto heavy & 5 & balanced & DPS AMSE oracle & 0.000 & 5000 \\
+Pareto heavy & 5 & balanced & DPS AMSE plug-in & 0.000 & 5000 \\
+Pareto heavy & 5 & balanced & DPS variance & 0.000 & 5000 \\
+Pareto heavy & 5 & balanced & Equal & 0.000 & 5000 \\
+Pareto light & 5 & balanced & Centralised & 0.000 & 5000 \\
+Pareto light & 5 & balanced & DPS AMSE oracle & 0.000 & 5000 \\
+Pareto light & 5 & balanced & DPS AMSE plug-in & 0.000 & 5000 \\
+Pareto light & 5 & balanced & DPS variance & 0.000 & 5000 \\
+Pareto light & 5 & balanced & Equal & 0.000 & 5000 \\
+Abs. Student-3 & 5 & balanced & Centralised & 0.000 & 5000 \\
+Abs. Student-3 & 5 & balanced & DPS AMSE oracle & 0.000 & 5000 \\
+Abs. Student-3 & 5 & balanced & DPS AMSE plug-in & 0.000 & 5000 \\
+Abs. Student-3 & 5 & balanced & DPS variance & 0.000 & 5000 \\
+Abs. Student-3 & 5 & balanced & Equal & 0.000 & 5000 \\
+Burr heavy & 10 & balanced & Centralised & 0.000 & 5000 \\
+Burr heavy & 10 & balanced & DPS AMSE oracle & 0.000 & 5000 \\
+Burr heavy & 10 & balanced & DPS AMSE plug-in & 0.000 & 5000 \\
+Burr heavy & 10 & balanced & DPS variance & 0.000 & 5000 \\
+Burr heavy & 10 & balanced & Equal & 0.000 & 5000 \\
+Burr light & 10 & balanced & Centralised & 0.000 & 5000 \\
+Burr light & 10 & balanced & DPS AMSE oracle & 0.000 & 5000 \\
+Burr light & 10 & balanced & DPS AMSE plug-in & 0.000 & 5000 \\
+Burr light & 10 & balanced & DPS variance & 0.000 & 5000 \\
+Burr light & 10 & balanced & Equal & 0.000 & 5000 \\
+Pareto heavy & 10 & balanced & Centralised & 0.000 & 5000 \\
+Pareto heavy & 10 & balanced & DPS AMSE oracle & 0.000 & 5000 \\
+Pareto heavy & 10 & balanced & DPS AMSE plug-in & 0.000 & 5000 \\
+Pareto heavy & 10 & balanced & DPS variance & 0.000 & 5000 \\
+Pareto heavy & 10 & balanced & Equal & 0.000 & 5000 \\
+Pareto light & 10 & balanced & Centralised & 0.000 & 5000 \\
+Pareto light & 10 & balanced & DPS AMSE oracle & 0.000 & 5000 \\
+Pareto light & 10 & balanced & DPS AMSE plug-in & 0.000 & 5000 \\
+Pareto light & 10 & balanced & DPS variance & 0.000 & 5000 \\
+Pareto light & 10 & balanced & Equal & 0.000 & 5000 \\
+Abs. Student-3 & 10 & balanced & Centralised & 0.000 & 5000 \\
+Abs. Student-3 & 10 & balanced & DPS AMSE oracle & 0.000 & 5000 \\
+Abs. Student-3 & 10 & balanced & DPS AMSE plug-in & 0.000 & 5000 \\
+Abs. Student-3 & 10 & balanced & DPS variance & 0.000 & 5000 \\
+Abs. Student-3 & 10 & balanced & Equal & 0.000 & 5000 \\
+Burr heavy & 5 & strong & Centralised & 0.000 & 5000 \\
+Burr heavy & 5 & strong & DPS AMSE oracle & 0.000 & 5000 \\
+Burr heavy & 5 & strong & DPS AMSE plug-in & 0.000 & 5000 \\
+Burr heavy & 5 & strong & DPS variance & 0.000 & 5000 \\
+Burr heavy & 5 & strong & Equal & 0.000 & 5000 \\
+Burr light & 5 & strong & Centralised & 0.000 & 5000 \\
+Burr light & 5 & strong & DPS AMSE oracle & 0.000 & 5000 \\
+Burr light & 5 & strong & DPS AMSE plug-in & 0.000 & 5000 \\
+Burr light & 5 & strong & DPS variance & 0.000 & 5000 \\
+Burr light & 5 & strong & Equal & 0.000 & 5000 \\
+Pareto heavy & 5 & strong & Centralised & 0.000 & 5000 \\
+Pareto heavy & 5 & strong & DPS AMSE oracle & 0.000 & 5000 \\
+Pareto heavy & 5 & strong & DPS AMSE plug-in & 0.000 & 5000 \\
+Pareto heavy & 5 & strong & DPS variance & 0.000 & 5000 \\
+Pareto heavy & 5 & strong & Equal & 0.000 & 5000 \\
+Pareto light & 5 & strong & Centralised & 0.000 & 5000 \\
+Pareto light & 5 & strong & DPS AMSE oracle & 0.000 & 5000 \\
+Pareto light & 5 & strong & DPS AMSE plug-in & 0.000 & 5000 \\
+Pareto light & 5 & strong & DPS variance & 0.000 & 5000 \\
+Pareto light & 5 & strong & Equal & 0.000 & 5000 \\
+Abs. Student-3 & 5 & strong & Centralised & 0.000 & 5000 \\
+Abs. Student-3 & 5 & strong & DPS AMSE oracle & 0.000 & 5000 \\
+Abs. Student-3 & 5 & strong & DPS AMSE plug-in & 0.000 & 5000 \\
+Abs. Student-3 & 5 & strong & DPS variance & 0.000 & 5000 \\
+Abs. Student-3 & 5 & strong & Equal & 0.000 & 5000 \\
+Burr heavy & 10 & strong & Centralised & 0.000 & 5000 \\
+Burr heavy & 10 & strong & DPS AMSE oracle & 0.000 & 5000 \\
+Burr heavy & 10 & strong & DPS AMSE plug-in & 0.000 & 5000 \\
+Burr heavy & 10 & strong & DPS variance & 0.000 & 5000 \\
+Burr heavy & 10 & strong & Equal & 0.000 & 5000 \\
+Burr light & 10 & strong & Centralised & 0.000 & 5000 \\
+Burr light & 10 & strong & DPS AMSE oracle & 0.000 & 5000 \\
+Burr light & 10 & strong & DPS AMSE plug-in & 0.000 & 5000 \\
+Burr light & 10 & strong & DPS variance & 0.000 & 5000 \\
+Burr light & 10 & strong & Equal & 0.000 & 5000 \\
+Pareto heavy & 10 & strong & Centralised & 0.000 & 5000 \\
+Pareto heavy & 10 & strong & DPS AMSE oracle & 0.000 & 5000 \\
+Pareto heavy & 10 & strong & DPS AMSE plug-in & 0.000 & 5000 \\
+Pareto heavy & 10 & strong & DPS variance & 0.000 & 5000 \\
+Pareto heavy & 10 & strong & Equal & 0.000 & 5000 \\
+Pareto light & 10 & strong & Centralised & 0.000 & 5000 \\
+Pareto light & 10 & strong & DPS AMSE oracle & 0.000 & 5000 \\
+Pareto light & 10 & strong & DPS AMSE plug-in & 0.000 & 5000 \\
+Pareto light & 10 & strong & DPS variance & 0.000 & 5000 \\
+Pareto light & 10 & strong & Equal & 0.000 & 5000 \\
+Abs. Student-3 & 10 & strong & Centralised & 0.000 & 5000 \\
+Abs. Student-3 & 10 & strong & DPS AMSE oracle & 0.000 & 5000 \\
+Abs. Student-3 & 10 & strong & DPS AMSE plug-in & 0.000 & 5000 \\
+Abs. Student-3 & 10 & strong & DPS variance & 0.000 & 5000 \\
+Abs. Student-3 & 10 & strong & Equal & 0.000 & 5000 \\
 \bottomrule
 \end{tabular}

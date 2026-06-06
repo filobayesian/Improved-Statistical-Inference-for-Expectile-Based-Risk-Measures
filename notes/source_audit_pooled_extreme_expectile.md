@@ -1,20 +1,31 @@
 # Source audit: pooled extreme-expectile decomposition
 
-Status: Markdown research layer, not theorem prose. The first-order
-deterministic two-weight route is now source-checked under the conservative
+Status: Markdown research layer supporting the promoted theorem prose. The
+first-order deterministic two-weight route is now source-checked under the conservative
 $\eta_n\to0$ design. This note records the exact decomposition, source inputs,
 rate comparison, checked theorem candidate, resulting design decision, and the
 first source-audited transfer check for DPS estimated weights in the
 pooled-Weissman component. It also records the source-conditional plug-in
 standardisation and the corresponding log-scale interval inversion. It does
-not promote these results to thesis prose, run simulations, or construct a
-lower-order criterion for the bridge-Hill weights.
+not run simulations or construct a lower-order criterion for the bridge-Hill
+weights.
 
 Current first-order decision as of 2026-06-05: keep the deterministic theorem,
 estimated-$\omega$ transfer, and plug-in inference corollary sequential. The
-base theorem is deterministic: for every deterministic admissible pair
-$(\nu,\omega)$, the $\eta_n\to0$ route gives the pooled-Weissman source-scale
-limit $N(B_\omega,V_\omega)$. A transfer corollary may replace only the
+base theorem is deterministic: for fixed deterministic affine weights, or more
+generally deterministic triangular weights with exact affine normalisation and
+finite-dimensional convergence,
+
+$$
+\nu_n^\top\mathbf 1=\omega_n^\top\mathbf 1=1,\qquad
+\nu_n\to\nu,\qquad
+\omega_n\to\omega,
+$$
+
+the $\eta_n\to0$ route gives the pooled-Weissman source-scale limit
+$N(B_\omega,V_\omega)$. In the rest of this note, "deterministic admissible"
+means this bounded fixed/convergent deterministic-weight convention, not
+affine normalisation alone. A transfer corollary may replace only the
 pooled-Weissman weights $\omega$ by source-admissible DPS estimated weights
 $\widehat\omega_n\to_P\omega$, because DPS already proves the corresponding
 random-weight quantile result. The plug-in inference corollary then applies if
@@ -32,11 +43,12 @@ $$
 $$
 
 This convention is deterministic once the intermediate thresholds are chosen
-and allows $\omega$ to be replaced by DPS estimated variance- or AMSE-optimal
-weights without making the bridge-Hill vector random. It is not an optimality
-claim for $\nu$. Choosing $\nu$ optimally, or making $\nu$ random, would
-require a new lower-order or compact-event audit, not an extension of the
-present first-order result.
+and, under the threshold-proportion assumptions, is exactly normalised,
+bounded, and convergent. It allows $\omega$ to be replaced by DPS estimated
+variance- or AMSE-optimal weights without making the bridge-Hill vector
+random. It is not an optimality claim for $\nu$. Choosing $\nu$ optimally, or
+making $\nu$ random, would require a new lower-order or compact-event audit,
+not an extension of the present first-order result.
 
 Current inference decision: when DPS source conditions provide consistent
 plug-in centring and variance objects for the selected $\omega$ route, use
@@ -60,15 +72,9 @@ inverting the transferred plug-in-centred expectile statistic. The theorem
 route is
 source-consistent after carrying forward the source conventions on continuity,
 common iid data, aggregate $n$ and $k$, and eventual positivity of the upper
-tail needed for the log-Weissman expressions. The first theorem has now been
-moved into Chapter 4 as the diagonal special case. The checked Markdown layer
-is the two-weight estimator below, where $\omega$ weights the DPS geometric
-pooled Weissman quantile and $\nu$ weights only the outer bridge-Hill
-estimator.
-
-Chapter 4 has not yet been updated to this two-weight result. That is
-deliberate: the thesis prose layer should wait until Filippo chooses to promote
-the checked Markdown result.
+tail needed for the log-Weissman expressions. The checked two-weight route has
+now been promoted to Chapter 4: $\omega$ weights the DPS geometric pooled
+Weissman quantile and $\nu$ weights only the outer bridge-Hill estimator.
 
 ## Object and exact identity
 
@@ -83,16 +89,28 @@ $$
 \psi(\gamma)=(\gamma^{-1}-1)^{-\gamma}.
 $$
 
-Here $\omega^\top\mathbf 1=1$ and $\nu^\top\mathbf 1=1$ are deterministic
-admissible affine weights. The diagonal estimator already written in Chapter 4
-is the special case $\nu=\omega$; it should not be read as the only
-first-order admissible design. For downstream implementation and inference
-design, use the fixed deterministic convention
+Here deterministic admissibility means exact affine normalisation plus fixed
+finite weights, or deterministic triangular weights with finite-dimensional
+convergence:
+
+$$
+\omega_n^\top\mathbf 1=\nu_n^\top\mathbf 1=1,
+\qquad
+\omega_n\to\omega,\qquad
+\nu_n\to\nu.
+$$
+
+This boundedness is not cosmetic: it is the condition that lets the pooled Hill
+CLT imply $\widehat\gamma_n(\nu_n)-\gamma=O_P(k^{-1/2})$ in the bridge term.
+The diagonal estimator is the special case $\nu_n=\omega_n$ when the common
+deterministic sequence satisfies this condition; it should not be read as the
+only first-order admissible design. For downstream implementation and
+inference design, use the fixed deterministic convention
 $\nu_n^k=(k_1/k,\ldots,k_m/k)$.
 
 Scope convention for this note: all sections through the deterministic
-weight-criterion audit treat both $\nu$ and $\omega$ as deterministic
-triangular weight sequences. Random weights appear only in the later
+weight-criterion audit treat both $\nu$ and $\omega$ as fixed or convergent
+deterministic triangular weight sequences. Random weights appear only in the later
 estimated-$\omega$ transfer section, and only in the DPS pooled-Weissman role.
 The bridge-Hill vector $\nu$ is not random in the checked theorem or transfer
 corollary. The practical transfer route fixes $\nu=\nu_n^k$ while allowing
@@ -145,7 +163,7 @@ research status is:
 
 1. Estimator fixed: the active object is
    $\widehat\xi_{\tau_n}^{pool,\star}(\nu,\omega)$, with separate
-   deterministic admissible vectors $\nu$ and $\omega$.
+   deterministic admissible bridge and pooled-Weissman weight sequences.
 2. Exact decomposition fixed:
    $A_n(\omega)+B_n(\nu)-C_n$ is an identity, not an asymptotic
    approximation.
@@ -168,7 +186,7 @@ research status is:
    $\widehat\omega_n\to_P\omega$, then the same first-order limit transfers
    to
    $\widehat\xi_{\tau_n}^{pool,\star}(\nu,\widehat\omega_n)$ for
-   deterministic admissible $\nu$.
+   fixed or convergent deterministic admissible $\nu$.
 8. Practical bridge convention fixed:
    $\nu=\nu_n^k=(k_1/k,\ldots,k_m/k)$ for downstream inference work. This
    avoids the unaudited random choice $\nu=\widehat\omega_n$ and carries no
@@ -188,7 +206,7 @@ research status is:
 | $A_n(\omega)$ | Daouia--Padoan--Stupfler, *Optimal weighted pooling for inference about the tail index and extreme quantiles*, Theorem 2, Section 2.3. Local files: `papers/Optimal Weighted Pooling Bernoulli 2024.pdf` and arXiv file `papers/Optimal Pooling.pdf`. | General finite-$m$ pooled weighted-geometric Weissman CLT for relative error. | Main statement is for relative error, not log-relative error. The pooled-quantile part also needs tail homoskedasticity $(H)$ if the margins are not literally common. |
 | $A_n(\omega)$ common-marginal specialisation | Same paper, Corollary 8 in the published Bernoulli version, Section 3.3. | Common-marginal distributed version of the same relative-error CLT, with simplified bias and variance. | This is the cleanest source statement for the iid/common-marginal route. The arXiv file numbers this result as Corollary 9; the thesis bibliography cites the published version, so theorem prose should cite Corollary 8. |
 | $A_n(\omega)$ log conversion | Same paper, supplement, proof of Theorem 2; Lemma B.2. Local file: `papers/optimal pooling supp.pdf`. | Shows the log Weissman error equals the dominant Hill term plus a lower-order log remainder. | This is a proof ingredient, not the headline theorem statement. In the common-marginal case the target-alignment term is exactly zero, so Lemma B.2 is only needed for the broader $(H)$ route. |
-| $B_n(\nu)$ | Daouia--Padoan--Stupfler, Theorem 1, Section 2.1; Corollary 5 in the iid/common-marginal route. | Joint CLT for marginal Hill estimators and pooled Hill CLT under common $\gamma$, usable for any deterministic admissible bridge-Hill vector $\nu$. | Passing through $\log\psi$ is our Taylor step. This term is separate from the Hill errors already embedded in the Weissman component $A_n(\omega)$. |
+| $B_n(\nu)$ | Daouia--Padoan--Stupfler, Theorem 1, Section 2.1; Corollary 5 in the iid/common-marginal route. | Joint CLT for marginal Hill estimators and pooled Hill CLT under common $\gamma$, usable for fixed deterministic bridge-Hill weights or convergent deterministic triangular weights. | Passing through $\log\psi$ is our Taylor step. Affine normalisation alone is not enough if weights can diverge. This term is separate from the Hill errors already embedded in the Weissman component $A_n(\omega)$. |
 | $C_n$ first order | Bellini et al. (2014), and Daouia--Girard--Stupfler (2019), Corollary 1 with $p=2$. Local file for DGS 2019: `papers/DGS2019.pdf`. | $\xi_\tau/Q(\tau) \to \psi(\gamma)$ for $0<\gamma<1$ with finite lower-tail first moment. | First order only; no rate for $C_n$. |
 | $C_n$ second order | Daouia--Girard--Stupfler, *Tail expectile process and risk assessment*, Proposition 1(i). Local file: `papers/DGS2020.pdf`. | Ratio expansion for $\xi_\tau/Q(\tau)$ with second-order term and first-moment term. | It is a ratio expansion, not a log expansion. Logging adds an explicit deterministic square-order remainder whose scaled order must be checked later. |
 | Single-sample sanity check / rate guide | Daouia--Girard--Stupfler (2018), Corollaries 3-4; Davison--Padoan--Stupfler (2023), Theorem 3.5. Local files: `papers/Daouia-Estimationtailrisk-2018.pdf`, `papers/Tail Risk Inference via Expectiles in Heavy-Tailed Time Series.pdf`. | Full extrapolated expectile CLTs in single-sample/time-series settings. DGS 2018 Corollary 3 reduces to the same QB extreme-expectile object when $m=1$. | Do not import these as the pooled theorem. Use DGS 2018 as an $m=1$ sanity check, with explicit translation because their $\tau_n$ is intermediate and their $\tau'_n$ is extreme. |
@@ -556,9 +574,10 @@ $$
 \subset(0,1)
 $$
 
-has probability tending to one. The same argument works for estimated weights
-if they are exactly normalised and converge to a deterministic admissible
-weight vector, as in the source theorem.
+has probability tending to one. The same argument works for deterministic
+triangular weights that are exactly normalised and converge to a finite vector.
+It also works for estimated weights only when the corresponding source theorem
+gives exact normalisation and convergence in probability.
 
 Equivalently, with
 
@@ -1182,8 +1201,8 @@ separately.
 
 Status: checked rate comparison for the current first-order route, not theorem
 prose. This section works in the finite-$m$ iid/common-marginal distributed
-route with deterministic admissible weights $\omega^\top 1=1$ and
-$\nu^\top 1=1$. Its purpose is to compare the already-audited ledgers, not to
+route with deterministic admissible weights in the fixed/convergent sense
+defined above. Its purpose is to compare the already-audited ledgers, not to
 state final thesis prose.
 
 ### Benchmark scale and neutral rate notation
@@ -1562,7 +1581,7 @@ Relative to the pooled-Weissman benchmark $s_{A,n}=\sqrt{k}/\ell_n$:
 | Piece | Scaled order before choosing $\eta_n$ | What the decomposition permits |
 |---|---|---|
 | $A_n(\omega)$ | $s_{A,n}A_n(\omega)=\sqrt{k}\{\widehat\gamma_n(\omega)-\gamma\}+o_P(1)$ | Non-degenerate pooled-Weissman source component; this is where $\omega$ remains visible. |
-| $B_n(\nu)$ | $s_{A,n}B_n(\nu)=o_P(1)$ | Plug-in $\psi$ cost is lower order on the $A_n(\omega)$ source scale for any deterministic admissible $\nu$. |
+| $B_n(\nu)$ | $s_{A,n}B_n(\nu)=o_P(1)$ | Plug-in $\psi$ cost is lower order on the $A_n(\omega)$ source scale for any fixed or convergent deterministic admissible $\nu$. |
 | $c(\gamma,\rho)A(1/p_n)$ in $C_n$ | $o(1)$ | Second-order expectile-quantile bridge is lower order under the DPS $\rho<0$ route. |
 | $\alpha_\gamma\mu/Q_0(1-p_n)$ in $C_n$ | $\alpha_\gamma\mu\,\eta_n$ | This is the only audited first-order competitor to $A_n(\omega)$ on the source scale. |
 | DGS $o(Q^{-1})$ remainder in $C_n$ | $r_{Q,n}\eta_n$ | Automatic if $\eta_n$ is bounded; needs extra control if $\eta_n\to\infty$. |
@@ -1645,14 +1664,24 @@ $$
 \to0.
 $$
 
-Let $\omega,\nu\in\mathbb R^m$ be deterministic and admissible, with
-$\omega^\top\mathbf 1=1$ and $\nu^\top\mathbf 1=1$. Define
+Let $\omega_n,\nu_n\in\mathbb R^m$ be deterministic admissible weight
+sequences, with
 
 $$
-\widehat\xi_{\tau_n}^{pool,\star}(\nu,\omega)
+\omega_n^\top\mathbf 1=\nu_n^\top\mathbf 1=1,
+\qquad
+\omega_n\to\omega,
+\qquad
+\nu_n\to\nu,
+$$
+
+for finite limiting vectors $\omega,\nu$. Define
+
+$$
+\widehat\xi_{\tau_n}^{pool,\star}(\nu_n,\omega_n)
 =
-\psi(\widehat\gamma_n(\nu))\,
-\widehat q_n^\star(\tau_n\mid\omega),
+\psi(\widehat\gamma_n(\nu_n))\,
+\widehat q_n^\star(\tau_n\mid\omega_n),
 \qquad
 \psi(\gamma)=(\gamma^{-1}-1)^{-\gamma}.
 $$
@@ -1662,7 +1691,7 @@ Then, on log-relative scale,
 $$
 \frac{\sqrt{k}}{\ell_n}
 \log
-\frac{\widehat\xi_{\tau_n}^{pool,\star}(\nu,\omega)}
+\frac{\widehat\xi_{\tau_n}^{pool,\star}(\nu_n,\omega_n)}
      {\xi_{\tau_n}}
 \Rightarrow
 N\left(
@@ -2262,8 +2291,8 @@ by informally inserting random weights into the deterministic proof. The source
 input is that DPS already proves the pooled-Weissman theorem for affine random
 weights $\widehat\omega_n\to_P\omega$. This section only opens the
 $\omega$ role in $\widehat q_n^\star(\tau_n\mid\omega)$. The bridge-Hill
-vector $\nu$ remains deterministic admissible and first-order unidentified. For
-practical use with estimated optimal $\omega$, set
+vector $\nu$ remains deterministic admissible in the fixed/convergent sense and
+first-order unidentified. For practical use with estimated optimal $\omega$, set
 $\nu=\nu_n^k=(k_1/k,\ldots,k_m/k)$. No estimated-$\nu$ or $\nu$-optimality
 statement is made.
 
@@ -2362,8 +2391,10 @@ consistency.
 
 Work in the same finite-$m$ iid/common-marginal route as the deterministic
 two-weight theorem candidate. Keep all assumptions of the $\eta_n\to0$ theorem
-candidate. Keep $\nu$ deterministic admissible; the downstream practical
-choice is $\nu=\nu_n^k=(k_1/k,\ldots,k_m/k)$. Let $\widehat\omega_n$ be any
+candidate. Keep $\nu$ deterministic admissible in the fixed/convergent sense;
+the downstream practical choice is
+$\nu=\nu_n^k=(k_1/k,\ldots,k_m/k)$, which is admissible under the threshold
+proportion assumptions. Let $\widehat\omega_n$ be any
 DPS-admissible random pooled-Weissman weight vector such that
 
 $$
@@ -2646,7 +2677,8 @@ The estimated-$\omega$ transfer is source-consistent at first order under
 $\eta_n\to0$. DPS already covers random pooled-Weissman weights
 $\widehat\omega_n$ satisfying exact affine normalisation and convergence to a
 deterministic $\omega$. The exact expectile decomposition then shows that the
-additional plug-in-$\psi$ term with deterministic $\nu$ and the population
+additional plug-in-$\psi$ term with fixed or convergent deterministic $\nu$
+and the population
 expectile--quantile bridge remain lower order. Consequently,
 
 $$
@@ -2657,8 +2689,9 @@ $$
 \Rightarrow N(B_\omega,V_\omega)
 $$
 
-for every deterministic admissible $\nu$ and every source-admissible estimated
-DPS weight vector $\widehat\omega_n\to_P\omega$.
+for every fixed or convergent deterministic admissible $\nu$ and every
+source-admissible estimated DPS weight vector
+$\widehat\omega_n\to_P\omega$.
 
 The checked conclusion is deliberately narrow:
 
@@ -2685,18 +2718,19 @@ revised:
 | DPS constants | The two-weight theorem candidate's $B_\omega$, $V_\omega$, and $d_j=(c_j/b_j)(\sum_i c_i^{-1})/(\sum_i b_i^{-1})$ match Corollaries 5 and 8. Deterministic $\omega$ weights are obtained by taking $\widehat\omega_n=\omega$ in the source statement. |
 | Relative-to-log step for $A_n(\omega)$ | Corollary 8 is relative-error scale. Since the source regime gives $\ell_n/\sqrt{k}\to0$, the relative error is $o_P(1)$ and $\log(1+x_n)=x_n+O_P(x_n^2)$ yields the displayed log-scale limit. The supplement proof of Theorem 2 gives the same conclusion directly on log scale. |
 | Positivity/log convention | DPS works with Hill and log-Weissman expressions. The thesis theorem should state or inherit eventual upper-tail positivity, $U(t)>0$ for large $t$, so the high order statistics and Weissman estimators are positive with probability tending to one. |
-| $B_n(\nu)$ plug-in cost | Corollary 5 gives $\widehat\gamma_n(\nu)-\gamma=O_P(k^{-1/2})$ and consistency for any deterministic admissible $\nu$. The compact-event Taylor expansion of $g=\log\psi$ is elementary and valid because $0<\gamma<1$; on the pooled-Weissman scale it is $o_P(1)$ because $\ell_n\to\infty$. |
+| $B_n(\nu)$ plug-in cost | Corollary 5 and the vector pooled Hill CLT give $\widehat\gamma_n(\nu_n)-\gamma=O_P(k^{-1/2})$ and consistency for fixed deterministic bridge weights or convergent deterministic triangular weights. Affine normalisation alone is not sufficient if the weights can diverge. The compact-event Taylor expansion of $g=\log\psi$ is elementary and valid because $0<\gamma<1$; on the pooled-Weissman scale it is $o_P(1)$ because $\ell_n\to\infty$. |
 | DGS bridge input | DGS 2020 Proposition 1(i) assumes $E|X^-|<\infty$, $0<\gamma<1$, and $C_2(\gamma,\rho,A)$ with $\rho\le0$. It gives a ratio expansion for $\xi_\tau/Q(\tau)$, not a log expansion, and it explicitly removes the older strict-monotonicity requirement. The DPS route imposes the stricter $\rho<0$ separately. |
 | Ratio-to-log step for $C_n$ | After setting $\Delta_n=\xi_{\tau_n}/\{\psi(\gamma)Q(1-p_n)\}-1$, DGS gives $\Delta_n=c(\gamma,\rho)A(1/p_n)+\gamma(\gamma^{-1}-1)^\gamma EX/Q(1-p_n)+o(|A(1/p_n)|)+o(Q(1-p_n)^{-1})$. Since $\Delta_n\to0$, $C_n=\log(1+\Delta_n)=\Delta_n+O(\Delta_n^2)$. |
 | Rate comparison | Under $\rho<0$, $\sqrt{k}A(n/k)=O(1)$, and $k/(np_n)\to\infty$, regular variation gives $(\sqrt{k}/\ell_n)A(1/p_n)\to0$. The extra condition $\eta_n=\sqrt{k}/\{\ell_n Q(1-p_n)\}\to0$ removes the first-moment bridge and also controls the DGS $o(Q^{-1})$ and log-square remainders. |
-| Estimated $\omega$ transfer | DPS Theorem A.1, Theorem 2, and Corollary 8 already allow random affine weights $\widehat\omega_n\to_P\omega$ in the pooled Hill and pooled Weissman components. The exact expectile decomposition adds only $B_n(\nu)=o_P(\ell_n/\sqrt{k})$ and $C_n=o(\ell_n/\sqrt{k})$ under $\eta_n\to0$, so the same first-order limit transfers to $\widehat\xi_{\tau_n}^{pool,\star}(\nu,\widehat\omega_n)$ for deterministic admissible $\nu$. |
+| Estimated $\omega$ transfer | DPS Theorem A.1, Theorem 2, and Corollary 8 already allow random affine weights $\widehat\omega_n\to_P\omega$ in the pooled Hill and pooled Weissman components. The exact expectile decomposition adds only $B_n(\nu_n)=o_P(\ell_n/\sqrt{k})$ for fixed or convergent deterministic bridge weights and $C_n=o(\ell_n/\sqrt{k})$ under $\eta_n\to0$, so the same first-order limit transfers to $\widehat\xi_{\tau_n}^{pool,\star}(\nu_n,\widehat\omega_n)$. |
 | Plug-in standardisation | If the selected DPS source route gives $\widehat B_{\widehat\omega,n}\to_P B_\omega$ and $\widehat V_{\widehat\omega,n}\to_P V_\omega$ with $V_\omega>0$, then Slutsky gives the studentised expectile statistic. Inverting that log-scale statistic gives the multiplicative plug-in interval recorded above. This is not a direct import of the DPS Corollary 4 interval formula; it is the inversion of the transferred expectile CLT. |
 
 Closed verdict for the current first-order Markdown layer: no source-level
 contradiction was found in the deterministic two-weight route or in the
 source-admissible estimated-$\omega$ transfer. The theorem candidate gives the
-first-order limit $N(B_\omega,V_\omega)$ for every deterministic admissible
-$\nu$, so $\nu$ is first-order unidentified. Deterministic/oracle DPS weight
+first-order limit $N(B_\omega,V_\omega)$ for every fixed or convergent
+deterministic admissible bridge-Hill sequence $\nu_n$, so $\nu$ is first-order
+unidentified. Deterministic/oracle DPS weight
 criteria match under $\eta_n\to0$ for $\omega$ only, and DPS estimated weights
 transfer for $\omega$ when the source consistency conditions hold. The
 plug-in centring and variance route is mathematically closed conditionally on
@@ -2729,7 +2763,8 @@ layers; they are not blockers for the current first-order result.
    $B_n(\nu)=m(\gamma)\{\widehat\gamma_n(\nu)-\gamma\}+O_P(k^{-1})$, with the
    exceptional case $m(\gamma)=0$ visible. The order comparison above shows
    that $B_n(\nu)$ is lower order on the pooled-Weissman benchmark scale for
-   every deterministic admissible $\nu$ because $\ell_n\to\infty$.
+   every fixed or convergent deterministic admissible $\nu$ because
+   $\ell_n\to\infty$.
 
 5. $C_n$ is now validated as a source-grounded ratio-to-log ledger in the
    common-marginal setting. The order comparison above checks
@@ -2755,10 +2790,10 @@ layers; they are not blockers for the current first-order result.
    $\omega$ only. The note does not choose $\nu$; a lower-order AMSE theory
    would be a separate project.
 
-9. When Filippo decides to leave the Markdown research layer, the next thesis
-   prose move is to revise Chapter 4 from the diagonal theorem to the
-   deterministic two-weight theorem, or to state explicitly that the diagonal
-   estimator is a convention $\nu=\omega$.
+9. Chapter 4 now carries the deterministic two-weight theorem. Future prose
+   edits should preserve the fixed/convergent deterministic-weight convention
+   and should treat the diagonal estimator only as the convention
+   $\nu_n=\omega_n$ when that common sequence is admissible.
 
 10. Estimated plug-in $\omega$ weights are now checked at first order through
     the DPS transfer route above. The plug-in centring and variance convention
@@ -2777,19 +2812,19 @@ inference corollary.
 Base deterministic theorem:
 
 $$
-\widehat\xi_{\tau_n}^{pool,\star}(\nu,\omega),
+\widehat\xi_{\tau_n}^{pool,\star}(\nu_n,\omega_n),
 \quad
-\nu^\top\mathbf 1=1,
+\nu_n^\top\mathbf 1=\omega_n^\top\mathbf 1=1,
 \quad
-\omega^\top\mathbf 1=1,
+\nu_n\to\nu,\quad \omega_n\to\omega,
 \quad
-\nu,\omega\text{ deterministic},
+\nu_n,\omega_n\text{ deterministic},
 \qquad
 \eta_n\to0,
 \qquad
 \frac{\sqrt{k}}{\ell_n}
 \log
-\frac{\widehat\xi_{\tau_n}^{pool,\star}(\nu,\omega)}
+\frac{\widehat\xi_{\tau_n}^{pool,\star}(\nu_n,\omega_n)}
      {\xi_{\tau_n}}
 \Rightarrow N(B_\omega,V_\omega).
 $$
@@ -2841,10 +2876,10 @@ vector, and it may be deterministic/oracle or estimated through DPS under the
 source consistency conditions. When the selected DPS route provides consistent
 plug-in bias and variance objects, the corresponding log-scale multiplicative
 interval is the principled inference object. The base theorem remains valid for
-any deterministic admissible $\nu$, but the main practical route now fixes
+any fixed or convergent deterministic admissible $\nu$, but the main practical route now fixes
 $\nu=\nu_n^k=(k_1/k,\ldots,k_m/k)$ so that estimated optimal $\omega$ can be
 used without making the bridge-Hill weights random. The diagonal
-$\nu=\omega$ remains only a deterministic prototype/special case when
-$\omega$ is deterministic. Any claim that one choice of $\nu$ is optimal
+$\nu_n=\omega_n$ remains only a deterministic prototype/special case when the
+common sequence is deterministic and convergent. Any claim that one choice of $\nu$ is optimal
 requires a new audit with a sharper scale, joint expansion, cross-covariance
 control, and remainder bounds beyond this note.

@@ -5,6 +5,7 @@ mode <- "smoke"
 if ("--pilot" %in% args) mode <- "pilot"
 if ("--final" %in% args) mode <- "final"
 if ("--smoke" %in% args) mode <- "smoke"
+
 cores_arg <- grep("^--cores=", args, value = TRUE)
 requested_cores <- if (length(cores_arg) == 1) {
   as.integer(sub("^--cores=", "", cores_arg))
@@ -14,14 +15,25 @@ requested_cores <- if (length(cores_arg) == 1) {
 
 cmd_args <- commandArgs(FALSE)
 file_arg <- grep("^--file=", cmd_args, value = TRUE)
-script_path <- if (length(file_arg) == 1) sub("^--file=", "", file_arg) else "simulation/run_simulation.R"
+script_path <- if (length(file_arg) == 1) {
+  sub("^--file=", "", file_arg)
+} else {
+  "simulation/run_simulation.R"
+}
 repo_root <- normalizePath(file.path(dirname(script_path), ".."), mustWork = FALSE)
 if (!file.exists(file.path(repo_root, "simulation", "R", "sim_functions.R"))) {
   repo_root <- normalizePath(getwd(), mustWork = TRUE)
 }
-source(file.path(repo_root, "simulation", "R", "sim_functions.R"))
 
-seed <- 20260602
+local_lib <- file.path(repo_root, "simulation", "Rlib")
+if (dir.exists(local_lib)) {
+  .libPaths(c(normalizePath(local_lib, mustWork = TRUE), .libPaths()))
+}
+
+source(file.path(repo_root, "simulation", "R", "sim_functions.R"))
+ensure_extremerisks()
+
+seed <- 20260606
 set.seed(seed)
 
 nrep <- switch(mode, smoke = 10, pilot = 300, final = 5000)
@@ -42,15 +54,17 @@ cores <- if (is.finite(requested_cores) && requested_cores > 0) {
 message("Running ", mode, " simulation with ", nrow(grid),
         " scenarios and ", nrep, " replications per scenario.")
 message("Using ", cores, " worker(s).")
-if (!requireNamespace("evt0", quietly = TRUE)) {
-  message("Package evt0 is not installed; feasible plug-in AMSE rows will be skipped.")
-}
+message("ExtremeRisks version: ", as.character(utils::packageVersion("ExtremeRisks")))
+message("evt0 available for plug-in AMSE rows: ",
+        requireNamespace("evt0", quietly = TRUE))
 
 all_rows <- vector("list", nrow(grid))
 for (s in seq_len(nrow(grid))) {
   scenario <- grid[s, ]
-  message("Scenario ", s, "/", nrow(grid), ": ",
-          paste(names(scenario), unlist(scenario), sep = "=", collapse = ", "))
+  message(
+    "Scenario ", s, "/", nrow(grid), ": ",
+    paste(names(scenario), unlist(scenario), sep = "=", collapse = ", ")
+  )
   worker <- function(r) {
     set.seed(seed + 100000 * s + r)
     run_one_replication(scenario, r)
@@ -65,14 +79,6 @@ for (s in seq_len(nrow(grid))) {
 
 results <- do.call(rbind, all_rows)
 summary <- summarise_results(results)
-summary$bias <- summary$log_error
-summary$mse <- summary$log_error_sq
-summary$variance <- pmax(summary$mse - summary$bias^2, 0)
-summary$coverage <- summary$covered
-summary$negative_weight_rate <- summary$any_negative_weight
-summary$avg_max_abs_weight <- summary$max_abs_weight
-summary$valid_rate <- summary$valid_replications / summary$n_replications
-summary$valid_ci_rate <- summary$valid_ci_replications / summary$n_replications
 
 out_dir <- file.path(repo_root, "simulation", "results")
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)

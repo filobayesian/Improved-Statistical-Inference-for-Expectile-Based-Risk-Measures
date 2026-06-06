@@ -196,15 +196,27 @@ Finally impose the expectile-bridge rate condition
   \frac{\sqrt{k}}{\ell_n Q(1-p_n)}
   \to0.
 \end{equation}
-For deterministic affine weights
-\(\bm\nu^\top\bm 1=1\) and \(\bm\omega^\top\bm 1=1\), the estimator
+Let \(\bm\nu_n,\bm\omega_n\in\R^m\) be deterministic weight sequences
+satisfying exact affine normalisation and finite-dimensional convergence,
+\[
+  \bm\nu_n^\top\bm 1=1,
+  \qquad
+  \bm\omega_n^\top\bm 1=1,
+  \qquad
+  \bm\nu_n\to\bm\nu,
+  \qquad
+  \bm\omega_n\to\bm\omega,
+\]
+for finite vectors \(\bm\nu,\bm\omega\in\R^m\). Fixed deterministic weights
+are included by taking constant sequences. No non-negativity is imposed unless
+stated separately. Then the estimator
 \eqref{eq:pool-ext:estimator} satisfies
 \begin{equation}
 \label{eq:pool-ext:log-limit}
   \frac{\sqrt{k}}{\ell_n}
   \log
   \frac{
-    \widehat\xi_{\tau_n}^{\mathrm{pool},\star}(\bm\nu,\bm\omega)
+    \widehat\xi_{\tau_n}^{\mathrm{pool},\star}(\bm\nu_n,\bm\omega_n)
   }{\expectile{\tau_n}}
   \;\todist\;
   \mathcal N(B_{\bm\omega},V_{\bm\omega}),
@@ -235,7 +247,7 @@ Moreover,
   \frac{\sqrt{k}}{\ell_n}
   \left(
     \frac{
-      \widehat\xi_{\tau_n}^{\mathrm{pool},\star}(\bm\nu,\bm\omega)
+      \widehat\xi_{\tau_n}^{\mathrm{pool},\star}(\bm\nu_n,\bm\omega_n)
     }{\expectile{\tau_n}}
     -1
   \right)
@@ -249,12 +261,14 @@ Start from the exact identity
 \eqref{eq:pool-ext:decomposition}. We treat the three terms separately on the
 scale \(s_n=\sqrt{k}/\ell_n\).
 
-For \(A_n(\bm\omega)\), the common-marginal pooled-Weissman theorem of
-\textcite[Corollary~8]{DaouiaPadoanStupfler2021} gives
+For \(A_n(\bm\omega_n)\), use the random-weight version of the
+common-marginal pooled-Weissman theorem recalled in
+\Cref{prop:bg:estimated-pooling-weights}, applied to the exactly normalised
+deterministic sequence \(\bm\omega_n\to\bm\omega\). It gives
 \[
   \frac{\sqrt{k}}{\ell_n}
   \left(
-    \frac{\hatWei_n(1-p_n\mid\bm\omega)}{Q(1-p_n)}-1
+    \frac{\hatWei_n(1-p_n\mid\bm\omega_n)}{Q(1-p_n)}-1
   \right)
   \;\todist\;
   \mathcal N(B_{\bm\omega},V_{\bm\omega}).
@@ -263,7 +277,7 @@ Set
 \[
   x_n
   =
-  \frac{\hatWei_n(1-p_n\mid\bm\omega)}{Q(1-p_n)}-1.
+  \frac{\hatWei_n(1-p_n\mid\bm\omega_n)}{Q(1-p_n)}-1.
 \]
 The condition \(\sqrt{k}/\ell_n\to\infty\) implies
 \(x_n=O_P(\ell_n/\sqrt{k})=o_P(1)\). Hence
@@ -282,12 +296,12 @@ and
 Therefore
 \begin{equation}
 \label{eq:pool-ext:A-limit}
-  \frac{\sqrt{k}}{\ell_n}A_n(\bm\omega)
+  \frac{\sqrt{k}}{\ell_n}A_n(\bm\omega_n)
   \;\todist\;
   \mathcal N(B_{\bm\omega},V_{\bm\omega}).
 \end{equation}
 
-For \(B_n(\bm\nu)\), write
+For \(B_n(\bm\nu_n)\), write
 \[
   g(x)=\log\psifn(x)=-x\log(x^{-1}-1).
 \]
@@ -302,34 +316,47 @@ differentiable, with
   =
   \frac{1}{(1-x)^2}+\frac{1}{1-x}+\frac{1}{x}.
 \]
-By the pooled Hill CLT in \Cref{thm:bg:pool-hill},
-\(\hat\gamma_n(\bm\nu)-\gamma=O_P(k^{-1/2})\) and
-\(\hat\gamma_n(\bm\nu)\toprob\gamma\). Hence, with probability tending to one,
-the line segment between \(\hat\gamma_n(\bm\nu)\) and \(\gamma\) lies in a fixed
-compact subset of \((0,1)\). Taylor's theorem on that event gives
+By the vector pooled Hill CLT in \Cref{thm:bg:pool-hill},
 \[
-  B_n(\bm\nu)
+  \sqrt{k}\{\hat{\bm\gamma}_n-\gamma\bm 1\}=O_P(1).
+\]
+Since \(\bm\nu_n\to\bm\nu\), the sequence \((\bm\nu_n)\) is bounded, and
+\[
+  \sqrt{k}\{\hat\gamma_n(\bm\nu_n)-\gamma\}
   =
-  m(\gamma)\{\hat\gamma_n(\bm\nu)-\gamma\}
+  \bm\nu_n^\top
+  \sqrt{k}\{\hat{\bm\gamma}_n-\gamma\bm 1\}
+  =
+  O_P(1).
+\]
+Thus \(\hat\gamma_n(\bm\nu_n)\toprob\gamma\). Hence, with probability tending
+to one, the line segment between \(\hat\gamma_n(\bm\nu_n)\) and \(\gamma\)
+lies in a fixed compact subset of \((0,1)\). Taylor's theorem on that event
+gives
+\[
+  B_n(\bm\nu_n)
+  =
+  m(\gamma)\{\hat\gamma_n(\bm\nu_n)-\gamma\}
   +
-  O_P\!\left(\{\hat\gamma_n(\bm\nu)-\gamma\}^2\right)
+  O_P\!\left(\{\hat\gamma_n(\bm\nu_n)-\gamma\}^2\right)
   =
-  m(\gamma)\{\hat\gamma_n(\bm\nu)-\gamma\}+O_P(k^{-1}).
+  m(\gamma)\{\hat\gamma_n(\bm\nu_n)-\gamma\}+O_P(k^{-1}).
 \]
 Consequently
 \begin{equation}
 \label{eq:pool-ext:B-negligible}
-  \frac{\sqrt{k}}{\ell_n}B_n(\bm\nu)
+  \frac{\sqrt{k}}{\ell_n}B_n(\bm\nu_n)
   =
   \frac{m(\gamma)}{\ell_n}
-  \sqrt{k}\{\hat\gamma_n(\bm\nu)-\gamma\}
+  \sqrt{k}\{\hat\gamma_n(\bm\nu_n)-\gamma\}
   +
   O_P\!\left(\frac{1}{\ell_n\sqrt{k}}\right)
   =
   o_P(1),
 \end{equation}
-because \(\ell_n\to\infty\). If \(m(\gamma)=0\), the displayed conclusion
-follows from the quadratic remainder alone.
+because \(\ell_n\to\infty\), which follows from \(k/(np_n)\to\infty\). If
+\(m(\gamma)=0\), the displayed conclusion follows from the quadratic remainder
+alone.
 
 It remains to control \(C_n\). Put
 \[
@@ -396,7 +423,7 @@ For the relative-error statement, define
   L_n=
   \log
   \frac{
-    \widehat\xi_{\tau_n}^{\mathrm{pool},\star}(\bm\nu,\bm\omega)
+    \widehat\xi_{\tau_n}^{\mathrm{pool},\star}(\bm\nu_n,\bm\omega_n)
   }{\expectile{\tau_n}}.
 \]
 The log limit implies \(L_n=O_P(\ell_n/\sqrt{k})=o_P(1)\). Therefore
@@ -417,11 +444,12 @@ This proves \eqref{eq:pool-ext:relative-limit}.
 \begin{remark}[What the theorem does and does not identify]
 \label{rem:pool-ext:nu-unidentified}
 The limit in \Cref{thm:pool-ext:deterministic} depends on
-\(\bm\omega\), the geometric pooled-Weissman weights, but not on
-\(\bm\nu\), the bridge-Hill weights. Thus \(\bm\nu\) is first-order
+\(\bm\omega\), the limiting geometric pooled-Weissman weights, but not on
+\(\bm\nu\), the limiting bridge-Hill weights. Thus \(\bm\nu\) is first-order
 unidentified in the present regime. The diagonal estimator
-\(\bm\nu=\bm\omega\) is a permissible deterministic convention, and the
-practical convention used for plug-in inference below is
+\(\bm\nu_n=\bm\omega_n\) is a permissible deterministic convention when the
+common deterministic sequence satisfies the theorem's convergence condition,
+and the practical convention used for plug-in inference below is
 \[
   \bm\nu_n^k=\left(\frac{k_1}{k},\ldots,\frac{k_m}{k}\right)^\top.
 \]
@@ -466,7 +494,10 @@ and the first-order AMSE criterion is
 \]
 both under the affine constraint \(\bm\omega^\top\bm 1=1\). Hence the
 deterministic/oracle variance- and AMSE-optimal formulas of
-\textcite{DaouiaPadoanStupfler2021} apply to \(\bm\omega\). In particular,
+\textcite{DaouiaPadoanStupfler2021} apply to \(\bm\omega\). These criteria
+concern \(\bm\omega\) only; the bridge-Hill weights \(\bm\nu\) do not enter
+because \(B_n(\bm\nu_n)\) is lower order under \eqref{eq:pool-ext:eta}. In
+particular,
 \[
   \bm\omega^{\mathrm{Var}}
   =
@@ -509,7 +540,7 @@ By \Cref{thm:pool-ext:deterministic},
   \frac{\sqrt{k}}{\ell_n}
   \log
   \frac{
-    \widehat\xi_{\tau_n}^{\mathrm{pool},\star}(\bm\nu,\bm\omega)
+    \widehat\xi_{\tau_n}^{\mathrm{pool},\star}(\bm\nu_n,\bm\omega_n)
   }{\expectile{\tau_n}}
   \todist
   \mathcal N(B_{\bm\omega},V_{\bm\omega}).
@@ -546,17 +577,19 @@ transfer through the exact decomposition.
 \begin{corollary}[Estimated-\(\bm\omega\) transfer]
 \label{cor:pool-ext:estimated-omega}
 Assume the conditions of \Cref{thm:pool-ext:deterministic}, with the
-deterministic \(\bm\omega\) in the estimator replaced by a random
-\(\widehat{\bm\omega}_n\) satisfying the estimated-weight conditions of
+deterministic pooled-Weissman weight sequence in the estimator replaced by a
+random \(\widehat{\bm\omega}_n\) satisfying the estimated-weight conditions of
 \Cref{prop:bg:estimated-pooling-weights}, with limiting vector
-\(\bm\omega\). Let \(\bm\nu\) be deterministic and affine, or let
-\(\bm\nu=\bm\nu_n^k=(k_1/k,\ldots,k_m/k)^\top\). Then
+\(\bm\omega\). Let \(\bm\nu_n\) be any deterministic bridge-Hill weight
+sequence satisfying the exact affine normalisation and convergence conditions
+of \Cref{thm:pool-ext:deterministic}; in particular one may take
+\(\bm\nu_n=\bm\nu_n^k=(k_1/k,\ldots,k_m/k)^\top\). Then
 \[
   \frac{\sqrt{k}}{\ell_n}
   \log
   \frac{
     \widehat\xi_{\tau_n}^{\mathrm{pool},\star}
-    (\bm\nu,\widehat{\bm\omega}_n)
+    (\bm\nu_n,\widehat{\bm\omega}_n)
   }{\expectile{\tau_n}}
   \;\todist\;
   \mathcal N(B_{\bm\omega},V_{\bm\omega}).
@@ -570,10 +603,10 @@ The exact decomposition becomes
   \log
   \frac{
     \widehat\xi_{\tau_n}^{\mathrm{pool},\star}
-    (\bm\nu,\widehat{\bm\omega}_n)
+    (\bm\nu_n,\widehat{\bm\omega}_n)
   }{\expectile{\tau_n}}
   =
-  A_n(\widehat{\bm\omega}_n)+B_n(\bm\nu)-C_n.
+  A_n(\widehat{\bm\omega}_n)+B_n(\bm\nu_n)-C_n.
 \]
 \Cref{prop:bg:estimated-pooling-weights} gives the random-weight
 relative-error limit for the pooled-Weissman component. With
@@ -597,13 +630,10 @@ relative-to-log Taylor step used in the proof of
   \todist
   \mathcal N(B_{\bm\omega},V_{\bm\omega}).
 \]
-The bridge-Hill term is unchanged. If \(\bm\nu\) is fixed, the proof of
-\eqref{eq:pool-ext:B-negligible} applies verbatim. If
-\(\bm\nu=\bm\nu_n^k\), then \(\bm\nu_n^k\) is deterministic, affine, bounded,
-and convergent under the threshold-proportion assumptions; the vector pooled
-Hill CLT again gives
-\(\hat\gamma_n(\bm\nu_n^k)-\gamma=O_P(k^{-1/2})\), so the same Taylor bound
-applies. The population bridge term \(C_n\) is deterministic and is still
+The bridge-Hill term is unchanged because \(\bm\nu_n\) is deterministic,
+exactly normalised, and convergent. The proof of
+\eqref{eq:pool-ext:B-negligible} therefore applies verbatim. The population
+bridge term \(C_n\) is deterministic and is still
 controlled by \eqref{eq:pool-ext:C-negligible}. Slutsky's theorem gives the
 log limit, and the final exponential Taylor step in
 \Cref{thm:pool-ext:deterministic} gives the relative-error version.
@@ -671,7 +701,8 @@ and assume \(V_{\bm\omega}>0\). Then
   \;\todist\;
   \mathcal N(0,1).
 \]
-Let \(z_{1-\alpha/2}\) be the standard normal quantile. On the event
+Let \(z_{1-\alpha/2}\) be the standard normal quantile. On the
+high-probability event that the local Weissman estimators are positive and
 \(\widehat V_{\widehat{\bm\omega},n}>0\), define
 \[
   I_{n,1-\alpha}^{\mathrm{plug}}
@@ -735,6 +766,9 @@ the pooled-Weissman objects supplied by the source theory. Together with
 by Slutsky's theorem.
 Since \(\widehat V_{\widehat{\bm\omega},n}\toprob V_{\bm\omega}>0\), the event
 \(\widehat V_{\widehat{\bm\omega},n}>0\) has probability tending to one.
+Eventual upper-tail positivity also gives positivity of the high order
+statistics, and hence of all local Weissman estimators, with probability
+tending to one.
 Solving
 \[
   \left|T_n^{\mathrm{plug}}\right|\le z_{1-\alpha/2}

@@ -65,6 +65,49 @@
       \field{pages}{41\bibrangedash 48}
       \range{pages}{8}
     \endentry
+    \entry{evt0R}{manual}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=3be512212ba2a6d26c35423e2ea9a3bf}{%
+           family={Belzile},
+           familyi={B\bibinitperiod},
+           given={Leo},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6292ddba4a04ec62c296d68ad3657d5e}{%
+           family={Manjunath},
+           familyi={M\bibinitperiod},
+           given={B.\bibnamedelimi G.},
+           giveni={B\bibinitperiod\bibinitdelim G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b2b6658c50443f4207bbc82ead3a7b26}{%
+           family={Caeiro},
+           familyi={C\bibinitperiod},
+           given={Frederico},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{6a858203b90d51dd0107aa70d219d1c5}
+      \strng{fullhash}{e8ea323a5afa4e4dd5a8a84fbc5a83ed}
+      \strng{bibnamehash}{e8ea323a5afa4e4dd5a8a84fbc5a83ed}
+      \strng{authorbibnamehash}{e8ea323a5afa4e4dd5a8a84fbc5a83ed}
+      \strng{authornamehash}{6a858203b90d51dd0107aa70d219d1c5}
+      \strng{authorfullhash}{e8ea323a5afa4e4dd5a8a84fbc5a83ed}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{R package manual, accessed 2026-06-02}
+      \field{title}{{evt0}: Mean of Order P, Peaks over Random Threshold Hill and High Quantile Estimates}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://cran.r-universe.dev/evt0/evt0.pdf
+      \endverb
+      \verb{url}
+      \verb https://cran.r-universe.dev/evt0/evt0.pdf
+      \endverb
+    \endentry
     \entry{DaouiaGirardStupfler2018}{article}{}
       \name{author}{3}{ul=2}{%
         {{un=0,uniquepart=base,hash=9bd5145f5ade5b755a2fd71b455eb620}{%
@@ -471,6 +514,37 @@
       \field{year}{1987}
       \field{pages}{819\bibrangedash 847}
       \range{pages}{29}
+    \endentry
+    \entry{ExtremeRisksR}{manual}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=0c11d850708ce6fef1d53c0b8af5f7eb}{%
+           family={Padoan},
+           familyi={P\bibinitperiod},
+           given={Simone\bibnamedelima A.},
+           giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{0c11d850708ce6fef1d53c0b8af5f7eb}
+      \strng{fullhash}{0c11d850708ce6fef1d53c0b8af5f7eb}
+      \strng{bibnamehash}{0c11d850708ce6fef1d53c0b8af5f7eb}
+      \strng{authorbibnamehash}{0c11d850708ce6fef1d53c0b8af5f7eb}
+      \strng{authornamehash}{0c11d850708ce6fef1d53c0b8af5f7eb}
+      \strng{authorfullhash}{0c11d850708ce6fef1d53c0b8af5f7eb}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{R package manual, accessed 2026-06-02}
+      \field{title}{{ExtremeRisks}: Extreme Risk Measures}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://cran.r-universe.dev/ExtremeRisks/doc/manual.html
+      \endverb
+      \verb{url}
+      \verb https://cran.r-universe.dev/ExtremeRisks/doc/manual.html
+      \endverb
     \endentry
     \entry{Weissman1978}{article}{}
       \name{author}{1}{}{%

@@ -26,4 +26,11 @@
 \contentsline {section}{\numberline {3.2}A deterministic two-weight theorem}{16}{section.3.2}%
 \contentsline {section}{\numberline {3.3}Weight consequences}{19}{section.3.3}%
 \contentsline {section}{\numberline {3.4}Estimated pooled-Weissman weights and inference}{20}{section.3.4}%
-\contentsline {chapter}{Bibliography}{23}{chapter*.4}%
+\contentsline {chapter}{\numberline {4}Finite-sample study}{24}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Estimators and implementation}{24}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Design}{25}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Point estimation}{25}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Plug-in interval performance}{26}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Sensitivity to thresholds and targets}{28}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Weight stability and limitations}{28}{section.4.6}%
+\contentsline {chapter}{Bibliography}{33}{chapter*.4}%

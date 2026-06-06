@@ -2,3 +2,4 @@ papers/
 CLAUDE.md
 AGENT.md
 simulation/results/*.rds
+simulation/Rlib/
