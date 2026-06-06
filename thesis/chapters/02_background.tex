@@ -81,10 +81,11 @@ The function $|A|$ is itself regularly varying with index $\rho$
 sign eventually, signed ratios $A(t y)/A(t)$ converge to $y^\rho$; the
 rate $A$ is the source of the second-order bias terms below.
 
-\begin{condition}[Finite first-moment condition]
+\begin{condition}[Finite first-moment range]
 \label{cond:bg:finite-first-moment}
-The extreme-value index satisfies $\gamma \in (0,1)$ and the negative
-part $X^{-}=\max(-X,0)$ satisfies
+In addition to \Cref{cond:bg:first-order}, the extreme-value index
+satisfies $\gamma \in (0,1)$ and the negative part
+$X^{-}=\max(-X,0)$ satisfies
 \[
   \E X^{-}<\infty .
 \]
@@ -309,9 +310,7 @@ proportional to the quantile of the same level.
                     \textcite{BelliniKlarMullerRosazzaGianin2014},
                     \textcite{DaouiaGirardStupfler2019}, Corollary~1 with $p=2$]
 \label{prop:bg:expectile-quantile}
-Suppose $X$ satisfies \Cref{cond:bg:first-order} with index
-$\gamma \in (0, 1)$ and $\E X^{-} < \infty$; equivalently, suppose
-\Cref{cond:bg:finite-first-moment} holds. Then
+Suppose \Cref{cond:bg:finite-first-moment} holds. Then
 \begin{equation}
 \label{eq:bg:expectile-quantile-equivalence}
   \frac{\expectile{\tau}(X)}{\Quant_{X}(\tau)}
@@ -399,6 +398,9 @@ extreme-quantile inference before applying the expectile--quantile
 bridge. The framework pools tail-index and
 extreme-quantile estimators from $m$ samples, allowing heterogeneous
 sizes, second-order properties and cross-sample tail dependence.
+This general framework is recalled to identify the source objects and
+notation. The main theorem in \Cref{ch:pooled-extreme} later uses only
+the independent common-distribution distributed special case.
 
 \subsection{Setup}
 
@@ -410,6 +412,8 @@ $i=1,\ldots,n_j$ and has continuous right-heavy-tailed distribution
 $F_j$, tail quantile function $U_j=(1/\overline F_j)^\leftarrow$ and
 extreme-value index $\gamma_j>0$; its order statistics are denoted
 $X_{1:n_j,j}\le\cdots\le X_{n_j:n_j,j}$.
+We write $\Quant_j(\tau)=F_j^\leftarrow(\tau)$, so that
+$U_j(t)=\Quant_j(1-1/t)$ for $t>1$.
 
 Tail inference in sample $j$ uses its top $k_{j} + 1$ order statistics,
 where the effective sample size $k_{j} = k_{j}(n)$ satisfies
@@ -684,9 +688,11 @@ $j \in \{1, \ldots, m\}$,
 \]
 \end{theorem}
 
-The strict $\rho_j<0$ assumption is part of the Weissman theorem. It
-also supplies the rate needed to recenter by any marginal
-$\Quant_j(1-p)$ under $(\mathcal H)$
+The strict $\rho_j<0$ assumption is part of the Weissman theorem.
+Together with the bias-rate assumptions
+$\sqrt{k_j}\,A_j(n_j/k_j)\to\lambda_j$ in
+\Cref{thm:bg:pool-hill}, it also supplies the rate needed to recenter
+by any marginal $\Quant_j(1-p)$ under $(\mathcal H)$
 \parencite[Supplement, Lemma~B.2]{DaouiaPadoanStupfler2021}: for any
 $j,\ell$,
 \[
@@ -807,13 +813,17 @@ All vectors and matrices have fixed dimension. The maps
 \((w,V)\mapsto w^\top Vw\) are continuous, so the result follows from
 the continuous mapping theorem.
 
-\textcite[\S2.2 and Corollary~1]{DaouiaPadoanStupfler2021} give a
-general route to the consistency assumptions in
+\textcite[\S2.2 and Corollary~1]{DaouiaPadoanStupfler2021} give one
+source route to the consistency assumptions in
 \Cref{prop:bg:plugin-bias-variance} through estimated second-order and
-tail-dependence quantities. In the common-distribution distributed
-case, their Corollaries~6--7 give the corresponding deterministic
-variance allocation and plug-in AMSE constructions under the stated
-second-order parameter consistency assumptions.
+tail-dependence quantities. That route is not assumption-free: in the
+source it is stated under $\rho_j<0$, the parametric second-order form
+$A_j(t)=\gamma\beta_j t^{\rho_j}$, positive definiteness of the
+asymptotic covariance matrix, consistency of the $\beta_j$ estimators,
+and $(\hat\rho_j-\rho_j)\log n_j=o_P(1)$. In the common-distribution
+distributed case, their Corollaries~6--7 give the corresponding
+deterministic variance allocation and plug-in AMSE constructions under
+the analogous common second-order parameter consistency assumptions.
 
 \subsection{Source diagnostics and intervals}
 
