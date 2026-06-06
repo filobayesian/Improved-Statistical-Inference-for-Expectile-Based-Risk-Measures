@@ -536,6 +536,13 @@ When the estimated weights or plug-in bias and variance objects are taken from
 the Daouia--Padoan--Stupfler constructions, the source-side consistency
 assumptions recalled in \Cref{sec:bg:estimated-pooling} are imposed.
 
+The only new source input is the random-weight version of the
+Daouia--Padoan--Stupfler pooled-Weissman limit: exact affine normalisation
+\(\widehat{\bm\omega}_n^\top\bm 1=1\) and convergence
+\(\widehat{\bm\omega}_n\toprob\bm\omega\) give the same first-order quantile
+limit as the deterministic vector \(\bm\omega\). The rest of the argument is a
+transfer through the exact decomposition.
+
 \begin{corollary}[Estimated-\(\bm\omega\) transfer]
 \label{cor:pool-ext:estimated-omega}
 Assume the conditions of \Cref{thm:pool-ext:deterministic}, with the
@@ -568,9 +575,23 @@ The exact decomposition becomes
   =
   A_n(\widehat{\bm\omega}_n)+B_n(\bm\nu)-C_n.
 \]
-\Cref{prop:bg:estimated-pooling-weights} gives the relative-error limit for
-the pooled-Weissman component. The same Taylor conversion used in the proof
-of \Cref{thm:pool-ext:deterministic} gives
+\Cref{prop:bg:estimated-pooling-weights} gives the random-weight
+relative-error limit for the pooled-Weissman component. With
+\[
+  x_n(\widehat{\bm\omega}_n)
+  =
+  \frac{\hatWei_n(1-p_n\mid\widehat{\bm\omega}_n)}{Q(1-p_n)}-1,
+\]
+this gives
+\[
+  \frac{\sqrt{k}}{\ell_n}x_n(\widehat{\bm\omega}_n)
+  \todist
+  \mathcal N(B_{\bm\omega},V_{\bm\omega}).
+\]
+Since \(\sqrt{k}/\ell_n\to\infty\),
+\(x_n(\widehat{\bm\omega}_n)=O_P(\ell_n/\sqrt{k})=o_P(1)\), and the
+relative-to-log Taylor step used in the proof of
+\Cref{thm:pool-ext:deterministic} gives
 \[
   \frac{\sqrt{k}}{\ell_n}A_n(\widehat{\bm\omega}_n)
   \todist
@@ -584,8 +605,17 @@ Hill CLT again gives
 \(\hat\gamma_n(\bm\nu_n^k)-\gamma=O_P(k^{-1/2})\), so the same Taylor bound
 applies. The population bridge term \(C_n\) is deterministic and is still
 controlled by \eqref{eq:pool-ext:C-negligible}. Slutsky's theorem gives the
-log limit, and the exponential Taylor step gives the relative-error version.
+log limit, and the final exponential Taylor step in
+\Cref{thm:pool-ext:deterministic} gives the relative-error version.
 \end{proof}
+
+Thus any source-admissible Daouia--Padoan--Stupfler construction of
+\(\widehat{\bm\omega}_n\) transfers in the pooled-Weissman role, including
+estimated variance- and AMSE-optimal weights when their source assumptions give
+\(\widehat{\bm\omega}_n\toprob\bm\omega\). This statement concerns
+\(\bm\omega\) only. It does not optimise \(\bm\nu\), and it does not cover a
+random bridge-Hill convention such as
+\(\bm\nu=\widehat{\bm\omega}_n\).
 
 \begin{corollary}[Plug-in studentisation and log-scale interval]
 \label{cor:pool-ext:plugin-inference}
@@ -607,6 +637,10 @@ Under the assumptions of \Cref{cor:pool-ext:estimated-omega}, let
   \qquad
   \widehat{\Vc}^{\mathrm{dist}}_n\toprob\Vc^{\mathrm{dist}}.
 \]
+These consistency assumptions belong to the selected
+Daouia--Padoan--Stupfler plug-in route; they are not consequences of the
+expectile decomposition alone. No expectile-specific bias or variance estimator
+is introduced here.
 Define
 \[
   \widehat B_{\widehat{\bm\omega},n}
@@ -694,8 +728,11 @@ Then
   \qquad
   \widehat V_{\widehat{\bm\omega},n}\toprob V_{\bm\omega}.
 \]
-Together with \(V_{\bm\omega}>0\), these convergences give the standard normal
-limit by Slutsky's theorem.
+The additional expectile terms have already been absorbed in
+\Cref{cor:pool-ext:estimated-omega}, so the centring and variance objects remain
+the pooled-Weissman objects supplied by the source theory. Together with
+\(V_{\bm\omega}>0\), the displayed convergences give the standard normal limit
+by Slutsky's theorem.
 Since \(\widehat V_{\widehat{\bm\omega},n}\toprob V_{\bm\omega}>0\), the event
 \(\widehat V_{\widehat{\bm\omega},n}>0\) has probability tending to one.
 Solving
@@ -714,5 +751,8 @@ of the transferred expectile limit, rather than a direct restatement of the
 quantile interval in \textcite{DaouiaPadoanStupfler2021}. The centering and
 variance objects remain those of the pooled-Weissman component because, under
 \(\eta_n\to0\), the additional expectile-bridge terms are lower order on that
-scale.
+scale. The corollary is consequently conditional on the selected
+Daouia--Padoan--Stupfler construction providing consistent plug-in objects for
+\(B_{\bm\omega}\) and \(V_{\bm\omega}\); it does not make an additional claim
+about simulations, finite-sample calibration, or optimal bridge-Hill weights.
 \end{remark}

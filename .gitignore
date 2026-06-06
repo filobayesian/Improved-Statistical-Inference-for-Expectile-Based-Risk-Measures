@@ -1,6 +1,4 @@
 papers/
-notes/*
-!notes/source_audit_pooled_extreme_expectile.md
 CLAUDE.md
 AGENT.md
 simulation/results/*.rds
