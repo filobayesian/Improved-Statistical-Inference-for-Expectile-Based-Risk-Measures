@@ -33,41 +33,40 @@ Slutsky/studentised statistic and a log-scale multiplicative interval by
 inversion. It is not a direct import of the DPS Corollary 4 quantile interval
 formula, and it does not make `\nu` optimal or random.
 
-## Current Repository Status: LaTeX Blank-Slate Reset
+## Current Repository Status: Promoted First-Order Thesis Prose
 
-As of 2026-06-06, the live compiled thesis has been reset to a clean LaTeX
-scaffold. The compiled document is intentionally only:
+As of 2026-06-06, the live compiled thesis is no longer only the clean
+blank-slate scaffold. It now compiles:
 
-- title/front matter, with `\todo{}` in the Abstract;
-- `thesis/chapters/01_introduction.tex`, now only the chapter heading, label,
-  and `\todo{}`;
-- `thesis/chapters/02_background.tex`, retained as the background chapter;
+- title/front matter, with `\todo{}` still in the Abstract;
+- `thesis/chapters/01_introduction.tex`, still only the chapter heading,
+  label, and `\todo{}`;
+- `thesis/chapters/02_background.tex`, retained as the background chapter and
+  expanded with source-level estimated-weight and plug-in-object statements;
+- `thesis/chapters/04_pooled_extreme.tex`, now the live main-theory chapter;
 - bibliography via `\printbibliography`.
 
-`thesis/main.tex` currently includes only `chapters/01_introduction` and
-`chapters/02_background` before the bibliography. It does not compile
-Chapters 3--6 and it no longer contains the old reset appendix. The current
-PDF was rebuilt successfully with
-`latexmk -pdf -synctex=1 -interaction=nonstopmode main.tex`; the table of
-contents contains only Introduction, Background, and Bibliography.
+`thesis/main.tex` currently includes `chapters/01_introduction`,
+`chapters/02_background`, and `chapters/04_pooled_extreme` before the
+bibliography. Since `thesis/chapters/03_pooled_intermediate.tex` remains
+uncompiled, the file `04_pooled_extreme.tex` is numbered as Chapter 3 in the
+PDF. The current PDF was rebuilt successfully with
+`latexmk -pdf -synctex=1 -interaction=nonstopmode main.tex`.
 
-The files
-`thesis/chapters/03_pooled_intermediate.tex`,
-`thesis/chapters/04_pooled_extreme.tex`,
+The files `thesis/chapters/03_pooled_intermediate.tex`,
 `thesis/chapters/05_finite_sample.tex`, and
-`thesis/chapters/06_discussion.tex` are five-line placeholders with only a
-chapter title, label, and `\todo{}`. They are retained as chapter stubs but
-are not part of the compiled thesis. Do not read their existence as evidence
-that the current chapter structure is final.
+`thesis/chapters/06_discussion.tex` remain uncompiled chapter stubs with only
+a chapter title, label, and `\todo{}`. They are retained as placeholders, not
+as evidence that the current final chapter structure is settled.
 
-Important: no theorem, two-weight result, estimated-`\omega` corollary,
-plug-in confidence interval, or simulation claim is currently promoted to live
-`.tex` thesis prose. The previous Chapter 4 Theorem 4.1 prose was removed
-from the live LaTeX draft during the blank-slate reset. Treat it as historical
-draft material available through git history and as research context mirrored
-by the Markdown audit note, not as compiled thesis content.
+Important: the deterministic two-weight theorem, the estimated-`\omega`
+transfer corollary, and the plug-in studentisation/log-scale interval
+corollary are now promoted to live `.tex` prose in
+`thesis/chapters/04_pooled_extreme.tex`. The old diagonal Chapter 4 theorem
+route remains historical draft/audit context only. No simulation claim is
+currently promoted as final thesis evidence.
 
-Current source-audit status: the `A_n(\omega)` pooled Weissman component, the
+Current source-audit/prose status: the `A_n(\omega)` pooled Weissman component, the
 `B_n(\nu)` plug-in-`\psi` component, and the `C_n` population bridge component
 of the exact decomposition have been source-checked in
 `notes/source_audit_pooled_extreme_expectile.md` against the local PDFs of
@@ -85,11 +84,15 @@ Corollary 6, Corollary 7, and Corollary 8. DPS Corollary 4 has been checked
 only as the source's log-scale quantile-inference analogue; the audit note does
 not import its interval formula directly. The expectile interval is instead
 obtained by inverting the transferred plug-in-centred expectile statistic.
-These checked results remain in the Markdown research layer until Filippo
-explicitly chooses to promote them back into `.tex` theorem prose.
+These checked results have now been promoted into polished thesis prose where
+needed: the background chapter carries the source propositions for estimated
+weights and plug-in objects, while the main-theory chapter carries the
+deterministic theorem, estimated-`\omega` transfer, and conditional plug-in
+inference corollary.
 
-The two-weight audit in `notes/source_audit_pooled_extreme_expectile.md` now
-generalises this route to the deterministic estimator
+The promoted two-weight route, first audited in
+`notes/source_audit_pooled_extreme_expectile.md` and now written in
+`thesis/chapters/04_pooled_extreme.tex`, uses the deterministic estimator
 `\widehat\xi_{\tau_n}^{pool,\star}(\nu,\omega)`. The active decomposition is
 \[
   \log
@@ -103,14 +106,13 @@ same population expectile--quantile bridge, and
 `B_n(\nu)=\log\psi(\widehat\gamma_n(\nu))-\log\psi(\gamma)`. Under the current
 `\eta_n\to0` route, the compact-event Taylor argument gives
 `(\sqrt{k}/\ell_n)B_n(\nu)=o_P(1)` for any deterministic admissible `\nu`.
-Consequently the checked two-weight first-order limit depends on `\omega` but
-not on `\nu`:
+Consequently the promoted two-weight first-order limit depends on `\omega`
+but not on `\nu`:
 `\frac{\sqrt{k}}{\ell_n}\log\{\widehat\xi_{\tau_n}^{pool,\star}(\nu,\omega)/\xi_{\tau_n}\}
 \Rightarrow N(B_\omega,V_\omega)`.
 
-The audit note now also checks the source-admissible random-`\omega` estimator
-as a transfer corollary, not as a replacement for the deterministic base
-theorem:
+The promoted source-admissible random-`\omega` result is a transfer
+corollary, not a replacement for the deterministic base theorem:
 \[
   \widehat\xi_{\tau_n}^{pool,\star}(\nu,\widehat\omega_n)
   =
@@ -141,8 +143,8 @@ compact-event/order audit for `B_n(\nu)`.
 For the finite-`m` iid/common-marginal distributed route, use
 Daouia--Padoan--Stupfler Corollary 8 in the published Bernoulli version as the
 clean source statement for `A_n`; use Theorem 2 plus the supplement proof if
-Chapter 4 needs the broader tail-homoskedastic route or if the proof is written
-directly on log scale. DPS Corollary 8 is a relative-error theorem, so if it is
+the main-theory chapter needs the broader tail-homoskedastic route or if the
+proof is written directly on log scale. DPS Corollary 8 is a relative-error theorem, so if it is
 cited as the main source statement, explicitly convert it to log scale through
 `x_n=O_P(\ell_n/\sqrt{k})=o_P(1)` and
 `\log(1+x_n)=x_n+O_P(x_n^2)`. For `B_n(\nu)`, use the pooled Hill CLT and the
@@ -155,19 +157,15 @@ source-studied ratio error
 `\Delta_n=\xi_{\tau_n}/\{\psi(\gamma)Q(1-p_n)\}-1`, then apply only the
 elementary log step `C_n=\log(1+\Delta_n)=\Delta_n+R_n^{log}`. The log
 remainder is a square-order ledger item; it is controlled on the benchmark
-scale under the chosen `\eta_n\to0` route. This validates the component ledgers,
-the benchmark order comparison, the Chapter 4 deterministic-weight theorem
-route for the diagonal one-weight estimator, and the deterministic two-weight
-theorem candidate in the audit note. The sequential hierarchy is important:
-first state/prove the deterministic `(\nu,\omega)` theorem; only afterward add
-the source-admissible estimated-`\omega` transfer as a corollary if desired,
-and only then add the conditional plug-in inference corollary. The next layer
-is not to promote a one-weight DPS weight corollary, and it is not to start a
-lower-order `\nu`-optimality theory by default. If Filippo decides to leave the
-Markdown research layer, the next thesis-prose move is to revise Chapter 4 to
-the deterministic two-weight theorem or explicitly state that the diagonal
-estimator is a convention `\nu=\omega`; the estimated `\omega` transfer and
-plug-in inference statement should remain separate corollaries.
+scale under the chosen `\eta_n\to0` route. This validates the component
+ledgers, the benchmark order comparison, and the promoted deterministic
+two-weight theorem in the live main-theory chapter. The sequential hierarchy
+is important and is now the live thesis structure: first state/prove the
+deterministic `(\nu,\omega)` theorem; only afterward add the source-admissible
+estimated-`\omega` transfer as a corollary; and only then add the conditional
+plug-in inference corollary. The next layer is not to promote a one-weight DPS
+weight corollary, and it is not to start a lower-order `\nu`-optimality theory
+by default.
 
 The checked weight-criterion layer shows that, under `\eta_n\to0`, the
 first-order AMSE criterion for the leading pooled-Weissman/geometric quantile
@@ -186,8 +184,8 @@ the deterministic convention `\nu_n^k=(k_1/k,\ldots,k_m/k)` for downstream
 inference work. The plug-in centring and variance route is now mathematically
 settled conditionally on DPS consistency. The next open layer is not to
 reprove estimated `\omega` transfer, choose `\nu`, or choose a new centring
-philosophy; it is to decide whether to promote the checked Markdown results to
-thesis prose and then design simulations around the promoted estimator and
+philosophy; it is either to polish surrounding thesis prose such as the
+Introduction, or to design simulations around the promoted estimator and
 plug-in inference route.
 
 The error is that the thesis was built around a standalone pooled intermediate QB expectile theory:
@@ -199,43 +197,46 @@ The error is that the thesis was built around a standalone pooled intermediate Q
 \]
 treated as an intermediate-level target with its own CLT, its own two-weight variance formula, and its own closed-form variance-/AMSE-optimal expectile weights. This is not the path the supervisor wants, and it exposes the thesis to unnecessary and fragile derivations.
 
-The live scaffold now has the following status:
+The live thesis now has the following status:
 
 - `thesis/chapters/01_introduction.tex` is blank thesis prose with `\todo{}`.
-- `thesis/chapters/02_background.tex` is the only substantive chapter still
-  compiled.
+- `thesis/chapters/02_background.tex` is substantive and compiled; it now
+  includes estimated-weight and plug-in-object propositions supporting the
+  promoted main-theory corollaries.
 - `thesis/chapters/03_pooled_intermediate.tex` is an uncompiled placeholder.
-- `thesis/chapters/04_pooled_extreme.tex` is an uncompiled placeholder. It no
-  longer contains the diagonal one-weight theorem or proof in the live
-  worktree.
+- `thesis/chapters/04_pooled_extreme.tex` is compiled and contains the
+  promoted two-weight estimator, exact decomposition lemma, deterministic
+  theorem, deterministic/oracle `\omega` weight corollary, estimated-`\omega`
+  transfer corollary, and plug-in inference corollary with proofs.
 - `thesis/chapters/05_finite_sample.tex` is an uncompiled placeholder.
 - `thesis/chapters/06_discussion.tex` is an uncompiled placeholder.
 - `notes/source_audit_pooled_extreme_expectile.md` records the active
   two-weight estimator, the exact `A_n(\omega)+B_n(\nu)-C_n` decomposition,
   the `B_n(\nu)` Taylor/order check, the checked deterministic two-weight
-  theorem candidate, the deterministic/oracle DPS weight-criterion match for
+  theorem route, the deterministic/oracle DPS weight-criterion match for
   `\omega` only, the source-admissible estimated-`\omega` transfer, the
   principled plug-in standardisation and log-scale interval inversion, the
   fixed practical bridge convention `\nu_n^k=(k_1/k,\ldots,k_m/k)`, and the
   default decision not to open lower-order `\nu` optimality.
-- `thesis/main.tex` compiles only Chapters 1--2 and the bibliography.
+- `thesis/main.tex` compiles the Introduction, Background, and
+  `04_pooled_extreme.tex` main-theory file before the bibliography.
 
 ### What Is Affected
 
 - `thesis/chapters/01_introduction.tex`: currently blank except for
-  `\todo{}`. Do not add final theorem, interval, or simulation claims here
-  before the relevant theorem/corollary is promoted to live `.tex` prose.
+  `\todo{}`. When rewriting it, align claims with the promoted main-theory
+  results and avoid simulation or broader-scope claims before those layers are
+  actually written.
 - `thesis/chapters/03_pooled_intermediate.tex`: uncompiled placeholder. The
   pooled intermediate QB CLT, A/B estimator comparison, two-weight optimality
   results, AMSE closed form, CI, and expectile-homogeneity diagnostic should
   not be used as established thesis contributions.
-- `thesis/chapters/04_pooled_extreme.tex`: uncompiled placeholder. The next
-  thesis edit, when Filippo asks to leave the Markdown layer, should write the
-  deterministic two-weight theorem from the checked audit or explicitly choose
-  a narrower convention. A random-`\omega` corollary and plug-in inference
-  corollary can be promoted only from the checked Markdown transfer. Do not add
-  simulations or broader tail-homoskedastic target claims before those layers
-  are separately source-grounded.
+- `thesis/chapters/04_pooled_extreme.tex`: live compiled main-theory chapter.
+  Preserve the current order: exact decomposition, deterministic two-weight
+  theorem, `\omega` weight corollary, estimated-`\omega` transfer, then
+  plug-in inference. Do not add simulations, broader tail-homoskedastic target
+  claims, random `\nu`, or lower-order `\nu` optimality before those layers are
+  separately source-grounded.
 - Appendix proofs in `thesis/main.tex`: no appendix is currently compiled.
   Individual algebraic ideas from old drafts may be useful as scratch work,
   but do not cite them as validated results.
@@ -309,12 +310,12 @@ bias term, weight formula, confidence interval, or simulation design before the
 source audit and proof justify that specific layer.
 
 The pooled Weissman normalisation `\sqrt{k}/\ell_n` is justified in the
-Markdown audit note for the removed diagonal draft route, the deterministic
-two-weight theorem candidate, and the source-admissible estimated-`\omega`
-transfer under `\eta_n\to0`, as a conclusion of the exact decomposition. Do
-not reuse the normalisation for broader routes, alternative estimators,
-lower-order optimality, estimated `\nu`, final intervals, or simulation claims
-without rechecking the decomposition.
+Markdown audit note and promoted main-theory chapter for the deterministic
+two-weight theorem and source-admissible estimated-`\omega` transfer under
+`\eta_n\to0`, as a conclusion of the exact decomposition. Do not reuse the
+normalisation for broader routes, alternative estimators, lower-order
+optimality, estimated `\nu`, final intervals, or simulation claims without
+rechecking the decomposition.
 
 ### Ground Every Step In Previous Work
 
@@ -355,23 +356,18 @@ or a separately proved lower-order criterion.
 
 Prefer the leanest defensible result. The less the thesis needs to prove, discuss, or numerically validate, the fewer opportunities there are for errors. Avoid side comparisons, alternative estimators, extra optimality criteria, or new tests unless they are necessary for the main theorem or explicitly requested.
 
-The current least-action path has completed one diagonal estimator, one exact
-decomposition, one source audit, one generic deterministic-weight theorem, one
-deterministic two-weight audit, one deterministic/oracle weight-criterion
-check for the DPS pooled-Weissman weights `\omega`, and one source-admissible
-estimated-`\omega` transfer audit, and one conditional plug-in inference audit.
-A hidden design restriction has now been resolved in the Markdown audit note:
-the diagonal choice `\nu=\omega` is not forced by the first-order theorem. The
-least-action research stopping point is the checked deterministic two-weight
-theorem under `\eta_n\to0`, plus the optional source-admissible
-estimated-`\omega` transfer corollary under the DPS random-weight conditions,
-plus the plug-in-centred studentisation and log-scale multiplicative interval
-when DPS consistency provides the required plug-in objects. The weight
-`\omega` is first-order optimisable and may be DPS-estimated under source
-conditions in that corollary, while `\nu` remains deterministic and
-first-order unidentified. Do not open random `\nu` or lower-order `\nu`
-optimality by default. The next thesis-prose move happens only when Filippo
-decides to promote the checked Markdown result.
+The current least-action path has completed the source audit and promoted the
+first-order thesis layer: the deterministic two-weight theorem under
+`\eta_n\to0`, the source-admissible estimated-`\omega` transfer corollary under
+the DPS random-weight conditions, and the plug-in-centred studentisation with
+log-scale multiplicative interval when DPS consistency provides the required
+plug-in objects. A hidden design restriction has now been resolved: the
+diagonal choice `\nu=\omega` is not forced by the first-order theorem. The
+weight `\omega` is first-order optimisable and may be DPS-estimated under
+source conditions, while `\nu` remains deterministic and first-order
+unidentified. Do not open random `\nu` or lower-order `\nu` optimality by
+default. The next thesis work should either polish surrounding prose or design
+the finite-sample study around the promoted estimator and inference route.
 
 ### Current Conservative Design Choices
 
@@ -395,11 +391,10 @@ As of 2026-06-05, the agreed conservative research design is:
   standard in DPS, but it is conditional on exact affine normalisation and
   convergence in probability of the estimated weights.
 - Use the `\eta_n\to0` route for the first theorem:
-  `\eta_n=\sqrt{k}/\{\ell_n Q(1-p_n)\}\to0`. When this route is promoted to
-  theorem prose, make clear that `p_n\to0` is only tail movement; the Weissman
-  extreme extrapolation regime is `k/(np_n)\to\infty`, together with the DPS
-  scale condition `\sqrt{k}/\ell_n\to\infty`, where
-  `\ell_n=\log\{k/(np_n)\}`.
+  `\eta_n=\sqrt{k}/\{\ell_n Q(1-p_n)\}\to0`. In theorem prose, keep clear
+  that `p_n\to0` is only tail movement; the Weissman extreme extrapolation
+  regime is `k/(np_n)\to\infty`, together with the DPS scale condition
+  `\sqrt{k}/\ell_n\to\infty`, where `\ell_n=\log\{k/(np_n)\}`.
 - Under `\eta_n\to0`, the checked first-order limit depends on `\omega` but
   not on `\nu`. This implies that DPS deterministic/oracle variance and AMSE
   weights may be used only for `\omega`, not for `\nu`.
@@ -411,20 +406,18 @@ As of 2026-06-05, the agreed conservative research design is:
   estimated variance-optimal weights, estimated AMSE-optimal weights, and
   estimated bias/variance objects transfer when the corresponding DPS source
   consistency conditions hold. This transfer applies to `\omega` only and is
-  an optional corollary, not part of the deterministic base theorem. The
-  associated plug-in-centred statistic and log-scale interval inversion are
-  mathematically justified conditionally on those same consistency inputs.
+  a corollary after the deterministic base theorem. The associated
+  plug-in-centred statistic and log-scale interval inversion are mathematically
+  justified conditionally on those same consistency inputs.
 - Do not make `\nu` random, including by setting `\nu=\widehat\omega_n`,
   without a separate audit of the compact-event Taylor expansion and order of
   `B_n(\nu)` for the proposed random bridge-Hill convention.
-- Do not add thesis-prose confidence intervals or simulations from the
-  first-order calculation alone. The plug-in interval is checked in Markdown,
-  but it should move to thesis prose only with the deterministic theorem and
-  estimated-`\omega` corollary. Simulations still require a finite-sample
-  design around the promoted estimator, selected DPS `\omega` route, plug-in
-  objects, and fixed `\nu_n^k` convention.
+- Do not add simulation claims from the first-order calculation alone.
+  Simulations still require a finite-sample design around the promoted
+  estimator, selected DPS `\omega` route, plug-in objects, and fixed
+  `\nu_n^k` convention.
 - Keep mathematical research work in `notes/source_audit_pooled_extreme_expectile.md`
-  or a new note before moving additional results into thesis prose.
+  or a new note before moving additional result layers into thesis prose.
 
 ### Imported Results Versus New Proof Work
 
@@ -466,9 +459,8 @@ Directly importable, subject to notation matching and assumption checking:
 - Any optimality theory for the bridge-Hill weights `\nu` remains a separate
   lower-order layer.
 
-Proof work completed in the Markdown audit and removed theorem draft for the
-diagonal route, the two-weight audit, the estimated-`\omega` transfer, and the
-conditional plug-in inference layer:
+Proof work completed in the Markdown audit and promoted where relevant in the
+live main-theory chapter:
 
 - The thesis notation has been matched to the source notation, especially
   `p_n=1-\tau_n`, aggregate `k`, aggregate `n`, and the common target
@@ -476,7 +468,8 @@ conditional plug-in inference layer:
 - The exact diagonal log decomposition `A_n+B_n-C_n` was stated in the removed
   Chapter 4 draft and remains recorded in the audit context.
 - The exact two-weight log decomposition
-  `A_n(\omega)+B_n(\nu)-C_n` is stated and checked in the audit note.
+  `A_n(\omega)+B_n(\nu)-C_n` is stated in the audit note and in the live
+  decomposition lemma.
 - The pooled Weissman component cites DPS Corollary 8 and converts the
   published relative-error result to log scale via
   `x_n=O_P(\ell_n/\sqrt{k})=o_P(1)` and
@@ -491,8 +484,9 @@ conditional plug-in inference layer:
   first-order criterion for `\omega` is
   `(\omega^\top B_c^{dist})^2+\omega^\top V_c^{dist}\omega`. This criterion
   does not choose `\nu`.
-- The deterministic two-weight theorem candidate is recorded in the audit note:
-  for deterministic admissible `(\nu,\omega)`, the first-order limit remains
+- The deterministic two-weight theorem is recorded in the audit note and
+  promoted in `thesis/chapters/04_pooled_extreme.tex`: for deterministic
+  admissible `(\nu,\omega)`, the first-order limit remains
   `N(B_\omega,V_\omega)` and is independent of `\nu`.
 - The source-admissible estimated-`\omega` transfer is recorded in the audit
   note as a corollary after the deterministic theorem: for deterministic
@@ -513,8 +507,8 @@ conditional plug-in inference layer:
   `\omega` transfer second; conditional plug-in inference third; random `\nu`
   remains unaudited.
 
-Remaining choices after the closed Markdown two-weight, estimated-`\omega`,
-and plug-in inference audit:
+Remaining choices after the promoted two-weight, estimated-`\omega`, and
+plug-in inference layer:
 
 - Default research decision: stop the main theorem at "any deterministic
   admissible `\nu`" at first order. The base theorem uses deterministic
@@ -530,11 +524,9 @@ and plug-in inference audit:
   `\nu` choices such as `\nu=\omega` or equal weights, but the main practical
   route should use `\nu_n^k` and no `\nu` choice should be described as
   optimal.
-- If Filippo decides to leave the Markdown research layer, revise Chapter 4
-  theorem prose from the diagonal theorem to deterministic `(\nu,\omega)`, or
-  explicitly retain the diagonal estimator as a convention `\nu=\omega`.
-- If Chapter 4 is revised to the two-weight theorem, update the introduction
-  only after the theorem statement/proof is in thesis prose.
+- The next prose-sensitive edit is likely the Introduction: update it only
+  around the promoted theorem/corollary sequence and still avoid simulation
+  claims until Chapter 5 is redesigned.
 - If Filippo explicitly wants optimality for `\nu`, first audit the additional
   mathematics:
   a joint expansion for the leading `A_n(\omega)` term and the bridge-Hill
@@ -543,19 +535,19 @@ and plug-in inference audit:
 
 ## Immediate Next Step
 
-The active compiled thesis scaffold is `thesis/main.tex` with only
-`chapters/01_introduction`, `chapters/02_background`, and the bibliography.
-The active audit trail is
+The active compiled thesis is `thesis/main.tex` with
+`chapters/01_introduction`, `chapters/02_background`, `chapters/04_pooled_extreme`,
+and the bibliography. The file `04_pooled_extreme.tex` is currently numbered
+as Chapter 3 in the PDF because `03_pooled_intermediate.tex` remains
+uncompiled. The active audit trail remains
 `notes/source_audit_pooled_extreme_expectile.md`.
 
-The immediate next research step is not an automatic `.tex` edit. The
-estimated-`\omega` transfer and conditional plug-in inference route are now
-checked in Markdown, and the bridge-Hill convention is fixed as
-`\nu=\nu_n^k=(k_1/k,\ldots,k_m/k)`. The next unresolved step is either to
-promote the checked Markdown results into new Chapter 4 theorem/corollary
-prose, or to design the finite-sample study around the promoted estimator and
-plug-in inference route. Until Filippo asks for that promotion, Chapters 3--6
-remain uncompiled placeholders.
+The immediate next research step is no longer to promote the first-order
+result: that has been done. The next unresolved work is either to rewrite the
+Introduction around the promoted theorem/corollary sequence, or to design the
+finite-sample study around the promoted estimator and plug-in inference route.
+The remaining uncompiled placeholders are `03_pooled_intermediate.tex`,
+`05_finite_sample.tex`, and `06_discussion.tex`.
 
 At first order, DPS variance- and AMSE-optimal weights apply to `\omega` only,
 including source-admissible estimated weights. The practical route should use
@@ -564,8 +556,8 @@ can be used without making `\nu` random. Simulations may later explore
 finite-sample sensitivity to `\nu`, but they must not be used to claim an
 optimal `\nu` without a separately proved lower-order theory.
 
-When promoting results out of Markdown, preserve this order: deterministic
-two-weight theorem first; optional estimated-`\omega` transfer corollary
+When extending the promoted main-theory chapter, preserve this order:
+deterministic two-weight theorem first; estimated-`\omega` transfer corollary
 second; conditional plug-in standardisation and log-scale interval inversion
 third, using the fixed `\nu_n^k` bridge convention unless Filippo explicitly
 reopens that decision.
@@ -596,7 +588,7 @@ Completed deliverable:
   recorded in the audit note;
 - a source-admissible estimated-`\omega` transfer check, principled plug-in
   standardisation, and log-scale interval inversion, recorded in the audit
-  note;
+  note and now promoted to thesis prose;
 - no simulation design.
 
 Completed deliverable for the two-weight pivot:
@@ -605,14 +597,14 @@ Completed deliverable for the two-weight pivot:
   `\widehat\xi_{\tau_n}^{pool,\star}(\nu,\omega)`;
 - exact two-weight decomposition `A_n(\omega)+B_n(\nu)-C_n`;
 - source-check of the `B_n(\nu)` Taylor and pooled-Hill order comparison;
-- theorem candidate showing the first-order limit depends on `\omega` only;
+- theorem showing the first-order limit depends on `\omega` only;
 - a clear status statement that DPS weights optimise `\omega`, while `\nu`
   is not first-order identified.
 - source-admissible estimated-`\omega` transfer for deterministic admissible
   `\nu`, including the condition
   `\widehat\omega_n^\top\mathbf 1=1`,
   `\widehat\omega_n\to_P\omega`, recorded as a transfer corollary rather
-  than the base theorem.
+  than the base theorem and now promoted to thesis prose.
 - conditional plug-in inference for the practical estimator
   `\widehat\xi_{\tau_n}^{pool,\star}(\nu_n^k,\widehat\omega_n)`, using
   source-consistent DPS plug-in centring and variance objects when available.
@@ -622,15 +614,12 @@ Remaining deliverable before moving beyond first-order theory:
 - no further first-order Markdown proof work is required for the deterministic
   two-weight route, source-admissible estimated-`\omega` transfer, or
   conditional plug-in inference under `\eta_n\to0`;
-- next, either promote the checked theorem/corollaries into `.tex` prose or
-  settle the finite-sample simulation design around the promoted estimator,
-  selected DPS `\omega` route, plug-in objects, and fixed `\nu_n^k`
-  convention;
-- when Filippo asks to promote the result, write fresh Chapter 4 theorem prose
-  for the deterministic two-weight route first plus, if desired, a separate
-  source-admissible estimated-`\omega` corollary and plug-in inference
-  corollary; or explicitly keep the diagonal estimator as the convention
-  `\nu=\omega`.
+- next, rewrite the surrounding thesis prose or settle the finite-sample
+  simulation design around the promoted estimator, selected DPS `\omega`
+  route, plug-in objects, and fixed `\nu_n^k` convention;
+- if the promoted main-theory chapter is extended, keep the deterministic
+  two-weight route first, followed by the separate source-admissible
+  estimated-`\omega` corollary and plug-in inference corollary.
 
 ### Phase 1: Notation Reset
 
@@ -654,9 +643,9 @@ explicitly specialising to the diagonal case.
 
 ### Phase 2: Source Audit
 
-Completed in the audit layer for the removed diagonal theorem draft, the
-deterministic two-weight theorem candidate, the source-admissible
-estimated-`\omega` transfer, and the conditional plug-in inference corollary.
+Completed in the audit layer and promoted to thesis prose for the
+deterministic two-weight theorem, the source-admissible estimated-`\omega`
+transfer, and the conditional plug-in inference corollary.
 Re-read and extract exact source statements again before adding any new layer,
 especially lower-order `\nu` optimality, simulations, estimated `\nu`, or
 broader target settings. The checked sources for the theorem route are:
@@ -707,8 +696,9 @@ write
   \log\frac{\xi_{\tau_n}}{\psi(\gamma)Q(\tau_n)}.
 \]
 
-This identity is now checked in the audit note. The removed Chapter 4 draft
-identity was the diagonal special case `\nu=\omega`.
+This identity is now checked in the audit note and stated in the live
+decomposition lemma. The removed Chapter 4 draft identity was the diagonal
+special case `\nu=\omega`.
 
 ### Phase 4: Source-Audit Questions For The Three Terms
 
@@ -781,56 +771,50 @@ Term 3 (`C_n`, source-audited for the finite-`m` iid/common-marginal route):
 
 The note has compared the diagonal and two-weight ledgers on the
 pooled-Weissman benchmark scale, recorded the theorem-design fork, preserved
-the source-checked route that used to be written as Chapter 4 theorem prose,
-and supplied the checked deterministic two-weight theorem candidate,
+the source-checked diagonal route as history, and supplied the source audit
+behind the now-promoted deterministic two-weight theorem,
 estimated-`\omega` transfer, and conditional plug-in inference corollary. Keep
 the `\eta_n\to\eta\in(0,\infty)` branch visible as a Markdown comparison, but
 parked unless Filippo explicitly reopens it.
 
 ### Phase 5: Main Theorem
 
-No main theorem is currently promoted to live `.tex` prose. The previous
-diagonal first-route theorem was removed from the compiled LaTeX scaffold
-during the 2026-06-06 blank-slate reset. Its route remains useful as
-audit/history context: generic deterministic admissible weights satisfying
-`\omega^\top\mathbf 1=1` in the finite-`m` iid/common-marginal distributed
-setting under `\eta_n\to0`, with DPS extreme-level assumptions `p_n\to0`,
-`k/(np_n)\to\infty`, and `\sqrt{k}/\ell_n\to\infty`, where
-`\ell_n=\log\{k/(np_n)\}`.
+The main first-order theorem is now promoted to live `.tex` prose in
+`thesis/chapters/04_pooled_extreme.tex`. The previous diagonal first-route
+theorem remains useful only as audit/history context: generic deterministic
+admissible weights satisfying `\omega^\top\mathbf 1=1` in the finite-`m`
+iid/common-marginal distributed setting under `\eta_n\to0`, with DPS
+extreme-level assumptions `p_n\to0`, `k/(np_n)\to\infty`, and
+`\sqrt{k}/\ell_n\to\infty`, where `\ell_n=\log\{k/(np_n)\}`.
 
-The audit note now restates this result for deterministic two-weight vectors
-`(\nu,\omega)`. This deterministic statement is the base theorem candidate.
-Under the same route,
+The live theorem uses deterministic two-weight vectors `(\nu,\omega)`. Under
+the same route,
 `\frac{\sqrt{k}}{\ell_n}\log\{
 \widehat\xi_{\tau_n}^{pool,\star}(\nu,\omega)/\xi_{\tau_n}\}`
-has limit `N(B_\omega,V_\omega)`. The note also checks the optional
+has limit `N(B_\omega,V_\omega)`. The live chapter then adds the
 source-admissible estimated-`\omega` transfer: for deterministic admissible
-`\nu` and
-`\widehat\omega_n^\top\mathbf 1=1`,
+`\nu` and `\widehat\omega_n^\top\mathbf 1=1`,
 `\widehat\omega_n\to_P\omega`, the same limit holds with
 `\widehat\xi_{\tau_n}^{pool,\star}(\nu,\widehat\omega_n)`. The limit depends
-on the limiting `\omega` only. The note also checks conditional plug-in
-inference for the practical estimator
+on the limiting `\omega` only. Finally, the live chapter adds conditional
+plug-in inference for the practical estimator
 `\widehat\xi_{\tau_n}^{pool,\star}(\nu_n^k,\widehat\omega_n)`: if DPS gives
 source-consistent `\widehat B_{\widehat\omega,n}` and
 `\widehat V_{\widehat\omega,n}`, the plug-in-centred statistic is
 asymptotically standard normal and the log-scale multiplicative interval is
 obtained by inversion.
 
-The active theorem work in Markdown is closed at first order. The thesis-prose
-move is parked until Filippo asks to promote the checked result: then write
-fresh Chapter 4 prose to state and prove the two-weight theorem, optionally
-add the source-admissible estimated-`\omega` corollary and plug-in inference
-corollary, or explicitly retain the diagonal estimator as a convention
-`\nu=\omega`.
+The active first-order theorem work is closed. Future theorem work should be
+treated as a new layer: lower-order `\nu` optimality, random `\nu`, broader
+tail-homoskedastic targets, or alternative estimators all require fresh audit
+before thesis prose.
 
 ### Phase 6: Weights And Intervals
 
 Do not draft a one-weight corollary as if `\nu=\omega` were optimal. The
 deterministic two-weight theorem, source-admissible estimated-`\omega`
 transfer corollary, and conditional plug-in inference corollary are
-source-checked in the audit note; fresh Chapter 4 theorem prose should be
-written only when Filippo decides to promote the Markdown result.
+source-checked in the audit note and promoted in the live main-theory chapter.
 First-order status under `\eta_n\to0`: DPS variance-optimal and AMSE-optimal
 deterministic/oracle or estimated weights apply to `\omega`, the
 pooled-Weissman/geometric quantile weights, while `\nu` remains deterministic
@@ -848,8 +832,8 @@ The default route is first-order and practical:
 3. Use DPS plug-in centring and variance objects for the selected `\omega`
    route whenever the DPS source conditions give their consistency.
 4. State confidence intervals only as the inversion of the checked
-   plug-in-centred log-scale statistic, and only after the relevant
-   theorem/corollary is promoted to thesis prose.
+   plug-in-centred log-scale statistic already promoted in the main-theory
+   chapter.
 5. Design simulations only after the promoted estimator, selected DPS
    `\omega` route, plug-in objects, and `\nu_n^k` convention are fixed.
 
@@ -863,10 +847,10 @@ sharper `A_n` and `C_n` remainder controls at the `k^{-1/2}` scale, and a
 precise admissible class for `\nu`. Do not open this route by default.
 
 Estimated plug-in weights and plug-in inference objects for `\omega` are
-validated at first order in the Markdown audit note. They are still not a
-simulation design. Do not switch to undersmoothing/no-bias centring unless
-Filippo explicitly reopens that route and the required conditions are
-source-checked.
+validated at first order in the audit note and promoted in the live thesis.
+They are still not a simulation design. Do not switch to undersmoothing/no-bias
+centring unless Filippo explicitly reopens that route and the required
+conditions are source-checked.
 
 ### Phase 7: Thesis Restructure
 
@@ -874,17 +858,17 @@ Expected lean structure:
 
 1. Introduction: rewritten around pooled extreme expectiles through Padoan pooled Weissman plus expectile bridge.
 2. Background: keep and tighten; remove overbuilt intermediate machinery.
-3. Main theory: define the estimator, use the decomposition to prove the theorem, then state weights and intervals if justified.
+3. Main theory: live promoted chapter defining the estimator, proving the theorem through the decomposition, then stating weights and plug-in intervals.
 4. Simulation: redesign only after the selected `\omega` route, DPS plug-in
-   objects, promoted interval formula, and fixed `\nu` convention are set.
+   objects, promoted log-scale interval, and fixed `\nu` convention are set.
 5. Discussion: limitations and future work.
 
 The old Chapter 3 should likely be deleted, shortened to a source/background note, or replaced by the new main-theory chapter. Do not preserve it merely because it is already written.
 
 ### Phase 8: Simulation Rebuild
 
-Only after the selected `\omega` route, DPS plug-in objects, promoted interval
-formula, and fixed `\nu_n^k` convention are stable:
+Only after the selected `\omega` route, DPS plug-in objects, promoted
+log-scale interval, and fixed `\nu_n^k` convention are stable:
 
 - simulations should use the first-order theorem, DPS estimated-`\omega`
   transfer, and plug-in inference corollary as their mathematical base;

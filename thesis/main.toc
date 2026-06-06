@@ -6,23 +6,24 @@
 \contentsline {subsection}{\numberline {2.2.1}The Hill estimator}{3}{subsection.2.2.1}%
 \contentsline {subsection}{\numberline {2.2.2}Weissman extrapolation to extreme quantiles}{4}{subsection.2.2.2}%
 \contentsline {section}{\numberline {2.3}Expectiles}{4}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Definition}{5}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.1}Definition}{4}{subsection.2.3.1}%
 \contentsline {subsection}{\numberline {2.3.2}Basic properties}{5}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Coherence and elicitability}{6}{subsection.2.3.3}%
-\contentsline {section}{\numberline {2.4}Extreme expectile inference: the iid heavy-tailed baseline}{6}{section.2.4}%
+\contentsline {subsection}{\numberline {2.3.3}Coherence and elicitability}{5}{subsection.2.3.3}%
+\contentsline {section}{\numberline {2.4}The high-expectile/high-quantile bridge}{6}{section.2.4}%
 \contentsline {subsection}{\numberline {2.4.1}The expectile--quantile asymptotic equivalence}{6}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}Two families of estimators at intermediate levels}{7}{subsection.2.4.2}%
-\contentsline {paragraph}{LAWS direct estimator.}{7}{section*.3}%
-\contentsline {paragraph}{Quantile-based plug-in estimator.}{7}{section*.4}%
-\contentsline {paragraph}{Comparison.}{8}{section*.5}%
-\contentsline {subsection}{\numberline {2.4.3}Weissman extrapolation to very-extreme expectile levels}{8}{subsection.2.4.3}%
-\contentsline {subsection}{\numberline {2.4.4}The plug-in central limit theorem}{9}{subsection.2.4.4}%
-\contentsline {section}{\numberline {2.5}The optimal pooling framework}{10}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Setup}{10}{subsection.2.5.1}%
-\contentsline {paragraph}{Condition $\mathcal J(\bm {R})$ (tail-copula condition).}{11}{section*.6}%
-\contentsline {subsection}{\numberline {2.5.2}The pooled Hill estimator}{11}{subsection.2.5.2}%
-\contentsline {subsection}{\numberline {2.5.3}Variance- and AMSE-optimal weights}{12}{subsection.2.5.3}%
-\contentsline {subsection}{\numberline {2.5.4}Weighted geometric pooling of extreme quantiles}{13}{subsection.2.5.4}%
-\contentsline {subsection}{\numberline {2.5.5}Tail-homogeneity testing and confidence intervals}{14}{subsection.2.5.5}%
-\contentsline {subsection}{\numberline {2.5.6}Distributed inference as a special case}{15}{subsection.2.5.6}%
-\contentsline {chapter}{Bibliography}{16}{chapter*.7}%
+\contentsline {subsection}{\numberline {2.4.2}Relation to earlier expectile estimators}{7}{subsection.2.4.2}%
+\contentsline {section}{\numberline {2.5}The optimal pooling framework}{7}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Setup}{7}{subsection.2.5.1}%
+\contentsline {paragraph}{Condition $\mathcal J(\bm {R})$ (tail-copula condition).}{8}{section*.3}%
+\contentsline {subsection}{\numberline {2.5.2}The pooled Hill estimator}{8}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}Variance- and AMSE-optimal weights}{9}{subsection.2.5.3}%
+\contentsline {subsection}{\numberline {2.5.4}Weighted geometric pooling of extreme quantiles}{10}{subsection.2.5.4}%
+\contentsline {subsection}{\numberline {2.5.5}Estimated weights and plug-in objects}{11}{subsection.2.5.5}%
+\contentsline {subsection}{\numberline {2.5.6}Source diagnostics and intervals}{12}{subsection.2.5.6}%
+\contentsline {subsection}{\numberline {2.5.7}Distributed inference as a special case}{12}{subsection.2.5.7}%
+\contentsline {chapter}{\numberline {3}Pooled extreme expectiles}{14}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Estimator and exact decomposition}{14}{section.3.1}%
+\contentsline {section}{\numberline {3.2}A deterministic two-weight theorem}{16}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Weight consequences}{19}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Estimated pooled-Weissman weights and inference}{20}{section.3.4}%
+\contentsline {chapter}{Bibliography}{22}{chapter*.4}%
