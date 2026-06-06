@@ -19,53 +19,6 @@
 
 \refsection{0}
   \datalist[entry]{nyt/global//global/global}
-    \entry{ArtznerDelbaenEberHeath1999}{article}{}
-      \name{author}{4}{}{%
-        {{un=0,uniquepart=base,hash=3f2ec6a82c23c0c7062a2c8dad7a86e1}{%
-           family={Artzner},
-           familyi={A\bibinitperiod},
-           given={Philippe},
-           giveni={P\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=1af76fc6ac243ee12ea3e2cb593750ee}{%
-           family={Delbaen},
-           familyi={D\bibinitperiod},
-           given={Freddy},
-           giveni={F\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=1d79028403b8f170c257ba3e5531a3e8}{%
-           family={Eber},
-           familyi={E\bibinitperiod},
-           given={Jean-Marc},
-           giveni={J\bibinithyphendelim M\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=efe5624ffa1b674383a27edcc7c48d62}{%
-           family={Heath},
-           familyi={H\bibinitperiod},
-           given={David},
-           giveni={D\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{401eceac13445f29090201341d46d9fa}
-      \strng{fullhash}{70f38e73ef1cfca300fa942b4a702234}
-      \strng{bibnamehash}{70f38e73ef1cfca300fa942b4a702234}
-      \strng{authorbibnamehash}{70f38e73ef1cfca300fa942b4a702234}
-      \strng{authornamehash}{401eceac13445f29090201341d46d9fa}
-      \strng{authorfullhash}{70f38e73ef1cfca300fa942b4a702234}
-      \field{sortinit}{A}
-      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Mathematical Finance}
-      \field{number}{3}
-      \field{title}{Coherent measures of risk}
-      \field{volume}{9}
-      \field{year}{1999}
-      \field{pages}{203\bibrangedash 228}
-      \range{pages}{26}
-    \endentry
     \entry{BelliniKlarMullerRosazzaGianin2014}{article}{}
       \name{author}{4}{}{%
         {{un=0,uniquepart=base,hash=e456d4173faeb5b59527fe1a7cb9e985}{%

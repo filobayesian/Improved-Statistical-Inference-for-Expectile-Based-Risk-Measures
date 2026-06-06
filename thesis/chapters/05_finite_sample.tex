@@ -1,33 +1,5 @@
 % !TEX root = ../main.tex
-\chapter{Finite-sample study: frozen pending design}
+\chapter{Finite-sample study}
 \label{ch:finite-sample}
 
-\section{Status}
-\label{sec:finite-status}
-
-The finite-sample study from the previous draft is frozen. It was
-designed around the withdrawn intermediate pooled expectile estimator,
-the old two-weight variance and AMSE formulas, and simulation rows that
-no longer correspond to the rebuilt thesis target.
-
-The existing scripts, generated tables, and generated figures are kept
-as scaffolding only. They should not be interpreted as final evidence
-for the estimator in \Cref{eq:pool-ext:working-estimator}.
-
-\section{Before simulations resume}
-\label{sec:finite-before-resume}
-
-Simulation work should restart only after the weight choice, centring,
-and standard errors have been derived from
-\Cref{thm:pool-ext:deterministic}. At that point the simulation design
-should be rebuilt from the proved statement:
-\begin{enumerate}[label=(\roman*)]
-\item implement the estimator
-      $\psifn(\widehat\gamma_n(\bm\omega))
-      \widehat q_n^\star(\tau_n\mid\bm\omega)$;
-\item remove estimator rows that exist only for the obsolete
-      intermediate two-weight theory;
-\item choose weights, centring, and standard errors only from the
-      proved asymptotic statement;
-\item run the smoke test before regenerating thesis tables or figures.
-\end{enumerate}
+\todo{}

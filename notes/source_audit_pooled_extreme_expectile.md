@@ -5,22 +5,25 @@ deterministic two-weight route is now source-checked under the conservative
 $\eta_n\to0$ design. This note records the exact decomposition, source inputs,
 rate comparison, checked theorem candidate, resulting design decision, and the
 first source-audited transfer check for DPS estimated weights in the
-pooled-Weissman component. It does not promote these results to thesis prose,
-finalise confidence intervals, run simulations, or construct a lower-order
-criterion for the bridge-Hill weights.
+pooled-Weissman component. It also records the source-conditional plug-in
+standardisation and the corresponding log-scale interval inversion. It does
+not promote these results to thesis prose, run simulations, or construct a
+lower-order criterion for the bridge-Hill weights.
 
-Current first-order decision as of 2026-06-05: keep two layers separate. The
+Current first-order decision as of 2026-06-05: keep the deterministic theorem,
+estimated-$\omega$ transfer, and plug-in inference corollary sequential. The
 base theorem is deterministic: for every deterministic admissible pair
 $(\nu,\omega)$, the $\eta_n\to0$ route gives the pooled-Weissman source-scale
-limit $N(B_\omega,V_\omega)$. A later transfer corollary may replace only the
+limit $N(B_\omega,V_\omega)$. A transfer corollary may replace only the
 pooled-Weissman weights $\omega$ by source-admissible DPS estimated weights
-$\widehat\omega_n\toprob\omega$, because DPS already proves the corresponding
-random-weight quantile result. The geometric pooled-Weissman weights $\omega$
-remain visible and may use the DPS variance and AMSE criteria when the source
-conditions justify the oracle or plug-in objects. The outer bridge-Hill weights
-$\nu$ remain deterministic throughout this first-order audit and are
-first-order unidentified. For downstream practical inference, the bridge-Hill
-convention is now fixed as
+$\widehat\omega_n\to_P\omega$, because DPS already proves the corresponding
+random-weight quantile result. The plug-in inference corollary then applies if
+the selected DPS route provides consistent bias and variance objects. The
+geometric pooled-Weissman weights $\omega$ remain visible and may use the DPS
+variance and AMSE criteria when the source conditions justify the oracle or
+plug-in objects. The outer bridge-Hill weights $\nu$ remain deterministic
+throughout this first-order audit and are first-order unidentified. For
+downstream practical inference, the bridge-Hill convention is now fixed as
 
 $$
 \nu=\nu_n^k
@@ -35,6 +38,14 @@ claim for $\nu$. Choosing $\nu$ optimally, or making $\nu$ random, would
 require a new lower-order or compact-event audit, not an extension of the
 present first-order result.
 
+Current inference decision: when DPS source conditions provide consistent
+plug-in centring and variance objects for the selected $\omega$ route, use
+those plug-ins. This is a mathematical Slutsky/studentisation choice, not a new
+estimator layer. Omitting the bias centring would require a separate
+bias-negligibility condition such as the corresponding DPS undersmoothing
+route; the plug-in route keeps the already admitted nonzero $B_\omega$ in the
+theorem and estimates it directly.
+
 Source-check status as of 2026-06-05: the $\eta_n\to0$ theorem route has been
 checked against the local PDFs of Daouia--Padoan--Stupfler Corollary 8 in the
 published Bernoulli version, the supplement proof of Theorem 2, and
@@ -42,9 +53,11 @@ Daouia--Girard--Stupfler (2020), Proposition 1(i). The subsequent
 estimated-$\omega$ transfer layer has been checked against
 Daouia--Padoan--Stupfler Theorem A.1 in the supplement, Section 2.2,
 Corollary 1, Theorem 2, Corollary 6, Corollary 7, and Corollary 8 in the
-published Bernoulli version. DPS Corollary 4 remains a later
-inference-design source; this note does not promote its interval formula to
-the expectile estimator. The theorem route is
+published Bernoulli version. DPS Corollary 4 has been checked only as the
+source's log-scale quantile-inference analogue; this note does not import its
+interval formula directly. The expectile interval below is obtained by
+inverting the transferred plug-in-centred expectile statistic. The theorem
+route is
 source-consistent after carrying forward the source conventions on continuity,
 common iid data, aggregate $n$ and $k$, and eventual positivity of the upper
 tail needed for the log-Weissman expressions. The first theorem has now been
@@ -152,7 +165,7 @@ research status is:
 7. Estimated-$\omega$ transfer fixed as a corollary, not a replacement for
    the deterministic theorem: if DPS source conditions give
    $\widehat\omega_n^\top\mathbf 1=1$ and
-   $\widehat\omega_n\toprob\omega$, then the same first-order limit transfers
+   $\widehat\omega_n\to_P\omega$, then the same first-order limit transfers
    to
    $\widehat\xi_{\tau_n}^{pool,\star}(\nu,\widehat\omega_n)$ for
    deterministic admissible $\nu$.
@@ -160,9 +173,13 @@ research status is:
    $\nu=\nu_n^k=(k_1/k,\ldots,k_m/k)$ for downstream inference work. This
    avoids the unaudited random choice $\nu=\widehat\omega_n$ and carries no
    optimality claim.
-9. Parked layers fixed after this pass: thesis-prose promotion, final
-   confidence intervals, simulations, broader tail-homoskedastic targets, and
-   lower-order $\nu$ optimality remain outside the current closure.
+9. Plug-in inference route fixed conditionally on DPS consistency:
+   source-admissible plug-in centring and variance objects for $\omega$ give a
+   standard normal statistic and a log-scale multiplicative interval by
+   inversion.
+10. Parked layers fixed after this pass: thesis-prose promotion, simulations,
+    broader tail-homoskedastic targets, and lower-order $\nu$ optimality remain
+    outside the current closure.
 
 ## Checked source statements
 
@@ -513,7 +530,7 @@ cleanest source for the first thesis route. Theorem 1 or Corollary 5 also gives
 $$
 \widehat\gamma_n(v)-\gamma=O_P(k^{-1/2})
 \quad\text{and}\quad
-\widehat\gamma_n(v)\xrightarrow{P}\gamma.
+\widehat\gamma_n(v)\to_P\gamma.
 $$
 
 ### Compactness Inside $(0,1)$
@@ -523,7 +540,7 @@ formed with fixed bridge-Hill weights satisfying $v^\top 1=1$, consistency of
 the local Hill estimators gives
 
 $$
-\widehat\gamma_n(v)\xrightarrow{P} \gamma.
+\widehat\gamma_n(v)\to_P \gamma.
 $$
 
 Thus, for any
@@ -2234,8 +2251,8 @@ two-weight $\eta_n\to0$ theorem candidate, but only for $\omega$:
 3. $\nu$ is first-order unidentified and has no variance/AMSE-optimal formula
    in this audit;
 4. estimated plug-in $\omega$ weights are a separate transfer layer, checked
-   next; standard errors, confidence intervals, simulations, and
-   lower-order $\nu$ choices remain separate after that.
+   next; plug-in standardisation is checked after that transfer layer, while
+   simulations and lower-order $\nu$ choices remain separate after that.
 
 ## Source audit: estimated DPS weights and plug-in $\omega$ transfer
 
@@ -2243,7 +2260,7 @@ Status: checked first-order transfer corollary for random DPS
 pooled-Weissman weights. This is not a new base theorem and it is not obtained
 by informally inserting random weights into the deterministic proof. The source
 input is that DPS already proves the pooled-Weissman theorem for affine random
-weights $\widehat\omega_n\toprob\omega$. This section only opens the
+weights $\widehat\omega_n\to_P\omega$. This section only opens the
 $\omega$ role in $\widehat q_n^\star(\tau_n\mid\omega)$. The bridge-Hill
 vector $\nu$ remains deterministic admissible and first-order unidentified. For
 practical use with estimated optimal $\omega$, set
@@ -2257,7 +2274,7 @@ There are three distinct source inputs.
 First, Daouia--Padoan--Stupfler Theorem A.1 in the supplement gives the
 generic pooling principle for estimated weights. If
 $\widehat\omega_n^\top\mathbf 1=1$ and
-$\widehat\omega_n\toprob\omega$, then replacing $\omega$ by
+$\widehat\omega_n\to_P\omega$, then replacing $\omega$ by
 $\widehat\omega_n$ changes the pooled estimator only by a lower-order term on
 the source scale. In the Hill setting this gives
 
@@ -2278,7 +2295,7 @@ and weights satisfying
 $$
 \widehat\omega_n^\top\mathbf 1=1,
 \qquad
-\widehat\omega_n\toprob\omega.
+\widehat\omega_n\to_P\omega.
 $$
 
 It then gives
@@ -2325,9 +2342,9 @@ $$
 $$
 
 The supplement proof of Corollary 1 records the key conclusion:
-$\widehat B_c\toprob B_c$, $\widehat V_c\toprob V_c$, and therefore
-$\widehat\omega_n^{Var}\toprob\omega^{Var}$ and
-$\widehat\omega_n^{AMSE}\toprob\omega^{AMSE}$. In the iid/common-marginal
+$\widehat B_c\to_P B_c$, $\widehat V_c\to_P V_c$, and therefore
+$\widehat\omega_n^{Var}\to_P\omega^{Var}$ and
+$\widehat\omega_n^{AMSE}\to_P\omega^{AMSE}$. In the iid/common-marginal
 distributed route, DPS Corollary 6 gives the variance-optimal allocation
 weights
 
@@ -2352,7 +2369,7 @@ DPS-admissible random pooled-Weissman weight vector such that
 $$
 \widehat\omega_n^\top\mathbf 1=1,
 \qquad
-\widehat\omega_n\toprob\omega.
+\widehat\omega_n\to_P\omega.
 $$
 
 Define
@@ -2464,10 +2481,10 @@ particular:
   $\omega_j^{Var}=c_j^{-1}/\sum_i c_i^{-1}$;
 - the general estimated variance-optimal weights of DPS Section 2.2 and
   Corollary 1 transfer when the source assumptions give
-  $\widehat\omega_n^{Var}\toprob\omega^{Var}$;
+  $\widehat\omega_n^{Var}\to_P\omega^{Var}$;
 - the general estimated AMSE-optimal weights of DPS Section 2.2 and
   Corollary 1 transfer when the source assumptions give
-  $\widehat\omega_n^{AMSE}\toprob\omega^{AMSE}$;
+  $\widehat\omega_n^{AMSE}\to_P\omega^{AMSE}$;
 - the distributed AMSE plug-in weights of DPS Corollary 7 transfer under its
   additional common second-order parameter assumptions.
 
@@ -2479,7 +2496,7 @@ compact-event Taylor expansion for $B_n(\widehat\omega_n)$ and its order on
 the pooled-Weissman scale. The present section deliberately keeps $\nu$
 deterministic.
 
-### Plug-in standardisation ledger, not interval design
+### Principled plug-in standardisation and interval inversion
 
 Let
 
@@ -2487,44 +2504,141 @@ $$
 s_n=\frac{\sqrt{k}}{\ell_n}.
 $$
 
-Suppose a DPS source result and its proof give leading-component plug-in
-objects satisfying
+For the main practical route set
 
 $$
-\widehat B_{\omega,n}\toprob B_\omega,
+\nu=\nu_n^k
+=\left(\frac{k_1}{k},\ldots,\frac{k_m}{k}\right)
+$$
+
+and use a DPS-admissible selected pooled-Weissman weight
+$\widehat\omega_n$, for instance an estimated variance-optimal or
+AMSE-optimal DPS weight vector under the corresponding source assumptions.
+Write
+
+$$
+\widehat\xi_{\tau_n}^{plug}
+=
+\widehat\xi_{\tau_n}^{pool,\star}(\nu_n^k,\widehat\omega_n).
+$$
+
+Suppose the same DPS source route supplies plug-in bias and variance objects,
+evaluated at the selected $\widehat\omega_n$, such that
+
+$$
+\widehat B_{\widehat\omega,n}\to_P B_\omega,
 \qquad
-\widehat V_{\omega,n}\toprob V_\omega,
+\widehat V_{\widehat\omega,n}\to_P V_\omega,
 \qquad
 V_\omega>0.
 $$
 
-Then the expectile transfer gives
+In the common-marginal distributed notation above this is obtained, for
+example, from DPS-consistent vector and matrix plug-ins through
 
 $$
+\widehat B_{\widehat\omega,n}
+=
+\widehat\omega_n^\top \widehat B_{c,n}^{dist},
+\qquad
+\widehat V_{\widehat\omega,n}
+=
+\widehat\omega_n^\top
+  \widehat V_{c,n}^{dist}
+  \widehat\omega_n,
+$$
+
+whenever
+$\widehat B_{c,n}^{dist}\to_P B_c^{dist}$,
+$\widehat V_{c,n}^{dist}\to_P V_c^{dist}$, and
+$\widehat\omega_n\to_P\omega$. The general DPS Section 2.2 route is the
+same statement with the corresponding $B_c$ and $V_c$ objects. In finite
+dimension this is just the continuous mapping theorem; no expectile-specific
+plug-in estimator is introduced.
+
+Then
+
+$$
+T_n^{plug}
+=
 \frac{
   s_n
   \log\{
-    \widehat\xi_{\tau_n}^{pool,\star}(\nu,\widehat\omega_n)
-    /\xi_{\tau_n}
+    \widehat\xi_{\tau_n}^{plug}/\xi_{\tau_n}
   \}
-  -\widehat B_{\omega,n}
+  -\widehat B_{\widehat\omega,n}
 }{
-  \sqrt{\widehat V_{\omega,n}}
+  \sqrt{\widehat V_{\widehat\omega,n}}
 }
 \Rightarrow N(0,1).
 $$
 
-The proof is only Slutsky's theorem: the additional expectile pieces
-$B_n(\nu)$ and $C_n$ are already $o_P(s_n^{-1})$, and the plug-in objects
+Proof. The transfer theorem gives
+
+$$
+s_n\log\{\widehat\xi_{\tau_n}^{plug}/\xi_{\tau_n}\}
+\Rightarrow
+N(B_\omega,V_\omega).
+$$
+
+The plug-in assumptions give
+$\widehat B_{\widehat\omega,n}\to_P B_\omega$ and
+$\widehat V_{\widehat\omega,n}\to_P V_\omega$. Since $V_\omega>0$,
+$\widehat V_{\widehat\omega,n}>0$ with probability tending to one, and the
+displayed standard normal limit follows by Slutsky's theorem. The additional
+expectile pieces $B_n(\nu_n^k)$ and $C_n$ have already been shown to be
+$o_P(s_n^{-1})$ under $\eta_n\to0$; all plug-in centring and variance objects
 belong to the DPS pooled-Weissman component.
 
-This ledger records only the mathematical transfer of plug-in centring and
-variance objects. It is not a final thesis confidence interval and it does not
-settle whether the thesis should use DPS bias-negligible/undersmoothed
-inference, DPS plug-in bias centring, or a deliberately bias-reduced estimator.
-Those choices belong to a separate inference-design note, together with the
-standard-error convention. The bridge-Hill convention has now been fixed as
-$\nu=\nu_n^k$ for the main practical route.
+The resulting $(1-\alpha)$ log-scale plug-in interval is the inversion of
+$|T_n^{plug}|\le z_{1-\alpha/2}$. On the high-probability event
+$\widehat V_{\widehat\omega,n}>0$, define
+
+$$
+I_{n,1-\alpha}^{plug}
+=
+\biggl[
+\widehat\xi_{\tau_n}^{plug}
+\exp\biggl\{
+-\frac{\ell_n}{\sqrt{k}}
+\Bigl(
+  \widehat B_{\widehat\omega,n}
+  +z_{1-\alpha/2}\sqrt{\widehat V_{\widehat\omega,n}}
+\Bigr)
+\biggr\},
+\,
+\widehat\xi_{\tau_n}^{plug}
+\exp\biggl\{
+-\frac{\ell_n}{\sqrt{k}}
+\Bigl(
+  \widehat B_{\widehat\omega,n}
+  -z_{1-\alpha/2}\sqrt{\widehat V_{\widehat\omega,n}}
+\Bigr)
+\biggr\}
+\biggr].
+$$
+
+Then
+
+$$
+\Pr\{\xi_{\tau_n}\in I_{n,1-\alpha}^{plug}\}\to1-\alpha.
+$$
+
+This is not a direct import of the DPS Corollary 4 interval formula. DPS
+Corollary 4 is a log-scale quantile interval under its own bias-negligible
+testing setup. The expectile interval above is our inversion of the
+source-transferred, plug-in-centred expectile statistic. The reason for using
+the plug-in centring is principled: the first-order theorem allows
+$B_\omega\ne0$, DPS supplies source-consistent estimates of the relevant
+pooled-Weissman bias and variance objects, and the bridge terms are lower
+order under $\eta_n\to0$.
+
+This settles the mathematical first-order inference route in the Markdown
+layer: use DPS plug-in centring and variance whenever the selected $\omega$
+construction comes with the required source consistency. Thesis-prose
+promotion, finite-sample implementation choices, and simulations remain later
+steps; the bridge-Hill convention for the main practical route is fixed as
+$\nu=\nu_n^k$.
 
 ### Transfer verdict
 
@@ -2544,7 +2658,7 @@ $$
 $$
 
 for every deterministic admissible $\nu$ and every source-admissible estimated
-DPS weight vector $\widehat\omega_n\toprob\omega$.
+DPS weight vector $\widehat\omega_n\to_P\omega$.
 
 The checked conclusion is deliberately narrow:
 
@@ -2553,8 +2667,9 @@ The checked conclusion is deliberately narrow:
    convention is $\nu=\nu_n^k=(k_1/k,\ldots,k_m/k)$;
 3. plug-in $B_\omega$ and $V_\omega$ objects transfer if the DPS source
    conditions give their consistency;
-4. confidence intervals and simulations still require an explicit centring,
-   variance-estimation choice before thesis prose.
+4. the plug-in standardisation and log-scale interval inversion are valid
+   conditionally on those DPS plug-in consistency inputs; simulations and
+   thesis-prose promotion remain separate.
 
 ## Closed source-check verdict for the first-order layer
 
@@ -2574,7 +2689,8 @@ revised:
 | DGS bridge input | DGS 2020 Proposition 1(i) assumes $E|X^-|<\infty$, $0<\gamma<1$, and $C_2(\gamma,\rho,A)$ with $\rho\le0$. It gives a ratio expansion for $\xi_\tau/Q(\tau)$, not a log expansion, and it explicitly removes the older strict-monotonicity requirement. The DPS route imposes the stricter $\rho<0$ separately. |
 | Ratio-to-log step for $C_n$ | After setting $\Delta_n=\xi_{\tau_n}/\{\psi(\gamma)Q(1-p_n)\}-1$, DGS gives $\Delta_n=c(\gamma,\rho)A(1/p_n)+\gamma(\gamma^{-1}-1)^\gamma EX/Q(1-p_n)+o(|A(1/p_n)|)+o(Q(1-p_n)^{-1})$. Since $\Delta_n\to0$, $C_n=\log(1+\Delta_n)=\Delta_n+O(\Delta_n^2)$. |
 | Rate comparison | Under $\rho<0$, $\sqrt{k}A(n/k)=O(1)$, and $k/(np_n)\to\infty$, regular variation gives $(\sqrt{k}/\ell_n)A(1/p_n)\to0$. The extra condition $\eta_n=\sqrt{k}/\{\ell_n Q(1-p_n)\}\to0$ removes the first-moment bridge and also controls the DGS $o(Q^{-1})$ and log-square remainders. |
-| Estimated $\omega$ transfer | DPS Theorem A.1, Theorem 2, and Corollary 8 already allow random affine weights $\widehat\omega_n\toprob\omega$ in the pooled Hill and pooled Weissman components. The exact expectile decomposition adds only $B_n(\nu)=o_P(\ell_n/\sqrt{k})$ and $C_n=o(\ell_n/\sqrt{k})$ under $\eta_n\to0$, so the same first-order limit transfers to $\widehat\xi_{\tau_n}^{pool,\star}(\nu,\widehat\omega_n)$ for deterministic admissible $\nu$. |
+| Estimated $\omega$ transfer | DPS Theorem A.1, Theorem 2, and Corollary 8 already allow random affine weights $\widehat\omega_n\to_P\omega$ in the pooled Hill and pooled Weissman components. The exact expectile decomposition adds only $B_n(\nu)=o_P(\ell_n/\sqrt{k})$ and $C_n=o(\ell_n/\sqrt{k})$ under $\eta_n\to0$, so the same first-order limit transfers to $\widehat\xi_{\tau_n}^{pool,\star}(\nu,\widehat\omega_n)$ for deterministic admissible $\nu$. |
+| Plug-in standardisation | If the selected DPS source route gives $\widehat B_{\widehat\omega,n}\to_P B_\omega$ and $\widehat V_{\widehat\omega,n}\to_P V_\omega$ with $V_\omega>0$, then Slutsky gives the studentised expectile statistic. Inverting that log-scale statistic gives the multiplicative plug-in interval recorded above. This is not a direct import of the DPS Corollary 4 interval formula; it is the inversion of the transferred expectile CLT. |
 
 Closed verdict for the current first-order Markdown layer: no source-level
 contradiction was found in the deterministic two-weight route or in the
@@ -2582,10 +2698,11 @@ source-admissible estimated-$\omega$ transfer. The theorem candidate gives the
 first-order limit $N(B_\omega,V_\omega)$ for every deterministic admissible
 $\nu$, so $\nu$ is first-order unidentified. Deterministic/oracle DPS weight
 criteria match under $\eta_n\to0$ for $\omega$ only, and DPS estimated weights
-transfer for $\omega$ when the source consistency conditions hold. Broader
-tail-homoskedastic targets, final confidence intervals, simulations, and any
-lower-order criterion for $\nu$ remain parked until each layer is checked
-separately.
+transfer for $\omega$ when the source consistency conditions hold. The
+plug-in centring and variance route is mathematically closed conditionally on
+the corresponding DPS consistency inputs. Broader tail-homoskedastic targets,
+simulations, and any lower-order criterion for $\nu$ remain parked until each
+layer is checked separately.
 
 ## Parked obligations after first-order closure
 
@@ -2644,16 +2761,18 @@ layers; they are not blockers for the current first-order result.
    estimator is a convention $\nu=\omega$.
 
 10. Estimated plug-in $\omega$ weights are now checked at first order through
-    the DPS transfer route above. Do not add final confidence intervals or
-    simulations from this calculation alone. Those still require an explicit
-    centring choice and variance-estimation convention. The bridge-Hill
-    $\nu$ convention is now fixed as $\nu_n^k=(k_1/k,\ldots,k_m/k)$.
+    the DPS transfer route above. The plug-in centring and variance convention
+    is also fixed conditionally on DPS consistency, giving the log-scale
+    multiplicative interval in the standardisation section. Simulations and
+    finite-sample implementation choices remain separate. The bridge-Hill
+    $\nu$ convention is fixed as $\nu_n^k=(k_1/k,\ldots,k_m/k)$.
 
 ## Default next research decision
 
 Do not open a lower-order optimality theory for $\nu$ by default. The current
-least-action stopping point has a deterministic theorem and an optional
-source-admissible transfer corollary.
+least-action stopping point has a deterministic theorem, an optional
+source-admissible transfer corollary, and a source-conditional plug-in
+inference corollary.
 
 Base deterministic theorem:
 
@@ -2684,7 +2803,7 @@ $$
 \quad
 \widehat\omega_n^\top\mathbf 1=1,
 \quad
-\widehat\omega_n\toprob\omega,
+\widehat\omega_n\to_P\omega,
 \qquad
 \eta_n\to0,
 \qquad
@@ -2695,10 +2814,34 @@ $$
 \Rightarrow N(B_\omega,V_\omega).
 $$
 
+Conditional plug-in inference corollary:
+
+$$
+\frac{
+  \frac{\sqrt{k}}{\ell_n}
+  \log
+  \frac{\widehat\xi_{\tau_n}^{pool,\star}
+        (\nu_n^k,\widehat\omega_n)}
+       {\xi_{\tau_n}}
+  -\widehat B_{\widehat\omega,n}
+}{
+  \sqrt{\widehat V_{\widehat\omega,n}}
+}
+\Rightarrow N(0,1),
+\qquad
+\widehat B_{\widehat\omega,n}\to_P B_\omega,
+\quad
+\widehat V_{\widehat\omega,n}\to_P V_\omega,
+\quad
+V_\omega>0.
+$$
+
 At this stopping point, $\omega$ is the only first-order optimisable weight
 vector, and it may be deterministic/oracle or estimated through DPS under the
-source consistency conditions. The base theorem remains valid for any
-deterministic admissible $\nu$, but the main practical route now fixes
+source consistency conditions. When the selected DPS route provides consistent
+plug-in bias and variance objects, the corresponding log-scale multiplicative
+interval is the principled inference object. The base theorem remains valid for
+any deterministic admissible $\nu$, but the main practical route now fixes
 $\nu=\nu_n^k=(k_1/k,\ldots,k_m/k)$ so that estimated optimal $\omega$ can be
 used without making the bridge-Hill weights random. The diagonal
 $\nu=\omega$ remains only a deterministic prototype/special case when
