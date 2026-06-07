@@ -249,14 +249,21 @@ write_table(
 
 stability <- summary[
   summary$design_role == "main" &
-    summary$estimator %in% c("dps_amse_oracle", "dps_amse_plugin") &
+    summary$estimator %in% c(
+      "dps_variance", "dps_amse_oracle", "dps_amse_plugin"
+    ) &
     summary$np_target == 5 &
     summary$m == 10 &
     summary$regime == "strong" &
     summary$nu_choice == "threshold",
 ]
+stability$estimator_order <- match(
+  stability$estimator,
+  c("dps_variance", "dps_amse_oracle", "dps_amse_plugin")
+)
 stability <- stability[order(
-  stability$regime, stability$m, stability$dgp_key, stability$estimator
+  stability$regime, stability$m, stability$dgp_key,
+  stability$estimator_order
 ), ]
 stability_lines <- character(0)
 if (nrow(stability) > 0) {
@@ -517,27 +524,42 @@ if (requireNamespace("ggplot2", quietly = TRUE)) {
       summary$nu_choice %in% c("threshold", "centralised") &
       summary$estimator %in% c(
         "centralised", "dps_variance", "dps_amse_plugin"
-      ) &
-      summary$valid_ci_rate > 0,
+      ),
   ]
   if (nrow(cov_data) > 0) {
-    cov_data$dgp <- factor(cov_data$dgp, levels = rev(dgp_order))
-    cov_data$Estimator <- factor(
-      estimator_label(cov_data$estimator),
-      levels = estimator_label(c(
-        "centralised", "dps_variance", "dps_amse_plugin"
-      ))
+    estimator_levels <- estimator_label(c(
+      "centralised", "dps_variance", "dps_amse_plugin"
+    ))
+    cov_data$Estimator <- estimator_label(cov_data$estimator)
+    coverage_grid <- expand.grid(
+      dgp = dgp_order,
+      Estimator = estimator_levels,
+      stringsAsFactors = FALSE
     )
+    cov_data <- merge(
+      coverage_grid,
+      cov_data[, c("dgp", "Estimator", "coverage", "valid_ci_rate")],
+      by = c("dgp", "Estimator"),
+      all.x = TRUE,
+      sort = FALSE
+    )
+    cov_data$dgp <- factor(cov_data$dgp, levels = rev(dgp_order))
+    cov_data$Estimator <- factor(cov_data$Estimator, levels = estimator_levels)
     cov_data$coverage_gap <- cov_data$coverage - 0.95
+    cov_data$coverage_label <- ifelse(
+      is.na(cov_data$coverage) | cov_data$valid_ci_rate <= 0,
+      "--",
+      sprintf("%.2f", cov_data$coverage)
+    )
     p2 <- ggplot(
       cov_data,
       aes(x = Estimator, y = dgp, fill = coverage_gap)
     ) +
       geom_tile(color = "white", linewidth = 0.6) +
-      geom_text(aes(label = sprintf("%.2f", coverage)), size = 3) +
+      geom_text(aes(label = coverage_label), size = 3) +
       scale_fill_gradient2(
         low = "#B2182B", mid = "#F7F7F7", high = "#2166AC",
-        midpoint = 0, name = "Coverage - 0.95"
+        midpoint = 0, name = "Coverage - 0.95", na.value = "#E8E8E8"
       ) +
       labs(x = NULL, y = NULL) +
       theme_minimal(base_size = 9) +
@@ -565,9 +587,14 @@ if (requireNamespace("ggplot2", quietly = TRUE)) {
     diag <- diag[diag$kind == "oracle", ]
     if (nrow(diag) > 0) {
       diag$dgp <- factor(diag$dgp, levels = dgp_order)
-      diag$Design <- paste0(
-        "n = ", diag$n_total, ", ", diag$k_design,
-        ", eta = ", sprintf("%.2f", diag$eta)
+      diag$Design <- ifelse(
+        diag$k_design == "fraction=0.05",
+        paste0("n = ", diag$n_total, ", k/n = 0.05"),
+        paste0("n = ", diag$n_total, ", k = n^0.45")
+      )
+      diag$Design <- factor(
+        diag$Design,
+        levels = unique(diag$Design[order(diag$n_total, diag$k_design)])
       )
       bridge_plot <- rbind(
         data.frame(

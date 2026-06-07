@@ -641,8 +641,7 @@ Completed deliverable:
   recorded in the audit note;
 - a source-admissible estimated-`\omega` transfer check, principled plug-in
   standardisation, and log-scale interval inversion, recorded in the audit
-  note and now promoted to thesis prose;
-- no simulation design.
+  note and now promoted to thesis prose.
 
 Completed deliverable for the two-weight pivot:
 
@@ -904,9 +903,9 @@ precise admissible class for `\nu`. Do not open this route by default.
 
 Estimated plug-in weights and plug-in inference objects for `\omega` are
 validated at first order in the audit note and promoted in the live thesis.
-They are still not a simulation design. Do not switch to undersmoothing/no-bias
-centring unless Filippo explicitly reopens that route and the required
-conditions are source-checked.
+They are the mathematical basis for the current Chapter 4 simulation design.
+Do not switch to undersmoothing/no-bias centring unless Filippo explicitly
+reopens that route and the required conditions are source-checked.
 
 ### Phase 7: Thesis Restructure
 
