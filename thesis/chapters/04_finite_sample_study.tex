@@ -156,13 +156,13 @@ does not suggest opening a new optimisation layer for \(\bm\nu\).
 \label{tab:sim:point-main}
 \begingroup
 \setlength{\tabcolsep}{4pt}
-\input{tables/simulation/finite_sample_summary}
+\input{generated/simulation/tables/finite_sample_summary}
 \endgroup
 \end{table}
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{figures/simulation/rmse_pooled_vs_centralised.pdf}
+\includegraphics[width=\textwidth]{generated/simulation/figures/rmse_pooled_vs_centralised.pdf}
 \caption{Log RMSE of the DPS variance pooled estimator against the
 centralised benchmark in the main grid with \(k_j/n_j=0.05\) and \(np=5\).
 The dashed line is equality. Points near the line indicate that the pooled
@@ -202,7 +202,7 @@ choice.}
 \label{tab:sim:nu}
 \begingroup
 \setlength{\tabcolsep}{4pt}
-\input{tables/simulation/nu_sensitivity}
+\input{generated/simulation/tables/nu_sensitivity}
 \endgroup
 \end{table}
 
@@ -250,13 +250,13 @@ the representative main design.}
 \label{tab:sim:interval-main}
 \begingroup
 \setlength{\tabcolsep}{4pt}
-\input{tables/simulation/interval_summary}
+\input{generated/simulation/tables/interval_summary}
 \endgroup
 \end{table}
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{figures/simulation/coverage_heatmap.pdf}
+\includegraphics[width=\textwidth]{generated/simulation/figures/coverage_heatmap.pdf}
 \caption{Empirical coverage in the representative main design
 \((m=10\), strong allocation, \(k_j/n_j=0.05\), \(np=5)\). Cell labels give
 coverage; colour records the deviation from the nominal \(95\%\) level.}
@@ -265,7 +265,7 @@ coverage; colour records the deviation from the nominal \(95\%\) level.}
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{figures/simulation/bridge_target_diagnostic.pdf}
+\includegraphics[width=\textwidth]{generated/simulation/figures/bridge_target_diagnostic.pdf}
 \caption{Interval diagnostic comparing empirical coverage against the exact
 population expectile and against the first-order bridge target
 \(\psifn(\gamma)Q(1-p)\). The diagnostic uses oracle DPS centring and
@@ -317,7 +317,7 @@ The estimator uses DPS variance pooled-Weissman weights and
 \label{tab:sim:decomposition}
 \begingroup
 \setlength{\tabcolsep}{4pt}
-\input{tables/simulation/decomposition_summary}
+\input{generated/simulation/tables/decomposition_summary}
 \endgroup
 \end{table}
 
@@ -351,7 +351,7 @@ than to a simple monotone improvement when the target is made less extreme.
 \label{tab:sim:threshold}
 \begingroup
 \setlength{\tabcolsep}{4pt}
-\input{tables/simulation/threshold_sensitivity}
+\input{generated/simulation/tables/threshold_sensitivity}
 \endgroup
 \end{table}
 
@@ -363,7 +363,7 @@ than to a simple monotone improvement when the target is made less extreme.
 \label{tab:sim:target}
 \begingroup
 \setlength{\tabcolsep}{4pt}
-\input{tables/simulation/target_sensitivity}
+\input{generated/simulation/tables/target_sensitivity}
 \endgroup
 \end{table}
 
@@ -399,6 +399,6 @@ simulation targets.
 \label{tab:sim:weights}
 \begingroup
 \setlength{\tabcolsep}{4pt}
-\input{tables/simulation/weight_stability}
+\input{generated/simulation/tables/weight_stability}
 \endgroup
 \end{table}

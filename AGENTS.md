@@ -35,36 +35,39 @@ formula, and it does not make `\nu` optimal or random.
 
 ## Current Repository Status: Promoted First-Order Thesis Prose
 
-As of 2026-06-06, the live compiled thesis is no longer only the clean
-blank-slate scaffold. It now compiles:
+As of 2026-06-07, the live compiled thesis has been reorganised after the
+two-weight pivot. It now compiles:
 
 - title/front matter, with `\todo{}` still in the Abstract;
 - `thesis/chapters/01_introduction.tex`, still only the chapter heading,
   label, and `\todo{}`;
 - `thesis/chapters/02_background.tex`, retained as the background chapter and
   expanded with source-level estimated-weight and plug-in-object statements;
-- `thesis/chapters/04_pooled_extreme.tex`, now the live main-theory chapter;
+- `thesis/chapters/03_pooled_extreme_expectiles.tex`, now the live
+  main-theory chapter;
+- `thesis/chapters/04_finite_sample_study.tex`, the current narrow
+  finite-sample chapter for the promoted estimator and inference route;
 - bibliography via `\printbibliography`.
 
 `thesis/main.tex` currently includes `chapters/01_introduction`,
-`chapters/02_background`, and `chapters/04_pooled_extreme` before the
-bibliography. Since `thesis/chapters/03_pooled_intermediate.tex` remains
-uncompiled, the file `04_pooled_extreme.tex` is numbered as Chapter 3 in the
-PDF. The current PDF was rebuilt successfully with
+`chapters/02_background`, `chapters/03_pooled_extreme_expectiles`, and
+`chapters/04_finite_sample_study` before the bibliography. The current PDF is
+written to `thesis/build/main.pdf` and was rebuilt successfully with
 `latexmk -pdf -synctex=1 -interaction=nonstopmode main.tex`.
 
-The files `thesis/chapters/03_pooled_intermediate.tex`,
-`thesis/chapters/05_finite_sample.tex`, and
-`thesis/chapters/06_discussion.tex` remain uncompiled chapter stubs with only
-a chapter title, label, and `\todo{}`. They are retained as placeholders, not
-as evidence that the current final chapter structure is settled.
+The withdrawn pooled-intermediate placeholder has been moved out of live
+chapter source to `archive/pre_pivot/03_pooled_intermediate_placeholder.tex`.
+The file `thesis/chapters/05_discussion.tex` remains an uncompiled future
+placeholder with only a chapter title, label, and `\todo{}`.
 
 Important: the deterministic two-weight theorem, the estimated-`\omega`
 transfer corollary, and the plug-in studentisation/log-scale interval
 corollary are now promoted to live `.tex` prose in
-`thesis/chapters/04_pooled_extreme.tex`. The old diagonal Chapter 4 theorem
-route remains historical draft/audit context only. No simulation claim is
-currently promoted as final thesis evidence.
+`thesis/chapters/03_pooled_extreme_expectiles.tex`. The old diagonal Chapter 4
+theorem route remains historical draft/audit context only. The finite-sample
+chapter is a narrow current draft for the promoted estimator; do not widen its
+claims beyond the compiled design and generated artifacts under
+`thesis/generated/simulation/`.
 
 Current source-audit/prose status: the `A_n(\omega)` pooled Weissman component, the
 `B_n(\nu)` plug-in-`\psi` component, and the `C_n` population bridge component
@@ -92,7 +95,7 @@ inference corollary.
 
 The promoted two-weight route, first audited in
 `notes/source_audit_pooled_extreme_expectile.md` and now written in
-`thesis/chapters/04_pooled_extreme.tex`, uses the deterministic estimator
+`thesis/chapters/03_pooled_extreme_expectiles.tex`, uses the deterministic estimator
 `\widehat\xi_{\tau_n}^{pool,\star}(\nu,\omega)`. The active decomposition is
 \[
   \log
@@ -203,13 +206,16 @@ The live thesis now has the following status:
 - `thesis/chapters/02_background.tex` is substantive and compiled; it now
   includes estimated-weight and plug-in-object propositions supporting the
   promoted main-theory corollaries.
-- `thesis/chapters/03_pooled_intermediate.tex` is an uncompiled placeholder.
-- `thesis/chapters/04_pooled_extreme.tex` is compiled and contains the
+- `archive/pre_pivot/03_pooled_intermediate_placeholder.tex` is the archived
+  withdrawn pooled-intermediate placeholder, not live thesis source.
+- `thesis/chapters/03_pooled_extreme_expectiles.tex` is compiled and contains the
   promoted two-weight estimator, exact decomposition lemma, deterministic
   theorem, deterministic/oracle `\omega` weight corollary, estimated-`\omega`
   transfer corollary, and plug-in inference corollary with proofs.
-- `thesis/chapters/05_finite_sample.tex` is an uncompiled placeholder.
-- `thesis/chapters/06_discussion.tex` is an uncompiled placeholder.
+- `thesis/chapters/04_finite_sample_study.tex` is compiled and contains the
+  current narrow finite-sample study for the promoted estimator and plug-in
+  inference route.
+- `thesis/chapters/05_discussion.tex` is an uncompiled placeholder.
 - `notes/source_audit_pooled_extreme_expectile.md` records the active
   two-weight estimator, the exact `A_n(\omega)+B_n(\nu)-C_n` decomposition,
   the `B_n(\nu)` Taylor/order check, the checked deterministic two-weight
@@ -218,8 +224,9 @@ The live thesis now has the following status:
   principled plug-in standardisation and log-scale interval inversion, the
   fixed practical bridge convention `\nu_n^k=(k_1/k,\ldots,k_m/k)`, and the
   default decision not to open lower-order `\nu` optimality.
-- `thesis/main.tex` compiles the Introduction, Background, and
-  `04_pooled_extreme.tex` main-theory file before the bibliography.
+- `thesis/main.tex` compiles the Introduction, Background,
+  `03_pooled_extreme_expectiles.tex`, and `04_finite_sample_study.tex` before
+  the bibliography.
 
 ### What Is Affected
 
@@ -227,11 +234,13 @@ The live thesis now has the following status:
   `\todo{}`. When rewriting it, align claims with the promoted main-theory
   results and avoid simulation or broader-scope claims before those layers are
   actually written.
-- `thesis/chapters/03_pooled_intermediate.tex`: uncompiled placeholder. The
+- `archive/pre_pivot/03_pooled_intermediate_placeholder.tex`: archived
+  withdrawn placeholder. The
   pooled intermediate QB CLT, A/B estimator comparison, two-weight optimality
   results, AMSE closed form, CI, and expectile-homogeneity diagnostic should
   not be used as established thesis contributions.
-- `thesis/chapters/04_pooled_extreme.tex`: live compiled main-theory chapter.
+- `thesis/chapters/03_pooled_extreme_expectiles.tex`: live compiled
+  main-theory chapter.
   Preserve the current order: exact decomposition, deterministic two-weight
   theorem, `\omega` weight corollary, estimated-`\omega` transfer, then
   plug-in inference. Do not add simulations, broader tail-homoskedastic target
@@ -240,13 +249,13 @@ The live thesis now has the following status:
 - Appendix proofs in `thesis/main.tex`: no appendix is currently compiled.
   Individual algebraic ideas from old drafts may be useful as scratch work,
   but do not cite them as validated results.
-- `thesis/chapters/05_finite_sample.tex` and `simulation/`: Chapter 5 is an
-  uncompiled placeholder. The existing simulations were designed around the
-  old estimator and old weight menu. They are not final evidence for the
-  rebuilt thesis and should stay frozen until the promoted estimator, plug-in
-  inference route, and finite-sample metrics are settled; the main practical
-  bridge-Hill convention is `\nu_n^k`.
-- Generated tables/figures under `thesis/tables/simulation/` and `thesis/figures/simulation/`: treat as stale until the new estimator and simulation design are settled.
+- `thesis/chapters/04_finite_sample_study.tex` and `simulation/`: the current
+  compiled finite-sample study is narrow and post-pivot. Keep its claims tied
+  to the promoted estimator, selected DPS `\omega` routes, plug-in objects,
+  and fixed bridge-Hill convention `\nu_n^k`.
+- Generated tables/figures under `thesis/generated/simulation/`: treat as
+  rendered artifacts produced by `simulation/render_results.R`, not hand-written
+  thesis prose.
 
 ### What To Keep
 
@@ -485,7 +494,7 @@ live main-theory chapter:
   `(\omega^\top B_c^{dist})^2+\omega^\top V_c^{dist}\omega`. This criterion
   does not choose `\nu`.
 - The deterministic two-weight theorem is recorded in the audit note and
-  promoted in `thesis/chapters/04_pooled_extreme.tex`: for deterministic
+  promoted in `thesis/chapters/03_pooled_extreme_expectiles.tex`: for deterministic
   admissible `(\nu,\omega)`, the first-order limit remains
   `N(B_\omega,V_\omega)` and is independent of `\nu`.
 - The source-admissible estimated-`\omega` transfer is recorded in the audit
@@ -536,18 +545,16 @@ plug-in inference layer:
 ## Immediate Next Step
 
 The active compiled thesis is `thesis/main.tex` with
-`chapters/01_introduction`, `chapters/02_background`, `chapters/04_pooled_extreme`,
-and the bibliography. The file `04_pooled_extreme.tex` is currently numbered
-as Chapter 3 in the PDF because `03_pooled_intermediate.tex` remains
-uncompiled. The active audit trail remains
+`chapters/01_introduction`, `chapters/02_background`,
+`chapters/03_pooled_extreme_expectiles`, `chapters/04_finite_sample_study`,
+and the bibliography. The active audit trail remains
 `notes/source_audit_pooled_extreme_expectile.md`.
 
 The immediate next research step is no longer to promote the first-order
-result: that has been done. The next unresolved work is either to rewrite the
-Introduction around the promoted theorem/corollary sequence, or to design the
-finite-sample study around the promoted estimator and plug-in inference route.
-The remaining uncompiled placeholders are `03_pooled_intermediate.tex`,
-`05_finite_sample.tex`, and `06_discussion.tex`.
+result or reorganise the thesis directory: both have been done. The next
+unresolved prose task is to rewrite the Introduction around the promoted
+theorem/corollary sequence and the narrow finite-sample chapter. The remaining
+uncompiled chapter placeholder is `05_discussion.tex`.
 
 At first order, DPS variance- and AMSE-optimal weights apply to `\omega` only,
 including source-admissible estimated weights. The practical route should use
@@ -780,7 +787,7 @@ parked unless Filippo explicitly reopens it.
 ### Phase 5: Main Theorem
 
 The main first-order theorem is now promoted to live `.tex` prose in
-`thesis/chapters/04_pooled_extreme.tex`. The previous diagonal first-route
+`thesis/chapters/03_pooled_extreme_expectiles.tex`. The previous diagonal first-route
 theorem remains useful only as audit/history context: generic deterministic
 admissible weights satisfying `\omega^\top\mathbf 1=1` in the finite-`m`
 iid/common-marginal distributed setting under `\eta_n\to0`, with DPS
@@ -891,6 +898,9 @@ log-scale interval, and fixed `\nu_n^k` convention are stable:
 ├── notes/
 │   └── source_audit_pooled_extreme_expectile.md
 ├── papers/
+├── archive/
+│   └── pre_pivot/
+│       └── 03_pooled_intermediate_placeholder.tex
 ├── simulation/
 │   ├── R/sim_functions.R
 │   ├── run_simulation.R
@@ -900,18 +910,22 @@ log-scale interval, and fixed `\nu_n^k` convention are stable:
     ├── main.tex
     ├── preamble.tex
     ├── references.bib
-    ├── figures/simulation/
-    ├── tables/simulation/
+    ├── latexmkrc
+    ├── build/                    # ignored LaTeX output
+    ├── generated/simulation/
+    │   ├── figures/
+    │   └── tables/
     └── chapters/
         ├── 01_introduction.tex
         ├── 02_background.tex
-        ├── 03_pooled_intermediate.tex
-        ├── 04_pooled_extreme.tex
-        ├── 05_finite_sample.tex
-        └── 06_discussion.tex
+        ├── 03_pooled_extreme_expectiles.tex
+        ├── 04_finite_sample_study.tex
+        └── 05_discussion.tex
 ```
 
-The files are aligned only as a reset scaffold. Treat the layout as a workspace, not as a statement that the chapter structure is final.
+The live `thesis/chapters/` directory should contain only current thesis prose
+or explicitly future chapter placeholders. Withdrawn or pre-pivot material
+belongs under `archive/`.
 
 ## Building The Document
 

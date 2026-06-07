@@ -58,9 +58,13 @@ if (any(summary$design_version != SIMULATION_DESIGN_VERSION)) {
     call. = FALSE
   )
 }
-output_root <- if (is.na(artifact_root)) file.path(repo_root, "thesis") else artifact_root
-fig_dir <- file.path(output_root, "figures", "simulation")
-tab_dir <- file.path(output_root, "tables", "simulation")
+output_root <- if (is.na(artifact_root)) {
+  file.path(repo_root, "thesis", "generated", "simulation")
+} else {
+  artifact_root
+}
+fig_dir <- file.path(output_root, "figures")
+tab_dir <- file.path(output_root, "tables")
 dir.create(fig_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(tab_dir, recursive = TRUE, showWarnings = FALSE)
 
