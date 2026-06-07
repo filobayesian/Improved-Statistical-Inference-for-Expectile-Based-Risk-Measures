@@ -179,7 +179,8 @@ The log-denominator is the cost of extrapolation. Up to that factor the
 limit is the Hill limit, which is why
 \textcite[\S2.3]{DaouiaPadoanStupfler2021} pool Weissman estimators
 geometrically. This pooled-Weissman law is the source result against
-which the rebuilt expectile estimator will be compared.
+which the pooled extreme-expectile estimator in
+\Cref{ch:pooled-extreme} will be compared.
 
 \section{Expectiles}
 \label{sec:bg:expectiles}
@@ -258,45 +259,29 @@ Let $X$ and $Y$ be real-valued random variables with $\E |X|, \E |Y|
 \end{enumerate}
 \end{proposition}
 
-For losses, expectiles are translation equivariant, positively
-homogeneous and monotone. The remaining coherence issue is
-subadditivity.
-
-\subsection{Coherence and elicitability}
-
-In the rest of the thesis $X$ denotes a loss. The coherence literature
-is often written for financial positions, so in this subsection only
-write $Y$ for a position and define the capital requirement
-\[
-  \rho_{\tau}(Y) \;=\; \expectile{\tau}(-Y).
-\]
-
-\begin{theorem}[\textcite{BelliniKlarMullerRosazzaGianin2014}]
-\label{thm:bg:expectile-coherence}
-The functional $\rho_{\tau}(Y) = \expectile{\tau}(-Y)$ is a coherent
-risk measure if and only if $\tau \ge 1/2$.
-\end{theorem}
-
-Recall that a functional is \emph{elicitable} if it is the unique
-minimiser of an expected strictly consistent score
-\parencite{Gneiting2011}. Expectiles are elicitable on classes with
-finite first moment; the asymmetric squared score is strictly
-consistent under finite second moments, and the general scoring class
-has Bregman-type and Choquet-type representations
-\parencite{Gneiting2011,EhmGneitingJordanKrueger2016}. This scoring
-structure motivates forecast comparison, but the asymptotic theory below
-uses only \eqref{eq:bg:expectile-foc} and the extreme
-expectile--quantile equivalence.
+For losses, these properties give translation equivariance, positive
+homogeneity and monotonicity. If $Y$ denotes a financial position and
+$\rho_{\tau}(Y)=\expectile{\tau}(-Y)$ is the associated capital
+requirement, then $\rho_\tau$ is coherent exactly when
+$\tau\ge 1/2$ \parencite{BelliniKlarMullerRosazzaGianin2014}.
+Expectiles are also elicitable on classes with finite first moment; the
+asymmetric squared score is strictly consistent under finite second
+moments, and the general scoring class has Bregman-type and
+Choquet-type representations
+\parencite{Gneiting2011,EhmGneitingJordanKrueger2016}. These facts
+motivate high-level expectiles as tail-risk functionals, while the
+asymptotic theory below uses only \eqref{eq:bg:expectile-foc} and the
+extreme expectile--quantile equivalence.
 
 \section{The high-expectile/high-quantile bridge}
 \label{sec:bg:extreme-expectile}
 
-The contribution chapter uses expectile theory through the population
+\Cref{ch:pooled-extreme} uses expectile theory through the population
 relationship between a high expectile and the quantile of the same
-level. The stochastic extreme-quantile part is supplied by the
-Daouia--Padoan--Stupfler pooled Weissman estimator recalled in
-\Cref{sec:bg:pooling}; the expectile-specific work is to control the
-deterministic bridge between $\expectile{\tau}$ and
+level. The stochastic extreme-quantile part is supplied by the pooled
+Weissman estimator of \textcite[\S2.3]{DaouiaPadoanStupfler2021},
+recalled in \Cref{sec:bg:pooling}; the expectile-specific work is to
+control the deterministic bridge between $\expectile{\tau}$ and
 $\Quant_X(\tau)$. This section therefore records only the bridge
 statements needed later.
 
@@ -380,22 +365,20 @@ asymmetric-least-squares estimators, quantile-based intermediate
 plug-in estimators, and Weissman-type expectile extrapolations from an
 intermediate expectile anchor
 \parencite{DaouiaGirardStupfler2018,DaouiaGirardStupfler2020,DavisonPadoanStupfler2023}.
-Those results explain why the expectile--quantile bridge is useful, but
-they are not theorem inputs for the contribution chapter. The estimator
-analysed below performs the extreme extrapolation in the
-pooled-quantile component and then applies the population bridge at the
-target level. Accordingly, the needed expectile background is the
-first- and second-order bridge above, rather than a generic CLT for an
-intermediate expectile estimator.
+These results provide context for the use of the expectile--quantile
+bridge. The estimator analysed in \Cref{ch:pooled-extreme} performs the
+extreme extrapolation in the pooled-quantile component and then applies
+the population bridge at the target level. Consequently, the later
+argument relies on the first- and second-order bridge statements
+recorded in this section.
 
 \section{The optimal pooling framework}
 \label{sec:bg:pooling}
 
 We now recall the pooling framework of
-\textcite{DaouiaPadoanStupfler2021}. The rebuilt thesis uses this
-framework as the source theory for pooled tail-index and
-extreme-quantile inference before applying the expectile--quantile
-bridge. The framework pools tail-index and
+\textcite{DaouiaPadoanStupfler2021}. This framework provides the source
+theory for pooled tail-index and extreme-quantile inference before the
+expectile--quantile bridge is applied. The framework pools tail-index and
 extreme-quantile estimators from $m$ samples, allowing heterogeneous
 sizes, second-order properties and cross-sample tail dependence.
 This general framework is recalled to identify the source objects and
@@ -562,7 +545,7 @@ becomes the diagonal matrix
     \mathrm{diag}(c_{1}, \ldots, c_{m}).
 \end{equation}
 \Cref{eq:bg:V_c-diagonal} is the covariance form to be used when the
-rebuilt main theorem is specialised to independent samples.
+main theorem is specialised to independent samples.
 
 \subsection{Variance- and AMSE-optimal weights}
 
@@ -708,8 +691,8 @@ along the Weissman sequence.
 
 Thus the pooled Weissman and pooled Hill limits share the same mean,
 variance and optimal weights up to the log-rate factor. This shared
-structure is the reason the contribution chapter can import the
-Daouia--Padoan--Stupfler weight criteria for the pooled-Weissman
+structure is the reason \Cref{ch:pooled-extreme} can use the weight
+criteria of \textcite{DaouiaPadoanStupfler2021} for the pooled-Weissman
 component.
 
 \subsection{Estimated weights and plug-in objects}
@@ -720,8 +703,8 @@ the asymptotic bias and covariance objects. For inference they are
 replaced either by deterministic allocation weights, such as
 \((k_1/k,\ldots,k_m/k)^\top\) in the independent distributed case, or
 by estimated weights based on plug-in estimates of the same objects.
-The following result records the stability property used in the
-contribution chapter. There, estimated weights are used only in the
+The following result records the stability property used in
+\Cref{ch:pooled-extreme}. Estimated weights are used there only in the
 pooled-Weissman role; the bridge-Hill vector remains deterministic.
 
 \begin{proposition}[Estimated pooling weights;
@@ -825,15 +808,9 @@ distributed case, their Corollaries~6--7 give the corresponding
 deterministic variance allocation and plug-in AMSE constructions under
 the analogous common second-order parameter consistency assumptions.
 
-\subsection{Source diagnostics and intervals}
-
-\textcite{DaouiaPadoanStupfler2021} also develop tail-homogeneity tests
-for the common-$\gamma$ condition, confidence intervals for the common
-tail index, and log-scale intervals for pooled Weissman quantiles. These
-tools are useful diagnostics in the source pooling framework. The
-expectile interval in \Cref{ch:pooled-extreme}, however, is not imported
-as a direct restatement of a DPS quantile interval; it is obtained by
-Slutsky's theorem and inversion after the exact expectile decomposition.
+The log-scale interval for the expectile estimator in
+\Cref{ch:pooled-extreme} is derived from the transferred plug-in
+centring and variance objects after the expectile decomposition.
 
 \subsection{Distributed inference as a special case}
 \label{sec:bg:pool-distrib}
