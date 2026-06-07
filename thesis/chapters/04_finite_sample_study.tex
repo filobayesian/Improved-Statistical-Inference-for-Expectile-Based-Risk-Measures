@@ -148,7 +148,10 @@ variance weights in the representative design. Thus the simulation supports
 DPS variance weights as a stable practical baseline for \(\bm\omega\), but it
 does not show a finite-sample benefit from estimating second-order AMSE
 weights here. This is a statement about the pooled-Weissman weights only; it
-does not suggest opening a new optimisation layer for \(\bm\nu\).
+does not suggest opening a new optimisation layer for \(\bm\nu\). The
+heterogeneous-threshold diagnostic in \Cref{tab:sim:omega-heterogeneous}
+separately checks whether AMSE weights behave differently when the local
+threshold fractions no longer coincide.
 
 \begin{table}[htbp]
 \centering
@@ -409,6 +412,17 @@ unstable or frequently negative weights. Rather, in the representative
 common-tail design the estimated AMSE rule is numerically close to the simpler
 variance allocation, so there is little finite-sample gain to obtain.
 
+\Cref{tab:sim:omega-heterogeneous} gives AMSE weights a more discriminating
+finite-sample environment by reusing the heterogeneous-threshold diagnostic from
+\Cref{tab:sim:nu-heterogeneous}. Here the bridge-Hill vector is fixed at
+\(\bm\nu_n^k\), while the pooled-Weissman weights vary between the DPS variance
+rule and the DPS AMSE rules. This isolates the \(\bm\omega\)-weight question:
+whether the AMSE criterion has a visible finite-sample advantage when the local
+threshold fractions make the bias constants less uniform. The interpretation is
+still limited to the first-order \(\bm\omega\) criterion from
+\Cref{cor:pool-ext:omega-criteria}; it is not an expectile-specific AMSE theory
+and it does not choose \(\bm\nu\).
+
 The simulation evidence is intentionally limited. It supports the promoted
 estimator in the iid common-marginal distributed setting and suggests that
 DPS variance weights are a robust practical choice for \(\bm\omega\). It
@@ -429,5 +443,26 @@ simulation targets.
 \begingroup
 \setlength{\tabcolsep}{4pt}
 \input{generated/simulation/tables/weight_stability}
+\endgroup
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Pooled-Weissman weight comparison under heterogeneous local threshold
+fractions. The bridge-Hill weights are fixed at
+\(\bm\nu=\bm\nu_n^k\).}
+\label{tab:sim:omega-heterogeneous}
+\begingroup
+\setlength{\tabcolsep}{4pt}
+\IfFileExists{generated/simulation/tables/omega_heterogeneous_sensitivity.tex}
+  {\input{generated/simulation/tables/omega_heterogeneous_sensitivity}}
+  {\begin{tabular}{llrrrrr}
+   \toprule
+   DGP & Estimator & Log bias & Log RMSE & Coverage & Neg. rate & Avg. max \(|\omega|\) \\
+   \midrule
+   No rows & -- & -- & -- & -- & -- & -- \\
+   \bottomrule
+   \end{tabular}}
 \endgroup
 \end{table}

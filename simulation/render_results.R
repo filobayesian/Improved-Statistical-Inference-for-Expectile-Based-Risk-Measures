@@ -277,6 +277,39 @@ write_table(
   "lrllrr"
 )
 
+omega_hetero <- summary[
+  summary$design_role == "nu_heterogeneous" &
+    summary$np_target == 5 &
+    summary$m == 10 &
+    summary$regime == "strong" &
+    summary$k_profile == "inverse_allocation" &
+    summary$nu_choice == "threshold" &
+    summary$estimator %in% c(
+      "dps_variance", "dps_amse_oracle", "dps_amse_plugin"
+    ),
+]
+omega_hetero <- omega_hetero[order(
+  omega_hetero$dgp_key, omega_hetero$estimator
+), ]
+omega_hetero_lines <- character(0)
+if (nrow(omega_hetero) > 0) {
+  for (i in seq_len(nrow(omega_hetero))) {
+    row <- omega_hetero[i, ]
+    omega_hetero_lines <- c(omega_hetero_lines, sprintf(
+      "%s & %s & %s & %s & %s & %s & %s \\\\",
+      row$dgp, estimator_label(row$estimator),
+      fmt(row$log_bias), fmt(row$log_rmse), fmt(row$coverage),
+      fmt(row$negative_weight_rate), fmt(row$avg_max_abs_weight)
+    ))
+  }
+}
+write_table(
+  file.path(tab_dir, "omega_heterogeneous_sensitivity.tex"),
+  "DGP & Estimator & Log bias & Log RMSE & Coverage & Neg. rate & Avg. max $|\\omega|$ \\\\",
+  omega_hetero_lines,
+  "llrrrrr"
+)
+
 validity <- summary[
   summary$design_role == "main" &
     summary$np_target == 5 &
