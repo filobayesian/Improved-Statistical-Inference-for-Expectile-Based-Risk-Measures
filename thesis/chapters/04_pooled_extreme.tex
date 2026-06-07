@@ -316,7 +316,39 @@ differentiable, with
   =
   \frac{1}{(1-x)^2}+\frac{1}{1-x}+\frac{1}{x}.
 \]
-By the vector pooled Hill CLT in \Cref{thm:bg:pool-hill},
+The aggregate assumptions imply the local bias calibration required by the
+vector pooled Hill CLT. Indeed, \(k_j\to\infty\), \(k_j/n_j\to0\), and
+\[
+  \frac{k_j}{k}\to
+  \frac{c_j^{-1}}{\sum_{i=1}^{m}c_i^{-1}},
+  \qquad
+  \frac{n_j}{n}\to
+  \frac{b_j^{-1}}{\sum_{i=1}^{m}b_i^{-1}}.
+\]
+Consequently,
+\[
+  \frac{n_j/k_j}{n/k}
+  \to
+  d_j
+  =
+  \frac{c_j}{b_j}\,
+  \frac{\sum_{i=1}^{m}c_i^{-1}}{\sum_{i=1}^{m}b_i^{-1}},
+\]
+and regular variation of \(A\) gives
+\[
+  \sqrt{k_j}\,A(n_j/k_j)
+  =
+  \sqrt{\frac{k_j}{k}}\,
+  \sqrt{k}\,A(n/k)\,
+  \frac{A(n_j/k_j)}{A(n/k)}
+  \to
+  \lambda
+  \left(\frac{c_j^{-1}}{\sum_{i=1}^{m} c_i^{-1}}\right)^{1/2}
+  d_j^\rho .
+\]
+Thus the common-marginal distributed assumptions of
+\Cref{thm:pool-ext:deterministic} meet the local assumptions of
+\Cref{thm:bg:pool-hill}. In particular,
 \[
   \sqrt{k}\{\hat{\bm\gamma}_n-\gamma\bm 1\}=O_P(1).
 \]

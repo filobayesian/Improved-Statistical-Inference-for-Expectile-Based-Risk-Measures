@@ -208,14 +208,23 @@ pooled_expectile <- function(gamma_hat, q_hat, nu, omega) {
   if (!valid_gamma_domain(gamma_bridge) ||
       any(!is.finite(q_hat)) || any(q_hat <= 0) ||
       any(!is.finite(omega))) {
-    return(list(estimate = NA_real_, gamma_bridge = gamma_bridge))
+    return(list(
+      estimate = NA_real_,
+      gamma_bridge = gamma_bridge,
+      q_pool = NA_real_
+    ))
   }
   q_pool <- exp(sum(omega * log(q_hat)))
   if (!is.finite(q_pool) || q_pool <= 0) {
-    return(list(estimate = NA_real_, gamma_bridge = gamma_bridge))
+    return(list(
+      estimate = NA_real_,
+      gamma_bridge = gamma_bridge,
+      q_pool = q_pool
+    ))
   }
   list(estimate = psi_fn(gamma_bridge) * q_pool,
-       gamma_bridge = gamma_bridge)
+       gamma_bridge = gamma_bridge,
+       q_pool = q_pool)
 }
 
 dps_objects <- function(gamma, rho, beta, n_vec, k_vec) {
@@ -237,6 +246,15 @@ dps_objects <- function(gamma, rho, beta, n_vec, k_vec) {
 
 variance_weights <- function(k_vec) {
   normalize_weights(k_vec)
+}
+
+nu_specs <- function(n_vec, k_vec) {
+  m <- length(k_vec)
+  list(
+    threshold = variance_weights(k_vec),
+    equal = rep(1 / m, m),
+    sample = variance_weights(n_vec)
+  )
 }
 
 amse_weights <- function(Bc, Vc) {
@@ -268,14 +286,24 @@ estimate_second_order_evt0 <- function(x) {
   list(rho = rho, beta = beta)
 }
 
-plugin_dps_objects <- function(samples, n_vec, k_vec, gamma_hat, nu) {
+plugin_second_order <- function(samples, n_vec) {
   second <- lapply(samples, estimate_second_order_evt0)
   if (any(vapply(second, is.null, logical(1)))) return(NULL)
   n_weight <- n_vec / sum(n_vec)
-  rho_hat <- sum(n_weight * vapply(second, `[[`, numeric(1), "rho"))
-  beta_hat <- sum(n_weight * vapply(second, `[[`, numeric(1), "beta"))
+  list(
+    rho = sum(n_weight * vapply(second, `[[`, numeric(1), "rho")),
+    beta = sum(n_weight * vapply(second, `[[`, numeric(1), "beta"))
+  )
+}
+
+plugin_dps_objects <- function(samples, n_vec, k_vec, gamma_hat, nu,
+                               second_order = NULL) {
+  if (is.null(second_order)) {
+    second_order <- plugin_second_order(samples, n_vec)
+  }
+  if (is.null(second_order)) return(NULL)
   gamma_hat_pool <- sum(nu * gamma_hat)
-  dps_objects(gamma_hat_pool, rho_hat, beta_hat, n_vec, k_vec)
+  dps_objects(gamma_hat_pool, second_order$rho, second_order$beta, n_vec, k_vec)
 }
 
 log_ci <- function(est, ell, k_total, B_hat, V_hat, alpha = 0.05) {
@@ -302,7 +330,7 @@ allocation_weights <- function(m, regime) {
 scenario_grid <- function(mode) {
   if (mode == "smoke") {
     return(data.frame(
-      dgp = "burr_heavy", m = 5, regime = "strong",
+      dgp = "burr_heavy", m = 10, regime = "strong",
       k_fraction = 0.05, n_total = 2500, np_target = 5,
       stringsAsFactors = FALSE
     ))
@@ -363,10 +391,13 @@ scenario_sizes <- function(m, regime, n_total, k_fraction) {
   list(n_vec = as.integer(n_vec), k_vec = as.integer(k_vec))
 }
 
-estimator_specs <- function(dgp, samples, n_vec, k_vec, gamma_hat, nu) {
+estimator_specs <- function(dgp, samples, n_vec, k_vec, gamma_hat, nu,
+                            plugin_second = NULL) {
   m <- length(k_vec)
   oracle <- dps_objects(dgp$gamma, dgp$rho, dgp$beta, n_vec, k_vec)
-  plugin <- plugin_dps_objects(samples, n_vec, k_vec, gamma_hat, nu)
+  plugin <- plugin_dps_objects(
+    samples, n_vec, k_vec, gamma_hat, nu, plugin_second
+  )
 
   specs <- list(
     equal = list(
@@ -405,16 +436,25 @@ run_one_replication <- function(scenario, rep_id, alpha = 0.05) {
   p <- scenario$np_target / n_total
   tau <- 1 - p
   ell <- log(k_total / (n_total * p))
-  nu <- variance_weights(k_vec)
+  scale <- sqrt(k_total) / ell
 
   samples <- lapply(n_vec, dgp$r)
   combined <- unlist(samples, use.names = FALSE)
   prim <- local_primitives(samples, k_vec, p)
   truth <- expectile_truth_cached(dgp, tau)
-  specs <- estimator_specs(dgp, samples, n_vec, k_vec, prim$gamma_hat, nu)
+  q_truth <- dgp$quantile(tau)
+  psi_true <- psi_fn(dgp$gamma)
+  bridge_target <- psi_true * q_truth
+  C_term <- if (is.finite(truth) && truth > 0 &&
+                is.finite(bridge_target) && bridge_target > 0) {
+    log(truth / bridge_target)
+  } else {
+    NA_real_
+  }
 
   rows <- list()
-  add_row <- function(estimator, kind, xi_hat, gamma_bridge, omega, objects,
+  add_row <- function(estimator, kind, nu_choice, xi_hat, gamma_bridge,
+                      q_pool, omega, objects,
                       is_centralised = FALSE) {
     valid_estimate <- is.finite(xi_hat) && xi_hat > 0 &&
       is.finite(truth) && truth > 0 && valid_gamma_domain(gamma_bridge)
@@ -428,6 +468,28 @@ run_one_replication <- function(scenario, rep_id, alpha = 0.05) {
     }
     ci <- log_ci(xi_hat, ell, k_total, B_hat, V_hat, alpha)
     valid_ci <- valid_estimate && all(is.finite(ci))
+    psi_bridge <- psi_fn(gamma_bridge)
+    A_term <- if (is.finite(q_pool) && q_pool > 0 &&
+                  is.finite(q_truth) && q_truth > 0) {
+      log(q_pool / q_truth)
+    } else {
+      NA_real_
+    }
+    B_term <- if (is.finite(psi_bridge) && psi_bridge > 0 &&
+                  is.finite(psi_true) && psi_true > 0) {
+      log(psi_bridge) - log(psi_true)
+    } else {
+      NA_real_
+    }
+    log_error <- if (valid_estimate) log(xi_hat / truth) else NA_real_
+    scaled_log_error <- if (is.finite(log_error)) scale * log_error else NA_real_
+    studentized <- if (is.finite(scaled_log_error) &&
+                       is.finite(B_hat) &&
+                       is.finite(V_hat) && V_hat > 0) {
+      (scaled_log_error - B_hat) / sqrt(V_hat)
+    } else {
+      NA_real_
+    }
     rows[[length(rows) + 1]] <<- data.frame(
       rep = rep_id,
       dgp = dgp$name,
@@ -440,12 +502,32 @@ run_one_replication <- function(scenario, rep_id, alpha = 0.05) {
       k_total = k_total,
       np_target = scenario$np_target,
       tau = tau,
+      nu_choice = nu_choice,
       estimator = estimator,
       estimator_kind = kind,
       estimate = if (valid_estimate) xi_hat else NA_real_,
       truth = truth,
-      log_error = if (valid_estimate) log(xi_hat / truth) else NA_real_,
-      abs_log_error = if (valid_estimate) abs(log(xi_hat / truth)) else NA_real_,
+      bridge_target = bridge_target,
+      q_truth = q_truth,
+      q_pool = q_pool,
+      gamma_bridge = gamma_bridge,
+      B_hat = B_hat,
+      V_hat = V_hat,
+      log_error = log_error,
+      abs_log_error = if (valid_estimate) abs(log_error) else NA_real_,
+      scaled_log_error = scaled_log_error,
+      studentized = studentized,
+      decomp_A = A_term,
+      decomp_B = B_term,
+      decomp_C = C_term,
+      decomp_remainder = if (all(is.finite(c(A_term, B_term, C_term, log_error)))) {
+        log_error - (A_term + B_term - C_term)
+      } else {
+        NA_real_
+      },
+      scaled_A = if (is.finite(A_term)) scale * A_term else NA_real_,
+      scaled_B = if (is.finite(B_term)) scale * B_term else NA_real_,
+      scaled_C = if (is.finite(C_term)) scale * C_term else NA_real_,
       covered = if (valid_ci) {
         as.integer(log(truth) >= ci[1] && log(truth) <= ci[2])
       } else {
@@ -462,13 +544,21 @@ run_one_replication <- function(scenario, rep_id, alpha = 0.05) {
     )
   }
 
-  for (name in names(specs)) {
-    spec <- specs[[name]]
-    pooled <- pooled_expectile(prim$gamma_hat, prim$q_hat, nu, spec$omega)
-    add_row(
-      name, spec$kind, pooled$estimate, pooled$gamma_bridge,
-      spec$omega, spec$objects
+  nu_choices <- nu_specs(n_vec, k_vec)
+  plugin_second <- plugin_second_order(samples, n_vec)
+  for (nu_choice in names(nu_choices)) {
+    nu <- nu_choices[[nu_choice]]
+    specs <- estimator_specs(
+      dgp, samples, n_vec, k_vec, prim$gamma_hat, nu, plugin_second
     )
+    for (name in names(specs)) {
+      spec <- specs[[name]]
+      pooled <- pooled_expectile(prim$gamma_hat, prim$q_hat, nu, spec$omega)
+      add_row(
+        name, spec$kind, nu_choice, pooled$estimate, pooled$gamma_bridge,
+        pooled$q_pool, spec$omega, spec$objects
+      )
+    }
   }
 
   gamma_full <- er_hill(combined, k_total)
@@ -480,7 +570,8 @@ run_one_replication <- function(scenario, rep_id, alpha = 0.05) {
     NA_real_
   }
   add_row(
-    "centralised", "benchmark", xi_full, gamma_full, 1, NULL,
+    "centralised", "benchmark", "centralised", xi_full, gamma_full, q_full,
+    1, NULL,
     is_centralised = TRUE
   )
 
@@ -495,25 +586,36 @@ summarise_results <- function(results) {
   sum_na <- function(x) sum(x, na.rm = TRUE)
   group_vars <- c(
     "dgp", "dgp_key", "gamma", "m", "regime", "k_fraction", "n_total",
-    "k_total", "np_target", "estimator", "estimator_kind", "plugin_available"
+    "k_total", "np_target", "nu_choice", "estimator", "estimator_kind",
+    "plugin_available"
   )
   summary_input <- transform(
     results,
-    log_error_sq = ifelse(is.na(log_error), NA_real_, log_error^2)
+    log_error_sq = ifelse(is.na(log_error), NA_real_, log_error^2),
+    scaled_log_error_sq = ifelse(is.na(scaled_log_error), NA_real_, scaled_log_error^2),
+    studentized_sq = ifelse(is.na(studentized), NA_real_, studentized^2),
+    scaled_A_sq = ifelse(is.na(scaled_A), NA_real_, scaled_A^2),
+    scaled_B_sq = ifelse(is.na(scaled_B), NA_real_, scaled_B^2),
+    scaled_C_sq = ifelse(is.na(scaled_C), NA_real_, scaled_C^2),
+    decomp_remainder_abs = abs(decomp_remainder)
   )
   out <- aggregate(
     cbind(
       log_error, log_error_sq, abs_log_error, covered, ci_log_length,
-      any_negative_weight, max_abs_weight
+      scaled_log_error, scaled_log_error_sq, studentized, studentized_sq,
+      scaled_A, scaled_A_sq, scaled_B, scaled_B_sq, scaled_C, scaled_C_sq,
+      decomp_remainder_abs, any_negative_weight, max_abs_weight
     ) ~ dgp + dgp_key + gamma + m + regime + k_fraction + n_total +
-      k_total + np_target + estimator + estimator_kind + plugin_available,
+      k_total + np_target + nu_choice + estimator + estimator_kind +
+      plugin_available,
     data = summary_input,
     FUN = mean_na,
     na.action = na.pass
   )
   counts <- aggregate(
     rep ~ dgp + dgp_key + gamma + m + regime + k_fraction + n_total +
-      k_total + np_target + estimator + estimator_kind + plugin_available,
+      k_total + np_target + nu_choice + estimator + estimator_kind +
+      plugin_available,
     data = summary_input,
     FUN = length,
     na.action = na.pass
@@ -521,7 +623,8 @@ summarise_results <- function(results) {
   diagnostics <- aggregate(
     cbind(valid_estimate, valid_ci, invalid_domain) ~
       dgp + dgp_key + gamma + m + regime + k_fraction + n_total +
-      k_total + np_target + estimator + estimator_kind + plugin_available,
+      k_total + np_target + nu_choice + estimator + estimator_kind +
+      plugin_available,
     data = summary_input,
     FUN = sum_na,
     na.action = na.pass
@@ -534,6 +637,11 @@ summarise_results <- function(results) {
   merged <- merge(merged, diagnostics, by = group_vars)
   merged$log_bias <- merged$log_error
   merged$log_rmse <- sqrt(merged$log_error_sq)
+  merged$scaled_log_rmse <- sqrt(merged$scaled_log_error_sq)
+  merged$studentized_sd <- sqrt(pmax(0, merged$studentized_sq - merged$studentized^2))
+  merged$scaled_A_rms <- sqrt(merged$scaled_A_sq)
+  merged$scaled_B_rms <- sqrt(merged$scaled_B_sq)
+  merged$scaled_C_rms <- sqrt(merged$scaled_C_sq)
   merged$coverage <- merged$covered
   merged$invalid_rate <- merged$invalid_count / merged$n_replications
   merged$valid_rate <- merged$valid_replications / merged$n_replications

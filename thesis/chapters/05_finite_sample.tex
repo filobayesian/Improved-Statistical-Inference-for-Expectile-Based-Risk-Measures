@@ -21,6 +21,16 @@ Daouia--Padoan--Stupfler choices studied below. The simulations do not claim
 optimality of \(\bm\nu_n^k\), do not use random bridge-Hill weights, and do
 not revive the intermediate expectile-pooling route discarded earlier.
 
+The main empirical message is also narrow. In the representative imbalanced
+design, DPS variance weights make the distributed estimator behave almost like
+the centralised benchmark for point estimation, while equal weights are mildly
+less efficient and AMSE weights add no systematic gain. The fixed bridge-Hill
+convention \(\bm\nu_n^k\) is not visibly driving the conclusions. The main
+limitation is interval calibration: the first-order log intervals often
+under-cover, and the decomposition diagnostics suggest that finite-sample
+bridge effects and lower-order Hill effects can still be visible even though
+they disappear in the theorem.
+
 \section{Estimators and implementation}
 \label{sec:sim:estimators}
 
@@ -92,17 +102,51 @@ one varies \(k_j/n_j\in\{0.03,0.05,0.10\}\), and the other varies
 Performance is measured by the Monte Carlo mean of the log relative error,
 the root mean squared log relative error, empirical coverage of the nominal
 \(95\%\) log interval, average log interval width, invalid-estimate rate, and
-weight-stability diagnostics.
+weight-stability diagnostics. The code also records the exact finite-sample
+decomposition terms
+\[
+  A_n(\bm\omega)
+  =
+  \log\{\hatWei_n(1-p\mid\bm\omega)/Q(1-p)\},
+  \qquad
+  B_n(\bm\nu)
+  =
+  \log\psifn\{\hat\gamma_n(\bm\nu)\}-\log\psifn(\gamma),
+\]
+and
+\[
+  C_n
+  =
+  \log\{\xi_\tau/(\psifn(\gamma)Q(1-p))\}.
+\]
+These diagnostics are included to connect the Monte Carlo evidence to
+\Cref{lem:pool-ext:decomposition}; they are not used to estimate new
+asymptotic constants.
 
-\section{Point estimation}
+\section{Point estimation and pooled-Weissman weights}
 \label{sec:sim:point}
 
 \Cref{tab:sim:point-main} reports the representative main design with
 \(m=10\), strong sample-size imbalance, \(k_j/n_j=0.05\), and \(np=5\). The
-distributed DPS variance estimator tracks the centralised benchmark closely
-across all five models. The log RMSE is essentially unchanged in the Burr
-heavy case, the Student case, and the Pareto heavy case, and differs only
-slightly in the lighter-tailed Pareto and Burr settings.
+table compares the simple equal weights, the DPS variance weights, the oracle
+AMSE weights, the plug-in AMSE weights, and the centralised benchmark. The
+main result is that distributed pooling loses very little relative to the
+centralised benchmark when the pooled-Weissman weights are chosen by the DPS
+variance rule. The log RMSEs are identical to three decimals in the Burr heavy
+case, essentially identical in the Pareto heavy and Student cases, and only
+slightly larger in the light-tailed Pareto and Burr cases. This is the main
+positive finite-sample evidence for the promoted estimator: the communication
+restriction does not create a large point-estimation penalty in this grid.
+
+The comparison across distributed weights gives a simple practical lesson.
+Equal weights are consistently worse under strong imbalance, especially in the
+heavier-tailed models, because they ignore the different local sample sizes.
+The oracle and plug-in AMSE weights are almost indistinguishable from the
+variance weights in the representative design. Thus the simulation supports
+DPS variance weights as a stable practical baseline for \(\bm\omega\), but it
+does not show a finite-sample benefit from estimating second-order AMSE
+weights here. This is a statement about the pooled-Weissman weights only; it
+does not suggest opening a new optimisation layer for \(\bm\nu\).
 
 \begin{table}[htbp]
 \centering
@@ -110,17 +154,11 @@ slightly in the lighter-tailed Pareto and Burr settings.
 \caption{Point-estimation performance in the representative main design
 \((m=10\), strong allocation, \(k_j/n_j=0.05\), \(np=5)\).}
 \label{tab:sim:point-main}
-\resizebox{\textwidth}{!}{\input{tables/simulation/finite_sample_summary}}
+\begingroup
+\setlength{\tabcolsep}{4pt}
+\input{tables/simulation/finite_sample_summary}
+\endgroup
 \end{table}
-
-The plug-in AMSE weights do not deliver a systematic improvement over the
-variance weights in this design. This is not surprising: in the common
-distributed setting the variance allocation is already the dominant stable
-choice, and the estimated second-order quantities add finite-sample noise.
-The conclusion is therefore practical rather than theoretical. The
-simulation supports the use of DPS variance weights as a stable baseline for
-\(\bm\omega\); it does not suggest opening a new optimisation layer for
-\(\bm\nu\).
 
 \begin{figure}[htbp]
 \centering
@@ -132,6 +170,42 @@ route tracks the centralised benchmark closely.}
 \label{fig:sim:rmse-estimator}
 \end{figure}
 
+\section{Deterministic bridge-Hill sensitivity}
+\label{sec:sim:nu-sensitivity}
+
+The main specification fixes the bridge-Hill weights at
+\(\bm\nu_n^k=(k_1/k,\ldots,k_m/k)^\top\). To check whether this convention has
+visible finite-sample consequences, \Cref{tab:sim:nu} repeats the representative
+main design for the DPS variance pooled-Weissman weights while replacing
+\(\bm\nu_n^k\) by two other deterministic conventions: equal bridge-Hill
+weights and sample-allocation weights \((n_1/n,\ldots,n_m/n)^\top\). This is
+only a sensitivity check. It does not search for an optimal \(\bm\nu\), and it
+does not use the random estimated \(\bm\omega\) as a bridge-Hill vector.
+
+The rows are close. In this design the threshold and sample-allocation
+conventions coincide because the same \(k_j/n_j\) ratio is used on every
+machine, and their reported performance is identical. Replacing them by equal
+bridge-Hill weights changes little in the light-tailed Burr and Pareto cases
+and in the Student case. It has a modest cost in the heavier-tailed designs:
+for example, log RMSE increases from \(0.223\) to \(0.236\) in Burr heavy and
+from \(0.204\) to \(0.216\) in Pareto heavy, with slightly lower coverage.
+The practical conclusion is that \(\bm\nu_n^k\) is not driving the main
+finite-sample conclusions, although the bridge-Hill component can still matter
+at a lower-order level in heavier-tailed settings.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Sensitivity to deterministic bridge-Hill weights in the representative
+main design. The pooled-Weissman weights are fixed at the DPS variance
+choice.}
+\label{tab:sim:nu}
+\begingroup
+\setlength{\tabcolsep}{4pt}
+\input{tables/simulation/nu_sensitivity}
+\endgroup
+\end{table}
+
 \section{Plug-in interval performance}
 \label{sec:sim:intervals}
 
@@ -139,29 +213,16 @@ route tracks the centralised benchmark closely.}
 not uniformly well calibrated at this sample size. Coverage is close to
 nominal only in the absolute Student case, where the DPS variance and plug-in
 AMSE intervals cover about \(92\%\) of replications. In the Pareto and Burr
-cases, coverage is materially below \(95\%\), especially for the lighter-tailed
-models. The centralised benchmark displays the same qualitative undercoverage,
-so this is not mainly a distributed-pooling artefact. It is a finite-sample
-calibration issue for the first-order log approximation and the plug-in
-centring objects.
-
-\begin{table}[htbp]
-\centering
-\small
-\caption{Empirical coverage and log-width of nominal \(95\%\) intervals in
-the representative main design.}
-\label{tab:sim:interval-main}
-\resizebox{\textwidth}{!}{\input{tables/simulation/interval_summary}}
-\end{table}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\textwidth]{figures/simulation/coverage_heatmap.pdf}
-\caption{Empirical coverage in the representative main design
-\((m=10\), strong allocation, \(k_j/n_j=0.05\), \(np=5)\). Cell labels give
-coverage; colour records the deviation from the nominal \(95\%\) level.}
-\label{fig:sim:coverage-estimator}
-\end{figure}
+cases, coverage is materially below \(95\%\), ranging from about \(59\%\) in
+the light Burr case to about \(75\%\) in the heavy Burr case. The centralised
+benchmark also under-covers in every model, so the problem is not simply that
+the sample has been distributed across machines. At the same time, the size of
+the discrepancy is model-dependent: distributed pooling is much worse than
+the centralised benchmark in the light Burr case, while it is much better in
+the Student case. The most defensible reading is therefore that interval
+calibration is a finite-sample weakness of the first-order plug-in route, with
+both bridge and centring effects and the distributed construction contributing
+differently across models.
 
 The interval results therefore support a cautious interpretation of
 \Cref{cor:pool-ext:plugin-inference}. The corollary gives the asymptotic
@@ -181,6 +242,27 @@ effect, not a sign error or a failure of the pooling construction. The
 diagnostic is not uniform across all heavy-tailed designs, so the conclusion
 remains cautionary rather than corrective.
 
+\begin{table}[htbp]
+\centering
+\small
+\caption{Empirical coverage and log-width of nominal \(95\%\) intervals in
+the representative main design.}
+\label{tab:sim:interval-main}
+\begingroup
+\setlength{\tabcolsep}{4pt}
+\input{tables/simulation/interval_summary}
+\endgroup
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/simulation/coverage_heatmap.pdf}
+\caption{Empirical coverage in the representative main design
+\((m=10\), strong allocation, \(k_j/n_j=0.05\), \(np=5)\). Cell labels give
+coverage; colour records the deviation from the nominal \(95\%\) level.}
+\label{fig:sim:coverage-estimator}
+\end{figure}
+
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{figures/simulation/bridge_target_diagnostic.pdf}
@@ -191,49 +273,98 @@ variance objects and is separate from the final main grid.}
 \label{fig:sim:bridge-diagnostic}
 \end{figure}
 
+\section{Decomposition diagnostics}
+\label{sec:sim:decomposition}
+
+\Cref{tab:sim:decomposition} records the scaled decomposition terms in the
+representative main design for the DPS variance estimator with
+\(\bm\nu=\bm\nu_n^k\). The columns report root mean squared values of
+\((\sqrt{k}/\ell)A_n\), \((\sqrt{k}/\ell)B_n\), and
+\((\sqrt{k}/\ell)C_n\), together with the scaled log error. The final column is
+the numerical reconstruction check for
+\[
+  \log(\widehat\xi_\tau/\xi_\tau)=A_n(\bm\omega)+B_n(\bm\nu)-C_n.
+\]
+
+This table is meant to make the simulation chapter answer the same question as
+the proof: which terms are visible at the pooled-Weissman scale? In the
+asymptotic theorem \(A_n(\bm\omega)\) carries the first-order law, while
+\(B_n(\bm\nu)\) and \(C_n\) vanish after multiplication by
+\(\sqrt{k}/\ell\). At the simulated sample size, that separation is only
+partly visible. The pooled-Weissman component remains the largest stochastic
+term in most rows, but the bridge-Hill term is not negligible in the
+heavier-tailed cases: its RMS scaled value is \(0.474\) in Burr heavy and
+\(0.382\) in Pareto heavy, compared with \(0.638\) and \(0.610\) for
+\(A_n(\bm\omega)\). In contrast, \(B_n(\bm\nu)\) is almost invisible in the
+light-tailed Pareto and Burr designs.
+
+The population bridge term \(C_n\) shows the opposite pattern. It is small in
+the heavier-tailed Pareto and Burr cases, but it is comparable to, or larger
+than, the pooled-Weissman component in the light-tailed cases. This helps
+explain why point-estimation performance and interval calibration need not
+move together: some finite-sample error is coming from the population
+expectile--quantile bridge rather than from the distributed quantile pooling
+itself. The zero reconstruction errors in the final column confirm that these
+diagnostics are reading the exact decomposition rather than an approximate
+post-hoc split.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Finite-sample decomposition ledger in the representative main design.
+The estimator uses DPS variance pooled-Weissman weights and
+\(\bm\nu=\bm\nu_n^k\).}
+\label{tab:sim:decomposition}
+\begingroup
+\setlength{\tabcolsep}{4pt}
+\input{tables/simulation/decomposition_summary}
+\endgroup
+\end{table}
+
 \section{Sensitivity to thresholds and targets}
 \label{sec:sim:sensitivity}
 
 The threshold sensitivity in \Cref{tab:sim:threshold} shows the usual
-bias--variance trade-off. For the Burr light model, increasing
-\(k_j/n_j\) reduces log RMSE but worsens coverage sharply, consistent with
-second-order bias becoming visible. For the absolute Student model, the
-larger threshold \(0.10\) increases log RMSE. The Pareto heavy case benefits
-from a larger threshold in RMSE terms, reflecting the absence of second-order
-bias in the exact Pareto model. No single threshold is uniformly best across
-models and metrics.
-
-\begin{table}[htbp]
-\centering
-\scriptsize
-\caption{Threshold sensitivity for \(m=10\), strong allocation and \(np=5\).}
-\label{tab:sim:threshold}
-\resizebox{\textwidth}{!}{\input{tables/simulation/threshold_sensitivity}}
-\end{table}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\textwidth]{figures/simulation/threshold_tradeoff.pdf}
-\caption{Threshold trade-off for the DPS variance estimator with \(m=10\),
-strong allocation and \(np=5\). The two panels show point-estimation error and
-interval coverage on the same threshold grid.}
-\label{fig:sim:k-sensitivity}
-\end{figure}
+bias--variance trade-off, but the important point is that RMSE and coverage
+often point in different directions. For Burr light, increasing \(k_j/n_j\)
+from \(0.03\) to \(0.10\) lowers the DPS variance log RMSE from \(0.084\) to
+\(0.047\), while coverage falls from about \(70\%\) to \(31\%\). For Pareto
+heavy, the larger threshold improves RMSE, consistent with the exact Pareto
+model having no second-order bias of the Burr type. For the absolute Student
+case, the largest threshold worsens RMSE even though coverage remains around
+\(92\%\). Thus threshold choice cannot be justified by point error alone.
 
 \Cref{tab:sim:target} varies the target through \(np\). The least extreme
 target, \(np=10\), often has smaller log RMSE than \(np=1\), as expected from
-the shorter extrapolation distance. Coverage, however, need not improve when
-the target is less extreme; in the light Burr and light Pareto cases it falls
-as \(np\) increases. This again points to the interaction between
-second-order bias, threshold choice, and first-order interval centring.
+the shorter extrapolation distance. Coverage, however, usually falls as
+\(np\) increases in this grid. The pattern is especially sharp in the light
+Burr and light Pareto cases, where DPS variance coverage drops from about
+\(78\%\) and \(84\%\), respectively, at \(np=1\), to about \(43\%\) and
+\(49\%\) at \(np=10\). This again points to the interaction between
+second-order bias, threshold choice, and first-order interval centring, rather
+than to a simple monotone improvement when the target is made less extreme.
 
 \begin{table}[htbp]
 \centering
-\scriptsize
+\small
+\caption{Threshold sensitivity for \(m=10\), strong allocation and \(np=5\).}
+\label{tab:sim:threshold}
+\begingroup
+\setlength{\tabcolsep}{4pt}
+\input{tables/simulation/threshold_sensitivity}
+\endgroup
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
 \caption{Target sensitivity for \(m=10\), strong allocation and
 \(k_j/n_j=0.05\).}
 \label{tab:sim:target}
-\resizebox{\textwidth}{!}{\input{tables/simulation/target_sensitivity}}
+\begingroup
+\setlength{\tabcolsep}{4pt}
+\input{tables/simulation/target_sensitivity}
+\endgroup
 \end{table}
 
 \section{Weight stability and limitations}
@@ -243,23 +374,31 @@ second-order bias, threshold choice, and first-order interval centring.
 representative imbalanced design. The oracle and plug-in AMSE weights are
 stable in this grid: negative weights are essentially absent, and the average
 maximum absolute weight is close to the largest deterministic allocation
-weight. The stability of the weights is one reason the point-estimation
-performance of DPS variance and plug-in AMSE weights is nearly identical in
-\Cref{tab:sim:point-main}.
+weight. The diagnostic matters because it rules out an obvious failure mode:
+the lack of AMSE improvement in \Cref{tab:sim:point-main} is not caused by
+unstable or frequently negative weights. Rather, in the representative
+common-tail design the estimated AMSE rule is numerically close to the simpler
+variance allocation, so there is little finite-sample gain to obtain.
+
+The simulation evidence is intentionally limited. It supports the promoted
+estimator in the iid common-marginal distributed setting and suggests that
+DPS variance weights are a robust practical choice for \(\bm\omega\). It
+also shows where the asymptotic theory should not be overinterpreted:
+first-order plug-in intervals may under-cover at realistic sample sizes, and
+the exact decomposition reveals finite-sample contributions from terms that are
+asymptotically negligible under the theorem's scaling. The study does not
+address non-identical margins, time series, multivariate targets, random
+bridge-Hill weights, or lower-order optimality of \(\bm\nu\). Those questions
+would require additional mathematical work before they could become
+simulation targets.
 
 \begin{table}[htbp]
 \centering
 \small
 \caption{AMSE weight diagnostics in the representative main design.}
 \label{tab:sim:weights}
-\resizebox{\textwidth}{!}{\input{tables/simulation/weight_stability}}
+\begingroup
+\setlength{\tabcolsep}{4pt}
+\input{tables/simulation/weight_stability}
+\endgroup
 \end{table}
-
-The simulation evidence is intentionally limited. It supports the promoted
-estimator in the iid common-marginal distributed setting and suggests that
-DPS variance weights are a robust practical choice for \(\bm\omega\). It also
-shows that first-order plug-in intervals may under-cover at realistic sample
-sizes. The study does not address non-identical margins, time series,
-multivariate targets, random bridge-Hill weights, or lower-order optimality
-of \(\bm\nu\). Those questions would require additional mathematical work
-before they could become simulation targets.

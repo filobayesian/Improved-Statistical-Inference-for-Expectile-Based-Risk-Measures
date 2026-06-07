@@ -8,6 +8,12 @@ mode <- if ("--final" %in% args) {
 } else {
   "smoke"
 }
+artifact_arg <- grep("^--artifact-root=", args, value = TRUE)
+artifact_root <- if (length(artifact_arg) == 1) {
+  normalizePath(sub("^--artifact-root=", "", artifact_arg), mustWork = FALSE)
+} else {
+  NA_character_
+}
 
 repo_root <- normalizePath(getwd(), mustWork = TRUE)
 if (!file.exists(file.path(repo_root, "simulation", "run_simulation.R"))) {
@@ -29,8 +35,27 @@ if (!file.exists(summary_path)) {
 }
 
 summary <- readRDS(summary_path)
-fig_dir <- file.path(repo_root, "thesis", "figures", "simulation")
-tab_dir <- file.path(repo_root, "thesis", "tables", "simulation")
+summary_has_nu <- "nu_choice" %in% names(summary)
+summary_has_decomp <- all(c(
+  "scaled_log_rmse", "scaled_A_rms", "scaled_B_rms",
+  "scaled_C_rms", "decomp_remainder_abs"
+) %in% names(summary))
+if (!"nu_choice" %in% names(summary)) {
+  summary$nu_choice <- ifelse(summary$estimator == "centralised",
+                              "centralised", "threshold")
+}
+for (missing_col in c(
+  "scaled_log_error", "scaled_log_rmse", "studentized", "studentized_sd",
+  "scaled_A", "scaled_A_rms", "scaled_B", "scaled_B_rms",
+  "scaled_C", "scaled_C_rms", "decomp_remainder_abs"
+)) {
+  if (!missing_col %in% names(summary)) {
+    summary[[missing_col]] <- NA_real_
+  }
+}
+output_root <- if (is.na(artifact_root)) file.path(repo_root, "thesis") else artifact_root
+fig_dir <- file.path(output_root, "figures", "simulation")
+tab_dir <- file.path(output_root, "tables", "simulation")
 dir.create(fig_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(tab_dir, recursive = TRUE, showWarnings = FALSE)
 
@@ -55,6 +80,18 @@ estimator_label <- function(x) {
   out
 }
 
+nu_label <- function(x) {
+  labels <- c(
+    threshold = "$\\nu^k$",
+    equal = "Equal",
+    sample = "Sample",
+    centralised = "Centralised"
+  )
+  out <- labels[x]
+  out[is.na(out)] <- x[is.na(out)]
+  out
+}
+
 write_table <- function(path, header, rows, align) {
   con <- file(path, open = "w")
   on.exit(close(con), add = TRUE)
@@ -63,7 +100,10 @@ write_table <- function(path, header, rows, align) {
   writeLines(header, con)
   writeLines("\\midrule", con)
   if (length(rows) == 0) {
-    writeLines("No rows & -- & -- & -- & -- \\\\", con)
+    n_cols <- lengths(regmatches(align, gregexpr("[lcr]", align)))
+    empty_row <- paste(c("No rows", rep("--", max(0, n_cols - 1))),
+                       collapse = " & ")
+    writeLines(paste0(empty_row, " \\\\"), con)
   } else {
     writeLines(rows, con)
   }
@@ -76,8 +116,10 @@ main_rows <- summary[
     summary$np_target == 5 &
     summary$m == 10 &
     summary$regime == "strong" &
+    summary$nu_choice %in% c("threshold", "centralised") &
     summary$estimator %in% c(
-      "dps_variance", "dps_amse_plugin", "centralised"
+      "equal", "dps_variance", "dps_amse_oracle",
+      "dps_amse_plugin", "centralised"
     ),
 ]
 main_rows <- main_rows[order(
@@ -108,6 +150,7 @@ interval_rows <- summary[
     summary$np_target == 5 &
     summary$m == 10 &
     summary$regime == "strong" &
+    summary$nu_choice %in% c("threshold", "centralised") &
     summary$estimator %in% c(
       "dps_variance", "dps_amse_plugin", "centralised"
     ),
@@ -140,6 +183,7 @@ threshold_rows <- summary[
   summary$m == 10 &
     summary$regime == "strong" &
     summary$np_target == 5 &
+    summary$nu_choice == "threshold" &
     summary$estimator %in% c("dps_variance", "dps_amse_plugin"),
 ]
 threshold_rows <- threshold_rows[order(
@@ -168,6 +212,7 @@ target_rows <- summary[
   summary$m == 10 &
     summary$regime == "strong" &
     summary$k_fraction == 0.05 &
+    summary$nu_choice == "threshold" &
     summary$estimator %in% c("dps_variance", "dps_amse_plugin"),
 ]
 target_rows <- target_rows[order(
@@ -196,7 +241,8 @@ stability <- summary[
     summary$k_fraction == 0.05 &
     summary$np_target == 5 &
     summary$m == 10 &
-    summary$regime == "strong",
+    summary$regime == "strong" &
+    summary$nu_choice == "threshold",
 ]
 stability <- stability[order(
   stability$regime, stability$m, stability$dgp_key, stability$estimator
@@ -223,6 +269,7 @@ write_table(
 validity <- summary[
   summary$k_fraction == 0.05 &
     summary$np_target == 5 &
+    summary$nu_choice %in% c("threshold", "centralised") &
     summary$estimator %in% c(
       "equal", "dps_variance", "dps_amse_oracle",
       "dps_amse_plugin", "centralised"
@@ -250,6 +297,73 @@ write_table(
   "lrllrr"
 )
 
+nu_rows <- summary[
+  summary_has_nu &
+    summary$k_fraction == 0.05 &
+    summary$np_target == 5 &
+    summary$m == 10 &
+    summary$regime == "strong" &
+    summary$estimator == "dps_variance" &
+    summary$nu_choice %in% c("threshold", "equal", "sample"),
+]
+nu_rows <- nu_rows[order(nu_rows$dgp_key, nu_rows$nu_choice), ]
+nu_lines <- character(0)
+if (!summary_has_nu) {
+  nu_lines <- "\\multicolumn{5}{l}{Regenerate with \\texttt{simulation/run\\_simulation.R --final}.} \\\\"
+} else if (nrow(nu_rows) > 0) {
+  for (i in seq_len(nrow(nu_rows))) {
+    row <- nu_rows[i, ]
+    nu_lines <- c(nu_lines, sprintf(
+      "%s & %s & %s & %s & %s \\\\",
+      row$dgp, nu_label(row$nu_choice),
+      fmt(row$log_bias), fmt(row$log_rmse), fmt(row$coverage)
+    ))
+  }
+}
+write_table(
+  file.path(tab_dir, "nu_sensitivity.tex"),
+  "DGP & Bridge weights & Log bias & Log RMSE & Coverage \\\\",
+  nu_lines,
+  "llrrr"
+)
+
+decomp_rows <- summary[
+  summary_has_decomp &
+    summary$k_fraction == 0.05 &
+    summary$np_target == 5 &
+    summary$m == 10 &
+    summary$regime == "strong" &
+    summary$nu_choice == "threshold" &
+    summary$estimator == "dps_variance",
+]
+decomp_rows <- decomp_rows[order(decomp_rows$dgp_key), ]
+decomp_lines <- character(0)
+if (!summary_has_decomp) {
+  decomp_lines <- "\\multicolumn{6}{l}{Regenerate with \\texttt{simulation/run\\_simulation.R --final}.} \\\\"
+} else if (nrow(decomp_rows) > 0) {
+  for (i in seq_len(nrow(decomp_rows))) {
+    row <- decomp_rows[i, ]
+    decomp_lines <- c(decomp_lines, sprintf(
+      "%s & %s & %s & %s & %s & %s \\\\",
+      row$dgp,
+      fmt(row$scaled_log_rmse),
+      fmt(row$scaled_A_rms),
+      fmt(row$scaled_B_rms),
+      fmt(row$scaled_C_rms),
+      fmt(row$decomp_remainder_abs, 2)
+    ))
+  }
+}
+write_table(
+  file.path(tab_dir, "decomposition_summary.tex"),
+  paste(
+    "DGP & RMS scaled log error & RMS scaled $A_n$ &",
+    "RMS scaled $B_n$ & $|$scaled $C_n|$ & Check \\\\"
+  ),
+  decomp_lines,
+  "lrrrrr"
+)
+
 if (requireNamespace("ggplot2", quietly = TRUE)) {
   library(ggplot2)
   dgp_order <- c(
@@ -267,6 +381,7 @@ if (requireNamespace("ggplot2", quietly = TRUE)) {
   rmse_data <- summary[
     summary$k_fraction == 0.05 &
       summary$np_target == 5 &
+      summary$nu_choice %in% c("threshold", "centralised") &
       summary$estimator %in% c("centralised", "dps_variance"),
   ]
   if (nrow(rmse_data) > 0) {
@@ -330,6 +445,7 @@ if (requireNamespace("ggplot2", quietly = TRUE)) {
       summary$np_target == 5 &
       summary$m == 10 &
       summary$regime == "strong" &
+      summary$nu_choice %in% c("threshold", "centralised") &
       summary$estimator %in% c(
         "centralised", "dps_variance", "dps_amse_plugin"
       ),
@@ -366,65 +482,9 @@ if (requireNamespace("ggplot2", quietly = TRUE)) {
     )
   }
 
-  sens <- summary[
-    summary$m == 10 &
-      summary$regime == "strong" &
-      summary$np_target == 5 &
-      summary$estimator == "dps_variance",
-  ]
-  if (nrow(sens) > 0) {
-    sens$dgp <- factor(sens$dgp, levels = dgp_order)
-    trade <- rbind(
-      data.frame(
-        dgp = sens$dgp,
-        k_fraction = sens$k_fraction,
-        metric = "Log RMSE",
-        value = sens$log_rmse
-      ),
-      data.frame(
-        dgp = sens$dgp,
-        k_fraction = sens$k_fraction,
-        metric = "Coverage",
-        value = sens$coverage
-      )
-    )
-    trade$metric <- factor(trade$metric, levels = c("Log RMSE", "Coverage"))
-    nominal <- data.frame(metric = factor("Coverage", levels = levels(trade$metric)))
-    p3 <- ggplot(
-      trade,
-      aes(x = k_fraction, y = value, color = dgp, group = dgp)
-    ) +
-      geom_line(linewidth = 0.45) +
-      geom_point(size = 1.8) +
-      geom_hline(
-        data = nominal, aes(yintercept = 0.95),
-        linetype = "dashed", linewidth = 0.35, color = "grey35"
-      ) +
-      facet_wrap(~ metric, scales = "free_y", nrow = 1) +
-      scale_x_continuous(
-        breaks = sort(unique(trade$k_fraction)),
-        labels = formatC(sort(unique(trade$k_fraction)), format = "f", digits = 2)
-      ) +
-      scale_color_manual(values = dgp_cols, drop = FALSE) +
-      labs(
-        x = "Local threshold fraction",
-        y = NULL,
-        color = "DGP"
-      ) +
-      theme_minimal(base_size = 9) +
-      theme(
-        legend.position = "bottom",
-        panel.grid.minor = element_blank()
-      )
-    ggsave(
-      file.path(fig_dir, "threshold_tradeoff.pdf"), p3,
-      width = 7.2, height = 4.0
-    )
-  }
-
   diag_path <- file.path(
     repo_root, "simulation", "results",
-    "interval_diagnostics_summary_latest.rds"
+    paste0("interval_diagnostics_", mode, "_summary_latest.rds")
   )
   if (file.exists(diag_path)) {
     diag <- readRDS(diag_path)
