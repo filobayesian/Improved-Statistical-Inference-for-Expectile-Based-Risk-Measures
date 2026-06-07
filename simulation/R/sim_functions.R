@@ -5,7 +5,7 @@
 # extrapolation. The remaining code is the thesis-specific glue for the
 # two-weight pooled extreme-expectile estimator.
 
-SIMULATION_DESIGN_VERSION <- "two_weight_pooled_extreme_20260607"
+SIMULATION_DESIGN_VERSION <- "two_weight_pooled_extreme_20260607_central_oracle"
 
 ensure_extremerisks <- function() {
   if (!requireNamespace("ExtremeRisks", quietly = TRUE)) {
@@ -559,8 +559,11 @@ run_one_replication <- function(scenario, rep_id, alpha = 0.05) {
       is.finite(truth) && truth > 0 && valid_gamma_domain(gamma_bridge)
     B_hat <- V_hat <- NA_real_
     if (is_centralised) {
-      B_hat <- 0
-      V_hat <- if (valid_gamma_domain(gamma_bridge)) gamma_bridge^2 else NA_real_
+      if (!is.null(objects) && length(objects$Bc) == 1L &&
+          all(dim(objects$Vc) == c(1L, 1L))) {
+        B_hat <- objects$Bc[1]
+        V_hat <- objects$Vc[1, 1]
+      }
     } else if (!is.null(objects) && all(is.finite(omega))) {
       B_hat <- sum(omega * objects$Bc)
       V_hat <- as.numeric(t(omega) %*% objects$Vc %*% omega)
@@ -700,9 +703,10 @@ run_one_replication <- function(scenario, rep_id, alpha = 0.05) {
   } else {
     NA_real_
   }
+  central_objects <- dps_objects(dgp$gamma, dgp$rho, dgp$beta, n_total, k_total)
   add_row(
     "centralised", "benchmark", "centralised", xi_full, gamma_full, q_full,
-    1, NULL,
+    1, central_objects,
     "oracle", "not_applicable",
     is_centralised = TRUE
   )
