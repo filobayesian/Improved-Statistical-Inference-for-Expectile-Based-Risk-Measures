@@ -36,7 +36,8 @@ ensure_extremerisks()
 diagnostic_grid <- function(mode) {
   if (mode == "smoke") {
     return(data.frame(
-      dgp = "burr_heavy", n_total = 2500, k_fraction = 0.05,
+      dgp = "burr_heavy", n_total = 2500, k_rule = "fraction",
+      k_fraction = 0.05, k_power = NA_real_, design_role = "diagnostic",
       stringsAsFactors = FALSE
     ))
   }
@@ -46,7 +47,11 @@ diagnostic_grid <- function(mode) {
   )
   designs <- data.frame(
     n_total = c(10000, 100000),
-    k_fraction = c(0.05, 0.01)
+    k_rule = c("fraction", "power"),
+    k_fraction = c(0.05, NA_real_),
+    k_power = c(NA_real_, 0.45),
+    design_role = "diagnostic",
+    stringsAsFactors = FALSE
   )
   if (mode == "pilot") {
     dgp_names <- c("pareto_light", "burr_heavy", "student3")
@@ -67,10 +72,19 @@ cover_log_target <- function(ci, target) {
 
 run_one_diagnostic <- function(scenario, rep_id, alpha = 0.05) {
   dgp <- make_dgp(scenario$dgp)
+  k_rule <- as.character(scenario_value(scenario, "k_rule", "fraction"))
+  k_fraction_design <- suppressWarnings(as.numeric(
+    scenario_value(scenario, "k_fraction", NA_real_)
+  ))
+  k_power <- suppressWarnings(as.numeric(
+    scenario_value(scenario, "k_power", NA_real_)
+  ))
   sizes <- scenario_sizes(
     m = 10, regime = "strong",
     n_total = scenario$n_total,
-    k_fraction = scenario$k_fraction
+    k_fraction = k_fraction_design,
+    k_rule = k_rule,
+    k_power = k_power
   )
   n_vec <- sizes$n_vec
   k_vec <- sizes$k_vec
@@ -81,6 +95,12 @@ run_one_diagnostic <- function(scenario, rep_id, alpha = 0.05) {
   tau <- 1 - p
   ell <- log(k_total / (n_total * p))
   scale <- sqrt(k_total) / ell
+  k_fraction_actual <- k_total / n_total
+  k_design <- if (k_rule == "power") {
+    paste0("n^", format(k_power, trim = TRUE, scientific = FALSE))
+  } else {
+    paste0("fraction=", format(k_fraction_design, trim = TRUE, scientific = FALSE))
+  }
 
   samples <- lapply(n_vec, dgp$r)
   prim <- local_primitives(samples, k_vec, p)
@@ -91,6 +111,12 @@ run_one_diagnostic <- function(scenario, rep_id, alpha = 0.05) {
   exact_target <- expectile_truth_cached(dgp, tau)
   q_target <- dgp$quantile(tau)
   bridge_target <- psi_fn(dgp$gamma) * q_target
+  eta <- if (is.finite(q_target) && q_target > 0 &&
+             is.finite(ell) && ell > 0) {
+    sqrt(k_total) / (ell * q_target)
+  } else {
+    NA_real_
+  }
   bridge_log_gap <- if (is.finite(exact_target) && exact_target > 0 &&
                         is.finite(bridge_target) && bridge_target > 0) {
     log(exact_target / bridge_target)
@@ -99,7 +125,14 @@ run_one_diagnostic <- function(scenario, rep_id, alpha = 0.05) {
   }
 
   oracle <- dps_objects(dgp$gamma, dgp$rho, dgp$beta, n_vec, k_vec)
-  plugin <- plugin_dps_objects(samples, n_vec, k_vec, prim$gamma_hat, nu)
+  plugin_second <- if (plugin_source_eligible(dgp)) {
+    plugin_second_order(samples, n_vec)
+  } else {
+    NULL
+  }
+  plugin <- plugin_dps_objects(
+    samples, n_vec, k_vec, prim$gamma_hat, nu, plugin_second, dgp
+  )
   objects <- list(oracle = oracle, plugin = plugin)
 
   rows <- list()
@@ -141,13 +174,26 @@ run_one_diagnostic <- function(scenario, rep_id, alpha = 0.05) {
 
     rows[[length(rows) + 1]] <- data.frame(
       rep = rep_id,
+      design_version = SIMULATION_DESIGN_VERSION,
+      design_role = as.character(scenario_value(scenario, "design_role", "diagnostic")),
       dgp = dgp$name,
       dgp_key = dgp$key,
       n_total = n_total,
       k_total = k_total,
-      k_fraction = scenario$k_fraction,
+      k_rule = k_rule,
+      k_design = k_design,
+      k_fraction = k_fraction_actual,
+      k_power = if (is.finite(k_power)) k_power else NA_real_,
       np_target = np_target,
+      ell = ell,
+      sqrtk_over_ell = sqrt(k_total) / ell,
+      eta = eta,
       kind = kind,
+      plugin_status = if (kind == "plugin") {
+        plugin_status(dgp, plugin_second, plugin)
+      } else {
+        "not_used"
+      },
       B = B_hat,
       V = V_hat,
       log_error_exact = log_error_exact,
@@ -173,7 +219,9 @@ summarise_diagnostics <- function(results) {
     cbind(
       B, V, log_error_exact, log_error_bridge, z_exact, z_bridge,
       cover_exact, cover_bridge, bridge_log_gap
-    ) ~ dgp + dgp_key + n_total + k_total + k_fraction + np_target + kind,
+    ) ~ design_version + design_role + dgp + dgp_key + n_total + k_total +
+      k_rule + k_design + k_fraction + np_target + ell + sqrtk_over_ell +
+      eta + kind + plugin_status,
     data = results,
     FUN = mean_na,
     na.action = na.pass

@@ -5,6 +5,8 @@
 # extrapolation. The remaining code is the thesis-specific glue for the
 # two-weight pooled extreme-expectile estimator.
 
+SIMULATION_DESIGN_VERSION <- "two_weight_pooled_extreme_20260607"
+
 ensure_extremerisks <- function() {
   if (!requireNamespace("ExtremeRisks", quietly = TRUE)) {
     stop(
@@ -42,6 +44,12 @@ safe_solve <- function(a, b) {
 finite_or_na <- function(x) {
   x <- suppressWarnings(as.numeric(x))
   if (length(x) == 0 || !is.finite(x[1])) NA_real_ else x[1]
+}
+
+scenario_value <- function(scenario, name, default) {
+  if (!name %in% names(scenario)) return(default)
+  value <- scenario[[name]][1]
+  if (length(value) == 0 || is.na(value)) default else value
 }
 
 student_tail_beta <- function(df) {
@@ -296,8 +304,21 @@ plugin_second_order <- function(samples, n_vec) {
   )
 }
 
+plugin_source_eligible <- function(dgp) {
+  is.null(dgp) || (is.finite(dgp$beta) && abs(dgp$beta) > 1e-12)
+}
+
+plugin_status <- function(dgp, second_order, objects) {
+  if (!requireNamespace("evt0", quietly = TRUE)) return("evt0_unavailable")
+  if (!plugin_source_eligible(dgp)) return("source_ineligible")
+  if (is.null(second_order)) return("second_order_failed")
+  if (is.null(objects)) return("object_failed")
+  "ok"
+}
+
 plugin_dps_objects <- function(samples, n_vec, k_vec, gamma_hat, nu,
-                               second_order = NULL) {
+                               second_order = NULL, dgp = NULL) {
+  if (!plugin_source_eligible(dgp)) return(NULL)
   if (is.null(second_order)) {
     second_order <- plugin_second_order(samples, n_vec)
   }
@@ -331,7 +352,8 @@ scenario_grid <- function(mode) {
   if (mode == "smoke") {
     return(data.frame(
       dgp = "burr_heavy", m = 10, regime = "strong",
-      k_fraction = 0.05, n_total = 2500, np_target = 5,
+      k_rule = "fraction", k_fraction = 0.05, k_power = NA_real_,
+      n_total = 2500, np_target = 5, design_role = "main",
       stringsAsFactors = FALSE
     ))
   }
@@ -345,9 +367,12 @@ scenario_grid <- function(mode) {
       dgp = c("pareto_light", "burr_heavy", "student3"),
       m = c(5, 10),
       regime = c("balanced", "strong"),
-      k_fraction = 0.05,
+      k_rule = "power",
+      k_fraction = NA_real_,
+      k_power = 0.45,
       n_total = 5000,
       np_target = 5,
+      design_role = "main",
       stringsAsFactors = FALSE
     ))
   }
@@ -356,69 +381,122 @@ scenario_grid <- function(mode) {
     dgp = dgp_names,
     m = c(5, 10),
     regime = c("balanced", "strong"),
-    k_fraction = 0.05,
+    k_rule = "power",
+    k_fraction = NA_real_,
+    k_power = 0.45,
     n_total = 10000,
     np_target = 5,
+    design_role = "main",
     stringsAsFactors = FALSE
   )
   threshold <- expand.grid(
     dgp = dgp_names,
     m = 10,
     regime = "strong",
-    k_fraction = c(0.03, 0.05, 0.10),
+    k_rule = "power",
+    k_fraction = NA_real_,
+    k_power = c(0.35, 0.45, 0.55),
     n_total = 10000,
     np_target = 5,
+    design_role = "threshold",
     stringsAsFactors = FALSE
   )
   target <- expand.grid(
     dgp = dgp_names,
     m = 10,
     regime = "strong",
-    k_fraction = 0.05,
+    k_rule = "power",
+    k_fraction = NA_real_,
+    k_power = 0.45,
     n_total = 10000,
     np_target = c(1, 5, 10),
+    design_role = "target",
     stringsAsFactors = FALSE
   )
   unique(rbind(main, threshold, target))
 }
 
-scenario_sizes <- function(m, regime, n_total, k_fraction) {
+allocate_counts <- function(total, weights, min_count = 0L) {
+  weights <- normalize_weights(weights)
+  raw <- total * weights
+  counts <- pmax(as.integer(min_count), floor(raw))
+  delta <- as.integer(total - sum(counts))
+  if (delta > 0) {
+    order_add <- order(raw - floor(raw), decreasing = TRUE)
+    for (idx in rep(order_add, length.out = delta)) {
+      counts[idx] <- counts[idx] + 1L
+    }
+  } else if (delta < 0) {
+    order_drop <- order(counts - min_count, decreasing = TRUE)
+    for (idx in rep(order_drop, length.out = abs(delta))) {
+      if (counts[idx] > min_count) counts[idx] <- counts[idx] - 1L
+    }
+  }
+  counts
+}
+
+scenario_sizes <- function(m, regime, n_total, k_fraction = NA_real_,
+                           k_rule = "fraction", k_power = NA_real_) {
   w <- allocation_weights(m, regime)
   n_vec <- pmax(20, floor(n_total * w))
   n_vec[length(n_vec)] <- n_vec[length(n_vec)] + n_total - sum(n_vec)
-  k_vec <- pmax(5, floor(k_fraction * n_vec))
+  if (k_rule == "fraction") {
+    if (!is.finite(k_fraction) || k_fraction <= 0) {
+      stop("A positive k_fraction is required for fraction threshold designs.",
+           call. = FALSE)
+    }
+    k_vec <- pmax(5, floor(k_fraction * n_vec))
+  } else if (k_rule == "power") {
+    if (!is.finite(k_power) || k_power <= 0 || k_power >= 1) {
+      stop("k_power must be in (0, 1) for power threshold designs.",
+           call. = FALSE)
+    }
+    k_total_target <- max(5L * m, as.integer(floor(n_total^k_power)))
+    k_vec <- allocate_counts(k_total_target, w, min_count = 5L)
+  } else {
+    stop("Unknown threshold rule: ", k_rule, call. = FALSE)
+  }
   k_vec <- pmin(k_vec, n_vec - 2)
   list(n_vec = as.integer(n_vec), k_vec = as.integer(k_vec))
 }
 
-estimator_specs <- function(dgp, samples, n_vec, k_vec, gamma_hat, nu,
+estimator_specs <- function(dgp, samples, n_vec, k_vec, gamma_hat, plugin_nu,
                             plugin_second = NULL) {
   m <- length(k_vec)
   oracle <- dps_objects(dgp$gamma, dgp$rho, dgp$beta, n_vec, k_vec)
   plugin <- plugin_dps_objects(
-    samples, n_vec, k_vec, gamma_hat, nu, plugin_second
+    samples, n_vec, k_vec, gamma_hat, plugin_nu, plugin_second, dgp
   )
+  plugin_state <- plugin_status(dgp, plugin_second, plugin)
 
   specs <- list(
     equal = list(
       omega = rep(1 / m, m),
       kind = "deterministic",
-      objects = plugin
+      objects = plugin,
+      standardization = if (is.null(plugin)) "none" else "plugin",
+      plugin_status = plugin_state
     ),
     dps_variance = list(
       omega = variance_weights(k_vec),
       kind = "deterministic",
-      objects = plugin
+      objects = plugin,
+      standardization = if (is.null(plugin)) "none" else "plugin",
+      plugin_status = plugin_state
     ),
     dps_amse_oracle = list(
       omega = if (is.null(oracle)) rep(NA_real_, m) else amse_weights(oracle$Bc, oracle$Vc),
       kind = "oracle",
-      objects = oracle
+      objects = oracle,
+      standardization = if (is.null(oracle)) "none" else "oracle",
+      plugin_status = "not_used"
     ),
     dps_amse_plugin = list(
       omega = if (is.null(plugin)) rep(NA_real_, m) else amse_weights(plugin$Bc, plugin$Vc),
       kind = "plugin",
-      objects = plugin
+      objects = plugin,
+      standardization = if (is.null(plugin)) "none" else "plugin",
+      plugin_status = plugin_state
     )
   )
   specs
@@ -426,13 +504,28 @@ estimator_specs <- function(dgp, samples, n_vec, k_vec, gamma_hat, nu,
 
 run_one_replication <- function(scenario, rep_id, alpha = 0.05) {
   dgp <- make_dgp(scenario$dgp)
+  k_rule <- as.character(scenario_value(scenario, "k_rule", "fraction"))
+  k_fraction_design <- suppressWarnings(as.numeric(
+    scenario_value(scenario, "k_fraction", NA_real_)
+  ))
+  k_power <- suppressWarnings(as.numeric(
+    scenario_value(scenario, "k_power", NA_real_)
+  ))
+  design_role <- as.character(scenario_value(scenario, "design_role", "main"))
   sizes <- scenario_sizes(
-    scenario$m, scenario$regime, scenario$n_total, scenario$k_fraction
+    scenario$m, scenario$regime, scenario$n_total, k_fraction_design,
+    k_rule, k_power
   )
   n_vec <- sizes$n_vec
   k_vec <- sizes$k_vec
   n_total <- sum(n_vec)
   k_total <- sum(k_vec)
+  k_fraction_actual <- k_total / n_total
+  k_design <- if (k_rule == "power") {
+    paste0("n^", format(k_power, trim = TRUE, scientific = FALSE))
+  } else {
+    paste0("fraction=", format(k_fraction_design, trim = TRUE, scientific = FALSE))
+  }
   p <- scenario$np_target / n_total
   tau <- 1 - p
   ell <- log(k_total / (n_total * p))
@@ -445,6 +538,11 @@ run_one_replication <- function(scenario, rep_id, alpha = 0.05) {
   q_truth <- dgp$quantile(tau)
   psi_true <- psi_fn(dgp$gamma)
   bridge_target <- psi_true * q_truth
+  eta <- if (is.finite(q_truth) && q_truth > 0 && is.finite(ell) && ell > 0) {
+    sqrt(k_total) / (ell * q_truth)
+  } else {
+    NA_real_
+  }
   C_term <- if (is.finite(truth) && truth > 0 &&
                 is.finite(bridge_target) && bridge_target > 0) {
     log(truth / bridge_target)
@@ -455,6 +553,7 @@ run_one_replication <- function(scenario, rep_id, alpha = 0.05) {
   rows <- list()
   add_row <- function(estimator, kind, nu_choice, xi_hat, gamma_bridge,
                       q_pool, omega, objects,
+                      standardization = "none", plugin_state = "not_used",
                       is_centralised = FALSE) {
     valid_estimate <- is.finite(xi_hat) && xi_hat > 0 &&
       is.finite(truth) && truth > 0 && valid_gamma_domain(gamma_bridge)
@@ -490,21 +589,47 @@ run_one_replication <- function(scenario, rep_id, alpha = 0.05) {
     } else {
       NA_real_
     }
+    any_negative <- if (is_centralised) {
+      0L
+    } else if (any(is.finite(omega))) {
+      as.integer(any(omega[is.finite(omega)] < 0))
+    } else {
+      NA_integer_
+    }
+    max_abs <- if (is_centralised) {
+      1
+    } else if (any(is.finite(omega))) {
+      max(abs(omega[is.finite(omega)]))
+    } else {
+      NA_real_
+    }
     rows[[length(rows) + 1]] <<- data.frame(
       rep = rep_id,
+      design_version = SIMULATION_DESIGN_VERSION,
+      design_role = design_role,
       dgp = dgp$name,
       dgp_key = dgp$key,
       gamma = dgp$gamma,
       m = scenario$m,
       regime = scenario$regime,
-      k_fraction = scenario$k_fraction,
+      k_rule = k_rule,
+      k_design = k_design,
+      k_fraction_design = k_fraction_design,
+      k_power = if (is.finite(k_power)) k_power else NA_real_,
+      k_fraction = k_fraction_actual,
       n_total = n_total,
       k_total = k_total,
       np_target = scenario$np_target,
       tau = tau,
+      ell = ell,
+      sqrtk_over_ell = sqrt(k_total) / ell,
+      eta = eta,
+      bridge_log_gap = C_term,
       nu_choice = nu_choice,
       estimator = estimator,
       estimator_kind = kind,
+      standardization = standardization,
+      plugin_status = plugin_state,
       estimate = if (valid_estimate) xi_hat else NA_real_,
       truth = truth,
       bridge_target = bridge_target,
@@ -537,26 +662,32 @@ run_one_replication <- function(scenario, rep_id, alpha = 0.05) {
       invalid_domain = as.integer(!valid_gamma_domain(gamma_bridge)),
       valid_estimate = as.integer(valid_estimate),
       valid_ci = as.integer(valid_ci),
-      any_negative_weight = if (is_centralised) 0L else as.integer(any(omega < 0, na.rm = TRUE)),
-      max_abs_weight = if (is_centralised) 1 else max(abs(omega), na.rm = TRUE),
+      any_negative_weight = any_negative,
+      max_abs_weight = max_abs,
       plugin_available = requireNamespace("evt0", quietly = TRUE),
       stringsAsFactors = FALSE
     )
   }
 
   nu_choices <- nu_specs(n_vec, k_vec)
-  plugin_second <- plugin_second_order(samples, n_vec)
+  plugin_second <- if (plugin_source_eligible(dgp)) {
+    plugin_second_order(samples, n_vec)
+  } else {
+    NULL
+  }
+  plugin_nu <- nu_choices$threshold
   for (nu_choice in names(nu_choices)) {
     nu <- nu_choices[[nu_choice]]
     specs <- estimator_specs(
-      dgp, samples, n_vec, k_vec, prim$gamma_hat, nu, plugin_second
+      dgp, samples, n_vec, k_vec, prim$gamma_hat, plugin_nu, plugin_second
     )
     for (name in names(specs)) {
       spec <- specs[[name]]
       pooled <- pooled_expectile(prim$gamma_hat, prim$q_hat, nu, spec$omega)
       add_row(
         name, spec$kind, nu_choice, pooled$estimate, pooled$gamma_bridge,
-        pooled$q_pool, spec$omega, spec$objects
+        pooled$q_pool, spec$omega, spec$objects,
+        spec$standardization, spec$plugin_status
       )
     }
   }
@@ -572,6 +703,7 @@ run_one_replication <- function(scenario, rep_id, alpha = 0.05) {
   add_row(
     "centralised", "benchmark", "centralised", xi_full, gamma_full, q_full,
     1, NULL,
+    "oracle", "not_applicable",
     is_centralised = TRUE
   )
 
@@ -585,9 +717,11 @@ summarise_results <- function(results) {
   }
   sum_na <- function(x) sum(x, na.rm = TRUE)
   group_vars <- c(
-    "dgp", "dgp_key", "gamma", "m", "regime", "k_fraction", "n_total",
-    "k_total", "np_target", "nu_choice", "estimator", "estimator_kind",
-    "plugin_available"
+    "design_version", "design_role", "dgp", "dgp_key", "gamma", "m",
+    "regime", "k_rule", "k_design", "k_fraction", "n_total", "k_total",
+    "np_target", "ell", "sqrtk_over_ell", "eta", "bridge_log_gap",
+    "nu_choice", "estimator", "estimator_kind", "standardization",
+    "plugin_status", "plugin_available"
   )
   summary_input <- transform(
     results,
@@ -599,32 +733,28 @@ summarise_results <- function(results) {
     scaled_C_sq = ifelse(is.na(scaled_C), NA_real_, scaled_C^2),
     decomp_remainder_abs = abs(decomp_remainder)
   )
+  grouped_formula <- function(lhs) {
+    stats::as.formula(paste(lhs, "~", paste(group_vars, collapse = " + ")))
+  }
   out <- aggregate(
-    cbind(
+    grouped_formula("cbind(
       log_error, log_error_sq, abs_log_error, covered, ci_log_length,
       scaled_log_error, scaled_log_error_sq, studentized, studentized_sq,
       scaled_A, scaled_A_sq, scaled_B, scaled_B_sq, scaled_C, scaled_C_sq,
       decomp_remainder_abs, any_negative_weight, max_abs_weight
-    ) ~ dgp + dgp_key + gamma + m + regime + k_fraction + n_total +
-      k_total + np_target + nu_choice + estimator + estimator_kind +
-      plugin_available,
+    )"),
     data = summary_input,
     FUN = mean_na,
     na.action = na.pass
   )
   counts <- aggregate(
-    rep ~ dgp + dgp_key + gamma + m + regime + k_fraction + n_total +
-      k_total + np_target + nu_choice + estimator + estimator_kind +
-      plugin_available,
+    grouped_formula("rep"),
     data = summary_input,
     FUN = length,
     na.action = na.pass
   )
   diagnostics <- aggregate(
-    cbind(valid_estimate, valid_ci, invalid_domain) ~
-      dgp + dgp_key + gamma + m + regime + k_fraction + n_total +
-      k_total + np_target + nu_choice + estimator + estimator_kind +
-      plugin_available,
+    grouped_formula("cbind(valid_estimate, valid_ci, invalid_domain)"),
     data = summary_input,
     FUN = sum_na,
     na.action = na.pass

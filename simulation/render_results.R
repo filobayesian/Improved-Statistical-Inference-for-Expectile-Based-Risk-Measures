@@ -24,6 +24,7 @@ local_lib <- file.path(repo_root, "simulation", "Rlib")
 if (dir.exists(local_lib)) {
   .libPaths(c(normalizePath(local_lib, mustWork = TRUE), .libPaths()))
 }
+source(file.path(repo_root, "simulation", "R", "sim_functions.R"))
 
 summary_path <- file.path(
   repo_root, "simulation", "results",
@@ -35,23 +36,27 @@ if (!file.exists(summary_path)) {
 }
 
 summary <- readRDS(summary_path)
-summary_has_nu <- "nu_choice" %in% names(summary)
-summary_has_decomp <- all(c(
-  "scaled_log_rmse", "scaled_A_rms", "scaled_B_rms",
-  "scaled_C_rms", "decomp_remainder_abs"
-) %in% names(summary))
-if (!"nu_choice" %in% names(summary)) {
-  summary$nu_choice <- ifelse(summary$estimator == "centralised",
-                              "centralised", "threshold")
+required_cols <- c(
+  "design_version", "design_role", "k_rule", "k_design", "k_fraction",
+  "ell", "sqrtk_over_ell", "eta", "bridge_log_gap", "nu_choice",
+  "standardization", "plugin_status", "scaled_log_rmse", "studentized_sd",
+  "scaled_A_rms", "scaled_B_rms", "scaled_C_rms", "decomp_remainder_abs"
+)
+missing_cols <- setdiff(required_cols, names(summary))
+if (length(missing_cols) > 0) {
+  stop(
+    "Summary file is stale for the current two-weight simulation design. ",
+    "Missing columns: ", paste(missing_cols, collapse = ", "),
+    ". Regenerate with simulation/run_simulation.R before rendering.",
+    call. = FALSE
+  )
 }
-for (missing_col in c(
-  "scaled_log_error", "scaled_log_rmse", "studentized", "studentized_sd",
-  "scaled_A", "scaled_A_rms", "scaled_B", "scaled_B_rms",
-  "scaled_C", "scaled_C_rms", "decomp_remainder_abs"
-)) {
-  if (!missing_col %in% names(summary)) {
-    summary[[missing_col]] <- NA_real_
-  }
+if (any(summary$design_version != SIMULATION_DESIGN_VERSION)) {
+  stop(
+    "Summary file design_version does not match current code. ",
+    "Regenerate with simulation/run_simulation.R before rendering.",
+    call. = FALSE
+  )
 }
 output_root <- if (is.na(artifact_root)) file.path(repo_root, "thesis") else artifact_root
 fig_dir <- file.path(output_root, "figures", "simulation")
@@ -112,7 +117,7 @@ write_table <- function(path, header, rows, align) {
 }
 
 main_rows <- summary[
-  summary$k_fraction == 0.05 &
+  summary$design_role == "main" &
     summary$np_target == 5 &
     summary$m == 10 &
     summary$regime == "strong" &
@@ -146,14 +151,15 @@ write_table(
 )
 
 interval_rows <- summary[
-  summary$k_fraction == 0.05 &
+  summary$design_role == "main" &
     summary$np_target == 5 &
     summary$m == 10 &
     summary$regime == "strong" &
     summary$nu_choice %in% c("threshold", "centralised") &
     summary$estimator %in% c(
       "dps_variance", "dps_amse_plugin", "centralised"
-    ),
+    ) &
+    summary$valid_ci_rate > 0,
 ]
 interval_rows <- interval_rows[order(
   interval_rows$regime, interval_rows$m, interval_rows$dgp_key,
@@ -164,23 +170,24 @@ if (nrow(interval_rows) > 0) {
   for (i in seq_len(nrow(interval_rows))) {
     row <- interval_rows[i, ]
     interval_lines <- c(interval_lines, sprintf(
-      "%s & %d & %s & %s & %s & %s & %s \\\\",
+      "%s & %d & %s & %s & %s & %s & %s & %s & %s \\\\",
       row$dgp, as.integer(row$m), esc(row$regime),
       estimator_label(row$estimator),
       fmt(row$coverage), fmt(row$ci_log_length),
-      fmt(row$valid_ci_rate)
+      fmt(row$valid_ci_rate), fmt(row$eta), fmt(row$bridge_log_gap)
     ))
   }
 }
 write_table(
   file.path(tab_dir, "interval_summary.tex"),
-  "DGP & $m$ & Regime & Estimator & Coverage & Log width & CI rate \\\\",
+  "DGP & $m$ & Regime & Estimator & Coverage & Log width & CI rate & $\\eta_n$ & Bridge gap \\\\",
   interval_lines,
-  "lrllrrr"
+  "lrllrrrrr"
 )
 
 threshold_rows <- summary[
-  summary$m == 10 &
+  summary$design_role == "threshold" &
+    summary$m == 10 &
     summary$regime == "strong" &
     summary$np_target == 5 &
     summary$nu_choice == "threshold" &
@@ -195,23 +202,23 @@ if (nrow(threshold_rows) > 0) {
   for (i in seq_len(nrow(threshold_rows))) {
     row <- threshold_rows[i, ]
     threshold_lines <- c(threshold_lines, sprintf(
-      "%s & %s & %s & %s & %s \\\\",
-      row$dgp, fmt(row$k_fraction, 2), estimator_label(row$estimator),
-      fmt(row$log_rmse), fmt(row$coverage)
+      "%s & %s & %s & %s & %s & %s \\\\",
+      row$dgp, esc(row$k_design), estimator_label(row$estimator),
+      fmt(row$k_fraction, 3), fmt(row$log_rmse), fmt(row$coverage)
     ))
   }
 }
 write_table(
   file.path(tab_dir, "threshold_sensitivity.tex"),
-  "DGP & $k_j/n_j$ & Estimator & Log RMSE & Coverage \\\\",
+  "DGP & Threshold rule & Estimator & $k/n$ & Log RMSE & Coverage \\\\",
   threshold_lines,
-  "lrlrr"
+  "lllrrr"
 )
 
 target_rows <- summary[
-  summary$m == 10 &
+  summary$design_role == "target" &
+    summary$m == 10 &
     summary$regime == "strong" &
-    summary$k_fraction == 0.05 &
     summary$nu_choice == "threshold" &
     summary$estimator %in% c("dps_variance", "dps_amse_plugin"),
 ]
@@ -223,22 +230,22 @@ if (nrow(target_rows) > 0) {
   for (i in seq_len(nrow(target_rows))) {
     row <- target_rows[i, ]
     target_lines <- c(target_lines, sprintf(
-      "%s & %s & %s & %s & %s \\\\",
+      "%s & %s & %s & %s & %s & %s \\\\",
       row$dgp, fmt(row$np_target, 0), estimator_label(row$estimator),
-      fmt(row$log_rmse), fmt(row$coverage)
+      fmt(row$eta), fmt(row$log_rmse), fmt(row$coverage)
     ))
   }
 }
 write_table(
   file.path(tab_dir, "target_sensitivity.tex"),
-  "DGP & $np$ & Estimator & Log RMSE & Coverage \\\\",
+  "DGP & $np$ & Estimator & $\\eta_n$ & Log RMSE & Coverage \\\\",
   target_lines,
-  "lrlrr"
+  "lrlrrr"
 )
 
 stability <- summary[
-  summary$estimator %in% c("dps_amse_oracle", "dps_amse_plugin") &
-    summary$k_fraction == 0.05 &
+  summary$design_role == "main" &
+    summary$estimator %in% c("dps_amse_oracle", "dps_amse_plugin") &
     summary$np_target == 5 &
     summary$m == 10 &
     summary$regime == "strong" &
@@ -267,7 +274,7 @@ write_table(
 )
 
 validity <- summary[
-  summary$k_fraction == 0.05 &
+  summary$design_role == "main" &
     summary$np_target == 5 &
     summary$nu_choice %in% c("threshold", "centralised") &
     summary$estimator %in% c(
@@ -298,8 +305,7 @@ write_table(
 )
 
 nu_rows <- summary[
-  summary_has_nu &
-    summary$k_fraction == 0.05 &
+  summary$design_role == "main" &
     summary$np_target == 5 &
     summary$m == 10 &
     summary$regime == "strong" &
@@ -308,9 +314,7 @@ nu_rows <- summary[
 ]
 nu_rows <- nu_rows[order(nu_rows$dgp_key, nu_rows$nu_choice), ]
 nu_lines <- character(0)
-if (!summary_has_nu) {
-  nu_lines <- "\\multicolumn{5}{l}{Regenerate with \\texttt{simulation/run\\_simulation.R --final}.} \\\\"
-} else if (nrow(nu_rows) > 0) {
+if (nrow(nu_rows) > 0) {
   for (i in seq_len(nrow(nu_rows))) {
     row <- nu_rows[i, ]
     nu_lines <- c(nu_lines, sprintf(
@@ -328,8 +332,7 @@ write_table(
 )
 
 decomp_rows <- summary[
-  summary_has_decomp &
-    summary$k_fraction == 0.05 &
+  summary$design_role == "main" &
     summary$np_target == 5 &
     summary$m == 10 &
     summary$regime == "strong" &
@@ -338,9 +341,7 @@ decomp_rows <- summary[
 ]
 decomp_rows <- decomp_rows[order(decomp_rows$dgp_key), ]
 decomp_lines <- character(0)
-if (!summary_has_decomp) {
-  decomp_lines <- "\\multicolumn{6}{l}{Regenerate with \\texttt{simulation/run\\_simulation.R --final}.} \\\\"
-} else if (nrow(decomp_rows) > 0) {
+if (nrow(decomp_rows) > 0) {
   for (i in seq_len(nrow(decomp_rows))) {
     row <- decomp_rows[i, ]
     decomp_lines <- c(decomp_lines, sprintf(
@@ -379,7 +380,7 @@ if (requireNamespace("ggplot2", quietly = TRUE)) {
   )
 
   rmse_data <- summary[
-    summary$k_fraction == 0.05 &
+    summary$design_role == "main" &
       summary$np_target == 5 &
       summary$nu_choice %in% c("threshold", "centralised") &
       summary$estimator %in% c("centralised", "dps_variance"),
@@ -441,14 +442,15 @@ if (requireNamespace("ggplot2", quietly = TRUE)) {
   }
 
   cov_data <- summary[
-    summary$k_fraction == 0.05 &
+    summary$design_role == "main" &
       summary$np_target == 5 &
       summary$m == 10 &
       summary$regime == "strong" &
       summary$nu_choice %in% c("threshold", "centralised") &
       summary$estimator %in% c(
         "centralised", "dps_variance", "dps_amse_plugin"
-      ),
+      ) &
+      summary$valid_ci_rate > 0,
   ]
   if (nrow(cov_data) > 0) {
     cov_data$dgp <- factor(cov_data$dgp, levels = rev(dgp_order))
@@ -488,13 +490,16 @@ if (requireNamespace("ggplot2", quietly = TRUE)) {
   )
   if (file.exists(diag_path)) {
     diag <- readRDS(diag_path)
+    if (!all(c("design_version", "k_design", "eta", "plugin_status") %in% names(diag)) ||
+        any(diag$design_version != SIMULATION_DESIGN_VERSION)) {
+      diag <- diag[FALSE, ]
+    }
     diag <- diag[diag$kind == "oracle", ]
     if (nrow(diag) > 0) {
       diag$dgp <- factor(diag$dgp, levels = dgp_order)
-      diag$Design <- ifelse(
-        diag$n_total >= 100000,
-        "n = 100000, k/n = 0.01",
-        "n = 10000, k/n = 0.05"
+      diag$Design <- paste0(
+        "n = ", diag$n_total, ", ", diag$k_design,
+        ", eta = ", sprintf("%.2f", diag$eta)
       )
       bridge_plot <- rbind(
         data.frame(
