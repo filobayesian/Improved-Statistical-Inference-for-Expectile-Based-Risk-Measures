@@ -184,16 +184,22 @@ weights and sample-allocation weights \((n_1/n,\ldots,n_m/n)^\top\). This is
 only a sensitivity check. It does not search for an optimal \(\bm\nu\), and it
 does not use the random estimated \(\bm\omega\) as a bridge-Hill vector.
 
-The rows are close. In this design the threshold and sample-allocation
-conventions coincide because the same \(k_j/n_j\) ratio is used on every
-machine, and their reported performance is identical. Replacing them by equal
-bridge-Hill weights changes little in the light-tailed Burr and Pareto cases
-and in the Student case. It has a modest cost in the heavier-tailed designs:
-for example, log RMSE increases from \(0.223\) to \(0.236\) in Burr heavy and
-from \(0.204\) to \(0.216\) in Pareto heavy, with slightly lower coverage.
-The practical conclusion is that \(\bm\nu_n^k\) is not driving the main
-finite-sample conclusions, although the bridge-Hill component can still matter
-at a lower-order level in heavier-tailed settings.
+In this representative design the threshold and sample-allocation conventions
+coincide because the same \(k_j/n_j\) ratio is used on every machine. The table
+therefore gives a useful baseline, but it cannot by itself separate
+\(\bm\nu_n^k\) from sample-allocation bridge weights. For that reason
+\Cref{tab:sim:nu-heterogeneous} adds a deliberately narrow diagnostic with
+heterogeneous local threshold fractions. The profile assigns larger
+\(k_j/n_j\) values to the smaller machines and smaller values to the larger
+machines, rescaled so the aggregate \(k/n\) remains close to the main value
+\(0.05\). The pooled-Weissman weights are still fixed at the DPS variance
+choice, so the diagnostic isolates the bridge-Hill vector.
+
+The practical conclusion from this block should remain modest. The theorem says
+that \(\bm\nu\) is first-order unidentified under the chosen scaling, while the
+simulation asks whether deterministic bridge choices can still be visible at
+the sample sizes used here. It is a robustness check for the convention
+\(\bm\nu_n^k\), not a finite-sample search for an optimal bridge-Hill vector.
 
 \begin{table}[htbp]
 \centering
@@ -205,6 +211,27 @@ choice.}
 \begingroup
 \setlength{\tabcolsep}{4pt}
 \input{generated/simulation/tables/nu_sensitivity}
+\endgroup
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Sensitivity to deterministic bridge-Hill weights under heterogeneous
+local threshold fractions. The aggregate \(k/n\) is kept close to \(0.05\), and
+the pooled-Weissman weights are fixed at the DPS variance choice.}
+\label{tab:sim:nu-heterogeneous}
+\begingroup
+\setlength{\tabcolsep}{4pt}
+\IfFileExists{generated/simulation/tables/nu_heterogeneous_sensitivity.tex}
+  {\input{generated/simulation/tables/nu_heterogeneous_sensitivity}}
+  {\begin{tabular}{llrrrr}
+   \toprule
+   DGP & Bridge weights & Log bias & Log RMSE & Coverage & RMS scaled \(B_n\) \\
+   \midrule
+   No rows & -- & -- & -- & -- & -- \\
+   \bottomrule
+   \end{tabular}}
 \endgroup
 \end{table}
 

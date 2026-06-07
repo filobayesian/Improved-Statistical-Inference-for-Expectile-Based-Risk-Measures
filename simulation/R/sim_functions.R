@@ -1,11 +1,11 @@
-# Utilities for the finite-sample study in Chapter 5.
+# Utilities for the finite-sample study in Chapter 4.
 #
 # The simulation uses ExtremeRisks for the importable univariate EVT
 # primitives: Hill tail-index estimation and Weissman extreme-quantile
 # extrapolation. The remaining code is the thesis-specific glue for the
 # two-weight pooled extreme-expectile estimator.
 
-SIMULATION_DESIGN_VERSION <- "two_weight_pooled_extreme_20260607_central_oracle"
+SIMULATION_DESIGN_VERSION <- "two_weight_pooled_extreme_20260607_central_oracle_hetero_nu"
 
 ensure_extremerisks <- function() {
   if (!requireNamespace("ExtremeRisks", quietly = TRUE)) {
@@ -348,11 +348,22 @@ allocation_weights <- function(m, regime) {
   stop("Unknown allocation regime: ", regime, call. = FALSE)
 }
 
+threshold_fraction_profile <- function(m, profile) {
+  if (profile == "inverse_allocation") {
+    return(seq(0.10, 0.03, length.out = m))
+  }
+  if (profile == "allocation_aligned") {
+    return(seq(0.03, 0.10, length.out = m))
+  }
+  stop("Unknown threshold profile: ", profile, call. = FALSE)
+}
+
 scenario_grid <- function(mode) {
   if (mode == "smoke") {
     return(data.frame(
       dgp = "burr_heavy", m = 10, regime = "strong",
       k_rule = "fraction", k_fraction = 0.05, k_power = NA_real_,
+      k_profile = "none",
       n_total = 2500, np_target = 5, design_role = "main",
       stringsAsFactors = FALSE
     ))
@@ -370,6 +381,7 @@ scenario_grid <- function(mode) {
       k_rule = "fraction",
       k_fraction = 0.05,
       k_power = NA_real_,
+      k_profile = "none",
       n_total = 5000,
       np_target = 5,
       design_role = "main",
@@ -384,6 +396,7 @@ scenario_grid <- function(mode) {
     k_rule = "fraction",
     k_fraction = 0.05,
     k_power = NA_real_,
+    k_profile = "none",
     n_total = 10000,
     np_target = 5,
     design_role = "main",
@@ -396,6 +409,7 @@ scenario_grid <- function(mode) {
     k_rule = "fraction",
     k_fraction = c(0.03, 0.05, 0.10),
     k_power = NA_real_,
+    k_profile = "none",
     n_total = 10000,
     np_target = 5,
     design_role = "threshold",
@@ -408,12 +422,26 @@ scenario_grid <- function(mode) {
     k_rule = "fraction",
     k_fraction = 0.05,
     k_power = NA_real_,
+    k_profile = "none",
     n_total = 10000,
     np_target = c(1, 5, 10),
     design_role = "target",
     stringsAsFactors = FALSE
   )
-  unique(rbind(main, threshold, target))
+  nu_heterogeneous <- data.frame(
+    dgp = dgp_names,
+    m = 10,
+    regime = "strong",
+    k_rule = "fraction_profile",
+    k_fraction = 0.05,
+    k_power = NA_real_,
+    k_profile = "inverse_allocation",
+    n_total = 10000,
+    np_target = 5,
+    design_role = "nu_heterogeneous",
+    stringsAsFactors = FALSE
+  )
+  unique(rbind(main, threshold, target, nu_heterogeneous))
 }
 
 allocate_counts <- function(total, weights, min_count = 0L) {
@@ -436,7 +464,8 @@ allocate_counts <- function(total, weights, min_count = 0L) {
 }
 
 scenario_sizes <- function(m, regime, n_total, k_fraction = NA_real_,
-                           k_rule = "fraction", k_power = NA_real_) {
+                           k_rule = "fraction", k_power = NA_real_,
+                           k_profile = "none") {
   w <- allocation_weights(m, regime)
   n_vec <- pmax(20, floor(n_total * w))
   n_vec[length(n_vec)] <- n_vec[length(n_vec)] + n_total - sum(n_vec)
@@ -446,6 +475,18 @@ scenario_sizes <- function(m, regime, n_total, k_fraction = NA_real_,
            call. = FALSE)
     }
     k_vec <- pmax(5, floor(k_fraction * n_vec))
+  } else if (k_rule == "fraction_profile") {
+    if (!is.finite(k_fraction) || k_fraction <= 0) {
+      stop("A positive aggregate k_fraction target is required for profile threshold designs.",
+           call. = FALSE)
+    }
+    base_fraction <- threshold_fraction_profile(m, k_profile)
+    achieved <- sum((n_vec / sum(n_vec)) * base_fraction)
+    if (!is.finite(achieved) || achieved <= 0) {
+      stop("Invalid threshold fraction profile: ", k_profile, call. = FALSE)
+    }
+    local_fraction <- base_fraction * (k_fraction / achieved)
+    k_vec <- pmax(5, floor(local_fraction * n_vec))
   } else if (k_rule == "power") {
     if (!is.finite(k_power) || k_power <= 0 || k_power >= 1) {
       stop("k_power must be in (0, 1) for power threshold designs.",
@@ -511,10 +552,11 @@ run_one_replication <- function(scenario, rep_id, alpha = 0.05) {
   k_power <- suppressWarnings(as.numeric(
     scenario_value(scenario, "k_power", NA_real_)
   ))
+  k_profile <- as.character(scenario_value(scenario, "k_profile", "none"))
   design_role <- as.character(scenario_value(scenario, "design_role", "main"))
   sizes <- scenario_sizes(
     scenario$m, scenario$regime, scenario$n_total, k_fraction_design,
-    k_rule, k_power
+    k_rule, k_power, k_profile
   )
   n_vec <- sizes$n_vec
   k_vec <- sizes$k_vec
@@ -523,6 +565,11 @@ run_one_replication <- function(scenario, rep_id, alpha = 0.05) {
   k_fraction_actual <- k_total / n_total
   k_design <- if (k_rule == "power") {
     paste0("n^", format(k_power, trim = TRUE, scientific = FALSE))
+  } else if (k_rule == "fraction_profile") {
+    paste0(
+      "profile=", k_profile,
+      ", target=", format(k_fraction_design, trim = TRUE, scientific = FALSE)
+    )
   } else {
     paste0("fraction=", format(k_fraction_design, trim = TRUE, scientific = FALSE))
   }
@@ -619,6 +666,7 @@ run_one_replication <- function(scenario, rep_id, alpha = 0.05) {
       k_design = k_design,
       k_fraction_design = k_fraction_design,
       k_power = if (is.finite(k_power)) k_power else NA_real_,
+      k_profile = k_profile,
       k_fraction = k_fraction_actual,
       n_total = n_total,
       k_total = k_total,
@@ -722,7 +770,7 @@ summarise_results <- function(results) {
   sum_na <- function(x) sum(x, na.rm = TRUE)
   group_vars <- c(
     "design_version", "design_role", "dgp", "dgp_key", "gamma", "m",
-    "regime", "k_rule", "k_design", "k_fraction", "n_total", "k_total",
+    "regime", "k_rule", "k_design", "k_profile", "k_fraction", "n_total", "k_total",
     "np_target", "ell", "sqrtk_over_ell", "eta", "bridge_log_gap",
     "nu_choice", "estimator", "estimator_kind", "standardization",
     "plugin_status", "plugin_available"

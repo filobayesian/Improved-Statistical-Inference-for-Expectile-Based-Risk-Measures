@@ -38,7 +38,7 @@ if (!file.exists(summary_path)) {
 summary <- readRDS(summary_path)
 required_cols <- c(
   "design_version", "design_role", "k_rule", "k_design", "k_fraction",
-  "ell", "sqrtk_over_ell", "eta", "bridge_log_gap", "nu_choice",
+  "k_profile", "ell", "sqrtk_over_ell", "eta", "bridge_log_gap", "nu_choice",
   "standardization", "plugin_status", "scaled_log_rmse", "studentized_sd",
   "scaled_A_rms", "scaled_B_rms", "scaled_C_rms", "decomp_remainder_abs"
 )
@@ -333,6 +333,37 @@ write_table(
   "DGP & Bridge weights & Log bias & Log RMSE & Coverage \\\\",
   nu_lines,
   "llrrr"
+)
+
+nu_hetero_rows <- summary[
+  summary$design_role == "nu_heterogeneous" &
+    summary$np_target == 5 &
+    summary$m == 10 &
+    summary$regime == "strong" &
+    summary$estimator == "dps_variance" &
+    summary$k_profile == "inverse_allocation" &
+    summary$nu_choice %in% c("threshold", "equal", "sample"),
+]
+nu_hetero_rows <- nu_hetero_rows[order(
+  nu_hetero_rows$dgp_key, nu_hetero_rows$nu_choice
+), ]
+nu_hetero_lines <- character(0)
+if (nrow(nu_hetero_rows) > 0) {
+  for (i in seq_len(nrow(nu_hetero_rows))) {
+    row <- nu_hetero_rows[i, ]
+    nu_hetero_lines <- c(nu_hetero_lines, sprintf(
+      "%s & %s & %s & %s & %s & %s \\\\",
+      row$dgp, nu_label(row$nu_choice),
+      fmt(row$log_bias), fmt(row$log_rmse), fmt(row$coverage),
+      fmt(row$scaled_B_rms)
+    ))
+  }
+}
+write_table(
+  file.path(tab_dir, "nu_heterogeneous_sensitivity.tex"),
+  "DGP & Bridge weights & Log bias & Log RMSE & Coverage & RMS scaled $B_n$ \\\\",
+  nu_hetero_lines,
+  "llrrrr"
 )
 
 decomp_rows <- summary[
