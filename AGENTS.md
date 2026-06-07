@@ -33,7 +33,7 @@ Slutsky/studentised statistic and a log-scale multiplicative interval by
 inversion. It is not a direct import of the DPS Corollary 4 quantile interval
 formula, and it does not make `\nu` optimal or random.
 
-## Current Repository Status: Promoted First-Order Thesis Prose
+## Current Repository Status: Promoted First-Order Thesis Prose And Final Simulation Run
 
 As of 2026-06-07, the live compiled thesis has been reorganised after the
 two-weight pivot. It now compiles:
@@ -46,7 +46,8 @@ two-weight pivot. It now compiles:
 - `thesis/chapters/03_pooled_extreme_expectiles.tex`, now the live
   main-theory chapter;
 - `thesis/chapters/04_finite_sample_study.tex`, the current narrow
-  finite-sample chapter for the promoted estimator and inference route;
+  finite-sample chapter for the promoted estimator and inference route,
+  rewritten from a fresh final simulation run;
 - bibliography via `\printbibliography`.
 
 `thesis/main.tex` currently includes `chapters/01_introduction`,
@@ -65,9 +66,45 @@ transfer corollary, and the plug-in studentisation/log-scale interval
 corollary are now promoted to live `.tex` prose in
 `thesis/chapters/03_pooled_extreme_expectiles.tex`. The old diagonal Chapter 4
 theorem route remains historical draft/audit context only. The finite-sample
-chapter is a narrow current draft for the promoted estimator; do not widen its
-claims beyond the compiled design and generated artifacts under
+chapter is now a narrow thesis-ready current draft for the promoted estimator;
+do not widen its claims beyond the compiled design and generated artifacts under
 `thesis/generated/simulation/`.
+
+As of 2026-06-07, the stale/smoke simulation results and stale Chapter 4 prose
+from earlier runs have been superseded. The current simulation code design
+version is
+`two_weight_pooled_extreme_20260607_central_oracle_hetero_nu`. A fresh final
+finite-sample run was completed with 55 scenarios and 5000 replications per
+scenario, and a fresh final interval-diagnostic run was completed with 10
+scenarios and 1500 replications per scenario. The current `latest` RDS files in
+`simulation/results/` match the current design version, and
+`simulation/render_results.R --final` regenerated the tables and figures under
+`thesis/generated/simulation/`. The regenerated artifacts include the new
+heterogeneous-threshold diagnostics
+`nu_heterogeneous_sensitivity.tex` and
+`omega_heterogeneous_sensitivity.tex`. The thesis was rebuilt successfully to
+`thesis/build/main.pdf` with
+`latexmk -pdf -synctex=1 -interaction=nonstopmode main.tex`.
+
+Current Chapter 4 simulation interpretation:
+
+- the main practical bridge-Hill convention remains
+  `\nu_n^k=(k_1/k,\ldots,k_m/k)`, with other deterministic `\nu` choices used
+  only as finite-sample sensitivity checks;
+- the centralised benchmark interval uses the corresponding single-sample
+  oracle DPS centring and variance objects with `m=1`;
+- exact Pareto plug-in AMSE rows are treated as source-ineligible because the
+  second-order bias coefficient is zero, so do not describe plug-in AMSE as an
+  active distinct estimated AMSE route in exact Pareto designs;
+- the main equal-threshold grid shows DPS variance weights are a stable
+  baseline for `\omega`, while AMSE weights are almost indistinguishable from
+  variance weights in that grid;
+- the heterogeneous-threshold diagnostic is the proper finite-sample place to
+  discuss whether AMSE weights can differ meaningfully from variance weights;
+  it shows AMSE can matter, but is not uniformly superior or uniformly stable;
+- first-order log-scale intervals under-cover in several finite-sample rows, so
+  Chapter 4 should present interval results as diagnostics of the plug-in route,
+  not as a claim of strong finite-sample calibration.
 
 Current source-audit/prose status: the `A_n(\omega)` pooled Weissman component, the
 `B_n(\nu)` plug-in-`\psi` component, and the `C_n` population bridge component
@@ -185,11 +222,11 @@ to keep the thesis at this first-order layer by default, not to open
 lower-order `\nu`-optimality unless Filippo explicitly asks for it, and to use
 the deterministic convention `\nu_n^k=(k_1/k,\ldots,k_m/k)` for downstream
 inference work. The plug-in centring and variance route is now mathematically
-settled conditionally on DPS consistency. The next open layer is not to
-reprove estimated `\omega` transfer, choose `\nu`, or choose a new centring
-philosophy; it is either to polish surrounding thesis prose such as the
-Introduction, or to design simulations around the promoted estimator and
-plug-in inference route.
+settled conditionally on DPS consistency, and the narrow finite-sample study
+has been regenerated and rewritten around that route. The next open layer is
+not to reprove estimated `\omega` transfer, choose `\nu`, choose a new
+centring philosophy, or redesign Chapter 4 by default; it is to polish
+surrounding thesis prose such as the Introduction and eventual Discussion.
 
 The error is that the thesis was built around a standalone pooled intermediate QB expectile theory:
 \[
@@ -214,7 +251,8 @@ The live thesis now has the following status:
   transfer corollary, and plug-in inference corollary with proofs.
 - `thesis/chapters/04_finite_sample_study.tex` is compiled and contains the
   current narrow finite-sample study for the promoted estimator and plug-in
-  inference route.
+  inference route, based on the fresh final simulation artifacts generated on
+  2026-06-07.
 - `thesis/chapters/05_discussion.tex` is an uncompiled placeholder.
 - `notes/source_audit_pooled_extreme_expectile.md` records the active
   two-weight estimator, the exact `A_n(\omega)+B_n(\nu)-C_n` decomposition,
@@ -232,8 +270,8 @@ The live thesis now has the following status:
 
 - `thesis/chapters/01_introduction.tex`: currently blank except for
   `\todo{}`. When rewriting it, align claims with the promoted main-theory
-  results and avoid simulation or broader-scope claims before those layers are
-  actually written.
+  results and the narrow Chapter 4 finite-sample findings. Avoid broader-scope
+  claims beyond the theorem and regenerated simulation grid.
 - `archive/pre_pivot/03_pooled_intermediate_placeholder.tex`: archived
   withdrawn placeholder. The
   pooled intermediate QB CLT, A/B estimator comparison, two-weight optimality
@@ -250,9 +288,10 @@ The live thesis now has the following status:
   Individual algebraic ideas from old drafts may be useful as scratch work,
   but do not cite them as validated results.
 - `thesis/chapters/04_finite_sample_study.tex` and `simulation/`: the current
-  compiled finite-sample study is narrow and post-pivot. Keep its claims tied
-  to the promoted estimator, selected DPS `\omega` routes, plug-in objects,
-  and fixed bridge-Hill convention `\nu_n^k`.
+  compiled finite-sample study is narrow, post-pivot, and based on the fresh
+  final 2026-06-07 run. Keep its claims tied to the promoted estimator,
+  selected DPS `\omega` routes, plug-in objects, fixed bridge-Hill convention
+  `\nu_n^k`, and the generated artifacts under `thesis/generated/simulation/`.
 - Generated tables/figures under `thesis/generated/simulation/`: treat as
   rendered artifacts produced by `simulation/render_results.R`, not hand-written
   thesis prose.
@@ -375,8 +414,9 @@ diagonal choice `\nu=\omega` is not forced by the first-order theorem. The
 weight `\omega` is first-order optimisable and may be DPS-estimated under
 source conditions, while `\nu` remains deterministic and first-order
 unidentified. Do not open random `\nu` or lower-order `\nu` optimality by
-default. The next thesis work should either polish surrounding prose or design
-the finite-sample study around the promoted estimator and inference route.
+default. The finite-sample study has now been run and rewritten around the
+promoted estimator and inference route; the next thesis work should polish the
+surrounding prose, especially the Introduction and eventual Discussion.
 
 ### Current Conservative Design Choices
 
@@ -422,9 +462,10 @@ As of 2026-06-05, the agreed conservative research design is:
   without a separate audit of the compact-event Taylor expansion and order of
   `B_n(\nu)` for the proposed random bridge-Hill convention.
 - Do not add simulation claims from the first-order calculation alone.
-  Simulations still require a finite-sample design around the promoted
-  estimator, selected DPS `\omega` route, plug-in objects, and fixed
-  `\nu_n^k` convention.
+  The current Chapter 4 claims must be tied to the fresh final simulation
+  artifacts and not inferred directly from the theorem. Any new simulation
+  claim requires a corresponding regenerated artifact and, if it changes the
+  design, a fresh design-version check.
 - Keep mathematical research work in `notes/source_audit_pooled_extreme_expectile.md`
   or a new note before moving additional result layers into thesis prose.
 
@@ -532,10 +573,12 @@ plug-in inference layer:
 - Optional finite-sample sensitivity checks may compare other deterministic
   `\nu` choices such as `\nu=\omega` or equal weights, but the main practical
   route should use `\nu_n^k` and no `\nu` choice should be described as
-  optimal.
+  optimal. Chapter 4 now includes deterministic `\nu` sensitivity, including a
+  heterogeneous-threshold diagnostic where `k_j/n_j` differs across machines.
 - The next prose-sensitive edit is likely the Introduction: update it only
-  around the promoted theorem/corollary sequence and still avoid simulation
-  claims until Chapter 5 is redesigned.
+  around the promoted theorem/corollary sequence and the narrow regenerated
+  Chapter 4 findings. Do not turn the finite-sample diagnostics into broader
+  methodological claims.
 - If Filippo explicitly wants optimality for `\nu`, first audit the additional
   mathematics:
   a joint expansion for the leading `A_n(\omega)` term and the bridge-Hill
@@ -551,16 +594,19 @@ and the bibliography. The active audit trail remains
 `notes/source_audit_pooled_extreme_expectile.md`.
 
 The immediate next research step is no longer to promote the first-order
-result or reorganise the thesis directory: both have been done. The next
-unresolved prose task is to rewrite the Introduction around the promoted
-theorem/corollary sequence and the narrow finite-sample chapter. The remaining
-uncompiled chapter placeholder is `05_discussion.tex`.
+result, reorganise the thesis directory, or run the first final simulation:
+those have been done. The next unresolved prose task is to rewrite the
+Introduction around the promoted theorem/corollary sequence and the narrow
+finite-sample chapter. The remaining uncompiled chapter placeholder is
+`05_discussion.tex`.
 
 At first order, DPS variance- and AMSE-optimal weights apply to `\omega` only,
 including source-admissible estimated weights. The practical route should use
 `\nu_n^k` for the bridge-Hill estimator so that estimated optimal `\omega`
 can be used without making `\nu` random. Simulations may later explore
-finite-sample sensitivity to `\nu`, but they must not be used to claim an
+additional finite-sample sensitivity to `\nu`, but the current Chapter 4
+already includes the baseline deterministic `\nu` sensitivity and the
+heterogeneous-threshold diagnostic. No simulation should be used to claim an
 optimal `\nu` without a separately proved lower-order theory.
 
 When extending the promoted main-theory chapter, preserve this order:
@@ -621,9 +667,11 @@ Remaining deliverable before moving beyond first-order theory:
 - no further first-order Markdown proof work is required for the deterministic
   two-weight route, source-admissible estimated-`\omega` transfer, or
   conditional plug-in inference under `\eta_n\to0`;
-- next, rewrite the surrounding thesis prose or settle the finite-sample
-  simulation design around the promoted estimator, selected DPS `\omega`
-  route, plug-in objects, and fixed `\nu_n^k` convention;
+- the finite-sample simulation design around the promoted estimator, selected
+  DPS `\omega` route, plug-in objects, and fixed `\nu_n^k` convention has been
+  implemented and run for Chapter 4;
+- next, rewrite the surrounding thesis prose, especially the Introduction and
+  eventual Discussion;
 - if the promoted main-theory chapter is extended, keep the deterministic
   two-weight route first, followed by the separate source-admissible
   estimated-`\omega` corollary and plug-in inference corollary.
@@ -654,8 +702,9 @@ Completed in the audit layer and promoted to thesis prose for the
 deterministic two-weight theorem, the source-admissible estimated-`\omega`
 transfer, and the conditional plug-in inference corollary.
 Re-read and extract exact source statements again before adding any new layer,
-especially lower-order `\nu` optimality, simulations, estimated `\nu`, or
-broader target settings. The checked sources for the theorem route are:
+especially lower-order `\nu` optimality, new simulation designs, estimated
+`\nu`, or broader target settings. The checked sources for the theorem route
+are:
 
 1. Daouia--Padoan--Stupfler pooled Hill CLT.
 2. Daouia--Padoan--Stupfler weighted-geometric pooled Weissman theorem.
@@ -866,29 +915,42 @@ Expected lean structure:
 1. Introduction: rewritten around pooled extreme expectiles through Padoan pooled Weissman plus expectile bridge.
 2. Background: keep and tighten; remove overbuilt intermediate machinery.
 3. Main theory: live promoted chapter defining the estimator, proving the theorem through the decomposition, then stating weights and plug-in intervals.
-4. Simulation: redesign only after the selected `\omega` route, DPS plug-in
-   objects, promoted log-scale interval, and fixed `\nu` convention are set.
+4. Simulation: live Chapter 4 now reports the regenerated narrow finite-sample
+   study for the selected `\omega` routes, DPS plug-in objects, promoted
+   log-scale interval, and fixed `\nu_n^k` convention.
 5. Discussion: limitations and future work.
 
-The old Chapter 3 should likely be deleted, shortened to a source/background note, or replaced by the new main-theory chapter. Do not preserve it merely because it is already written.
+The old Chapter 3 has already been replaced by the new main-theory chapter.
+Do not preserve old pre-pivot material merely because it is already written.
 
 ### Phase 8: Simulation Rebuild
 
-Only after the selected `\omega` route, DPS plug-in objects, promoted
-log-scale interval, and fixed `\nu_n^k` convention are stable:
+This phase is complete for the current Chapter 4. The selected `\omega` route,
+DPS plug-in objects, promoted log-scale interval, and fixed `\nu_n^k`
+convention are stable for the current narrow finite-sample study, and the
+fresh final run has been rendered into thesis artifacts.
 
-- simulations should use the first-order theorem, DPS estimated-`\omega`
-  transfer, and plug-in inference corollary as their mathematical base;
-- simulations should use `\nu_n^k=(k_1/k,\ldots,k_m/k)` as the main
-  bridge-Hill convention;
-- simulations may compare other deterministic choices for `\nu` as
-  finite-sample sensitivity analysis, not as evidence of a theoretically
-  optimal `\nu`;
-- update `simulation/R/sim_functions.R` to compute the new estimator;
-- remove old estimator rows that correspond only to the obsolete two-weight intermediate theory;
-- run `Rscript simulation/run_simulation.R --smoke`;
-- run pilot/final only when Filippo asks or when the theorem-driven design is settled;
-- regenerate tables/figures and rebuild LaTeX afterward.
+Current simulation status:
+
+- simulations use the first-order theorem, DPS estimated-`\omega` transfer, and
+  plug-in inference corollary as their mathematical base;
+- simulations use `\nu_n^k=(k_1/k,\ldots,k_m/k)` as the main bridge-Hill
+  convention;
+- deterministic alternatives for `\nu` appear only as finite-sample
+  sensitivity analysis, not as evidence of a theoretically optimal `\nu`;
+- `simulation/R/sim_functions.R` computes the promoted two-weight pooled
+  extreme-expectile estimator and records the exact
+  `A_n(\omega)+B_n(\nu)-C_n` decomposition diagnostics;
+- exact Pareto plug-in AMSE is source-ineligible by design, while oracle AMSE
+  collapses to the variance rule in exact Pareto cases;
+- final Chapter 4 artifacts were produced by running smoke checks, final
+  finite-sample simulations, final interval diagnostics, rendering tables and
+  figures, and rebuilding LaTeX.
+
+Future simulation-code edits should still begin with
+`Rscript simulation/run_simulation.R --smoke`, followed by fresh final runs and
+`simulation/render_results.R --final` only when the change affects final
+artifacts or Filippo explicitly asks for a rerun.
 
 ## Repository Layout
 
@@ -946,12 +1008,19 @@ From the repository root:
 
 ```bash
 Rscript simulation/run_simulation.R --smoke
+Rscript simulation/run_interval_diagnostics.R --smoke
 Rscript simulation/run_simulation.R --pilot
 Rscript simulation/run_simulation.R --final --cores=8
+Rscript simulation/run_interval_diagnostics.R --final --cores=8
 Rscript simulation/render_results.R --final
 ```
 
-The existing simulation outputs were produced for the old design. Do not use them as final evidence for the rebuilt thesis. For simulation-code edits, run the smoke test first. Run pilot/final only after the new estimator and metrics are settled or Filippo explicitly asks.
+The current final Chapter 4 outputs were produced on 2026-06-07 with design
+version `two_weight_pooled_extreme_20260607_central_oracle_hetero_nu`. Treat
+older timestamped files and any smoke/pilot outputs as audit history only. For
+simulation-code edits, run the smoke tests first. Run final simulations and
+rendering only after the changed estimator/metrics are settled or Filippo
+explicitly asks.
 
 ## Notation Conventions
 
@@ -997,7 +1066,8 @@ When adding entries, prefer verified DOIs / journal volumes. Mark unverified pie
 
 ## What Is Not Here
 
-- A validated final thesis structure after the 2026-06-03 reset.
+- A complete final thesis: the Introduction remains a placeholder and the
+  Discussion is still uncompiled.
 - A real-data application.
 - Time-series, multivariate, or dependent-data simulations.
 - Production software beyond the narrow R simulation scripts.
