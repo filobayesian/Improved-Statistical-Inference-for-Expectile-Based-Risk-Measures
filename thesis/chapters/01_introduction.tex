@@ -2,7 +2,7 @@
 \chapter{Introduction}
 \label{ch:intro}
 
-Estimating tail risk is challlenging because the events of greatest practical
+Estimating tail risk is challenging because the events of greatest practical
 interest are precisely those for which the data are scarce. In financial,
 insurance and operational-risk applications, the target may lie beyond the
 range where empirical averages or order statistics alone give reliable
@@ -61,44 +61,34 @@ separation is important. The diagonal choice \(\bm\nu=\bm\omega\) is a
 natural prototype, but it is not forced by the construction and is not treated
 as an optimality principle.
 
-The main theoretical contribution is to analyse this estimator from an exact
-log decomposition. The decomposition separates three terms: the
-pooled-Weissman quantile error, the error from plugging a pooled Hill estimator
-into \(\psifn\), and the population error in replacing the expectile by its
-asymptotic quantile bridge. In the finite-\(m\) iid common-marginal setting,
-under the same extreme-Weissman scale and an explicit bridge-rate condition,
-the latter two terms are lower order. The resulting first-order limit is
-therefore inherited from the pooled-Weissman component. Consequently, the
-first-order bias, variance and AMSE criteria depend on \(\bm\omega\), while
-\(\bm\nu\) is first-order unidentified. The practical bridge-Hill convention
-used later is the deterministic threshold-allocation vector
-\(\bm\nu_n^k=(k_1/k,\ldots,k_m/k)^\top\), not an estimated or optimised
-bridge-Hill weight.
+With this estimator in place, the thesis makes three contributions. First, it
+derives the first-order law from an exact log decomposition rather than by
+formal analogy with quantile pooling. In the finite-\(m\) iid common-marginal
+setting, this shows that the leading term is the pooled-Weissman error. The
+outer bridge-Hill term and the population expectile--quantile bridge error are
+lower order under the bridge-rate condition used in the main result. Thus the
+first-order bias, variance and AMSE criteria concern \(\bm\omega\), while
+\(\bm\nu\) remains first-order unidentified.
 
-This first-order separation also determines the inference route. Estimated
-weights are introduced only in the pooled-Weissman role: when the
-Daouia--Padoan--Stupfler source theory supplies a consistent estimated
-\(\widehat{\bm\omega}_n\), together with consistent plug-in centring and
-variance objects, these objects transfer through the expectile decomposition.
-This yields a plug-in-centred studentised statistic and a multiplicative
-log-scale interval for the extreme expectile.
+Second, the thesis transfers the relevant estimated-weight and plug-in
+inference machinery from Daouia--Padoan--Stupfler to the expectile estimator
+when the source consistency conditions apply. Estimated weights are used only
+in the pooled-Weissman role. For implementation, the bridge-Hill vector is
+kept at the deterministic threshold-allocation convention
+\(\bm\nu_n^k=(k_1/k,\ldots,k_m/k)^\top\).
 
-The finite-sample study is deliberately narrow and follows the theory's
-scope. It keeps the bridge-Hill vector fixed at
-\(\bm\nu_n^k\) and varies only the pooled-Weissman weights. In the simulated
-iid common-marginal designs, Daouia--Padoan--Stupfler variance weights are a
-stable practical baseline and track the centralised benchmark closely for
-point estimation. AMSE weights are almost indistinguishable from variance
-weights in the main equal-threshold grid, but the heterogeneous-threshold
-diagnostic shows that they can become informative, with some stability costs.
-The log-scale intervals under-cover in several finite-sample rows, so they
-are reported as diagnostics of the first-order plug-in route rather than as a
-claim of strong finite-sample calibration.
+Third, the thesis reports a finite-sample study matched to this theoretical
+scope. The simulations vary the pooled-Weissman weights, keep the bridge-Hill
+convention fixed, and assess point estimation, plug-in intervals and
+decomposition diagnostics. Their role is to show how the promoted first-order
+route behaves in the studied designs, not to introduce a wider estimator class
+or a new optimality principle.
 
 The rest of the thesis is organised as follows. \Cref{ch:background} recalls
 the heavy-tail, expectile and optimal-pooling results used as source inputs.
 \Cref{ch:pooled-extreme} develops the pooled extreme-expectile estimator, its
-exact decomposition, the deterministic first-order theorem, the weight
+exact decomposition, the deterministic first-order result, the weight
 consequences and the estimated-weight inference transfer. \Cref{ch:finite-sample}
 reports the finite-sample study for the promoted estimator and inference
-route.
+route. \Cref{ch:conclusion} summarises the main lessons and the limitations
+left by this deliberately narrow construction.
