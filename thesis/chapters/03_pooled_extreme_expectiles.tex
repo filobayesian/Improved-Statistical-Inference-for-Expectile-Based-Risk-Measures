@@ -96,7 +96,7 @@ and
 \]
 \end{lemma}
 
-\begin{proof}
+\begin{proof}[Verification]
 By the definition of the estimator,
 \[
 \begin{aligned}
@@ -150,15 +150,15 @@ The first bracket is \(A_n(\bm\omega)\), the second bracket is
 Combining the three brackets yields \eqref{eq:pool-ext:decomposition}.
 \end{proof}
 
-\section{A deterministic two-weight theorem}
+\section{A deterministic two-weight conjecture}
 \label{sec:pool-ext:deterministic}
 
-The following theorem gives the first-order limit under a rate condition that
+The following conjecture records the first-order limit under a rate condition that
 makes the deterministic population gap between expectiles and quantiles
 negligible on the pooled-Weissman scale.
 
-\begin{theorem}[Pooled extreme expectile, deterministic weights]
-\label{thm:pool-ext:deterministic}
+\begin{conjecture}[Pooled extreme expectile, deterministic weights]
+\label{conj:pool-ext:deterministic}
 Let \(m\) be fixed. Suppose the observations across and within machines are
 iid copies of a common continuous loss variable \(X\). Let
 \(U(t)=Q(1-1/t)\) be the common tail quantile, and assume
@@ -254,9 +254,9 @@ Moreover,
   \;\todist\;
   \mathcal N(B_{\bm\omega},V_{\bm\omega}).
 \end{equation}
-\end{theorem}
+\end{conjecture}
 
-\begin{proof}
+\begin{proof}[Supporting argument]
 Write \(s_n=\sqrt{k}/\ell_n\). By the exact decomposition
 \eqref{eq:pool-ext:decomposition},
 \[
@@ -363,7 +363,7 @@ by the uniform convergence theorem for regularly varying functions. Hence
   \left(\frac{c_j^{-1}}{\sum_{i=1}^{m} c_i^{-1}}\right)^{1/2}
   d_j^\rho .
 \]
-Thus the assumptions of \Cref{thm:pool-ext:deterministic} meet the local
+Thus the assumptions of \Cref{conj:pool-ext:deterministic} meet the local
 assumptions of
 \Cref{thm:bg:pool-hill}. In particular,
 \[
@@ -521,14 +521,14 @@ and
 This proves \eqref{eq:pool-ext:relative-limit}.
 \end{proof}
 
-\begin{remark}[What the theorem does and does not identify]
+\begin{remark}[What the conjecture does and does not identify]
 \label{rem:pool-ext:nu-unidentified}
-The limit in \Cref{thm:pool-ext:deterministic} depends on
+The limit in \Cref{conj:pool-ext:deterministic} depends on
 \(\bm\omega\), the limiting geometric pooled-Weissman weights, but not on
 \(\bm\nu\), the limiting bridge-Hill weights. Thus \(\bm\nu\) is first-order
 unidentified in the present regime. The diagonal estimator
 \(\bm\nu_n=\bm\omega_n\) is a permissible deterministic convention when the
-common deterministic sequence satisfies the theorem's convergence condition,
+common deterministic sequence satisfies the conjecture's convergence condition,
 and the practical convention used for plug-in inference below is
 \[
   \bm\nu_n^k=\left(\frac{k_1}{k},\ldots,\frac{k_m}{k}\right)^\top.
@@ -540,7 +540,7 @@ of bridge-Hill weights would require a lower-order theory not developed here.
 \section{Weight consequences}
 \label{sec:pool-ext:weights}
 
-The preceding theorem determines the relevant first-order weight criterion.
+The preceding conjecture determines the relevant first-order weight criterion.
 The leading bias and variance coincide with those of the
 Daouia--Padoan--Stupfler pooled-Weissman component in the distributed
 common-marginal case. Define
@@ -559,9 +559,9 @@ common-marginal case. Define
 Then \(B_{\bm\omega}=\bm\omega^\top\Bc^{\mathrm{dist}}\) and
 \(V_{\bm\omega}=\bm\omega^\top\Vc^{\mathrm{dist}}\bm\omega\).
 
-\begin{corollary}[First-order criteria for \(\bm\omega\)]
-\label{cor:pool-ext:omega-criteria}
-Under the assumptions of \Cref{thm:pool-ext:deterministic}, the
+\begin{conjecture}[First-order criteria for \(\bm\omega\)]
+\label{conj:pool-ext:omega-criteria}
+Under the assumptions of \Cref{conj:pool-ext:deterministic}, the
 first-order variance criterion for the pooled extreme-expectile estimator is
 \[
   \bm\omega^\top\Vc^{\mathrm{dist}}\bm\omega,
@@ -611,11 +611,11 @@ If \(\Vc^{\mathrm{dist}}\) is positive definite, the AMSE-optimal weights are
   }.
 \]
 No first-order variance or AMSE criterion for \(\bm\nu\) is identified by
-\Cref{thm:pool-ext:deterministic}.
-\end{corollary}
+\Cref{conj:pool-ext:deterministic}.
+\end{conjecture}
 
-\begin{proof}
-By \Cref{thm:pool-ext:deterministic},
+\begin{proof}[Supporting argument]
+By \Cref{conj:pool-ext:deterministic},
 \[
   \frac{\sqrt{k}}{\ell_n}
   \log
@@ -638,7 +638,7 @@ and AMSE formulas follow from that result.
 \section{Estimated pooled-Weissman weights and inference}
 \label{sec:pool-ext:inference}
 
-The deterministic theorem is the base result. Estimated weights are introduced
+The deterministic conjecture is the base statement. Estimated weights are introduced
 only in the pooled-Weissman role \(\bm\omega\), where
 \textcite{DaouiaPadoanStupfler2021} already provide random-weight quantile
 limits under their own consistency conditions. The bridge-Hill vector remains
@@ -654,15 +654,15 @@ Daouia--Padoan--Stupfler pooled-Weissman limit: exact affine normalisation
 limit as the deterministic vector \(\bm\omega\). The rest of the argument is a
 transfer through the exact decomposition.
 
-\begin{corollary}[Estimated-\(\bm\omega\) transfer]
-\label{cor:pool-ext:estimated-omega}
-Assume the conditions of \Cref{thm:pool-ext:deterministic}, with the
+\begin{conjecture}[Estimated-\(\bm\omega\) transfer]
+\label{conj:pool-ext:estimated-omega}
+Assume the conditions of \Cref{conj:pool-ext:deterministic}, with the
 deterministic pooled-Weissman weight sequence in the estimator replaced by a
 random \(\widehat{\bm\omega}_n\) satisfying the estimated-weight conditions of
 \Cref{prop:bg:estimated-pooling-weights}, with limiting vector
 \(\bm\omega\). Let \(\bm\nu_n\) be any deterministic bridge-Hill weight
 sequence satisfying the exact affine normalisation and convergence conditions
-of \Cref{thm:pool-ext:deterministic}; in particular one may take
+of \Cref{conj:pool-ext:deterministic}; in particular one may take
 \(\bm\nu_n=\bm\nu_n^k=(k_1/k,\ldots,k_m/k)^\top\). Then
 \[
   \frac{\sqrt{k}}{\ell_n}
@@ -675,9 +675,9 @@ of \Cref{thm:pool-ext:deterministic}; in particular one may take
   \mathcal N(B_{\bm\omega},V_{\bm\omega}).
 \]
 The same limit holds on relative-error scale.
-\end{corollary}
+\end{conjecture}
 
-\begin{proof}
+\begin{proof}[Supporting argument]
 The exact decomposition becomes
 \[
   \log
@@ -703,20 +703,20 @@ this gives
 \]
 Since \(\sqrt{k}/\ell_n\to\infty\),
 \(x_n(\widehat{\bm\omega}_n)=O_P(\ell_n/\sqrt{k})=o_P(1)\), and the
-relative-to-log Taylor step used in the proof of
-\Cref{thm:pool-ext:deterministic} gives
+relative-to-log Taylor step used in the supporting argument for
+\Cref{conj:pool-ext:deterministic} gives
 \[
   \frac{\sqrt{k}}{\ell_n}A_n(\widehat{\bm\omega}_n)
   \todist
   \mathcal N(B_{\bm\omega},V_{\bm\omega}).
 \]
 The bridge-Hill term is unchanged because \(\bm\nu_n\) is deterministic,
-exactly normalised, and convergent. The proof of
+exactly normalised, and convergent. The argument for
 \eqref{eq:pool-ext:B-negligible} therefore applies verbatim. The population
 bridge term \(C_n\) is deterministic and is still
 controlled by \eqref{eq:pool-ext:C-negligible}. Slutsky's theorem gives the
 log limit, and the final exponential Taylor step in
-\Cref{thm:pool-ext:deterministic} gives the relative-error version.
+\Cref{conj:pool-ext:deterministic} gives the relative-error version.
 \end{proof}
 
 Thus any source-admissible Daouia--Padoan--Stupfler construction of
@@ -727,8 +727,8 @@ estimated variance- and AMSE-optimal weights when their source assumptions give
 random bridge-Hill convention such as
 \(\bm\nu=\widehat{\bm\omega}_n\).
 
-\begin{corollary}[Plug-in studentisation and log-scale interval]
-\label{cor:pool-ext:plugin-inference}
+\begin{conjecture}[Plug-in studentisation and log-scale interval]
+\label{conj:pool-ext:plugin-inference}
 Let
 \[
   \widehat\xi_{\tau_n}^{\mathrm{plug}}
@@ -739,7 +739,7 @@ Let
   \bm\nu_n^k=
   \left(\frac{k_1}{k},\ldots,\frac{k_m}{k}\right)^\top.
 \]
-Under the assumptions of \Cref{cor:pool-ext:estimated-omega}, let
+Under the assumptions of \Cref{conj:pool-ext:estimated-omega}, let
 \(\widehat{\Bc}^{\mathrm{dist}}_n\) and
 \(\widehat{\Vc}^{\mathrm{dist}}_n\) be plug-in estimators satisfying
 \[
@@ -820,10 +820,10 @@ Then
   \to
   1-\alpha.
 \]
-\end{corollary}
+\end{conjecture}
 
-\begin{proof}
-\Cref{cor:pool-ext:estimated-omega} gives
+\begin{proof}[Supporting argument]
+\Cref{conj:pool-ext:estimated-omega} gives
 \[
   \frac{\sqrt{k}}{\ell_n}
   \log\!\left(
@@ -840,7 +840,7 @@ Then
   \widehat V_{\widehat{\bm\omega},n}\toprob V_{\bm\omega}.
 \]
 The additional expectile terms have already been absorbed in
-\Cref{cor:pool-ext:estimated-omega}, so the centring and variance objects remain
+\Cref{conj:pool-ext:estimated-omega}, so the centring and variance objects remain
 the pooled-Weissman objects supplied by the source theory. Together with
 \(V_{\bm\omega}>0\), the displayed convergences give the standard normal limit
 by Slutsky's theorem.
@@ -857,15 +857,15 @@ for the unknown \(\expectile{\tau_n}\) gives the displayed multiplicative
 interval, so its asymptotic coverage follows from the studentised limit.
 \end{proof}
 
-\begin{remark}[Scope of the inference corollary]
+\begin{remark}[Scope of the inference conjecture]
 \label{rem:pool-ext:interval-scope}
-The interval in \Cref{cor:pool-ext:plugin-inference} is obtained by inverting
+The interval in \Cref{conj:pool-ext:plugin-inference} is obtained by inverting
 the plug-in-centred expectile statistic above. It is therefore a consequence
 of the transferred expectile limit, rather than a direct restatement of the
 quantile interval in \textcite{DaouiaPadoanStupfler2021}. The centering and
 variance objects remain those of the pooled-Weissman component because, under
 \(\eta_n\to0\), the additional expectile-bridge terms are lower order on that
-scale. The corollary is consequently conditional on the selected
+scale. The conjecture is consequently conditional on the selected
 Daouia--Padoan--Stupfler construction providing consistent plug-in objects for
 \(B_{\bm\omega}\) and \(V_{\bm\omega}\); it does not make an additional claim
 about simulations, finite-sample calibration, or optimal bridge-Hill weights.
