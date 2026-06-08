@@ -257,14 +257,24 @@ Moreover,
 \end{theorem}
 
 \begin{proof}
-Start from the exact identity
-\eqref{eq:pool-ext:decomposition}. We treat the three terms separately on the
-scale \(s_n=\sqrt{k}/\ell_n\).
+Write \(s_n=\sqrt{k}/\ell_n\). By the exact decomposition
+\eqref{eq:pool-ext:decomposition},
+\[
+  \log
+  \frac{
+    \widehat\xi_{\tau_n}^{\mathrm{pool},\star}(\bm\nu_n,\bm\omega_n)
+  }{\expectile{\tau_n}}
+  =
+  A_n(\bm\omega_n)+B_n(\bm\nu_n)-C_n .
+\]
+We now control the three terms on the common scale \(s_n\).
 
-For \(A_n(\bm\omega_n)\), use the random-weight version of the
-common-marginal pooled-Weissman theorem recalled in
+\smallskip
+\noindent\textbf{The pooled-Weissman term \(A_n(\bm\omega_n)\).}
+The source theorem controls this term. Specifically, the random-weight version
+of the common-marginal pooled-Weissman theorem recalled in
 \Cref{prop:bg:estimated-pooling-weights}, applied to the exactly normalised
-deterministic sequence \(\bm\omega_n\to\bm\omega\). It gives
+deterministic sequence \(\bm\omega_n\to\bm\omega\), gives
 \[
   \frac{\sqrt{k}}{\ell_n}
   \left(
@@ -279,29 +289,31 @@ Set
   =
   \frac{\hatWei_n(1-p_n\mid\bm\omega_n)}{Q(1-p_n)}-1.
 \]
-The condition \(\sqrt{k}/\ell_n\to\infty\) implies
-\(x_n=O_P(\ell_n/\sqrt{k})=o_P(1)\). Hence
+The condition \(s_n=\sqrt{k}/\ell_n\to\infty\) implies
+\(x_n=O_P(s_n^{-1})=o_P(1)\). Hence the relative-error statement can be
+converted to log scale:
 \[
   \log(1+x_n)=x_n+O_P(x_n^2)
 \]
 and
 \[
-  \frac{\sqrt{k}}{\ell_n}
-  \{\log(1+x_n)-x_n\}
+  s_n\{\log(1+x_n)-x_n\}
   =
-  O_P\!\left(\frac{\ell_n}{\sqrt{k}}\right)
+  O_P(s_n^{-1})
   =
   o_P(1).
 \]
 Therefore
 \begin{equation}
 \label{eq:pool-ext:A-limit}
-  \frac{\sqrt{k}}{\ell_n}A_n(\bm\omega_n)
+  s_n A_n(\bm\omega_n)
   \;\todist\;
   \mathcal N(B_{\bm\omega},V_{\bm\omega}).
 \end{equation}
 
-For \(B_n(\bm\nu_n)\), write
+\smallskip
+\noindent\textbf{The bridge-Hill term \(B_n(\bm\nu_n)\).}
+This term enters only through the smooth map
 \[
   g(x)=\log\psifn(x)=-x\log(x^{-1}-1).
 \]
@@ -316,8 +328,9 @@ differentiable, with
   =
   \frac{1}{(1-x)^2}+\frac{1}{1-x}+\frac{1}{x}.
 \]
-The aggregate assumptions imply the local bias calibration required by the
-vector pooled Hill CLT. Indeed, \(k_j\to\infty\), \(k_j/n_j\to0\), and
+First check that the local Hill estimators are in the usual pooled-Hill
+regime. The aggregate assumptions imply \(k_j\to\infty\), \(k_j/n_j\to0\),
+and
 \[
   \frac{k_j}{k}\to
   \frac{c_j^{-1}}{\sum_{i=1}^{m}c_i^{-1}},
@@ -336,6 +349,10 @@ Consequently,
 \]
 and regular variation of \(A\) gives
 \[
+  \frac{A(n_j/k_j)}{A(n/k)}\to d_j^\rho
+\]
+by the uniform convergence theorem for regularly varying functions. Hence
+\[
   \sqrt{k_j}\,A(n_j/k_j)
   =
   \sqrt{\frac{k_j}{k}}\,
@@ -346,13 +363,16 @@ and regular variation of \(A\) gives
   \left(\frac{c_j^{-1}}{\sum_{i=1}^{m} c_i^{-1}}\right)^{1/2}
   d_j^\rho .
 \]
-Thus the common-marginal distributed assumptions of
-\Cref{thm:pool-ext:deterministic} meet the local assumptions of
+Thus the assumptions of \Cref{thm:pool-ext:deterministic} meet the local
+assumptions of
 \Cref{thm:bg:pool-hill}. In particular,
 \[
   \sqrt{k}\{\hat{\bm\gamma}_n-\gamma\bm 1\}=O_P(1).
 \]
-Since \(\bm\nu_n\to\bm\nu\), the sequence \((\bm\nu_n)\) is bounded, and
+The use of a deterministic triangular bridge-weight sequence does not change
+this order. Since \(\bm\nu_n\to\bm\nu\), the sequence \((\bm\nu_n)\) is
+bounded. Using the exact affine normalisation
+\(\bm\nu_n^\top\bm 1=1\),
 \[
   \sqrt{k}\{\hat\gamma_n(\bm\nu_n)-\gamma\}
   =
@@ -361,10 +381,18 @@ Since \(\bm\nu_n\to\bm\nu\), the sequence \((\bm\nu_n)\) is bounded, and
   =
   O_P(1).
 \]
-Thus \(\hat\gamma_n(\bm\nu_n)\toprob\gamma\). Hence, with probability tending
-to one, the line segment between \(\hat\gamma_n(\bm\nu_n)\) and \(\gamma\)
-lies in a fixed compact subset of \((0,1)\). Taylor's theorem on that event
-gives
+Therefore \(\hat\gamma_n(\bm\nu_n)\toprob\gamma\). Choose a deterministic
+compact interval \(K\subset(0,1)\) containing \(\gamma\) in its interior, and
+define the random interval
+\[
+  I_n
+  =
+  \left\{
+    \gamma+t\{\hat\gamma_n(\bm\nu_n)-\gamma\}:0\le t\le1
+  \right\}.
+\]
+Then \(\Pr(I_n\subset K)\to1\). On this event, Taylor's theorem with remainder
+bounded uniformly over \(K\) gives
 \[
   B_n(\bm\nu_n)
   =
@@ -377,7 +405,7 @@ gives
 Consequently
 \begin{equation}
 \label{eq:pool-ext:B-negligible}
-  \frac{\sqrt{k}}{\ell_n}B_n(\bm\nu_n)
+  s_n B_n(\bm\nu_n)
   =
   \frac{m(\gamma)}{\ell_n}
   \sqrt{k}\{\hat\gamma_n(\bm\nu_n)-\gamma\}
@@ -390,7 +418,9 @@ because \(\ell_n\to\infty\), which follows from \(k/(np_n)\to\infty\). If
 \(m(\gamma)=0\), the displayed conclusion follows from the quadratic remainder
 alone.
 
-It remains to control \(C_n\). Put
+\smallskip
+\noindent\textbf{The population bridge term \(C_n\).}
+Put
 \[
   a_n=A(1/p_n),
   \qquad
@@ -414,11 +444,10 @@ Since \(\Delta_n\to0\),
 \[
   C_n=\log(1+\Delta_n)=\Delta_n+O(\Delta_n^2).
 \]
-The regular variation of \(A\), the strict inequality \(\rho<0\), and
-\[
-  \frac{1/p_n}{n/k}=\frac{k}{np_n}\to\infty
-\]
-imply
+It remains only to compare the linear terms and the logarithmic square
+remainder with \(s_n^{-1}\). For the second-order tail term, regular variation
+of \(A\), the strict inequality \(\rho<0\), and
+\((1/p_n)/(n/k)=k/(np_n)\to\infty\) imply
 \[
   \frac{A(1/p_n)}{A(n/k)}
   =
@@ -427,30 +456,49 @@ imply
 \]
 Together with \(\sqrt{k}A(n/k)\to\lambda\), this yields
 \[
-  \frac{\sqrt{k}}{\ell_n}a_n\to0.
+  s_n a_n\to0.
 \]
-The imposed bridge-rate condition \eqref{eq:pool-ext:eta} is exactly
+For the mean term, the imposed bridge-rate condition \eqref{eq:pool-ext:eta}
+is exactly
 \[
-  \frac{\sqrt{k}}{\ell_n}b_n\to0.
+  s_n b_n\to0.
 \]
-Therefore all linear terms in \(C_n\) are \(o(1)\) after multiplication by
-\(\sqrt{k}/\ell_n\). The logarithmic square remainder is also negligible, since
+Thus all linear terms in \(C_n\) are negligible after multiplication by
+\(s_n\).
+
+The square remainder is negligible as well. Since
+\(s_n|a_n|\to0\), \(s_n b_n\to0\), and \(|a_n|+b_n\to0\),
 \[
-  \frac{\sqrt{k}}{\ell_n}(|a_n|+b_n)^2\to0
+  s_n(|a_n|+b_n)^2
+  =
+  \{s_n(|a_n|+b_n)\}\{|a_n|+b_n\}
+  \to0.
 \]
-follows from
-\((\sqrt{k}/\ell_n)|a_n|\to0\), \((\sqrt{k}/\ell_n)b_n\to0\), and
-\(|a_n|+b_n\to0\). Hence
+Hence
 \begin{equation}
 \label{eq:pool-ext:C-negligible}
-  \frac{\sqrt{k}}{\ell_n}C_n\to0.
+  s_n C_n\to0.
 \end{equation}
 
-Combining \eqref{eq:pool-ext:A-limit}, \eqref{eq:pool-ext:B-negligible}, and
-\eqref{eq:pool-ext:C-negligible} in the exact decomposition gives
-\eqref{eq:pool-ext:log-limit} by Slutsky's theorem.
+\smallskip
+\noindent\textbf{Putting the terms together.}
+Since \eqref{eq:pool-ext:C-negligible} is deterministic convergence, it also
+implies \(s_nC_n=o_P(1)\). Hence the exact decomposition can be written as
+\[
+  s_n
+  \log
+  \frac{
+    \widehat\xi_{\tau_n}^{\mathrm{pool},\star}(\bm\nu_n,\bm\omega_n)
+  }{\expectile{\tau_n}}
+  =
+  s_nA_n(\bm\omega_n)+o_P(1).
+\]
+Together with \eqref{eq:pool-ext:A-limit}, Slutsky's theorem gives
+\eqref{eq:pool-ext:log-limit}.
 
-For the relative-error statement, define
+\smallskip
+\noindent\textbf{The relative-error version.}
+Define
 \[
   L_n=
   \log
@@ -458,15 +506,15 @@ For the relative-error statement, define
     \widehat\xi_{\tau_n}^{\mathrm{pool},\star}(\bm\nu_n,\bm\omega_n)
   }{\expectile{\tau_n}}.
 \]
-The log limit implies \(L_n=O_P(\ell_n/\sqrt{k})=o_P(1)\). Therefore
+The log limit implies \(L_n=O_P(s_n^{-1})=o_P(1)\). Therefore
 \[
   e^{L_n}-1=L_n+O_P(L_n^2)
 \]
 and
 \[
-  \frac{\sqrt{k}}{\ell_n}\{e^{L_n}-1-L_n\}
+  s_n\{e^{L_n}-1-L_n\}
   =
-  O_P\!\left(\frac{\ell_n}{\sqrt{k}}\right)
+  O_P(s_n^{-1})
   =
   o_P(1).
 \]

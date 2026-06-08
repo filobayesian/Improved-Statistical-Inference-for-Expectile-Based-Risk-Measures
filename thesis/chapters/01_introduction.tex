@@ -2,4 +2,103 @@
 \chapter{Introduction}
 \label{ch:intro}
 
-\todo{}
+Estimating tail risk is challlenging because the events of greatest practical
+interest are precisely those for which the data are scarce. In financial,
+insurance and operational-risk applications, the target may lie beyond the
+range where empirical averages or order statistics alone give reliable
+answers. Extreme-value methods address this by combining intermediate tail
+information with a heavy-tailed model, trading a small amount of structural
+assumption for the ability to extrapolate to rarer loss levels. This thesis
+works in that regime, with a focus on extreme expectiles as tail-risk
+functionals.
+
+Expectiles, introduced by \textcite{NeweyPowell1987}, are asymmetric
+least-squares analogues of quantiles. At high levels they respond to both the
+size and probability of large losses, and they have attractive risk-measure
+properties, including coherence in the relevant high-level range and
+elicitability under standard integrability conditions
+\parencite{BelliniKlarMullerRosazzaGianin2014,Ziegel2016,Gneiting2011}.
+For heavy-tailed distributions with finite mean, extreme expectiles are also
+asymptotically proportional to extreme quantiles. In the notation used
+throughout the thesis,
+\[
+  \expectile{\tau}
+  \sim
+  \psifn(\gamma)Q(\tau),
+  \qquad
+  \psifn(\gamma)=(\gamma^{-1}-1)^{-\gamma},
+  \qquad \tau\uparrow1,
+\]
+where \(Q\) is the marginal quantile function and \(\gamma\) is the
+extreme-value index. This bridge is the point at which expectile inference can
+be connected to the more developed theory of extreme-quantile extrapolation.
+
+The second ingredient is pooling. In many statistical settings the available
+sample is naturally distributed across several machines, institutions or data
+sources. If these sources share the same upper-tail target, each local sample
+contains useful information but none is necessarily ideal on its own.
+\textcite{DaouiaPadoanStupfler2021} develop an optimal weighted-pooling
+framework for tail-index and extreme-quantile inference, including geometric
+pooling of local Weissman estimators. Their results identify variance- and
+AMSE-optimal weights for the pooled extreme-quantile problem and provide
+estimated-weight and plug-in inference machinery under source conditions. The
+question in this thesis is how much of that structure survives after the target
+is changed from an extreme quantile to an extreme expectile.
+
+The estimator studied here applies the expectile--quantile bridge after the
+pooled extreme-quantile extrapolation. For a target level
+\(\tau_n=1-p_n\), define
+\[
+  \widehat\xi_{\tau_n}^{\mathrm{pool},\star}(\bm\nu,\bm\omega)
+  =
+  \psifn\!\big(\widehat\gamma_n(\bm\nu)\big)\,
+  \widehat q_n^\star(\tau_n\mid\bm\omega).
+\]
+The vector \(\bm\omega\) weights the geometrically pooled Weissman estimator
+\(\widehat q_n^\star(\tau_n\mid\bm\omega)\). The vector \(\bm\nu\) weights
+only the pooled Hill estimator appearing in the outer bridge factor. This
+separation is important. The diagonal choice \(\bm\nu=\bm\omega\) is a
+natural prototype, but it is not forced by the construction and is not treated
+as an optimality principle.
+
+The main theoretical contribution is to analyse this estimator from an exact
+log decomposition. The decomposition separates three terms: the
+pooled-Weissman quantile error, the error from plugging a pooled Hill estimator
+into \(\psifn\), and the population error in replacing the expectile by its
+asymptotic quantile bridge. In the finite-\(m\) iid common-marginal setting,
+under the same extreme-Weissman scale and an explicit bridge-rate condition,
+the latter two terms are lower order. The resulting first-order limit is
+therefore inherited from the pooled-Weissman component. Consequently, the
+first-order bias, variance and AMSE criteria depend on \(\bm\omega\), while
+\(\bm\nu\) is first-order unidentified. The practical bridge-Hill convention
+used later is the deterministic threshold-allocation vector
+\(\bm\nu_n^k=(k_1/k,\ldots,k_m/k)^\top\), not an estimated or optimised
+bridge-Hill weight.
+
+This first-order separation also determines the inference route. Estimated
+weights are introduced only in the pooled-Weissman role: when the
+Daouia--Padoan--Stupfler source theory supplies a consistent estimated
+\(\widehat{\bm\omega}_n\), together with consistent plug-in centring and
+variance objects, these objects transfer through the expectile decomposition.
+This yields a plug-in-centred studentised statistic and a multiplicative
+log-scale interval for the extreme expectile.
+
+The finite-sample study is deliberately narrow and follows the theory's
+scope. It keeps the bridge-Hill vector fixed at
+\(\bm\nu_n^k\) and varies only the pooled-Weissman weights. In the simulated
+iid common-marginal designs, Daouia--Padoan--Stupfler variance weights are a
+stable practical baseline and track the centralised benchmark closely for
+point estimation. AMSE weights are almost indistinguishable from variance
+weights in the main equal-threshold grid, but the heterogeneous-threshold
+diagnostic shows that they can become informative, with some stability costs.
+The log-scale intervals under-cover in several finite-sample rows, so they
+are reported as diagnostics of the first-order plug-in route rather than as a
+claim of strong finite-sample calibration.
+
+The rest of the thesis is organised as follows. \Cref{ch:background} recalls
+the heavy-tail, expectile and optimal-pooling results used as source inputs.
+\Cref{ch:pooled-extreme} develops the pooled extreme-expectile estimator, its
+exact decomposition, the deterministic first-order theorem, the weight
+consequences and the estimated-weight inference transfer. \Cref{ch:finite-sample}
+reports the finite-sample study for the promoted estimator and inference
+route.
