@@ -1,53 +1,30 @@
 % Master's thesis: Improved Statistical Inference for Expectile-Based Risk Measures
-% Author: Filippo Gombac
 % Compile with: latexmk -pdf main.tex
 
 \input{preamble}
 
-\title{Improved Statistical Inference for Expectile-Based Risk Measures\\[0.5em]
-       \large An Optimal Pooling Approach in the Heavy-Tailed Regime}
-\author{Filippo Gombac\\
-        Supervisor: Simone Padoan\\
-        Department of Decision Sciences\\
-        Bocconi University}
-\date{\today}
+\newcommand{\submissionblankpage}{%
+  \null
+  \thispagestyle{empty}%
+  \clearpage
+}
 
 \begin{document}
 
-\frontmatter
+% Submission format: four unnumbered leading pages before the numbered text.
 \hypersetup{pageanchor=false}
-\maketitle
-\cleardoublepage
+\pagestyle{empty}
+\submissionblankpage
+\submissionblankpage
+\submissionblankpage
+\submissionblankpage
+
 \hypersetup{pageanchor=true}
-
-\chapter*{Abstract}
-This thesis studies statistical inference for extreme expectile-based risk
-measures in a distributed heavy-tailed setting. It extends optimal
-weighted-pooling methods for extreme quantiles to a pooled extreme-expectile
-estimator built from a geometrically pooled Weissman quantile estimator and an
-expectile--quantile bridge evaluated with a pooled Hill tail-index estimator.
-The estimator is deliberately written with two weight vectors:
-\(\bm\omega\) weights the pooled-Weissman component, while a separate
-deterministic vector \(\bm\nu\) is used only in the outer bridge-Hill
-estimator.
-
-An exact log decomposition separates the pooled-Weissman error, the
-bridge-Hill plug-in error and the population expectile--quantile bridge error.
-Under the adopted iid common-marginal regime and an explicit bridge-rate
-condition, the first-order limit is inherited from the pooled extreme-quantile
-component. It depends on \(\bm\omega\), but not on \(\bm\nu\), so first-order
-variance and AMSE optimisation apply only to the pooled-Weissman weights.
-Estimated \(\bm\omega\) weights and plug-in centring and variance objects
-transfer from the source pooling theory when its consistency conditions hold,
-yielding a studentised statistic and a multiplicative log-scale interval. The
-finite-sample study finds variance weights to be a stable baseline; AMSE
-weights are mostly close in the equal-threshold grid but can matter under
-heterogeneous thresholds. The plug-in intervals are reported as diagnostics,
-since undercoverage remains visible in several designs.
+\pagestyle{plain}
+\pagenumbering{arabic}
+\setcounter{page}{1}
 
 \tableofcontents
-
-\mainmatter
 
 \include{chapters/01_introduction}
 \include{chapters/02_background}
