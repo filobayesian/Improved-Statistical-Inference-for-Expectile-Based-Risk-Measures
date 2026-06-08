@@ -1,5 +1,111 @@
 % !TEX root = ../main.tex
-\chapter{Discussion and future work}
-\label{ch:discussion}
+\chapter{Conclusion}
+\label{ch:conclusion}
 
-\todo{}
+This thesis has studied inference for extreme expectile-based risk measures in
+a distributed heavy-tailed setting. The construction deliberately stays close
+to the optimal-pooling framework of \textcite{DaouiaPadoanStupfler2021}: it
+first forms a geometrically pooled Weissman estimator of an extreme quantile
+and only then applies the high-expectile/high-quantile bridge. The final
+estimator is written with two weights,
+\[
+  \widehat\xi_{\tau_n}^{\mathrm{pool},\star}(\bm\nu,\bm\omega)
+  =
+  \psifn\!\big(\hat\gamma_n(\bm\nu)\big)
+  \hatWei_n(1-p_n\mid\bm\omega),
+  \qquad p_n=1-\tau_n,
+\]
+where \(\bm\omega\) weights the pooled-Weissman component and
+\(\bm\nu\) weights only the Hill estimator entering the outer bridge. This
+separation is the main structural choice in the thesis. It prevents the
+diagonal convention \(\bm\nu=\bm\omega\) from being mistaken for an
+optimality result and makes clear which part of the estimator is governed by
+the source pooling theory.
+
+\section{Main findings}
+\label{sec:conclusion:findings}
+
+The theoretical contribution is based on the exact decomposition
+\[
+  \log
+  \frac{
+    \widehat\xi_{\tau_n}^{\mathrm{pool},\star}(\bm\nu,\bm\omega)
+  }{\expectile{\tau_n}}
+  =
+  A_n(\bm\omega)+B_n(\bm\nu)-C_n.
+\]
+Here \(A_n(\bm\omega)\) is the pooled-Weissman error,
+\(B_n(\bm\nu)\) is the plug-in error from evaluating
+\(\psifn\) at a pooled Hill estimator, and \(C_n\) is the population
+expectile--quantile bridge error. This identity is useful because it shows
+exactly what has to be controlled, rather than importing the quantile-pooling
+limit by analogy.
+
+In the iid common-marginal distributed regime, under the extreme-Weissman
+conditions and the bridge-rate condition
+\[
+  \eta_n=\frac{\sqrt{k}}{\ell_n Q(1-p_n)}\to0,
+  \qquad
+  \ell_n=\log\!\left(\frac{k}{np_n}\right),
+\]
+the two bridge terms are lower order on the pooled-Weissman scale. Therefore
+\[
+  \frac{\sqrt{k}}{\ell_n}
+  \log
+  \frac{
+    \widehat\xi_{\tau_n}^{\mathrm{pool},\star}(\bm\nu_n,\bm\omega_n)
+  }{\expectile{\tau_n}}
+  \todist
+  \mathcal N(B_{\bm\omega},V_{\bm\omega}).
+\]
+The limit depends on the pooled-Weissman weights \(\bm\omega\), but not on the
+bridge-Hill weights \(\bm\nu\). This is the main message of
+\Cref{ch:pooled-extreme}: first-order variance and AMSE optimisation transfer
+to \(\bm\omega\) from the Daouia--Padoan--Stupfler theory, while
+\(\bm\nu\) is first-order unidentified in this regime.
+
+The thesis then extends the deterministic result to source-admissible
+estimated \(\bm\omega\) weights. This transfer is deliberately conditional:
+when the Daouia--Padoan--Stupfler construction supplies consistent estimated
+weights and consistent plug-in centring and variance objects, the expectile
+estimator inherits the same first-order studentised limit. The resulting
+confidence interval is obtained by inverting the transferred log-scale
+expectile statistic. It is not a direct reuse of a quantile interval formula,
+and it does not introduce an expectile-specific plug-in bias or variance
+estimator.
+
+\section{Finite-sample lessons}
+\label{sec:conclusion:finite-sample}
+
+The simulation study in \Cref{ch:finite-sample} is intentionally narrow. It
+uses the practical bridge-Hill convention
+\[
+  \bm\nu_n^k=(k_1/k,\ldots,k_m/k)^\top
+\]
+and varies only the pooled-Weissman weights \(\bm\omega\). Within this design,
+Daouia--Padoan--Stupfler variance weights provide a stable practical baseline.
+In the representative imbalanced grid, they make the distributed estimator
+track the centralised benchmark closely for point estimation, whereas equal
+pooled-Weissman weights are less efficient under strong imbalance.
+
+The finite-sample role of AMSE weights is more conditional. In the main
+equal-threshold grid, oracle and plug-in AMSE weights are nearly
+indistinguishable from variance weights. Under heterogeneous local threshold
+fractions, AMSE weights can matter more, and in some rows they improve either
+coverage or log RMSE. They are not uniformly superior, however, and the
+diagnostics show that signed or unstable weights can appear. Thus the
+simulation evidence supports reporting AMSE weights as a meaningful
+source-based alternative, not as a uniformly preferable default.
+
+The interval results are more cautionary. The first-order log-scale intervals
+under-cover in several finite-sample designs, and the centralised oracle
+benchmark also under-covers. The decomposition diagnostics explain why this is
+not only a distributed-splitting issue. At the simulated sample sizes, the
+terms \(B_n(\bm\nu)\) and \(C_n\), although asymptotically negligible under
+the theorem's scaling, can still be visible. In particular, finite-sample
+bridge error can affect calibration even when point estimation is competitive.
+The interval study should therefore be read as a diagnostic of the plug-in
+route rather than as evidence of strong finite-sample nominal coverage.
+
+\section{Limitations and future work}
+\label{sec:conclusion:future}
