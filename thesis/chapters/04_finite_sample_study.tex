@@ -16,17 +16,17 @@ study
 \]
 where \(p=1-\tau\) and \(k=\sum_{j=1}^{m}k_j\). Thus the bridge-Hill weights
 are fixed at the deterministic threshold-allocation convention, while the
-pooled-Weissman weights \(\bm\omega\) vary across the
-Daouia--Padoan--Stupfler choices studied below. The role of
+pooled-Weissman weights \(\bm\omega\) vary across the variance and AMSE
+choices of \textcite{DaouiaPadoanStupfler2021} studied below. The role of
 \(\bm\nu_n^k\) is that of a transparent implementation convention rather than
-an optimality claim; all weight variation in the study concerns
-\(\bm\omega\).
+an optimality claim; all weight variation in the study concerns \(\bm\omega\).
 
-The empirical conclusions should be read as diagnostics for the promoted
-first-order theory, not as new mathematical claims. In the representative
-imbalanced design, the Daouia--Padoan--Stupfler variance weights make the
-distributed estimator track the centralised benchmark closely for point
-estimation. Equal pooled-Weissman weights are less efficient under imbalance.
+The empirical conclusions should be read as diagnostics for the Chapter~3
+first-order route, not as new mathematical claims. In the representative
+imbalanced design, the variance weights of
+\textcite{DaouiaPadoanStupfler2021} make the distributed estimator track the
+centralised benchmark closely for point estimation. Equal pooled-Weissman
+weights are less efficient under imbalance.
 In the main equal-threshold grid, AMSE weights are almost indistinguishable
 from variance weights; in the separate heterogeneous-threshold diagnostic they
 become more informative, but can also produce unstable signed weights. The
@@ -40,23 +40,25 @@ first-order interval calibration.
 For each machine \(j\), the local Hill estimator and Weissman quantile
 estimator are computed using the \texttt{HTailIndex} and \texttt{extQuantile}
 routines from the \texttt{ExtremeRisks} package \parencite{ExtremeRisksR}.
-The simulation code adds only the thesis-specific pooling layer: geometric
+The simulation code adds only the study-specific pooling layer: geometric
 pooling of local Weissman estimates, the map \(\psifn\), the deterministic
 bridge-Hill convention \(\bm\nu_n^k\), and the plug-in summary calculations.
 
-The following estimators are recorded:
+The following estimators are recorded. In the simulation tables, \emph{DPS}
+is used as a compact label for the source framework of
+\textcite{DaouiaPadoanStupfler2021}.
 \begin{itemize}
 \item \emph{equal}: \(\omega_j=1/m\);
-\item \emph{Daouia--Padoan--Stupfler variance}: \(\omega_j=k_j/k\), the
-      independent distributed version of the variance weights in this
-      common-tail design. Since the variance-optimal formula reduces to this
-      deterministic threshold allocation, the oracle and plug-in
-      variance-weight versions coincide;
-\item \emph{Daouia--Padoan--Stupfler AMSE oracle}: the AMSE formula evaluated
-      with the population second-order parameters of the data-generating
-      model;
-\item \emph{Daouia--Padoan--Stupfler AMSE plug-in}: the same formula with
-      second-order inputs estimated using \texttt{evt0} \parencite{evt0R};
+\item \emph{DPS variance}: \(\omega_j=k_j/k\), the independent distributed
+      version of the variance weights of
+      \textcite{DaouiaPadoanStupfler2021} in this common-tail design. Since the
+      variance-optimal formula reduces to this deterministic threshold
+      allocation, the oracle and plug-in variance-weight versions coincide;
+\item \emph{DPS AMSE oracle}: the AMSE formula of
+      \textcite{DaouiaPadoanStupfler2021} evaluated with the population
+      second-order parameters of the data-generating model;
+\item \emph{DPS AMSE plug-in}: the same formula with second-order inputs
+      estimated using \texttt{evt0} \parencite{evt0R};
 \item \emph{centralised}: the corresponding single-sample estimator computed
       from the combined sample, used only as a benchmark.
 \end{itemize}
@@ -67,13 +69,17 @@ zero in the design, so the plug-in AMSE route is treated as source-ineligible
 rather than as a distinct estimated AMSE procedure. The oracle AMSE row then
 collapses to the same point estimator as the variance rule. For the
 centralised benchmark interval, the centring and variance objects are the
-corresponding single-sample oracle objects obtained by taking \(m=1\).
+corresponding single-sample oracle objects obtained by taking \(m=1\). Thus
+dashes in exact-Pareto plug-in AMSE rows mean ``not reported under the source
+convention'', not numerical failure or zero coverage.
 
 For each estimator with available centring and variance objects, inference is
 assessed with the log-scale interval from
 \Cref{conj:pool-ext:plugin-inference}. In one Monte Carlo replication, if
 \(\widehat B_\omega\) and \(\widehat V_\omega\) denote the selected
-Daouia--Padoan--Stupfler centring and variance objects, the interval is
+centring and variance objects from
+\textcite[\S2.2 and Corollary~1; Corollaries~6--7]{DaouiaPadoanStupfler2021},
+the interval is
 \[
   \widehat\xi
   \left[
@@ -91,7 +97,8 @@ not as a claim of finite-sample calibration.
 \section{Design}
 \label{sec:sim:design}
 
-The study stays within the iid common-marginal setting of the theorem. The
+The study stays within the iid common-marginal setting of the Chapter~3
+conjectural result. The
 data-generating models are Pareto with \(\gamma=0.25\), Pareto with
 \(\gamma=0.60\), Burr with \(\gamma=0.25\) and \(\rho=-1\), Burr with
 \(\gamma=0.60\) and \(\rho=-1\), and the absolute Student distribution with
@@ -113,6 +120,9 @@ or a strong imbalanced allocation with machine proportions increasing
 geometrically from \(1\) to \(10\). The threshold block fixes \(m=10\) and
 strong allocation, then varies \(k_j/n_j\in\{0.03,0.05,0.10\}\). The target
 block fixes the same design and varies \(np\in\{1,5,10\}\).
+The sensitivity blocks were simulated independently from the main grid, so
+rows that nominally coincide with the representative design are independent
+Monte Carlo estimates rather than reused entries.
 
 The heterogeneous-threshold block is separate. It keeps \(m=10\), strong
 allocation, \(n=10000\), and \(np=5\), but assigns larger threshold fractions
@@ -144,35 +154,50 @@ and
 \]
 These diagnostics connect the Monte Carlo evidence to
 \Cref{lem:pool-ext:decomposition}; they are not used to estimate new
-asymptotic constants.
+asymptotic constants. Parenthesised values in the generated tables are Monte
+Carlo standard errors. For means and rates they use the usual empirical
+standard-error formulas, while RMSE standard errors use the delta method
+applied to the Monte Carlo mean of the squared log error.
 
 \section{Point estimation and pooled-Weissman weights}
 \label{sec:sim:point}
 
 \Cref{tab:sim:point-main} reports the representative main design with
 \(m=10\), strong sample-size imbalance, \(k_j/n_j=0.05\), and \(np=5\). The
-estimator using Daouia--Padoan--Stupfler variance weights is close to the
-centralised benchmark across the five models. Its log RMSE is \(0.223\) versus
-\(0.226\) for Burr heavy, \(0.070\) versus \(0.069\) for Burr light,
-\(0.204\) versus \(0.204\) for Pareto heavy, \(0.090\) versus \(0.089\) for
-Pareto light, and \(0.142\) versus \(0.143\) for the absolute Student model.
-This is the main positive finite-sample finding: in this grid, the promoted
+estimator using the variance weights of \textcite{DaouiaPadoanStupfler2021}
+is close to the centralised benchmark across the five models. Its log RMSE is
+\(0.223\) versus \(0.226\) for Burr heavy, \(0.070\) versus \(0.069\) for
+Burr light, \(0.204\) versus \(0.204\) for Pareto heavy, \(0.090\) versus
+\(0.089\) for Pareto light, and \(0.142\) versus \(0.143\) for the absolute
+Student model.
+This is the main positive finite-sample finding: in this grid, the proposed
 distributed estimator does not pay a large point-estimation penalty relative to
 the single-sample benchmark.
 
 Equal pooled-Weissman weights are worse under strong imbalance. The effect is
 most visible in the heavier-tailed models, where the equal-weight log RMSE is
 \(0.245\) for Burr heavy and \(0.231\) for Pareto heavy, compared with
-\(0.223\) and \(0.204\) under Daouia--Padoan--Stupfler variance weights. The
+\(0.223\) and \(0.204\) under the source variance weights. The
 oracle and plug-in AMSE weights are essentially the same as the variance
-weights in this equal-threshold main design. This statement is deliberately
+weights in this equal-threshold main design.
+
+This closeness has a direct explanation from the source AMSE criterion. In
+the main grid the threshold fraction \(k_j/n_j\) is common across machines, so
+the asymptotic constants in \Cref{conj:pool-ext:omega-criteria} satisfy
+\(c_j=b_j\) and therefore \(d_j=1\) for every \(j\). Hence
+\(\Bc^{\mathrm{dist}}\) is proportional to \(\bm 1\). Under the affine
+constraint \(\bm\omega^\top\bm 1=1\), the bias term
+\(\bm\omega^\top\Bc^{\mathrm{dist}}\) is then the same for every admissible
+\(\bm\omega\), and the AMSE criterion differs across weights only through the
+variance term. Thus the DPS AMSE rule collapses asymptotically to the DPS
+variance rule in this equal-threshold design. This statement is deliberately
 local to the main grid; \Cref{tab:sim:omega-heterogeneous} gives AMSE weights a
 more discriminating environment by varying the local threshold fractions.
 
-The blank plug-in AMSE rows for exact Pareto models are not invalid
-point-estimates. They mark the conservative source decision described above:
-the plug-in AMSE route is not reported as an active estimated second-order
-procedure when the model has zero second-order bias coefficient.
+The blank plug-in AMSE rows for exact Pareto models are the table-level form
+of the convention described above: the route is source-ineligible in these
+rows, although the corresponding oracle AMSE point estimator coincides with
+the variance rule.
 
 \begin{table}[htbp]
 \centering
@@ -182,17 +207,20 @@ procedure when the model has zero second-order bias coefficient.
 \label{tab:sim:point-main}
 \begingroup
 \setlength{\tabcolsep}{4pt}
-\input{generated/simulation/tables/finite_sample_summary}
+\resizebox{\textwidth}{!}{%
+  \input{generated/simulation/tables/finite_sample_summary}%
+}
 \endgroup
 \end{table}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{generated/simulation/figures/rmse_pooled_vs_centralised.pdf}
-\caption{Log RMSE of the pooled estimator using Daouia--Padoan--Stupfler
-variance weights against the centralised benchmark in the main grid with
-\(k_j/n_j=0.05\) and \(np=5\). The dashed line is equality. Points near the
-line indicate that the pooled route tracks the centralised benchmark closely.}
+\caption{Log RMSE of the pooled estimator using the variance weights of
+\textcite{DaouiaPadoanStupfler2021} against the centralised benchmark in the
+main grid with \(k_j/n_j=0.05\) and \(np=5\). The dashed line is equality.
+Points near the line indicate that the pooled route tracks the centralised
+benchmark closely.}
 \label{fig:sim:rmse-estimator}
 \end{figure}
 
@@ -200,24 +228,20 @@ line indicate that the pooled route tracks the centralised benchmark closely.}
 \label{sec:sim:nu-sensitivity}
 
 The main specification fixes the bridge-Hill weights at
-\(\bm\nu_n^k=(k_1/k,\ldots,k_m/k)^\top\). To check whether this convention has
+\(\bm\nu_n^k=(k_1/k,\ldots,k_m/k)^\top\). To check whether this choice has
 visible finite-sample consequences, \Cref{tab:sim:nu} repeats the
-representative main design for the Daouia--Padoan--Stupfler variance
-pooled-Weissman weights while replacing \(\bm\nu_n^k\) by two other
-deterministic conventions: equal
-bridge-Hill weights and sample-allocation weights
-\((n_1/n,\ldots,n_m/n)^\top\). This is only a sensitivity check. It does not
-search for an optimal \(\bm\nu\), and it does not use the random estimated
-\(\bm\omega\) as a bridge-Hill vector.
+representative main design for the variance pooled-Weissman weights of
+\textcite{DaouiaPadoanStupfler2021} while replacing \(\bm\nu_n^k\) by two other
+deterministic choices: equal bridge-Hill weights and sample-allocation weights
+\((n_1/n,\ldots,n_m/n)^\top\).
 
 In the representative main design, the threshold and sample-allocation
 conventions coincide because \(k_j/n_j\) is constant across machines. The
 table therefore mainly compares this allocation convention against equal
 bridge-Hill weights. Equal bridge-Hill weights have little effect in the
 light-tailed rows, but are less favourable in Burr heavy, Pareto heavy, and
-the absolute Student model. The conclusion is not that
-\(\bm\nu_n^k\) is optimal. The conclusion is only that the deterministic
-threshold-allocation convention is not visibly harmful in this main grid.
+the absolute Student model. The conclusion is only that the deterministic
+threshold-allocation choice is not visibly harmful in this main grid.
 
 \Cref{tab:sim:nu-heterogeneous} makes the comparison more informative by
 breaking the equality between threshold and sample-allocation weights. The
@@ -226,7 +250,8 @@ lowest log RMSE, \(0.231\), while \(\bm\nu_n^k\) has slightly higher coverage,
 \(0.744\). In the absolute Student model, sample weights again have the
 lowest log RMSE, while \(\bm\nu_n^k\) remains close. In the light-tailed
 models, all three bridge-Hill conventions are nearly indistinguishable. These
-patterns are consistent with the theorem's message: \(\bm\nu\) is
+patterns are consistent with the conjectured first-order message:
+\(\bm\nu\) is
 first-order unidentified under the chosen scaling, but lower-order
 finite-sample differences can still be visible.
 
@@ -235,11 +260,13 @@ finite-sample differences can still be visible.
 \small
 \caption{Sensitivity to deterministic bridge-Hill weights in the representative
 main design. The pooled-Weissman weights are fixed at the
-Daouia--Padoan--Stupfler variance choice.}
+variance choice of \textcite{DaouiaPadoanStupfler2021}.}
 \label{tab:sim:nu}
 \begingroup
 \setlength{\tabcolsep}{4pt}
-\input{generated/simulation/tables/nu_sensitivity}
+\resizebox{\textwidth}{!}{%
+  \input{generated/simulation/tables/nu_sensitivity}%
+}
 \endgroup
 \end{table}
 
@@ -248,12 +275,14 @@ Daouia--Padoan--Stupfler variance choice.}
 \small
 \caption{Sensitivity to deterministic bridge-Hill weights under heterogeneous
 local threshold fractions. The aggregate \(k/n\) is kept close to \(0.05\), and
-the pooled-Weissman weights are fixed at the Daouia--Padoan--Stupfler variance
-choice.}
+the pooled-Weissman weights are fixed at the variance choice of
+\textcite{DaouiaPadoanStupfler2021}.}
 \label{tab:sim:nu-heterogeneous}
 \begingroup
 \setlength{\tabcolsep}{4pt}
-\input{generated/simulation/tables/nu_heterogeneous_sensitivity}
+\resizebox{\textwidth}{!}{%
+  \input{generated/simulation/tables/nu_heterogeneous_sensitivity}%
+}
 \endgroup
 \end{table}
 
@@ -277,6 +306,9 @@ every model, with coverage between \(0.708\) and \(0.770\). Hence the problem
 is not simply that the sample has been split across machines. The finite
 sample is also feeling first-order centring, variance, and bridge
 approximations.
+In the light-tailed rows, \(\eta_n\) is not numerically small, so these designs
+should be read as stress tests of the bridge approximation rather than as
+settings where the bridge-rate condition is already well reflected.
 
 \Cref{fig:sim:bridge-diagnostic} gives a targeted diagnostic for this
 undercoverage. It uses oracle centring and variance objects to compare coverage
@@ -292,6 +324,21 @@ exact-target coverage for these light-tailed rows is also higher, about
 interpretation that some of the observed undercoverage is a finite-sample
 bridge effect. The heavy-tailed rows are less improved by this diagnostic, so
 the conclusion remains cautionary rather than corrective.
+
+This interpretation is consistent with the single-sample extreme-expectile
+inference evidence of \textcite{PadoanStupfler2022}. There, straightforward
+Gaussian intervals for quantile-based expectile estimators can be poorly
+calibrated in finite samples, and the refined log-scale construction keeps
+bridge-bias and covariance contributions that are asymptotically lower order
+but still numerically visible. In the present decomposition, the asymptotic
+argument sends \(B_n(\bm\nu)\) and \(C_n\) to zero on the
+\(\sqrt{k}/\ell\) scale, while the
+diagnostics show that these terms need not be small at the simulated sample
+sizes. Extending such corrections to the distributed two-weight estimator
+would be a separate lower-order inference layer, and may require additional
+communicated summaries such as local means. The intervals reported here are
+therefore diagnostics of the first-order plug-in route, not claims of reliable
+finite-sample calibration.
 
 \begin{table}[htbp]
 \centering
@@ -333,7 +380,8 @@ objects and is separate from the final main grid.}
 
 \Cref{tab:sim:decomposition} records the scaled decomposition terms in the
 representative main design for the estimator using
-Daouia--Padoan--Stupfler variance weights with \(\bm\nu=\bm\nu_n^k\). The
+the variance weights of \textcite{DaouiaPadoanStupfler2021} with
+\(\bm\nu=\bm\nu_n^k\). The
 columns report root mean squared values of
 \((\sqrt{k}/\ell)A_n\), \((\sqrt{k}/\ell)B_n\), and
 \((\sqrt{k}/\ell)C_n\), together with the scaled log error. The final column
@@ -342,8 +390,8 @@ is the numerical reconstruction check for
   \log(\widehat\xi_\tau/\xi_\tau)=A_n(\bm\omega)+B_n(\bm\nu)-C_n.
 \]
 
-The table answers the same question as the proof: which terms are visible at
-the pooled-Weissman scale? In the asymptotic theorem
+The table answers the same question as the supporting argument: which terms
+are visible at the pooled-Weissman scale? In the asymptotic argument
 \(A_n(\bm\omega)\) carries the first-order law, while \(B_n(\bm\nu)\) and
 \(C_n\) vanish after multiplication by \(\sqrt{k}/\ell\). At the simulated
 sample size, that separation is only partial. The pooled-Weissman component
@@ -367,8 +415,8 @@ post-hoc split.
 \centering
 \small
 \caption{Finite-sample decomposition ledger in the representative main design.
-The estimator uses Daouia--Padoan--Stupfler variance pooled-Weissman weights and
-\(\bm\nu=\bm\nu_n^k\).}
+The estimator uses the variance pooled-Weissman weights of
+\textcite{DaouiaPadoanStupfler2021} and \(\bm\nu=\bm\nu_n^k\).}
 \label{tab:sim:decomposition}
 \begingroup
 \setlength{\tabcolsep}{4pt}
@@ -384,9 +432,9 @@ The estimator uses Daouia--Padoan--Stupfler variance pooled-Weissman weights and
 The threshold sensitivity in \Cref{tab:sim:threshold} shows that point error
 and interval calibration can move in different directions. Burr light is the
 clearest example: increasing \(k_j/n_j\) from \(0.03\) to \(0.10\) lowers the
-log RMSE of the Daouia--Padoan--Stupfler variance-weighted estimator from
-\(0.084\) to \(0.047\), while coverage falls from about \(70\%\) to about
-\(32\%\). In Pareto heavy, where the exact Pareto model removes the Burr-type
+log RMSE of the source variance-weighted estimator from \(0.084\) to
+\(0.047\), while coverage falls from about \(70\%\) to about \(32\%\). In
+Pareto heavy, where the exact Pareto model removes the Burr-type
 second-order bias, increasing the threshold improves the corresponding log
 RMSE from \(0.248\) to \(0.156\), but the distributed interval coverage entries
 are source-ineligible and therefore left blank. In the absolute Student case,
@@ -411,7 +459,9 @@ a simple monotone improvement when the target is made less extreme.
 \label{tab:sim:threshold}
 \begingroup
 \setlength{\tabcolsep}{4pt}
-\input{generated/simulation/tables/threshold_sensitivity}
+\resizebox{\textwidth}{!}{%
+  \input{generated/simulation/tables/threshold_sensitivity}%
+}
 \endgroup
 \end{table}
 
@@ -423,7 +473,9 @@ a simple monotone improvement when the target is made less extreme.
 \label{tab:sim:target}
 \begingroup
 \setlength{\tabcolsep}{4pt}
-\input{generated/simulation/tables/target_sensitivity}
+\resizebox{\textwidth}{!}{%
+  \input{generated/simulation/tables/target_sensitivity}%
+}
 \endgroup
 \end{table}
 
@@ -431,21 +483,23 @@ a simple monotone improvement when the target is made less extreme.
 \label{sec:sim:limitations}
 
 \Cref{tab:sim:weights} reports weight diagnostics in the representative main
-design. The Daouia--Padoan--Stupfler variance row is the deterministic
-variance-optimal baseline; there is no separate oracle variance row because, in
-this common-tail independent design, the oracle and plug-in variance formulas
-both reduce to \(\omega_j=k_j/k\). The oracle and plug-in AMSE weights are
-stable in this equal-threshold grid: negative weights are absent, and the
-average maximum absolute weight is close to the largest deterministic
-allocation weight. The diagnostic matters because it rules out an obvious
-failure mode. The lack of AMSE improvement in \Cref{tab:sim:point-main} is not
-caused by unstable AMSE weights; rather, in the main common-threshold design
-the AMSE rule is numerically close to the simpler variance allocation.
+design. The variance row based on \textcite{DaouiaPadoanStupfler2021} is the
+deterministic variance-optimal baseline; there is no separate oracle variance
+row because, in this common-tail independent design, the oracle and plug-in
+variance formulas both reduce to \(\omega_j=k_j/k\). The oracle and plug-in
+AMSE weights are stable in this equal-threshold grid: negative weights are
+absent, and the average maximum absolute weight is close to the largest
+deterministic allocation weight. The diagnostic matters because it rules out
+an obvious failure mode. The lack of AMSE improvement in
+\Cref{tab:sim:point-main} is not caused by unstable AMSE weights; rather, the
+common-threshold design makes the first-order AMSE criterion reduce to the
+variance criterion up to an additive bias constant.
 
 \Cref{tab:sim:omega-heterogeneous} gives the AMSE rule a more discriminating
 environment. The bridge-Hill vector is fixed at \(\bm\nu_n^k\), while
-\(\bm\omega\) varies between Daouia--Padoan--Stupfler variance, oracle AMSE,
-and plug-in AMSE weights. Here AMSE weighting can matter. In Burr light, the
+\(\bm\omega\) varies between the variance, oracle AMSE, and plug-in AMSE
+weights of \textcite{DaouiaPadoanStupfler2021}. Here AMSE weighting can
+matter. In Burr light, the
 oracle AMSE row
 raises coverage from \(0.600\) under variance weights to \(0.732\), while the
 plug-in AMSE row raises it to \(0.642\). In the absolute Student model, AMSE
@@ -455,16 +509,17 @@ weights are signed in almost every replication. In Burr heavy, AMSE weights
 give only a small improvement. Exact Pareto plug-in AMSE rows remain omitted
 for the source reason described above.
 
-The simulation evidence is intentionally limited. It supports the promoted
+The simulation evidence is intentionally limited. It supports the proposed
 estimator in the iid common-marginal distributed setting and suggests that
-Daouia--Padoan--Stupfler variance weights are a robust practical baseline for
-\(\bm\omega\). Heterogeneous-threshold diagnostics show that AMSE weights are a
+the variance weights of \textcite{DaouiaPadoanStupfler2021} are a robust
+practical baseline for \(\bm\omega\). Heterogeneous-threshold diagnostics show that AMSE weights are a
 genuine alternative worth reporting, but not uniformly superior or uniformly
 stable.
 The study also shows where the asymptotic theory should not be
 overinterpreted: first-order plug-in intervals may under-cover at realistic
 sample sizes, and the exact decomposition reveals finite-sample contributions
-from terms that are asymptotically negligible under the theorem's scaling.
+from terms that are asymptotically negligible under the conjectured
+first-order scaling.
 The study does not address non-identical margins, time series, multivariate
 targets, random bridge-Hill weights, or lower-order optimality of
 \(\bm\nu\). Those questions would require additional mathematical work before
@@ -477,7 +532,9 @@ they could become simulation targets.
 \label{tab:sim:weights}
 \begingroup
 \setlength{\tabcolsep}{4pt}
-\input{generated/simulation/tables/weight_stability}
+\resizebox{\textwidth}{!}{%
+  \input{generated/simulation/tables/weight_stability}%
+}
 \endgroup
 \end{table}
 

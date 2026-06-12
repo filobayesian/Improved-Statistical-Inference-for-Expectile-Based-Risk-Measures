@@ -5,7 +5,7 @@
 \section{Regular variation and the second-order condition}
 \label{sec:bg:rv}
 
-Throughout the thesis we work with a real-valued random loss $X$ that
+Throughout this work we consider a real-valued random loss $X$ that
 has continuous distribution function $F$ and survival function
 $\overline F = 1 - F$. Given an iid sample $X_{1}, \ldots, X_{n}$ from
 $F$, the corresponding order statistics are denoted by
@@ -98,7 +98,7 @@ regime for the quantile-based expectile approximation.
 \section{Tail-index and extreme-quantile estimation}
 \label{sec:bg:tail-index-quantile}
 
-We collect the two classical estimators used throughout the thesis: the
+We collect the two classical estimators used throughout this work: the
 Hill estimator of $\gamma$ and the Weissman extrapolation for extreme
 quantiles. The textbook reference is
 \textcite[Ch.~3--4]{deHaanFerreira2006}.
@@ -117,8 +117,7 @@ $\gamma$ based on the $k + 1$ top order statistics is
 \end{equation}
 Since $U(t)\to\infty$, $X_{n-k:n}>0$ with probability tending to one
 for intermediate $k$; log-based estimators are understood on this event.
-For tail-index estimation one may also shift the data, but shifts must
-be undone for quantile or expectile estimation. The consistency result
+The consistency result
 below is \textcite[Theorem~3.2.2]{deHaanFerreira2006}; the normal limit
 is \textcite[Theorem~3.2.5]{deHaanFerreira2006} when $\rho<0$, with the
 $\rho=0$ endpoint covered by the $m=1$ specialisation of
@@ -126,9 +125,10 @@ $\rho=0$ endpoint covered by the $m=1$ specialisation of
 
 \begin{theorem}
 \label{thm:bg:hill}
-Assume $\mathcal C_{2}(\gamma, \rho, A)$ with $\gamma > 0$. Let
+Assume \Cref{cond:bg:first-order} with $\gamma > 0$. Let
 $k = k_{n} \to \infty$ and $k / n \to 0$ as $n \to \infty$. Then
 $\hat\gamma_{n}(k) \toprob \gamma$. If, in addition,
+$\mathcal C_{2}(\gamma, \rho, A)$ holds and
 $\sqrt{k}\, A(n/k) \to \lambda \in \R$, then
 \[
   \sqrt{k}\,\big( \hat\gamma_{n}(k) - \gamma \big)
@@ -137,8 +137,8 @@ $\sqrt{k}\, A(n/k) \to \lambda \in \R$, then
 \]
 \end{theorem}
 
-The choice of $k$ controls the usual bias--variance trade-off; here it
-is treated as fixed by the data analyst.
+The choice of $k$ controls the usual bias--variance trade-off; here it is
+treated as a tuning parameter fixed outside the asymptotic analysis.
 
 \subsection{Weissman extrapolation to extreme quantiles}
 \label{sec:bg:weissman}
@@ -321,9 +321,10 @@ monotone: its logarithmic derivative
   \frac{1}{1 - \gamma} - \log\big(\gamma^{-1} - 1\big)
 \end{equation}
 changes sign at $\gamma^{\star}\approx0.2178$, where $\psifn$ reaches
-its minimum. In the pooled extreme-expectile theorem below, $m(\gamma)$
-appears in the Taylor expansion of the bridge-Hill term; when
-$m(\gamma)=0$, that term is even smaller at first order.
+its minimum. In the Chapter~3 pooled extreme-expectile statement, $m(\gamma)$
+appears as the coefficient of the linear term in the Taylor expansion of the
+bridge-Hill contribution. At the exceptional value where $m(\gamma)=0$, this
+linear term vanishes and the expansion starts at quadratic order.
 
 Under the second-order condition $\mathcal C_{2}(\gamma, \rho, A)$ with
 $\gamma \in (0, 1)$ and $\E X^{-}<\infty$, the first-order equivalence
@@ -382,7 +383,7 @@ expectile--quantile bridge is applied. The framework pools tail-index and
 extreme-quantile estimators from $m$ samples, allowing heterogeneous
 sizes, second-order properties and cross-sample tail dependence.
 This general framework is recalled to identify the source objects and
-notation. The main theorem in \Cref{ch:pooled-extreme} later uses only
+notation. The main Chapter~3 statement later uses only
 the independent common-distribution distributed special case.
 
 \subsection{Setup}
@@ -411,7 +412,7 @@ asymptotic-proportionality conditions
 \end{equation}
 with $b_{1} = c_{1} = 1$. The marginal $F_{j}$ satisfies
 $\mathcal C_{2}(\gamma_{j}, \rho_{j}, A_{j})$
-(\Cref{cond:bg:second-order}). The thesis works under the
+(\Cref{cond:bg:second-order}). This work is developed under the
 \emph{common-tail-index} assumption
 \[
   (H_{\gamma}) \qquad
@@ -439,7 +440,7 @@ $(x_{j}, x_{\ell}) \in [0, \infty]^{2} \setminus \{(\infty,\infty)\}$,
 \]
 
 The case $\Rjl \equiv 0$ is asymptotic tail independence, implied by the
-independent samples used later in the thesis.
+independent samples used later in this work.
 
 \subsection{The pooled Hill estimator}
 
@@ -545,7 +546,7 @@ becomes the diagonal matrix
     \mathrm{diag}(c_{1}, \ldots, c_{m}).
 \end{equation}
 \Cref{eq:bg:V_c-diagonal} is the covariance form to be used when the
-main theorem is specialised to independent samples.
+main Chapter~3 statement is specialised to independent samples.
 
 \subsection{Variance- and AMSE-optimal weights}
 
@@ -676,7 +677,7 @@ Together with the bias-rate assumptions
 $\sqrt{k_j}\,A_j(n_j/k_j)\to\lambda_j$ in
 \Cref{thm:bg:pool-hill}, it also supplies the rate needed to recenter
 by any marginal $\Quant_j(1-p)$ under $(\mathcal H)$
-\parencite[Supplement, Lemma~B.2]{DaouiaPadoanStupfler2021}: for any
+\parencite[Supplementary Material, Lemma~B.2]{DaouiaPadoanStupfler2021}: for any
 $j,\ell$,
 \[
   \log\Quant_j(1-p)-\log\Quant_\ell(1-p)
@@ -709,7 +710,7 @@ pooled-Weissman role; the bridge-Hill vector remains deterministic.
 
 \begin{proposition}[Estimated pooling weights;
                     \textcite{DaouiaPadoanStupfler2021},
-                    Supplement, Theorem~A.1; Theorem~2 and Corollary~8]
+                    Supplementary Material, Theorem~A.1; Theorem~2 and Corollary~8]
 \label{prop:bg:estimated-pooling-weights}
 Assume the common-\(\gamma\) conditions of \Cref{thm:bg:pool-hill}. Let
 \(\widehat{\bm\omega}_n\) be a random weight vector satisfying
@@ -744,7 +745,7 @@ statement holds with the diagonal covariance matrix
 \textcite[Corollary~5]{DaouiaPadoanStupfler2021}.
 \end{proposition}
 
-The supplement's Theorem~A.1 is the generic estimated-weight transfer:
+The Supplementary Material's Theorem~A.1 is the generic estimated-weight transfer:
 exact affine normalisation and convergence in probability of the weights
 make the random-weight pooled estimator asymptotically equivalent to the
 pooled estimator with limiting deterministic weights. Applied to
@@ -835,8 +836,8 @@ Under the stronger balanced-allocation assumptions studied by
 the variance-optimally pooled Hill and pooled Weissman estimators match
 the corresponding unfeasible estimators built from the entire combined
 sample at first order. This oracle equivalence is useful benchmark
-context for distributed inference. The main theorem in
-\Cref{ch:pooled-extreme} uses the more direct consequence needed for the
+context for distributed inference. The main Chapter~3 statement uses the more
+direct consequence needed for the
 expectile problem: in the independent common-distribution case, the
 pooled-Weissman bias and variance objects are the diagonal distributed
 objects displayed above.

@@ -8,8 +8,8 @@ insurance and operational-risk applications, the target may lie beyond the
 range where empirical averages or order statistics alone give reliable
 answers. Extreme-value methods address this by combining intermediate tail
 information with a heavy-tailed model, trading a small amount of structural
-assumption for the ability to extrapolate to rarer loss levels. This thesis
-works in that regime, with a focus on extreme expectiles as tail-risk
+assumption for the ability to extrapolate to rarer loss levels. This is the
+regime studied here, with a focus on extreme expectiles as tail-risk
 functionals.
 
 Expectiles, introduced by \textcite{NeweyPowell1987}, are asymmetric
@@ -20,7 +20,7 @@ elicitability under standard integrability conditions
 \parencite{BelliniKlarMullerRosazzaGianin2014,Ziegel2016,Gneiting2011}.
 For heavy-tailed distributions with finite mean, extreme expectiles are also
 asymptotically proportional to extreme quantiles. In the notation used
-throughout the thesis,
+throughout this work,
 \[
   \expectile{\tau}
   \sim
@@ -42,7 +42,7 @@ framework for tail-index and extreme-quantile inference, including geometric
 pooling of local Weissman estimators. Their results identify variance- and
 AMSE-optimal weights for the pooled extreme-quantile problem and provide
 estimated-weight and plug-in inference machinery under source conditions. The
-question in this thesis is how much of that structure survives after the target
+question addressed here is how much of that structure survives after the target
 is changed from an extreme quantile to an extreme expectile.
 
 The estimator studied here applies the expectile--quantile bridge after the
@@ -61,34 +61,38 @@ separation is important. The diagonal choice \(\bm\nu=\bm\omega\) is a
 natural prototype, but it is not forced by the construction and is not treated
 as an optimality principle.
 
-With this estimator in place, the thesis makes three contributions. First, it
-derives the first-order law from an exact log decomposition rather than by
-formal analogy with quantile pooling. In the finite-\(m\) iid common-marginal
-setting, this shows that the leading term is the pooled-Weissman error. The
+With this estimator in place, this work makes three contributions. First, it
+formulates and supports a first-order log-scale limit for the pooled
+extreme-expectile estimator from an exact decomposition of its error. In the
+finite-\(m\) iid common-marginal setting, the resulting statement identifies
+the leading term as the pooled-Weissman error. The
 outer bridge-Hill term and the population expectile--quantile bridge error are
-lower order under the bridge-rate condition used in the main result. Thus the
-first-order bias, variance and AMSE criteria concern \(\bm\omega\), while
-\(\bm\nu\) remains first-order unidentified.
+lower order under the bridge-rate condition used in the main Chapter~3
+statement. Thus the first-order bias, variance and AMSE criteria concern
+\(\bm\omega\), while \(\bm\nu\) remains first-order unidentified.
 
-Second, the thesis transfers the relevant estimated-weight and plug-in
-inference machinery from Daouia--Padoan--Stupfler to the expectile estimator
+Second, this work formulates a corresponding transfer of the relevant
+estimated-weight and plug-in inference machinery from the optimal-pooling
+framework of \textcite{DaouiaPadoanStupfler2021} to the expectile estimator
 when the source consistency conditions apply. Estimated weights are used only
-in the pooled-Weissman role. For implementation, the bridge-Hill vector is
-kept at the deterministic threshold-allocation convention
+in the pooled-Weissman role. For implementation, the bridge-Hill vector is kept
+at the deterministic threshold-allocation convention
 \(\bm\nu_n^k=(k_1/k,\ldots,k_m/k)^\top\).
 
-Third, the thesis reports a finite-sample study matched to this theoretical
+Third, this work reports a finite-sample study matched to this theoretical
 scope. The simulations vary the pooled-Weissman weights, keep the bridge-Hill
 convention fixed, and assess point estimation, plug-in intervals and
-decomposition diagnostics. Their role is to show how the promoted first-order
-route behaves in the studied designs, not to introduce a wider estimator class
-or a new optimality principle.
+decomposition diagnostics. Their role is to show how the Chapter~3
+first-order route behaves in the studied designs, not to introduce a wider
+estimator class or a new optimality principle.
 
-The rest of the thesis is organised as follows. \Cref{ch:background} recalls
+The rest of this work is organised as follows. \Cref{ch:background} recalls
 the heavy-tail, expectile and optimal-pooling results used as source inputs.
 \Cref{ch:pooled-extreme} develops the pooled extreme-expectile estimator, its
-exact decomposition, the deterministic first-order result, the weight
-consequences and the estimated-weight inference transfer. \Cref{ch:finite-sample}
-reports the finite-sample study for the promoted estimator and inference
-route. \Cref{ch:conclusion} summarises the main lessons and the limitations
-left by this deliberately narrow construction.
+exact decomposition, the deterministic first-order statement, the weight
+consequences and the estimated-weight inference transfer statement.
+\Cref{ch:finite-sample} reports the finite-sample study for the proposed
+estimator and inference route. \Cref{ch:conclusion} summarises the main
+lessons, discusses the
+limitations of the proposed estimator and inference route, and outlines
+directions for further work.

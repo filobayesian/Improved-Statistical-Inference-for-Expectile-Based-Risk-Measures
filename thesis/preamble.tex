@@ -1,5 +1,5 @@
 % !TEX root = main.tex
-% Preamble for the Master's thesis.
+% Preamble for the final work.
 % Notation aligned with Daouia-Padoan-Stupfler (2021, "Optimal Pooling").
 
 \documentclass[12pt, a4paper, oneside]{book}
@@ -44,8 +44,11 @@
             style=authoryear,
             sorting=nyt,
             maxcitenames=2,
+            mincitenames=1,
             maxbibnames=99,
             giveninits=true,
+            useprefix=true,
+            uniquelist=false,
             uniquename=init]{biblatex}
 \addbibresource{references.bib}
 
@@ -108,5 +111,5 @@
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
 
-% --- TODO marker (visible until thesis is final) ---
+% --- TODO marker (visible until the final work is complete) ---
 \newcommand{\todo}[1]{\textcolor{red}{\textbf{[TODO:} #1\textbf{]}}}

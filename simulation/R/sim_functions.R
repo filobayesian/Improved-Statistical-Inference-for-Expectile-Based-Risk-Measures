@@ -778,11 +778,21 @@ summarise_results <- function(results) {
   summary_input <- transform(
     results,
     log_error_sq = ifelse(is.na(log_error), NA_real_, log_error^2),
+    log_error_fourth = ifelse(is.na(log_error), NA_real_, log_error^4),
     scaled_log_error_sq = ifelse(is.na(scaled_log_error), NA_real_, scaled_log_error^2),
+    scaled_log_error_fourth = ifelse(is.na(scaled_log_error), NA_real_, scaled_log_error^4),
     studentized_sq = ifelse(is.na(studentized), NA_real_, studentized^2),
+    ci_log_length_sq = ifelse(is.na(ci_log_length), NA_real_, ci_log_length^2),
     scaled_A_sq = ifelse(is.na(scaled_A), NA_real_, scaled_A^2),
+    scaled_A_fourth = ifelse(is.na(scaled_A), NA_real_, scaled_A^4),
     scaled_B_sq = ifelse(is.na(scaled_B), NA_real_, scaled_B^2),
+    scaled_B_fourth = ifelse(is.na(scaled_B), NA_real_, scaled_B^4),
     scaled_C_sq = ifelse(is.na(scaled_C), NA_real_, scaled_C^2),
+    scaled_C_fourth = ifelse(is.na(scaled_C), NA_real_, scaled_C^4),
+    max_abs_weight_sq = ifelse(is.na(max_abs_weight), NA_real_, max_abs_weight^2),
+    decomp_remainder_abs_sq = ifelse(
+      is.na(decomp_remainder), NA_real_, abs(decomp_remainder)^2
+    ),
     decomp_remainder_abs = abs(decomp_remainder)
   )
   grouped_formula <- function(lhs) {
@@ -790,10 +800,15 @@ summarise_results <- function(results) {
   }
   out <- aggregate(
     grouped_formula("cbind(
-      log_error, log_error_sq, abs_log_error, covered, ci_log_length,
-      scaled_log_error, scaled_log_error_sq, studentized, studentized_sq,
-      scaled_A, scaled_A_sq, scaled_B, scaled_B_sq, scaled_C, scaled_C_sq,
-      decomp_remainder_abs, any_negative_weight, max_abs_weight
+      log_error, log_error_sq, log_error_fourth, abs_log_error, covered,
+      ci_log_length, ci_log_length_sq,
+      scaled_log_error, scaled_log_error_sq, scaled_log_error_fourth,
+      studentized, studentized_sq,
+      scaled_A, scaled_A_sq, scaled_A_fourth,
+      scaled_B, scaled_B_sq, scaled_B_fourth,
+      scaled_C, scaled_C_sq, scaled_C_fourth,
+      decomp_remainder_abs, decomp_remainder_abs_sq,
+      any_negative_weight, max_abs_weight, max_abs_weight_sq
     )"),
     data = summary_input,
     FUN = mean_na,
@@ -830,5 +845,89 @@ summarise_results <- function(results) {
   merged$valid_ci_rate <- merged$valid_ci_replications / merged$n_replications
   merged$negative_weight_rate <- merged$any_negative_weight
   merged$avg_max_abs_weight <- merged$max_abs_weight
+
+  mean_mcse <- function(mean, second_moment, n) {
+    var_est <- pmax(0, second_moment - mean^2)
+    out <- rep(NA_real_, length(mean))
+    ok <- is.finite(n) & n > 1 & is.finite(var_est)
+    out[ok] <- sqrt(var_est[ok] / (n[ok] - 1))
+    out
+  }
+  prop_mcse <- function(p, n) {
+    out <- rep(NA_real_, length(p))
+    ok <- is.finite(n) & n > 0 & is.finite(p)
+    out[ok] <- sqrt(pmax(0, p[ok] * (1 - p[ok])) / n[ok])
+    out
+  }
+  rms_mcse <- function(second_moment, fourth_moment, rms, n) {
+    second_moment_var <- pmax(0, fourth_moment - second_moment^2)
+    out <- rep(NA_real_, length(rms))
+    ok <- is.finite(n) & n > 1 & is.finite(rms) & rms > 0 &
+      is.finite(second_moment_var)
+    out[ok] <- sqrt(second_moment_var[ok] / (n[ok] - 1)) / (2 * rms[ok])
+    out
+  }
+
+  merged$log_bias_mcse <- mean_mcse(
+    merged$log_bias, merged$log_error_sq, merged$valid_replications
+  )
+  merged$log_rmse_mcse <- rms_mcse(
+    merged$log_error_sq,
+    merged$log_error_fourth,
+    merged$log_rmse,
+    merged$valid_replications
+  )
+  merged$scaled_log_rmse_mcse <- rms_mcse(
+    merged$scaled_log_error_sq,
+    merged$scaled_log_error_fourth,
+    merged$scaled_log_rmse,
+    merged$valid_replications
+  )
+  merged$scaled_A_rms_mcse <- rms_mcse(
+    merged$scaled_A_sq,
+    merged$scaled_A_fourth,
+    merged$scaled_A_rms,
+    merged$valid_replications
+  )
+  merged$scaled_B_rms_mcse <- rms_mcse(
+    merged$scaled_B_sq,
+    merged$scaled_B_fourth,
+    merged$scaled_B_rms,
+    merged$valid_replications
+  )
+  merged$scaled_C_rms_mcse <- rms_mcse(
+    merged$scaled_C_sq,
+    merged$scaled_C_fourth,
+    merged$scaled_C_rms,
+    merged$valid_replications
+  )
+  merged$ci_log_length_mcse <- mean_mcse(
+    merged$ci_log_length,
+    merged$ci_log_length_sq,
+    merged$valid_ci_replications
+  )
+  merged$coverage_mcse <- prop_mcse(
+    merged$coverage, merged$valid_ci_replications
+  )
+  merged$valid_rate_mcse <- prop_mcse(
+    merged$valid_rate, merged$n_replications
+  )
+  merged$valid_ci_rate_mcse <- prop_mcse(
+    merged$valid_ci_rate, merged$n_replications
+  )
+  merged$negative_weight_rate_mcse <- prop_mcse(
+    merged$negative_weight_rate, merged$valid_replications
+  )
+  merged$avg_max_abs_weight_mcse <- mean_mcse(
+    merged$avg_max_abs_weight,
+    merged$max_abs_weight_sq,
+    merged$valid_replications
+  )
+  merged$decomp_remainder_abs_mcse <- mean_mcse(
+    merged$decomp_remainder_abs,
+    merged$decomp_remainder_abs_sq,
+    merged$valid_replications
+  )
+
   merged
 }

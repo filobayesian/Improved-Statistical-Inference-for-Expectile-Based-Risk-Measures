@@ -40,7 +40,12 @@ required_cols <- c(
   "design_version", "design_role", "k_rule", "k_design", "k_fraction",
   "k_profile", "ell", "sqrtk_over_ell", "eta", "bridge_log_gap", "nu_choice",
   "standardization", "plugin_status", "scaled_log_rmse", "studentized_sd",
-  "scaled_A_rms", "scaled_B_rms", "scaled_C_rms", "decomp_remainder_abs"
+  "scaled_A_rms", "scaled_B_rms", "scaled_C_rms", "decomp_remainder_abs",
+  "log_bias_mcse", "log_rmse_mcse", "valid_rate_mcse",
+  "coverage_mcse", "ci_log_length_mcse", "valid_ci_rate_mcse",
+  "scaled_log_rmse_mcse", "scaled_A_rms_mcse", "scaled_B_rms_mcse",
+  "scaled_C_rms_mcse", "decomp_remainder_abs_mcse",
+  "negative_weight_rate_mcse", "avg_max_abs_weight_mcse"
 )
 missing_cols <- setdiff(required_cols, names(summary))
 if (length(missing_cols) > 0) {
@@ -70,6 +75,16 @@ dir.create(tab_dir, recursive = TRUE, showWarnings = FALSE)
 
 fmt <- function(x, digits = 3) {
   ifelse(is.na(x), "--", formatC(x, digits = digits, format = "f"))
+}
+
+fmt_mcse <- function(x, se, digits = 3) {
+  if (is.na(x)) {
+    return("--")
+  }
+  if (is.na(se)) {
+    return(fmt(x, digits))
+  }
+  paste0(fmt(x, digits), " {\\scriptsize (", fmt(se, digits), ")}")
 }
 
 esc <- function(x) {
@@ -143,7 +158,14 @@ if (nrow(main_rows) > 0) {
       "%s & %d & %s & %s & %s & %s & %s \\\\",
       row$dgp, as.integer(row$m), esc(row$regime),
       estimator_label(row$estimator),
-      fmt(row$log_bias), fmt(row$log_rmse), fmt(row$valid_rate)
+      fmt_mcse(row$log_bias, row$log_bias_mcse),
+      fmt_mcse(row$log_rmse, row$log_rmse_mcse),
+      if (row$estimator == "dps_amse_plugin" &&
+          row$plugin_status %in% "source_ineligible") {
+        "--"
+      } else {
+        fmt_mcse(row$valid_rate, row$valid_rate_mcse)
+      }
     ))
   }
 }
@@ -177,8 +199,10 @@ if (nrow(interval_rows) > 0) {
       "%s & %d & %s & %s & %s & %s & %s & %s & %s \\\\",
       row$dgp, as.integer(row$m), esc(row$regime),
       estimator_label(row$estimator),
-      fmt(row$coverage), fmt(row$ci_log_length),
-      fmt(row$valid_ci_rate), fmt(row$eta), fmt(row$bridge_log_gap)
+      fmt_mcse(row$coverage, row$coverage_mcse),
+      fmt_mcse(row$ci_log_length, row$ci_log_length_mcse),
+      fmt_mcse(row$valid_ci_rate, row$valid_ci_rate_mcse),
+      fmt(row$eta), fmt(row$bridge_log_gap)
     ))
   }
 }
@@ -208,7 +232,9 @@ if (nrow(threshold_rows) > 0) {
     threshold_lines <- c(threshold_lines, sprintf(
       "%s & %s & %s & %s & %s & %s \\\\",
       row$dgp, esc(row$k_design), estimator_label(row$estimator),
-      fmt(row$k_fraction, 3), fmt(row$log_rmse), fmt(row$coverage)
+      fmt(row$k_fraction, 3),
+      fmt_mcse(row$log_rmse, row$log_rmse_mcse),
+      fmt_mcse(row$coverage, row$coverage_mcse)
     ))
   }
 }
@@ -236,7 +262,9 @@ if (nrow(target_rows) > 0) {
     target_lines <- c(target_lines, sprintf(
       "%s & %s & %s & %s & %s & %s \\\\",
       row$dgp, fmt(row$np_target, 0), estimator_label(row$estimator),
-      fmt(row$eta), fmt(row$log_rmse), fmt(row$coverage)
+      fmt(row$eta),
+      fmt_mcse(row$log_rmse, row$log_rmse_mcse),
+      fmt_mcse(row$coverage, row$coverage_mcse)
     ))
   }
 }
@@ -273,7 +301,8 @@ if (nrow(stability) > 0) {
       "%s & %d & %s & %s & %s & %s \\\\",
       row$dgp, as.integer(row$m), esc(row$regime),
       estimator_label(row$estimator),
-      fmt(row$negative_weight_rate), fmt(row$avg_max_abs_weight)
+      fmt_mcse(row$negative_weight_rate, row$negative_weight_rate_mcse),
+      fmt_mcse(row$avg_max_abs_weight, row$avg_max_abs_weight_mcse)
     ))
   }
 }
@@ -305,8 +334,11 @@ if (nrow(omega_hetero) > 0) {
     omega_hetero_lines <- c(omega_hetero_lines, sprintf(
       "%s & %s & %s & %s & %s & %s & %s \\\\",
       row$dgp, estimator_label(row$estimator),
-      fmt(row$log_bias), fmt(row$log_rmse), fmt(row$coverage),
-      fmt(row$negative_weight_rate), fmt(row$avg_max_abs_weight)
+      fmt_mcse(row$log_bias, row$log_bias_mcse),
+      fmt_mcse(row$log_rmse, row$log_rmse_mcse),
+      fmt_mcse(row$coverage, row$coverage_mcse),
+      fmt_mcse(row$negative_weight_rate, row$negative_weight_rate_mcse),
+      fmt_mcse(row$avg_max_abs_weight, row$avg_max_abs_weight_mcse)
     ))
   }
 }
@@ -337,7 +369,13 @@ if (nrow(validity) > 0) {
       "%s & %d & %s & %s & %s & %d \\\\",
       row$dgp, as.integer(row$m), esc(row$regime),
       estimator_label(row$estimator),
-      fmt(1 - row$valid_rate), as.integer(row$valid_replications)
+      if (row$estimator == "dps_amse_plugin" &&
+          row$plugin_status %in% "source_ineligible") {
+        "--"
+      } else {
+        fmt_mcse(1 - row$valid_rate, row$valid_rate_mcse)
+      },
+      as.integer(row$valid_replications)
     ))
   }
 }
@@ -364,7 +402,9 @@ if (nrow(nu_rows) > 0) {
     nu_lines <- c(nu_lines, sprintf(
       "%s & %s & %s & %s & %s \\\\",
       row$dgp, nu_label(row$nu_choice),
-      fmt(row$log_bias), fmt(row$log_rmse), fmt(row$coverage)
+      fmt_mcse(row$log_bias, row$log_bias_mcse),
+      fmt_mcse(row$log_rmse, row$log_rmse_mcse),
+      fmt_mcse(row$coverage, row$coverage_mcse)
     ))
   }
 }
@@ -394,8 +434,10 @@ if (nrow(nu_hetero_rows) > 0) {
     nu_hetero_lines <- c(nu_hetero_lines, sprintf(
       "%s & %s & %s & %s & %s & %s \\\\",
       row$dgp, nu_label(row$nu_choice),
-      fmt(row$log_bias), fmt(row$log_rmse), fmt(row$coverage),
-      fmt(row$scaled_B_rms)
+      fmt_mcse(row$log_bias, row$log_bias_mcse),
+      fmt_mcse(row$log_rmse, row$log_rmse_mcse),
+      fmt_mcse(row$coverage, row$coverage_mcse),
+      fmt_mcse(row$scaled_B_rms, row$scaled_B_rms_mcse)
     ))
   }
 }
@@ -422,11 +464,11 @@ if (nrow(decomp_rows) > 0) {
     decomp_lines <- c(decomp_lines, sprintf(
       "%s & %s & %s & %s & %s & %s \\\\",
       row$dgp,
-      fmt(row$scaled_log_rmse),
-      fmt(row$scaled_A_rms),
-      fmt(row$scaled_B_rms),
-      fmt(row$scaled_C_rms),
-      fmt(row$decomp_remainder_abs, 2)
+      fmt_mcse(row$scaled_log_rmse, row$scaled_log_rmse_mcse),
+      fmt_mcse(row$scaled_A_rms, row$scaled_A_rms_mcse),
+      fmt_mcse(row$scaled_B_rms, row$scaled_B_rms_mcse),
+      fmt_mcse(row$scaled_C_rms, row$scaled_C_rms_mcse),
+      fmt_mcse(row$decomp_remainder_abs, row$decomp_remainder_abs_mcse, 2)
     ))
   }
 }
