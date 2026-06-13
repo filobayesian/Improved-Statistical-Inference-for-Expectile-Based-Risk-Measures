@@ -6,12 +6,12 @@ This work has studied inference for extreme expectile-based risk measures in
 a distributed heavy-tailed setting. The construction builds on the
 optimal-pooling framework of \textcite{DaouiaPadoanStupfler2021}: it first
 forms a geometrically pooled Weissman estimator of an extreme quantile and only
-then applies the high-expectile/high-quantile bridge. Looking back, the main
-value of the two-weight formulation is that it separates two roles
-that are easy to conflate: \(\bm\omega\) controls the pooled-Weissman
+then applies the high-expectile/high-quantile bridge. The two-weight
+formulation separates two roles that are easy to conflate:
+\(\bm\omega\) controls the pooled-Weissman
 component, while \(\bm\nu\) enters only through the Hill estimator used in the
 outer bridge. This separation makes clear which part of the estimator is
-governed by the source pooling theory.
+governed by the pooling theory of \textcite{DaouiaPadoanStupfler2021}.
 
 \section{Main findings}
 \label{sec:conclusion:findings}
@@ -20,7 +20,7 @@ The theoretical argument is useful precisely because it is explicit about what
 has to be controlled. The log error splits into the pooled-Weissman error, the
 plug-in error from evaluating \(\psifn\) at a pooled Hill estimator, and the
 population error in replacing the expectile by the asymptotic quantile bridge.
-In the iid common-marginal distributed regime, under the extreme-Weissman
+In the i.i.d. common-marginal distributed regime, under the extreme-Weissman
 conditions and the bridge-rate condition, the Chapter~3 asymptotic argument
 treats the two bridge terms as lower order on the pooled-Weissman scale. The
 resulting conjectural limiting law therefore depends on \(\bm\omega\), but not
@@ -30,11 +30,13 @@ This is the main conjectural message of \Cref{ch:pooled-extreme}: first-order
 variance and AMSE optimisation transfer to \(\bm\omega\) from the theory of
 \textcite{DaouiaPadoanStupfler2021}, while \(\bm\nu\) is first-order
 unidentified in this regime. The simulations then adopt the fixed
-threshold-allocation bridge vector used in the plug-in route.
+threshold-allocation bridge vector used in the plug-in construction.
 
-The work then formulates a conditional transfer to source-admissible estimated
-\(\bm\omega\) weights. This transfer is deliberately conditional: when the
-source construction supplies consistent estimated weights and consistent
+This work then formulates a conditional transfer to estimated \(\bm\omega\)
+weights satisfying the random-weight conditions of
+\textcite[Supplementary Material, Theorem~A.1; Theorem~2 and Corollary~8]{DaouiaPadoanStupfler2021}.
+This transfer is deliberately conditional: when the corresponding source
+construction supplies consistent estimated weights and consistent
 plug-in centring and variance objects, the expectile estimator is expected to
 inherit the same first-order studentised limit. The resulting
 confidence interval is obtained by inverting the transferred log-scale
@@ -46,7 +48,7 @@ estimator.
 \label{sec:conclusion:finite-sample}
 
 The simulation study in \Cref{ch:finite-sample} is matched to the theoretical
-scope of this work. It uses the practical bridge-Hill convention and varies
+scope of the Chapter~3 analysis. It uses the practical bridge-Hill convention and varies
 only the pooled-Weissman weights. Within this design, the variance weights of
 \textcite{DaouiaPadoanStupfler2021} provide a stable practical baseline. In
 the representative imbalanced grid, they make the distributed estimator track
@@ -63,21 +65,22 @@ simulation evidence supports reporting AMSE weights as a meaningful
 source-based alternative, not as a uniformly preferable default.
 
 The interval results are more cautionary. The first-order log-scale intervals
-under-cover in several finite-sample designs, and the centralised oracle
-benchmark also under-covers. The decomposition diagnostics explain why this is
-not only a distributed-splitting issue. At the simulated sample sizes, the
+have empirical coverage below nominal levels in several finite-sample designs,
+and the centralised oracle benchmark does too. The decomposition diagnostics
+explain why this is not only a distributed-splitting issue. At the simulated
+sample sizes, the
 terms \(B_n(\bm\nu)\) and \(C_n\), although asymptotically negligible under
-the conjectured first-order scaling, can still be visible. In particular,
+the Chapter~3 first-order scaling, can still be visible. In particular,
 finite-sample bridge error can affect calibration even when point estimation is
 competitive.
 The interval study should therefore be read as a diagnostic of the plug-in
-route rather than as evidence of strong finite-sample nominal coverage.
+construction rather than as evidence of strong finite-sample nominal coverage.
 
 \section{Limitations and future work}
 \label{sec:conclusion:future}
 
-The limitations of this work are mainly in its scope. The analysis
-is carried out in the finite-source iid common-marginal distributed setting.
+The limitations are mainly in scope. The analysis
+is carried out in the finite-\(m\) i.i.d. common-marginal distributed setting.
 This restriction is useful: it keeps the target expectile unambiguous and lets
 the pooled-Weissman theory of \textcite{DaouiaPadoanStupfler2021} be combined
 with the high-expectile/high-quantile bridge without adding a separate
@@ -92,17 +95,21 @@ A second limitation is that the present argument is first-order. Under the
 bridge-rate condition used in \Cref{ch:pooled-extreme}, the terms coming from
 the plug-in \(\psifn\) factor and from the population expectile--quantile
 bridge are lower order on the pooled-Weissman scale. This is precisely what
-makes the DPS weight theory transfer to \(\bm\omega\), but it also means that
-the bridge-Hill vector \(\bm\nu\) is not selected by the first-order criterion.
+allows the pooling-weight criteria of
+\textcite[Corollary~5]{DaouiaPadoanStupfler2021} to apply to \(\bm\omega\)
+at first order, but it also means that the bridge-Hill vector \(\bm\nu\) is
+not selected by the first-order criterion.
 A refined analysis retaining lower-order bridge terms would be needed before
 any performance-based data-adaptive rule for \(\bm\nu\) could be justified.
 
 The same boundary applies to estimated weights and plug-in inference. The
-estimated-weight transfer in this work is an \(\bm\omega\)-transfer: when
-the DPS source construction supplies consistent estimated weights and
-consistent plug-in centring and variance objects, the pooled extreme expectile
-estimator inherits the corresponding first-order log-scale limit. The
-bridge-Hill convention remains deterministic in this route. Allowing a random
+estimated-weight transfer is an \(\bm\omega\)-transfer: when
+the plug-in construction of
+\textcite[\S2.2 and Corollary~1; Corollaries~6--7]{DaouiaPadoanStupfler2021}
+supplies consistent estimated weights and consistent plug-in centring and
+variance objects, the pooled extreme expectile estimator inherits the
+corresponding first-order log-scale limit. The
+bridge-Hill convention remains deterministic here. Allowing a random
 or fully data-adaptive bridge-Hill vector would require checking that the
 compact-event Taylor argument for the \(\psifn\) term still gives a negligible
 contribution at the relevant scale, and, if lower-order accuracy is desired,
@@ -110,20 +117,23 @@ that the retained bridge terms are correctly represented.
 
 The finite-sample interval results point to a related direction rather than to
 a purely numerical gap. The simulations show that first-order log-scale
-plug-in intervals can under-cover, including for the centralised benchmark.
+plug-in intervals can have empirical coverage below nominal levels, including
+for the centralised benchmark.
 This suggests that calibration is affected by threshold choice, second-order
 tail bias and finite-sample bridge effects that are deliberately suppressed by
 the first-order theory. More systematic calibration work would therefore be
 most informative after the relevant lower-order terms or broader source
-settings have been theoretically isolated. Possible routes include
-bias-corrected centring, alternative studentisation, threshold diagnostics and
-simulation-guided sensitivity analysis, but each would need to be tied to a
+settings have been theoretically isolated. Possible extensions include
+bias-corrected centring, alternative studentisation, threshold diagnostics,
+intervals retaining an estimable population bridge term, and
+simulation-guided sensitivity analysis. Each would need to be tied to a
 specific extension of the asymptotic argument.
 
 The simulation study is narrow for the same reason. It is designed to test the
-promoted estimator, the DPS variance and AMSE choices for \(\bm\omega\), the
-fixed bridge-Hill convention, and the associated plug-in inference route in a
-controlled iid common-marginal setting. Broader simulation grids, real-data
+promoted estimator, the variance and AMSE choices for \(\bm\omega\) from
+\textcite{DaouiaPadoanStupfler2021}, the fixed bridge-Hill convention, and the
+associated plug-in construction in a
+controlled i.i.d. common-marginal setting. Broader simulation grids, real-data
 examples, time-series dependence, non-identical sources, growing numbers of
 machines and more systematic threshold-selection rules are all natural next
 analyses. Their interpretation, however, depends on which theoretical
@@ -131,13 +141,16 @@ extension is being assessed. Simulating such designs before the corresponding
 target and decomposition have been fixed would risk turning numerical
 evidence into a substitute for the missing mathematical layer.
 
-Finally, this work follows the geometrically pooled Weissman route because
-it is the route directly supported by the DPS framework and by the log-scale
-decomposition used in \Cref{ch:pooled-extreme}. Other architectures remain
+Finally, this work follows the geometrically pooled Weissman construction
+because it is directly supported by the pooled-Weissman framework of
+\textcite[Theorem~2 and Corollary~8]{DaouiaPadoanStupfler2021} and by the
+log-scale decomposition used in \Cref{ch:pooled-extreme}. Other architectures remain
 possible. One could transmit and pool local quantile-based or LAWS expectile
 estimators, compare geometric and arithmetic pooling of expectile estimates,
-or change the communication protocol to send additional tail summaries. These
-are not merely cosmetic variants of the estimator studied here. They would
+or change the communication protocol to send additional summaries such as local
+upper order statistics, local tail means, intermediate expectiles, or local
+estimates of \(\E X\). These are not merely cosmetic variants of the estimator
+studied here. They would
 define different statistical objects, and should therefore be analysed through
 their own exact decompositions before being compared theoretically or in
 finite samples.

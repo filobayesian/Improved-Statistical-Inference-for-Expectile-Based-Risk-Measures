@@ -18,9 +18,11 @@ size and probability of large losses, and they have attractive risk-measure
 properties, including coherence in the relevant high-level range and
 elicitability under standard integrability conditions
 \parencite{BelliniKlarMullerRosazzaGianin2014,Ziegel2016,Gneiting2011}.
+A formal definition is recalled in \Cref{sec:bg:expectiles}; here the point is
+that high-level expectiles are useful tail-risk functionals whose asymptotic
+behaviour can be related to extreme quantiles.
 For heavy-tailed distributions with finite mean, extreme expectiles are also
-asymptotically proportional to extreme quantiles. In the notation used
-throughout this work,
+asymptotically proportional to extreme quantiles. In the notation used here,,
 \[
   \expectile{\tau}
   \sim
@@ -61,38 +63,40 @@ separation is important. The diagonal choice \(\bm\nu=\bm\omega\) is a
 natural prototype, but it is not forced by the construction and is not treated
 as an optimality principle.
 
-With this estimator in place, this work makes three contributions. First, it
-formulates and supports a first-order log-scale limit for the pooled
-extreme-expectile estimator from an exact decomposition of its error. In the
-finite-\(m\) iid common-marginal setting, the resulting statement identifies
-the leading term as the pooled-Weissman error. The
-outer bridge-Hill term and the population expectile--quantile bridge error are
-lower order under the bridge-rate condition used in the main Chapter~3
-statement. Thus the first-order bias, variance and AMSE criteria concern
-\(\bm\omega\), while \(\bm\nu\) remains first-order unidentified.
+With this estimator in place, the contribution is split into four parts. The
+first is the estimator itself: a two-weight construction that keeps the
+pooled-Weissman weights \(\bm\omega\) separate from the bridge-Hill weights
+\(\bm\nu\). The second is the exact decomposition of the log error into a
+pooled-Weissman term, a bridge-Hill term, and a population bridge term. In the
+finite-\(m\) i.i.d. common-marginal setting, the Chapter~3 statement identifies
+the pooled-Weissman term as the first-order component under the stated
+bridge-rate condition. Thus the first-order bias, variance and AMSE criteria
+concern \(\bm\omega\), while \(\bm\nu\) remains first-order unidentified.
 
-Second, this work formulates a corresponding transfer of the relevant
+The third contribution is a conditional transfer of the relevant
 estimated-weight and plug-in inference machinery from the optimal-pooling
 framework of \textcite{DaouiaPadoanStupfler2021} to the expectile estimator
-when the source consistency conditions apply. Estimated weights are used only
+when the original consistency conditions apply. Estimated weights are used only
 in the pooled-Weissman role. For implementation, the bridge-Hill vector is kept
 at the deterministic threshold-allocation convention
 \(\bm\nu_n^k=(k_1/k,\ldots,k_m/k)^\top\).
 
-Third, this work reports a finite-sample study matched to this theoretical
+The fourth contribution is a finite-sample study matched to this theoretical
 scope. The simulations vary the pooled-Weissman weights, keep the bridge-Hill
 convention fixed, and assess point estimation, plug-in intervals and
-decomposition diagnostics. Their role is to show how the Chapter~3
-first-order route behaves in the studied designs, not to introduce a wider
-estimator class or a new optimality principle.
+decomposition diagnostics. The intervals are treated as diagnostics of the
+asymptotic plug-in construction, not as calibrated finite-sample procedures.
+The study is intentionally limited to the estimator and i.i.d. common-marginal
+design analysed in Chapter~3; non-identical margins, time series, random
+bridge-Hill weights and lower-order optimality for \(\bm\nu\) are left outside
+the present scope.
 
-The rest of this work is organised as follows. \Cref{ch:background} recalls
+The rest of the work is organised as follows. \Cref{ch:background} recalls
 the heavy-tail, expectile and optimal-pooling results used as source inputs.
 \Cref{ch:pooled-extreme} develops the pooled extreme-expectile estimator, its
 exact decomposition, the deterministic first-order statement, the weight
 consequences and the estimated-weight inference transfer statement.
 \Cref{ch:finite-sample} reports the finite-sample study for the proposed
-estimator and inference route. \Cref{ch:conclusion} summarises the main
-lessons, discusses the
-limitations of the proposed estimator and inference route, and outlines
-directions for further work.
+estimator and plug-in diagnostics. \Cref{ch:conclusion} summarises the main
+lessons, discusses the limitations of the estimator and inference construction,
+and outlines directions for further work.

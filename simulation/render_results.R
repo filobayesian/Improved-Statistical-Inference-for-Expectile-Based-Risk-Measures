@@ -84,7 +84,21 @@ fmt_mcse <- function(x, se, digits = 3) {
   if (is.na(se)) {
     return(fmt(x, digits))
   }
-  paste0(fmt(x, digits), " {\\scriptsize (", fmt(se, digits), ")}")
+  paste0(fmt(x, digits), " (", fmt(se, digits), ")")
+}
+
+fmt_mcse_stack <- function(x, se, digits = 3) {
+  if (is.na(x)) {
+    return("--")
+  }
+  if (is.na(se)) {
+    return(fmt(x, digits))
+  }
+  paste0(
+    "\\begin{tabular}[t]{@{}r@{}}",
+    fmt(x, digits), "\\\\(", fmt(se, digits), ")",
+    "\\end{tabular}"
+  )
 }
 
 esc <- function(x) {
@@ -199,9 +213,9 @@ if (nrow(interval_rows) > 0) {
       "%s & %d & %s & %s & %s & %s & %s & %s & %s \\\\",
       row$dgp, as.integer(row$m), esc(row$regime),
       estimator_label(row$estimator),
-      fmt_mcse(row$coverage, row$coverage_mcse),
-      fmt_mcse(row$ci_log_length, row$ci_log_length_mcse),
-      fmt_mcse(row$valid_ci_rate, row$valid_ci_rate_mcse),
+      fmt_mcse_stack(row$coverage, row$coverage_mcse),
+      fmt_mcse_stack(row$ci_log_length, row$ci_log_length_mcse),
+      fmt_mcse_stack(row$valid_ci_rate, row$valid_ci_rate_mcse),
       fmt(row$eta), fmt(row$bridge_log_gap)
     ))
   }
@@ -334,11 +348,11 @@ if (nrow(omega_hetero) > 0) {
     omega_hetero_lines <- c(omega_hetero_lines, sprintf(
       "%s & %s & %s & %s & %s & %s & %s \\\\",
       row$dgp, estimator_label(row$estimator),
-      fmt_mcse(row$log_bias, row$log_bias_mcse),
-      fmt_mcse(row$log_rmse, row$log_rmse_mcse),
-      fmt_mcse(row$coverage, row$coverage_mcse),
-      fmt_mcse(row$negative_weight_rate, row$negative_weight_rate_mcse),
-      fmt_mcse(row$avg_max_abs_weight, row$avg_max_abs_weight_mcse)
+      fmt_mcse_stack(row$log_bias, row$log_bias_mcse),
+      fmt_mcse_stack(row$log_rmse, row$log_rmse_mcse),
+      fmt_mcse_stack(row$coverage, row$coverage_mcse),
+      fmt_mcse_stack(row$negative_weight_rate, row$negative_weight_rate_mcse),
+      fmt_mcse_stack(row$avg_max_abs_weight, row$avg_max_abs_weight_mcse)
     ))
   }
 }
@@ -464,11 +478,11 @@ if (nrow(decomp_rows) > 0) {
     decomp_lines <- c(decomp_lines, sprintf(
       "%s & %s & %s & %s & %s & %s \\\\",
       row$dgp,
-      fmt_mcse(row$scaled_log_rmse, row$scaled_log_rmse_mcse),
-      fmt_mcse(row$scaled_A_rms, row$scaled_A_rms_mcse),
-      fmt_mcse(row$scaled_B_rms, row$scaled_B_rms_mcse),
-      fmt_mcse(row$scaled_C_rms, row$scaled_C_rms_mcse),
-      fmt_mcse(row$decomp_remainder_abs, row$decomp_remainder_abs_mcse, 2)
+      fmt_mcse_stack(row$scaled_log_rmse, row$scaled_log_rmse_mcse),
+      fmt_mcse_stack(row$scaled_A_rms, row$scaled_A_rms_mcse),
+      fmt_mcse_stack(row$scaled_B_rms, row$scaled_B_rms_mcse),
+      fmt_mcse_stack(row$scaled_C_rms, row$scaled_C_rms_mcse),
+      fmt_mcse_stack(row$decomp_remainder_abs, row$decomp_remainder_abs_mcse, 2)
     ))
   }
 }

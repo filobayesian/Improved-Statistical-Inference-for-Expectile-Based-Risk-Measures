@@ -2,8 +2,8 @@
 \chapter{Pooled extreme expectiles}
 \label{ch:pooled-extreme}
 
-This chapter develops the pooled extreme-expectile estimator studied in this
-work. We work in the finite-\(m\) distributed iid setting of
+This chapter develops the pooled extreme-expectile estimator studied here.
+ We work in the finite-\(m\) distributed i.i.d. setting of
 \Cref{sec:bg:pool-distrib}: each machine contains observations from the same
 continuous heavy-tailed loss distribution, and the target is the common
 marginal expectile \(\expectile{\tau_n}\). In this setting the population
@@ -12,10 +12,10 @@ handled through the distributed pooled-Weissman theorem of
 \textcite[Corollary~8]{DaouiaPadoanStupfler2021}.
 
 The construction combines the geometrically pooled Weissman estimator with the
-asymptotic bridge between high expectiles and high quantiles. The role of the
-chapter is to show, from an exact log decomposition, which terms remain visible
-on the pooled-Weissman scale. Under the bridge-rate condition imposed below,
-the first-order law is inherited from the pooled extreme-quantile component.
+asymptotic bridge between high expectiles and high quantiles. This chapter
+identifies, through an exact log decomposition, which terms remain visible on
+the pooled-Weissman scale. Under the bridge-rate condition imposed below, the
+first-order law is inherited from the pooled extreme-quantile component.
 Accordingly, first-order weight optimisation concerns the
 pooled-Weissman weights \(\bm\omega\).
 The general heavy-tail background allows \(\gamma>0\), but the expectile
@@ -44,8 +44,11 @@ be the local Weissman estimator. For an affine weight vector
   \hatWei_n(1-p_n\mid\bm\omega)
   =
   \prod_{j=1}^{m}
-  \big[\hat q_j^\star(1-p_n\mid k_j)\big]^{\omega_j}.
+	  \big[\hat q_j^\star(1-p_n\mid k_j)\big]^{\omega_j}.
 \]
+Since \(\tau_n=1-p_n\), the notation \(1-p_n\) and \(\tau_n\) refer to the same
+target level; the formulas below use \(1-p_n\) when emphasising the tail
+probability and \(\tau_n\) when emphasising the expectile target.
 For another affine weight vector \(\bm\nu^\top\bm 1=1\), define the pooled
 Hill estimator used in the outer bridge by
 \[
@@ -67,6 +70,8 @@ The vector \(\bm\omega\) weights the pooled-Weissman quantile estimator. The
 vector \(\bm\nu\) weights only the Hill estimator appearing in the outer
 expectile bridge. The diagonal construction
 \(\bm\nu=\bm\omega\) is a special case, not a first-order necessity.
+All distributed estimators considered later are special cases of
+\eqref{eq:pool-ext:estimator}.
 
 \begin{lemma}[Exact log decomposition]
 \label{lem:pool-ext:decomposition}
@@ -164,7 +169,7 @@ negligible on the pooled-Weissman scale.
 \begin{conjecture}[Pooled extreme expectile, deterministic weights]
 \label{conj:pool-ext:deterministic}
 Let \(m\) be fixed. Suppose the observations across and within machines are
-iid copies of a common continuous loss variable \(X\). Let
+i.i.d. copies of a common continuous loss variable \(X\). Let
 \(U(t)=Q(1-1/t)\) be the common tail quantile, and assume
 \(\mathcal C_2(\gamma,\rho,A)\) with \(0<\gamma<1\) and \(\rho<0\). Assume
 \(\E X^{-}<\infty\) and \(U(t)>0\) for all sufficiently large \(t\).
@@ -207,7 +212,8 @@ at an intermediate anchor \(u_n\uparrow1\) one has
 \(\sqrt{k}/Q(u_n)=O(1)\), and the extreme target satisfies
 \(1-p_n\ge u_n\) eventually, then monotonicity of \(Q\) gives
 \(\sqrt{k}/Q(1-p_n)=O(1)\), so \(\eta_n=O(\ell_n^{-1})=o(1)\) whenever
-\(\ell_n\to\infty\).
+\(\ell_n\to\infty\). The inequality \(1-p_n\ge u_n\) means that the target
+quantile is no smaller than the intermediate anchor quantile.
 Let \(\bm\nu_n,\bm\omega_n\in\R^m\) be deterministic weight sequences
 satisfying exact affine normalisation and finite-dimensional convergence,
 \[
@@ -248,11 +254,14 @@ where
 \]
 and
 \[
-  d_j
-  =
-  \frac{c_j}{b_j}\,
-  \frac{\sum_{i=1}^{m}c_i^{-1}}{\sum_{i=1}^{m}b_i^{-1}}.
+	  d_j
+	  =
+	  \frac{c_j}{b_j}\,
+	  \frac{\sum_{i=1}^{m}c_i^{-1}}{\sum_{i=1}^{m}b_i^{-1}}.
 \]
+The displayed centring and variance depend on the limiting pooled-Weissman
+weights \(\bm\omega\), but not on the limiting bridge-Hill weights
+\(\bm\nu\).
 Moreover,
 \begin{equation}
 \label{eq:pool-ext:relative-limit}
@@ -280,20 +289,26 @@ Write \(s_n=\sqrt{k}/\ell_n\). By the exact decomposition
   A_n(\bm\omega_n)+B_n(\bm\nu_n)-C_n .
 \]
 We now control the three terms on the common scale \(s_n\).
-All logarithmic and Taylor expansions below are understood on a single event
-whose probability tends to one. On this event, the relevant high order
-statistics and local Weissman estimators are positive, the relative errors to
-which \(\log(1+x)\) is applied are bounded away from \(-1\), and
-\(\hat\gamma_n(\bm\nu_n)\) lies in a fixed compact subinterval of \((0,1)\).
-The eventual upper-tail positivity assumption gives the first two positivity
-properties for the Hill and Weissman statistics, while the relative-error
-source limits, the expectile--quantile bridge expansion and the pooled-Hill
-consistency checks below give the remaining parts of the event.
+All logarithmic and Taylor expansions below are understood on a common
+high-probability event. This event has three parts:
+\begin{itemize}
+\item the relevant high order statistics and local Weissman estimators are
+      positive;
+\item the relative errors to which \(\log(1+x)\) is applied are bounded away
+      from \(-1\);
+\item \(\hat\gamma_n(\bm\nu_n)\) lies in a fixed compact subinterval of
+      \((0,1)\).
+\end{itemize}
+The eventual upper-tail positivity assumption gives the first positivity
+property. The pooled-Weissman relative-error limit, the expectile--quantile
+bridge expansion and the pooled-Hill consistency checks below give the
+remaining parts.
 
 \smallskip
 \noindent\textbf{The pooled-Weissman term \(A_n(\bm\omega_n)\).}
-The source theorem controls this term. Specifically, the random-weight version
-of the common-marginal pooled-Weissman theorem recalled in
+The pooled-Weissman result of
+\textcite[Corollary~8]{DaouiaPadoanStupfler2021} controls this term.
+Specifically, the random-weight version recalled in
 \Cref{prop:bg:estimated-pooling-weights}, applied to the exactly normalised
 deterministic sequence \(\bm\omega_n\to\bm\omega\), gives
 \[
@@ -385,8 +400,9 @@ by the uniform convergence theorem for regularly varying functions. Hence
   d_j^\rho .
 \]
 Thus the assumptions of \Cref{conj:pool-ext:deterministic} meet the local
-assumptions of
-\Cref{thm:bg:pool-hill}. In particular,
+assumptions of \Cref{thm:bg:pool-hill}. Each local Hill estimator has the
+required \(k_j\)-scale second-order centring, and the vector CLT applies. In
+particular,
 \[
   \sqrt{k}\{\hat{\bm\gamma}_n-\gamma\bm 1\}=O_P(1).
 \]
@@ -745,10 +761,12 @@ introduced only in the pooled-Weissman role \(\bm\omega\), where
 provide random-weight quantile limits under their own consistency conditions.
 The bridge-Hill vector remains deterministic in this chapter.
 When the estimated weights or plug-in bias and variance objects are taken from
-these source constructions, the source-side consistency assumptions recalled in
-\Cref{sec:bg:estimated-pooling} are imposed.
+the constructions of
+\textcite[\S2.2 and Corollary~1; Corollaries~6--7]{DaouiaPadoanStupfler2021},
+the consistency assumptions recalled in \Cref{sec:bg:estimated-pooling} are
+imposed.
 
-The source input needed here is the random-weight version of the
+The outside input needed here is the random-weight version of the
 pooled-Weissman limit recorded in \Cref{prop:bg:estimated-pooling-weights}:
 exact affine normalisation \(\widehat{\bm\omega}_n^\top\bm 1=1\) and
 convergence \(\widehat{\bm\omega}_n\toprob\bm\omega\) give the same
@@ -820,9 +838,9 @@ log limit, and the final exponential Taylor step in
 \Cref{conj:pool-ext:deterministic} gives the relative-error version.
 \end{proof}
 
-Thus any source-admissible construction covered by
-\Cref{prop:bg:estimated-pooling-weights} transfers in the pooled-Weissman role,
-including estimated variance- and AMSE-optimal weights when their source
+Thus any weight construction covered by \Cref{prop:bg:estimated-pooling-weights}
+transfers in the pooled-Weissman role,
+including estimated variance- and AMSE-optimal weights when the corresponding
 assumptions give \(\widehat{\bm\omega}_n\toprob\bm\omega\). This statement
 concerns \(\bm\omega\) only. It does not optimise \(\bm\nu\), and it does not
 cover a random bridge-Hill convention such as
@@ -848,7 +866,7 @@ Under the assumptions of \Cref{conj:pool-ext:estimated-omega}, let
   \qquad
   \widehat{\Vc}^{\mathrm{dist}}_n\toprob\Vc^{\mathrm{dist}}.
 \]
-These consistency assumptions belong to the selected plug-in route from
+These consistency assumptions belong to the selected plug-in construction from
 \textcite[\S2.2 and Corollary~1; Corollaries~6--7]{DaouiaPadoanStupfler2021};
 they are not consequences of the expectile decomposition alone. No
 expectile-specific bias or variance estimator is introduced here.
@@ -879,9 +897,11 @@ and assume \(V_{\bm\omega}>0\). Then
   }{
     \sqrt{\widehat V_{\widehat{\bm\omega},n}}
   }
-  \;\todist\;
-  \mathcal N(0,1).
+	  \;\todist\;
+	  \mathcal N(0,1).
 \]
+Solving the corresponding studentised inequality for
+\(\expectile{\tau_n}\) gives a multiplicative interval on the original scale.
 Let \(z_{1-\alpha/2}\) be the standard normal quantile. On the
 high-probability event that the local Weissman estimators are positive and
 \(\widehat V_{\widehat{\bm\omega},n}>0\), define
@@ -942,7 +962,9 @@ Then
 \]
 The additional expectile terms have already been absorbed in
 \Cref{conj:pool-ext:estimated-omega}, so the centring and variance objects remain
-the pooled-Weissman objects supplied by the source theory. Together with
+the pooled-Weissman objects supplied by
+\textcite[\S2.2 and Corollary~1; Corollaries~6--7]{DaouiaPadoanStupfler2021}.
+Together with
 \(V_{\bm\omega}>0\), the displayed convergences give the standard normal limit
 by Slutsky's theorem.
 Since \(\widehat V_{\widehat{\bm\omega},n}\toprob V_{\bm\omega}>0\), the event
@@ -966,8 +988,10 @@ of the transferred expectile limit, rather than a direct restatement of the
 quantile interval in \textcite{DaouiaPadoanStupfler2021}. The centering and
 variance objects remain those of the pooled-Weissman component because, under
 \(\eta_n\to0\), the additional expectile-bridge terms are lower order on that
-scale. The conjecture is consequently conditional on the selected
-source construction providing consistent plug-in objects for \(B_{\bm\omega}\)
-and \(V_{\bm\omega}\); it does not make an additional claim about simulations,
-finite-sample calibration, or optimal bridge-Hill weights.
+scale. The conjecture is consequently conditional on the selected plug-in
+construction satisfying the consistency statements established by
+\textcite[\S2.2 and Corollary~1; Corollaries~6--7]{DaouiaPadoanStupfler2021}
+for \(B_{\bm\omega}\) and \(V_{\bm\omega}\); it does not make an additional
+claim about simulations, finite-sample calibration, or optimal bridge-Hill
+weights.
 \end{remark}

@@ -22,7 +22,10 @@ choices of \textcite{DaouiaPadoanStupfler2021} studied below. The role of
 an optimality claim; all weight variation in the study concerns \(\bm\omega\).
 
 The empirical conclusions should be read as diagnostics for the Chapter~3
-first-order route, not as new mathematical claims. In the representative
+first-order argument, not as new mathematical claims. The final run uses
+\(5000\) Monte Carlo replications per scenario. The main grid targets
+\(np=5\), while the target-sensitivity block compares \(np\in\{1,5,10\}\).
+In the representative
 imbalanced design, the variance weights of
 \textcite{DaouiaPadoanStupfler2021} make the distributed estimator track the
 centralised benchmark closely for point estimation. Equal pooled-Weissman
@@ -30,9 +33,9 @@ weights are less efficient under imbalance.
 In the main equal-threshold grid, AMSE weights are almost indistinguishable
 from variance weights; in the separate heterogeneous-threshold diagnostic they
 become more informative, but can also produce unstable signed weights. The
-log-scale plug-in intervals under-cover in several models, so the finite-sample
-evidence supports the estimator more strongly than it supports the nominal
-first-order interval calibration.
+log-scale plug-in intervals have empirical coverage below nominal levels in
+several models, so the finite-sample evidence supports the estimator more
+strongly than it supports the nominal first-order interval calibration.
 
 \section{Estimators and implementation}
 \label{sec:sim:estimators}
@@ -44,9 +47,9 @@ The simulation code adds only the study-specific pooling layer: geometric
 pooling of local Weissman estimates, the map \(\psifn\), the deterministic
 bridge-Hill convention \(\bm\nu_n^k\), and the plug-in summary calculations.
 
-The following estimators are recorded. In the simulation tables, \emph{DPS}
-is used as a compact label for the source framework of
-\textcite{DaouiaPadoanStupfler2021}.
+The following estimators are recorded. As noted in \Cref{sec:bg:pooling},
+\emph{DPS} is used in tables as a compact label for the
+pooling theory of \textcite{DaouiaPadoanStupfler2021}.
 \begin{itemize}
 \item \emph{equal}: \(\omega_j=1/m\);
 \item \emph{DPS variance}: \(\omega_j=k_j/k\), the independent distributed
@@ -58,19 +61,20 @@ is used as a compact label for the source framework of
       \textcite{DaouiaPadoanStupfler2021} evaluated with the population
       second-order parameters of the data-generating model;
 \item \emph{DPS AMSE plug-in}: the same formula with second-order inputs
-      estimated using \texttt{evt0} \parencite{evt0R};
+      estimated using the \texttt{evt0} package \parencite{evt0R};
 \item \emph{centralised}: the corresponding single-sample estimator computed
       from the combined sample, used only as a benchmark.
 \end{itemize}
 All distributed estimators use the same bridge-Hill vector
 \(\bm\nu_n^k\). The plug-in AMSE estimator randomises only
 \(\bm\omega\). For exact Pareto models, the second-order bias coefficient is
-zero in the design, so the plug-in AMSE route is treated as source-ineligible
+zero in the design, so the plug-in AMSE construction is treated as
+source-ineligible
 rather than as a distinct estimated AMSE procedure. The oracle AMSE row then
 collapses to the same point estimator as the variance rule. For the
 centralised benchmark interval, the centring and variance objects are the
 corresponding single-sample oracle objects obtained by taking \(m=1\). Thus
-dashes in exact-Pareto plug-in AMSE rows mean ``not reported under the source
+dashes in exact-Pareto plug-in AMSE rows mean ``not reported under the DPS
 convention'', not numerical failure or zero coverage.
 
 For each estimator with available centring and variance objects, inference is
@@ -91,13 +95,13 @@ the interval is
   \qquad
   \ell=\log\!\left(\frac{k}{np}\right).
 \]
-The interval is included as a diagnostic of the first-order plug-in route,
-not as a claim of finite-sample calibration.
+The interval is included as a diagnostic of the first-order plug-in
+construction, not as a claim of finite-sample calibration.
 
 \section{Design}
 \label{sec:sim:design}
 
-The study stays within the iid common-marginal setting of the Chapter~3
+The study stays within the i.i.d. common-marginal setting of the Chapter~3
 conjectural result. The
 data-generating models are Pareto with \(\gamma=0.25\), Pareto with
 \(\gamma=0.60\), Burr with \(\gamma=0.25\) and \(\rho=-1\), Burr with
@@ -123,6 +127,39 @@ block fixes the same design and varies \(np\in\{1,5,10\}\).
 The sensitivity blocks were simulated independently from the main grid, so
 rows that nominally coincide with the representative design are independent
 Monte Carlo estimates rather than reused entries.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Compact summary of the finite-sample design.}
+\label{tab:sim:design-summary}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.20\textwidth}
+                  >{\raggedright\arraybackslash}p{0.70\textwidth}@{}}
+\toprule
+Component & Specification \\
+\midrule
+Data-generating models &
+Pareto \((\gamma=0.25)\), Pareto \((\gamma=0.60)\), Burr
+\((\gamma=0.25,\rho=-1)\), Burr \((\gamma=0.60,\rho=-1)\), and
+\(|t_3|\). \\
+Replications &
+\(5000\) per final finite-sample scenario. \\
+Main grid &
+\(n=10000\), \(m\in\{5,10\}\), balanced or strong allocation,
+\(k_j/n_j=0.05\), and \(np=5\). \\
+Threshold block &
+\(m=10\), strong allocation, \(np=5\), and
+\(k_j/n_j\in\{0.03,0.05,0.10\}\). \\
+Target block &
+\(m=10\), strong allocation, \(k_j/n_j=0.05\), and
+\(np\in\{1,5,10\}\). \\
+Heterogeneous thresholds &
+\(m=10\), strong allocation, \(n=10000\), \(np=5\), and local threshold
+fractions decreasing with machine size, rescaled to aggregate \(k/n\approx0.05\). \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 The heterogeneous-threshold block is separate. It keeps \(m=10\), strong
 allocation, \(n=10000\), and \(np=5\), but assigns larger threshold fractions
@@ -177,11 +214,11 @@ the single-sample benchmark.
 Equal pooled-Weissman weights are worse under strong imbalance. The effect is
 most visible in the heavier-tailed models, where the equal-weight log RMSE is
 \(0.245\) for Burr heavy and \(0.231\) for Pareto heavy, compared with
-\(0.223\) and \(0.204\) under the source variance weights. The
+\(0.223\) and \(0.204\) under the DPS variance weights. The
 oracle and plug-in AMSE weights are essentially the same as the variance
 weights in this equal-threshold main design.
 
-This closeness has a direct explanation from the source AMSE criterion. In
+This closeness has a direct explanation from the DPS AMSE criterion. In
 the main grid the threshold fraction \(k_j/n_j\) is common across machines, so
 the asymptotic constants in \Cref{conj:pool-ext:omega-criteria} satisfy
 \(c_j=b_j\) and therefore \(d_j=1\) for every \(j\). Hence
@@ -195,7 +232,7 @@ local to the main grid; \Cref{tab:sim:omega-heterogeneous} gives AMSE weights a
 more discriminating environment by varying the local threshold fractions.
 
 The blank plug-in AMSE rows for exact Pareto models are the table-level form
-of the convention described above: the route is source-ineligible in these
+of the convention described above: the construction is source-ineligible in these
 rows, although the corresponding oracle AMSE point estimator coincides with
 the variance rule.
 
@@ -206,21 +243,16 @@ the variance rule.
 \((m=10\), strong allocation, \(k_j/n_j=0.05\), \(np=5)\).}
 \label{tab:sim:point-main}
 \begingroup
-\setlength{\tabcolsep}{4pt}
-\resizebox{\textwidth}{!}{%
-  \input{generated/simulation/tables/finite_sample_summary}%
-}
+\setlength{\tabcolsep}{3pt}
+\input{generated/simulation/tables/finite_sample_summary}
 \endgroup
 \end{table}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{generated/simulation/figures/rmse_pooled_vs_centralised.pdf}
-\caption{Log RMSE of the pooled estimator using the variance weights of
-\textcite{DaouiaPadoanStupfler2021} against the centralised benchmark in the
-main grid with \(k_j/n_j=0.05\) and \(np=5\). The dashed line is equality.
-Points near the line indicate that the pooled route tracks the centralised
-benchmark closely.}
+\caption{Log RMSE of the pooled estimator with DPS variance weights against the
+centralised benchmark in the main grid. The dashed line is equality.}
 \label{fig:sim:rmse-estimator}
 \end{figure}
 
@@ -250,7 +282,7 @@ lowest log RMSE, \(0.231\), while \(\bm\nu_n^k\) has slightly higher coverage,
 \(0.744\). In the absolute Student model, sample weights again have the
 lowest log RMSE, while \(\bm\nu_n^k\) remains close. In the light-tailed
 models, all three bridge-Hill conventions are nearly indistinguishable. These
-patterns are consistent with the conjectured first-order message:
+patterns are consistent with the Chapter~3 first-order message:
 \(\bm\nu\) is
 first-order unidentified under the chosen scaling, but lower-order
 finite-sample differences can still be visible.
@@ -264,9 +296,7 @@ variance choice of \textcite{DaouiaPadoanStupfler2021}.}
 \label{tab:sim:nu}
 \begingroup
 \setlength{\tabcolsep}{4pt}
-\resizebox{\textwidth}{!}{%
-  \input{generated/simulation/tables/nu_sensitivity}%
-}
+\input{generated/simulation/tables/nu_sensitivity}
 \endgroup
 \end{table}
 
@@ -280,9 +310,7 @@ the pooled-Weissman weights are fixed at the variance choice of
 \label{tab:sim:nu-heterogeneous}
 \begingroup
 \setlength{\tabcolsep}{4pt}
-\resizebox{\textwidth}{!}{%
-  \input{generated/simulation/tables/nu_heterogeneous_sensitivity}%
-}
+\input{generated/simulation/tables/nu_heterogeneous_sensitivity}
 \endgroup
 \end{table}
 
@@ -291,18 +319,19 @@ the pooled-Weissman weights are fixed at the variance choice of
 
 \Cref{tab:sim:interval-main} reports nominal \(95\%\) log intervals in the
 representative main design. For non-Pareto distributed rows, the table reports
-the source-admissible plug-in route. For exact Pareto models, the distributed
-plug-in interval rows are omitted because the plug-in second-order route is
-source-ineligible; the centralised oracle benchmark is still shown. The same
-distinction is made visually in \Cref{fig:sim:coverage-estimator}: exact-Pareto
-distributed interval cells are marked by dashes rather than interpreted as zero
-coverage.
+the plug-in construction satisfying the DPS source conditions. For exact Pareto
+models, the distributed plug-in interval rows are omitted because the plug-in
+second-order construction is source-ineligible; the centralised oracle benchmark
+is still shown. The same distinction is made visually in
+\Cref{fig:sim:coverage-estimator}: exact-Pareto distributed interval cells are
+marked by dashes rather than interpreted as zero coverage.
 
 The intervals are not uniformly calibrated at this sample size. The
 distributed Burr heavy intervals cover about \(75\%\) of replications, the
 Burr light intervals cover about \(59\%\), and the absolute Student intervals
-cover about \(92\%\). The centralised oracle benchmark also under-covers in
-every model, with coverage between \(0.708\) and \(0.770\). Hence the problem
+cover about \(92\%\). The centralised oracle benchmark also has empirical
+coverage below the nominal level in every model, with coverage between
+\(0.708\) and \(0.770\). Hence the problem
 is not simply that the sample has been split across machines. The finite
 sample is also feeling first-order centring, variance, and bridge
 approximations.
@@ -336,21 +365,22 @@ argument sends \(B_n(\bm\nu)\) and \(C_n\) to zero on the
 diagnostics show that these terms need not be small at the simulated sample
 sizes. Extending such corrections to the distributed two-weight estimator
 would be a separate lower-order inference layer, and may require additional
-communicated summaries such as local means. The intervals reported here are
-therefore diagnostics of the first-order plug-in route, not claims of reliable
-finite-sample calibration.
+communicated summaries such as local upper order statistics, local tail means,
+intermediate expectiles, or local estimates of \(\E X\). The intervals reported
+here are therefore diagnostics of the first-order plug-in construction, not
+claims of reliable finite-sample calibration. They should not be recommended
+without additional calibration in samples of this size.
 
 \begin{table}[htbp]
 \centering
 \small
 \caption{Empirical coverage and log-width of nominal \(95\%\) intervals in
-the representative main design.}
+the representative main design. Dashes indicate source-ineligible plug-in
+constructions, not zero coverage or numerical failure.}
 \label{tab:sim:interval-main}
 \begingroup
-\setlength{\tabcolsep}{3pt}
-\resizebox{\textwidth}{!}{%
-  \input{generated/simulation/tables/interval_summary}%
-}
+\setlength{\tabcolsep}{2pt}
+\input{generated/simulation/tables/interval_summary}
 \endgroup
 \end{table}
 
@@ -359,7 +389,7 @@ the representative main design.}
 \includegraphics[width=\textwidth]{generated/simulation/figures/coverage_heatmap.pdf}
 \caption{Empirical coverage in the representative main design
 \((m=10\), strong allocation, \(k_j/n_j=0.05\), \(np=5)\). Cell labels give
-coverage; colour records the deviation from the nominal \(95\%\) level.
+coverage; color records the deviation from the nominal \(95\%\) level.
 Cells marked by dashes are source-ineligible exact-Pareto distributed interval
 rows.}
 \label{fig:sim:coverage-estimator}
@@ -381,7 +411,8 @@ objects and is separate from the final main grid.}
 \Cref{tab:sim:decomposition} records the scaled decomposition terms in the
 representative main design for the estimator using
 the variance weights of \textcite{DaouiaPadoanStupfler2021} with
-\(\bm\nu=\bm\nu_n^k\). The
+\(\bm\nu=\bm\nu_n^k\). Here \(A_n\) is the pooled-Weissman term, \(B_n\) is the
+bridge-Hill term, and \(C_n\) is the population bridge gap. The
 columns report root mean squared values of
 \((\sqrt{k}/\ell)A_n\), \((\sqrt{k}/\ell)B_n\), and
 \((\sqrt{k}/\ell)C_n\), together with the scaled log error. The final column
@@ -420,9 +451,7 @@ The estimator uses the variance pooled-Weissman weights of
 \label{tab:sim:decomposition}
 \begingroup
 \setlength{\tabcolsep}{4pt}
-\resizebox{\textwidth}{!}{%
-  \input{generated/simulation/tables/decomposition_summary}%
-}
+\input{generated/simulation/tables/decomposition_summary}
 \endgroup
 \end{table}
 
@@ -432,7 +461,7 @@ The estimator uses the variance pooled-Weissman weights of
 The threshold sensitivity in \Cref{tab:sim:threshold} shows that point error
 and interval calibration can move in different directions. Burr light is the
 clearest example: increasing \(k_j/n_j\) from \(0.03\) to \(0.10\) lowers the
-log RMSE of the source variance-weighted estimator from \(0.084\) to
+log RMSE of the DPS variance-weighted estimator from \(0.084\) to
 \(0.047\), while coverage falls from about \(70\%\) to about \(32\%\). In
 Pareto heavy, where the exact Pareto model removes the Burr-type
 second-order bias, increasing the threshold improves the corresponding log
@@ -451,6 +480,8 @@ about \(70\%\), and absolute Student coverage falls from about \(92\%\) to
 about \(88\%\). The target sensitivity again points to an interaction between
 second-order bias, threshold choice, and first-order interval centring, not to
 a simple monotone improvement when the target is made less extreme.
+This suggests that any empirical application should report threshold-sensitivity
+diagnostics rather than relying on a single threshold fraction.
 
 \begin{table}[htbp]
 \centering
@@ -459,9 +490,7 @@ a simple monotone improvement when the target is made less extreme.
 \label{tab:sim:threshold}
 \begingroup
 \setlength{\tabcolsep}{4pt}
-\resizebox{\textwidth}{!}{%
-  \input{generated/simulation/tables/threshold_sensitivity}%
-}
+\input{generated/simulation/tables/threshold_sensitivity}
 \endgroup
 \end{table}
 
@@ -473,9 +502,7 @@ a simple monotone improvement when the target is made less extreme.
 \label{tab:sim:target}
 \begingroup
 \setlength{\tabcolsep}{4pt}
-\resizebox{\textwidth}{!}{%
-  \input{generated/simulation/tables/target_sensitivity}%
-}
+\input{generated/simulation/tables/target_sensitivity}
 \endgroup
 \end{table}
 
@@ -510,15 +537,17 @@ give only a small improvement. Exact Pareto plug-in AMSE rows remain omitted
 for the source reason described above.
 
 The simulation evidence is intentionally limited. It supports the proposed
-estimator in the iid common-marginal distributed setting and suggests that
+estimator in the i.i.d. common-marginal distributed setting and suggests that
 the variance weights of \textcite{DaouiaPadoanStupfler2021} are a robust
-practical baseline for \(\bm\omega\). Heterogeneous-threshold diagnostics show that AMSE weights are a
+practical baseline for \(\bm\omega\). Heterogeneous-threshold diagnostics show
+that AMSE weights are a
 genuine alternative worth reporting, but not uniformly superior or uniformly
 stable.
 The study also shows where the asymptotic theory should not be
-overinterpreted: first-order plug-in intervals may under-cover at realistic
+overinterpreted: first-order plug-in intervals may have empirical coverage below
+nominal levels at realistic
 sample sizes, and the exact decomposition reveals finite-sample contributions
-from terms that are asymptotically negligible under the conjectured
+from terms that are asymptotically negligible under the Chapter~3
 first-order scaling.
 The study does not address non-identical margins, time series, multivariate
 targets, random bridge-Hill weights, or lower-order optimality of
@@ -532,9 +561,7 @@ they could become simulation targets.
 \label{tab:sim:weights}
 \begingroup
 \setlength{\tabcolsep}{4pt}
-\resizebox{\textwidth}{!}{%
-  \input{generated/simulation/tables/weight_stability}%
-}
+\input{generated/simulation/tables/weight_stability}
 \endgroup
 \end{table}
 
@@ -546,9 +573,7 @@ fractions. The bridge-Hill weights are fixed at
 \(\bm\nu=\bm\nu_n^k\).}
 \label{tab:sim:omega-heterogeneous}
 \begingroup
-\setlength{\tabcolsep}{4pt}
-\resizebox{\textwidth}{!}{%
-  \input{generated/simulation/tables/omega_heterogeneous_sensitivity}%
-}
+\setlength{\tabcolsep}{2pt}
+\input{generated/simulation/tables/omega_heterogeneous_sensitivity}
 \endgroup
 \end{table}

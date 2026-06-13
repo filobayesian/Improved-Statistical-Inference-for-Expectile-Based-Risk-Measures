@@ -5,9 +5,10 @@
 \section{Regular variation and the second-order condition}
 \label{sec:bg:rv}
 
-Throughout this work we consider a real-valued random loss $X$ that
-has continuous distribution function $F$ and survival function
-$\overline F = 1 - F$. Given an iid sample $X_{1}, \ldots, X_{n}$ from
+We consider a real-valued random loss $X$ that
+has continuous distribution function $F$ and tail, or survival, function
+$\bar F(x) \coloneqq 1 - F(x)$. Given an i.i.d. sample
+$X_{1}, \ldots, X_{n}$ from
 $F$, the corresponding order statistics are denoted by
 $X_{1:n} \le X_{2:n} \le \cdots \le X_{n:n}$.
 
@@ -31,10 +32,10 @@ asserts that $F$ has a Pareto-type tail.
 \begin{condition}[First-order condition]
 \label{cond:bg:first-order}
 There exists $\gamma > 0$ such that
-$\overline F \in \mathrm{RV}_{-1/\gamma}$, or equivalently the
+$\bar F \in \mathrm{RV}_{-1/\gamma}$, or equivalently the
 \emph{tail quantile function}
 \[
-  U(t) \;\coloneqq\; \inf\!\Big\{ x \in \R \,:\, \tfrac{1}{\overline F(x)} \ge t \Big\}
+  U(t) \;\coloneqq\; \inf\!\Big\{ x \in \R \,:\, \tfrac{1}{\bar F(x)} \ge t \Big\}
   \,,\qquad t>1,
 \]
 satisfies $U \in \mathrm{RV}_{\gamma}$.
@@ -49,7 +50,7 @@ Throughout, for a continuous distribution function $F$, we write
   \inf\{x\in\R:F(x)\ge \tau\},
   \qquad 0<\tau<1.
 \]
-With the tail quantile $U(t)=F^{\leftarrow}(1-1/t)$, $t>1$, this gives
+For continuous \(F\), this agrees with \(U(t)=F^\leftarrow(1-1/t)\). Thus
 \[
   \Quant_X(\tau)=U((1-\tau)^{-1}),
   \qquad
@@ -59,7 +60,7 @@ With the tail quantile $U(t)=F^{\leftarrow}(1-1/t)$, $t>1$, this gives
 \Cref{cond:bg:first-order} is the Fr\'echet max-domain condition with
 extreme-value index $\gamma$ \parencite[Theorem~1.2.1]{deHaanFerreira2006};
 standard examples include Pareto, Burr, Student-$t$, Fr\'echet and
-$F$-distribution tails \parencite[\S2.6]{deHaanFerreira2006}. For
+Fisher--Snedecor \(F\)-law tails \parencite[\S2.6]{deHaanFerreira2006}. For
 normal limits we use the standard second-order refinement.
 
 \begin{condition}[Second-order condition $\mathcal C_{2}(\gamma, \rho, A)$]
@@ -106,7 +107,7 @@ quantiles. The textbook reference is
 \subsection{The Hill estimator}
 \label{sec:bg:hill}
 
-Given an iid sample $X_{1}, \ldots, X_{n}$ from $F$ and an integer
+Given an i.i.d. sample $X_{1}, \ldots, X_{n}$ from $F$ and an integer
 $k = k_{n} \in \{1, \ldots, n-1\}$, the \emph{Hill estimator}
 \parencite{Hill1975} of
 $\gamma$ based on the $k + 1$ top order statistics is
@@ -137,8 +138,11 @@ $\sqrt{k}\, A(n/k) \to \lambda \in \R$, then
 \]
 \end{theorem}
 
+The last citation is used only to justify the endpoint case
+\(\rho=0\): with \(m=1\), the pooled-Hill central limit theorem reduces to the
+same single-sample Hill statement under the displayed second-order centring.
 The choice of $k$ controls the usual bias--variance trade-off; here it is
-treated as a tuning parameter fixed outside the asymptotic analysis.
+treated as an exogenous tuning sequence in the asymptotic analysis.
 
 \subsection{Weissman extrapolation to extreme quantiles}
 \label{sec:bg:weissman}
@@ -159,7 +163,9 @@ Weissman estimator
 The theorem below, the Hill-estimator specialisation of
 \textcite[Theorem~4.3.8]{deHaanFerreira2006}, covers the far-tail
 regime $np=o(k)$; the case $np=O(1)$ is very-extreme in the sense that
-only finitely many observations are expected beyond the target.
+only finitely many observations are expected beyond the target. Such rows are
+included by the theorem whenever \(k/(np)\to\infty\) and
+\(\sqrt{k}/\log\{k/(np)\}\to\infty\) both hold.
 
 \begin{theorem}
 \label{thm:bg:weissman}
@@ -264,6 +270,9 @@ homogeneity and monotonicity. If $Y$ denotes a financial position and
 $\rho_{\tau}(Y)=\expectile{\tau}(-Y)$ is the associated capital
 requirement, then $\rho_\tau$ is coherent exactly when
 $\tau\ge 1/2$ \parencite{BelliniKlarMullerRosazzaGianin2014}.
+This is a statement about the capital requirement for positions under the
+loss convention \( -Y \), not about subadditivity of the map
+\(X\mapsto\expectile{\tau}(X)\) for arbitrary signed variables.
 Expectiles are also elicitable on classes with finite first moment; the
 asymmetric squared score is strictly consistent under finite second
 moments, and the general scoring class has Bregman-type and
@@ -353,47 +362,59 @@ second-order expansion
   \end{aligned}
 \end{equation}
 At $\rho=0$ the second term in $c(\gamma,\rho)$ is read by continuity,
-so $c(\gamma,0)=m(\gamma)$. The $A$-term is the second-order
-expectile--quantile bias used later to control the population bridge
-term. The displayed first-moment term is
-$O(\Quant_X(\tau)^{-1})$; in \Cref{ch:pooled-extreme} it is controlled
-on the pooled-Weissman scale by the explicit bridge-rate condition.
+so $c(\gamma,0)=m(\gamma)$. The two visible deterministic pieces in
+\eqref{eq:bg:c-gamma-rho} are the second-order tail-bias term
+\[
+  c(\gamma,\rho)A\big((1-\tau)^{-1}\big)
+\]
+and the first-moment bridge term
+\[
+  \gamma(\gamma^{-1}-1)^\gamma
+  \frac{\E X}{\Quant_X(\tau)}.
+\]
+In \Cref{ch:pooled-extreme} the first is controlled through the
+second-order tail rate, while the second is controlled on the
+pooled-Weissman scale by the explicit bridge-rate condition.
 
 \subsection{Relation to earlier expectile estimators}
 
-The iid extreme-expectile literature also studies direct
-asymmetric-least-squares estimators, quantile-based intermediate
+The i.i.d. extreme-expectile literature also studies direct empirical
+expectiles based on asymmetric least squares, LAWS-type estimators using
+least asymmetrically weighted squares, quantile-based intermediate
 plug-in estimators, and Weissman-type expectile extrapolations from an
 intermediate expectile anchor
 \parencite{DaouiaGirardStupfler2018,DaouiaGirardStupfler2020,DavisonPadoanStupfler2023}.
 These results provide context for the use of the expectile--quantile
-bridge. The estimator analysed in \Cref{ch:pooled-extreme} performs the
-extreme extrapolation in the pooled-quantile component and then applies
-the population bridge at the target level. Consequently, the later
-argument relies on the first- and second-order bridge statements
-recorded in this section.
+bridge, but they communicate or estimate a different object. The estimator
+analysed in \Cref{ch:pooled-extreme} performs the extreme extrapolation in
+the pooled-quantile component and then applies the population bridge at the
+target level. Consequently, the later argument relies on the first- and
+second-order bridge statements recorded in this section rather than on a
+direct empirical-expectile central limit theorem.
 
 \section{The optimal pooling framework}
 \label{sec:bg:pooling}
 
 We now recall the pooling framework of
-\textcite{DaouiaPadoanStupfler2021}. This framework provides the source
+\textcite{DaouiaPadoanStupfler2021}. For compact references in the simulation
+chapter, this work sometimes abbreviates their pooling theory as DPS. The
+framework provides the source
 theory for pooled tail-index and extreme-quantile inference before the
 expectile--quantile bridge is applied. The framework pools tail-index and
 extreme-quantile estimators from $m$ samples, allowing heterogeneous
 sizes, second-order properties and cross-sample tail dependence.
 This general framework is recalled to identify the source objects and
-notation. The main Chapter~3 statement later uses only
-the independent common-distribution distributed special case.
+notation. It is broader than the setting used later: the main Chapter~3
+statement specialises back to independent samples with common margins.
 
 \subsection{Setup}
 
 Throughout \Cref{sec:bg:pooling}, $m$ is fixed while
 $n=\sum_{j=1}^{m}n_j\to\infty$. Let
-$\bm X_i=(X_{i,1},\ldots,X_{i,m})^\top$, $i\ge1$, be iid copies of
+$\bm X_i=(X_{i,1},\ldots,X_{i,m})^\top$, $i\ge1$, be i.i.d. copies of
 $\bm X=(X_1,\ldots,X_m)^\top$. Margin $j$ is observed for
 $i=1,\ldots,n_j$ and has continuous right-heavy-tailed distribution
-$F_j$, tail quantile function $U_j=(1/\overline F_j)^\leftarrow$ and
+$F_j$, tail quantile function \(U_j(t)=F_j^\leftarrow(1-1/t)\), and
 extreme-value index $\gamma_j>0$; its order statistics are denoted
 $X_{1:n_j,j}\le\cdots\le X_{n_j:n_j,j}$.
 We write $\Quant_j(\tau)=F_j^\leftarrow(\tau)$, so that
@@ -412,7 +433,7 @@ asymptotic-proportionality conditions
 \end{equation}
 with $b_{1} = c_{1} = 1$. The marginal $F_{j}$ satisfies
 $\mathcal C_{2}(\gamma_{j}, \rho_{j}, A_{j})$
-(\Cref{cond:bg:second-order}). This work is developed under the
+(\Cref{cond:bg:second-order}). The analysis is developed under the
 \emph{common-tail-index} assumption
 \[
   (H_{\gamma}) \qquad
@@ -440,7 +461,7 @@ $(x_{j}, x_{\ell}) \in [0, \infty]^{2} \setminus \{(\infty,\infty)\}$,
 \]
 
 The case $\Rjl \equiv 0$ is asymptotic tail independence, implied by the
-independent samples used later in this work.
+independent samples used later in the document.
 
 \subsection{The pooled Hill estimator}
 
@@ -536,6 +557,11 @@ Consequently, for any $\bm\omega$ with $\bm\omega^{\top}\bm 1 = 1$,
 \]
 \end{theorem}
 
+Here \(b_j\) records the limiting relative sample size and \(c_j\) records the
+limiting relative threshold size. The vector \(\Bc\) collects the local
+second-order Hill biases after conversion to the aggregate \(\sqrt{k}\) scale,
+while \(\Vc\) is the corresponding covariance matrix. In the independent
+distributed case used in Chapter~3, \(\Vc\) becomes diagonal.
 For independent samples, all off-diagonal entries vanish and $\Vc$
 becomes the diagonal matrix
 \begin{equation}
@@ -672,6 +698,10 @@ $j \in \{1, \ldots, m\}$,
 \]
 \end{theorem}
 
+The tail-homoskedasticity condition and the restrictions \(\rho_j<0\) are
+essential for transferring the extreme-quantile result to a common target. They
+ensure that recentering by any marginal extreme quantile is asymptotically
+harmless on the Weissman scale.
 The strict $\rho_j<0$ assumption is part of the Weissman theorem.
 Together with the bias-rate assumptions
 $\sqrt{k_j}\,A_j(n_j/k_j)\to\lambda_j$ in
@@ -797,17 +827,20 @@ All vectors and matrices have fixed dimension. The maps
 \((w,V)\mapsto w^\top Vw\) are continuous, so the result follows from
 the continuous mapping theorem.
 
-\textcite[\S2.2 and Corollary~1]{DaouiaPadoanStupfler2021} give one
-source route to the consistency assumptions in
-\Cref{prop:bg:plugin-bias-variance} through estimated second-order and
-tail-dependence quantities. That route is not assumption-free: in the
-source it is stated under $\rho_j<0$, the parametric second-order form
-$A_j(t)=\gamma\beta_j t^{\rho_j}$, positive definiteness of the
-asymptotic covariance matrix, consistency of the $\beta_j$ estimators,
-and $(\hat\rho_j-\rho_j)\log n_j=o_P(1)$. In the common-distribution
-distributed case, their Corollaries~6--7 give the corresponding
-deterministic variance allocation and plug-in AMSE constructions under
-the analogous common second-order parameter consistency assumptions.
+\textcite[\S2.2 and Corollary~1]{DaouiaPadoanStupfler2021} give one way to
+obtain the consistency assumptions in \Cref{prop:bg:plugin-bias-variance}
+through estimated second-order and tail-dependence quantities. That construction
+is not assumption-free. In the source it is stated under:
+\begin{itemize}
+\item \(\rho_j<0\) for all margins;
+\item the parametric second-order form \(A_j(t)=\gamma\beta_j t^{\rho_j}\);
+\item positive definiteness of the asymptotic covariance matrix;
+\item consistency of the \(\beta_j\) estimators;
+\item \((\hat\rho_j-\rho_j)\log n_j=o_P(1)\).
+\end{itemize}
+In the common-distribution distributed case, their Corollaries~6--7 give the
+corresponding deterministic variance allocation and plug-in AMSE constructions
+under the analogous common second-order parameter consistency assumptions.
 
 The log-scale interval for the expectile estimator in
 \Cref{ch:pooled-extreme} is derived from the transferred plug-in
@@ -816,8 +849,9 @@ centring and variance objects after the expectile decomposition.
 \subsection{Distributed inference as a special case}
 \label{sec:bg:pool-distrib}
 
+\noindent\textbf{Case used in Chapter~3.}
 In the independent common-distribution distributed setting, the samples
-are iid subdivisions of one common population. Then:
+are i.i.d. subdivisions of one common population. Then:
 \begin{itemize}
 \item the common-$\gamma$ condition $(H_{\gamma})$ and the
       tail-homoskedasticity condition $(\mathcal H)$ are trivially
@@ -841,3 +875,51 @@ direct consequence needed for the
 expectile problem: in the independent common-distribution case, the
 pooled-Weissman bias and variance objects are the diagonal distributed
 objects displayed above.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Roadmap of assumptions used in the pooled extreme-expectile chapter.}
+\label{tab:bg:assumption-roadmap}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.22\textwidth}
+                  >{\raggedright\arraybackslash}p{0.35\textwidth}
+                  >{\raggedright\arraybackslash}p{0.34\textwidth}@{}}
+\toprule
+Layer & Main conditions & Role in Chapter~3 \\
+\midrule
+Heavy-tail inputs &
+\(\bar F\in\mathrm{RV}_{-1/\gamma}\) and
+\(\mathcal C_2(\gamma,\rho,A)\), with \(\rho<0\) for Weissman limits &
+Provide Hill and pooled-Weissman centring, variance and bias rates. \\
+Expectile target &
+\(0<\gamma<1\), \(\E X^-<\infty\), and eventual upper-tail positivity &
+Ensure a finite high expectile, the bridge expansion, and well-defined log
+Weissman terms with probability tending to one. \\
+Distributed design &
+Fixed \(m\), common continuous i.i.d. margins, \(n_1/n_j\to b_j\),
+\(k_1/k_j\to c_j\), \(k\to\infty\), and \(k/n\to0\) &
+Make the target common across machines and reduce the pooling objects to the
+diagonal distributed bias and variance forms. \\
+Extreme target &
+\(p_n\to0\), \(k/(np_n)\to\infty\),
+\(\sqrt{k}/\ell_n\to\infty\), where
+\(\ell_n=\log\{k/(np_n)\}\) &
+Define the pooled-Weissman extrapolation scale. \\
+Bridge negligibility &
+\(\eta_n=\sqrt{k}/\{\ell_n Q(1-p_n)\}\to0\) &
+Makes the population bridge term lower order on the pooled-Weissman scale. \\
+Weights &
+Deterministic affine \((\bm\nu_n,\bm\omega_n)\) for the base statement;
+random \(\widehat{\bm\omega}_n\) only when exactly normalised and
+\(\widehat{\bm\omega}_n\toprob\bm\omega\) &
+Separates bridge-Hill weights from pooled-Weissman weights and restricts the
+random-weight transfer to \(\bm\omega\). \\
+Plug-in inference &
+Consistency of the selected DPS plug-in centring and variance objects, plus
+\(V_{\bm\omega}>0\) &
+Allows studentisation and the log-scale interval after the expectile
+decomposition. \\
+\bottomrule
+\end{tabular}
+\end{table}
