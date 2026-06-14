@@ -510,6 +510,75 @@ if (requireNamespace("ggplot2", quietly = TRUE)) {
     "Abs. Student-3" = "#666666"
   )
 
+  threshold_plot_rows <- summary[
+    summary$design_role == "threshold" &
+      summary$m == 10 &
+      summary$regime == "strong" &
+      summary$np_target == 5 &
+      summary$nu_choice == "threshold" &
+      summary$estimator == "dps_variance",
+  ]
+  if (nrow(threshold_plot_rows) > 0) {
+    threshold_plot <- rbind(
+      data.frame(
+        dgp = threshold_plot_rows$dgp,
+        k_fraction = threshold_plot_rows$k_fraction,
+        Metric = "Log RMSE",
+        value = threshold_plot_rows$log_rmse
+      ),
+      data.frame(
+        dgp = threshold_plot_rows$dgp,
+        k_fraction = threshold_plot_rows$k_fraction,
+        Metric = "Coverage",
+        value = threshold_plot_rows$coverage
+      )
+    )
+    threshold_plot <- threshold_plot[is.finite(threshold_plot$value), ]
+    threshold_plot$dgp <- factor(threshold_plot$dgp, levels = dgp_order)
+    threshold_plot$Metric <- factor(
+      threshold_plot$Metric,
+      levels = c("Log RMSE", "Coverage")
+    )
+    threshold_breaks <- sort(unique(threshold_plot$k_fraction))
+    p_threshold <- ggplot(
+      threshold_plot,
+      aes(x = k_fraction, y = value, color = dgp, group = dgp)
+    ) +
+      geom_line(linewidth = 0.45, alpha = 0.9) +
+      geom_point(size = 2.1, alpha = 0.95) +
+      geom_hline(
+        data = data.frame(
+          Metric = factor("Coverage", levels = levels(threshold_plot$Metric)),
+          yintercept = 0.95
+        ),
+        aes(yintercept = yintercept),
+        linetype = "dashed",
+        linewidth = 0.35,
+        color = "grey35"
+      ) +
+      facet_grid(Metric ~ ., scales = "free_y") +
+      scale_color_manual(values = dgp_cols, drop = FALSE) +
+      scale_x_continuous(
+        breaks = threshold_breaks,
+        labels = function(x) formatC(x, digits = 3, format = "f")
+      ) +
+      labs(
+        x = "Aggregate threshold fraction k/n",
+        y = NULL,
+        color = "DGP"
+      ) +
+      theme_minimal(base_size = 9) +
+      theme(
+        legend.position = "bottom",
+        panel.grid.minor = element_blank(),
+        strip.text = element_text(face = "bold")
+      )
+    ggsave(
+      file.path(fig_dir, "threshold_sensitivity.pdf"), p_threshold,
+      width = 7.2, height = 4.6
+    )
+  }
+
   rmse_data <- summary[
     summary$design_role == "main" &
       summary$np_target == 5 &

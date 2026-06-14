@@ -458,18 +458,20 @@ The estimator uses the variance pooled-Weissman weights of
 \section{Sensitivity to thresholds and targets}
 \label{sec:sim:sensitivity}
 
-The threshold sensitivity in \Cref{tab:sim:threshold} shows that point error
-and interval calibration can move in different directions. Burr light is the
-clearest example: increasing \(k_j/n_j\) from \(0.03\) to \(0.10\) lowers the
-log RMSE of the DPS variance-weighted estimator from \(0.084\) to
+\Cref{fig:sim:threshold-sensitivity} displays the threshold sensitivity for
+the DPS variance-weighted estimator. Point error and interval calibration can
+move in different directions. Burr light is the clearest example: increasing
+\(k_j/n_j\) from \(0.03\) to \(0.10\) lowers the log RMSE from \(0.084\) to
 \(0.047\), while coverage falls from about \(70\%\) to about \(32\%\). In
-Pareto heavy, where the exact Pareto model removes the Burr-type
-second-order bias, increasing the threshold improves the corresponding log
-RMSE from \(0.248\) to \(0.156\), but the distributed interval coverage entries
-are source-ineligible and therefore left blank. In the absolute Student case,
-the largest threshold worsens log RMSE from \(0.116\) to \(0.285\), even though
-coverage stays near \(90\%\). Threshold choice therefore cannot be defended by
-a single point-error criterion.
+Pareto heavy, where the exact Pareto model removes the Burr-type second-order
+bias, increasing the threshold improves the corresponding log RMSE from
+\(0.248\) to \(0.156\), but the distributed interval coverage entries are
+source-ineligible and therefore absent from the coverage panel. In the absolute
+Student case, the largest threshold worsens log RMSE from \(0.116\) to
+\(0.285\), even though coverage stays near \(90\%\). Threshold choice therefore
+cannot be defended by a single point-error criterion. The full numerical
+summary, including the plug-in AMSE rows, is retained in
+\Cref{tab:sim:threshold}.
 
 \Cref{tab:sim:target} varies the target through \(np\). Moving from \(np=1\)
 to \(np=10\) shortens the extrapolation distance, and this lowers log RMSE in
@@ -482,6 +484,17 @@ second-order bias, threshold choice, and first-order interval centring, not to
 a simple monotone improvement when the target is made less extreme.
 This suggests that any empirical application should report threshold-sensitivity
 diagnostics rather than relying on a single threshold fraction.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{generated/simulation/figures/threshold_sensitivity.pdf}
+\caption{Threshold sensitivity of log RMSE and empirical coverage for the DPS
+variance-weighted estimator with \(m=10\), strong allocation, \(np=5\), and
+\(\bm\nu=\bm\nu_n^k\). The dashed line marks nominal \(95\%\) coverage.
+Coverage is omitted for exact-Pareto distributed rows because the corresponding
+plug-in interval route is source-ineligible.}
+\label{fig:sim:threshold-sensitivity}
+\end{figure}
 
 \begin{table}[htbp]
 \centering
